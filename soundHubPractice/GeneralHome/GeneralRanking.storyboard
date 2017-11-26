@@ -130,20 +130,25 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NZ4-Z1-oHx">
                                                     <rect key="frame" x="20" y="11" width="335" height="60"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fb_logo" translatesAutoresizingMaskIntoConstraints="NO" id="BJM-2I-X5v">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iu_profile" translatesAutoresizingMaskIntoConstraints="NO" id="BJM-2I-X5v">
                                                             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="BJM-2I-X5v" secondAttribute="height" multiplier="1:1" id="chs-CY-blq"/>
                                                             </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                    <real key="value" value="6"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="npg-Di-h6B">
-                                                            <rect key="frame" x="60" y="0.0" width="59" height="36"/>
+                                                            <rect key="frame" x="70" y="0.0" width="59" height="36"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아이유" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ujy-pv-A2u">
-                                                            <rect key="frame" x="60" y="39.5" width="44.5" height="20.5"/>
+                                                            <rect key="frame" x="70" y="39.5" width="44.5" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -158,18 +163,18 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="07l-SS-S3w"/>
-                                                        <constraint firstItem="npg-Di-h6B" firstAttribute="leading" secondItem="BJM-2I-X5v" secondAttribute="trailing" id="4Fb-vq-fKQ"/>
+                                                        <constraint firstItem="npg-Di-h6B" firstAttribute="leading" secondItem="BJM-2I-X5v" secondAttribute="trailing" constant="10" id="4Fb-vq-fKQ"/>
                                                         <constraint firstItem="BJM-2I-X5v" firstAttribute="height" secondItem="NZ4-Z1-oHx" secondAttribute="height" id="70l-KO-ANT"/>
                                                         <constraint firstAttribute="trailing" secondItem="KPy-IC-NUa" secondAttribute="trailing" id="Hcj-e4-dS0"/>
-                                                        <constraint firstItem="ujy-pv-A2u" firstAttribute="leading" secondItem="BJM-2I-X5v" secondAttribute="trailing" id="J3Q-oW-bKG"/>
                                                         <constraint firstAttribute="bottom" secondItem="KPy-IC-NUa" secondAttribute="bottom" id="JQz-uG-gbw"/>
                                                         <constraint firstAttribute="bottom" secondItem="ujy-pv-A2u" secondAttribute="bottom" id="RJg-PZ-dKf"/>
+                                                        <constraint firstItem="ujy-pv-A2u" firstAttribute="leading" secondItem="npg-Di-h6B" secondAttribute="leading" id="Viz-Jh-HS0"/>
                                                         <constraint firstItem="BJM-2I-X5v" firstAttribute="top" secondItem="NZ4-Z1-oHx" secondAttribute="top" id="fTs-vY-7Hd"/>
                                                         <constraint firstItem="BJM-2I-X5v" firstAttribute="leading" secondItem="NZ4-Z1-oHx" secondAttribute="leading" id="fmQ-1d-Rh6"/>
                                                         <constraint firstItem="npg-Di-h6B" firstAttribute="top" secondItem="NZ4-Z1-oHx" secondAttribute="top" id="pKD-I1-p1o"/>
                                                     </constraints>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gplus_logo" translatesAutoresizingMaskIntoConstraints="NO" id="e0f-HC-XuQ">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="modernTImes" translatesAutoresizingMaskIntoConstraints="NO" id="e0f-HC-XuQ">
                                                     <rect key="frame" x="20" y="79" width="335" height="335"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="e0f-HC-XuQ" secondAttribute="height" multiplier="1:1" id="9vz-pr-RYM"/>
@@ -275,7 +280,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="fb_logo" width="512" height="512"/>
-        <image name="gplus_logo" width="128" height="128"/>
+        <image name="iu_profile" width="128" height="128"/>
+        <image name="modernTImes" width="316" height="316"/>
     </resources>
 </document>
