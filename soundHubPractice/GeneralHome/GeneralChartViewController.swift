@@ -15,21 +15,25 @@ class GeneralChartViewController: UIViewController, UITableViewDelegate, UITable
         return 3
     }
     
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        if section > 0 {return "Ranking Chart"}else {return nil}
-//    }
-//
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        var headerView:UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 0))
-        if section > 0 {
-            headerView.setHeight(with: 100)
-        }else{
-            headerView.setHeight(with: 50)
-        }
+        let headerView:UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 0))
+        if section > 0 {headerView.setHeight(with: 100)}
+        else{headerView.setHeight(with: 50)}
         headerView.backgroundColor = .white
+        
         let headerLabel = UILabel(frame: headerView.frame)
-        headerLabel.text = "Ranking Chart"
+        switch section {
+        case 0:
+            headerLabel.text = "Popular Musicians"
+        case 1:
+            headerLabel.text = "Ranking Chart"
+        case 2:
+            headerLabel.text = "Recent upload"
+        default:
+            print("Unexpected section")
+        }
         headerLabel.font = headerLabel.font.withSize(30)
+        
         headerView.addSubview(headerLabel)
         return headerView
     }
@@ -51,7 +55,8 @@ class GeneralChartViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+        if indexPath.section == 0 { return 200 }
+        return 500
     }
     
 
