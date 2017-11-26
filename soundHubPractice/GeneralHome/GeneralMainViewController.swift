@@ -28,8 +28,9 @@ class GeneralMainViewController: UIViewController, UICollectionViewDelegate, UIC
 
 extension GeneralMainViewController{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let foo = 20 + popularMusicianCollectionView.frame.height + 200 + 60
         if scrollView == outerScrollView &&
-            scrollView.contentOffset.y >= popularMusicianCollectionView.frame.height{
+            scrollView.contentOffset.y >= foo{
             scrollView.isScrollEnabled = false
             musicRankingTableView.isScrollEnabled = true
         }
@@ -56,8 +57,34 @@ extension GeneralMainViewController{
 }
 
 extension GeneralMainViewController{
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100))
+        header.backgroundColor = .white
+        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100))
+        titleLabel.text = "Ranking Chart"
+        titleLabel.font = titleLabel.font.withSize(40)
+        header.addSubview(titleLabel)
+        return header
+    }
+    
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return "Ranking Chart"
+//    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 100
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        return 100
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -68,4 +95,7 @@ extension GeneralMainViewController{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return self.view.frame.width
     }
+    
+
+    
 }

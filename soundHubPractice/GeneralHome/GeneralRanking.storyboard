@@ -106,7 +106,7 @@
                                                 </collectionReusableView>
                                             </collectionView>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5Cz-0A-8BL">
-                                                <rect key="frame" x="0.0" y="268" width="375" height="599"/>
+                                                <rect key="frame" x="0.0" y="268" width="375" height="275"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="rankingCell" id="R71-f6-RS3">
@@ -124,12 +124,11 @@
                                         <constraints>
                                             <constraint firstItem="5Cz-0A-8BL" firstAttribute="centerX" secondItem="XTR-TW-TAP" secondAttribute="centerX" id="1yc-Fw-ht5"/>
                                             <constraint firstItem="44n-1d-5wb" firstAttribute="top" secondItem="xX8-om-GLO" secondAttribute="bottom" id="26w-iM-27g"/>
-                                            <constraint firstItem="5Cz-0A-8BL" firstAttribute="top" secondItem="44n-1d-5wb" secondAttribute="bottom" id="8YE-Vd-jWU"/>
                                             <constraint firstItem="44n-1d-5wb" firstAttribute="centerX" secondItem="XTR-TW-TAP" secondAttribute="centerX" id="RTt-J7-UOP"/>
                                             <constraint firstItem="xX8-om-GLO" firstAttribute="leading" secondItem="XTR-TW-TAP" secondAttribute="leading" constant="20" id="cNx-cW-Osy"/>
                                             <constraint firstItem="44n-1d-5wb" firstAttribute="width" secondItem="XTR-TW-TAP" secondAttribute="width" id="jfh-Ww-hLD"/>
+                                            <constraint firstItem="5Cz-0A-8BL" firstAttribute="top" secondItem="44n-1d-5wb" secondAttribute="bottom" id="osb-CG-HWV"/>
                                             <constraint firstItem="xX8-om-GLO" firstAttribute="top" secondItem="XTR-TW-TAP" secondAttribute="top" constant="20" id="sYY-KB-bDN"/>
-                                            <constraint firstAttribute="bottom" secondItem="5Cz-0A-8BL" secondAttribute="bottom" id="xXK-UR-Dci"/>
                                             <constraint firstItem="5Cz-0A-8BL" firstAttribute="width" secondItem="XTR-TW-TAP" secondAttribute="width" id="ySE-Ph-m6I"/>
                                         </constraints>
                                     </view>
@@ -144,6 +143,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="5Cz-0A-8BL" firstAttribute="bottom" secondItem="Nen-TD-ftE" secondAttribute="bottom" id="15w-9t-822"/>
                             <constraint firstItem="oXG-rq-CD5" firstAttribute="top" secondItem="Nen-TD-ftE" secondAttribute="top" id="1FR-fJ-pJR"/>
                             <constraint firstItem="XTR-TW-TAP" firstAttribute="height" secondItem="Y6B-Ac-dLM" secondAttribute="height" constant="200" id="AW8-Rd-vtY"/>
                             <constraint firstItem="oXG-rq-CD5" firstAttribute="trailing" secondItem="Nen-TD-ftE" secondAttribute="trailing" id="M3o-cQ-v4w"/>
