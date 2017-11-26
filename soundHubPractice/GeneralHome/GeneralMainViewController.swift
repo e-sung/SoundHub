@@ -10,14 +10,11 @@ import UIKit
 
 class GeneralMainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
-    @IBOutlet weak var outerScrollView: UIScrollView!
     @IBOutlet weak var popularMusicianCollectionView: UICollectionView!
     @IBOutlet weak var musicRankingTableView: UITableView!
-    @IBOutlet weak var populacMusicianContainer: UIView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        outerScrollView.delegate = self
         popularMusicianCollectionView.delegate = self
         popularMusicianCollectionView.dataSource = self
         musicRankingTableView.delegate = self
@@ -29,17 +26,18 @@ class GeneralMainViewController: UIViewController, UICollectionViewDelegate, UIC
 extension GeneralMainViewController{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         print(scrollView.contentOffset)
-        if scrollView == outerScrollView &&
-            scrollView.contentOffset.y >= self.view.frame.height{
-            print("outer scroll view",scrollView.contentOffset.y)
-            scrollView.isScrollEnabled = false
-            musicRankingTableView.isScrollEnabled = true
-        }else if scrollView == self.musicRankingTableView &&
-            scrollView.contentOffset.y <= 0 {
-            print("table scroll view",scrollView.contentOffset.y)
-            scrollView.isScrollEnabled = false
-            outerScrollView.isScrollEnabled = true
-        }
+//        if scrollView == outerScrollView &&
+//            scrollView.contentOffset.y >= self.view.frame.height{
+//            print("outer scroll view",scrollView.contentOffset.y)
+//            scrollView.isScrollEnabled = false
+//            musicRankingTableView.isScrollEnabled = true
+//        }
+//        else if scrollView == self.musicRankingTableView &&
+//            scrollView.contentOffset.y <= 0 {
+//            print("table scroll view",scrollView.contentOffset.y)
+//            scrollView.isScrollEnabled = false
+//            outerScrollView.isScrollEnabled = true
+//        }
     }
 }
 
@@ -75,10 +73,6 @@ extension GeneralMainViewController{
         return header
     }
     
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return "Ranking Chart"
-//    }
-    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 100
     }
@@ -88,9 +82,15 @@ extension GeneralMainViewController{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "rankingCell", for: indexPath)
-        cell.backgroundColor = UIColor(red: 0.2, green: CGFloat(indexPath.item)*0.1, blue: 0.1, alpha: 1)
-        return cell
+        
+        if indexPath.item == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "popularMusicianContainerCell", for: indexPath)
+            return cell
+        }else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "rankingCell", for: indexPath)
+            cell.backgroundColor = UIColor(red: 0.2, green: CGFloat(indexPath.item)*0.1, blue: 0.1, alpha: 1)
+            return cell
+        }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return self.view.frame.width
