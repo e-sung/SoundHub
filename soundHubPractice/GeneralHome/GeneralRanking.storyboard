@@ -255,6 +255,9 @@
                                                 <real key="value" value="0.0"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="eLA-kX-c1g" kind="show" id="TPK-rG-A4D"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -276,7 +279,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7FQ-6n-cka" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1324" y="-143.02848575712144"/>
+            <point key="canvasLocation" x="1380" y="-143"/>
+        </scene>
+        <!--Detail-->
+        <scene sceneID="Wan-hL-uiq">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Detail" id="eLA-kX-c1g" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vpw-3l-VXv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2082" y="-143"/>
         </scene>
     </scenes>
     <resources>
