@@ -13,8 +13,8 @@ class GeneralMainViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var outerScrollView: UIScrollView!
     @IBOutlet weak var popularMusicianCollectionView: UICollectionView!
     @IBOutlet weak var musicRankingTableView: UITableView!
-
-
+    @IBOutlet weak var populacMusicianContainer: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         outerScrollView.delegate = self
@@ -28,17 +28,17 @@ class GeneralMainViewController: UIViewController, UICollectionViewDelegate, UIC
 
 extension GeneralMainViewController{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let foo = 20 + popularMusicianCollectionView.frame.height + 200 + 60
+        print(scrollView.contentOffset)
         if scrollView == outerScrollView &&
-            scrollView.contentOffset.y >= foo{
+            scrollView.contentOffset.y >= self.view.frame.height{
+            print("outer scroll view",scrollView.contentOffset.y)
             scrollView.isScrollEnabled = false
             musicRankingTableView.isScrollEnabled = true
-        }
-        
-        if scrollView == self.musicRankingTableView &&
+        }else if scrollView == self.musicRankingTableView &&
             scrollView.contentOffset.y <= 0 {
-            self.outerScrollView.isScrollEnabled = true
-            musicRankingTableView.isScrollEnabled = false
+            print("table scroll view",scrollView.contentOffset.y)
+            scrollView.isScrollEnabled = false
+            outerScrollView.isScrollEnabled = true
         }
     }
 }
