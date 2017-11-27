@@ -18,6 +18,7 @@
 		FF3B20C21FCC31930019F87A /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20C11FCC31930019F87A /* SignUpViewController.swift */; };
 		FF3B20C41FCC3B4C0019F87A /* SignUpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20C31FCC3B4C0019F87A /* SignUpRequest.swift */; };
 		FF3B20C61FCC3B930019F87A /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20C51FCC3B930019F87A /* Instrument.swift */; };
+		FF3B20C91FCC434B0019F87A /* ProfileSetUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20C81FCC434B0019F87A /* ProfileSetUpViewController.swift */; };
 		FF9A84DD1FC9612200AC4780 /* MainTabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF9A84DC1FC9612200AC4780 /* MainTabBar.storyboard */; };
 		FF9A84E01FC961AF00AC4780 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9A84DF1FC961AF00AC4780 /* MainTabBarController.swift */; };
 		FF9A84E31FC962C300AC4780 /* GeneralRanking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF9A84E21FC962C300AC4780 /* GeneralRanking.storyboard */; };
@@ -62,6 +63,7 @@
 		FF3B20C11FCC31930019F87A /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		FF3B20C31FCC3B4C0019F87A /* SignUpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRequest.swift; sourceTree = "<group>"; };
 		FF3B20C51FCC3B930019F87A /* Instrument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instrument.swift; sourceTree = "<group>"; };
+		FF3B20C81FCC434B0019F87A /* ProfileSetUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetUpViewController.swift; sourceTree = "<group>"; };
 		FF9A84DC1FC9612200AC4780 /* MainTabBar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainTabBar.storyboard; sourceTree = "<group>"; };
 		FF9A84DF1FC961AF00AC4780 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		FF9A84E21FC962C300AC4780 /* GeneralRanking.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GeneralRanking.storyboard; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				FFCF82EE1FC95E6D003B7861 /* LogIn.storyboard */,
+				FF3B20C81FCC434B0019F87A /* ProfileSetUpViewController.swift */,
 				FF3B20C11FCC31930019F87A /* SignUpViewController.swift */,
 				FF3B20BE1FCC2B0E0019F87A /* LoginViewController.swift */,
 			);
@@ -377,6 +380,7 @@
 				FFCF82ED1FC95E07003B7861 /* EntryViewController.swift in Sources */,
 				FF3B20C61FCC3B930019F87A /* Instrument.swift in Sources */,
 				FF3B20B11FCA98C50019F87A /* GeneralChartViewController.swift in Sources */,
+				FF3B20C91FCC434B0019F87A /* ProfileSetUpViewController.swift in Sources */,
 				FF3B20B31FCAA2700019F87A /* InspectableView.swift in Sources */,
 				FF3B20C21FCC31930019F87A /* SignUpViewController.swift in Sources */,
 				FF3B20C41FCC3B4C0019F87A /* SignUpRequest.swift in Sources */,

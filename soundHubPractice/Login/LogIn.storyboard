@@ -191,6 +191,9 @@
                                                 <real key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="9vm-a1-xVF" kind="presentation" id="N8f-qd-oKY"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -256,6 +259,143 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-980" y="868"/>
+        </scene>
+        <!--Profile Set Up View Controller-->
+        <scene sceneID="g8S-8W-PJo">
+            <objects>
+                <viewController id="9vm-a1-xVF" customClass="ProfileSetUpViewController" customModule="soundHubPractice" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hr7-86-imh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="gpt-j1-Xae">
+                                <rect key="frame" x="37.5" y="243.5" width="300" height="100"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AyD-0S-1sG">
+                                        <rect key="frame" x="0.0" y="0.0" width="96.5" height="100"/>
+                                        <state key="normal" backgroundImage="mic_lineart"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="Ikz-va-hjQ" kind="presentation" modalTransitionStyle="crossDissolve" id="uMM-1q-i4K"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2sQ-aD-TGp">
+                                        <rect key="frame" x="101.5" y="0.0" width="97" height="100"/>
+                                        <state key="normal" backgroundImage="guitar_lineart"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lb0-7S-vZL">
+                                        <rect key="frame" x="203.5" y="0.0" width="96.5" height="100"/>
+                                        <state key="normal" backgroundImage="bass_lineart"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="EUR-lr-y0Q"/>
+                                    <constraint firstAttribute="width" constant="300" id="tcR-Ut-2fm"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="8wK-a0-kxk">
+                                <rect key="frame" x="37" y="353.5" width="300" height="100"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D8J-5h-cy9">
+                                        <rect key="frame" x="0.0" y="0.0" width="96.5" height="100"/>
+                                        <state key="normal" backgroundImage="keyboard_lineart"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JGS-s1-YEP">
+                                        <rect key="frame" x="101.5" y="0.0" width="97" height="100"/>
+                                        <state key="normal" backgroundImage="drum_lineart"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t8C-86-qL1">
+                                        <rect key="frame" x="203.5" y="0.0" width="96.5" height="100"/>
+                                        <state key="normal" backgroundImage="other_lineart"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="bff-im-cQJ"/>
+                                    <constraint firstAttribute="width" constant="300" id="eo5-F7-gHg"/>
+                                </constraints>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="당신은 어떤 악기를 다루나요?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UZO-Ta-JuT">
+                                <rect key="frame" x="37" y="80" width="300" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="0zF-fn-jGb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="gpt-j1-Xae" firstAttribute="centerX" secondItem="BH9-Jg-Djs" secondAttribute="centerX" id="1AI-Ve-mVl"/>
+                            <constraint firstItem="UZO-Ta-JuT" firstAttribute="leading" secondItem="gpt-j1-Xae" secondAttribute="leading" id="8c5-pn-cOk"/>
+                            <constraint firstItem="gpt-j1-Xae" firstAttribute="centerY" secondItem="BH9-Jg-Djs" secondAttribute="centerY" constant="-50" id="FS2-fx-Owy"/>
+                            <constraint firstItem="8wK-a0-kxk" firstAttribute="top" secondItem="gpt-j1-Xae" secondAttribute="bottom" constant="10" id="Ihq-DP-C8R"/>
+                            <constraint firstItem="8wK-a0-kxk" firstAttribute="centerX" secondItem="gpt-j1-Xae" secondAttribute="centerX" id="b8j-z9-Zv7"/>
+                            <constraint firstItem="UZO-Ta-JuT" firstAttribute="width" secondItem="8wK-a0-kxk" secondAttribute="width" id="qG3-84-fsR"/>
+                            <constraint firstItem="gpt-j1-Xae" firstAttribute="top" secondItem="UZO-Ta-JuT" secondAttribute="bottom" constant="63.5" id="rAW-UV-tZf"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="BH9-Jg-Djs"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="7jD-cV-Lv9" appends="YES" id="dh7-au-h3c"/>
+                        </connections>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pd8-1D-wiP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="7jD-cV-Lv9">
+                    <connections>
+                        <action selector="onTapHandler:" destination="9vm-a1-xVF" id="ehY-Yl-l50"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-244" y="867.61619190404804"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="LCQ-P5-KD0">
@@ -387,11 +527,20 @@
                 <viewControllerPlaceholder storyboardName="MainTabBar" id="Ikz-va-hjQ" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uP6-RU-Oja" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="316" y="132"/>
+            <point key="canvasLocation" x="458" y="157"/>
         </scene>
     </scenes>
     <resources>
+        <image name="bass_lineart" width="800" height="554"/>
+        <image name="drum_lineart" width="606" height="540"/>
+        <image name="guitar_lineart" width="595" height="842"/>
         <image name="guitar_main" width="960" height="562"/>
+        <image name="keyboard_lineart" width="450" height="324"/>
+        <image name="mic_lineart" width="250" height="500"/>
+        <image name="other_lineart" width="430" height="400"/>
         <image name="soundHubLogo" width="943" height="248"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="uMM-1q-i4K"/>
+    </inferredMetricsTieBreakers>
 </document>
