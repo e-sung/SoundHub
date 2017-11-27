@@ -16,6 +16,8 @@
 		FF3B20BC1FCACE8D0019F87A /* DetailHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20BB1FCACE8D0019F87A /* DetailHeaderCell.swift */; };
 		FF3B20BF1FCC2B0E0019F87A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20BE1FCC2B0E0019F87A /* LoginViewController.swift */; };
 		FF3B20C21FCC31930019F87A /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20C11FCC31930019F87A /* SignUpViewController.swift */; };
+		FF3B20C41FCC3B4C0019F87A /* SignUpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20C31FCC3B4C0019F87A /* SignUpRequest.swift */; };
+		FF3B20C61FCC3B930019F87A /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20C51FCC3B930019F87A /* Instrument.swift */; };
 		FF9A84DD1FC9612200AC4780 /* MainTabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF9A84DC1FC9612200AC4780 /* MainTabBar.storyboard */; };
 		FF9A84E01FC961AF00AC4780 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9A84DF1FC961AF00AC4780 /* MainTabBarController.swift */; };
 		FF9A84E31FC962C300AC4780 /* GeneralRanking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF9A84E21FC962C300AC4780 /* GeneralRanking.storyboard */; };
@@ -58,6 +60,8 @@
 		FF3B20BB1FCACE8D0019F87A /* DetailHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHeaderCell.swift; sourceTree = "<group>"; };
 		FF3B20BE1FCC2B0E0019F87A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		FF3B20C11FCC31930019F87A /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		FF3B20C31FCC3B4C0019F87A /* SignUpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRequest.swift; sourceTree = "<group>"; };
+		FF3B20C51FCC3B930019F87A /* Instrument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instrument.swift; sourceTree = "<group>"; };
 		FF9A84DC1FC9612200AC4780 /* MainTabBar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainTabBar.storyboard; sourceTree = "<group>"; };
 		FF9A84DF1FC961AF00AC4780 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		FF9A84E21FC962C300AC4780 /* GeneralRanking.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GeneralRanking.storyboard; sourceTree = "<group>"; };
@@ -134,6 +138,15 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		FF3B20C71FCC3C9F0019F87A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FF3B20C31FCC3B4C0019F87A /* SignUpRequest.swift */,
+				FF3B20C51FCC3B930019F87A /* Instrument.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		FF9A84DE1FC9616A00AC4780 /* EntryPoint */ = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +200,7 @@
 			children = (
 				FFCF82BE1FC95D66003B7861 /* AppDelegate.swift */,
 				FF3B20B21FCAA2700019F87A /* InspectableView.swift */,
+				FF3B20C71FCC3C9F0019F87A /* Models */,
 				FF3B20BD1FCAD5F50019F87A /* DetailView */,
 				FF9A84E81FC9A4CE00AC4780 /* GeneralHome */,
 				FF9A84E41FC9675A00AC4780 /* GenreRanking.storyboard */,
@@ -361,9 +375,11 @@
 				FFCF82BF1FC95D66003B7861 /* AppDelegate.swift in Sources */,
 				FF3B20AF1FCA96E30019F87A /* PopularMusicianContainerCell.swift in Sources */,
 				FFCF82ED1FC95E07003B7861 /* EntryViewController.swift in Sources */,
+				FF3B20C61FCC3B930019F87A /* Instrument.swift in Sources */,
 				FF3B20B11FCA98C50019F87A /* GeneralChartViewController.swift in Sources */,
 				FF3B20B31FCAA2700019F87A /* InspectableView.swift in Sources */,
 				FF3B20C21FCC31930019F87A /* SignUpViewController.swift in Sources */,
+				FF3B20C41FCC3B4C0019F87A /* SignUpRequest.swift in Sources */,
 				FF9A84E01FC961AF00AC4780 /* MainTabBarController.swift in Sources */,
 				FF9A84EC1FC9AE6500AC4780 /* PopularMusicianCell.swift in Sources */,
 				FF3B20B51FCAADD80019F87A /* RankingCell.swift in Sources */,

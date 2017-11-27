@@ -29,7 +29,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         passwordConfirmTF.becomeFirstResponder()
     }
     @IBAction func passwordFinalConfirmHandler(_ sender: UITextField) {
-        print("asdf")
     }
     @IBAction func onTouchHandler(_ sender: UITapGestureRecognizer) {
         if isKeyboardUp {
