@@ -110,6 +110,16 @@
 			path = CustomCells;
 			sourceTree = "<group>";
 		};
+		FF3B20BD1FCAD5F50019F87A /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				FF3B20B71FCAC92D0019F87A /* Detail.storyboard */,
+				FF3B20BB1FCACE8D0019F87A /* DetailHeaderCell.swift */,
+				FF3B20B91FCACD4A0019F87A /* DetailViewController.swift */,
+			);
+			path = DetailView;
+			sourceTree = "<group>";
+		};
 		FF9A84DE1FC9616A00AC4780 /* EntryPoint */ = {
 			isa = PBXGroup;
 			children = (
@@ -163,9 +173,7 @@
 			children = (
 				FFCF82BE1FC95D66003B7861 /* AppDelegate.swift */,
 				FF3B20B21FCAA2700019F87A /* InspectableView.swift */,
-				FF3B20B71FCAC92D0019F87A /* Detail.storyboard */,
-				FF3B20BB1FCACE8D0019F87A /* DetailHeaderCell.swift */,
-				FF3B20B91FCACD4A0019F87A /* DetailViewController.swift */,
+				FF3B20BD1FCAD5F50019F87A /* DetailView */,
 				FF9A84E81FC9A4CE00AC4780 /* GeneralHome */,
 				FF9A84E41FC9675A00AC4780 /* GenreRanking.storyboard */,
 				FF9A84DE1FC9616A00AC4780 /* EntryPoint */,

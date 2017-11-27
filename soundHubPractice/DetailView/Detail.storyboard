@@ -6,6 +6,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -134,13 +135,69 @@
                                                     <outlet property="postTitleLB" destination="jX0-hu-hPz" id="6HT-Uf-UPz"/>
                                                 </connections>
                                             </tableViewCell>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="200" id="Xxm-xC-9b2">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="masterWaveCell" rowHeight="200" id="Xxm-xC-9b2">
                                                 <rect key="frame" x="0.0" y="228" width="375" height="200"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xxm-xC-9b2" id="pf2-LJ-aOb">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wave" translatesAutoresizingMaskIntoConstraints="NO" id="wa4-AJ-Adn">
+                                                            <rect key="frame" x="15" y="11" width="345" height="178"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="wa4-AJ-Adn" firstAttribute="top" secondItem="pf2-LJ-aOb" secondAttribute="topMargin" id="byS-o2-Ujb"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="wa4-AJ-Adn" secondAttribute="trailing" id="hRf-b8-WS9"/>
+                                                        <constraint firstAttribute="bottomMargin" secondItem="wa4-AJ-Adn" secondAttribute="bottom" id="jZR-kj-lcE"/>
+                                                        <constraint firstItem="wa4-AJ-Adn" firstAttribute="leading" secondItem="pf2-LJ-aOb" secondAttribute="leadingMargin" id="nCu-SX-AHS"/>
+                                                    </constraints>
                                                 </tableViewCellContentView>
+                                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </tableViewCell>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="mixedTrackCell" rowHeight="80" id="CPw-9e-aHh">
+                                                <rect key="frame" x="0.0" y="428" width="375" height="80"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CPw-9e-aHh" id="bjn-SV-1gd">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iu_profile" translatesAutoresizingMaskIntoConstraints="NO" id="GdF-eY-aY8">
+                                                            <rect key="frame" x="10" y="5" width="70" height="70"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="GdF-eY-aY8" secondAttribute="height" multiplier="1:1" id="dKC-fd-U2t"/>
+                                                                <constraint firstAttribute="width" constant="70" id="utR-4R-Wi3"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vocal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HdZ-4h-syP">
+                                                            <rect key="frame" x="88" y="11" width="71" height="36"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                            <color key="textColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YDl-Jo-Geb">
+                                                            <rect key="frame" x="88" y="48" width="51.5" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hJx-tO-cHZ">
+                                                            <rect key="frame" x="311" y="25" width="49" height="31"/>
+                                                            <color key="onTintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </switch>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="YDl-Jo-Geb" firstAttribute="leading" secondItem="HdZ-4h-syP" secondAttribute="leading" id="ALL-iH-brd"/>
+                                                        <constraint firstItem="GdF-eY-aY8" firstAttribute="centerY" secondItem="bjn-SV-1gd" secondAttribute="centerY" id="Eq2-HN-qeg"/>
+                                                        <constraint firstAttribute="trailing" secondItem="hJx-tO-cHZ" secondAttribute="trailing" constant="17" id="FZP-YZ-rOt"/>
+                                                        <constraint firstItem="hJx-tO-cHZ" firstAttribute="centerY" secondItem="bjn-SV-1gd" secondAttribute="centerY" id="IPs-c0-N0B"/>
+                                                        <constraint firstItem="YDl-Jo-Geb" firstAttribute="top" secondItem="HdZ-4h-syP" secondAttribute="bottom" constant="1" id="Rcd-Sz-Lhv"/>
+                                                        <constraint firstItem="GdF-eY-aY8" firstAttribute="leading" secondItem="bjn-SV-1gd" secondAttribute="leading" constant="10" id="VW1-B5-2Bn"/>
+                                                        <constraint firstItem="HdZ-4h-syP" firstAttribute="leading" secondItem="GdF-eY-aY8" secondAttribute="trailing" constant="8" id="WMl-vc-Yar"/>
+                                                        <constraint firstItem="HdZ-4h-syP" firstAttribute="top" secondItem="bjn-SV-1gd" secondAttribute="top" constant="11" id="aRg-7g-PTC"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
@@ -179,5 +236,6 @@
     <resources>
         <image name="iu_profile" width="128" height="128"/>
         <image name="modernTImes" width="316" height="316"/>
+        <image name="wave" width="838" height="395"/>
     </resources>
 </document>
