@@ -121,6 +121,9 @@
                                                 <real key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="emailPrimaryActionHandler:" destination="wSx-Gg-sUf" eventType="primaryActionTriggered" id="ccT-ez-08g"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hi4-Ur-RHJ">
                                         <rect key="frame" x="0.0" y="41" width="300" height="36"/>
@@ -135,6 +138,9 @@
                                                 <real key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="passwordPriamryActionHandler:" destination="wSx-Gg-sUf" eventType="primaryActionTriggered" id="Klb-xo-2y4"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Is-bc-taC">
                                         <rect key="frame" x="0.0" y="82" width="300" height="36"/>
@@ -149,7 +155,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="Ikz-va-hjQ" kind="presentation" modalTransitionStyle="flipHorizontal" id="QWT-xb-AqS"/>
+                                            <segue destination="Ikz-va-hjQ" kind="presentation" identifier="showMain" modalTransitionStyle="crossDissolve" id="QWT-xb-AqS"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -201,9 +207,17 @@
                             <outletCollection property="gestureRecognizers" destination="qVe-DL-NTY" appends="YES" id="IMM-LD-5BS"/>
                         </connections>
                     </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="Fin-d5-EYt" id="AoT-F6-OSS"/>
+                        <outlet property="passwordTextField" destination="Hi4-Ur-RHJ" id="Q4H-M8-pdK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a3y-ry-yLu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="qVe-DL-NTY"/>
+                <tapGestureRecognizer id="qVe-DL-NTY">
+                    <connections>
+                        <action selector="viewTouchHandler:" destination="wSx-Gg-sUf" id="VCJ-j5-Zdh"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-244" y="133"/>
         </scene>
@@ -213,7 +227,7 @@
                 <viewControllerPlaceholder storyboardName="MainTabBar" id="Ikz-va-hjQ" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uP6-RU-Oja" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="265" y="132"/>
+            <point key="canvasLocation" x="316" y="132"/>
         </scene>
     </scenes>
     <resources>
