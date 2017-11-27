@@ -47,6 +47,9 @@
                                                 <real key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="y5Y-p4-nBj" kind="presentation" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="IgO-El-unE"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Hh-xP-3ER">
                                         <rect key="frame" x="171" y="0.0" width="129" height="42"/>
@@ -121,6 +124,9 @@
                                                 <real key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="emailConfirmHandler:" destination="y5Y-p4-nBj" eventType="primaryActionTriggered" id="G74-Zr-z9R"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="NickName" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W95-be-h4a">
                                         <rect key="frame" x="0.0" y="41" width="300" height="36"/>
@@ -135,12 +141,15 @@
                                                 <real key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="nickNameConfirmHandler:" destination="y5Y-p4-nBj" eventType="primaryActionTriggered" id="PBJ-H6-nSO"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TeM-oW-WWD">
                                         <rect key="frame" x="0.0" y="82" width="300" height="36"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                 <real key="value" value="1"/>
@@ -149,6 +158,9 @@
                                                 <real key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="passwordConfirmHandler:" destination="y5Y-p4-nBj" eventType="primaryActionTriggered" id="kMU-RB-YDg"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password Confirm" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="svt-Fd-H32">
                                         <rect key="frame" x="0.0" y="123" width="300" height="36"/>
@@ -163,6 +175,9 @@
                                                 <real key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="passwordFinalConfirmHandler:" destination="y5Y-p4-nBj" eventType="primaryActionTriggered" id="UrV-Ck-eHa"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y6j-my-KCM">
                                         <rect key="frame" x="0.0" y="164" width="300" height="36"/>
@@ -212,6 +227,7 @@
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.086261831220000001" green="0.086283676330000003" blue="0.086257167159999995" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="o80-Wi-AmO" firstAttribute="centerY" secondItem="nOk-16-R4d" secondAttribute="centerY" constant="-80" id="4JR-1W-7RL"/>
                             <constraint firstItem="PKB-4n-QUM" firstAttribute="width" secondItem="o80-Wi-AmO" secondAttribute="width" id="9lQ-41-6yH"/>
@@ -221,11 +237,25 @@
                             <constraint firstItem="PKB-4n-QUM" firstAttribute="centerX" secondItem="o80-Wi-AmO" secondAttribute="centerX" id="iuY-c1-Wbn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nOk-16-R4d"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="kye-VD-Sgn" appends="YES" id="dnX-7J-oUa"/>
+                        </connections>
                     </view>
+                    <connections>
+                        <outlet property="emailTF" destination="jzZ-4N-eda" id="L8G-eW-COa"/>
+                        <outlet property="nickNameTF" destination="W95-be-h4a" id="FQU-IC-ecw"/>
+                        <outlet property="passwordConfirmTF" destination="svt-Fd-H32" id="gm0-Kw-c0Y"/>
+                        <outlet property="passwordTF" destination="TeM-oW-WWD" id="VYn-rd-RnN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UKa-9n-brg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="kye-VD-Sgn">
+                    <connections>
+                        <action selector="onTouchHandler:" destination="y5Y-p4-nBj" id="V3M-Hg-As5"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-970" y="808"/>
+            <point key="canvasLocation" x="-980" y="868"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="LCQ-P5-KD0">
