@@ -97,10 +97,10 @@
             </objects>
             <point key="canvasLocation" x="-980" y="132.68365817091455"/>
         </scene>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="LCQ-P5-KD0">
             <objects>
-                <viewController id="wSx-Gg-sUf" sceneMemberID="viewController">
+                <viewController id="wSx-Gg-sUf" customClass="LoginViewController" customModule="soundHubPractice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2fs-c8-vZd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -148,6 +148,9 @@
                                                 <real key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="Ikz-va-hjQ" kind="presentation" modalTransitionStyle="flipHorizontal" id="QWT-xb-AqS"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -184,6 +187,7 @@
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.086261831220000001" green="0.086283676330000003" blue="0.086257167159999995" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="dvs-E5-kHh" firstAttribute="centerY" secondItem="7S3-fE-DfC" secondAttribute="centerY" constant="-50" id="4t3-Xx-zYR"/>
                             <constraint firstItem="sNd-e9-KQ8" firstAttribute="top" secondItem="dvs-E5-kHh" secondAttribute="bottom" constant="30" id="FYF-7k-kd8"/>
@@ -193,9 +197,13 @@
                             <constraint firstItem="sNd-e9-KQ8" firstAttribute="centerX" secondItem="dvs-E5-kHh" secondAttribute="centerX" id="p7G-yr-QYl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7S3-fE-DfC"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="qVe-DL-NTY" appends="YES" id="IMM-LD-5BS"/>
+                        </connections>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a3y-ry-yLu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="qVe-DL-NTY"/>
             </objects>
             <point key="canvasLocation" x="-244" y="133"/>
         </scene>
