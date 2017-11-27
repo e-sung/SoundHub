@@ -10,6 +10,7 @@ import UIKit
 
 class LoginViewController: UIViewController, UITextViewDelegate {
     
+    var isKeyboardUp = false
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBAction func emailPrimaryActionHandler(_ sender: UITextField) {
@@ -22,18 +23,20 @@ class LoginViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func viewTouchHandler(_ sender: UITapGestureRecognizer) {
-        if emailTextField.isFirstResponder || passwordTextField.isFirstResponder{
-            print("touched when self.view is not first responder")
-            emailTextField.resignFirstResponder()
-            passwordTextField.resignFirstResponder()
-            self.view.becomeFirstResponder()
+        if isKeyboardUp{
+            self.view.endEditing(true)
         }else{
-            print("touched when self.view is first responder")
             self.dismiss(animated: true, completion: nil)
         }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardDidShow, object: nil, queue: nil) { (noti) in
+            self.isKeyboardUp = true
+        }
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardDidHide, object: nil, queue: nil) { (noti) in
+            self.isKeyboardUp = false
+        }
         // Do any additional setup after loading the view.
     }
 }
