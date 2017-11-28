@@ -37,6 +37,14 @@ class MainTabBarController: UITabBarController{
         sender.isSelected = true
         self.selectedIndex = sender.tag
     }
+    @objc func uploadButtonHandler(sender:UIButton){
+        let alert = UIAlertController(title: "어떻게 올리시겠습니까?", message: "", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "원래 있던 파일 올리기", style: .default , handler: { (action) in
+        }))
+        alert.addAction(UIAlertAction(title: "새로 녹음하기", style: .default , handler: { (action) in
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
 extension MainTabBarController{
@@ -50,6 +58,7 @@ extension MainTabBarController{
         uploadMusicButton.setTitle("+", for: .normal)
         uploadMusicButton.setTitleColor(.white, for: .normal)
         uploadMusicButton.titleLabel?.font = uploadMusicButton.titleLabel?.font.withSize(40)
+        uploadMusicButton.addTarget(self, action: #selector(uploadButtonHandler), for: .touchUpInside)
     }
     
     private func setUpperTabBar(){

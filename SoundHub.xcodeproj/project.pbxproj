@@ -188,8 +188,8 @@
 			isa = PBXGroup;
 			children = (
 				FF9A84E21FC962C300AC4780 /* GeneralRanking.storyboard */,
-				FF3B20B61FCAC7B70019F87A /* CustomCells */,
 				FF3B20B01FCA98C50019F87A /* GeneralChartViewController.swift */,
+				FF3B20B61FCAC7B70019F87A /* CustomCells */,
 			);
 			path = GeneralHome;
 			sourceTree = "<group>";

@@ -5,7 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -31,28 +30,11 @@
                     <connections>
                         <segue destination="vQj-Ye-PUC" kind="relationship" relationship="viewControllers" id="Nsx-1a-4vI"/>
                         <segue destination="39b-qt-fjI" kind="relationship" relationship="viewControllers" id="SPm-f5-zxj"/>
-                        <segue destination="YLo-Xf-t9U" kind="relationship" relationship="viewControllers" id="2eF-Qi-c6G"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bF9-Sh-1Zi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-737" y="-177"/>
-        </scene>
-        <!--Item-->
-        <scene sceneID="Ykd-VW-aRb">
-            <objects>
-                <viewController id="YLo-Xf-t9U" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Elp-LZ-rRB">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="Cfl-PN-RT5"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="nJv-cR-7DY"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ehA-fa-naq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-738" y="618"/>
         </scene>
         <!--GenreRanking-->
         <scene sceneID="SG1-Rc-iqH">
