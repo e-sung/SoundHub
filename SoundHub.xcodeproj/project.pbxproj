@@ -75,16 +75,16 @@
 		FF9A84EB1FC9AE6500AC4780 /* PopularMusicianCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMusicianCell.swift; sourceTree = "<group>"; };
 		FFA5A39E1FCCFD97001EA36F /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		FFA5A3A01FCD0962001EA36F /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
-		FFCF82BB1FC95D66003B7861 /* soundHubPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = soundHubPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FFCF82BB1FC95D66003B7861 /* SoundHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoundHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFCF82BE1FC95D66003B7861 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFCF82C31FC95D66003B7861 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Entry.storyboard; sourceTree = "<group>"; };
 		FFCF82C51FC95D66003B7861 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FFCF82C81FC95D66003B7861 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FFCF82CA1FC95D66003B7861 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FFCF82CF1FC95D66003B7861 /* soundHubPracticeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = soundHubPracticeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FFCF82CF1FC95D66003B7861 /* SoundHubTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoundHubTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFCF82D31FC95D66003B7861 /* soundHubPracticeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = soundHubPracticeTests.swift; sourceTree = "<group>"; };
 		FFCF82D51FC95D66003B7861 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FFCF82DA1FC95D66003B7861 /* soundHubPracticeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = soundHubPracticeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FFCF82DA1FC95D66003B7861 /* SoundHubUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoundHubUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFCF82DE1FC95D66003B7861 /* soundHubPracticeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = soundHubPracticeUITests.swift; sourceTree = "<group>"; };
 		FFCF82E01FC95D66003B7861 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFCF82EC1FC95E07003B7861 /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
@@ -197,9 +197,9 @@
 		FFCF82B21FC95D66003B7861 = {
 			isa = PBXGroup;
 			children = (
-				FFCF82BD1FC95D66003B7861 /* soundHubPractice */,
-				FFCF82D21FC95D66003B7861 /* soundHubPracticeTests */,
-				FFCF82DD1FC95D66003B7861 /* soundHubPracticeUITests */,
+				FFCF82BD1FC95D66003B7861 /* SoundHub */,
+				FFCF82D21FC95D66003B7861 /* SoundHubTests */,
+				FFCF82DD1FC95D66003B7861 /* SoundHubUITests */,
 				FFCF82BC1FC95D66003B7861 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -207,14 +207,14 @@
 		FFCF82BC1FC95D66003B7861 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FFCF82BB1FC95D66003B7861 /* soundHubPractice.app */,
-				FFCF82CF1FC95D66003B7861 /* soundHubPracticeTests.xctest */,
-				FFCF82DA1FC95D66003B7861 /* soundHubPracticeUITests.xctest */,
+				FFCF82BB1FC95D66003B7861 /* SoundHub.app */,
+				FFCF82CF1FC95D66003B7861 /* SoundHubTests.xctest */,
+				FFCF82DA1FC95D66003B7861 /* SoundHubUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		FFCF82BD1FC95D66003B7861 /* soundHubPractice */ = {
+		FFCF82BD1FC95D66003B7861 /* SoundHub */ = {
 			isa = PBXGroup;
 			children = (
 				FFCF82BE1FC95D66003B7861 /* AppDelegate.swift */,
@@ -231,33 +231,33 @@
 				FFCF82C71FC95D66003B7861 /* LaunchScreen.storyboard */,
 				FFCF82CA1FC95D66003B7861 /* Info.plist */,
 			);
-			path = soundHubPractice;
+			path = SoundHub;
 			sourceTree = "<group>";
 		};
-		FFCF82D21FC95D66003B7861 /* soundHubPracticeTests */ = {
+		FFCF82D21FC95D66003B7861 /* SoundHubTests */ = {
 			isa = PBXGroup;
 			children = (
 				FFCF82D31FC95D66003B7861 /* soundHubPracticeTests.swift */,
 				FFCF82D51FC95D66003B7861 /* Info.plist */,
 			);
-			path = soundHubPracticeTests;
+			path = SoundHubTests;
 			sourceTree = "<group>";
 		};
-		FFCF82DD1FC95D66003B7861 /* soundHubPracticeUITests */ = {
+		FFCF82DD1FC95D66003B7861 /* SoundHubUITests */ = {
 			isa = PBXGroup;
 			children = (
 				FFCF82DE1FC95D66003B7861 /* soundHubPracticeUITests.swift */,
 				FFCF82E01FC95D66003B7861 /* Info.plist */,
 			);
-			path = soundHubPracticeUITests;
+			path = SoundHubUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		FFCF82BA1FC95D66003B7861 /* soundHubPractice */ = {
+		FFCF82BA1FC95D66003B7861 /* SoundHub */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FFCF82E31FC95D66003B7861 /* Build configuration list for PBXNativeTarget "soundHubPractice" */;
+			buildConfigurationList = FFCF82E31FC95D66003B7861 /* Build configuration list for PBXNativeTarget "SoundHub" */;
 			buildPhases = (
 				FFCF82B71FC95D66003B7861 /* Sources */,
 				FFCF82B81FC95D66003B7861 /* Frameworks */,
@@ -267,14 +267,14 @@
 			);
 			dependencies = (
 			);
-			name = soundHubPractice;
+			name = SoundHub;
 			productName = soundHubPractice;
-			productReference = FFCF82BB1FC95D66003B7861 /* soundHubPractice.app */;
+			productReference = FFCF82BB1FC95D66003B7861 /* SoundHub.app */;
 			productType = "com.apple.product-type.application";
 		};
-		FFCF82CE1FC95D66003B7861 /* soundHubPracticeTests */ = {
+		FFCF82CE1FC95D66003B7861 /* SoundHubTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FFCF82E61FC95D66003B7861 /* Build configuration list for PBXNativeTarget "soundHubPracticeTests" */;
+			buildConfigurationList = FFCF82E61FC95D66003B7861 /* Build configuration list for PBXNativeTarget "SoundHubTests" */;
 			buildPhases = (
 				FFCF82CB1FC95D66003B7861 /* Sources */,
 				FFCF82CC1FC95D66003B7861 /* Frameworks */,
@@ -285,14 +285,14 @@
 			dependencies = (
 				FFCF82D11FC95D66003B7861 /* PBXTargetDependency */,
 			);
-			name = soundHubPracticeTests;
+			name = SoundHubTests;
 			productName = soundHubPracticeTests;
-			productReference = FFCF82CF1FC95D66003B7861 /* soundHubPracticeTests.xctest */;
+			productReference = FFCF82CF1FC95D66003B7861 /* SoundHubTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		FFCF82D91FC95D66003B7861 /* soundHubPracticeUITests */ = {
+		FFCF82D91FC95D66003B7861 /* SoundHubUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FFCF82E91FC95D66003B7861 /* Build configuration list for PBXNativeTarget "soundHubPracticeUITests" */;
+			buildConfigurationList = FFCF82E91FC95D66003B7861 /* Build configuration list for PBXNativeTarget "SoundHubUITests" */;
 			buildPhases = (
 				FFCF82D61FC95D66003B7861 /* Sources */,
 				FFCF82D71FC95D66003B7861 /* Frameworks */,
@@ -303,9 +303,9 @@
 			dependencies = (
 				FFCF82DC1FC95D66003B7861 /* PBXTargetDependency */,
 			);
-			name = soundHubPracticeUITests;
+			name = SoundHubUITests;
 			productName = soundHubPracticeUITests;
-			productReference = FFCF82DA1FC95D66003B7861 /* soundHubPracticeUITests.xctest */;
+			productReference = FFCF82DA1FC95D66003B7861 /* SoundHubUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -334,7 +334,7 @@
 					};
 				};
 			};
-			buildConfigurationList = FFCF82B61FC95D66003B7861 /* Build configuration list for PBXProject "soundHubPractice" */;
+			buildConfigurationList = FFCF82B61FC95D66003B7861 /* Build configuration list for PBXProject "SoundHub" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -347,9 +347,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FFCF82BA1FC95D66003B7861 /* soundHubPractice */,
-				FFCF82CE1FC95D66003B7861 /* soundHubPracticeTests */,
-				FFCF82D91FC95D66003B7861 /* soundHubPracticeUITests */,
+				FFCF82BA1FC95D66003B7861 /* SoundHub */,
+				FFCF82CE1FC95D66003B7861 /* SoundHubTests */,
+				FFCF82D91FC95D66003B7861 /* SoundHubUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -433,12 +433,12 @@
 /* Begin PBXTargetDependency section */
 		FFCF82D11FC95D66003B7861 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = FFCF82BA1FC95D66003B7861 /* soundHubPractice */;
+			target = FFCF82BA1FC95D66003B7861 /* SoundHub */;
 			targetProxy = FFCF82D01FC95D66003B7861 /* PBXContainerItemProxy */;
 		};
 		FFCF82DC1FC95D66003B7861 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = FFCF82BA1FC95D66003B7861 /* soundHubPractice */;
+			target = FFCF82BA1FC95D66003B7861 /* SoundHub */;
 			targetProxy = FFCF82DB1FC95D66003B7861 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -576,10 +576,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G4MM77V7NH;
-				INFOPLIST_FILE = soundHubPractice/Info.plist;
+				INFOPLIST_FILE = SoundHub/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = asdf.soundHubPractice;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sungdoo.soundhub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -592,10 +592,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G4MM77V7NH;
-				INFOPLIST_FILE = soundHubPractice/Info.plist;
+				INFOPLIST_FILE = SoundHub/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = asdf.soundHubPractice;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sungdoo.soundhub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -615,7 +615,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/soundHubPractice.app/soundHubPractice";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SoundHub.app/SoundHub";
 			};
 			name = Debug;
 		};
@@ -632,7 +632,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/soundHubPractice.app/soundHubPractice";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SoundHub.app/SoundHub";
 			};
 			name = Release;
 		};
@@ -671,7 +671,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FFCF82B61FC95D66003B7861 /* Build configuration list for PBXProject "soundHubPractice" */ = {
+		FFCF82B61FC95D66003B7861 /* Build configuration list for PBXProject "SoundHub" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FFCF82E11FC95D66003B7861 /* Debug */,
@@ -680,7 +680,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FFCF82E31FC95D66003B7861 /* Build configuration list for PBXNativeTarget "soundHubPractice" */ = {
+		FFCF82E31FC95D66003B7861 /* Build configuration list for PBXNativeTarget "SoundHub" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FFCF82E41FC95D66003B7861 /* Debug */,
@@ -689,7 +689,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FFCF82E61FC95D66003B7861 /* Build configuration list for PBXNativeTarget "soundHubPracticeTests" */ = {
+		FFCF82E61FC95D66003B7861 /* Build configuration list for PBXNativeTarget "SoundHubTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FFCF82E71FC95D66003B7861 /* Debug */,
@@ -698,7 +698,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FFCF82E91FC95D66003B7861 /* Build configuration list for PBXNativeTarget "soundHubPracticeUITests" */ = {
+		FFCF82E91FC95D66003B7861 /* Build configuration list for PBXNativeTarget "SoundHubUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FFCF82EA1FC95D66003B7861 /* Debug */,
