@@ -42,11 +42,18 @@ class GeneralChartViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
-            return 0
+            return 0.1
         }else if section == 1{
             return 50
         }else{
             return 100
+        }
+    }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 10
+        }else{
+            return 10
         }
     }
     
@@ -61,9 +68,9 @@ class GeneralChartViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.item == 0 && indexPath.section == 0 {
+        if indexPath.section == 0 {
             return tableView.dequeueReusableCell(withIdentifier: "categoryTab", for: indexPath)
-        }else if indexPath.item == 0 && indexPath.section == 1{
+        }else if indexPath.section == 1{
             return tableView.dequeueReusableCell(withIdentifier: "popularMusicianContainerCell", for: indexPath)
         }else{
             return tableView.dequeueReusableCell(withIdentifier: "rankingCell", for: indexPath)
