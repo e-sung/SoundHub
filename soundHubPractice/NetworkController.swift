@@ -15,7 +15,7 @@ class NetworkController{
     
     private let baseURL:URL
     private let signUpURL:URL
-    
+
     init(){
         baseURL = URL(string: "http://soundhub-dev.ap-northeast-2.elasticbeanstalk.com")!
         signUpURL = URL(string: "/user/signup/", relativeTo: baseURL)!
