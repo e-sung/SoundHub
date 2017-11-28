@@ -31,17 +31,46 @@
         <!--SoundHub-->
         <scene sceneID="4Ly-xw-OQf">
             <objects>
-                <viewController id="YsJ-m6-ZEM" customClass="GeneralChartViewController" customModule="soundHubPractice" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="YsJ-m6-ZEM" customClass="GeneralChartViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lPn-NK-CsK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Jw9-zx-7Mw">
-                                <rect key="frame" x="0.0" y="124" width="375" height="776"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="836"/>
                                 <color key="backgroundColor" red="0.086261831223964691" green="0.086283676326274872" blue="0.086257167160511017" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="popularMusicianContainerCell" rowHeight="200" id="x9e-8e-iaL" customClass="PopularMusicianContainerCell" customModule="soundHubPractice" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="375" height="200"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="categoryTab" id="lfh-aw-81i">
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lfh-aw-81i" id="BV1-U0-w3q">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="lSe-bB-kqb">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tki-z4-Hsl">
+                                                            <rect key="frame" x="0.0" y="0.0" width="187.5" height="43.5"/>
+                                                            <state key="normal" title="Button"/>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ipu-uU-1LK">
+                                                            <rect key="frame" x="187.5" y="0.0" width="187.5" height="43.5"/>
+                                                            <state key="normal" title="Button"/>
+                                                        </button>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="lSe-bB-kqb" secondAttribute="trailing" id="FkZ-E2-Uo4"/>
+                                                <constraint firstItem="lSe-bB-kqb" firstAttribute="top" secondItem="BV1-U0-w3q" secondAttribute="top" id="ZdP-LB-w0Q"/>
+                                                <constraint firstItem="lSe-bB-kqb" firstAttribute="leading" secondItem="BV1-U0-w3q" secondAttribute="leading" id="dQ2-GM-H3L"/>
+                                                <constraint firstAttribute="bottom" secondItem="lSe-bB-kqb" secondAttribute="bottom" id="pKT-qy-0Jf"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="popularMusicianContainerCell" rowHeight="200" id="x9e-8e-iaL" customClass="PopularMusicianContainerCell" customModule="SoundHub" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="99.5" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="x9e-8e-iaL" id="RSi-N0-K4Z">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
@@ -57,7 +86,7 @@
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="popularMusician" id="PX6-nE-I6a" customClass="PopularMusicianCell" customModule="soundHubPractice" customModuleProvider="target">
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="popularMusician" id="PX6-nE-I6a" customClass="PopularMusicianCell" customModule="SoundHub" customModuleProvider="target">
                                                             <rect key="frame" x="20" y="14" width="150" height="150"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -120,7 +149,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="rankingCell" rowHeight="480" id="Kjj-4X-NYH">
-                                        <rect key="frame" x="0.0" y="255.5" width="375" height="480"/>
+                                        <rect key="frame" x="0.0" y="299.5" width="375" height="480"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Kjj-4X-NYH" id="lVp-m0-frI">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="479.5"/>
@@ -266,7 +295,7 @@
                             <constraint firstItem="3MF-bu-PI5" firstAttribute="bottom" secondItem="Jw9-zx-7Mw" secondAttribute="bottom" id="7L5-qd-MSq"/>
                             <constraint firstItem="3MF-bu-PI5" firstAttribute="trailing" secondItem="Jw9-zx-7Mw" secondAttribute="trailing" id="dcc-qT-JYE"/>
                             <constraint firstItem="Jw9-zx-7Mw" firstAttribute="leading" secondItem="3MF-bu-PI5" secondAttribute="leading" id="hys-A7-YQI"/>
-                            <constraint firstItem="Jw9-zx-7Mw" firstAttribute="top" secondItem="3MF-bu-PI5" secondAttribute="top" constant="60" id="zIt-aE-QoR"/>
+                            <constraint firstItem="Jw9-zx-7Mw" firstAttribute="top" secondItem="3MF-bu-PI5" secondAttribute="top" id="zIt-aE-QoR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3MF-bu-PI5"/>
                     </view>

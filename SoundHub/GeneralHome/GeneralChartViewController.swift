@@ -12,22 +12,24 @@ class GeneralChartViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBOutlet weak var mainTV: UITableView!
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 0 {return nil}
+        
         let headerView:UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 0))
-        if section > 0 {headerView.setHeight(with: 100)}
-        else{headerView.setHeight(with: 50)}
+        if section == 1 {headerView.setHeight(with: 50)}
+        else {headerView.setHeight(with: 100)}
         headerView.backgroundColor = .white
         
         let headerLabel = UILabel(frame: headerView.frame)
         switch section {
-        case 0:
-            headerLabel.text = "Popular Musicians"
         case 1:
-            headerLabel.text = "Ranking Chart"
+            headerLabel.text = "Popular Musicians"
         case 2:
+            headerLabel.text = "Ranking Chart"
+        case 3:
             headerLabel.text = "Recent upload"
         default:
             print("Unexpected section")
@@ -39,15 +41,29 @@ class GeneralChartViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section>0 ? 100 : 50
+        if section == 0 {
+            return 0
+        }else if section == 1{
+            return 50
+        }else{
+            return 100
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section > 0 {return 3}else{return 1}
+        if section == 0 {
+            return 1
+        }else if section == 1{
+            return 1
+        }else{
+            return 3
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.item == 0 && indexPath.section == 0{
+        if indexPath.item == 0 && indexPath.section == 0 {
+            return tableView.dequeueReusableCell(withIdentifier: "categoryTab", for: indexPath)
+        }else if indexPath.item == 0 && indexPath.section == 1{
             return tableView.dequeueReusableCell(withIdentifier: "popularMusicianContainerCell", for: indexPath)
         }else{
             return tableView.dequeueReusableCell(withIdentifier: "rankingCell", for: indexPath)
@@ -55,8 +71,13 @@ class GeneralChartViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 { return 200 }
-        return 500
+        if indexPath.section == 0 {
+            return 50
+        }else if indexPath.section == 1 { 
+            return 200
+        }else{
+            return 500
+        }
     }
     
 

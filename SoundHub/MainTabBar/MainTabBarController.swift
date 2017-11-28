@@ -17,9 +17,9 @@ class MainTabBarController: UITabBarController{
     private var widthOfButton:CGFloat!
     
     override func viewDidLoad() {
-        initializeGlobalProperties()
-        setUpperTabBar()
-        setUpSwipeRecognizer()
+//        initializeGlobalProperties()
+//        setUpperTabBar()
+//        setUpSwipeRecognizer()
         self.tabBar.isHidden = true
     }
     
