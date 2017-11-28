@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// - ToDo : Input 값의 Validity확인
 class SignUpViewController: UIViewController, UITextFieldDelegate {
 
     var isKeyboardUp = false
