@@ -11,7 +11,7 @@ import Foundation
 enum Instrument:String{
     case Vocal = "V"
     case Guitar = "G"
-    case Base = "B"
+    case Bass = "B"
     case Drum = "D"
     case Keyboard = "K"
     case Other = "O"

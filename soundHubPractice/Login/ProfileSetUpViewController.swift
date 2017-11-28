@@ -10,29 +10,45 @@ import UIKit
 
 class ProfileSetUpViewController: UIViewController {
 
+    var selectedInstrument:Instrument?
+    var nickName:String!
+    var email:String!
+    var password:String!
+    var passwordConfirm:String!
+    var signupRequest:signUpRequest{
+        get{
+            return signUpRequest(email: email, nickname: nickName, instrument: selectedInstrument!.rawValue, password1: password, password2: passwordConfirm)
+        }
+    }
+    
     @IBAction func onTapHandler(_ sender: UITapGestureRecognizer) {
         self.dismiss(animated: true, completion: nil)
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    
+    @IBAction func micButtonHandler(_ sender: UIButton) {
+        selectedInstrument = .Vocal
+        NetworkController.main.sendRequest(with: self.signupRequest, from: self)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func guitarButtonHandler(_ sender: UIButton) {
+        selectedInstrument = .Guitar
+        NetworkController.main.sendRequest(with: self.signupRequest, from: self)
+    }
+    @IBAction func bassButtonHandler(_ sender: UIButton) {
+        selectedInstrument = .Bass
+        NetworkController.main.sendRequest(with: self.signupRequest, from: self)
+    }
+    @IBAction func keyboardButtonHandler(_ sender: UIButton) {
+        selectedInstrument = .Keyboard
+        NetworkController.main.sendRequest(with: self.signupRequest, from: self)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func drumButtonHandler(_ sender: UIButton) {
+        selectedInstrument = .Drum
+        NetworkController.main.sendRequest(with: self.signupRequest, from: self)
     }
-    */
+    @IBAction func otherButtonHandler(_ sender: UIButton) {
+        selectedInstrument = .Other
+        NetworkController.main.sendRequest(with: self.signupRequest, from: self)
+    }
 
 }

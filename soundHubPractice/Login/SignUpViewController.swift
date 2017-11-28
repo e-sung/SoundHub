@@ -15,6 +15,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var nickNameTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
     @IBOutlet weak var passwordConfirmTF: UITextField!
+    @IBOutlet var textFields: [UITextField]!
     
     @IBAction func emailConfirmHandler(_ sender: UITextField) {
         sender.resignFirstResponder()
@@ -29,7 +30,27 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         passwordConfirmTF.becomeFirstResponder()
     }
     @IBAction func passwordFinalConfirmHandler(_ sender: UITextField) {
+        performSegue(withIdentifier: "signUpToProfileSetUp", sender: self)
     }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        for textfield in textFields{
+            if textfield.text == nil {
+                alert(msg: "\(textfield.accessibilityHint!)이 비어있습니다!")
+                return false
+            }
+        }
+        return true
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let nextVC = segue.destination as! ProfileSetUpViewController
+        nextVC.email = emailTF.text!
+        nextVC.nickName = nickNameTF.text!
+        nextVC.password = passwordTF.text!
+        nextVC.passwordConfirm = passwordConfirmTF.text!
+    }
+    
     @IBAction func onTouchHandler(_ sender: UITapGestureRecognizer) {
         if isKeyboardUp {
             self.view.endEditing(true)

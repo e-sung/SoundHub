@@ -111,8 +111,9 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="o80-Wi-AmO">
                                 <rect key="frame" x="37.5" y="163.5" width="300" height="200"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jzZ-4N-eda">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="ios00@fc.com" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jzZ-4N-eda">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="36"/>
+                                        <accessibility key="accessibilityConfiguration" hint="이메일 입력창"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="email"/>
@@ -128,8 +129,9 @@
                                             <action selector="emailConfirmHandler:" destination="y5Y-p4-nBj" eventType="primaryActionTriggered" id="G74-Zr-z9R"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="NickName" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W95-be-h4a">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="ios00" borderStyle="roundedRect" placeholder="NickName" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W95-be-h4a">
                                         <rect key="frame" x="0.0" y="41" width="300" height="36"/>
+                                        <accessibility key="accessibilityConfiguration" hint="닉네임 입력창"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
@@ -145,8 +147,9 @@
                                             <action selector="nickNameConfirmHandler:" destination="y5Y-p4-nBj" eventType="primaryActionTriggered" id="PBJ-H6-nSO"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TeM-oW-WWD">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="asdf" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TeM-oW-WWD">
                                         <rect key="frame" x="0.0" y="82" width="300" height="36"/>
+                                        <accessibility key="accessibilityConfiguration" hint="비밀번호 입력창"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
@@ -162,8 +165,9 @@
                                             <action selector="passwordConfirmHandler:" destination="y5Y-p4-nBj" eventType="primaryActionTriggered" id="kMU-RB-YDg"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password Confirm" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="svt-Fd-H32">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="asdf" borderStyle="roundedRect" placeholder="Password Confirm" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="svt-Fd-H32">
                                         <rect key="frame" x="0.0" y="123" width="300" height="36"/>
+                                        <accessibility key="accessibilityConfiguration" hint="비밀번호 확인 입력창"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
@@ -192,7 +196,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="9vm-a1-xVF" kind="presentation" id="N8f-qd-oKY"/>
+                                            <segue destination="9vm-a1-xVF" kind="presentation" identifier="signUpToProfileSetUp" modalTransitionStyle="crossDissolve" id="N8f-qd-oKY"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -249,6 +253,10 @@
                         <outlet property="nickNameTF" destination="W95-be-h4a" id="FQU-IC-ecw"/>
                         <outlet property="passwordConfirmTF" destination="svt-Fd-H32" id="gm0-Kw-c0Y"/>
                         <outlet property="passwordTF" destination="TeM-oW-WWD" id="VYn-rd-RnN"/>
+                        <outletCollection property="textFields" destination="jzZ-4N-eda" collectionClass="NSMutableArray" id="CNR-9W-bKe"/>
+                        <outletCollection property="textFields" destination="W95-be-h4a" collectionClass="NSMutableArray" id="VsP-Xa-2Zv"/>
+                        <outletCollection property="textFields" destination="TeM-oW-WWD" collectionClass="NSMutableArray" id="SEI-eN-osM"/>
+                        <outletCollection property="textFields" destination="svt-Fd-H32" collectionClass="NSMutableArray" id="cs1-v2-Xif"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UKa-9n-brg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -283,7 +291,8 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="Ikz-va-hjQ" kind="presentation" modalTransitionStyle="crossDissolve" id="uMM-1q-i4K"/>
+                                            <action selector="micButtonHandler:" destination="9vm-a1-xVF" eventType="touchUpInside" id="ULE-pW-p8H"/>
+                                            <segue destination="Ikz-va-hjQ" kind="presentation" identifier="profileSetUpToMain" modalTransitionStyle="crossDissolve" id="uMM-1q-i4K"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2sQ-aD-TGp">
@@ -297,6 +306,9 @@
                                                 <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="guitarButtonHandler:" destination="9vm-a1-xVF" eventType="touchUpInside" id="Bar-zS-RYh"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lb0-7S-vZL">
                                         <rect key="frame" x="203.5" y="0.0" width="96.5" height="100"/>
@@ -309,6 +321,9 @@
                                                 <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="bassButtonHandler:" destination="9vm-a1-xVF" eventType="touchUpInside" id="HQp-zd-E8M"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -330,6 +345,9 @@
                                                 <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="keyboardButtonHandler:" destination="9vm-a1-xVF" eventType="touchUpInside" id="Uun-G5-bQF"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JGS-s1-YEP">
                                         <rect key="frame" x="101.5" y="0.0" width="97" height="100"/>
@@ -342,6 +360,9 @@
                                                 <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="drumButtonHandler:" destination="9vm-a1-xVF" eventType="touchUpInside" id="PGF-qN-fid"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t8C-86-qL1">
                                         <rect key="frame" x="203.5" y="0.0" width="96.5" height="100"/>
@@ -354,6 +375,9 @@
                                                 <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="otherButtonHandler:" destination="9vm-a1-xVF" eventType="touchUpInside" id="5qv-Jp-Ecb"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
