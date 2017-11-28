@@ -10,6 +10,7 @@ import UIKit
 
 class MainTabBarController: UITabBarController{
     let mainTabBarView = UIView()
+    let uploadMusicButton = UIButton()
     let tabBarItems:[String] = ["Genre", "Instruments"]
     var tabBarButtons:[UIButton] = []
     
@@ -17,7 +18,9 @@ class MainTabBarController: UITabBarController{
     private var widthOfButton:CGFloat!
     
     override func viewDidLoad() {
-//        initializeGlobalProperties()
+        initializeGlobalProperties()
+        setUploadButton()
+        self.view.addSubview(uploadMusicButton)
 //        setUpperTabBar()
 //        setUpSwipeRecognizer()
         self.tabBar.isHidden = true
@@ -40,6 +43,13 @@ extension MainTabBarController{
     private func initializeGlobalProperties(){
         widthOfButton = (self.view.frame.width)/2.0
         heightOfTabBar = CGFloat(60)
+    }
+    
+    private func setUploadButton(){
+        uploadMusicButton.frame = CGRect(x: self.view.frame.width - 70, y: self.view.frame.height-70, width: 60, height: 60)
+        uploadMusicButton.setTitle("+", for: .normal)
+        uploadMusicButton.setTitleColor(.white, for: .normal)
+        uploadMusicButton.titleLabel?.font = uploadMusicButton.titleLabel?.font.withSize(40)
     }
     
     private func setUpperTabBar(){
