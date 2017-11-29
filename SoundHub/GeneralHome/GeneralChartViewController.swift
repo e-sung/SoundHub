@@ -8,88 +8,69 @@
 
 import UIKit
 
-class GeneralChartViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+
+class GeneralChartViewController: UIViewController{
     
     var tapOnMoreRanking = 1
     var tapOnMoreRecent = 1
+    let sectionTitleList = ["CategoryTab", "Popular Musicians", "Ranking Chart", "Recent Upload"]
     
     @IBOutlet weak var mainTV: UITableView!
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        mainTV.delegate = self
+        mainTV.dataSource = self
+    }
+
+}
+
+extension GeneralChartViewController:UITableViewDelegate, UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return sectionTitleList.count
+    }
+    
+    func getHeaderHeighFor(given section:Int)->CGFloat{
+        if Section(rawValue: section) == .PopularMusicians{return 50.0}
+        else{return 100.0}
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 0 {return nil}
-        
-        let headerView:UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 0))
-        if section == 1 {headerView.setHeight(with: 50)}
-        else {headerView.setHeight(with: 100)}
-        headerView.backgroundColor = .white
-        
-        let headerLabel = UILabel(frame: headerView.frame)
-        switch section {
-        case 1:
-            headerLabel.text = "Popular Musicians"
-        case 2:
-            headerLabel.text = "Ranking Chart"
-        case 3:
-            headerLabel.text = "Recent upload"
-        default:
-            print("Unexpected section")
-        }
-        headerLabel.font = headerLabel.font.withSize(30)
-        
+        if Section(rawValue: section) == .CategoryTab{return nil}
+        let headerView = generateHeaderViewFor(given: section)
+        let headerLabel = generateHeaderLableFor(given: section, with: headerView)
         headerView.addSubview(headerLabel)
         return headerView
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if section < 2 {return nil}
+        if section < Section.RankingChart.rawValue {return nil}
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
-        let seeMoreButton = UIButton(frame: footerView.frame)
-        seeMoreButton.setTitle("See more", for: .normal)
-        seeMoreButton.tag = section
-        seeMoreButton.addTarget(self, action: #selector(seeMoreButtonTapHandler), for: .touchUpInside)
+        let seeMoreButton = generateSeeMoreButtonFor(given: section, with: footerView, and: "See more")
         footerView.addSubview(seeMoreButton)
         return footerView
     }
     
-    @objc func seeMoreButtonTapHandler(sender:UIButton){
-        if sender.tag == 2 {
-            tapOnMoreRanking += 1
-        }else{
-            tapOnMoreRecent += 1
-        }
-        mainTV.reloadSections( IndexSet(integer: sender.tag), with: .automatic)
-    }
-    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 {
+        if Section(rawValue: section) == .CategoryTab{
             return 0.1
-        }else if section == 1{
+        }else if Section(rawValue: section) == .PopularMusicians{
             return 50
         }else{
             return 100
         }
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section < 2 {return 10}
+        if section < Section.RankingChart.rawValue {return 10}
         return 50
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return 1
-        case 1:
-            return 1
-        case 2:
+        if Section(rawValue: section) == .RankingChart{
             return tapOnMoreRanking * 3
-        case 3:
+        }else if Section(rawValue: section) == .RecentUpload{
             return tapOnMoreRecent * 3
-        default:
-            print("Unexpected section")
-            return 0
+        }else{
+            return 1
         }
     }
     
@@ -104,20 +85,59 @@ class GeneralChartViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
+        if Section(rawValue: indexPath.section) == .CategoryTab{
             return 50
-        }else if indexPath.section == 1 { 
+        }else if Section(rawValue: indexPath.section) == .PopularMusicians{
             return 200
         }else{
             return 500
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        mainTV.delegate = self
-        mainTV.dataSource = self
-        // Do any additional setup after loading the view.
+}
+
+extension GeneralChartViewController{
+    func generateHeaderViewFor(given section:Int)->UIView{
+        let headerView:UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 0))
+        headerView.setHeight(with: getHeaderHeighFor(given: section))
+        headerView.backgroundColor = .white
+        return headerView
+    }
+    
+    func generateHeaderLableFor(given section:Int, with parentView:UIView)->UILabel{
+        let headerLabel = UILabel(frame: parentView.frame)
+        headerLabel.text = sectionTitleList[section]
+        headerLabel.font = headerLabel.font.withSize(30)
+        return headerLabel
     }
 
+    func generateSeeMoreButtonFor(given section:Int, with parentView:UIView, and title:String)->UIButton{
+        let seeMoreButton = UIButton(frame: parentView.frame)
+        seeMoreButton.setTitle(title, for: .normal)
+        seeMoreButton.tag = section
+        seeMoreButton.addTarget(self, action: #selector(seeMoreButtonTapHandler), for: .touchUpInside)
+        return seeMoreButton
+    }
+}
+
+extension GeneralChartViewController{
+    @objc func seeMoreButtonTapHandler(sender:UIButton){
+        if Section(rawValue: sender.tag) == .RankingChart{
+            if tapOnMoreRanking < 3 {
+                tapOnMoreRanking += 1
+            }
+        }else{
+            if tapOnMoreRecent < 3 {
+                tapOnMoreRecent += 1
+            }
+        }
+        mainTV.reloadSections(IndexSet(integer: sender.tag), with: .automatic)
+    }
+}
+
+fileprivate enum Section:Int{
+    case CategoryTab = 0
+    case PopularMusicians = 1
+    case RankingChart = 2
+    case RecentUpload = 3
 }
