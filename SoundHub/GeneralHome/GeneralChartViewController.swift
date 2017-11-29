@@ -10,6 +10,9 @@ import UIKit
 
 class GeneralChartViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
+    var tapOnMoreRanking = 1
+    var tapOnMoreRecent = 1
+    
     @IBOutlet weak var mainTV: UITableView!
     func numberOfSections(in tableView: UITableView) -> Int {
         return 4
@@ -40,6 +43,26 @@ class GeneralChartViewController: UIViewController, UITableViewDelegate, UITable
         return headerView
     }
     
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if section < 2 {return nil}
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
+        let seeMoreButton = UIButton(frame: footerView.frame)
+        seeMoreButton.setTitle("See more", for: .normal)
+        seeMoreButton.tag = section
+        seeMoreButton.addTarget(self, action: #selector(seeMoreButtonTapHandler), for: .touchUpInside)
+        footerView.addSubview(seeMoreButton)
+        return footerView
+    }
+    
+    @objc func seeMoreButtonTapHandler(sender:UIButton){
+        if sender.tag == 2 {
+            tapOnMoreRanking += 1
+        }else{
+            tapOnMoreRecent += 1
+        }
+        mainTV.reloadSections( IndexSet(integer: sender.tag), with: .automatic)
+    }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return 0.1
@@ -50,20 +73,23 @@ class GeneralChartViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section == 0 {
-            return 10
-        }else{
-            return 10
-        }
+        if section < 2 {return 10}
+        return 50
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
+        switch section {
+        case 0:
             return 1
-        }else if section == 1{
+        case 1:
             return 1
-        }else{
-            return 3
+        case 2:
+            return tapOnMoreRanking * 3
+        case 3:
+            return tapOnMoreRecent * 3
+        default:
+            print("Unexpected section")
+            return 0
         }
     }
     
