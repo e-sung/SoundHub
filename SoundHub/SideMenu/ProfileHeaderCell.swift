@@ -22,14 +22,6 @@ class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate {
         delegate?.changeImageOf(button: sender)
     }
     
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-//        print(info)
-//        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-//            headerImageButton.imageView?.image = pickedImage
-//        }
-//    }
-    
-    let imagePicker = UIImagePickerController()
     var isSettingPhase:Bool{
         get{
             return _isSettingPhase
@@ -47,9 +39,6 @@ class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-//        imagePicker.delegate = self as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
-//        imagePicker.allowsEditing = false
-//        imagePicker.sourceType = .photoLibrary
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -17,6 +17,7 @@ class ProfileViewController: UIViewController, ProfileHeaderCellDelegate, UIImag
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             buttonToChange?.setImage(pickedImage, for: .normal)
+            buttonToChange?.imageView?.contentMode = .scaleAspectFill
         }
         dismiss(animated: true, completion: nil)
     }
