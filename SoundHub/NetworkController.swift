@@ -13,16 +13,40 @@ class NetworkController{
     
     static let main = NetworkController()
     
+    var recentPosts:[Post] = []
+
     private let baseURL:URL
     private let signUpURL:URL
+    private let postURL:URL
+    
 
     init(){
         baseURL = URL(string: "http://soundhub-dev.ap-northeast-2.elasticbeanstalk.com")!
         signUpURL = URL(string: "/user/signup/", relativeTo: baseURL)!
+        postURL = URL(string: "/post/", relativeTo: baseURL)!
+    }
+    
+    func fetchRecentPost(on tableView:UITableView){
+        URLSession.shared.dataTask(with: postURL) { (data, response, error) in
+            if let error = error {
+               print(error)
+            }
+            guard let data = data else {
+                print("data is invalid")
+                return
+            }
+            guard let postlist = try? JSONDecoder().decode([Post].self, from: data) else {
+                print("Decoding failed")
+                return
+            }
+            self.recentPosts = postlist
+            DispatchQueue.main.async(execute: {
+                tableView.reloadData()
+            })
+        }.resume()
     }
 
     func sendRequest(with signUpContent:signUpRequest, from VC:UIViewController){
-
         guard let signUpData = try? JSONEncoder().encode(signUpContent) else {return}
         let request = generatePostRequest(with: self.signUpURL, and: signUpData)
         

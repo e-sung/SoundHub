@@ -34,6 +34,8 @@
 		FFA5A3A11FCD0962001EA36F /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA5A3A01FCD0962001EA36F /* LoginRequest.swift */; };
 		FFB85FCC1FCE652A000E47C8 /* ProfileHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB85FCB1FCE652A000E47C8 /* ProfileHeaderCell.swift */; };
 		FFB85FCE1FCE657F000E47C8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB85FCD1FCE657F000E47C8 /* ProfileViewController.swift */; };
+		FFB85FD01FCE78B3000E47C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB85FCF1FCE78B3000E47C8 /* Post.swift */; };
+		FFB85FD21FCE79A3000E47C8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB85FD11FCE79A3000E47C8 /* User.swift */; };
 		FFCF82BF1FC95D66003B7861 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCF82BE1FC95D66003B7861 /* AppDelegate.swift */; };
 		FFCF82C41FC95D66003B7861 /* Entry.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFCF82C21FC95D66003B7861 /* Entry.storyboard */; };
 		FFCF82C61FC95D66003B7861 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFCF82C51FC95D66003B7861 /* Assets.xcassets */; };
@@ -95,6 +97,8 @@
 		FFA5A3A01FCD0962001EA36F /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
 		FFB85FCB1FCE652A000E47C8 /* ProfileHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCell.swift; sourceTree = "<group>"; };
 		FFB85FCD1FCE657F000E47C8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		FFB85FCF1FCE78B3000E47C8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		FFB85FD11FCE79A3000E47C8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FFCF82BB1FC95D66003B7861 /* SoundHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoundHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFCF82BE1FC95D66003B7861 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFCF82C31FC95D66003B7861 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Entry.storyboard; sourceTree = "<group>"; };
@@ -278,6 +282,8 @@
 			children = (
 				FFCF82BE1FC95D66003B7861 /* AppDelegate.swift */,
 				FFA5A39E1FCCFD97001EA36F /* NetworkController.swift */,
+				FFB85FCF1FCE78B3000E47C8 /* Post.swift */,
+				FFB85FD11FCE79A3000E47C8 /* User.swift */,
 				FF688F7B1FCE5C1F00F0A41F /* SideMenu */,
 				FF4A7F9C1FCCEE180002E27A /* Extensions */,
 				FF3B20C71FCC3C9F0019F87A /* Models */,
@@ -612,6 +618,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF3B20BA1FCACD4A0019F87A /* DetailViewController.swift in Sources */,
+				FFB85FD01FCE78B3000E47C8 /* Post.swift in Sources */,
 				FFCF82BF1FC95D66003B7861 /* AppDelegate.swift in Sources */,
 				FF3B20AF1FCA96E30019F87A /* PopularMusicianContainerCell.swift in Sources */,
 				FFA5A39F1FCCFD97001EA36F /* NetworkController.swift in Sources */,
@@ -632,6 +639,7 @@
 				FFB85FCE1FCE657F000E47C8 /* ProfileViewController.swift in Sources */,
 				FF688F781FCE58B700F0A41F /* SideMenuViewController.swift in Sources */,
 				FF3B20BF1FCC2B0E0019F87A /* LoginViewController.swift in Sources */,
+				FFB85FD21FCE79A3000E47C8 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

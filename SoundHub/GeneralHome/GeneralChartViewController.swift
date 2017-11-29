@@ -14,12 +14,13 @@ class GeneralChartViewController: UIViewController{
     var tapOnMoreRanking = 1
     var tapOnMoreRecent = 1
     let sectionTitleList = ["CategoryTab", "Popular Musicians", "Ranking Chart", "Recent Upload"]
-    
+
     @IBOutlet weak var mainTV: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         mainTV.delegate = self
         mainTV.dataSource = self
+        NetworkController.main.fetchRecentPost(on: mainTV)
     }
 
 }
@@ -68,7 +69,7 @@ extension GeneralChartViewController:UITableViewDelegate, UITableViewDataSource{
         if Section(rawValue: section) == .RankingChart{
             return tapOnMoreRanking * 3
         }else if Section(rawValue: section) == .RecentUpload{
-            return tapOnMoreRecent * 3
+            return NetworkController.main.recentPosts.count
         }else{
             return 1
         }
@@ -79,8 +80,14 @@ extension GeneralChartViewController:UITableViewDelegate, UITableViewDataSource{
             return tableView.dequeueReusableCell(withIdentifier: "categoryTab", for: indexPath)
         }else if indexPath.section == 1{
             return tableView.dequeueReusableCell(withIdentifier: "popularMusicianContainerCell", for: indexPath)
+        }else if Section(rawValue: indexPath.section) == .RankingChart{
+            return tableView.dequeueReusableCell(withIdentifier: "rankingCell", for: indexPath) as! RankingCell
         }else{
-            return tableView.dequeueReusableCell(withIdentifier: "rankingCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "recentUploadCell", for: indexPath) as! RankingCell
+            if NetworkController.main.recentPosts.count - 1 >= indexPath.item{
+                cell.postInfo = NetworkController.main.recentPosts[indexPath.item]
+            }
+            return cell
         }
     }
     
