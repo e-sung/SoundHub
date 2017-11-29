@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C7582719DEC0BCF97AC9658 /* Pods_SoundHubTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97CA82572278A09E19CB69B /* Pods_SoundHubTests.framework */; };
+		514AE9D3C68525A59E406194 /* Pods_SoundHubUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFEF70D3C538FB607DF5384A /* Pods_SoundHubUITests.framework */; };
+		8C64A22E72B4C054AEC0195F /* Pods_SoundHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F94B1440EDA863E444AD34F /* Pods_SoundHub.framework */; };
 		FF3B20AF1FCA96E30019F87A /* PopularMusicianContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20AE1FCA96E30019F87A /* PopularMusicianContainerCell.swift */; };
 		FF3B20B11FCA98C50019F87A /* GeneralChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20B01FCA98C50019F87A /* GeneralChartViewController.swift */; };
 		FF3B20B31FCAA2700019F87A /* InspectableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20B21FCAA2700019F87A /* InspectableView.swift */; };
@@ -55,6 +58,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F94B1440EDA863E444AD34F /* Pods_SoundHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoundHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		434159AB5BE18417E2607205 /* Pods-SoundHubUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoundHubUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SoundHubUITests/Pods-SoundHubUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		4EC7FA26C4B503FAC8262F9D /* Pods-SoundHubUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoundHubUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoundHubUITests/Pods-SoundHubUITests.release.xcconfig"; sourceTree = "<group>"; };
+		6492D10D6B49087BFEF96FCA /* Pods-SoundHubTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoundHubTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoundHubTests/Pods-SoundHubTests.release.xcconfig"; sourceTree = "<group>"; };
+		AE770600F915C8F1A790C952 /* Pods-SoundHub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoundHub.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoundHub/Pods-SoundHub.release.xcconfig"; sourceTree = "<group>"; };
+		CCF9A4D681C26D32FDD78A4F /* Pods-SoundHub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoundHub.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SoundHub/Pods-SoundHub.debug.xcconfig"; sourceTree = "<group>"; };
+		D05EBE5F32CFEB3E6E483A33 /* Pods-SoundHubTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoundHubTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SoundHubTests/Pods-SoundHubTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D97CA82572278A09E19CB69B /* Pods_SoundHubTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoundHubTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DFEF70D3C538FB607DF5384A /* Pods_SoundHubUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoundHubUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF3B20AE1FCA96E30019F87A /* PopularMusicianContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMusicianContainerCell.swift; sourceTree = "<group>"; };
 		FF3B20B01FCA98C50019F87A /* GeneralChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralChartViewController.swift; sourceTree = "<group>"; };
 		FF3B20B21FCAA2700019F87A /* InspectableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectableView.swift; sourceTree = "<group>"; };
@@ -96,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C64A22E72B4C054AEC0195F /* Pods_SoundHub.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +116,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C7582719DEC0BCF97AC9658 /* Pods_SoundHubTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,12 +124,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				514AE9D3C68525A59E406194 /* Pods_SoundHubUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		967939E6E3BED4CA83F262A3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CCF9A4D681C26D32FDD78A4F /* Pods-SoundHub.debug.xcconfig */,
+				AE770600F915C8F1A790C952 /* Pods-SoundHub.release.xcconfig */,
+				D05EBE5F32CFEB3E6E483A33 /* Pods-SoundHubTests.debug.xcconfig */,
+				6492D10D6B49087BFEF96FCA /* Pods-SoundHubTests.release.xcconfig */,
+				434159AB5BE18417E2607205 /* Pods-SoundHubUITests.debug.xcconfig */,
+				4EC7FA26C4B503FAC8262F9D /* Pods-SoundHubUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		B8F68593BF37E0BBB183F1A1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3F94B1440EDA863E444AD34F /* Pods_SoundHub.framework */,
+				D97CA82572278A09E19CB69B /* Pods_SoundHubTests.framework */,
+				DFEF70D3C538FB607DF5384A /* Pods_SoundHubUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FF3B20B61FCAC7B70019F87A /* CustomCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +239,8 @@
 				FFCF82D21FC95D66003B7861 /* SoundHubTests */,
 				FFCF82DD1FC95D66003B7861 /* SoundHubUITests */,
 				FFCF82BC1FC95D66003B7861 /* Products */,
+				967939E6E3BED4CA83F262A3 /* Pods */,
+				B8F68593BF37E0BBB183F1A1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -259,9 +299,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FFCF82E31FC95D66003B7861 /* Build configuration list for PBXNativeTarget "SoundHub" */;
 			buildPhases = (
+				37CB4F1E65395CA35E64488C /* [CP] Check Pods Manifest.lock */,
 				FFCF82B71FC95D66003B7861 /* Sources */,
 				FFCF82B81FC95D66003B7861 /* Frameworks */,
 				FFCF82B91FC95D66003B7861 /* Resources */,
+				DB25F33641692DBEA38EE203 /* [CP] Embed Pods Frameworks */,
+				D041DF92D08272798AE44498 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -276,9 +319,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FFCF82E61FC95D66003B7861 /* Build configuration list for PBXNativeTarget "SoundHubTests" */;
 			buildPhases = (
+				8504D2E0DE2F884DF5B5373D /* [CP] Check Pods Manifest.lock */,
 				FFCF82CB1FC95D66003B7861 /* Sources */,
 				FFCF82CC1FC95D66003B7861 /* Frameworks */,
 				FFCF82CD1FC95D66003B7861 /* Resources */,
+				7C29ADAE179A5CF98C1F3950 /* [CP] Embed Pods Frameworks */,
+				D2322EB168AD005ACF550774 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -294,9 +340,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FFCF82E91FC95D66003B7861 /* Build configuration list for PBXNativeTarget "SoundHubUITests" */;
 			buildPhases = (
+				5802026CD12777973FD41FE4 /* [CP] Check Pods Manifest.lock */,
 				FFCF82D61FC95D66003B7861 /* Sources */,
 				FFCF82D71FC95D66003B7861 /* Frameworks */,
 				FFCF82D81FC95D66003B7861 /* Resources */,
+				F51D325A2DAE3858908B9595 /* [CP] Embed Pods Frameworks */,
+				626CED7B72F77CBB8445E856 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -385,6 +434,156 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		37CB4F1E65395CA35E64488C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SoundHub-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5802026CD12777973FD41FE4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SoundHubUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		626CED7B72F77CBB8445E856 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SoundHubUITests/Pods-SoundHubUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7C29ADAE179A5CF98C1F3950 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SoundHubTests/Pods-SoundHubTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8504D2E0DE2F884DF5B5373D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SoundHubTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D041DF92D08272798AE44498 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SoundHub/Pods-SoundHub-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D2322EB168AD005ACF550774 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SoundHubTests/Pods-SoundHubTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DB25F33641692DBEA38EE203 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SoundHub/Pods-SoundHub-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SoundHub/Pods-SoundHub-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F51D325A2DAE3858908B9595 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SoundHubUITests/Pods-SoundHubUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FFCF82B71FC95D66003B7861 /* Sources */ = {
@@ -572,6 +771,7 @@
 		};
 		FFCF82E41FC95D66003B7861 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CCF9A4D681C26D32FDD78A4F /* Pods-SoundHub.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -588,6 +788,7 @@
 		};
 		FFCF82E51FC95D66003B7861 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE770600F915C8F1A790C952 /* Pods-SoundHub.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -604,6 +805,7 @@
 		};
 		FFCF82E71FC95D66003B7861 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D05EBE5F32CFEB3E6E483A33 /* Pods-SoundHubTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -621,6 +823,7 @@
 		};
 		FFCF82E81FC95D66003B7861 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6492D10D6B49087BFEF96FCA /* Pods-SoundHubTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -638,6 +841,7 @@
 		};
 		FFCF82EA1FC95D66003B7861 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 434159AB5BE18417E2607205 /* Pods-SoundHubUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -654,6 +858,7 @@
 		};
 		FFCF82EB1FC95D66003B7861 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4EC7FA26C4B503FAC8262F9D /* Pods-SoundHubUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
