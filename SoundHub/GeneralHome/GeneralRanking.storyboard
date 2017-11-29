@@ -28,6 +28,14 @@
             </objects>
             <point key="canvasLocation" x="636" y="-142"/>
         </scene>
+        <!--SideMenu-->
+        <scene sceneID="9Su-Q4-cfd">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SideMenu" id="E49-sP-aj0" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sTb-lc-ACr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1154" y="-619"/>
+        </scene>
         <!--SoundHub-->
         <scene sceneID="4Ly-xw-OQf">
             <objects>
@@ -308,7 +316,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3MF-bu-PI5"/>
                     </view>
-                    <navigationItem key="navigationItem" title="SoundHub" id="owF-nE-daD"/>
+                    <navigationItem key="navigationItem" title="SoundHub" id="lhf-ib-QSo">
+                        <barButtonItem key="leftBarButtonItem" image="Hamburger_icon" id="0V8-5d-6Ic">
+                            <color key="tintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <segue destination="E49-sP-aj0" kind="presentation" id="8Gd-5u-Ag5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <size key="freeformSize" width="375" height="900"/>
                     <connections>
                         <outlet property="mainTV" destination="Jw9-zx-7Mw" id="hRs-Nu-Oe3"/>
@@ -328,6 +343,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Hamburger_icon" width="32" height="32"/>
         <image name="iu_profile" width="128" height="128"/>
         <image name="modernTImes" width="316" height="316"/>
     </resources>
