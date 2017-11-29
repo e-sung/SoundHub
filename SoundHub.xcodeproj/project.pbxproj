@@ -208,6 +208,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		FF688F7B1FCE5C1F00F0A41F /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				FF688F791FCE58D600F0A41F /* SideMenu.storyboard */,
+				FF688F771FCE58B700F0A41F /* SideMenuViewController.swift */,
+			);
+			path = SideMenu;
+			sourceTree = "<group>";
+		};
 		FF9A84DE1FC9616A00AC4780 /* EntryPoint */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,10 +239,8 @@
 			isa = PBXGroup;
 			children = (
 				FF9A84E21FC962C300AC4780 /* GeneralRanking.storyboard */,
-				FF688F791FCE58D600F0A41F /* SideMenu.storyboard */,
 				FF3B20B01FCA98C50019F87A /* GeneralChartViewController.swift */,
 				FF3B20B61FCAC7B70019F87A /* CustomCells */,
-				FF688F771FCE58B700F0A41F /* SideMenuViewController.swift */,
 			);
 			path = GeneralHome;
 			sourceTree = "<group>";
@@ -265,6 +272,7 @@
 			children = (
 				FFCF82BE1FC95D66003B7861 /* AppDelegate.swift */,
 				FFA5A39E1FCCFD97001EA36F /* NetworkController.swift */,
+				FF688F7B1FCE5C1F00F0A41F /* SideMenu */,
 				FF4A7F9C1FCCEE180002E27A /* Extensions */,
 				FF3B20C71FCC3C9F0019F87A /* Models */,
 				FF3B20BD1FCAD5F50019F87A /* DetailView */,
