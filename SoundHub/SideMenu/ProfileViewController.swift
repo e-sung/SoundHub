@@ -8,9 +8,22 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, ProfileHeaderCellDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate  {
+    func changeImageOf(button: UIButton) {
+        buttonToChange = button
+        self.present(imagePicker, animated: true, completion: nil)
+    }
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            buttonToChange?.setImage(pickedImage, for: .normal)
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
+    var buttonToChange:UIButton?
     var headerCell:ProfileHeaderCell!
+    let imagePicker = UIImagePickerController()
     @IBOutlet weak var confirmButton: UIBarButtonItem!
     @IBAction func confirmButtonHandler(_ sender: UIBarButtonItem) {
         confirmButton.title = ""
@@ -37,7 +50,9 @@ class ProfileViewController: UIViewController {
         mainTV.dataSource = self
         confirmButton.title = ""
         confirmButton.isEnabled = false
-        // Do any additional setup after loading the view.
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = self
     }
 
 }
@@ -49,6 +64,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         self.headerCell = tableView.dequeueReusableCell(withIdentifier: "profileHeaderCell", for: indexPath) as! ProfileHeaderCell
+        self.headerCell.delegate = self
         return self.headerCell
     }
     

@@ -203,6 +203,9 @@
                                                         <constraint firstAttribute="width" secondItem="e4K-aU-IoP" secondAttribute="height" multiplier="16:9" id="4TF-TO-RZD"/>
                                                     </constraints>
                                                     <state key="normal" image="guitar_main"/>
+                                                    <connections>
+                                                        <action selector="headerImageChangeHandler:" destination="wBt-Lf-jqh" eventType="touchUpInside" id="xhY-0n-85l"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cdx-mN-D95">
                                                     <rect key="frame" x="137" y="161" width="100" height="100"/>
@@ -211,6 +214,9 @@
                                                         <constraint firstAttribute="height" constant="100" id="dnz-Km-FVa"/>
                                                     </constraints>
                                                     <state key="normal" image="iu_profile"/>
+                                                    <connections>
+                                                        <action selector="profileImageChangeHandler:" destination="wBt-Lf-jqh" eventType="touchUpInside" id="6CO-1P-5zu"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -230,7 +236,7 @@
                                         <connections>
                                             <outlet property="headerImageButton" destination="e4K-aU-IoP" id="WRT-yD-b3E"/>
                                             <outlet property="nickNameTF" destination="tM6-Ze-Yg3" id="yV0-6g-Fe2"/>
-                                            <outlet property="profileImageButton" destination="cdx-mN-D95" id="FYP-aC-9df"/>
+                                            <outlet property="profileImageButton" destination="cdx-mN-D95" id="GdG-OZ-m4H"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
