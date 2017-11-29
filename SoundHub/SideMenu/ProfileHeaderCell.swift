@@ -10,10 +10,12 @@ import UIKit
 
 class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate {
 
+    // MARK: IBOutlets
     @IBOutlet weak var profileImageButton: UIButton!
     @IBOutlet weak var headerImageButton: UIButton!
     @IBOutlet weak var nickNameTF: UITextField!
     
+    // MARK: IBActions
     @IBAction func headerImageChangeHandler(_ sender: UIButton) {
         delegate?.changeImageOf(button: sender)
     }
@@ -22,6 +24,7 @@ class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate {
         delegate?.changeImageOf(button: sender)
     }
     
+    // MARK: Computed Properties
     var isSettingPhase:Bool{
         get{
             return _isSettingPhase
@@ -34,19 +37,13 @@ class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate {
             nickNameTF.becomeFirstResponder()
         }
     }
+    
+    // MARK: Stored Properties
     var delegate:ProfileHeaderCellDelegate?
     private var _isSettingPhase = false
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-
 }
 
+// MARK: Protocol Defenition
 protocol ProfileHeaderCellDelegate {
     func changeImageOf(button:UIButton)
 }

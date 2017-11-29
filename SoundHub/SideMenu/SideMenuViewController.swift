@@ -9,14 +9,7 @@
 import UIKit
 
 class SideMenuViewController: UIViewController {
-
     @IBAction func logoutButtonHandler(_ sender: UIButton) {
         self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
 }

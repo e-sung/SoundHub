@@ -28,21 +28,15 @@ class NetworkController{
     
     func fetchRecentPost(on tableView:UITableView){
         URLSession.shared.dataTask(with: postURL) { (data, response, error) in
-            if let error = error {
-               print(error)
-            }
-            guard let data = data else {
-                print("data is invalid")
-                return
-            }
+            if let error = error { print(error) }
+            guard let data = data else { print("data is invalid"); return}
+            
             guard let postlist = try? JSONDecoder().decode([Post].self, from: data) else {
                 print("Decoding failed")
                 return
             }
             self.recentPosts = postlist
-            DispatchQueue.main.async(execute: {
-                tableView.reloadData()
-            })
+            DispatchQueue.main.async(execute: {tableView.reloadData()})
         }.resume()
     }
 

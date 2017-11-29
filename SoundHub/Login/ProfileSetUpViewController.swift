@@ -10,17 +10,21 @@ import UIKit
 
 class ProfileSetUpViewController: UIViewController {
 
+    // MARK: Stored Properties
     var selectedInstrument:Instrument?
     var nickName:String!
     var email:String!
     var password:String!
     var passwordConfirm:String!
+    
+    // MARK: Computed Properties
     var signupRequest:signUpRequest{
         get{
             return signUpRequest(email: email, nickname: nickName, instrument: selectedInstrument!.rawValue, password1: password, password2: passwordConfirm)
         }
     }
     
+    // MARK: IBActions
     @IBAction func onTapHandler(_ sender: UITapGestureRecognizer) {
         self.dismiss(animated: true, completion: nil)
     }

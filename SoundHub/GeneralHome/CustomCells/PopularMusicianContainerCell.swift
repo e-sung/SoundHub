@@ -8,7 +8,18 @@
 
 import UIKit
 
-class PopularMusicianContainerCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate {
+class PopularMusicianContainerCell: UITableViewCell,  {
+
+    @IBOutlet weak var popularMusicianFlowLayout: UICollectionView!
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        popularMusicianFlowLayout.delegate = self
+        popularMusicianFlowLayout.dataSource = self
+    }
+}
+
+// MARK: CollectionViewDelegates
+extension PopularMusicianCell:UICollectionViewDataSource, UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
     }
@@ -19,20 +30,4 @@ class PopularMusicianContainerCell: UITableViewCell, UICollectionViewDataSource,
         cell.artistNameLabel.text = "\(indexPath)"
         return cell
     }
-    
-
-    @IBOutlet weak var popularMusicianFlowLayout: UICollectionView!
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        popularMusicianFlowLayout.delegate = self
-        popularMusicianFlowLayout.dataSource = self
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

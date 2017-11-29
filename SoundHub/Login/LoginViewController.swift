@@ -10,9 +10,14 @@ import UIKit
 
 class LoginViewController: UIViewController, UITextViewDelegate {
     
+    // MARK: Stored Properties
     var isKeyboardUp = false
+    
+    // MARK: IBOutlests
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    
+    // MARK: IBActions
     @IBAction func emailPrimaryActionHandler(_ sender: UITextField) {
         sender.resignFirstResponder()
         passwordTextField.becomeFirstResponder()
@@ -29,6 +34,8 @@ class LoginViewController: UIViewController, UITextViewDelegate {
             self.dismiss(animated: true, completion: nil)
         }
     }
+    
+    // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardDidShow, object: nil, queue: nil) { (noti) in
@@ -37,7 +44,6 @@ class LoginViewController: UIViewController, UITextViewDelegate {
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardDidHide, object: nil, queue: nil) { (noti) in
             self.isKeyboardUp = false
         }
-        // Do any additional setup after loading the view.
     }
 }
 

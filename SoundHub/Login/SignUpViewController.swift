@@ -11,13 +11,17 @@ import UIKit
 /// - ToDo : Input 값의 Validity확인
 class SignUpViewController: UIViewController, UITextFieldDelegate {
 
+    // MARK: Stored Properties
     var isKeyboardUp = false
+    
+    // MARK: IBOutlets
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var nickNameTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
     @IBOutlet weak var passwordConfirmTF: UITextField!
     @IBOutlet var textFields: [UITextField]!
     
+    // MARK: IBActions
     @IBAction func emailConfirmHandler(_ sender: UITextField) {
         sender.resignFirstResponder()
         nickNameTF.becomeFirstResponder()
@@ -34,6 +38,29 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         performSegue(withIdentifier: "signUpToProfileSetUp", sender: self)
     }
     
+
+    @IBAction func onTouchHandler(_ sender: UITapGestureRecognizer) {
+        if isKeyboardUp {
+            self.view.endEditing(true)
+        }else{
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    // MARK: LifeCycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardDidShow, object: nil, queue: nil) { (noti) in
+            self.isKeyboardUp = true
+        }
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardDidHide, object: nil, queue: nil) { (noti) in
+            self.isKeyboardUp = false
+        }
+    }
+}
+
+// MARK: Segue Config
+extension SignUpViewController{
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         for textfield in textFields{
             if textfield.text == nil {
@@ -50,23 +77,5 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         nextVC.nickName = nickNameTF.text!
         nextVC.password = passwordTF.text!
         nextVC.passwordConfirm = passwordConfirmTF.text!
-    }
-    
-    @IBAction func onTouchHandler(_ sender: UITapGestureRecognizer) {
-        if isKeyboardUp {
-            self.view.endEditing(true)
-        }else{
-            self.dismiss(animated: true, completion: nil)
-        }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardDidShow, object: nil, queue: nil) { (noti) in
-            self.isKeyboardUp = true
-        }
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardDidHide, object: nil, queue: nil) { (noti) in
-            self.isKeyboardUp = false
-        }
     }
 }
