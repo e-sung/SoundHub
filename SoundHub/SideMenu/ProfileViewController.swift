@@ -99,7 +99,11 @@ extension ProfileViewController{
                 self.imagePicker.sourceType = .camera
                 self.present(self.imagePicker, animated: true, completion: nil)
             })
-            return [withExistingPhoto, withNewPhoto]
+            
+            let cancel = UIAlertAction(title: "취소", style: .cancel) { (action) in
+                self.presentedViewController?.dismiss(animated: true, completion: nil)
+            }
+            return [withExistingPhoto, withNewPhoto, cancel]
         }
     }
     

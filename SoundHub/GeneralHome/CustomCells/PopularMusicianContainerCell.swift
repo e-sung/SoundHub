@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PopularMusicianContainerCell: UITableViewCell,  {
+class PopularMusicianContainerCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate {
 
     @IBOutlet weak var popularMusicianFlowLayout: UICollectionView!
     override func awakeFromNib() {
@@ -16,10 +16,8 @@ class PopularMusicianContainerCell: UITableViewCell,  {
         popularMusicianFlowLayout.delegate = self
         popularMusicianFlowLayout.dataSource = self
     }
-}
-
-// MARK: CollectionViewDelegates
-extension PopularMusicianCell:UICollectionViewDataSource, UICollectionViewDelegate{
+    
+    // MARK: CollectionViewDelegates
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
     }
