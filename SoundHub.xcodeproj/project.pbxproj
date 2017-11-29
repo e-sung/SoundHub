@@ -13,7 +13,7 @@
 		FF3B20AF1FCA96E30019F87A /* PopularMusicianContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20AE1FCA96E30019F87A /* PopularMusicianContainerCell.swift */; };
 		FF3B20B11FCA98C50019F87A /* GeneralChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20B01FCA98C50019F87A /* GeneralChartViewController.swift */; };
 		FF3B20B31FCAA2700019F87A /* InspectableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20B21FCAA2700019F87A /* InspectableView.swift */; };
-		FF3B20B51FCAADD80019F87A /* RankingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20B41FCAADD80019F87A /* RankingCell.swift */; };
+		FF3B20B51FCAADD80019F87A /* PostListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20B41FCAADD80019F87A /* PostListCell.swift */; };
 		FF3B20B81FCAC92D0019F87A /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF3B20B71FCAC92D0019F87A /* Detail.storyboard */; };
 		FF3B20BA1FCACD4A0019F87A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20B91FCACD4A0019F87A /* DetailViewController.swift */; };
 		FF3B20BC1FCACE8D0019F87A /* DetailHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20BB1FCACE8D0019F87A /* DetailHeaderCell.swift */; };
@@ -76,7 +76,7 @@
 		FF3B20AE1FCA96E30019F87A /* PopularMusicianContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMusicianContainerCell.swift; sourceTree = "<group>"; };
 		FF3B20B01FCA98C50019F87A /* GeneralChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralChartViewController.swift; sourceTree = "<group>"; };
 		FF3B20B21FCAA2700019F87A /* InspectableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectableView.swift; sourceTree = "<group>"; };
-		FF3B20B41FCAADD80019F87A /* RankingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingCell.swift; sourceTree = "<group>"; };
+		FF3B20B41FCAADD80019F87A /* PostListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListCell.swift; sourceTree = "<group>"; };
 		FF3B20B71FCAC92D0019F87A /* Detail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
 		FF3B20B91FCACD4A0019F87A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		FF3B20BB1FCACE8D0019F87A /* DetailHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHeaderCell.swift; sourceTree = "<group>"; };
@@ -171,7 +171,7 @@
 			children = (
 				FF9A84EB1FC9AE6500AC4780 /* PopularMusicianCell.swift */,
 				FF3B20AE1FCA96E30019F87A /* PopularMusicianContainerCell.swift */,
-				FF3B20B41FCAADD80019F87A /* RankingCell.swift */,
+				FF3B20B41FCAADD80019F87A /* PostListCell.swift */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -632,7 +632,7 @@
 				FF3B20C41FCC3B4C0019F87A /* SignUpRequest.swift in Sources */,
 				FF9A84E01FC961AF00AC4780 /* MainTabBarController.swift in Sources */,
 				FF9A84EC1FC9AE6500AC4780 /* PopularMusicianCell.swift in Sources */,
-				FF3B20B51FCAADD80019F87A /* RankingCell.swift in Sources */,
+				FF3B20B51FCAADD80019F87A /* PostListCell.swift in Sources */,
 				FF3B20BC1FCACE8D0019F87A /* DetailHeaderCell.swift in Sources */,
 				FFB85FCC1FCE652A000E47C8 /* ProfileHeaderCell.swift in Sources */,
 				FF4A7F9B1FCCEE0A0002E27A /* UIViewController.swift in Sources */,

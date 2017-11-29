@@ -165,7 +165,7 @@
                                             <outlet property="popularMusicianFlowLayout" destination="qZ8-eN-hYV" id="bUn-WW-lKs"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="rankingCell" rowHeight="480" id="Kjj-4X-NYH" customClass="RankingCell" customModule="SoundHub" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="rankingCell" rowHeight="480" id="Kjj-4X-NYH" customClass="PostListCell" customModule="SoundHub" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="299.5" width="375" height="480"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Kjj-4X-NYH" id="lVp-m0-frI">
@@ -309,7 +309,7 @@
                                             <segue destination="eLA-kX-c1g" kind="show" id="TPK-rG-A4D"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recentUploadCell" rowHeight="480" id="OG8-gg-dIU" customClass="RankingCell" customModule="SoundHub" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recentUploadCell" rowHeight="480" id="OG8-gg-dIU" customClass="PostListCell" customModule="SoundHub" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="779.5" width="375" height="480"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OG8-gg-dIU" id="pEj-DT-ln1">

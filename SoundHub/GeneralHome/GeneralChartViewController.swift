@@ -81,9 +81,9 @@ extension GeneralChartViewController:UITableViewDelegate, UITableViewDataSource{
         }else if indexPath.section == 1{
             return tableView.dequeueReusableCell(withIdentifier: "popularMusicianContainerCell", for: indexPath)
         }else if Section(rawValue: indexPath.section) == .RankingChart{
-            return tableView.dequeueReusableCell(withIdentifier: "rankingCell", for: indexPath) as! RankingCell
+            return tableView.dequeueReusableCell(withIdentifier: "rankingCell", for: indexPath) as! PostListCell
         }else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "recentUploadCell", for: indexPath) as! RankingCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "recentUploadCell", for: indexPath) as! PostListCell
             if NetworkController.main.recentPosts.count - 1 >= indexPath.item{
                 cell.postInfo = NetworkController.main.recentPosts[indexPath.item]
             }

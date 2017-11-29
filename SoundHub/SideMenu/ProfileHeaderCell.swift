@@ -10,6 +10,23 @@ import UIKit
 
 class ProfileHeaderCell: UITableViewCell {
 
+    @IBOutlet weak var profileImageButton: UIButton!
+    @IBOutlet weak var headerImageButton: UIButton!
+    @IBOutlet weak var nickNameTF: UITextField!
+    var isSettingPhase:Bool{
+        get{
+            return _isSettingPhase
+        }
+        set(newVal){
+            profileImageButton.isUserInteractionEnabled = newVal
+            headerImageButton.isUserInteractionEnabled = newVal
+            nickNameTF.isEnabled = newVal
+            _isSettingPhase = newVal
+            nickNameTF.becomeFirstResponder()
+        }
+    }
+    private var _isSettingPhase = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -17,8 +34,6 @@ class ProfileHeaderCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }

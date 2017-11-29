@@ -8,49 +8,51 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ProfileViewController: UIViewController {
     
+    var headerCell:ProfileHeaderCell!
+    @IBOutlet weak var confirmButton: UIBarButtonItem!
     @IBAction func confirmButtonHandler(_ sender: UIBarButtonItem) {
+        confirmButton.title = ""
+        confirmButton.isEnabled = false
+        headerCell.isSettingPhase = false
+    }
+    
+    @IBAction func goBackButtonHandler(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCell(withIdentifier: "profileHeaderCell", for: indexPath)
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 330
-    }
-
-    
     @IBOutlet weak var mainTV: UITableView!
+    
+    @IBAction func changeProfileButtnHandler(_ sender: UIButton) {
+        confirmButton.title = "확인"
+        confirmButton.isEnabled = true
+        headerCell.isSettingPhase = true
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mainTV.delegate = self
         mainTV.dataSource = self
-
+        confirmButton.title = ""
+        confirmButton.isEnabled = false
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+}
+
+extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        self.headerCell = tableView.dequeueReusableCell(withIdentifier: "profileHeaderCell", for: indexPath) as! ProfileHeaderCell
+        return self.headerCell
     }
-    */
-
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 330
+    }
 }

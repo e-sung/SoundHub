@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RankingCell: UITableViewCell {
+class PostListCell: UITableViewCell {
     
     @IBOutlet weak private var postTitleLB: UILabel!
     @IBOutlet weak private var authorNameLB: UILabel!
@@ -26,16 +26,4 @@ class RankingCell: UITableViewCell {
         }
     }
     private var _postInfo:Post!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }
