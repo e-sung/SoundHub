@@ -6,6 +6,7 @@ target 'SoundHub' do
   use_frameworks!
 
   pod 'SideMenu'
+  pod 'FDWaveformView'
 
   # Pods for SoundHub
 

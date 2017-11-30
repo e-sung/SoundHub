@@ -142,15 +142,16 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wave" translatesAutoresizingMaskIntoConstraints="NO" id="wa4-AJ-Adn">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Gu-Dv-h9L">
                                                             <rect key="frame" x="15" y="11" width="345" height="178"/>
-                                                        </imageView>
+                                                            <color key="backgroundColor" red="0.086261831220000001" green="0.086283676330000003" blue="0.086257167159999995" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </view>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="wa4-AJ-Adn" firstAttribute="top" secondItem="pf2-LJ-aOb" secondAttribute="topMargin" id="byS-o2-Ujb"/>
-                                                        <constraint firstAttribute="trailingMargin" secondItem="wa4-AJ-Adn" secondAttribute="trailing" id="hRf-b8-WS9"/>
-                                                        <constraint firstAttribute="bottomMargin" secondItem="wa4-AJ-Adn" secondAttribute="bottom" id="jZR-kj-lcE"/>
-                                                        <constraint firstItem="wa4-AJ-Adn" firstAttribute="leading" secondItem="pf2-LJ-aOb" secondAttribute="leadingMargin" id="nCu-SX-AHS"/>
+                                                        <constraint firstItem="6Gu-Dv-h9L" firstAttribute="top" secondItem="pf2-LJ-aOb" secondAttribute="topMargin" id="cSm-zw-pgq"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="6Gu-Dv-h9L" secondAttribute="trailing" id="eLl-er-sgS"/>
+                                                        <constraint firstAttribute="bottomMargin" secondItem="6Gu-Dv-h9L" secondAttribute="bottom" id="fXm-ZV-cIm"/>
+                                                        <constraint firstItem="6Gu-Dv-h9L" firstAttribute="leading" secondItem="pf2-LJ-aOb" secondAttribute="leadingMargin" id="hpm-vm-0GS"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -290,6 +291,5 @@
     <resources>
         <image name="iu_profile" width="128" height="128"/>
         <image name="modernTImes" width="316" height="316"/>
-        <image name="wave" width="838" height="395"/>
     </resources>
 </document>
