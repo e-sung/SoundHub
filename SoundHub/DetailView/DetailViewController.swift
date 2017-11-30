@@ -7,14 +7,64 @@
 //
 
 import UIKit
+import AVFoundation
 
 class DetailViewController: UIViewController{
     var post:Post!
     @IBOutlet weak var detailTV: UITableView!
+    @IBOutlet weak var playButton: UIButton!
+    @IBAction func playButtonHandler(_ sender: UIButton) {
+        for i in 0..<audioPlayers.count{
+            if switcheStates[i] == true {
+                audioPlayers[i].play()
+            }
+        }
+    }
+    
+    let masterAudioRemoteURL = URL(string: "https://s3.ap-northeast-2.amazonaws.com/che1-soundhub/media/author_tracks/guitar.m4a")!
+    
+    let mixedAudioRemoteURLs = [
+        URL(string: "https://s3.ap-northeast-2.amazonaws.com/che1-soundhub/media/author_tracks/guitar.m4a")!,
+        URL(string: "https://s3.ap-northeast-2.amazonaws.com/che1-soundhub/media/author_tracks/drum.m4a")!
+    ]
+    
+    var masterWaveCell:MasterWaveFormViewCell!{
+        willSet(newVal){
+            newVal.masterAudioURL = audioLocalURLs[0]
+        }
+    }
+    
+    var switcheStates:[Bool] = []{
+        didSet(oldVal){
+            print(oldVal)
+        }
+    }
+    var audioPlayers:[AVPlayer] = []
+    
+    var audioLocalURLs:[URL] = []{
+        willSet(newVal){
+            audioPlayers.append(AVPlayer(url: newVal.last!))
+            if audioPlayers.count == mixedAudioRemoteURLs.count {playButton.isEnabled = true}
+        }
+    }
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        for url in mixedAudioRemoteURLs{
+            NetworkController.main.downloadAudio(from: url, to: self)
+        }
+        for _ in mixedAudioRemoteURLs{
+            switcheStates.append(true)
+        }
         detailTV.delegate = self
         detailTV.dataSource = self
+    }
+}
+
+extension DetailViewController:AudioCommentCellDelegate{
+    func didSwitchToggled(state: Bool, by tag: Int) {
+        switcheStates[tag] = state
     }
 }
 
@@ -57,11 +107,18 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             cell.postInfo = self.post
             return cell
         }else if indexPath.section == 0 && indexPath.item == 1{
-            return tableView.dequeueReusableCell(withIdentifier: "masterWaveCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "masterWaveCell", for: indexPath) as! MasterWaveFormViewCell
+            masterWaveCell = cell
+            return cell
         }else if Section(rawValue: indexPath.section) == .MixedTracks{
-            return tableView.dequeueReusableCell(withIdentifier: "mixedTrackCell", for: indexPath)
+            let cell =  tableView.dequeueReusableCell(withIdentifier: "mixedTrackCell", for: indexPath) as! AudioCommentCell
+            cell.tag = indexPath.item
+            cell.delegate = self
+            return cell
         }else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "commentTrackCell", for: indexPath) as! AudioCommentCell
+            cell.tag = indexPath.item
+            cell.delegate = self
             return cell
         }
     }

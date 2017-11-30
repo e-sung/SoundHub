@@ -13,6 +13,13 @@ class AudioCommentCell: UITableViewCell {
     @IBOutlet weak private var profileImageView: UIImageView!
     @IBOutlet weak private var InstrumentLB: UILabel!
     @IBOutlet weak private var nickNameLB: UILabel!
+    
+    @IBAction private func switchToggleHandler(_ sender: UISwitch) {
+        delegate?.didSwitchToggled(state: sender.isOn, by: self.tag)
+    }
+    
+    var delegate:AudioCommentCellDelegate?
+
     var commentInfo:Comment{
         get{
             return _commentInfo
@@ -24,17 +31,8 @@ class AudioCommentCell: UITableViewCell {
         }
     }
     private var _commentInfo:Comment!
-    
+}
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+protocol AudioCommentCellDelegate {
+    func didSwitchToggled(state:Bool, by tag:Int)
 }
