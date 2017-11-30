@@ -36,6 +36,7 @@
 		FFB85FCE1FCE657F000E47C8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB85FCD1FCE657F000E47C8 /* ProfileViewController.swift */; };
 		FFB85FD01FCE78B3000E47C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB85FCF1FCE78B3000E47C8 /* Post.swift */; };
 		FFB85FD21FCE79A3000E47C8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB85FD11FCE79A3000E47C8 /* User.swift */; };
+		FFC32AE41FCF8E1500651A31 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC32AE31FCF8E1500651A31 /* Comment.swift */; };
 		FFCF82BF1FC95D66003B7861 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCF82BE1FC95D66003B7861 /* AppDelegate.swift */; };
 		FFCF82C41FC95D66003B7861 /* Entry.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFCF82C21FC95D66003B7861 /* Entry.storyboard */; };
 		FFCF82C61FC95D66003B7861 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFCF82C51FC95D66003B7861 /* Assets.xcassets */; };
@@ -99,6 +100,7 @@
 		FFB85FCD1FCE657F000E47C8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		FFB85FCF1FCE78B3000E47C8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		FFB85FD11FCE79A3000E47C8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		FFC32AE31FCF8E1500651A31 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		FFCF82BB1FC95D66003B7861 /* SoundHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoundHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFCF82BE1FC95D66003B7861 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFCF82C31FC95D66003B7861 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Entry.storyboard; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 				FFCF82BE1FC95D66003B7861 /* AppDelegate.swift */,
 				FFA5A39E1FCCFD97001EA36F /* NetworkController.swift */,
 				FFB85FCF1FCE78B3000E47C8 /* Post.swift */,
+				FFC32AE31FCF8E1500651A31 /* Comment.swift */,
 				FFB85FD11FCE79A3000E47C8 /* User.swift */,
 				FF688F7B1FCE5C1F00F0A41F /* SideMenu */,
 				FF4A7F9C1FCCEE180002E27A /* Extensions */,
@@ -636,6 +639,7 @@
 				FF3B20BC1FCACE8D0019F87A /* DetailHeaderCell.swift in Sources */,
 				FFB85FCC1FCE652A000E47C8 /* ProfileHeaderCell.swift in Sources */,
 				FF4A7F9B1FCCEE0A0002E27A /* UIViewController.swift in Sources */,
+				FFC32AE41FCF8E1500651A31 /* Comment.swift in Sources */,
 				FFB85FCE1FCE657F000E47C8 /* ProfileViewController.swift in Sources */,
 				FF688F781FCE58B700F0A41F /* SideMenuViewController.swift in Sources */,
 				FF3B20BF1FCC2B0E0019F87A /* LoginViewController.swift in Sources */,

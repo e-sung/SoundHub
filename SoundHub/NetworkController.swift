@@ -21,7 +21,7 @@ class NetworkController{
     
 
     init(){
-        baseURL = URL(string: "http://soundhub-dev.ap-northeast-2.elasticbeanstalk.com")!
+        baseURL = URL(string: "https://soundhub.che1.co.kr")!
         signUpURL = URL(string: "/user/signup/", relativeTo: baseURL)!
         postURL = URL(string: "/post/", relativeTo: baseURL)!
     }

@@ -14,6 +14,6 @@ struct Post:Codable{
     let author:User
     let master_track:String?
     let author_track:String?
-    let comment_tracks:[String]
+    let comment_tracks:[Comment]
 }
 

@@ -39,7 +39,11 @@ extension GeneralChartViewController:UITableViewDataSource{
         if Section(rawValue: section) == .RankingChart{
             return tapOnMoreRanking * 3
         }else if Section(rawValue: section) == .RecentUpload{
-            return NetworkController.main.recentPosts.count
+            if tapOnMoreRecent * 3 > NetworkController.main.recentPosts.count{
+                return NetworkController.main.recentPosts.count
+            }else{
+                return tapOnMoreRecent * 3
+            }
         }else{
             return 1
         }
