@@ -135,14 +135,14 @@
                                                     <outlet property="postTitleLB" destination="jX0-hu-hPz" id="6HT-Uf-UPz"/>
                                                 </connections>
                                             </tableViewCell>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="masterWaveCell" rowHeight="200" id="Xxm-xC-9b2">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="masterWaveCell" rowHeight="200" id="Xxm-xC-9b2" customClass="MasterWaveFormViewCell" customModule="SoundHub" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="228" width="375" height="200"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xxm-xC-9b2" id="pf2-LJ-aOb">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Gu-Dv-h9L">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Gu-Dv-h9L" customClass="FDWaveformView" customModule="FDWaveformView">
                                                             <rect key="frame" x="15" y="11" width="345" height="178"/>
                                                             <color key="backgroundColor" red="0.086261831220000001" green="0.086283676330000003" blue="0.086257167159999995" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </view>
@@ -155,6 +155,9 @@
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <connections>
+                                                    <outlet property="waveForm" destination="6Gu-Dv-h9L" id="LvM-fD-sXH"/>
+                                                </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="mixedTrackCell" rowHeight="80" id="CPw-9e-aHh" customClass="AudioCommentCell" customModule="SoundHub" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="428" width="375" height="80"/>

@@ -38,6 +38,8 @@
 		FFB85FD21FCE79A3000E47C8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB85FD11FCE79A3000E47C8 /* User.swift */; };
 		FFC32AE41FCF8E1500651A31 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC32AE31FCF8E1500651A31 /* Comment.swift */; };
 		FFC32AE61FCF9F0C00651A31 /* AudioCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC32AE51FCF9F0C00651A31 /* AudioCommentCell.swift */; };
+		FFC32AE81FCFBFDB00651A31 /* MasterWaveFormViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC32AE71FCFBFDB00651A31 /* MasterWaveFormViewCell.swift */; };
+		FFC32AEB1FCFC1C600651A31 /* blues.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FFC32AEA1FCFC1C600651A31 /* blues.mp3 */; };
 		FFCF82BF1FC95D66003B7861 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCF82BE1FC95D66003B7861 /* AppDelegate.swift */; };
 		FFCF82C41FC95D66003B7861 /* Entry.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFCF82C21FC95D66003B7861 /* Entry.storyboard */; };
 		FFCF82C61FC95D66003B7861 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFCF82C51FC95D66003B7861 /* Assets.xcassets */; };
@@ -103,6 +105,8 @@
 		FFB85FD11FCE79A3000E47C8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FFC32AE31FCF8E1500651A31 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		FFC32AE51FCF9F0C00651A31 /* AudioCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCommentCell.swift; sourceTree = "<group>"; };
+		FFC32AE71FCFBFDB00651A31 /* MasterWaveFormViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterWaveFormViewCell.swift; sourceTree = "<group>"; };
+		FFC32AEA1FCFC1C600651A31 /* blues.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = blues.mp3; sourceTree = "<group>"; };
 		FFCF82BB1FC95D66003B7861 /* SoundHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoundHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFCF82BE1FC95D66003B7861 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFCF82C31FC95D66003B7861 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Entry.storyboard; sourceTree = "<group>"; };
@@ -183,10 +187,9 @@
 		FF3B20BD1FCAD5F50019F87A /* DetailView */ = {
 			isa = PBXGroup;
 			children = (
+				FFC32AE91FCFBFEA00651A31 /* CustomCell */,
 				FF3B20B71FCAC92D0019F87A /* Detail.storyboard */,
-				FF3B20BB1FCACE8D0019F87A /* DetailHeaderCell.swift */,
 				FF3B20B91FCACD4A0019F87A /* DetailViewController.swift */,
-				FFC32AE51FCF9F0C00651A31 /* AudioCommentCell.swift */,
 			);
 			path = DetailView;
 			sourceTree = "<group>";
@@ -263,6 +266,16 @@
 			path = GeneralHome;
 			sourceTree = "<group>";
 		};
+		FFC32AE91FCFBFEA00651A31 /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				FF3B20BB1FCACE8D0019F87A /* DetailHeaderCell.swift */,
+				FFC32AE51FCF9F0C00651A31 /* AudioCommentCell.swift */,
+				FFC32AE71FCFBFDB00651A31 /* MasterWaveFormViewCell.swift */,
+			);
+			path = CustomCell;
+			sourceTree = "<group>";
+		};
 		FFCF82B21FC95D66003B7861 = {
 			isa = PBXGroup;
 			children = (
@@ -290,6 +303,7 @@
 			children = (
 				FFCF82BE1FC95D66003B7861 /* AppDelegate.swift */,
 				FFA5A39E1FCCFD97001EA36F /* NetworkController.swift */,
+				FFC32AEA1FCFC1C600651A31 /* blues.mp3 */,
 				FF688F7B1FCE5C1F00F0A41F /* SideMenu */,
 				FF4A7F9C1FCCEE180002E27A /* Extensions */,
 				FF3B20C71FCC3C9F0019F87A /* Models */,
@@ -441,6 +455,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF9A84E51FC9675A00AC4780 /* GenreRanking.storyboard in Resources */,
+				FFC32AEB1FCFC1C600651A31 /* blues.mp3 in Resources */,
 				FFCF82EF1FC95E6D003B7861 /* LogIn.storyboard in Resources */,
 				FF9A84DD1FC9612200AC4780 /* MainTabBar.storyboard in Resources */,
 				FF688F7A1FCE58D600F0A41F /* SideMenu.storyboard in Resources */,
@@ -646,6 +661,7 @@
 				FFB85FCC1FCE652A000E47C8 /* ProfileHeaderCell.swift in Sources */,
 				FF4A7F9B1FCCEE0A0002E27A /* UIViewController.swift in Sources */,
 				FFC32AE41FCF8E1500651A31 /* Comment.swift in Sources */,
+				FFC32AE81FCFBFDB00651A31 /* MasterWaveFormViewCell.swift in Sources */,
 				FFB85FCE1FCE657F000E47C8 /* ProfileViewController.swift in Sources */,
 				FF688F781FCE58B700F0A41F /* SideMenuViewController.swift in Sources */,
 				FF3B20BF1FCC2B0E0019F87A /* LoginViewController.swift in Sources */,
