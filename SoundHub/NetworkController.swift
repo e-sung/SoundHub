@@ -77,7 +77,7 @@ class NetworkController{
     }
     
     
-    func downloadAudio(from remoteURL:URL, to playerVC:DetailViewController){
+    func downloadAudio(from remoteURL:URL, to container:URLContainer){
         
         // then lets create your document folder url
         let documentsDirectoryURL =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -89,14 +89,15 @@ class NetworkController{
         // to check if it exists before downloading it
         if FileManager.default.fileExists(atPath: destinationUrl.path) {
             print("The file already exists at path")
-            playerVC.audioLocalURLs.append(destinationUrl)
+            container.list.append(destinationUrl)
+            print(container)
         } else {
             URLSession.shared.downloadTask(with: remoteURL, completionHandler: { (location, response, error) -> Void in
                 guard let location = location, error == nil else { return }
                 do {
                     // after downloading your file you need to move it to your destination url
                     try FileManager.default.moveItem(at: location, to: destinationUrl)
-                    playerVC.audioLocalURLs.append(destinationUrl)
+                    container.list.append(destinationUrl)
                 } catch let error as NSError {
                     print(error.localizedDescription)
                 }
