@@ -24,8 +24,22 @@ class LoginViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func passwordPriamryActionHandler(_ sender: UITextField) {
-        performSegue(withIdentifier: "showMain", sender: nil)
+//        performSegue(withIdentifier: "loginSuccessSegue", sender: nil)
     }
+    
+    @IBAction func loginButtonHandler(_ sender: UIButton) {
+//        guard let email = emailTextField.text else {
+//            alert(msg: "Email")
+//            return
+//        }
+//        guard let password = passwordTextField.text else {
+//            alert(msg: "password")
+//            return
+//        }
+        // NetworkController.main.login(with: email, and: password)
+        performSegue(withIdentifier: "loginSuccessSegue", sender: nil)
+    }
+    
     
     @IBAction func viewTouchHandler(_ sender: UITapGestureRecognizer) {
         if isKeyboardUp{

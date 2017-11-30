@@ -103,7 +103,7 @@
         <!--Sign Up View Controller-->
         <scene sceneID="uJ4-vQ-scZ">
             <objects>
-                <viewController id="y5Y-p4-nBj" customClass="SignUpViewController" customModule="soundHubPractice" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="y5Y-p4-nBj" customClass="SignUpViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5V7-fE-40j">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -271,7 +271,7 @@
         <!--Profile Set Up View Controller-->
         <scene sceneID="g8S-8W-PJo">
             <objects>
-                <viewController id="9vm-a1-xVF" customClass="ProfileSetUpViewController" customModule="soundHubPractice" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9vm-a1-xVF" customClass="ProfileSetUpViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hr7-86-imh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -424,7 +424,7 @@
         <!--Login View Controller-->
         <scene sceneID="LCQ-P5-KD0">
             <objects>
-                <viewController id="wSx-Gg-sUf" customClass="LoginViewController" customModule="soundHubPractice" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="wSx-Gg-sUf" customClass="LoginViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2fs-c8-vZd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -479,7 +479,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="Ikz-va-hjQ" kind="presentation" identifier="showMain" modalTransitionStyle="crossDissolve" id="QWT-xb-AqS"/>
+                                            <action selector="loginButtonHandler:" destination="wSx-Gg-sUf" eventType="touchUpInside" id="neO-j3-9NR"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -534,6 +534,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="Fin-d5-EYt" id="AoT-F6-OSS"/>
                         <outlet property="passwordTextField" destination="Hi4-Ur-RHJ" id="Q4H-M8-pdK"/>
+                        <segue destination="Ikz-va-hjQ" kind="presentation" identifier="loginSuccessSegue" modalTransitionStyle="crossDissolve" id="JPt-Em-Itg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a3y-ry-yLu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -565,6 +566,6 @@
         <image name="soundHubLogo" width="943" height="248"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="uMM-1q-i4K"/>
+        <segue reference="JPt-Em-Itg"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -7,6 +7,7 @@ target 'SoundHub' do
 
   pod 'SideMenu'
   pod 'FDWaveformView'
+  pod 'NVActivityIndicatorView'
 
   # Pods for SoundHub
 

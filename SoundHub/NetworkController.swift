@@ -17,12 +17,14 @@ class NetworkController{
 
     private let baseURL:URL
     private let signUpURL:URL
+    private let loginURL:URL
     private let postURL:URL
-    
+
 
     init(){
         baseURL = URL(string: "https://soundhub.che1.co.kr")!
         signUpURL = URL(string: "/user/signup/", relativeTo: baseURL)!
+        loginURL = URL(string: "/user/login", relativeTo: baseURL)!
         postURL = URL(string: "/post/", relativeTo: baseURL)!
     }
     
@@ -51,6 +53,25 @@ class NetworkController{
                 }else{
                     DispatchQueue.main.async {VC.alert(msg: "\(response.statusCode)")}
                 }
+            }
+        }.resume()
+    }
+    
+    func login(with email:String, and password:String){
+        let loginInfo = ["email":email,"password":password]
+        guard let loginData = try? JSONEncoder().encode(loginInfo) else {
+            print("Encoding failed")
+            return
+        }
+        let request = generatePostRequest(with: loginURL, and: loginData)
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+
+            if let data = data{
+                guard let decodedData = try? JSONDecoder().decode(LoginResponse.self, from: data) else{
+                    print("decoding fail")
+                    return
+                }
+                print(decodedData)
             }
         }.resume()
     }
