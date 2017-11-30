@@ -10,25 +10,20 @@ import UIKit
 
 class DetailHeaderCell: UITableViewCell {
 
-    @IBOutlet weak var authorProfileImage: UIImageView!
-    
-    @IBOutlet weak var postTitleLB: UILabel!
-    
-    @IBOutlet weak var authorNameLB: UILabel!
-    
-    @IBOutlet weak var numberOfLikesLB: UILabel!
-    
-    @IBOutlet weak var numberOfPlaysLB: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    @IBOutlet weak private var authorProfileImage: UIImageView!
+    @IBOutlet weak private var postTitleLB: UILabel!
+    @IBOutlet weak private var authorNameLB: UILabel!
+    @IBOutlet weak private var numberOfLikesLB: UILabel!
+    @IBOutlet weak private var numberOfPlaysLB: UILabel!
+    var postInfo:Post{
+        get{
+            return _postInfo
+        }
+        set(newVal){
+            _postInfo = newVal
+            postTitleLB.text = newVal.title
+            authorNameLB.text = newVal.author.nickname
+        }
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+    private var _postInfo:Post!
 }

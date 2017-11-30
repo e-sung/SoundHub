@@ -14,7 +14,7 @@
         <!--Detail View Controller-->
         <scene sceneID="LLj-Th-LfA">
             <objects>
-                <viewController id="1GI-i7-ZL1" customClass="DetailViewController" customModule="soundHubPractice" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="1GI-i7-ZL1" customClass="DetailViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rzj-m7-OOC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -29,7 +29,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="587"/>
                                         <color key="backgroundColor" red="0.086261831220000001" green="0.086283676330000003" blue="0.086257167159999995" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="detailHeaderCell" rowHeight="200" id="P9h-w3-Lc5" customClass="DetailHeaderCell" customModule="soundHubPractice" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="detailHeaderCell" rowHeight="200" id="P9h-w3-Lc5" customClass="DetailHeaderCell" customModule="SoundHub" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="375" height="200"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P9h-w3-Lc5" id="XAj-Mj-KGi">

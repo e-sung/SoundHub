@@ -101,7 +101,22 @@ extension GeneralChartViewController:UITableViewDelegate{
         else if Section(rawValue: indexPath.section) == .PopularMusicians {return 200}
         else {return 500}
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "generalChartToDetail", sender: indexPath)
+    }
+}
 
+extension GeneralChartViewController{
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let nextVC = segue.destination as? DetailViewController{
+            guard let indexPath = sender as? IndexPath else {
+                print("indexPath downcasting failed")
+                return
+            }
+            nextVC.post = NetworkController.main.recentPosts[indexPath.item]
+        }
+    }
 }
 
 extension GeneralChartViewController{

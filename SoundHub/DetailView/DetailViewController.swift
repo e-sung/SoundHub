@@ -8,8 +8,18 @@
 
 import UIKit
 
-class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
-    
+class DetailViewController: UIViewController{
+    var post:Post!
+    @IBOutlet weak var detailTV: UITableView!
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        detailTV.delegate = self
+        detailTV.dataSource = self
+    }
+}
+
+extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
+    /// Master / Mixed / Comment
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
@@ -34,7 +44,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         case 1:
             return 2
         case 2:
-            return 2
+            return post.comment_tracks.count
         default:
             return 10
         }
@@ -42,7 +52,9 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 && indexPath.item == 0 {
-            return tableView.dequeueReusableCell(withIdentifier: "detailHeaderCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "detailHeaderCell", for: indexPath) as! DetailHeaderCell
+            cell.postInfo = self.post
+            return cell
         }else if indexPath.section == 0 && indexPath.item == 1{
             return tableView.dequeueReusableCell(withIdentifier: "masterWaveCell", for: indexPath)
         }else{
@@ -53,31 +65,4 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return indexPath.section>0 ? 100 : 200
     }
-    
-
-    @IBOutlet weak var detailTV: UITableView!
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        detailTV.delegate = self
-        detailTV.dataSource = self
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

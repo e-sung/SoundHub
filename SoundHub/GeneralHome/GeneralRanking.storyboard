@@ -306,7 +306,7 @@
                                             <outlet property="authorProfileImageView" destination="BJM-2I-X5v" id="Zdc-KI-xpD"/>
                                             <outlet property="playTimeLB" destination="KPy-IC-NUa" id="MVK-aP-1lf"/>
                                             <outlet property="postTitleLB" destination="npg-Di-h6B" id="ylr-KJ-EKV"/>
-                                            <segue destination="eLA-kX-c1g" kind="show" id="TPK-rG-A4D"/>
+                                            <segue destination="eLA-kX-c1g" kind="show" identifier="generalChartToDetail" id="TPK-rG-A4D"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recentUploadCell" rowHeight="480" id="OG8-gg-dIU" customClass="PostListCell" customModule="SoundHub" customModuleProvider="target">
@@ -487,7 +487,7 @@
                 <viewControllerPlaceholder storyboardName="Detail" id="eLA-kX-c1g" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vpw-3l-VXv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2082" y="-143"/>
+            <point key="canvasLocation" x="2088" y="-121"/>
         </scene>
     </scenes>
     <resources>
