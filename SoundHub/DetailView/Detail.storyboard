@@ -155,7 +155,7 @@
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                             </tableViewCell>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="mixedTrackCell" rowHeight="80" id="CPw-9e-aHh">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="mixedTrackCell" rowHeight="80" id="CPw-9e-aHh" customClass="AudioCommentCell" customModule="SoundHub" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="428" width="375" height="80"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CPw-9e-aHh" id="bjn-SV-1gd">
@@ -198,6 +198,60 @@
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <connections>
+                                                    <outlet property="InstrumentLB" destination="HdZ-4h-syP" id="dKv-ry-hFD"/>
+                                                    <outlet property="nickNameLB" destination="YDl-Jo-Geb" id="Lvr-2v-2fr"/>
+                                                    <outlet property="profileImageView" destination="GdF-eY-aY8" id="eUe-pc-lBd"/>
+                                                </connections>
+                                            </tableViewCell>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="commentTrackCell" rowHeight="80" id="1xE-NU-ko9" customClass="AudioCommentCell" customModule="SoundHub" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="508" width="375" height="80"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1xE-NU-ko9" id="5Cv-6m-PTy">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iu_profile" translatesAutoresizingMaskIntoConstraints="NO" id="ZOB-jw-Dc4">
+                                                            <rect key="frame" x="10" y="5" width="70" height="70"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="70" id="Dml-kN-AhF"/>
+                                                                <constraint firstAttribute="width" secondItem="ZOB-jw-Dc4" secondAttribute="height" multiplier="1:1" id="Ywp-SO-wjk"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vocal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zhi-k8-DzF">
+                                                            <rect key="frame" x="88" y="11" width="71" height="36"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                            <color key="textColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZXo-q9-BVp">
+                                                            <rect key="frame" x="88" y="48" width="51.5" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qvg-Nv-4zg">
+                                                            <rect key="frame" x="311" y="25" width="49" height="31"/>
+                                                            <color key="onTintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </switch>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="Qvg-Nv-4zg" firstAttribute="centerY" secondItem="5Cv-6m-PTy" secondAttribute="centerY" id="3f2-ih-gm4"/>
+                                                        <constraint firstItem="ZOB-jw-Dc4" firstAttribute="centerY" secondItem="5Cv-6m-PTy" secondAttribute="centerY" id="9bh-Al-Khd"/>
+                                                        <constraint firstItem="ZXo-q9-BVp" firstAttribute="top" secondItem="Zhi-k8-DzF" secondAttribute="bottom" constant="1" id="HA4-TH-jf8"/>
+                                                        <constraint firstItem="ZXo-q9-BVp" firstAttribute="leading" secondItem="Zhi-k8-DzF" secondAttribute="leading" id="Nts-mY-cnc"/>
+                                                        <constraint firstItem="Zhi-k8-DzF" firstAttribute="leading" secondItem="ZOB-jw-Dc4" secondAttribute="trailing" constant="8" id="PyD-YL-Z14"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Qvg-Nv-4zg" secondAttribute="trailing" constant="17" id="hHd-fB-9Qf"/>
+                                                        <constraint firstItem="Zhi-k8-DzF" firstAttribute="top" secondItem="5Cv-6m-PTy" secondAttribute="top" constant="11" id="iJh-x9-rHO"/>
+                                                        <constraint firstItem="ZOB-jw-Dc4" firstAttribute="leading" secondItem="5Cv-6m-PTy" secondAttribute="leading" constant="10" id="ivB-cO-VNr"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <connections>
+                                                    <outlet property="InstrumentLB" destination="Zhi-k8-DzF" id="Q4i-9w-y9a"/>
+                                                    <outlet property="nickNameLB" destination="ZXo-q9-BVp" id="rcm-Co-pjz"/>
+                                                    <outlet property="profileImageView" destination="ZOB-jw-Dc4" id="Zf7-O5-eG1"/>
+                                                </connections>
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
