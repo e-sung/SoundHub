@@ -202,6 +202,9 @@
 		FF3B20C71FCC3C9F0019F87A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FFB85FCF1FCE78B3000E47C8 /* Post.swift */,
+				FFC32AE31FCF8E1500651A31 /* Comment.swift */,
+				FFB85FD11FCE79A3000E47C8 /* User.swift */,
 				FF3B20C31FCC3B4C0019F87A /* SignUpRequest.swift */,
 				FF3B20C51FCC3B930019F87A /* Instrument.swift */,
 				FFA5A3A01FCD0962001EA36F /* LoginRequest.swift */,
@@ -284,9 +287,6 @@
 			children = (
 				FFCF82BE1FC95D66003B7861 /* AppDelegate.swift */,
 				FFA5A39E1FCCFD97001EA36F /* NetworkController.swift */,
-				FFB85FCF1FCE78B3000E47C8 /* Post.swift */,
-				FFC32AE31FCF8E1500651A31 /* Comment.swift */,
-				FFB85FD11FCE79A3000E47C8 /* User.swift */,
 				FF688F7B1FCE5C1F00F0A41F /* SideMenu */,
 				FF4A7F9C1FCCEE180002E27A /* Extensions */,
 				FF3B20C71FCC3C9F0019F87A /* Models */,
