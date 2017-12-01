@@ -30,7 +30,7 @@ class MasterWaveFormViewCell: UITableViewCell, FDWaveformViewDelegate {
         waveForm.delegate = self
         waveForm.wavesColor = .orange
         activityIndicator.color = .orange
-        activityIndicator.type = .lineScaleParty
+        activityIndicator.type = .audioEqualizer
         activityIndicator.startAnimating()
     }
 

@@ -15,39 +15,42 @@ class DetailViewController: UIViewController{
     @IBOutlet weak var detailTV: UITableView!
     @IBOutlet weak var playButton: UIButton!
     @IBAction func playButtonHandler(_ sender: UIButton) {
-        for i in 0..<audioPlayers.count{
-            if switcheStates[i] == true {
-                audioPlayers[i].play()
-            }
+        if currentPhase == .ReadyToPlay {
+            sender.setImage(#imageLiteral(resourceName: "ic_pause_circle_outline_white"), for: .normal)
+            currentPhase = .Playing
+            for player in audioPlayers {player.play()}
+        }else if currentPhase == .Playing{
+            sender.setImage(#imageLiteral(resourceName: "ic_play_circle_outline_white"), for: .normal)
+            currentPhase = .ReadyToPlay
+            for player in audioPlayers {player.pause()}
         }
     }
     
     let masterAudioRemoteURL = URL(string: "https://s3.ap-northeast-2.amazonaws.com/che1-soundhub/media/author_tracks/guitar.m4a")!
-    
     let mixedAudioRemoteURLs = [
         URL(string: "https://s3.ap-northeast-2.amazonaws.com/che1-soundhub/media/author_tracks/guitar.m4a")!,
         URL(string: "https://s3.ap-northeast-2.amazonaws.com/che1-soundhub/media/author_tracks/drum.m4a")!
     ]
     
+    var mixedTrackLocalContainer = URLContainer()
+    var masterTrackLocalContainer = URLContainer()
     var masterWaveCell:MasterWaveFormViewCell!
-    
     var switcheStates:[Bool] = []{
         didSet(oldVal){
-            print(oldVal)
+            for i in 0..<switcheStates.count{
+                if switcheStates[i] == false {
+                    audioPlayers[i].volume = 0
+                }else{
+                    audioPlayers[i].volume = 1
+                }
+            }
         }
     }
     var audioPlayers:[AVPlayer] = []
     
-//    var audioLocalURLs:[URL] = []{
-//        willSet(newVal){
-//            audioPlayers.append(AVPlayer(url: newVal.last!))
-//            if audioPlayers.count == mixedAudioRemoteURLs.count {playButton.isEnabled = true}
-//        }
-//    }
+    fileprivate var currentPhase = Phase.ReadyToPlay
     
-    var mixedTrackLocalContainer = URLContainer()
-    var masterTrackLocalContainer = URLContainer()
-    
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,9 +58,7 @@ class DetailViewController: UIViewController{
         for url in mixedAudioRemoteURLs{
             NetworkController.main.downloadAudio(from: url, to: mixedTrackLocalContainer)
         }
-        for _ in mixedAudioRemoteURLs{
-            switcheStates.append(true)
-        }
+        for _ in mixedAudioRemoteURLs {switcheStates.append(true)}
         detailTV.delegate = self
         detailTV.dataSource = self
     }
@@ -67,7 +68,11 @@ extension DetailViewController:URLContainerDelegate{
     func listCountDidSet(to value: Int, In container: URLContainer) {
         if container === mixedTrackLocalContainer {
             audioPlayers.append(AVPlayer(url: mixedTrackLocalContainer.list.last!))
-            if audioPlayers.count == mixedTrackLocalContainer.list.count {playButton.isEnabled = true}
+            if audioPlayers.count == mixedTrackLocalContainer.list.count {
+                DispatchQueue.main.async(execute: {
+                    self.playButton.isEnabled = true
+                })
+            }
         }else if container === masterTrackLocalContainer{
             masterWaveCell.masterAudioURL = container.list[0]
         }
@@ -146,4 +151,9 @@ fileprivate enum Section:Int{
     case Header = 0
     case MixedTracks = 1
     case CommentTracks = 2
+}
+
+fileprivate enum Phase{
+    case ReadyToPlay
+    case Playing
 }

@@ -148,7 +148,7 @@
                                                             <color key="backgroundColor" red="0.086261831220000001" green="0.086283676330000003" blue="0.086257167159999995" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kO8-44-d6T" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
-                                                            <rect key="frame" x="127" y="39" width="120" height="120"/>
+                                                            <rect key="frame" x="147" y="59" width="80" height="80"/>
                                                             <color key="backgroundColor" red="0.2364057004" green="0.4013232887" blue="0.76923906799999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="kO8-44-d6T" secondAttribute="height" multiplier="1:1" id="REm-Ox-lxf"/>
@@ -156,7 +156,7 @@
                                                         </view>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="kO8-44-d6T" firstAttribute="height" secondItem="pf2-LJ-aOb" secondAttribute="height" multiplier="0.6" id="CFW-5e-Q3R"/>
+                                                        <constraint firstItem="kO8-44-d6T" firstAttribute="height" secondItem="pf2-LJ-aOb" secondAttribute="height" multiplier="0.4" id="CFW-5e-Q3R"/>
                                                         <constraint firstItem="kO8-44-d6T" firstAttribute="centerX" secondItem="pf2-LJ-aOb" secondAttribute="centerX" id="POO-ej-50Q"/>
                                                         <constraint firstItem="6Gu-Dv-h9L" firstAttribute="top" secondItem="pf2-LJ-aOb" secondAttribute="topMargin" id="cSm-zw-pgq"/>
                                                         <constraint firstAttribute="trailingMargin" secondItem="6Gu-Dv-h9L" secondAttribute="trailing" id="eLl-er-sgS"/>
@@ -277,16 +277,27 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rrM-qV-Mws">
                                         <rect key="frame" x="0.0" y="587" width="375" height="60"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2e9-fS-FQG">
-                                                <rect key="frame" x="164" y="15" width="46" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="재생"/>
+                                            <button opaque="NO" contentMode="scaleAspectFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="etS-zh-JoX">
+                                                <rect key="frame" x="157" y="0.0" width="60" height="60"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="etS-zh-JoX" secondAttribute="height" multiplier="1:1" id="xxc-rr-AgK"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                <color key="tintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" image="ic_play_circle_outline_white">
+                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
                                                 <connections>
-                                                    <action selector="playButtonHandler:" destination="1GI-i7-ZL1" eventType="touchUpInside" id="3MO-Tl-JKy"/>
+                                                    <action selector="playButtonHandler:" destination="1GI-i7-ZL1" eventType="touchUpInside" id="CZm-uy-uKT"/>
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="etS-zh-JoX" firstAttribute="height" secondItem="rrM-qV-Mws" secondAttribute="height" id="L8X-uw-G5C"/>
+                                            <constraint firstItem="etS-zh-JoX" firstAttribute="centerX" secondItem="rrM-qV-Mws" secondAttribute="centerX" id="PMd-e4-e52"/>
+                                            <constraint firstItem="etS-zh-JoX" firstAttribute="centerY" secondItem="rrM-qV-Mws" secondAttribute="centerY" id="hNG-5G-YD3"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.086261831220000001" green="0.086283676330000003" blue="0.086257167159999995" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
@@ -317,7 +328,7 @@
                     </view>
                     <connections>
                         <outlet property="detailTV" destination="sPC-mL-dPH" id="WcF-kh-Tnc"/>
-                        <outlet property="playButton" destination="2e9-fS-FQG" id="cXY-eN-zIU"/>
+                        <outlet property="playButton" destination="etS-zh-JoX" id="NsH-10-5yn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Asy-Nl-xOg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -326,6 +337,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ic_play_circle_outline_white" width="24" height="24"/>
         <image name="iu_profile" width="128" height="128"/>
         <image name="modernTImes" width="316" height="316"/>
     </resources>
