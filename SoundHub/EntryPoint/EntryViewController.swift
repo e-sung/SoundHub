@@ -9,23 +9,11 @@
 import UIKit
 
 class EntryViewController: UIViewController {
-    
-    var isUserLoggedIn:Bool{
-        get{
-            return false
-        }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
-        if isUserLoggedIn{
-            //Show Main RankingPage
+        if UserDefaults.standard.object(forKey: "token") != nil {
+            self.performSegue(withIdentifier: "showGeneral", sender: nil)
         }else{
             performSegue(withIdentifier: "showLogin", sender: nil)
         }
     }
-
 }

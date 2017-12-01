@@ -121,6 +121,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="gZP-RS-5t1"/>
                     <size key="freeformSize" width="300" height="667"/>
+                    <connections>
+                        <outlet property="nicknameLB" destination="ZXt-8J-EJw" id="Lxd-Ny-k80"/>
+                        <outlet property="profileImageView" destination="Jfh-0n-x04" id="OTC-MF-BRT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JJZ-1o-Ru6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

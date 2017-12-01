@@ -21,6 +21,7 @@
                     </view>
                     <connections>
                         <segue destination="GVL-G0-SG3" kind="presentation" identifier="showLogin" modalTransitionStyle="crossDissolve" id="yTB-E2-TgO"/>
+                        <segue destination="rJu-Ct-oMQ" kind="presentation" identifier="showGeneral" modalTransitionStyle="crossDissolve" id="Grx-pq-Pz4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -32,7 +33,15 @@
                 <viewControllerPlaceholder storyboardName="LogIn" id="GVL-G0-SG3" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SMx-cX-Nnk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="755" y="94"/>
+            <point key="canvasLocation" x="765" y="115"/>
+        </scene>
+        <!--GeneralRanking-->
+        <scene sceneID="TYs-aW-yUt">
+            <objects>
+                <viewControllerPlaceholder storyboardName="GeneralRanking" id="rJu-Ct-oMQ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e3u-NF-biI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="814" y="202"/>
         </scene>
     </scenes>
 </document>
