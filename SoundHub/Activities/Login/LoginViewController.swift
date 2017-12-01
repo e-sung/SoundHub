@@ -24,32 +24,17 @@ class LoginViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func passwordPriamryActionHandler(_ sender: UITextField) {
-//        performSegue(withIdentifier: "loginSuccessSegue", sender: nil)
+        tryLogin()
     }
     
     @IBAction func loginButtonHandler(_ sender: UIButton) {
-        guard let email = emailTextField.text else {
-            alert(msg: "Email")
-            return
-        }
-        guard let password = passwordTextField.text else {
-            alert(msg: "password")
-            return
-        }
-        NetworkController.main.login(with: email, and: password) {
-            DispatchQueue.main.async(execute: {
-                self.performSegue(withIdentifier: "loginSuccessSegue", sender: nil)
-            })
-        }
+        tryLogin()
     }
     
     
     @IBAction func viewTouchHandler(_ sender: UITapGestureRecognizer) {
-        if isKeyboardUp{
-            self.view.endEditing(true)
-        }else{
-            self.dismiss(animated: true, completion: nil)
-        }
+        if isKeyboardUp { self.view.endEditing(true) }
+        else { self.dismiss(animated: true, completion: nil) }
     }
     
     // MARK: LifeCycle
@@ -62,7 +47,24 @@ class LoginViewController: UIViewController, UITextViewDelegate {
             self.isKeyboardUp = false
         }
     }
-    
 
+}
+
+extension LoginViewController{
+    private func save(loginResponse:LoginResponse, on userDefault:UserDefaults){
+        userDefault.set(loginResponse.token, forKey: "token")
+        userDefault.set(loginResponse.user.nickname, forKey: "nickName")
+        userDefault.set(loginResponse.user.instrument, forKey: "instrument")
+    }
+    
+    private func tryLogin(){
+        guard let email = emailTextField.text else {alert(msg: "Email");return}
+        guard let password = passwordTextField.text else {alert(msg: "password is Invalid");return}
+        
+        NetworkController.main.login(with: email, and: password) {result in
+            self.save(loginResponse: result, on: UserDefaults.standard)
+            DispatchQueue.main.async(execute: {self.performSegue(withIdentifier: "loginSuccessSegue", sender: nil)})
+        }
+    }
 }
 

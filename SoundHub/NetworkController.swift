@@ -32,13 +32,9 @@ class NetworkController{
         URLSession.shared.dataTask(with: postURL) { (data, response, error) in
             if let error = error { print(error) }
             guard let data = data else { print("data is invalid"); return}
-            
-            guard let postlist = try? JSONDecoder().decode([Post].self, from: data) else {
-                print("Decoding failed")
-                return
-            }
+            guard let postlist = try? JSONDecoder().decode([Post].self, from: data) else { print("Decoding failed");return }
             self.recentPosts = postlist
-            DispatchQueue.main.async(execute: {tableView.reloadData()})
+            DispatchQueue.main.async(execute: { tableView.reloadData() })
         }.resume()
     }
 
@@ -50,27 +46,21 @@ class NetworkController{
             if let response = response as? HTTPURLResponse {
                 if response.statusCode == 201 {
                     DispatchQueue.main.async {VC.performSegue(withIdentifier: "profileSetUpToMain", sender: nil)}
-                }else{
-                    DispatchQueue.main.async {VC.alert(msg: "\(response.statusCode)")}
-                }
+                }else{ DispatchQueue.main.async {VC.alert(msg: "\(response.statusCode)")} }
             }
         }.resume()
     }
     
-    func login(with email:String, and password:String, success:@escaping ()->Void){
+    func login(with email:String, and password:String, done:@escaping (_ result:LoginResponse)->Void){
         let loginInfo = ["email":email,"password":password]
-        guard let loginData = try? JSONEncoder().encode(loginInfo) else {
-            print("Encoding failed")
-            return
-        }
+        guard let loginData = try? JSONEncoder().encode(loginInfo) else {print("Encoding failed");return}
+        
         let request = generatePostRequest(with: loginURL, and: loginData)
         URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error { print(error) }
             if let data = data{
-                guard let userInfo = try? JSONDecoder().decode(LoginResponse.self, from: data) else{return}
-                UserDefaults.standard.set(userInfo.token, forKey: "token")
-                UserDefaults.standard.set(userInfo.user.nickname, forKey: "nickName")
-                UserDefaults.standard.set(userInfo.user.instrument, forKey: "userInstrument")
-                success()
+                guard let result = try? JSONDecoder().decode(LoginResponse.self, from: data) else{return}
+                done(result)
             }
         }.resume()
     }
