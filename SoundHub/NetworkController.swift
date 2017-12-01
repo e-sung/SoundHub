@@ -18,7 +18,6 @@ class NetworkController{
     private let loginURL:URL
     private let postURL:URL
 
-
     init(){
         baseURL = URL(string: "https://soundhub.che1.co.kr")!
         signUpURL = URL(string: "/user/signup/", relativeTo: baseURL)!
@@ -67,6 +66,7 @@ class NetworkController{
         let destinationUrl = documentsDirectoryURL.appendingPathComponent(remoteURL.lastPathComponent)
         
         if FileManager.default.fileExists(atPath: destinationUrl.path) { done(destinationUrl); return }
+        
         URLSession.shared.downloadTask(with: remoteURL, completionHandler: { (location, response, error) -> Void in
             guard let location = location, error == nil else { return }
             do {

@@ -9,12 +9,13 @@
 import UIKit
 import AVFoundation
 
-
 class DetailViewController: UIViewController{
-    var post:Post!
-    @IBOutlet weak var detailTV: UITableView!
-    @IBOutlet weak var playButton: UIButton!
-    @IBAction func playButtonHandler(_ sender: UIButton) {
+    // MARK: IBOutlets
+    @IBOutlet weak private var detailTV: UITableView!
+    @IBOutlet weak private var playButton: UIButton!
+    
+    // MARK: IBActions
+    @IBAction private func playButtonHandler(_ sender: UIButton) {
         if currentPhase == .ReadyToPlay {
             sender.setImage(#imageLiteral(resourceName: "ic_pause_circle_outline_white"), for: .normal)
             currentPhase = .Playing
@@ -26,11 +27,19 @@ class DetailViewController: UIViewController{
         }
     }
     
+    // MARK: Stored Properties
+    var post:Post!
+    var masterWaveCell:MasterWaveFormViewCell!
     let masterAudioRemoteURL = URL(string: "https://s3.ap-northeast-2.amazonaws.com/che1-soundhub/media/author_tracks/guitar.m4a")!
     let mixedAudioRemoteURLs = [
         URL(string: "https://s3.ap-northeast-2.amazonaws.com/che1-soundhub/media/author_tracks/guitar.m4a")!,
         URL(string: "https://s3.ap-northeast-2.amazonaws.com/che1-soundhub/media/author_tracks/drum.m4a")!
     ]
+    fileprivate var currentPhase = Phase.ReadyToPlay
+    var audioPlayers:[AVPlayer] = []
+    var masterAudioLocalURL:URL?
+
+    // MARK: Obserable Properties
     var mixedAudioLocalURLs:[URL] = []{
         didSet(oldVal){
             audioPlayers.append(AVPlayer(url: mixedAudioLocalURLs.last!))
@@ -39,30 +48,19 @@ class DetailViewController: UIViewController{
             }
         }
     }
-    var masterAudioLocalURL:URL?{
-        didSet(oldVal){
-            masterWaveCell.masterAudioURL = masterAudioLocalURL!
-        }
-    }
-    
-    var masterWaveCell:MasterWaveFormViewCell!
     var switcheStates:[Bool] = []{
         didSet(oldVal){
             for i in 0..<switcheStates.count{
-                if switcheStates[i] == false {
-                    audioPlayers[i].volume = 0
-                }else{
-                    audioPlayers[i].volume = 1
-                }
+                if switcheStates[i] == false { audioPlayers[i].volume = 0 }
+                else { audioPlayers[i].volume = 1 }
             }
         }
     }
-    var audioPlayers:[AVPlayer] = []
     
-    fileprivate var currentPhase = Phase.ReadyToPlay
-
+    // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+
         for url in mixedAudioRemoteURLs{
             NetworkController.main.downloadAudio(from: url, done: { (localURL) in
                 self.mixedAudioLocalURLs.append(localURL)
@@ -113,33 +111,42 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+
         if indexPath.section == 0 && indexPath.item == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "detailHeaderCell", for: indexPath) as! DetailHeaderCell
             cell.postInfo = self.post
             return cell
         }else if indexPath.section == 0 && indexPath.item == 1{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "masterWaveCell", for: indexPath) as! MasterWaveFormViewCell
-            masterWaveCell = cell
-            NetworkController.main.downloadAudio(from: masterAudioRemoteURL, done: { (localURL) in
-                self.masterAudioLocalURL = localURL
-            })
-            return cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "masterWaveCell", for: indexPath)
+            return generateMasterWaveCell(outof: cell)
         }else if Section(rawValue: indexPath.section) == .MixedTracks{
-            let cell =  tableView.dequeueReusableCell(withIdentifier: "mixedTrackCell", for: indexPath) as! AudioCommentCell
-            cell.tag = indexPath.item
-            cell.delegate = self
-            return cell
+            let cell =  tableView.dequeueReusableCell(withIdentifier: "mixedTrackCell", for: indexPath)
+            return generateAudioCommentCell(outof: cell, on: indexPath)
         }else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "commentTrackCell", for: indexPath) as! AudioCommentCell
-            cell.tag = indexPath.item
-            cell.delegate = self
-            return cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "commentTrackCell", for: indexPath)
+            return generateAudioCommentCell(outof: cell, on: indexPath)
         }
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return indexPath.section>0 ? 100 : 200
+    }
+}
+
+extension DetailViewController{
+    privtae func generateAudioCommentCell(outof cell:UITableViewCell, on indexPath:IndexPath)->AudioCommentCell{
+        let commentCell = cell as! AudioCommentCell
+        commentCell.tag = indexPath.item
+        commentCell.delegate = self
+        return commentCell
+    }
+    
+    privtae func generateMasterWaveCell(outof cell:UITableViewCell)->MasterWaveFormViewCell{
+        masterWaveCell = cell as! MasterWaveFormViewCell
+        NetworkController.main.downloadAudio(from: masterAudioRemoteURL, done: { (localURL) in
+            self.masterWaveCell.masterAudioURL = localURL
+        })
+        return masterWaveCell
     }
 }
 
