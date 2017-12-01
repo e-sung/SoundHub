@@ -134,14 +134,14 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
 }
 
 extension DetailViewController{
-    privtae func generateAudioCommentCell(outof cell:UITableViewCell, on indexPath:IndexPath)->AudioCommentCell{
+    private func generateAudioCommentCell(outof cell:UITableViewCell, on indexPath:IndexPath)->AudioCommentCell{
         let commentCell = cell as! AudioCommentCell
         commentCell.tag = indexPath.item
         commentCell.delegate = self
         return commentCell
     }
     
-    privtae func generateMasterWaveCell(outof cell:UITableViewCell)->MasterWaveFormViewCell{
+    private func generateMasterWaveCell(outof cell:UITableViewCell)->MasterWaveFormViewCell{
         masterWaveCell = cell as! MasterWaveFormViewCell
         NetworkController.main.downloadAudio(from: masterAudioRemoteURL, done: { (localURL) in
             self.masterWaveCell.masterAudioURL = localURL
