@@ -10,6 +10,7 @@
 		3C7582719DEC0BCF97AC9658 /* Pods_SoundHubTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97CA82572278A09E19CB69B /* Pods_SoundHubTests.framework */; };
 		514AE9D3C68525A59E406194 /* Pods_SoundHubUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFEF70D3C538FB607DF5384A /* Pods_SoundHubUITests.framework */; };
 		8C64A22E72B4C054AEC0195F /* Pods_SoundHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F94B1440EDA863E444AD34F /* Pods_SoundHub.framework */; };
+		FF000D991FD11F7F00678999 /* DataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF000D981FD11F7F00678999 /* DataCenter.swift */; };
 		FF3B20AF1FCA96E30019F87A /* PopularMusicianContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20AE1FCA96E30019F87A /* PopularMusicianContainerCell.swift */; };
 		FF3B20B11FCA98C50019F87A /* GeneralChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20B01FCA98C50019F87A /* GeneralChartViewController.swift */; };
 		FF3B20B31FCAA2700019F87A /* InspectableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20B21FCAA2700019F87A /* InspectableView.swift */; };
@@ -77,6 +78,7 @@
 		D05EBE5F32CFEB3E6E483A33 /* Pods-SoundHubTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoundHubTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SoundHubTests/Pods-SoundHubTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D97CA82572278A09E19CB69B /* Pods_SoundHubTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoundHubTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFEF70D3C538FB607DF5384A /* Pods_SoundHubUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoundHubUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF000D981FD11F7F00678999 /* DataCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCenter.swift; sourceTree = "<group>"; };
 		FF3B20AE1FCA96E30019F87A /* PopularMusicianContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMusicianContainerCell.swift; sourceTree = "<group>"; };
 		FF3B20B01FCA98C50019F87A /* GeneralChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralChartViewController.swift; sourceTree = "<group>"; };
 		FF3B20B21FCAA2700019F87A /* InspectableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectableView.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 			children = (
 				FFCF82BE1FC95D66003B7861 /* AppDelegate.swift */,
 				FFA5A39E1FCCFD97001EA36F /* NetworkController.swift */,
+				FF000D981FD11F7F00678999 /* DataCenter.swift */,
 				FF3B20C71FCC3C9F0019F87A /* Models */,
 				FF4A7F9C1FCCEE180002E27A /* Extensions */,
 				FF000D971FD0FB8900678999 /* Activities */,
@@ -659,6 +662,7 @@
 				FF3B20C61FCC3B930019F87A /* Instrument.swift in Sources */,
 				FF3B20B11FCA98C50019F87A /* GeneralChartViewController.swift in Sources */,
 				FF3B20C91FCC434B0019F87A /* ProfileSetUpViewController.swift in Sources */,
+				FF000D991FD11F7F00678999 /* DataCenter.swift in Sources */,
 				FF3B20B31FCAA2700019F87A /* InspectableView.swift in Sources */,
 				FFC32AED1FCFD96500651A31 /* LoginResponse.swift in Sources */,
 				FF3B20C21FCC31930019F87A /* SignUpViewController.swift in Sources */,

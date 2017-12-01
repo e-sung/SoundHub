@@ -31,9 +31,20 @@ class DetailViewController: UIViewController{
         URL(string: "https://s3.ap-northeast-2.amazonaws.com/che1-soundhub/media/author_tracks/guitar.m4a")!,
         URL(string: "https://s3.ap-northeast-2.amazonaws.com/che1-soundhub/media/author_tracks/drum.m4a")!
     ]
+    var mixedAudioLocalURLs:[URL] = []{
+        didSet(oldVal){
+            audioPlayers.append(AVPlayer(url: mixedAudioLocalURLs.last!))
+            if audioPlayers.count == mixedAudioLocalURLs.count {
+                playButton.isEnabled = true
+            }
+        }
+    }
+    var masterAudioLocalURL:URL?{
+        didSet(oldVal){
+            masterWaveCell.masterAudioURL = masterAudioLocalURL!
+        }
+    }
     
-    var mixedTrackLocalContainer = URLContainer()
-    var masterTrackLocalContainer = URLContainer()
     var masterWaveCell:MasterWaveFormViewCell!
     var switcheStates:[Bool] = []{
         didSet(oldVal){
@@ -52,28 +63,14 @@ class DetailViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        mixedTrackLocalContainer.delegate = self
         for url in mixedAudioRemoteURLs{
-            NetworkController.main.downloadAudio(from: url, to: mixedTrackLocalContainer)
+            NetworkController.main.downloadAudio(from: url, done: { (localURL) in
+                self.mixedAudioLocalURLs.append(localURL)
+            })
         }
         for _ in mixedAudioRemoteURLs {switcheStates.append(true)}
         detailTV.delegate = self
         detailTV.dataSource = self
-    }
-}
-
-extension DetailViewController:URLContainerDelegate{
-    func listCountDidSet(to value: Int, In container: URLContainer) {
-        if container === mixedTrackLocalContainer {
-            audioPlayers.append(AVPlayer(url: mixedTrackLocalContainer.list.last!))
-            if audioPlayers.count == mixedTrackLocalContainer.list.count {
-                DispatchQueue.main.async(execute: {
-                    self.playButton.isEnabled = true
-                })
-            }
-        }else if container === masterTrackLocalContainer{
-            masterWaveCell.masterAudioURL = container.list[0]
-        }
     }
 }
 
@@ -124,8 +121,9 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         }else if indexPath.section == 0 && indexPath.item == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "masterWaveCell", for: indexPath) as! MasterWaveFormViewCell
             masterWaveCell = cell
-            masterTrackLocalContainer.delegate = self
-            NetworkController.main.downloadAudio(from: masterAudioRemoteURL, to: masterTrackLocalContainer)
+            NetworkController.main.downloadAudio(from: masterAudioRemoteURL, done: { (localURL) in
+                self.masterAudioLocalURL = localURL
+            })
             return cell
         }else if Section(rawValue: indexPath.section) == .MixedTracks{
             let cell =  tableView.dequeueReusableCell(withIdentifier: "mixedTrackCell", for: indexPath) as! AudioCommentCell

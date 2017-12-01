@@ -12,12 +12,12 @@ import UIKit
 class GeneralChartViewController: UIViewController{
     
     // MARK: IBOutlets
-    @IBOutlet weak var mainTV: UITableView!
+    @IBOutlet weak private var mainTV: UITableView!
     
     // MARK: Stored Properties
-    var tapOnMoreRanking = 1
-    var tapOnMoreRecent = 1
-    let sectionTitleList = ["CategoryTab", "Popular Musicians", "Ranking Chart", "Recent Upload"]
+    private var tapOnMoreRanking = 1
+    private var tapOnMoreRecent = 1
+    private let sectionTitleList = ["CategoryTab", "Popular Musicians", "Ranking Chart", "Recent Upload"]
     
     // MARK: LifeCycle
     override func viewDidLoad() {
@@ -39,8 +39,8 @@ extension GeneralChartViewController:UITableViewDataSource{
         if Section(rawValue: section) == .RankingChart{
             return tapOnMoreRanking * 3
         }else if Section(rawValue: section) == .RecentUpload{
-            if tapOnMoreRecent * 3 > NetworkController.main.recentPosts.count{
-                return NetworkController.main.recentPosts.count
+            if tapOnMoreRecent * 3 > DataCenter.main.recentPosts.count{
+                return DataCenter.main.recentPosts.count
             }else{
                 return tapOnMoreRecent * 3
             }
@@ -89,8 +89,8 @@ extension GeneralChartViewController:UITableViewDelegate{
             return tableView.dequeueReusableCell(withIdentifier: "rankingCell", for: indexPath) as! PostListCell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "recentUploadCell", for: indexPath) as! PostListCell
-            if NetworkController.main.recentPosts.count - 1 >= indexPath.item{
-                cell.postInfo = NetworkController.main.recentPosts[indexPath.item]
+            if DataCenter.main.recentPosts.count - 1 >= indexPath.item{
+                cell.postInfo = DataCenter.main.recentPosts[indexPath.item]
             }
             return cell
         }
@@ -114,7 +114,7 @@ extension GeneralChartViewController{
                 print("indexPath downcasting failed")
                 return
             }
-            nextVC.post = NetworkController.main.recentPosts[indexPath.item]
+            nextVC.post = DataCenter.main.recentPosts[indexPath.item]
         }
     }
 }
