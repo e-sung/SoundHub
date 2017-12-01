@@ -72,12 +72,14 @@ class DetailViewController: UIViewController{
     }
 }
 
+// MARK: AudioCommentDelegate
 extension DetailViewController:AudioCommentCellDelegate{
     func didSwitchToggled(state: Bool, by tag: Int) {
         switcheStates[tag] = state
     }
 }
 
+// MARK: TableView Delegate
 extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
     /// Master / Mixed / Comment
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -133,6 +135,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
     }
 }
 
+// MARK: Helper Functions
 extension DetailViewController{
     private func generateAudioCommentCell(outof cell:UITableViewCell, on indexPath:IndexPath)->AudioCommentCell{
         let commentCell = cell as! AudioCommentCell
@@ -150,6 +153,7 @@ extension DetailViewController{
     }
 }
 
+// MARK: Helper Enums
 fileprivate enum Section:Int{
     case Header = 0
     case MixedTracks = 1
