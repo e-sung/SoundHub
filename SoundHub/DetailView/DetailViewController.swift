@@ -49,8 +49,6 @@ class DetailViewController: UIViewController{
     var audioPlayers:[AVPlayer] = []
     
     fileprivate var currentPhase = Phase.ReadyToPlay
-    
-
 
     override func viewDidLoad() {
         super.viewDidLoad()

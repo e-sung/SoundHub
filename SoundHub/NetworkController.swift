@@ -24,7 +24,7 @@ class NetworkController{
     init(){
         baseURL = URL(string: "https://soundhub.che1.co.kr")!
         signUpURL = URL(string: "/user/signup/", relativeTo: baseURL)!
-        loginURL = URL(string: "/user/login", relativeTo: baseURL)!
+        loginURL = URL(string: "/user/login/", relativeTo: baseURL)!
         postURL = URL(string: "/post/", relativeTo: baseURL)!
     }
     
@@ -57,7 +57,7 @@ class NetworkController{
         }.resume()
     }
     
-    func login(with email:String, and password:String){
+    func login(with email:String, and password:String, success:@escaping ()->Void){
         let loginInfo = ["email":email,"password":password]
         guard let loginData = try? JSONEncoder().encode(loginInfo) else {
             print("Encoding failed")
@@ -65,13 +65,12 @@ class NetworkController{
         }
         let request = generatePostRequest(with: loginURL, and: loginData)
         URLSession.shared.dataTask(with: request) { (data, response, error) in
-
             if let data = data{
-                guard let decodedData = try? JSONDecoder().decode(LoginResponse.self, from: data) else{
-                    print("decoding fail")
-                    return
-                }
-                print(decodedData)
+                guard let userInfo = try? JSONDecoder().decode(LoginResponse.self, from: data) else{return}
+                UserDefaults.standard.set(userInfo.token, forKey: "token")
+                UserDefaults.standard.set(userInfo.user.nickname, forKey: "nickName")
+                UserDefaults.standard.set(userInfo.user.instrument, forKey: "userInstrument")
+                success()
             }
         }.resume()
     }

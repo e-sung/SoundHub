@@ -432,11 +432,11 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dvs-E5-kHh">
                                 <rect key="frame" x="37.5" y="234.5" width="300" height="118"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fin-d5-EYt">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="ios08@fc.com" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fin-d5-EYt">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="36"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="email"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                 <real key="value" value="1"/>
@@ -449,7 +449,7 @@
                                             <action selector="emailPrimaryActionHandler:" destination="wSx-Gg-sUf" eventType="primaryActionTriggered" id="ccT-ez-08g"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hi4-Ur-RHJ">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="asdf" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hi4-Ur-RHJ">
                                         <rect key="frame" x="0.0" y="41" width="300" height="36"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -534,7 +534,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="Fin-d5-EYt" id="AoT-F6-OSS"/>
                         <outlet property="passwordTextField" destination="Hi4-Ur-RHJ" id="Q4H-M8-pdK"/>
-                        <segue destination="Ikz-va-hjQ" kind="presentation" identifier="loginSuccessSegue" modalTransitionStyle="crossDissolve" id="JPt-Em-Itg"/>
+                        <segue destination="Ikz-va-hjQ" kind="presentation" identifier="loginSuccessSegue" modalTransitionStyle="crossDissolve" id="X5d-yV-mOA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a3y-ry-yLu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -566,6 +566,6 @@
         <image name="soundHubLogo" width="943" height="248"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JPt-Em-Itg"/>
+        <segue reference="X5d-yV-mOA"/>
     </inferredMetricsTieBreakers>
 </document>

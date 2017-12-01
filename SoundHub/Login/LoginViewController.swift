@@ -28,16 +28,19 @@ class LoginViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func loginButtonHandler(_ sender: UIButton) {
-//        guard let email = emailTextField.text else {
-//            alert(msg: "Email")
-//            return
-//        }
-//        guard let password = passwordTextField.text else {
-//            alert(msg: "password")
-//            return
-//        }
-        // NetworkController.main.login(with: email, and: password)
-        performSegue(withIdentifier: "loginSuccessSegue", sender: nil)
+        guard let email = emailTextField.text else {
+            alert(msg: "Email")
+            return
+        }
+        guard let password = passwordTextField.text else {
+            alert(msg: "password")
+            return
+        }
+        NetworkController.main.login(with: email, and: password) {
+            DispatchQueue.main.async(execute: {
+                self.performSegue(withIdentifier: "loginSuccessSegue", sender: nil)
+            })
+        }
     }
     
     
