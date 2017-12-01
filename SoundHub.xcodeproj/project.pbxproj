@@ -11,6 +11,9 @@
 		514AE9D3C68525A59E406194 /* Pods_SoundHubUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFEF70D3C538FB607DF5384A /* Pods_SoundHubUITests.framework */; };
 		8C64A22E72B4C054AEC0195F /* Pods_SoundHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F94B1440EDA863E444AD34F /* Pods_SoundHub.framework */; };
 		FF000D991FD11F7F00678999 /* DataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF000D981FD11F7F00678999 /* DataCenter.swift */; };
+		FF000D9B1FD135D400678999 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF000D9A1FD135D400678999 /* DocumentBrowserViewController.swift */; };
+		FF000D9D1FD1368000678999 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF000D9C1FD1368000678999 /* DocumentViewController.swift */; };
+		FF000D9F1FD136BA00678999 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF000D9E1FD136BA00678999 /* Document.swift */; };
 		FF3B20AF1FCA96E30019F87A /* PopularMusicianContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20AE1FCA96E30019F87A /* PopularMusicianContainerCell.swift */; };
 		FF3B20B11FCA98C50019F87A /* GeneralChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20B01FCA98C50019F87A /* GeneralChartViewController.swift */; };
 		FF3B20B31FCAA2700019F87A /* InspectableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20B21FCAA2700019F87A /* InspectableView.swift */; };
@@ -79,6 +82,9 @@
 		D97CA82572278A09E19CB69B /* Pods_SoundHubTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoundHubTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFEF70D3C538FB607DF5384A /* Pods_SoundHubUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoundHubUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF000D981FD11F7F00678999 /* DataCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCenter.swift; sourceTree = "<group>"; };
+		FF000D9A1FD135D400678999 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
+		FF000D9C1FD1368000678999 /* DocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewController.swift; sourceTree = "<group>"; };
+		FF000D9E1FD136BA00678999 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		FF3B20AE1FCA96E30019F87A /* PopularMusicianContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMusicianContainerCell.swift; sourceTree = "<group>"; };
 		FF3B20B01FCA98C50019F87A /* GeneralChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralChartViewController.swift; sourceTree = "<group>"; };
 		FF3B20B21FCAA2700019F87A /* InspectableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectableView.swift; sourceTree = "<group>"; };
@@ -257,6 +263,9 @@
 			children = (
 				FFCF82C21FC95D66003B7861 /* Entry.storyboard */,
 				FFCF82EC1FC95E07003B7861 /* EntryViewController.swift */,
+				FF000D9A1FD135D400678999 /* DocumentBrowserViewController.swift */,
+				FF000D9E1FD136BA00678999 /* Document.swift */,
+				FF000D9C1FD1368000678999 /* DocumentViewController.swift */,
 			);
 			path = EntryPoint;
 			sourceTree = "<group>";
@@ -667,6 +676,7 @@
 				FFC32AED1FCFD96500651A31 /* LoginResponse.swift in Sources */,
 				FF3B20C21FCC31930019F87A /* SignUpViewController.swift in Sources */,
 				FF3B20C41FCC3B4C0019F87A /* SignUpRequest.swift in Sources */,
+				FF000D9D1FD1368000678999 /* DocumentViewController.swift in Sources */,
 				FF9A84E01FC961AF00AC4780 /* MainTabBarController.swift in Sources */,
 				FF9A84EC1FC9AE6500AC4780 /* PopularMusicianCell.swift in Sources */,
 				FFC32AE61FCF9F0C00651A31 /* AudioCommentCell.swift in Sources */,
@@ -674,6 +684,8 @@
 				FF3B20BC1FCACE8D0019F87A /* DetailHeaderCell.swift in Sources */,
 				FFB85FCC1FCE652A000E47C8 /* ProfileHeaderCell.swift in Sources */,
 				FF4A7F9B1FCCEE0A0002E27A /* UIViewController.swift in Sources */,
+				FF000D9F1FD136BA00678999 /* Document.swift in Sources */,
+				FF000D9B1FD135D400678999 /* DocumentBrowserViewController.swift in Sources */,
 				FFC32AE41FCF8E1500651A31 /* Comment.swift in Sources */,
 				FFC32AE81FCFBFDB00651A31 /* MasterWaveFormViewCell.swift in Sources */,
 				FFB85FCE1FCE657F000E47C8 /* ProfileViewController.swift in Sources */,

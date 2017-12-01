@@ -40,8 +40,13 @@ class MainTabBarController: UITabBarController{
     @objc func uploadButtonHandler(sender:UIButton){
         let alert = UIAlertController(title: "어떻게 올리시겠습니까?", message: "", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "원래 있던 파일 올리기", style: .default , handler: { (action) in
+            let storyboard = UIStoryboard(name: "Entry", bundle: nil)
+            let documentBrowserVC = storyboard.instantiateViewController(withIdentifier: "DocumentBrowserController") as! DocumentBrowserViewController
+            self.present(documentBrowserVC, animated: true, completion: nil)
         }))
         alert.addAction(UIAlertAction(title: "새로 녹음하기", style: .default , handler: { (action) in
+        }))
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: { (action) in
         }))
         self.present(alert, animated: true, completion: nil)
     }
@@ -56,7 +61,7 @@ extension MainTabBarController{
     private func setUploadButton(){
         uploadMusicButton.frame = CGRect(x: self.view.frame.width - 70, y: self.view.frame.height-70, width: 60, height: 60)
         uploadMusicButton.setTitle("+", for: .normal)
-        uploadMusicButton.setTitleColor(.white, for: .normal)
+        uploadMusicButton.setTitleColor(.green, for: .normal)
         uploadMusicButton.titleLabel?.font = uploadMusicButton.titleLabel?.font.withSize(40)
         uploadMusicButton.addTarget(self, action: #selector(uploadButtonHandler), for: .touchUpInside)
     }
