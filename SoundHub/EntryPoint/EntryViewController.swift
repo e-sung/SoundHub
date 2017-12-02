@@ -11,7 +11,7 @@ import UIKit
 class EntryViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         if UserDefaults.standard.object(forKey: "token") != nil {
-            self.performSegue(withIdentifier: "showGeneral", sender: nil)
+            self.performSegue(withIdentifier: "showMainTabBar", sender: nil)
         }else{
             performSegue(withIdentifier: "showLogin", sender: nil)
         }

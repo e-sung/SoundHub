@@ -22,13 +22,21 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <segue destination="GVL-G0-SG3" kind="presentation" identifier="showLogin" modalTransitionStyle="crossDissolve" id="yTB-E2-TgO"/>
-                        <segue destination="rJu-Ct-oMQ" kind="presentation" identifier="showGeneral" modalTransitionStyle="crossDissolve" id="Grx-pq-Pz4"/>
+                        <segue destination="GVL-G0-SG3" kind="presentation" identifier="showLogin" animates="NO" modalTransitionStyle="crossDissolve" id="yTB-E2-TgO"/>
+                        <segue destination="KWY-KU-hXR" kind="presentation" identifier="showMainTabBar" animates="NO" id="mAv-M3-zPP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="122" y="234"/>
+        </scene>
+        <!--MainTabBar-->
+        <scene sceneID="8DB-l9-YPe">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MainTabBar" id="KWY-KU-hXR" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5BV-km-u5b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="794" y="233"/>
         </scene>
         <!--LogIn-->
         <scene sceneID="5CV-t4-Gzv">
@@ -37,14 +45,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SMx-cX-Nnk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="765" y="115"/>
-        </scene>
-        <!--GeneralRanking-->
-        <scene sceneID="TYs-aW-yUt">
-            <objects>
-                <viewControllerPlaceholder storyboardName="GeneralRanking" id="rJu-Ct-oMQ" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="e3u-NF-biI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="814" y="202"/>
         </scene>
         <!--Document Browser View Controller-->
         <scene sceneID="Bcf-lr-eJ0">
