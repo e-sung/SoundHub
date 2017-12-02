@@ -43,59 +43,91 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pDK-cg-ezQ">
                                 <rect key="frame" x="0.0" y="30" width="300" height="150"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iu_profile" translatesAutoresizingMaskIntoConstraints="NO" id="Jfh-0n-x04">
-                                        <rect key="frame" x="5" y="5" width="100" height="100"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="100" id="bXj-wX-1oT"/>
-                                            <constraint firstAttribute="width" constant="100" id="cAf-e7-NhX"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NickName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZXt-8J-EJw">
-                                        <rect key="frame" x="115" y="30" width="135" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="aYN-qa-feM"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                        <color key="textColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="yeq-wX-GZM">
-                                        <rect key="frame" x="0.0" y="110" width="300" height="40"/>
+                                        <rect key="frame" x="0.0" y="126" width="300" height="24"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B91-uI-Mqp">
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="40"/>
-                                                <state key="normal" image="ic_account_box_black_24dp_2x"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="24"/>
+                                                <state key="normal" image="ic_account_box"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="3"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <segue destination="Qam-ff-f9z" kind="presentation" id="ULM-Vb-ZIS"/>
+                                                    <segue destination="Qam-ff-f9z" kind="presentation" identifier="sideMenuToProfile" id="ULM-Vb-ZIS"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lrv-r2-fdJ">
-                                                <rect key="frame" x="100" y="0.0" width="100" height="40"/>
-                                                <state key="normal" image="ic_home_black_24dp_2x"/>
+                                                <rect key="frame" x="100" y="0.0" width="100" height="24"/>
+                                                <state key="normal" image="ic_home"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="3"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xAs-Xw-7HU">
-                                                <rect key="frame" x="200" y="0.0" width="100" height="40"/>
-                                                <state key="normal" image="ic_mail_outline_black_24dp_2x"/>
+                                                <rect key="frame" x="200" y="0.0" width="100" height="24"/>
+                                                <state key="normal" image="ic_mail_outline"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="3"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </button>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1VT-dC-BDL">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="De5-ne-gMe"/>
+                                            <constraint firstAttribute="height" constant="100" id="mmJ-Qu-bnp"/>
+                                        </constraints>
+                                        <state key="normal" image="iu_profile"/>
+                                        <connections>
+                                            <segue destination="Qam-ff-f9z" kind="presentation" id="ngR-Uh-qLE"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h9I-fv-WSY">
+                                        <rect key="frame" x="110" y="29" width="105" height="42"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <state key="normal" title="nickname">
+                                            <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="Qam-ff-f9z" kind="presentation" id="qCF-t8-1qe"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="Jfh-0n-x04" firstAttribute="top" secondItem="pDK-cg-ezQ" secondAttribute="top" constant="5" id="77h-xF-kDW"/>
+                                    <constraint firstItem="1VT-dC-BDL" firstAttribute="top" secondItem="pDK-cg-ezQ" secondAttribute="top" id="4BH-KA-Dt8"/>
+                                    <constraint firstItem="h9I-fv-WSY" firstAttribute="leading" secondItem="1VT-dC-BDL" secondAttribute="trailing" constant="10" id="FVw-hp-s8V"/>
+                                    <constraint firstItem="h9I-fv-WSY" firstAttribute="centerY" secondItem="1VT-dC-BDL" secondAttribute="centerY" id="HT3-bK-2yB"/>
                                     <constraint firstItem="yeq-wX-GZM" firstAttribute="leading" secondItem="pDK-cg-ezQ" secondAttribute="leading" id="QOU-41-Q14"/>
                                     <constraint firstAttribute="bottom" secondItem="yeq-wX-GZM" secondAttribute="bottom" id="R2H-9T-2S2"/>
                                     <constraint firstAttribute="trailing" secondItem="yeq-wX-GZM" secondAttribute="trailing" id="U2O-yC-h3e"/>
-                                    <constraint firstItem="ZXt-8J-EJw" firstAttribute="leading" secondItem="Jfh-0n-x04" secondAttribute="trailing" constant="10" id="V2S-eI-0tS"/>
-                                    <constraint firstItem="Jfh-0n-x04" firstAttribute="leading" secondItem="pDK-cg-ezQ" secondAttribute="leading" constant="5" id="cfu-UL-jIK"/>
                                     <constraint firstAttribute="height" constant="150" id="o14-bJ-5Ru"/>
-                                    <constraint firstItem="yeq-wX-GZM" firstAttribute="top" secondItem="Jfh-0n-x04" secondAttribute="bottom" constant="5" id="o7G-uX-aVh"/>
-                                    <constraint firstItem="ZXt-8J-EJw" firstAttribute="centerY" secondItem="Jfh-0n-x04" secondAttribute="centerY" id="v0N-Cy-Ybj"/>
+                                    <constraint firstItem="1VT-dC-BDL" firstAttribute="leading" secondItem="pDK-cg-ezQ" secondAttribute="leading" id="wTE-dH-p3l"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kF9-uD-Atn">
@@ -122,8 +154,8 @@
                     <navigationItem key="navigationItem" id="gZP-RS-5t1"/>
                     <size key="freeformSize" width="300" height="667"/>
                     <connections>
-                        <outlet property="nicknameLB" destination="ZXt-8J-EJw" id="Lxd-Ny-k80"/>
-                        <outlet property="profileImageView" destination="Jfh-0n-x04" id="OTC-MF-BRT"/>
+                        <outlet property="nickNameButton" destination="h9I-fv-WSY" id="GH8-6i-AGI"/>
+                        <outlet property="profileImageButton" destination="1VT-dC-BDL" id="OCJ-xI-qil"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JJZ-1o-Ru6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -289,10 +321,13 @@
     </scenes>
     <resources>
         <image name="guitar_main" width="960" height="562"/>
-        <image name="ic_account_box_black_24dp_2x" width="48" height="48"/>
-        <image name="ic_home_black_24dp_2x" width="48" height="48"/>
-        <image name="ic_mail_outline_black_24dp_2x" width="48" height="48"/>
+        <image name="ic_account_box" width="24" height="24"/>
+        <image name="ic_home" width="24" height="24"/>
+        <image name="ic_mail_outline" width="24" height="24"/>
         <image name="ic_settings_black_24dp_1x" width="24" height="24"/>
         <image name="iu_profile" width="128" height="128"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="ngR-Uh-qLE"/>
+    </inferredMetricsTieBreakers>
 </document>

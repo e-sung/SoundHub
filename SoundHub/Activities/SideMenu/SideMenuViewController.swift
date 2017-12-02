@@ -10,9 +10,8 @@ import UIKit
 
 class SideMenuViewController: UIViewController {
     
-    @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var nicknameLB: UILabel!
-    
+    @IBOutlet weak var nickNameButton:UIButton!
+    @IBOutlet weak var profileImageButton:UIButton!
     
     @IBAction func logoutButtonHandler(_ sender: UIButton) {
         UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
@@ -20,6 +19,6 @@ class SideMenuViewController: UIViewController {
     }
     
     override func viewDidLoad(){
-        nicknameLB.text = UserDefaults.standard.string(forKey: "nickName")
+        nickNameButton.setTitle(UserDefaults.standard.string(forKey: "nickName") , for: .normal)
     }
 }
