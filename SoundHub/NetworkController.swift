@@ -17,9 +17,11 @@ class NetworkController{
     private let signUpURL:URL
     private let loginURL:URL
     private let postURL:URL
+    internal let baseMediaURL:URL
 
     init(){
         baseURL = URL(string: "https://soundhub.che1.co.kr")!
+        baseMediaURL = URL(string: "https://s3.ap-northeast-2.amazonaws.com/che1-soundhub/media/")!
         signUpURL = URL(string: "/user/signup/", relativeTo: baseURL)!
         loginURL = URL(string: "/user/login/", relativeTo: baseURL)!
         postURL = URL(string: "/post/", relativeTo: baseURL)!

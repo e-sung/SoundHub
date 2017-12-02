@@ -30,11 +30,9 @@ class DetailViewController: UIViewController{
     // MARK: Stored Properties
     var post:Post!
     var masterWaveCell:MasterWaveFormViewCell!
-    let masterAudioRemoteURL = URL(string: "https://s3.ap-northeast-2.amazonaws.com/che1-soundhub/media/author_tracks/guitar.m4a")!
-    let mixedAudioRemoteURLs = [
-        URL(string: "https://s3.ap-northeast-2.amazonaws.com/che1-soundhub/media/author_tracks/guitar.m4a")!,
-        URL(string: "https://s3.ap-northeast-2.amazonaws.com/che1-soundhub/media/author_tracks/drum.m4a")!
-    ]
+    var masterAudioRemoteURL:URL!
+//    let masterAudioRemoteURL = URL(string: "https://s3.ap-northeast-2.amazonaws.com/che1-soundhub/media/author_tracks/guitar.m4a")!
+    var mixedAudioRemoteURLs:[URL] = []
     fileprivate var currentPhase = Phase.ReadyToPlay
     var audioPlayers:[AVPlayer] = []
     var masterAudioLocalURL:URL?
@@ -61,6 +59,11 @@ class DetailViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        masterAudioRemoteURL = URL(string: post.author_track!, relativeTo: NetworkController.main.baseMediaURL)
+        for comment in post.comment_tracks{
+            mixedAudioLocalURLs.append(URL(string: comment.comment_track)!)
+        }
+        
         for url in mixedAudioRemoteURLs{
             NetworkController.main.downloadAudio(from: url, done: { (localURL) in
                 self.mixedAudioLocalURLs.append(localURL)
