@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 import UIKit
 
 class NetworkController{
@@ -18,6 +19,15 @@ class NetworkController{
     private let loginURL:URL
     private let postURL:URL
     internal let baseMediaURL:URL
+    
+    var multipartFormDataHeader:HTTPHeaders{
+        get{
+            return [
+                "Authorization": "Token \(UserDefaults.standard.string(forKey: "token")!)",
+                "Content-type": "multipart/form-data"
+            ]
+        }
+    }
 
     init(){
         baseURL = URL(string: "https://soundhub.che1.co.kr")!
@@ -63,6 +73,29 @@ class NetworkController{
         }.resume()
     }
     
+    func uploadAudio(In localURL:URL, completion:@escaping ()->Void){
+        Alamofire.upload(
+            multipartFormData: { multipartFormData in
+                let filename = localURL.lastPathComponent.split(separator: ".")[0]
+                multipartFormData.append(filename.data(using: .utf8)!, withName: "title")
+                multipartFormData.append(localURL, withName: "author_track")
+        },
+            to: postURL, headers:multipartFormDataHeader,
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    upload.responseJSON { response in
+                        debugPrint(response)
+                        completion()
+                    }
+                case .failure(let encodingError):
+                    print(encodingError)
+                    completion()
+                }
+            }
+        )
+    }
+    
     func downloadAudio(from remoteURL:URL, done:@escaping (_ localURL:URL)->Void){
         let documentsDirectoryURL = DataCenter.documentsDirectoryURL
         let destinationUrl = documentsDirectoryURL.appendingPathComponent(remoteURL.lastPathComponent)
@@ -80,6 +113,7 @@ class NetworkController{
         }).resume()
     }
     
+
     func generatePostRequest(with url:URL, and body:Data)->URLRequest{
         var request = URLRequest(url: url)
         request.addValue("application/json", forHTTPHeaderField: "Content-type")

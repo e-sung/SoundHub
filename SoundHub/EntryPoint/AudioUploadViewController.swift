@@ -12,65 +12,42 @@ import UIKit
 
 class AudioUploadViewController: UIViewController {
     
-    @IBOutlet weak var albumArt: UIImageView!
-    @IBOutlet weak var audioTitleLB: UILabel!
-    @IBOutlet weak var authorNameLB: UILabel!
-    @IBAction func cancelHandler(_ sender: UIButton) {
+    var audioURL:URL!
+    @IBOutlet weak private var albumArt: UIImageView!
+    @IBOutlet weak private var audioTitleLB: UILabel!
+    @IBOutlet weak private var authorNameLB: UILabel!
+    @IBAction private func cancelHandler(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func uploadHandler(_ sender: UIButton) {
-        var request = URLRequest(url: URL(string: "https://soundhub.che1.co.kr/post/")!)
-        request.addValue("Token 28a286c348adf86e24908cb972f26f0491f4e951", forHTTPHeaderField: "Authorization")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpMethod = "POST"
-//        request.setValue(audioURL.lastPathComponent, forHTTPHeaderField: "author_track")
-//        request.set
-//
-//
-//        let task = session.uploadTask(with: request, fromFile: file)
-//        task.resume()
-//
-//
-//        let audio = FileManager.default.contents(atPath: audioURL.path)
-//        struct MusicUploadRequest:Codable{
-//            let title:String
-//            let author_track:Data
-//        }
-//        let body = MusicUploadRequest(title: audioTitleLB.text!, author_track: audio!)
-//        guard let requestBody = try? JSONEncoder().encode(body) else {
-//            print("=============")
-//            print("Encoding failed")
-//            return
-//        }
-//        request.httpBody = requestBody
-//        URLSession.shared.uploadTask(withStreamedRequest: request)
+    @IBAction private func uploadHandler(_ sender: UIButton) {
+        NetworkController.main.uploadAudio(In: audioURL, completion: {
+            let dbvc = self.presentingViewController as! DocumentBrowserViewController
+            self.dismiss(animated: true, completion: {
+                dbvc.dismiss(animated: true, completion: nil)
+            })
+        })
     }
-    var audioURL:URL!
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        let playerItem = AVPlayerItem(url: audioURL)
-        for item in playerItem.asset.metadata{
-            if item.commonKey == nil{
-                continue
-            }
-
+    private func setUpUI(with audio:AVPlayerItem){
+        for item in audio.asset.metadata{
             if let key = item.commonKey, let value = item.value {
-                if key == .commonKeyArtwork{
-                    if let audioImage = UIImage(data: value as! Data){
-                        albumArt.image = audioImage
-                    }
+                if key == .commonKeyArtwork, let data = value as? Data{
+                    albumArt.image = UIImage(data: data)
                 }
                 else if key == .commonKeyTitle {
                     audioTitleLB.text = value as? String
-                }else if key == .commonKeyArtist {
+                }
+                else if key == .commonKeyArtist {
                     authorNameLB.text = value as? String
                 }
             }
         }
-
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let playerItem = AVPlayerItem(url: audioURL)
+        setUpUI(with: playerItem)
+    }
 }
