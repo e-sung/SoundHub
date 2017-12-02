@@ -31,7 +31,6 @@ class DetailViewController: UIViewController{
     var post:Post!
     var masterWaveCell:MasterWaveFormViewCell!
     var masterAudioRemoteURL:URL!
-//    let masterAudioRemoteURL = URL(string: "https://s3.ap-northeast-2.amazonaws.com/che1-soundhub/media/author_tracks/guitar.m4a")!
     var mixedAudioRemoteURLs:[URL] = []
     fileprivate var currentPhase = Phase.ReadyToPlay
     var audioPlayers:[AVPlayer] = []
@@ -69,9 +68,11 @@ class DetailViewController: UIViewController{
                 self.mixedAudioLocalURLs.append(localURL)
             })
         }
-        for _ in mixedAudioRemoteURLs {switcheStates.append(true)}
         detailTV.delegate = self
         detailTV.dataSource = self
+        for _ in post.comment_tracks{
+            switcheStates.append(true)
+        }
     }
 }
 
@@ -108,9 +109,9 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         case .Header:
             return 2
         case .MixedTracks:
-            return 2
-        case .CommentTracks:
             return post.comment_tracks.count
+        case .CommentTracks:
+            return 2
         }
     }
     
