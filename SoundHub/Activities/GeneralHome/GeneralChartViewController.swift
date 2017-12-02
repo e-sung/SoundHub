@@ -108,6 +108,10 @@ extension GeneralChartViewController:UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "generalChartToDetail", sender: indexPath)
     }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 500
+    }
 }
 
 extension GeneralChartViewController{
@@ -155,7 +159,8 @@ extension GeneralChartViewController{
     @objc private func seeMoreButtonTapHandler(sender:UIButton){
         if Section(rawValue: sender.tag) == .RankingChart && tapOnMoreRanking < 3 {tapOnMoreRanking += 1}
         else if Section(rawValue: sender.tag) == .RecentUpload && tapOnMoreRecent < 3 {tapOnMoreRecent += 1}
-        mainTV.reloadSections(IndexSet(integer: sender.tag), with: .bottom)
+        mainTV.reloadData()
+//        mainTV.reloadSections(IndexSet(integer: sender.tag), with: .bottom)
     }
 }
 

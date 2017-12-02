@@ -47,7 +47,6 @@ class ProfileViewController: UIViewController{
         imagePicker.allowsEditing = false
         imagePicker.delegate = self
     }
-    
 }
 
 // MARK: ProfileHeaderCell Delegate

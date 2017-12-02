@@ -228,7 +228,7 @@
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yxQ-Bt-CPW">
                                                     <rect key="frame" x="346" y="237" width="24" height="24"/>
-                                                    <state key="normal" image="ic_settings_black_24dp_1x"/>
+                                                    <state key="normal" image="ic_settings"/>
                                                     <connections>
                                                         <action selector="changeProfileButtnHandler:" destination="Qam-ff-f9z" eventType="touchUpInside" id="zeR-c5-k8U"/>
                                                     </connections>
@@ -324,7 +324,7 @@
         <image name="ic_account_box" width="24" height="24"/>
         <image name="ic_home" width="24" height="24"/>
         <image name="ic_mail_outline" width="24" height="24"/>
-        <image name="ic_settings_black_24dp_1x" width="24" height="24"/>
+        <image name="ic_settings" width="24" height="24"/>
         <image name="iu_profile" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
