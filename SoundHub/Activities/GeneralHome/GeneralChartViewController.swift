@@ -24,6 +24,9 @@ class GeneralChartViewController: UIViewController{
         super.viewDidLoad()
         mainTV.delegate = self
         mainTV.dataSource = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         NetworkController.main.fetchRecentPost(on: mainTV)
     }
 

@@ -27,7 +27,7 @@ class AudioCommentCell: UITableViewCell {
         set(newVal){
            _commentInfo = newVal
             InstrumentLB.text = newVal.instrument
-            nickNameLB.text = newVal.comment_track
+//            nickNameLB.text = newVal.comment_track
         }
     }
     private var _commentInfo:Comment!

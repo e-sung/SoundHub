@@ -109,7 +109,6 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         case .CommentTracks:
             return post.comment_tracks.count
         }
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

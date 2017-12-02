@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import AVFoundation
 
 class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocumentBrowserViewControllerDelegate {
     
@@ -68,12 +68,10 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
     func presentDocument(at documentURL: URL) {
         
         print(documentURL)
-        self.dismiss(animated: true, completion: nil)
-//        let storyBoard = UIStoryboard(name: "Entry", bundle: nil)
-//        let documentViewController = storyBoard.instantiateViewController(withIdentifier: "DocumentViewController") as! DocumentViewController
-//        documentViewController.document = Document(fileURL: documentURL)
-//
-//        present(documentViewController, animated: true, completion: nil)
+        let storyBoard = UIStoryboard(name: "Entry", bundle: nil)
+        let audioUploadVC = storyBoard.instantiateViewController(withIdentifier: "DocumentViewController") as! AudioUploadViewController
+        audioUploadVC.audioURL = documentURL
+        present(audioUploadVC, animated: true, completion: nil)
     }
 }
 
