@@ -15,17 +15,18 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         super.viewDidLoad()
         
         delegate = self
-        
-        allowsDocumentCreation = true
-        allowsPickingMultipleItems = false
-        
-         browserUserInterfaceStyle = .dark
-         view.tintColor = .orange
-        
-        // Do any additional setup after loading the view, typically from a nib.
+        browserUserInterfaceStyle = .dark
+        view.tintColor = .orange
+
+    }
+    
+    @objc func onDoneButtonHandler(sender:UIBarButtonItem){
+       self.dismiss(animated: true, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onDoneButtonHandler))
+        self.additionalTrailingNavigationBarButtonItems = [cancelButton]
         if presentingViewController == nil {
             performSegue(withIdentifier: "startingSegue", sender: nil)
         }
