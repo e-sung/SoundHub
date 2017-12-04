@@ -9,6 +9,7 @@ target 'SoundHub' do
   pod 'FDWaveformView'
   pod 'NVActivityIndicatorView'
   pod 'Alamofire'
+  pod 'AudioKit'
 
   # Pods for SoundHub
 
