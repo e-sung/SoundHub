@@ -178,16 +178,26 @@
             </objects>
             <point key="canvasLocation" x="-605.60000000000002" y="894.60269865067471"/>
         </scene>
-        <!--View Controller-->
+        <!--Audio Recorder View Controller-->
         <scene sceneID="Ela-dF-JJ4">
             <objects>
-                <viewController id="czj-tZ-uY8" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AudioRecorderViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="czj-tZ-uY8" customClass="AudioRecorderViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="us7-hg-3vy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Msl-eF-bha" customClass="AKNodeOutputPlot" customModule="AudioKitUI">
+                                <rect key="frame" x="67" y="166" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.090183012187480927" green="0.090205498039722443" blue="0.090178228914737701" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="ggD-u2-ujS"/>
                     </view>
+                    <connections>
+                        <outlet property="inputPlot" destination="Msl-eF-bha" id="SAy-fN-LHr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8vx-5U-7YG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

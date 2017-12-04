@@ -14,6 +14,7 @@
 		FF000D9B1FD135D400678999 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF000D9A1FD135D400678999 /* DocumentBrowserViewController.swift */; };
 		FF000D9D1FD1368000678999 /* AudioUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF000D9C1FD1368000678999 /* AudioUploadViewController.swift */; };
 		FF000D9F1FD136BA00678999 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF000D9E1FD136BA00678999 /* Document.swift */; };
+		FF1054321FD518BA00A46443 /* AudioRecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1054311FD518BA00A46443 /* AudioRecorderViewController.swift */; };
 		FF3B20AF1FCA96E30019F87A /* PopularMusicianContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20AE1FCA96E30019F87A /* PopularMusicianContainerCell.swift */; };
 		FF3B20B11FCA98C50019F87A /* GeneralChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20B01FCA98C50019F87A /* GeneralChartViewController.swift */; };
 		FF3B20B31FCAA2700019F87A /* InspectableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20B21FCAA2700019F87A /* InspectableView.swift */; };
@@ -85,6 +86,7 @@
 		FF000D9A1FD135D400678999 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
 		FF000D9C1FD1368000678999 /* AudioUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioUploadViewController.swift; sourceTree = "<group>"; };
 		FF000D9E1FD136BA00678999 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		FF1054311FD518BA00A46443 /* AudioRecorderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderViewController.swift; sourceTree = "<group>"; };
 		FF3B20AE1FCA96E30019F87A /* PopularMusicianContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMusicianContainerCell.swift; sourceTree = "<group>"; };
 		FF3B20B01FCA98C50019F87A /* GeneralChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralChartViewController.swift; sourceTree = "<group>"; };
 		FF3B20B21FCAA2700019F87A /* InspectableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectableView.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				FFCF82C21FC95D66003B7861 /* Entry.storyboard */,
+				FF1054311FD518BA00A46443 /* AudioRecorderViewController.swift */,
 				FFCF82EC1FC95E07003B7861 /* EntryViewController.swift */,
 				FF000D9A1FD135D400678999 /* DocumentBrowserViewController.swift */,
 				FF000D9E1FD136BA00678999 /* Document.swift */,
@@ -676,6 +679,7 @@
 				FFCF82ED1FC95E07003B7861 /* EntryViewController.swift in Sources */,
 				FF3B20C61FCC3B930019F87A /* Instrument.swift in Sources */,
 				FF3B20B11FCA98C50019F87A /* GeneralChartViewController.swift in Sources */,
+				FF1054321FD518BA00A46443 /* AudioRecorderViewController.swift in Sources */,
 				FF3B20C91FCC434B0019F87A /* ProfileSetUpViewController.swift in Sources */,
 				FF000D991FD11F7F00678999 /* DataCenter.swift in Sources */,
 				FF3B20B31FCAA2700019F87A /* InspectableView.swift in Sources */,
