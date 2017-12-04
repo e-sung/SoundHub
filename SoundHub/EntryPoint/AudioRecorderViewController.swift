@@ -11,6 +11,13 @@ import AudioKit
 import AudioKitUI
 
 class AudioRecorderViewController: UIViewController {
+
+    @IBAction func cancleButtonHandler(_ sender: UIBarButtonItem) {
+        AudioKit.stop()
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
     @IBOutlet weak var inputPlot: AKNodeOutputPlot!
     let mic = AKMicrophone()
     
