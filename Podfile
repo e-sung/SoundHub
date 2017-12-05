@@ -10,7 +10,6 @@ target 'SoundHub' do
   pod 'NVActivityIndicatorView'
   pod 'Alamofire'
   pod 'AudioKit'
-  pod 'Metatron'
 
   # Pods for SoundHub
 
