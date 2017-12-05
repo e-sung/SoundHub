@@ -14,6 +14,7 @@ class AudioRecorderViewController: UIViewController {
 
     
     @IBOutlet weak var recordButton: UIButton!
+    @IBOutlet weak var titleTF: UITextField!
     
     @IBAction func cancleButtonHandler(_ sender: UIBarButtonItem) {
         AudioKit.stop()
@@ -47,7 +48,8 @@ class AudioRecorderViewController: UIViewController {
             let recordedDuration = player != nil ? player.audioFile.duration  : 0
             if recordedDuration > 0.0 {
                 recorder.stop()
-                player.audioFile.exportAsynchronously(name: "TempTestFile.m4a",
+                let assetWriter = AVAssetWriter(outputURL: player.audioFile.avAsset.url, fileType: .m4a)
+                player.audioFile.exportAsynchronously(name: titleTF.text! + ".m4a",
                                                       baseDir: .documents,
                                                       exportFormat: .m4a) {_, exportError in
                                                         if let error = exportError {
@@ -71,13 +73,7 @@ class AudioRecorderViewController: UIViewController {
 
         
     }
-    @IBAction func stopRecordButtonHandler(_ sender: UIButton) {
-        recorder.stop()
-    }
-    
-    @IBAction func playButtonHandler(_ sender: UIButton) {
-        player.play()
-    }
+
     @IBOutlet weak var inputPlot: AKNodeOutputPlot!
     let mic = AKMicrophone()
     var micMixer:AKMixer!

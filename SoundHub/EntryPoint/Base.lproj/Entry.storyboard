@@ -216,23 +216,34 @@
                                     <action selector="recordButtonHandler:" destination="czj-tZ-uY8" eventType="touchUpInside" id="zFn-k2-BtQ"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="MyRecording" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mPJ-CH-B8Y">
+                                <rect key="frame" x="141" y="64" width="97" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.090183012187480927" green="0.090205498039722443" blue="0.090178228914737701" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="ggD-u2-ujS" firstAttribute="trailing" secondItem="mPJ-CH-B8Y" secondAttribute="trailing" id="0gN-bk-rRh"/>
                             <constraint firstItem="WAe-Yk-yaj" firstAttribute="trailing" secondItem="ggD-u2-ujS" secondAttribute="trailing" id="18l-FB-G0y"/>
+                            <constraint firstItem="mPJ-CH-B8Y" firstAttribute="leading" secondItem="ggD-u2-ujS" secondAttribute="leading" id="2dc-Id-HK0"/>
                             <constraint firstItem="szu-qj-QGa" firstAttribute="top" secondItem="Msl-eF-bha" secondAttribute="bottom" constant="86" id="9E1-td-28C"/>
                             <constraint firstItem="Msl-eF-bha" firstAttribute="centerX" secondItem="ggD-u2-ujS" secondAttribute="centerX" id="NqQ-01-tyL"/>
                             <constraint firstItem="Msl-eF-bha" firstAttribute="width" secondItem="us7-hg-3vy" secondAttribute="width" id="Vv0-8e-V23"/>
                             <constraint firstItem="Msl-eF-bha" firstAttribute="centerY" secondItem="ggD-u2-ujS" secondAttribute="centerY" id="YiY-kj-Igp"/>
                             <constraint firstItem="WAe-Yk-yaj" firstAttribute="leading" secondItem="ggD-u2-ujS" secondAttribute="leading" id="d1k-dV-k5C"/>
+                            <constraint firstItem="mPJ-CH-B8Y" firstAttribute="width" secondItem="us7-hg-3vy" secondAttribute="width" id="kSs-S6-e7d"/>
                             <constraint firstItem="WAe-Yk-yaj" firstAttribute="top" secondItem="ggD-u2-ujS" secondAttribute="top" id="obi-C6-zde"/>
                             <constraint firstItem="szu-qj-QGa" firstAttribute="centerX" secondItem="Msl-eF-bha" secondAttribute="centerX" id="vDE-Ib-lw2"/>
+                            <constraint firstItem="mPJ-CH-B8Y" firstAttribute="top" secondItem="WAe-Yk-yaj" secondAttribute="bottom" id="zUU-fZ-lsa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ggD-u2-ujS"/>
                     </view>
                     <connections>
                         <outlet property="inputPlot" destination="Msl-eF-bha" id="SAy-fN-LHr"/>
                         <outlet property="recordButton" destination="szu-qj-QGa" id="Xuj-W8-lSM"/>
+                        <outlet property="titleTF" destination="mPJ-CH-B8Y" id="B01-le-6eZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8vx-5U-7YG" userLabel="First Responder" sceneMemberID="firstResponder"/>
