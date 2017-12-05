@@ -1,5 +1,8 @@
 PODS:
   - Alamofire (4.5.1)
+  - AudioKit (4.0.4):
+    - AudioKit/UI (= 4.0.4)
+  - AudioKit/UI (4.0.4)
   - FDWaveformView (3.0.0)
   - NVActivityIndicatorView (4.0.0):
     - NVActivityIndicatorView/Presenter (= 4.0.0)
@@ -8,16 +11,18 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - AudioKit
   - FDWaveformView
   - NVActivityIndicatorView
   - SideMenu
 
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  AudioKit: 647145c0462dc9dc8a8582998cd6db5f2e1ea848
   FDWaveformView: 0635b5ef719f004ab6ede154521c87bedd4889ef
   NVActivityIndicatorView: 54c9b93b6f25a4f467512680c0c90c09a1095cf2
   SideMenu: 99021e70b3f2eee65b5dd88e4274d09031b1221e
 
-PODFILE CHECKSUM: 94f237f3791d9108c2b84cf51b237946cb1278ec
+PODFILE CHECKSUM: c48cb5195a9c72d6232aa524c257377062814ed3
 
 COCOAPODS: 1.3.1

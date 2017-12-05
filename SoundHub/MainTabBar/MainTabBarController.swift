@@ -45,6 +45,9 @@ class MainTabBarController: UITabBarController{
             self.present(documentBrowserVC, animated: true, completion: nil)
         }))
         alert.addAction(UIAlertAction(title: "새로 녹음하기", style: .default , handler: { (action) in
+            let storyboard = UIStoryboard(name: "Entry", bundle: nil)
+            let audioRecorderVC = storyboard.instantiateViewController(withIdentifier: "AudioRecorderViewController") as! AudioRecorderViewController
+            self.present(audioRecorderVC, animated: true, completion: nil)
         }))
         alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: { (action) in
         }))
