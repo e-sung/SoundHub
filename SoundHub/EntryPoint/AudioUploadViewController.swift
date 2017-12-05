@@ -22,14 +22,12 @@ class AudioUploadViewController: UIViewController {
     
     @IBAction private func uploadHandler(_ sender: UIButton) {
         NetworkController.main.uploadAudio(In: audioURL, completion: {
-            let dbvc = self.presentingViewController as! DocumentBrowserViewController
-            self.dismiss(animated: true, completion: {
-                dbvc.dismiss(animated: true, completion: nil)
-            })
+            self.dismiss(animated: true, completion: nil)
         })
     }
 
     private func setUpUI(with audio:AVPlayerItem){
+        
         for item in audio.asset.metadata{
             if let key = item.commonKey, let value = item.value {
                 if key == .commonKeyArtwork, let data = value as? Data{
