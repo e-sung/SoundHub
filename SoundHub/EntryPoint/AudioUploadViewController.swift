@@ -24,7 +24,10 @@ class AudioUploadViewController: UIViewController {
     
     @IBAction private func uploadHandler(_ sender: UIButton) {
         NetworkController.main.uploadAudio(In: audioURL, genre: genre, instrument: instrument) {
-            self.dismiss(animated: true, completion: nil)
+            let pvc = self.presentingViewController
+            self.dismiss(animated: true, completion: {
+                pvc?.dismiss(animated: true, completion: nil)
+            })
         }
     }
 

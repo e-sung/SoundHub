@@ -31,6 +31,7 @@ class SetUpMetaInfoViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.presentingViewController?.dismiss(animated: false, completion: nil)
         instrumentPicker.delegate = self
         instrumentPicker.dataSource = self
         selectedInstrument = instruments[0]
