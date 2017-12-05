@@ -73,12 +73,14 @@ class NetworkController{
         }.resume()
     }
     
-    func uploadAudio(In localURL:URL, completion:@escaping ()->Void){
+    func uploadAudio(In localURL:URL, genre:String, instrument:String, completion:@escaping ()->Void){
         Alamofire.upload(
             multipartFormData: { multipartFormData in
                 let filename = localURL.lastPathComponent.split(separator: ".")[0]
                 multipartFormData.append(filename.data(using: .utf8)!, withName: "title")
                 multipartFormData.append(localURL, withName: "author_track")
+                multipartFormData.append(genre.data(using: .utf8)!, withName: "genre")
+                multipartFormData.append(instrument.data(using: .utf8)!, withName: "instrument")
         },
             to: postURL, headers:multipartFormDataHeader,
             encodingCompletion: { encodingResult in

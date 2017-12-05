@@ -216,28 +216,18 @@
                                     <action selector="recordButtonHandler:" destination="czj-tZ-uY8" eventType="touchUpInside" id="zFn-k2-BtQ"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="MyRecording2" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mPJ-CH-B8Y">
-                                <rect key="frame" x="0.0" y="64" width="375" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.090183012187480927" green="0.090205498039722443" blue="0.090178228914737701" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="ggD-u2-ujS" firstAttribute="trailing" secondItem="mPJ-CH-B8Y" secondAttribute="trailing" id="0gN-bk-rRh"/>
                             <constraint firstItem="WAe-Yk-yaj" firstAttribute="trailing" secondItem="ggD-u2-ujS" secondAttribute="trailing" id="18l-FB-G0y"/>
-                            <constraint firstItem="mPJ-CH-B8Y" firstAttribute="leading" secondItem="ggD-u2-ujS" secondAttribute="leading" id="2dc-Id-HK0"/>
                             <constraint firstItem="szu-qj-QGa" firstAttribute="top" secondItem="Msl-eF-bha" secondAttribute="bottom" constant="100" id="9E1-td-28C"/>
                             <constraint firstItem="Msl-eF-bha" firstAttribute="centerX" secondItem="ggD-u2-ujS" secondAttribute="centerX" id="NqQ-01-tyL"/>
                             <constraint firstItem="Msl-eF-bha" firstAttribute="width" secondItem="us7-hg-3vy" secondAttribute="width" id="Vv0-8e-V23"/>
                             <constraint firstItem="Msl-eF-bha" firstAttribute="centerY" secondItem="ggD-u2-ujS" secondAttribute="centerY" id="YiY-kj-Igp"/>
                             <constraint firstItem="WAe-Yk-yaj" firstAttribute="leading" secondItem="ggD-u2-ujS" secondAttribute="leading" id="d1k-dV-k5C"/>
-                            <constraint firstItem="mPJ-CH-B8Y" firstAttribute="width" secondItem="us7-hg-3vy" secondAttribute="width" id="kSs-S6-e7d"/>
                             <constraint firstItem="WAe-Yk-yaj" firstAttribute="top" secondItem="ggD-u2-ujS" secondAttribute="top" id="obi-C6-zde"/>
                             <constraint firstItem="szu-qj-QGa" firstAttribute="centerX" secondItem="Msl-eF-bha" secondAttribute="centerX" id="vDE-Ib-lw2"/>
-                            <constraint firstItem="mPJ-CH-B8Y" firstAttribute="top" secondItem="WAe-Yk-yaj" secondAttribute="bottom" id="zUU-fZ-lsa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ggD-u2-ujS"/>
                         <connections>
@@ -247,7 +237,6 @@
                     <connections>
                         <outlet property="inputPlot" destination="Msl-eF-bha" id="SAy-fN-LHr"/>
                         <outlet property="recordButton" destination="szu-qj-QGa" id="Xuj-W8-lSM"/>
-                        <outlet property="titleTF" destination="mPJ-CH-B8Y" id="B01-le-6eZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8vx-5U-7YG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -258,6 +247,73 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="120.8" y="894.60269865067471"/>
+        </scene>
+        <!--Set Up Meta Info View Controller-->
+        <scene sceneID="LEY-B2-XL1">
+            <objects>
+                <viewController storyboardIdentifier="SetUpMetaInfoViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zpa-2U-Kho" customClass="SetUpMetaInfoViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6hu-U4-dWL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ByC-vg-uUx">
+                                <rect key="frame" x="0.0" y="178" width="375" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aHx-Qz-k4z">
+                                <rect key="frame" x="0.0" y="263" width="375" height="162"/>
+                                <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="aHx-Qz-k4z" secondAttribute="height" multiplier="125:54" id="hlS-eo-cFM"/>
+                                </constraints>
+                            </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C4e-3j-fqG">
+                                <rect key="frame" x="137" y="507" width="100" height="56.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="C4e-3j-fqG" secondAttribute="height" multiplier="16:9" id="gQW-ge-jHB"/>
+                                    <constraint firstAttribute="width" constant="100" id="yWx-hE-Ifh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="확인">
+                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="confirmButtonHandler:" destination="zpa-2U-Kho" eventType="touchUpInside" id="rch-Gi-aDD"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.090183012189999995" green="0.090205498039999998" blue="0.090178228910000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="C4e-3j-fqG" firstAttribute="top" secondItem="aHx-Qz-k4z" secondAttribute="bottom" constant="82" id="E8A-zC-EE5"/>
+                            <constraint firstItem="aHx-Qz-k4z" firstAttribute="centerX" secondItem="szJ-AR-zrr" secondAttribute="centerX" id="JJC-b5-C39"/>
+                            <constraint firstItem="C4e-3j-fqG" firstAttribute="centerX" secondItem="aHx-Qz-k4z" secondAttribute="centerX" id="PTl-WM-v62"/>
+                            <constraint firstItem="aHx-Qz-k4z" firstAttribute="width" secondItem="6hu-U4-dWL" secondAttribute="width" id="TVW-uS-DLz"/>
+                            <constraint firstItem="ByC-vg-uUx" firstAttribute="width" secondItem="6hu-U4-dWL" secondAttribute="width" id="XFu-el-8KA"/>
+                            <constraint firstItem="aHx-Qz-k4z" firstAttribute="centerY" secondItem="szJ-AR-zrr" secondAttribute="centerY" id="i2r-OQ-DSe"/>
+                            <constraint firstItem="ByC-vg-uUx" firstAttribute="centerX" secondItem="aHx-Qz-k4z" secondAttribute="centerX" id="nEt-oj-SWb"/>
+                            <constraint firstItem="aHx-Qz-k4z" firstAttribute="top" secondItem="ByC-vg-uUx" secondAttribute="bottom" constant="54.5" id="oj3-C7-wHQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="szJ-AR-zrr"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="ZWF-x8-xCt" appends="YES" id="kjS-xt-PQM"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="instrumentPicker" destination="aHx-Qz-k4z" id="OeJ-Yo-fBZ"/>
+                        <outlet property="titleTF" destination="ByC-vg-uUx" id="nbG-qn-YAc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mjz-fS-XbZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="ZWF-x8-xCt">
+                    <connections>
+                        <action selector="onTouchHandler:" destination="zpa-2U-Kho" id="u2e-1m-hTT"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="793" y="895"/>
         </scene>
     </scenes>
 </document>

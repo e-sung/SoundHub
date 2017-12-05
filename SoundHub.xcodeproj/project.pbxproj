@@ -27,6 +27,7 @@
 		FF3B20C41FCC3B4C0019F87A /* SignUpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20C31FCC3B4C0019F87A /* SignUpRequest.swift */; };
 		FF3B20C61FCC3B930019F87A /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20C51FCC3B930019F87A /* Instrument.swift */; };
 		FF3B20C91FCC434B0019F87A /* ProfileSetUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20C81FCC434B0019F87A /* ProfileSetUpViewController.swift */; };
+		FF4A5C021FD68CAD00E8189F /* SetUpMetaInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4A5C011FD68CAD00E8189F /* SetUpMetaInfoViewController.swift */; };
 		FF4A7F9B1FCCEE0A0002E27A /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4A7F9A1FCCEE090002E27A /* UIViewController.swift */; };
 		FF688F781FCE58B700F0A41F /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF688F771FCE58B700F0A41F /* SideMenuViewController.swift */; };
 		FF688F7A1FCE58D600F0A41F /* SideMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF688F791FCE58D600F0A41F /* SideMenu.storyboard */; };
@@ -99,6 +100,7 @@
 		FF3B20C31FCC3B4C0019F87A /* SignUpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRequest.swift; sourceTree = "<group>"; };
 		FF3B20C51FCC3B930019F87A /* Instrument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instrument.swift; sourceTree = "<group>"; };
 		FF3B20C81FCC434B0019F87A /* ProfileSetUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetUpViewController.swift; sourceTree = "<group>"; };
+		FF4A5C011FD68CAD00E8189F /* SetUpMetaInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUpMetaInfoViewController.swift; sourceTree = "<group>"; };
 		FF4A7F9A1FCCEE090002E27A /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		FF688F771FCE58B700F0A41F /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		FF688F791FCE58D600F0A41F /* SideMenu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SideMenu.storyboard; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				FFCF82C21FC95D66003B7861 /* Entry.storyboard */,
+				FF4A5C011FD68CAD00E8189F /* SetUpMetaInfoViewController.swift */,
 				FF1054311FD518BA00A46443 /* AudioRecorderViewController.swift */,
 				FFCF82EC1FC95E07003B7861 /* EntryViewController.swift */,
 				FF000D9A1FD135D400678999 /* DocumentBrowserViewController.swift */,
@@ -674,6 +677,7 @@
 				FF3B20BA1FCACD4A0019F87A /* DetailViewController.swift in Sources */,
 				FFB85FD01FCE78B3000E47C8 /* Post.swift in Sources */,
 				FFCF82BF1FC95D66003B7861 /* AppDelegate.swift in Sources */,
+				FF4A5C021FD68CAD00E8189F /* SetUpMetaInfoViewController.swift in Sources */,
 				FF3B20AF1FCA96E30019F87A /* PopularMusicianContainerCell.swift in Sources */,
 				FFA5A39F1FCCFD97001EA36F /* NetworkController.swift in Sources */,
 				FFCF82ED1FC95E07003B7861 /* EntryViewController.swift in Sources */,

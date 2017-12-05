@@ -46,7 +46,7 @@ class AudioRecorderViewController: UIViewController {
             let recordedDuration = player != nil ? player.audioFile.duration  : 0
             if recordedDuration > 0.0 {
                 recorder.stop()
-                export(asset: player.audioFile.avAsset, to: self.exportURL, with: self.metadatas)
+                showMetaInfoSetUpVC()
             }
         }
     }
@@ -79,57 +79,17 @@ class AudioRecorderViewController: UIViewController {
     }
 }
 
-// MARK: Computed Properties
-extension AudioRecorderViewController{
-    private var titleMetadata:AVMutableMetadataItem{
-        get{
-            let titleItem =  AVMutableMetadataItem()
-            titleItem.identifier = AVMetadataIdentifier.commonIdentifierTitle
-            titleItem.value = titleTF.text! as (NSCopying & NSObjectProtocol)?
-            return titleItem
-        }
-    }
-    private var artistMetaData:AVMutableMetadataItem{
-        get{
-            let artistItem = AVMutableMetadataItem()
-            artistItem.identifier = AVMetadataIdentifier.commonIdentifierArtist
-            artistItem.value = UserDefaults.standard.string(forKey: "nickName")! as (NSCopying & NSObjectProtocol)?
-            return artistItem
-        }
-    }
-    
-    private var metadatas:[AVMetadataItem]{
-        get{
-            return [titleMetadata,artistMetaData]
-        }
-    }
-    private var exportURL:URL{
-        get{
-            return URL(string: "\(titleTF.text!).m4a", relativeTo: DataCenter.documentsDirectoryURL)!
-        }
-    }
-}
-
 // MARK: Helper Functions
 extension AudioRecorderViewController{
-    private func export(asset:AVAsset, to url:URL, with metadatas:[AVMetadataItem]){
-        if let session = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetAppleM4A){
-            session.metadata = metadatas
-            session.outputFileType = AVFileType.m4a
-            session.outputURL = exportURL
-            session.exportAsynchronously {showUploadVC()}
-        }else {
-            print("AVAssetExportSession wasn't generated")
-        }
-    }
-    
-    private func showUploadVC(){
+
+    private func showMetaInfoSetUpVC(){
         let storyBoard = UIStoryboard(name: "Entry", bundle: nil)
-        let audioUploadVC = storyBoard.instantiateViewController(withIdentifier: "DocumentViewController") as! AudioUploadViewController
-        audioUploadVC.audioURL = exportURL
-        present(audioUploadVC, animated: true, completion: nil)
+        let metaInfoSetUpVC = storyBoard.instantiateViewController(withIdentifier: "SetUpMetaInfoViewController") as! SetUpMetaInfoViewController
+        metaInfoSetUpVC.player = player
+        present(metaInfoSetUpVC, animated: true, completion: nil)
     }
     
+
     private func setUpProperties(){
         setUpSession()
         setUpMic()
