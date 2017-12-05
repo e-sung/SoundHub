@@ -13,6 +13,8 @@ import UIKit
 class AudioUploadViewController: UIViewController {
     
     var audioURL:URL!
+    var genre:String!
+    var instrument:String!
     @IBOutlet weak private var albumArt: UIImageView!
     @IBOutlet weak private var audioTitleLB: UILabel!
     @IBOutlet weak private var authorNameLB: UILabel!
@@ -21,9 +23,9 @@ class AudioUploadViewController: UIViewController {
     }
     
     @IBAction private func uploadHandler(_ sender: UIButton) {
-        NetworkController.main.uploadAudio(In: audioURL, completion: {
+        NetworkController.main.uploadAudio(In: audioURL, genre: genre, instrument: instrument) {
             self.dismiss(animated: true, completion: nil)
-        })
+        }
     }
 
     private func setUpUI(with audio:AVPlayerItem){
