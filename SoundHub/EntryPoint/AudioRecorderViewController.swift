@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 import AudioKit
 import AudioKitUI
 
@@ -16,6 +17,9 @@ class AudioRecorderViewController: UIViewController {
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var titleTF: UITextField!
     
+    @IBAction func onScreenTouchHandler(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
     @IBAction func cancleButtonHandler(_ sender: UIBarButtonItem) {
         AudioKit.stop()
         self.dismiss(animated: true, completion: nil)
@@ -48,15 +52,22 @@ class AudioRecorderViewController: UIViewController {
             let recordedDuration = player != nil ? player.audioFile.duration  : 0
             if recordedDuration > 0.0 {
                 recorder.stop()
-                let assetWriter = AVAssetWriter(outputURL: player.audioFile.avAsset.url, fileType: .m4a)
-                player.audioFile.exportAsynchronously(name: titleTF.text! + ".m4a",
-                                                      baseDir: .documents,
-                                                      exportFormat: .m4a) {_, exportError in
-                                                        if let error = exportError {
-                                                            print("Export Failed \(error)")
-                                                        } else {
-                                                            print("Export succeeded")
-                                                        }
+                
+                let titleItem =  AVMutableMetadataItem()
+                titleItem.identifier = AVMetadataIdentifier.commonIdentifierTitle
+                titleItem.value = titleTF.text! as (NSCopying & NSObjectProtocol)?
+                
+                let artistItem = AVMutableMetadataItem()
+                artistItem.identifier = AVMetadataIdentifier.commonIdentifierArtist
+                artistItem.value = UserDefaults.standard.string(forKey: "nickName")! as (NSCopying & NSObjectProtocol)?
+
+                let asset = player.audioFile.avAsset
+                let session = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetAppleM4A)
+                session?.metadata = [titleItem, artistItem]
+                session?.outputFileType = AVFileType.m4a
+                session?.outputURL = URL(string: "\(titleTF.text!).m4a", relativeTo: DataCenter.documentsDirectoryURL)
+                session?.exportAsynchronously {
+                    
                 }
             }
         case .readyToPlay :
@@ -67,6 +78,11 @@ class AudioRecorderViewController: UIViewController {
             player.stop()
             recordButton.setTitle("Record", for: .normal)
             state = .readyToRecord
+            let storyBoard = UIStoryboard(name: "Entry", bundle: nil)
+            let audioUploadVC = storyBoard.instantiateViewController(withIdentifier: "DocumentViewController") as! AudioUploadViewController
+            audioUploadVC.audioURL = URL(string: "\(titleTF.text!).m4a", relativeTo: DataCenter.documentsDirectoryURL)
+            present(audioUploadVC, animated: true, completion: nil)
+
         default:
             print("unexpected item")
         }
