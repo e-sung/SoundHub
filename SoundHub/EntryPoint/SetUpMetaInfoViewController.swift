@@ -22,6 +22,10 @@ class SetUpMetaInfoViewController: UIViewController{
         self.view.endEditing(true)
     }
 
+    @IBAction func oncancelHandler(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     let instruments = ["Guitar", "Bass", "Drums", "Vocal", "Keyboard", "Others"]
     let genres = ["Rock", "Jazz", "Blues", "Pop" ]
     
@@ -54,7 +58,7 @@ extension SetUpMetaInfoViewController{
         get{
             let artistItem = AVMutableMetadataItem()
             artistItem.identifier = AVMetadataIdentifier.commonIdentifierArtist
-            artistItem.value = UserDefaults.standard.string(forKey: "nickName")! as (NSCopying & NSObjectProtocol)?
+            artistItem.value = UserDefaults.standard.string(forKey: nickname)! as (NSCopying & NSObjectProtocol)?
             return artistItem
         }
     }
@@ -66,7 +70,7 @@ extension SetUpMetaInfoViewController{
     }
     private var exportURL:URL{
         get{
-            return URL(string: "\(titleTF.text!).m4a".trimmingCharacters(in: CharacterSet.whitespacesAndNewlines), relativeTo: DataCenter.documentsDirectoryURL)!
+            return URL(string: "\(titleTF.text!).m4a".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)! , relativeTo: DataCenter.documentsDirectoryURL)!
         }
     }
 }
@@ -74,7 +78,6 @@ extension SetUpMetaInfoViewController{
 extension SetUpMetaInfoViewController{
     private func export(asset:AVAsset, to url:URL, with metadatas:[AVMetadataItem]){
         if let session = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetAppleM4A){
-            AVPlayerItem(url: exportURL).asset.metadata
             session.metadata = metadatas
             session.outputFileType = AVFileType.m4a
             session.outputURL = exportURL

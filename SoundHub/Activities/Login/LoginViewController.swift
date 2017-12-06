@@ -53,7 +53,7 @@ class LoginViewController: UIViewController, UITextViewDelegate {
 extension LoginViewController{
     private func save(loginResponse:LoginResponse, on userDefault:UserDefaults){
         userDefault.set(loginResponse.token, forKey: "token")
-        userDefault.set(loginResponse.user.nickname, forKey: "nickName")
+        userDefault.set(loginResponse.user.nickname, forKey: "nickname")
         userDefault.set(loginResponse.user.instrument, forKey: "instrument")
     }
     

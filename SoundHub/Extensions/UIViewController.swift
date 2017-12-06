@@ -20,17 +20,22 @@ extension UIViewController{
         self.present(alert, animated: true, completion: nil)
     }
     
-    func dismissWith(depth:Int, from vc:UIViewController){
+    /**
+     최상단의 ViewController부터 depth만큼 스택에 쌓인 ViewController를 dismiss하는 함수
+     - parameter depth : 스택에서 빼내고자 하는 ViewController의 개수
+     - parameter currentVC : 현시점 스택의 최상단 ViewController
+     */
+    func dismissWith(depth:Int, from currentVC:UIViewController){
         if depth == 0 {
             return
         }
         
-        if let pvc = vc.presentingViewController {
-            vc.dismiss(animated: true, completion: {
+        if let pvc = currentVC.presentingViewController {
+            currentVC.dismiss(animated: true, completion: {
                 self.dismissWith(depth: depth - 1, from: pvc)
             })
         }else{
-            vc.dismiss(animated: true, completion: nil)
+            currentVC.dismiss(animated: true, completion: nil)
         }
     }
 }

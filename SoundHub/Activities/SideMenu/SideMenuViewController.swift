@@ -19,6 +19,6 @@ class SideMenuViewController: UIViewController {
     }
     
     override func viewDidLoad(){
-        nickNameButton.setTitle(UserDefaults.standard.string(forKey: "nickName") , for: .normal)
+        nickNameButton.setTitle(UserDefaults.standard.string(forKey: nickname) , for: .normal)
     }
 }
