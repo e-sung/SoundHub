@@ -87,10 +87,6 @@ extension DetailViewController:AudioCommentCellDelegate{
     func didSwitchToggled(to state: Bool, by tag: Int, of instrument: String) {
         if switcheStates[instrument] != nil {
             switcheStates[instrument]![tag] = state
-            if var switches = switcheStates[instrument]{
-                
-                switches[tag] = state
-            }
         }
     }
     
@@ -98,25 +94,30 @@ extension DetailViewController:AudioCommentCellDelegate{
 
 // MARK: TableView Delegate
 extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
-    /// Master / Mixed / Comment
+    /// Master / MixedHeader/ Mixed / CommentHeader / Comment
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1 + Instrument.cases.count
+        return 1 + 1 + Instrument.cases.count
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 0 { return nil }
-        return generateHeaderCell(with: Instrument.cases[section-1])
+        if section <= 1 { return nil }
+        let headerTitle = Instrument.cases[section - 2]
+        if post.comment_tracks[headerTitle] == nil { return nil }
+        return generateHeaderCell(with: headerTitle)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section > 0 ? 100 : 0
+        return section > 0 ? 100 : 0.1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 2
-        }else{
-            return post.comment_tracks[Instrument.cases[section - 1]]?.count ?? 0
+        }else if section == 1{
+            return 1
+        }
+        else{
+            return post.comment_tracks[Instrument.cases[section - 2]]?.count ?? 0
         }
     }
     
@@ -129,9 +130,12 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         }else if indexPath.section == 0 && indexPath.item == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "masterWaveCell", for: indexPath)
             return generateMasterWaveCell(outof: cell)
-        }else{
+        }else if indexPath.section == 1 {
+            return tableView.dequeueReusableCell(withIdentifier: "MixedCommentHeaderCell", for: indexPath)
+        }
+        else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "mixedTrackCell", for: indexPath)
-            let comments = post.comment_tracks[Instrument.cases[indexPath.section-1]]!
+            let comments = post.comment_tracks[Instrument.cases[indexPath.section-2]]!
             cell.tag = indexPath.item
             return generateAudioCommentCell(outof: cell, and: comments[indexPath.item])
         }
