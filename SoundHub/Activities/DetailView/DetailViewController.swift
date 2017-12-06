@@ -19,11 +19,11 @@ class DetailViewController: UIViewController{
         if currentPhase == .ReadyToPlay {
             sender.setImage(#imageLiteral(resourceName: "ic_pause_circle_outline_white"), for: .normal)
             currentPhase = .Playing
-            for player in audioPlayers {player.play()}
+            playMusic()
         }else if currentPhase == .Playing{
             sender.setImage(#imageLiteral(resourceName: "ic_play_circle_outline_white"), for: .normal)
             currentPhase = .ReadyToPlay
-            for player in audioPlayers {player.pause()}
+            pauseMusic()
         }
     }
     
@@ -31,88 +31,126 @@ class DetailViewController: UIViewController{
     var post:Post!
     var masterWaveCell:MasterWaveFormViewCell!
     var masterAudioRemoteURL:URL!
-    var mixedAudioRemoteURLs:[URL] = []
     fileprivate var currentPhase = Phase.ReadyToPlay
-    var audioPlayers:[AVPlayer] = []
-    var masterAudioLocalURL:URL?
-
+    var currentInstrument:String?
+    var audioPlayers:[String:[AVPlayer]]!
+    var masterPlayer:AVPlayer!
+    private var playMode:PlayMode = .master
+    
+    private enum PlayMode{
+        case master
+        case mixed
+    }
+    
     // MARK: Obserable Properties
-    var mixedAudioLocalURLs:[URL] = []{
+    var mixedAudioLocalURLs:[String:[URL]]!{
         didSet(oldVal){
-            audioPlayers.append(AVPlayer(url: mixedAudioLocalURLs.last!))
-            if audioPlayers.count == mixedAudioLocalURLs.count {
-                playButton.isEnabled = true
+            guard let currentInstrument = currentInstrument else { return }
+            if audioPlayers[currentInstrument] != nil{
+                audioPlayers[currentInstrument]!.append(AVPlayer(url: (mixedAudioLocalURLs[currentInstrument]?.last!)!))
             }
         }
     }
-    var switcheStates:[Bool] = []{
+    var switcheStates:[String:[Bool]]!{
         didSet(oldVal){
-            for i in 0..<switcheStates.count{
-                if switcheStates[i] == false { audioPlayers[i].volume = 0 }
-                else { audioPlayers[i].volume = 1 }
+            for instrument in Instrument.cases{
+                guard let switches = switcheStates[instrument] else { return }
+                guard let players = audioPlayers[instrument] else {return}
+                reflect(switchesStates: switches, to: players)
             }
         }
     }
     
-    // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        masterAudioRemoteURL = URL(string: post.author_track!, relativeTo: NetworkController.main.baseMediaURL)
-//        for comment in post.comment_tracks{
-//            mixedAudioLocalURLs.append(URL(string: comment.comment_track)!)
-//        }
-        
-        for url in mixedAudioRemoteURLs{
-            NetworkController.main.downloadAudio(from: url, done: { (localURL) in
-                self.mixedAudioLocalURLs.append(localURL)
-            })
-        }
+        audioPlayers = initializeDic(of: AVPlayer.self, with: Instrument.cases)
+        mixedAudioLocalURLs = initializeDic(of: URL.self, with: Instrument.cases)
+        switcheStates = initializeDic(of: Bool.self, with: Instrument.cases)
+
         detailTV.delegate = self
         detailTV.dataSource = self
-//        for _ in post.comment_tracks{
-//            switcheStates.append(true)
-//        }
+        
+        masterAudioRemoteURL = URL(string: post.author_track.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)
+
+        let commentTracks = post.comment_tracks
+        for instrument in commentTracks.keys{
+            currentInstrument = instrument
+            for track in commentTracks[currentInstrument!]!{
+                NetworkController.main.downloadAudio( from: track.comment_track.url, done: { (localURL) in
+                    self.mixedAudioLocalURLs[self.currentInstrument!]!.append(localURL)
+                })
+                switcheStates[instrument]!.append(false)
+            }
+        }
     }
 }
 
 // MARK: AudioCommentDelegate
 extension DetailViewController:AudioCommentCellDelegate{
-    func didSwitchToggled(state: Bool, by tag: Int) {
-        switcheStates[tag] = state
+    func didSwitchToggled(to state: Bool, by tag: Int, of instrument: String) {
+        if switcheStates[instrument] != nil {
+            switcheStates[instrument]![tag] = state
+        }
+    }
+}
+
+extension DetailViewController:ModeToggleCellDelegate{
+    func didModeToggled(to mode: Bool) {
+        toggleMode()
+        for i in 0..<Instrument.cases.count{
+            if let comments = post.comment_tracks[Instrument.cases[i]] {
+                for j in 0..<comments.count{
+                    if let commentCell = detailTV.cellForRow(at: IndexPath(item: j, section: i+2)) as? AudioCommentCell
+                    {
+                        commentCell.toggleSwitch.setOn(mode, animated: true)
+                        switcheStates[Instrument.cases[i]]![j] = mode
+                    }
+                }
+            }
+        }
+    }
+    private func toggleMode(){
+        if playMode == .master {
+            playMode = .mixed
+        }else {
+            playMode = .master
+        }
     }
 }
 
 // MARK: TableView Delegate
 extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
-    /// Master / Mixed / Comment
+    /// Master / MixedHeader/ Mixed / CommentHeader / Comment
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 1 + 1 + Instrument.cases.count
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 100))
-        header.backgroundColor = .white
-        let titleLabel = UILabel(frame: header.frame)
-        titleLabel.text = section == 1 ? "Mixed Tracks" : "Comment Tracks"
-        titleLabel.font = titleLabel.font.withSize(30)
-        header.addSubview(titleLabel)
-        return header
+        if section <= 1 { return nil }
+        let headerTitle = Instrument.cases[section - 2]
+        if post.comment_tracks[headerTitle] == nil { return nil }
+        return generateHeaderCell(with: headerTitle)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section > 0 ? 100 : 0
+        if section < 2 {
+            return 0.1
+        }else if let comments = post.comment_tracks[Instrument.cases[section-2]]{
+            if comments.count == 0 { return 0.1 }
+            else { return 100 }
+        }
+        return 0.1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch Section(rawValue: section)! {
-        case .Header:
+        if section == 0 {
             return 2
-        case .MixedTracks:
-            return 2
-//            return post.comment_tracks.count
-        case .CommentTracks:
-            return 2
+        }else if section == 1{
+            return 1
+        }
+        else{
+            return post.comment_tracks[Instrument.cases[section - 2]]?.count ?? 0
         }
     }
     
@@ -125,35 +163,117 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         }else if indexPath.section == 0 && indexPath.item == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "masterWaveCell", for: indexPath)
             return generateMasterWaveCell(outof: cell)
-        }else if Section(rawValue: indexPath.section) == .MixedTracks{
-            let cell =  tableView.dequeueReusableCell(withIdentifier: "mixedTrackCell", for: indexPath)
-            return generateAudioCommentCell(outof: cell, on: indexPath)
-        }else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "commentTrackCell", for: indexPath)
-            return generateAudioCommentCell(outof: cell, on: indexPath)
+        }else if indexPath.section == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MixedCommentHeaderCell", for: indexPath) as! ModeToggleCell
+            cell.delegate = self
+            return cell
+        }
+        else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "mixedTrackCell", for: indexPath)
+            let comments = post.comment_tracks[Instrument.cases[indexPath.section-2]]!
+            cell.tag = indexPath.item
+            return generateAudioCommentCell(outof: cell, and: comments[indexPath.item])
         }
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.section>0 ? 100 : 200
+        return indexPath.section>=1 ? 100 : 200
     }
 }
 
 // MARK: Helper Functions
 extension DetailViewController{
-    private func generateAudioCommentCell(outof cell:UITableViewCell, on indexPath:IndexPath)->AudioCommentCell{
+    private func generateAudioCommentCell(outof cell:UITableViewCell, and commentInfo:Comment)->AudioCommentCell{
         let commentCell = cell as! AudioCommentCell
-        commentCell.tag = indexPath.item
+        commentCell.commentInfo = commentInfo
         commentCell.delegate = self
         return commentCell
     }
-    
+
     private func generateMasterWaveCell(outof cell:UITableViewCell)->MasterWaveFormViewCell{
         masterWaveCell = cell as! MasterWaveFormViewCell
         NetworkController.main.downloadAudio(from: masterAudioRemoteURL, done: { (localURL) in
             self.masterWaveCell.masterAudioURL = localURL
+            self.masterPlayer = AVPlayer(url: localURL)
+            DispatchQueue.main.async(execute: { self.playButton.isEnabled = true })
         })
         return masterWaveCell
+    }
+    
+    private func generateHeaderCell(with title:String)->UIView?{
+        let header = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 100))
+        header.backgroundColor = .white
+        let titleLabel = UILabel(frame: header.frame)
+        titleLabel.text = title
+        titleLabel.font = titleLabel.font.withSize(30)
+        header.addSubview(titleLabel)
+        return header
+    }
+    
+    private func initializeDic<T>(of type: T.Type,with keys:[String])->[String:[T]]{
+        var dic = [String:[T]]()
+        for key in keys {
+            dic[key] = []
+        }
+        return dic
+    }
+    
+    private func reflect(switchesStates:[Bool], to players:[AVPlayer]){
+        for i in 0..<switchesStates.count{
+            if switchesStates[i] == false { players[i].volume = 0 }
+            else { players[i].volume = 1 }
+        }
+    }
+    
+    private func playMusic(){
+        switch playMode {
+        case .master:
+            for instrument in Instrument.cases{
+                guard let switches = switcheStates[instrument] else { return }
+                guard let players = audioPlayers[instrument] else {return}
+                reflect(switchesStates: switches, to: players)
+            }
+            masterPlayer.volume = 1
+            masterPlayer.play()
+        case .mixed:
+            masterPlayer.volume = 0
+            for instrument in Instrument.cases{
+                play(instrument)
+            }
+        }
+    }
+    
+    private func play(_ instrument:String){
+        guard let playlist = audioPlayers[instrument] else {return}
+        play(list: playlist)
+    }
+    
+    private func play(list:[AVPlayer]){
+        for item in list{
+            item.play()
+        }
+    }
+    
+    private func pauseMusic(){
+        switch playMode {
+        case .master:
+            masterPlayer.pause()
+        case .mixed:
+            for instrument in Instrument.cases{
+                pause(instrument)
+            }
+        }
+    }
+    
+    private func pause(_ instrument:String){
+        guard let playlist = audioPlayers[instrument] else {return}
+        pause(list: playlist)
+    }
+    
+    private func pause(list:[AVPlayer]){
+        for item in list{
+            item.pause()
+        }
     }
 }
 

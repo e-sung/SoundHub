@@ -13,9 +13,10 @@ class AudioCommentCell: UITableViewCell {
     @IBOutlet weak private var profileImageView: UIImageView!
     @IBOutlet weak private var InstrumentLB: UILabel!
     @IBOutlet weak private var nickNameLB: UILabel!
+    @IBOutlet weak var toggleSwitch: UISwitch!
     
     @IBAction private func switchToggleHandler(_ sender: UISwitch) {
-        delegate?.didSwitchToggled(state: sender.isOn, by: self.tag)
+        delegate?.didSwitchToggled(to: sender.isOn, by: self.tag, of: commentInfo.instrument)
     }
     
     var delegate:AudioCommentCellDelegate?
@@ -27,12 +28,12 @@ class AudioCommentCell: UITableViewCell {
         set(newVal){
            _commentInfo = newVal
             InstrumentLB.text = newVal.instrument
-//            nickNameLB.text = newVal.comment_track
+            nickNameLB.text = newVal.author
         }
     }
     private var _commentInfo:Comment!
 }
 
 protocol AudioCommentCellDelegate {
-    func didSwitchToggled(state:Bool, by tag:Int)
+    func didSwitchToggled(to state:Bool, by tag:Int, of instrument:String)
 }

@@ -13,7 +13,9 @@ struct User:Codable{
     let email:String
     let nickname:String
     let instrument:String
+    let total_liked:Int?
     let is_staff:Bool
     let is_active:Bool
     let last_login:String?
 }
+

@@ -9,10 +9,12 @@
 import Foundation
 
 enum Instrument:String{
-    case Vocal = "V"
-    case Guitar = "G"
-    case Bass = "B"
-    case Drum = "D"
-    case Keyboard = "K"
-    case Other = "O"
+    case Vocal = "Vocal"
+    case Guitar = "Guitar"
+    case Bass = "Bass"
+    case Drum = "Drum"
+    case Keyboard = "Keyboard"
+    case Other = "Other"
+    
+    static let cases = ["Vocal","Guitar","Bass","Drum","Keyboard" ]
 }

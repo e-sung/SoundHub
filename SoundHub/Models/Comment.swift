@@ -10,8 +10,8 @@ import Foundation
 
 struct Comment:Codable{
     let id:Int
+    let author:String
+    let post:String
     let comment_track:String
     let instrument:Instrument.RawValue
-    let author:Int
-    let post:Int
 }
