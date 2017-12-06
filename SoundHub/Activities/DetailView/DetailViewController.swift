@@ -107,7 +107,13 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section > 0 ? 100 : 0.1
+        if section < 2 {
+            return 0.1
+        }else if let comments = post.comment_tracks[Instrument.cases[section-2]]{
+            if comments.count == 0 { return 0.1 }
+            else { return 100 }
+        }
+        return 0.1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -142,7 +148,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.section>0 ? 100 : 200
+        return indexPath.section>=1 ? 100 : 200
     }
 }
 
