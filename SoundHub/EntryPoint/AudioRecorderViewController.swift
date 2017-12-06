@@ -16,7 +16,6 @@ class AudioRecorderViewController: UIViewController {
     
     // MARK: IBoutlets
     @IBOutlet weak private var recordButton: UIButton!
-    @IBOutlet weak private var titleTF: UITextField!
     @IBOutlet weak private var inputPlot: AKNodeOutputPlot!
     
     // MARK: IBActions
@@ -37,6 +36,8 @@ class AudioRecorderViewController: UIViewController {
             makeReadyToPlayState()
         case .readyToPlay :
             player.play()
+            inputPlot.color = .orange
+            inputPlot.node = player
             recordButton.setTitle("그만 듣고 업로드하기", for: .normal)
             state = .playing
         case .playing :
@@ -132,6 +133,7 @@ extension AudioRecorderViewController{
     
     private func makeRecordingState(){
         recordButton.setTitle("그만 녹음하기", for: .normal)
+        inputPlot.color = .red
         state = .recording
         if AKSettings.headPhonesPlugged { micBooster.gain = 1 }
         do { try recorder.record() } catch { print("Errored recording.") }
@@ -140,7 +142,7 @@ extension AudioRecorderViewController{
     private func makeReadyToPlayState(){
         recordButton.setTitle("들어보기", for: .normal)
         state = .readyToPlay
-        
+        inputPlot.color = .orange
         micBooster.gain = 0
         do { try player.reloadFile() } catch { print("Errored reloading.") }
     }

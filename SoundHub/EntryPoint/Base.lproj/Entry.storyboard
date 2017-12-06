@@ -205,6 +205,11 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="f4i-Ps-TNl"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                        <color key="value" red="0.2364057004" green="0.4013232887" blue="0.76923906799999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="szu-qj-QGa">
                                 <rect key="frame" x="141" y="389" width="93" height="58"/>
