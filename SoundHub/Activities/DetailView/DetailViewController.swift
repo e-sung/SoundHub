@@ -81,7 +81,7 @@ class DetailViewController: UIViewController{
                 NetworkController.main.downloadAudio( from: track.comment_track.url, done: { (localURL) in
                     self.mixedAudioLocalURLs[self.currentInstrument!]!.append(localURL)
                 })
-                switcheStates[instrument]!.append(true)
+                switcheStates[instrument]!.append(false)
             }
         }
     }
