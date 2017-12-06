@@ -61,7 +61,6 @@ class DetailViewController: UIViewController{
         }
     }
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -98,6 +97,7 @@ extension DetailViewController:AudioCommentCellDelegate{
 
 extension DetailViewController:ModeToggleCellDelegate{
     func didModeToggled(to mode: Bool) {
+        toggleMode()
         for i in 0..<Instrument.cases.count{
             if let comments = post.comment_tracks[Instrument.cases[i]] {
                 for j in 0..<comments.count{
@@ -108,6 +108,13 @@ extension DetailViewController:ModeToggleCellDelegate{
                     }
                 }
             }
+        }
+    }
+    private func toggleMode(){
+        if playMode == .master {
+            playMode = .mixed
+        }else {
+            playMode = .master
         }
     }
 }
@@ -219,8 +226,20 @@ extension DetailViewController{
     }
     
     private func playMusic(){
-        for instrument in Instrument.cases{
-            play(instrument)
+        switch playMode {
+        case .master:
+            for instrument in Instrument.cases{
+                guard let switches = switcheStates[instrument] else { return }
+                guard let players = audioPlayers[instrument] else {return}
+                reflect(switchesStates: switches, to: players)
+            }
+            masterPlayer.volume = 1
+            masterPlayer.play()
+        case .mixed:
+            masterPlayer.volume = 0
+            for instrument in Instrument.cases{
+                play(instrument)
+            }
         }
     }
     
@@ -236,8 +255,13 @@ extension DetailViewController{
     }
     
     private func pauseMusic(){
-        for instrument in Instrument.cases{
-            pause(instrument)
+        switch playMode {
+        case .master:
+            masterPlayer.pause()
+        case .mixed:
+            for instrument in Instrument.cases{
+                pause(instrument)
+            }
         }
     }
     
