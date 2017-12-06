@@ -66,7 +66,7 @@ extension SetUpMetaInfoViewController{
     }
     private var exportURL:URL{
         get{
-            return URL(string: "\(titleTF.text!).m4a".trimmingCharacters(in: CharacterSet.whitespacesAndNewlines), relativeTo: DataCenter.documentsDirectoryURL)!
+            return URL(string: "\(titleTF.text!).m4a".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)! , relativeTo: DataCenter.documentsDirectoryURL)!
         }
     }
 }
