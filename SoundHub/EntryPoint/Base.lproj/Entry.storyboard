@@ -186,19 +186,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="WAe-Yk-yaj">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <items>
-                                    <navigationItem title="Recorder" id="oE0-9k-SJL">
-                                        <barButtonItem key="rightBarButtonItem" title="취소" id="aZc-DM-QCg">
-                                            <color key="tintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <connections>
-                                                <action selector="cancleButtonHandler:" destination="czj-tZ-uY8" id="qS3-Sy-xaE"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Msl-eF-bha" customClass="AKNodeOutputPlot" customModule="AudioKitUI">
                                 <rect key="frame" x="0.0" y="279.5" width="375" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -221,17 +208,24 @@
                                     <action selector="recordButtonHandler:" destination="czj-tZ-uY8" eventType="touchUpInside" id="zFn-k2-BtQ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kDc-6x-3mZ">
+                                <rect key="frame" x="313" y="20" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="취소">
+                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onCancelHandler:" destination="czj-tZ-uY8" eventType="touchUpInside" id="FQo-7c-ehd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.090183012187480927" green="0.090205498039722443" blue="0.090178228914737701" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="WAe-Yk-yaj" firstAttribute="trailing" secondItem="ggD-u2-ujS" secondAttribute="trailing" id="18l-FB-G0y"/>
                             <constraint firstItem="szu-qj-QGa" firstAttribute="top" secondItem="Msl-eF-bha" secondAttribute="bottom" constant="100" id="9E1-td-28C"/>
                             <constraint firstItem="Msl-eF-bha" firstAttribute="centerX" secondItem="ggD-u2-ujS" secondAttribute="centerX" id="NqQ-01-tyL"/>
                             <constraint firstItem="Msl-eF-bha" firstAttribute="width" secondItem="us7-hg-3vy" secondAttribute="width" id="Vv0-8e-V23"/>
                             <constraint firstItem="Msl-eF-bha" firstAttribute="centerY" secondItem="ggD-u2-ujS" secondAttribute="centerY" id="YiY-kj-Igp"/>
-                            <constraint firstItem="WAe-Yk-yaj" firstAttribute="leading" secondItem="ggD-u2-ujS" secondAttribute="leading" id="d1k-dV-k5C"/>
-                            <constraint firstItem="WAe-Yk-yaj" firstAttribute="top" secondItem="ggD-u2-ujS" secondAttribute="top" id="obi-C6-zde"/>
                             <constraint firstItem="szu-qj-QGa" firstAttribute="centerX" secondItem="Msl-eF-bha" secondAttribute="centerX" id="vDE-Ib-lw2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ggD-u2-ujS"/>
@@ -288,14 +282,25 @@
                                     <action selector="confirmButtonHandler:" destination="zpa-2U-Kho" eventType="touchUpInside" id="rch-Gi-aDD"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xys-9x-Qrb">
+                                <rect key="frame" x="329" y="20" width="30" height="30"/>
+                                <state key="normal" title="취소">
+                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="oncancelHandler:" destination="zpa-2U-Kho" eventType="touchUpInside" id="01N-H3-qm7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.090183012189999995" green="0.090205498039999998" blue="0.090178228910000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="szJ-AR-zrr" firstAttribute="trailing" secondItem="xys-9x-Qrb" secondAttribute="trailing" constant="16" id="6wO-9r-0hq"/>
                             <constraint firstItem="C4e-3j-fqG" firstAttribute="top" secondItem="aHx-Qz-k4z" secondAttribute="bottom" constant="82" id="E8A-zC-EE5"/>
                             <constraint firstItem="aHx-Qz-k4z" firstAttribute="centerX" secondItem="szJ-AR-zrr" secondAttribute="centerX" id="JJC-b5-C39"/>
                             <constraint firstItem="C4e-3j-fqG" firstAttribute="centerX" secondItem="aHx-Qz-k4z" secondAttribute="centerX" id="PTl-WM-v62"/>
                             <constraint firstItem="aHx-Qz-k4z" firstAttribute="width" secondItem="6hu-U4-dWL" secondAttribute="width" id="TVW-uS-DLz"/>
+                            <constraint firstItem="xys-9x-Qrb" firstAttribute="top" secondItem="szJ-AR-zrr" secondAttribute="top" id="UJa-Of-Ybv"/>
                             <constraint firstItem="ByC-vg-uUx" firstAttribute="width" secondItem="6hu-U4-dWL" secondAttribute="width" id="XFu-el-8KA"/>
                             <constraint firstItem="aHx-Qz-k4z" firstAttribute="centerY" secondItem="szJ-AR-zrr" secondAttribute="centerY" id="i2r-OQ-DSe"/>
                             <constraint firstItem="ByC-vg-uUx" firstAttribute="centerX" secondItem="aHx-Qz-k4z" secondAttribute="centerX" id="nEt-oj-SWb"/>

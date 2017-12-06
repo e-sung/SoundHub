@@ -22,8 +22,8 @@ class AudioRecorderViewController: UIViewController {
     @IBAction private func onScreenTouchHandler(_ sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
     }
-    @IBAction private func cancleButtonHandler(_ sender: UIBarButtonItem) {
-        AudioKit.stop()
+    
+    @IBAction func onCancelHandler(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -53,7 +53,7 @@ class AudioRecorderViewController: UIViewController {
     }
     
     // MARK: Recording Related Stored Properties
-    private let mic = AKMicrophone()
+    private var mic: AKMicrophone!
     private var micMixer:AKMixer!
     private var micBooster: AKBooster!
     private var recorder:AKNodeRecorder!
@@ -78,6 +78,7 @@ class AudioRecorderViewController: UIViewController {
         state = .readyToRecord
         AudioKit.start()
     }
+
 }
 
 // MARK: Helper Functions
@@ -110,6 +111,7 @@ extension AudioRecorderViewController{
     
     private func setUpMic(){
         // Patching
+        mic = AKMicrophone()
         inputPlot.node = mic
         micMixer = AKMixer(mic)
         micBooster = AKBooster(micMixer)
