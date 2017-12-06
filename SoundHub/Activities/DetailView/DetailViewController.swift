@@ -34,6 +34,13 @@ class DetailViewController: UIViewController{
     fileprivate var currentPhase = Phase.ReadyToPlay
     var currentInstrument:String?
     var audioPlayers:[String:[AVPlayer]]!
+    var masterPlayer:AVPlayer!
+    private var playMode:PlayMode = .master
+    
+    private enum PlayMode{
+        case master
+        case mixed
+    }
     
     // MARK: Obserable Properties
     var mixedAudioLocalURLs:[String:[URL]]!{
@@ -42,8 +49,6 @@ class DetailViewController: UIViewController{
             if audioPlayers[currentInstrument] != nil{
                 audioPlayers[currentInstrument]!.append(AVPlayer(url: (mixedAudioLocalURLs[currentInstrument]?.last!)!))
             }
-            /// ToDo : play button should be enabled when master track is downloaded
-            playButton.isEnabled = true
         }
     }
     var switcheStates:[String:[Bool]]!{
@@ -68,7 +73,7 @@ class DetailViewController: UIViewController{
         detailTV.dataSource = self
         
         masterAudioRemoteURL = URL(string: post.author_track.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)
-        
+
         let commentTracks = post.comment_tracks
         for instrument in commentTracks.keys{
             currentInstrument = instrument
@@ -182,6 +187,8 @@ extension DetailViewController{
         masterWaveCell = cell as! MasterWaveFormViewCell
         NetworkController.main.downloadAudio(from: masterAudioRemoteURL, done: { (localURL) in
             self.masterWaveCell.masterAudioURL = localURL
+            self.masterPlayer = AVPlayer(url: localURL)
+            self.playButton.isEnabled = true
         })
         return masterWaveCell
     }
