@@ -16,6 +16,7 @@
 		FF000D9F1FD136BA00678999 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF000D9E1FD136BA00678999 /* Document.swift */; };
 		FF0280561FD776CF00C0013A /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0280551FD776CF00C0013A /* UserDefaultKey.swift */; };
 		FF02805A1FD7996C00C0013A /* RecordContuctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0280591FD7996C00C0013A /* RecordContuctor.swift */; };
+		FF02805C1FD7B9A400C0013A /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF02805B1FD7B9A400C0013A /* String.swift */; };
 		FF1054321FD518BA00A46443 /* AudioRecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1054311FD518BA00A46443 /* AudioRecorderViewController.swift */; };
 		FF3B20AF1FCA96E30019F87A /* PopularMusicianContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20AE1FCA96E30019F87A /* PopularMusicianContainerCell.swift */; };
 		FF3B20B11FCA98C50019F87A /* GeneralChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20B01FCA98C50019F87A /* GeneralChartViewController.swift */; };
@@ -91,6 +92,7 @@
 		FF000D9E1FD136BA00678999 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		FF0280551FD776CF00C0013A /* UserDefaultKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
 		FF0280591FD7996C00C0013A /* RecordContuctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordContuctor.swift; sourceTree = "<group>"; };
+		FF02805B1FD7B9A400C0013A /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		FF1054311FD518BA00A46443 /* AudioRecorderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderViewController.swift; sourceTree = "<group>"; };
 		FF3B20AE1FCA96E30019F87A /* PopularMusicianContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMusicianContainerCell.swift; sourceTree = "<group>"; };
 		FF3B20B01FCA98C50019F87A /* GeneralChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralChartViewController.swift; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 				FF3B20B21FCAA2700019F87A /* InspectableView.swift */,
 				FF4A7F9A1FCCEE090002E27A /* UIViewController.swift */,
 				FF0280551FD776CF00C0013A /* UserDefaultKey.swift */,
+				FF02805B1FD7B9A400C0013A /* String.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -709,6 +712,7 @@
 				FF000D9F1FD136BA00678999 /* Document.swift in Sources */,
 				FF000D9B1FD135D400678999 /* DocumentBrowserViewController.swift in Sources */,
 				FFC32AE41FCF8E1500651A31 /* Comment.swift in Sources */,
+				FF02805C1FD7B9A400C0013A /* String.swift in Sources */,
 				FFC32AE81FCFBFDB00651A31 /* MasterWaveFormViewCell.swift in Sources */,
 				FFB85FCE1FCE657F000E47C8 /* ProfileViewController.swift in Sources */,
 				FF688F781FCE58B700F0A41F /* SideMenuViewController.swift in Sources */,

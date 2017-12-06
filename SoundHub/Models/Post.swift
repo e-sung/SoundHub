@@ -19,7 +19,7 @@ struct Post:Codable{
     let num_comments:Int
     let created_date:String
     let master_track:String?
-    let author_track:String?
-    let comment_tracks:[String:[Comment]]?
+    let author_track:String
+    let comment_tracks:[String:[Comment]]
 }
 
