@@ -99,6 +99,7 @@ extension DetailViewController:ModeToggleCellDelegate{
                     if let commentCell = detailTV.cellForRow(at: IndexPath(item: j, section: i+2)) as? AudioCommentCell
                     {
                         commentCell.toggleSwitch.setOn(mode, animated: true)
+                        switcheStates[Instrument.cases[i]]![j] = mode
                     }
                 }
             }
