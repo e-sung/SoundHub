@@ -13,6 +13,7 @@ class AudioCommentCell: UITableViewCell {
     @IBOutlet weak private var profileImageView: UIImageView!
     @IBOutlet weak private var InstrumentLB: UILabel!
     @IBOutlet weak private var nickNameLB: UILabel!
+    @IBOutlet weak var toggleSwitch: UISwitch!
     
     @IBAction private func switchToggleHandler(_ sender: UISwitch) {
         delegate?.didSwitchToggled(to: sender.isOn, by: self.tag, of: commentInfo.instrument)

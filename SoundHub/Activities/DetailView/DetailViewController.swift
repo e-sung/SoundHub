@@ -89,7 +89,21 @@ extension DetailViewController:AudioCommentCellDelegate{
             switcheStates[instrument]![tag] = state
         }
     }
-    
+}
+
+extension DetailViewController:ModeToggleCellDelegate{
+    func didModeToggled(to mode: Bool) {
+        for i in 0..<Instrument.cases.count{
+            if let comments = post.comment_tracks[Instrument.cases[i]] {
+                for j in 0..<comments.count{
+                    if let commentCell = detailTV.cellForRow(at: IndexPath(item: j, section: i+2)) as? AudioCommentCell
+                    {
+                        commentCell.toggleSwitch.setOn(mode, animated: true)
+                    }
+                }
+            }
+        }
+    }
 }
 
 // MARK: TableView Delegate
@@ -137,7 +151,9 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             let cell = tableView.dequeueReusableCell(withIdentifier: "masterWaveCell", for: indexPath)
             return generateMasterWaveCell(outof: cell)
         }else if indexPath.section == 1 {
-            return tableView.dequeueReusableCell(withIdentifier: "MixedCommentHeaderCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MixedCommentHeaderCell", for: indexPath) as! ModeToggleCell
+            cell.delegate = self
+            return cell
         }
         else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "mixedTrackCell", for: indexPath)
