@@ -31,7 +31,7 @@ class DetailViewController: UIViewController{
     var post:Post!
     var masterWaveCell:MasterWaveFormViewCell!
     var masterAudioRemoteURL:URL!
-    fileprivate var currentPhase = Phase.ReadyToPlay
+    private var currentPhase = Phase.ReadyToPlay
     var currentInstrument:String?
     var audioPlayers:[String:[AVPlayer]]!
     var masterPlayer:AVPlayer!
@@ -123,23 +123,30 @@ extension DetailViewController:ModeToggleCellDelegate{
 extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
     /// Master / MixedHeader/ Mixed / CommentHeader / Comment
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1 + 1 + Instrument.cases.count
+        return SectionRange.MainHeader.range.count +
+        SectionRange.MixedTrackHeader.range.count +
+        SectionRange.MixedTracks.range.count +
+        SectionRange.commentTrackHeader.range.count +
+        SectionRange.commentTracks.range.count
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section <= 1 { return nil }
-        let headerTitle = Instrument.cases[section - 2]
-        if post.comment_tracks[headerTitle] == nil { return nil }
-        return generateHeaderCell(with: headerTitle)
+        if section >= 2 && section - 2 < Instrument.cases.count {
+            let headerTitle = Instrument.cases[section - 2]
+            if post.comment_tracks[headerTitle] == nil { return nil }
+            return generateHeaderCell(with: headerTitle)
+        }
+        return nil
     }
+
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section < 2 {
-            return 0.1
-        }else if let comments = post.comment_tracks[Instrument.cases[section-2]]{
-            if comments.count == 0 { return 0.1 }
-            else { return 100 }
+        if section >= 2 && section - 2 < Instrument.cases.count {
+            if let comments = post.comment_tracks[Instrument.cases[section-2]]{
+                if comments.count > 0 { return 100 }
+            }
         }
+
         return 0.1
     }
     
@@ -148,9 +155,13 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             return 2
         }else if section == 1{
             return 1
+        }else if section == 2 + Instrument.cases.count{
+            return 1
         }
-        else{
+        else if section >= 2 && section - 2 < Instrument.cases.count {
             return post.comment_tracks[Instrument.cases[section - 2]]?.count ?? 0
+        }else {
+            return 2
         }
     }
     
@@ -167,12 +178,17 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             let cell = tableView.dequeueReusableCell(withIdentifier: "MixedCommentHeaderCell", for: indexPath) as! ModeToggleCell
             cell.delegate = self
             return cell
+        }else if indexPath.section == 2 + Instrument.cases.count{
+            return tableView.dequeueReusableCell(withIdentifier: "CommentTracksHeaderCell", for: indexPath)
         }
-        else{
+        else if indexPath.section >= 2 && indexPath.section - 2 < Instrument.cases.count {
             let cell = tableView.dequeueReusableCell(withIdentifier: "mixedTrackCell", for: indexPath)
             let comments = post.comment_tracks[Instrument.cases[indexPath.section-2]]!
             cell.tag = indexPath.item
             return generateAudioCommentCell(outof: cell, and: comments[indexPath.item])
+        }else{
+            return tableView.dequeueReusableCell(withIdentifier: "commentTrackCell", for: indexPath
+            )
         }
     }
 
@@ -277,14 +293,36 @@ extension DetailViewController{
     }
 }
 
-// MARK: Helper Enums
-fileprivate enum Section:Int{
-    case Header = 0
-    case MixedTracks = 1
-    case CommentTracks = 2
+
+extension DetailViewController{
+    // MARK: Helper Enums
+    private enum SectionRange:Int{
+        case MainHeader
+        case MixedTrackHeader
+        case MixedTracks
+        case commentTrackHeader
+        case commentTracks
+        
+        var range:CountableClosedRange<Int>{
+            switch self {
+            case .MainHeader:
+                return 0 ... 0
+            case .MixedTrackHeader:
+                return 1 ... 1
+            case .MixedTracks:
+                return 2...(2 + Instrument.cases.count)
+            case .commentTrackHeader:
+                return (2 + Instrument.cases.count + 1)...(2 + Instrument.cases.count + 2)
+            case .commentTracks:
+                return (2 + Instrument.cases.count + 3)...(2 + Instrument.cases.count*2 + 3)
+            }
+        }
+    }
+    
+    private enum Phase{
+        case ReadyToPlay
+        case Playing
+    }
 }
 
-fileprivate enum Phase{
-    case ReadyToPlay
-    case Playing
-}
+
