@@ -19,23 +19,11 @@ class DetailViewController: UIViewController{
         if currentPhase == .ReadyToPlay {
             sender.setImage(#imageLiteral(resourceName: "ic_pause_circle_outline_white"), for: .normal)
             currentPhase = .Playing
-            for instrument in Instrument.cases{
-                if let players = audioPlayers[instrument]{
-                    for player in players{
-                        player.play()
-                    }
-                }
-            }
+            playMusic()
         }else if currentPhase == .Playing{
             sender.setImage(#imageLiteral(resourceName: "ic_play_circle_outline_white"), for: .normal)
             currentPhase = .ReadyToPlay
-            for instrument in Instrument.cases{
-                if let players = audioPlayers[instrument]{
-                    for player in players{
-                        player.pause()
-                    }
-                }
-            }
+            pauseMusic()
         }
     }
     
@@ -193,6 +181,40 @@ extension DetailViewController{
         for i in 0..<switchesStates.count{
             if switchesStates[i] == false { players[i].volume = 0 }
             else { players[i].volume = 1 }
+        }
+    }
+    
+    private func playMusic(){
+        for instrument in Instrument.cases{
+            play(instrument)
+        }
+    }
+    
+    private func play(_ instrument:String){
+        guard let playlist = audioPlayers[instrument] else {return}
+        play(list: playlist)
+    }
+    
+    private func play(list:[AVPlayer]){
+        for item in list{
+            item.play()
+        }
+    }
+    
+    private func pauseMusic(){
+        for instrument in Instrument.cases{
+            pause(instrument)
+        }
+    }
+    
+    private func pause(_ instrument:String){
+        guard let playlist = audioPlayers[instrument] else {return}
+        pause(list: playlist)
+    }
+    
+    private func pause(list:[AVPlayer]){
+        for item in list{
+            item.pause()
         }
     }
 }
