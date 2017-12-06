@@ -22,6 +22,10 @@ class SetUpMetaInfoViewController: UIViewController{
         self.view.endEditing(true)
     }
 
+    @IBAction func oncancelHandler(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     let instruments = ["Guitar", "Bass", "Drums", "Vocal", "Keyboard", "Others"]
     let genres = ["Rock", "Jazz", "Blues", "Pop" ]
     
