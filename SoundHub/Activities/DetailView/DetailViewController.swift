@@ -43,37 +43,38 @@ class DetailViewController: UIViewController{
     var post:Post!
     var masterWaveCell:MasterWaveFormViewCell!
     var masterAudioRemoteURL:URL!
-    var mixedAudioRemoteURLs:[Instrument.RawValue:[URL]] = [:]
     fileprivate var currentPhase = Phase.ReadyToPlay
-    var audioPlayers:[String:[AVPlayer]] = ["Vocal":[],"Guitar":[],"Bass":[],"Keyboard":[],"Others":[]]
-    var masterAudioLocalURL:URL?
-
-    var currentInstrument:String!
+    var currentInstrument:String?
+    var audioPlayers:[String:[AVPlayer]]!
+    
     // MARK: Obserable Properties
-    var mixedAudioLocalURLs:[String:[URL]] = ["Vocal":[],"Guitar":[],"Bass":[],"Keyboard":[],"Others":[]]{
+    var mixedAudioLocalURLs:[String:[URL]]!{
         didSet(oldVal){
-           audioPlayers[currentInstrument]!.append(AVPlayer(url: mixedAudioLocalURLs[currentInstrument]!.last!))
+            guard let currentInstrument = currentInstrument else { return }
+            if audioPlayers[currentInstrument] != nil{
+                audioPlayers[currentInstrument]!.append(AVPlayer(url: (mixedAudioLocalURLs[currentInstrument]?.last!)!))
+            }
+            /// ToDo : play button should be enabled when master track is downloaded
             playButton.isEnabled = true
         }
     }
-    var switcheStates:[String:[Bool]] = ["Vocal":[],"Guitar":[],"Bass":[],"Keyboard":[],"Others":[]]{
+    var switcheStates:[String:[Bool]]!{
         didSet(oldVal){
             for instrument in Instrument.cases{
-                if let switches = switcheStates[instrument]{
-                    for i in 0..<switches.count{
-                        if let players = audioPlayers[instrument]{
-                            if switches[i] == false {players[i].volume = 0 }
-                            else { players[i].volume = 1 }
-                        }
-                    }
-                }
+                guard let switches = switcheStates[instrument] else { return }
+                guard let players = audioPlayers[instrument] else {return}
+                reflect(switchesStates: switches, to: players)
             }
         }
     }
     
-    // MARK: LifeCycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        audioPlayers = initializeDic(of: AVPlayer.self, with: Instrument.cases)
+        mixedAudioLocalURLs = initializeDic(of: URL.self, with: Instrument.cases)
+        switcheStates = initializeDic(of: Bool.self, with: Instrument.cases)
 
         detailTV.delegate = self
         detailTV.dataSource = self
@@ -83,9 +84,9 @@ class DetailViewController: UIViewController{
         let commentTracks = post.comment_tracks
         for instrument in commentTracks.keys{
             currentInstrument = instrument
-            for track in commentTracks[currentInstrument]!{
+            for track in commentTracks[currentInstrument!]!{
                 NetworkController.main.downloadAudio( from: track.comment_track.url, done: { (localURL) in
-                    self.mixedAudioLocalURLs[self.currentInstrument]!.append(localURL)
+                    self.mixedAudioLocalURLs[self.currentInstrument!]!.append(localURL)
                 })
                 switcheStates[instrument]!.append(true)
             }
@@ -170,7 +171,7 @@ extension DetailViewController{
         return masterWaveCell
     }
     
-    func generateHeaderCell(with title:String)->UIView?{
+    private func generateHeaderCell(with title:String)->UIView?{
         let header = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 100))
         header.backgroundColor = .white
         let titleLabel = UILabel(frame: header.frame)
@@ -178,6 +179,21 @@ extension DetailViewController{
         titleLabel.font = titleLabel.font.withSize(30)
         header.addSubview(titleLabel)
         return header
+    }
+    
+    private func initializeDic<T>(of type: T.Type,with keys:[String])->[String:[T]]{
+        var dic = [String:[T]]()
+        for key in keys {
+            dic[key] = []
+        }
+        return dic
+    }
+    
+    private func reflect(switchesStates:[Bool], to players:[AVPlayer]){
+        for i in 0..<switchesStates.count{
+            if switchesStates[i] == false { players[i].volume = 0 }
+            else { players[i].volume = 1 }
+        }
     }
 }
 
