@@ -22,7 +22,7 @@ class DetailHeaderCell: UITableViewCell {
         set(newVal){
             _postInfo = newVal
             postTitleLB.text = newVal.title
-            authorNameLB.text = newVal.author.nickname
+//            authorNameLB.text = newVal.author.nickname
         }
     }
     private var _postInfo:Post!

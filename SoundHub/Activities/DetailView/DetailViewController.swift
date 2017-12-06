@@ -59,9 +59,9 @@ class DetailViewController: UIViewController{
         super.viewDidLoad()
 
         masterAudioRemoteURL = URL(string: post.author_track!, relativeTo: NetworkController.main.baseMediaURL)
-        for comment in post.comment_tracks{
-            mixedAudioLocalURLs.append(URL(string: comment.comment_track)!)
-        }
+//        for comment in post.comment_tracks{
+//            mixedAudioLocalURLs.append(URL(string: comment.comment_track)!)
+//        }
         
         for url in mixedAudioRemoteURLs{
             NetworkController.main.downloadAudio(from: url, done: { (localURL) in
@@ -70,9 +70,9 @@ class DetailViewController: UIViewController{
         }
         detailTV.delegate = self
         detailTV.dataSource = self
-        for _ in post.comment_tracks{
-            switcheStates.append(true)
-        }
+//        for _ in post.comment_tracks{
+//            switcheStates.append(true)
+//        }
     }
 }
 
@@ -109,7 +109,8 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         case .Header:
             return 2
         case .MixedTracks:
-            return post.comment_tracks.count
+            return 2
+//            return post.comment_tracks.count
         case .CommentTracks:
             return 2
         }

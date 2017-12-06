@@ -11,9 +11,12 @@ import Foundation
 struct Post:Codable{
     let id:Int
     let title:String
-    let author:User
+    let author:String
+    let liked:[Int]?
+    let num_liked:Int
+    let num_comments:Int
+    let created_date:String
     let master_track:String?
     let author_track:String?
-    let comment_tracks:[Comment]
 }
 
