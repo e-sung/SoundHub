@@ -195,7 +195,7 @@ extension DetailViewController{
         NetworkController.main.downloadAudio(from: masterAudioRemoteURL, done: { (localURL) in
             self.masterWaveCell.masterAudioURL = localURL
             self.masterPlayer = AVPlayer(url: localURL)
-            self.playButton.isEnabled = true
+            DispatchQueue.main.async(execute: { self.playButton.isEnabled = true })
         })
         return masterWaveCell
     }
