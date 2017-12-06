@@ -23,7 +23,7 @@ class NetworkController{
     var multipartFormDataHeader:HTTPHeaders{
         get{
             return [
-                "Authorization": "Token \(UserDefaults.standard.string(forKey: "token")!)",
+                "Authorization": "Token \(UserDefaults.standard.string(forKey: token)!)",
                 "Content-type": "multipart/form-data"
             ]
         }

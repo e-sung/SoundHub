@@ -54,7 +54,7 @@ extension SetUpMetaInfoViewController{
         get{
             let artistItem = AVMutableMetadataItem()
             artistItem.identifier = AVMetadataIdentifier.commonIdentifierArtist
-            artistItem.value = UserDefaults.standard.string(forKey: "nickName")! as (NSCopying & NSObjectProtocol)?
+            artistItem.value = UserDefaults.standard.string(forKey: nickname)! as (NSCopying & NSObjectProtocol)?
             return artistItem
         }
     }
@@ -74,7 +74,6 @@ extension SetUpMetaInfoViewController{
 extension SetUpMetaInfoViewController{
     private func export(asset:AVAsset, to url:URL, with metadatas:[AVMetadataItem]){
         if let session = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetAppleM4A){
-            AVPlayerItem(url: exportURL).asset.metadata
             session.metadata = metadatas
             session.outputFileType = AVFileType.m4a
             session.outputURL = exportURL
