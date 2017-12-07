@@ -18,6 +18,8 @@ class GeneralChartViewController: UIViewController{
     private var tapOnMoreRanking = 1
     private var tapOnMoreRecent = 1
     private let sectionTitleList = ["CategoryTab", "Popular Musicians", "Ranking Chart", "Recent Upload"]
+    var category:Categori = .general
+    var option:String = ""
     
     // MARK: LifeCycle
     override func viewDidLoad() {
@@ -27,16 +29,16 @@ class GeneralChartViewController: UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        NetworkController.main.fetchGeneralHomePage {
+        NetworkController.main.fetchHomePage(of: category, with: option) {
             DispatchQueue.main.async {
                 self.mainTV.reloadData()
-                let popularMusiciansContainer = self.mainTV.cellForRow(at: IndexPath(item: 0, section: Section.PopularMusicians.rawValue)) as! PopularMusicianContainerCell
-                popularMusiciansContainer.popularMusicianFlowLayout.reloadData()
+                if let popularMusiciansContainer = self.mainTV.cellForRow(at: IndexPath(item: 0, section: Section.PopularMusicians.rawValue)) as? PopularMusicianContainerCell
+                {
+                    popularMusiciansContainer.popularMusicianFlowLayout.reloadData()
+                }
             }
         }
-        NetworkController.main.fetchRecentPost(on: mainTV)
     }
-
 }
 
 //MARK: TableViewDataSource
@@ -50,7 +52,7 @@ extension GeneralChartViewController:UITableViewDataSource{
             return tapOnMoreRanking * 3
         }else if Section(rawValue: section) == .RecentUpload{
             if tapOnMoreRecent * 3 > DataCenter.main.recentPosts.count{
-                return DataCenter.main.homePages[.general]!.recent_posts.count
+                return DataCenter.main.homePages[category]!.recent_posts.count
             }else{
                 return tapOnMoreRecent * 3
             }
@@ -97,14 +99,14 @@ extension GeneralChartViewController:UITableViewDelegate{
             return tableView.dequeueReusableCell(withIdentifier: "popularMusicianContainerCell", for: indexPath)
         }else if Section(rawValue: indexPath.section) == .RankingChart{
             let cell = tableView.dequeueReusableCell(withIdentifier: "rankingCell", for: indexPath) as! PostListCell
-            var popularPost = DataCenter.main.homePages[.general]!.pop_posts
+            var popularPost = DataCenter.main.homePages[category]!.pop_posts
             if popularPost.count - 1 >= indexPath.item {
                 cell.postInfo = popularPost[indexPath.item]
             }
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "recentUploadCell", for: indexPath) as! PostListCell
-            var recentPosts = DataCenter.main.homePages[.general]!.recent_posts
+            var recentPosts = DataCenter.main.homePages[category]!.recent_posts
             if recentPosts.count - 1 >= indexPath.item {
                 cell.postInfo = recentPosts[indexPath.item]
             }
@@ -138,9 +140,9 @@ extension GeneralChartViewController{
                 return
             }
             if Section(rawValue: indexPath.section) == .RankingChart{
-                nextVC.post = DataCenter.main.homePages[.general]!.pop_posts[indexPath.item]
+                nextVC.post = DataCenter.main.homePages[category]!.pop_posts[indexPath.item]
             }else{
-                nextVC.post = DataCenter.main.homePages[.general]!.recent_posts[indexPath.item]
+                nextVC.post = DataCenter.main.homePages[category]!.recent_posts[indexPath.item]
             }
         }
     }
@@ -180,7 +182,6 @@ extension GeneralChartViewController{
         if Section(rawValue: sender.tag) == .RankingChart {tapOnMoreRanking += 1}
         else if Section(rawValue: sender.tag) == .RecentUpload {tapOnMoreRecent += 1}
         mainTV.reloadData()
-//        mainTV.reloadSections(IndexSet(integer: sender.tag), with: .bottom)
     }
 }
 

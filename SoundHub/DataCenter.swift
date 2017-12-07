@@ -15,7 +15,7 @@ class DataCenter{
     
     var recentPosts:[Post] = []
     
-    var homePages:[category:HomePage] = [
+    var homePages:[Categori:HomePage] = [
         .general:HomePage(pop_users: [], pop_posts: [], recent_posts: []),
         .genre:HomePage(pop_users: [], pop_posts: [], recent_posts: []),
         .instrument:HomePage(pop_users: [], pop_posts: [], recent_posts: [])
@@ -30,8 +30,8 @@ struct HomePage:Codable{
     var recent_posts:[Post]
 }
 
-enum category{
-    case general
-    case genre
-    case instrument
+enum Categori:String{
+    case general = " "
+    case genre = "genre"
+    case instrument = "instrument"
 }

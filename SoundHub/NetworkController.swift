@@ -39,17 +39,22 @@ class NetworkController{
         generalHomeURL = URL(string: "/home/", relativeTo: baseURL)!
     }
     
-    func fetchGeneralHomePage(completion:@escaping ()->Void){
-        print("fetching ..")
-        print(generalHomeURL)
-        URLSession.shared.dataTask(with: generalHomeURL) {(data, response, error) in
+    func fetchHomePage(of category:Categori, with option:String, completion:@escaping()->Void){
+        var entryURL:URL?
+        if category == .general {
+            entryURL = generalHomeURL
+        }else{
+            entryURL = URL(string: "\(category.rawValue)", relativeTo: generalHomeURL)
+        }
+        let homeURL = entryURL!.appendingPathComponent(option)
+        URLSession.shared.dataTask(with: homeURL) { (data, response, error) in
             if let error = error { print(error) }
             guard let data = data else { print("data is invalid"); return}
             guard let homePageData = try? JSONDecoder().decode(HomePage.self, from: data) else {
                 print("decoding failed")
                 return
             }
-            DataCenter.main.homePages[.general] = homePageData
+            DataCenter.main.homePages[category] = homePageData
             completion()
         }.resume()
     }
