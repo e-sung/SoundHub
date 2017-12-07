@@ -41,11 +41,11 @@
             <objects>
                 <viewController id="YsJ-m6-ZEM" customClass="GeneralChartViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lPn-NK-CsK">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jw9-zx-7Mw">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="1436"/>
                                 <color key="backgroundColor" red="0.086261831223964691" green="0.086283676326274872" blue="0.086257167160511017" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="categoryTab" id="lfh-aw-81i">
@@ -306,6 +306,8 @@
                                             <outlet property="authorProfileImageView" destination="BJM-2I-X5v" id="Zdc-KI-xpD"/>
                                             <outlet property="playTimeLB" destination="KPy-IC-NUa" id="MVK-aP-1lf"/>
                                             <outlet property="postTitleLB" destination="npg-Di-h6B" id="ylr-KJ-EKV"/>
+                                            <outlet property="totalComments" destination="Au9-vT-CaZ" id="uYf-6s-T45"/>
+                                            <outlet property="totalLikesLB" destination="hX6-5L-9L6" id="odI-kY-TNu"/>
                                             <segue destination="eLA-kX-c1g" kind="show" identifier="generalChartToDetail" id="TPK-rG-A4D"/>
                                         </connections>
                                     </tableViewCell>
@@ -317,7 +319,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vkb-fG-3EF">
-                                                    <rect key="frame" x="13" y="11" width="349" height="60"/>
+                                                    <rect key="frame" x="20" y="11" width="335" height="60"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iu_profile" translatesAutoresizingMaskIntoConstraints="NO" id="pTd-Ju-idG">
                                                             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -343,7 +345,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Lb-BJ-PsF">
-                                                            <rect key="frame" x="266.5" y="24" width="82.5" height="36"/>
+                                                            <rect key="frame" x="252.5" y="24" width="82.5" height="36"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -364,13 +366,13 @@
                                                     </constraints>
                                                 </view>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="modernTImes" translatesAutoresizingMaskIntoConstraints="NO" id="Cgu-va-ehk">
-                                                    <rect key="frame" x="13" y="79" width="349" height="349"/>
+                                                    <rect key="frame" x="20" y="79" width="335" height="335"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Cgu-va-ehk" secondAttribute="height" multiplier="1:1" id="ZhQ-Pr-6ar"/>
                                                     </constraints>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cMk-UH-Xfy">
-                                                    <rect key="frame" x="13" y="438" width="349" height="50"/>
+                                                    <rect key="frame" x="20" y="424" width="335" height="50"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Vocal, #K-Pop" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsH-wi-w2i">
                                                             <rect key="frame" x="10" y="14" width="118.5" height="21"/>
@@ -379,25 +381,25 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="♥️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lcw-Yb-aRz">
-                                                            <rect key="frame" x="246.5" y="14.5" width="23" height="21"/>
+                                                            <rect key="frame" x="232.5" y="14.5" width="23" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wKh-2K-Wma">
-                                                            <rect key="frame" x="331" y="14.5" width="18" height="21"/>
+                                                            <rect key="frame" x="317" y="14.5" width="18" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🎵" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flH-fv-zgk">
-                                                            <rect key="frame" x="308" y="14.5" width="23" height="21"/>
+                                                            <rect key="frame" x="294" y="14.5" width="23" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="156" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2IN-v9-jlf">
-                                                            <rect key="frame" x="269.5" y="14.5" width="28.5" height="21"/>
+                                                            <rect key="frame" x="255.5" y="14.5" width="28.5" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -450,6 +452,8 @@
                                             <outlet property="authorProfileImageView" destination="pTd-Ju-idG" id="PWC-Z8-H7N"/>
                                             <outlet property="playTimeLB" destination="0Lb-BJ-PsF" id="3TH-y9-aw7"/>
                                             <outlet property="postTitleLB" destination="5Wt-sW-uW8" id="fHM-8v-RrL"/>
+                                            <outlet property="totalComments" destination="wKh-2K-Wma" id="IIK-H1-1KE"/>
+                                            <outlet property="totalLikesLB" destination="2IN-v9-jlf" id="4xa-1g-ccl"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -472,6 +476,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <size key="freeformSize" width="375" height="1500"/>
                     <connections>
                         <outlet property="mainTV" destination="Jw9-zx-7Mw" id="hRs-Nu-Oe3"/>
                     </connections>
