@@ -27,8 +27,10 @@ class GeneralChartViewController: UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        NetworkController.main.fetchGeneralHomePage {
+            DispatchQueue.main.async { self.mainTV.reloadData() }
+        }
         NetworkController.main.fetchRecentPost(on: mainTV)
-        NetworkController.main.fetchGeneralHomePage()
     }
 
 }
@@ -44,7 +46,7 @@ extension GeneralChartViewController:UITableViewDataSource{
             return tapOnMoreRanking * 3
         }else if Section(rawValue: section) == .RecentUpload{
             if tapOnMoreRecent * 3 > DataCenter.main.recentPosts.count{
-                return DataCenter.main.recentPosts.count
+                return DataCenter.main.homePages[.general]!.recent_posts.count
             }else{
                 return tapOnMoreRecent * 3
             }
@@ -93,8 +95,9 @@ extension GeneralChartViewController:UITableViewDelegate{
             return tableView.dequeueReusableCell(withIdentifier: "rankingCell", for: indexPath) as! PostListCell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "recentUploadCell", for: indexPath) as! PostListCell
-            if DataCenter.main.recentPosts.count - 1 >= indexPath.item{
-                cell.postInfo = DataCenter.main.recentPosts[indexPath.item]
+            var recentPosts = DataCenter.main.homePages[.general]!.recent_posts
+            if recentPosts.count - 1 >= indexPath.item {
+                cell.postInfo = recentPosts[indexPath.item]
             }
             return cell
         }

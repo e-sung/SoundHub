@@ -39,22 +39,18 @@ class NetworkController{
         generalHomeURL = URL(string: "/home/", relativeTo: baseURL)!
     }
     
-    func fetchGeneralHomePage(){
+    func fetchGeneralHomePage(completion:@escaping ()->Void){
         print("fetching ..")
         print(generalHomeURL)
         URLSession.shared.dataTask(with: generalHomeURL) {(data, response, error) in
             if let error = error { print(error) }
             guard let data = data else { print("data is invalid"); return}
-            let decoder = JSONDecoder()
-            do {
-                let homePageData = try decoder.decode(HomePage.self, from: data)
-                print(homePageData)
-            } catch {
-                print("error trying to convert data to JSON")
-                print(error)
+            guard let homePageData = try? JSONDecoder().decode(HomePage.self, from: data) else {
+                print("decoding failed")
+                return
             }
-
-//            DataCenter.main.homePages[.general] = homePageData
+            DataCenter.main.homePages[.general] = homePageData
+            completion()
         }.resume()
     }
     
