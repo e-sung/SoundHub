@@ -24,7 +24,7 @@ class InstrumentPickerViewController: UIViewController {
         performSegue(withIdentifier: "unwindFromInstrToChart", sender: instrument!)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let nextVC = segue.destination as? GeneralChartViewController else {
+        guard let nextVC = segue.destination as? ChartViewController else {
             return
         }
         guard let instrument = sender as? String else {return}

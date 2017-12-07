@@ -29,7 +29,7 @@ class GenrePickViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let nextVC = segue.destination as? GeneralChartViewController else{
+        guard let nextVC = segue.destination as? ChartViewController else{
             return
         }
         guard let option = sender as? String else {return}
