@@ -28,7 +28,11 @@ class GeneralChartViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         NetworkController.main.fetchGeneralHomePage {
-            DispatchQueue.main.async { self.mainTV.reloadData() }
+            DispatchQueue.main.async {
+                self.mainTV.reloadData()
+                let popularMusiciansContainer = self.mainTV.cellForRow(at: IndexPath(item: 0, section: Section.PopularMusicians.rawValue)) as! PopularMusicianContainerCell
+                popularMusiciansContainer.popularMusicianFlowLayout.reloadData()
+            }
         }
         NetworkController.main.fetchRecentPost(on: mainTV)
     }

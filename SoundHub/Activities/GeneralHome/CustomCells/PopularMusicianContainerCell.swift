@@ -25,7 +25,11 @@ class PopularMusicianContainerCell: UITableViewCell, UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "popularMusician", for: indexPath) as! PopularMusicianCell
         cell.artistImage.backgroundColor = UIColor(red: 0.1, green: CGFloat(indexPath.item)*0.1, blue: 0.1, alpha: 1)
-        cell.artistNameLabel.text = "\(indexPath)"
+        if DataCenter.main.homePages[.general]!.pop_users.count == 0 {
+            return cell
+        }
+        let userName =  DataCenter.main.homePages[.general]!.pop_users[indexPath.item].nickname
+        cell.artistNameLabel.text = "\(userName)"
         return cell
     }
 }
