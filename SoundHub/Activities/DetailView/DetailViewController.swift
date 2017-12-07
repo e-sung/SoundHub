@@ -34,6 +34,7 @@ class DetailViewController: UIViewController{
             playMusic()
             RecordConductor.main.startRecording()
         }else{
+            currentPhase = .Ready
             pauseMusic()
             RecordConductor.main.stopRecording()
             RecordConductor.main.player.play()
