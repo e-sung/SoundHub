@@ -15,15 +15,14 @@ class GeneralChartViewController: UIViewController{
     @IBOutlet weak private var mainTV: UITableView!
     
     @IBAction func unwindToChart(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
-        print(option)
     }
     
     // MARK: Stored Properties
     private var tapOnMoreRanking = 1
     private var tapOnMoreRecent = 1
     private let sectionTitleList = ["CategoryTab", "Popular Musicians", "Ranking Chart", "Recent Upload"]
-    var category:Categori = .genre
-    var option:String = "rock/"
+    var category:Categori = .general
+    var option:String = ""
     
     // MARK: LifeCycle
     override func viewDidLoad() {

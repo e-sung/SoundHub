@@ -135,7 +135,97 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8h8-4s-Elc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="5UL-pm-07i" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1382" y="-1147"/>
+            <point key="canvasLocation" x="970" y="-1259"/>
+        </scene>
+        <!--Instrument Picker View Controller-->
+        <scene sceneID="RJc-gU-tsT">
+            <objects>
+                <viewController id="751-AC-JtG" customClass="InstrumentPickerViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="d2K-tm-90t">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Enc-TY-Py9">
+                                <rect key="frame" x="0.0" y="120" width="375" height="447"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="TzX-d9-Saw">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="223.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="czM-G9-t7a">
+                                                <rect key="frame" x="0.0" y="0.0" width="125" height="223.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                                                <state key="normal" title="Vocal">
+                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rxb-lc-YbS">
+                                                <rect key="frame" x="125" y="0.0" width="125" height="223.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                                                <state key="normal" title="Guitar">
+                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F4y-gS-Jqn">
+                                                <rect key="frame" x="250" y="0.0" width="125" height="223.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                                                <state key="normal" title="Bass">
+                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hYR-cu-M5s">
+                                        <rect key="frame" x="0.0" y="223.5" width="375" height="223.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mky-pf-fvk">
+                                                <rect key="frame" x="0.0" y="0.0" width="125" height="223.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                <state key="normal" title="Keyboard">
+                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5IE-xd-Lg4">
+                                                <rect key="frame" x="125" y="0.0" width="125" height="223.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                                                <state key="normal" title="Drums">
+                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Khq-OV-mu8">
+                                                <rect key="frame" x="250" y="0.0" width="125" height="223.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                                                <state key="normal" title="Others">
+                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.12939515709877014" green="0.12942373752593994" blue="0.12938910722732544" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Enc-TY-Py9" firstAttribute="centerX" secondItem="ALx-sw-x9I" secondAttribute="centerX" id="Skc-YQ-J5T"/>
+                            <constraint firstItem="ALx-sw-x9I" firstAttribute="bottom" secondItem="Enc-TY-Py9" secondAttribute="bottom" constant="100" id="Xpe-B2-FZF"/>
+                            <constraint firstItem="Enc-TY-Py9" firstAttribute="width" secondItem="d2K-tm-90t" secondAttribute="width" id="rDd-sr-MbW"/>
+                            <constraint firstItem="Enc-TY-Py9" firstAttribute="top" secondItem="ALx-sw-x9I" secondAttribute="top" constant="100" id="u9u-tU-qFs"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ALx-sw-x9I"/>
+                    </view>
+                    <connections>
+                        <outletCollection property="buttons" destination="czM-G9-t7a" collectionClass="NSMutableArray" id="Dk9-od-aRB"/>
+                        <outletCollection property="buttons" destination="rxb-lc-YbS" collectionClass="NSMutableArray" id="7dn-zN-Egj"/>
+                        <outletCollection property="buttons" destination="F4y-gS-Jqn" collectionClass="NSMutableArray" id="6Dg-2W-LvW"/>
+                        <outletCollection property="buttons" destination="Mky-pf-fvk" collectionClass="NSMutableArray" id="RYe-kZ-vda"/>
+                        <outletCollection property="buttons" destination="5IE-xd-Lg4" collectionClass="NSMutableArray" id="auh-4Y-bht"/>
+                        <outletCollection property="buttons" destination="Khq-OV-mu8" collectionClass="NSMutableArray" id="hrO-Xa-6ZK"/>
+                        <segue destination="FUN-TS-SWe" kind="unwind" identifier="unwindFromInstrToChart" unwindAction="unwindToChartFor:towardsViewController:" id="Kue-kE-oas"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="46V-bM-cRB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="FUN-TS-SWe" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1600" y="-1262"/>
         </scene>
         <!--SideMenu-->
         <scene sceneID="9Su-Q4-cfd">
@@ -185,6 +275,9 @@
                                                             <state key="normal" title="Instruments">
                                                                 <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
+                                                            <connections>
+                                                                <segue destination="751-AC-JtG" kind="presentation" id="HOv-g5-Nq1"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                 </stackView>
