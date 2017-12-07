@@ -28,6 +28,7 @@ class GeneralChartViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         NetworkController.main.fetchRecentPost(on: mainTV)
+        NetworkController.main.fetchGeneralHomePage()
     }
 
 }

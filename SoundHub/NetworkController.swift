@@ -14,12 +14,13 @@ class NetworkController{
     
     static let main = NetworkController()
     
-    private let baseURL:URL
+    internal let baseURL:URL
     private let signUpURL:URL
     private let loginURL:URL
     private let postURL:URL
     internal let baseMediaURL:URL
-    
+    internal let generalHomeURL:URL
+
     var multipartFormDataHeader:HTTPHeaders{
         get{
             return [
@@ -35,6 +36,40 @@ class NetworkController{
         signUpURL = URL(string: "/user/signup/", relativeTo: baseURL)!
         loginURL = URL(string: "/user/login/", relativeTo: baseURL)!
         postURL = URL(string: "/post/", relativeTo: baseURL)!
+        generalHomeURL = URL(string: "/home/", relativeTo: baseURL)!
+    }
+    
+    func fetchGeneralHomePage(){
+        print("fetching ..")
+        print(generalHomeURL)
+        URLSession.shared.dataTask(with: generalHomeURL) {(data, response, error) in
+            if let error = error { print(error) }
+            guard let data = data else { print("data is invalid"); return}
+            let decoder = JSONDecoder()
+            do {
+                let homePageData = try decoder.decode(HomePage.self, from: data)
+                print(homePageData)
+            } catch {
+                print("error trying to convert data to JSON")
+                print(error)
+            }
+
+//            DataCenter.main.homePages[.general] = homePageData
+        }.resume()
+    }
+    
+    func fetchGenreHomePage(genre:Genre){
+        let url = URL(string: "\(genre.rawValue.lowercased())/", relativeTo: generalHomeURL)!
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let error = error { print(error) }
+            guard let data = data else { print("data is invalid"); return}
+            guard let homePageData = try? JSONDecoder().decode(HomePage.self, from: data) else {
+                print("decoding failed")
+                return
+            }
+            print(homePageData)
+            DataCenter.main.homePages[.genre] = homePageData
+        }.resume()
     }
     
     func fetchRecentPost(on tableView:UITableView){
