@@ -111,23 +111,27 @@ extension DetailViewController:AudioCommentCellDelegate{
 extension DetailViewController:ModeToggleCellDelegate{
     func didModeToggled(to mode: Bool) {
         toggleMode()
-        for i in 0..<Instrument.cases.count{
-            if let comments = post.comment_tracks[Instrument.cases[i]] {
-                for j in 0..<comments.count{
-                    if let commentCell = detailTV.cellForRow(at: IndexPath(item: j, section: i+2)) as? AudioCommentCell
-                    {
-                        commentCell.toggleSwitch.setOn(mode, animated: true)
-                        switcheStates[Instrument.cases[i]]![j] = mode
-                    }
-                }
+        toggleSwitches(to: mode)
+
+    }
+    private func toggleMode(){
+        if playMode == .master { playMode = .mixed }
+        else { playMode = .master }
+    }
+    private func toggleSwitches(section:Int, to mode:Bool){
+        guard let instrument = getInstrument(at: section) else {return}
+        guard let comments = post.comment_tracks[instrument] else {return}
+        for i in 0..<comments.count{
+            let indexPath = IndexPath(item: i, section: section)
+            if let commentCell = detailTV.cellForRow(at: indexPath) as? AudioCommentCell{
+                commentCell.toggleSwitch.setOn(mode, animated: true)
+                switcheStates[instrument]![i] = mode
             }
         }
     }
-    private func toggleMode(){
-        if playMode == .master {
-            playMode = .mixed
-        }else {
-            playMode = .master
+    private func toggleSwitches(to mode:Bool){
+        for i in 0..<Instrument.cases.count{
+            toggleSwitches(section: i + SectionRange.MixedTracks.range.lowerBound, to: mode)
         }
     }
 }
@@ -150,7 +154,6 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         }
         return nil
     }
-
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if SectionRange.MixedTracks.range.contains(section) {
@@ -321,6 +324,13 @@ extension DetailViewController{
                 return (2 + Instrument.cases.count)...(2 + Instrument.cases.count)
             }
         }
+    }
+    
+    private func getInstrument(at section:Int)->String?{
+        if SectionRange.MixedTracks.range.contains(section){
+            return Instrument.cases[section - SectionRange.MixedTracks.range.lowerBound]
+        }
+        return nil
     }
     
     private enum Phase{
