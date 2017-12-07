@@ -131,7 +131,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section >= 2 && section - 2 < Instrument.cases.count {
+        if SectionRange.MixedTracks.range.contains(section){
             let headerTitle = Instrument.cases[section - 2]
             if post.comment_tracks[headerTitle] == nil { return nil }
             return generateHeaderCell(with: headerTitle)
@@ -141,12 +141,11 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
 
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section >= 2 && section - 2 < Instrument.cases.count {
+        if SectionRange.MixedTracks.range.contains(section) {
             if let comments = post.comment_tracks[Instrument.cases[section-2]]{
                 if comments.count > 0 { return 100 }
             }
         }
-
         return 0.1
     }
     
@@ -155,11 +154,10 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             return 2
         }else if section == 1{
             return 1
-        }else if section == 2 + Instrument.cases.count{
-            return 1
-        }
-        else if section >= 2 && section - 2 < Instrument.cases.count {
+        }else if SectionRange.MixedTracks.range.contains(section) {
             return post.comment_tracks[Instrument.cases[section - 2]]?.count ?? 0
+        }else if  SectionRange.commentTrackHeader.range.contains(section){
+            return 1
         }else {
             return 2
         }
@@ -174,14 +172,14 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         }else if indexPath.section == 0 && indexPath.item == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "masterWaveCell", for: indexPath)
             return generateMasterWaveCell(outof: cell)
-        }else if indexPath.section == 1 {
+        }else if SectionRange.MixedTrackHeader.range.contains(indexPath.section) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MixedCommentHeaderCell", for: indexPath) as! ModeToggleCell
             cell.delegate = self
             return cell
-        }else if indexPath.section == 2 + Instrument.cases.count{
+        }else if SectionRange.commentTrackHeader.range.contains(indexPath.section){
             return tableView.dequeueReusableCell(withIdentifier: "CommentTracksHeaderCell", for: indexPath)
         }
-        else if indexPath.section >= 2 && indexPath.section - 2 < Instrument.cases.count {
+        else if SectionRange.MixedTracks.range.contains(indexPath.section) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "mixedTrackCell", for: indexPath)
             let comments = post.comment_tracks[Instrument.cases[indexPath.section-2]]!
             cell.tag = indexPath.item
@@ -310,11 +308,11 @@ extension DetailViewController{
             case .MixedTrackHeader:
                 return 1 ... 1
             case .MixedTracks:
-                return 2...(2 + Instrument.cases.count)
+                return 2...(2 + Instrument.cases.count - 1)
             case .commentTrackHeader:
-                return (2 + Instrument.cases.count + 1)...(2 + Instrument.cases.count + 2)
+                return (2 + Instrument.cases.count)...(2 + Instrument.cases.count)
             case .commentTracks:
-                return (2 + Instrument.cases.count + 3)...(2 + Instrument.cases.count*2 + 3)
+                return (2 + Instrument.cases.count + 1)...(2 + Instrument.cases.count*2 + 1)
             }
         }
     }
