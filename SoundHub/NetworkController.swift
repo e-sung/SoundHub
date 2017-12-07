@@ -14,12 +14,13 @@ class NetworkController{
     
     static let main = NetworkController()
     
-    private let baseURL:URL
+    internal let baseURL:URL
     private let signUpURL:URL
     private let loginURL:URL
     private let postURL:URL
     internal let baseMediaURL:URL
-    
+    internal let generalHomeURL:URL
+
     var multipartFormDataHeader:HTTPHeaders{
         get{
             return [
@@ -35,6 +36,42 @@ class NetworkController{
         signUpURL = URL(string: "/user/signup/", relativeTo: baseURL)!
         loginURL = URL(string: "/user/login/", relativeTo: baseURL)!
         postURL = URL(string: "/post/", relativeTo: baseURL)!
+        generalHomeURL = URL(string: "/home/", relativeTo: baseURL)!
+    }
+    
+    func fetchHomePage(of category:Categori, with option:String, completion:@escaping()->Void){
+        var entryURL:URL?
+        if category == .general {
+            entryURL = generalHomeURL
+        }else{
+            entryURL = URL(string: "\(category.rawValue)", relativeTo: generalHomeURL)
+        }
+        let homeURL = entryURL!.appendingPathComponent(option)
+        URLSession.shared.dataTask(with: homeURL) { (data, response, error) in
+            if let error = error { print(error) }
+            guard let data = data else { print("data is invalid"); return}
+            guard let homePageData = try? JSONDecoder().decode(HomePage.self, from: data) else {
+                print("decoding failed")
+                return
+            }
+            print(homePageData)
+            DataCenter.main.homePages[category] = homePageData
+            completion()
+        }.resume()
+    }
+    
+    func fetchGenreHomePage(genre:Genre){
+        let url = URL(string: "\(genre.rawValue.lowercased())/", relativeTo: generalHomeURL)!
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let error = error { print(error) }
+            guard let data = data else { print("data is invalid"); return}
+            guard let homePageData = try? JSONDecoder().decode(HomePage.self, from: data) else {
+                print("decoding failed")
+                return
+            }
+            print(homePageData)
+            DataCenter.main.homePages[.genre] = homePageData
+        }.resume()
     }
     
     func fetchRecentPost(on tableView:UITableView){
@@ -79,8 +116,8 @@ class NetworkController{
                 let filename = localURL.lastPathComponent.split(separator: ".")[0]
                 multipartFormData.append(filename.data(using: .utf8)!, withName: "title")
                 multipartFormData.append(localURL, withName: "author_track")
-                multipartFormData.append(genre.data(using: .utf8)!, withName: "genre")
-                multipartFormData.append(instrument.data(using: .utf8)!, withName: "instrument")
+                multipartFormData.append(genre.lowercased().data(using: .utf8)!, withName: "genre")
+                multipartFormData.append(instrument.lowercased().data(using: .utf8)!, withName: "instrument")
         },
             to: postURL, headers:multipartFormDataHeader,
             encodingCompletion: { encodingResult in

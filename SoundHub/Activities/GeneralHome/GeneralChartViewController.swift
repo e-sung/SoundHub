@@ -14,10 +14,15 @@ class GeneralChartViewController: UIViewController{
     // MARK: IBOutlets
     @IBOutlet weak private var mainTV: UITableView!
     
+    @IBAction func unwindToChart(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
+    }
+    
     // MARK: Stored Properties
     private var tapOnMoreRanking = 1
     private var tapOnMoreRecent = 1
     private let sectionTitleList = ["CategoryTab", "Popular Musicians", "Ranking Chart", "Recent Upload"]
+    var category:Categori = .general
+    var option:String = ""
     
     // MARK: LifeCycle
     override func viewDidLoad() {
@@ -27,7 +32,16 @@ class GeneralChartViewController: UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        NetworkController.main.fetchRecentPost(on: mainTV)
+        NetworkController.main.fetchHomePage(of: category, with: option) {
+            DispatchQueue.main.async {
+                self.mainTV.reloadData()
+                if let popularMusiciansContainer = self.mainTV.cellForRow(at: IndexPath(item: 0, section: Section.PopularMusicians.rawValue)) as? PopularMusicianContainerCell
+                {
+                    popularMusiciansContainer.category = self.category
+                    popularMusiciansContainer.popularMusicianFlowLayout.reloadData()
+                }
+            }
+        }
     }
 
 }
@@ -43,7 +57,7 @@ extension GeneralChartViewController:UITableViewDataSource{
             return tapOnMoreRanking * 3
         }else if Section(rawValue: section) == .RecentUpload{
             if tapOnMoreRecent * 3 > DataCenter.main.recentPosts.count{
-                return DataCenter.main.recentPosts.count
+                return DataCenter.main.homePages[category]!.recent_posts.count
             }else{
                 return tapOnMoreRecent * 3
             }
@@ -89,11 +103,17 @@ extension GeneralChartViewController:UITableViewDelegate{
         }else if Section(rawValue: indexPath.section) == .PopularMusicians{
             return tableView.dequeueReusableCell(withIdentifier: "popularMusicianContainerCell", for: indexPath)
         }else if Section(rawValue: indexPath.section) == .RankingChart{
-            return tableView.dequeueReusableCell(withIdentifier: "rankingCell", for: indexPath) as! PostListCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "rankingCell", for: indexPath) as! PostListCell
+            var popularPost = DataCenter.main.homePages[category]!.pop_posts
+            if popularPost.count - 1 >= indexPath.item {
+                cell.postInfo = popularPost[indexPath.item]
+            }
+            return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "recentUploadCell", for: indexPath) as! PostListCell
-            if DataCenter.main.recentPosts.count - 1 >= indexPath.item{
-                cell.postInfo = DataCenter.main.recentPosts[indexPath.item]
+            var recentPosts = DataCenter.main.homePages[category]!.recent_posts
+            if recentPosts.count - 1 >= indexPath.item {
+                cell.postInfo = recentPosts[indexPath.item]
             }
             return cell
         }
@@ -106,6 +126,7 @@ extension GeneralChartViewController:UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         performSegue(withIdentifier: "generalChartToDetail", sender: indexPath)
     }
     
@@ -116,12 +137,18 @@ extension GeneralChartViewController:UITableViewDelegate{
 
 extension GeneralChartViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if let nextVC = segue.destination as? DetailViewController{
+            
             guard let indexPath = sender as? IndexPath else {
                 print("indexPath downcasting failed")
                 return
             }
-            nextVC.post = DataCenter.main.recentPosts[indexPath.item]
+            if Section(rawValue: indexPath.section) == .RankingChart{
+                nextVC.post = DataCenter.main.homePages[category]!.pop_posts[indexPath.item]
+            }else{
+                nextVC.post = DataCenter.main.homePages[category]!.recent_posts[indexPath.item]
+            }
         }
     }
 }
@@ -160,7 +187,6 @@ extension GeneralChartViewController{
         if Section(rawValue: sender.tag) == .RankingChart {tapOnMoreRanking += 1}
         else if Section(rawValue: sender.tag) == .RecentUpload {tapOnMoreRecent += 1}
         mainTV.reloadData()
-//        mainTV.reloadSections(IndexSet(integer: sender.tag), with: .bottom)
     }
 }
 
