@@ -150,7 +150,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         if SectionRange.MixedTracks.range.contains(section){
             let headerTitle = Instrument.cases[section - SectionRange.MixedTracks.range.lowerBound]
             if post.comment_tracks[headerTitle] == nil { return nil }
-            return generateHeaderCell(with: headerTitle)
+            return UIView.generateHeaderView(with: headerTitle)
         }
         return nil
     }
@@ -186,7 +186,10 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             return cell
         }else if indexPath.section == 0 && indexPath.item == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "masterWaveCell", for: indexPath)
-            return generateMasterWaveCell(outof: cell)
+            return cell.becomeMasterWaveCell(with: masterAudioRemoteURL, completion: { (localURL) in
+                self.masterPlayer = AVPlayer(url: localURL)
+                DispatchQueue.main.async(execute: { self.playButton.isEnabled = true })
+            })
         }else if SectionRange.MixedTrackHeader.range.contains(indexPath.section) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MixedCommentHeaderCell", for: indexPath) as! ModeToggleCell
             cell.delegate = self
@@ -195,7 +198,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             let cell = tableView.dequeueReusableCell(withIdentifier: "mixedTrackCell", for: indexPath)
             let comments = post.comment_tracks[Instrument.cases[indexPath.section-2]]!
             cell.tag = indexPath.item
-            return generateAudioCommentCell(outof: cell, and: comments[indexPath.item])
+            return cell.becomeAudioCommentCell(commentInfo: comments[indexPath.item], delegate: self)
         }else{
             return tableView.dequeueReusableCell(withIdentifier: "CommentTracksHeaderCell", for: indexPath)
         }
@@ -209,33 +212,6 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
 
 // MARK: Helper Functions
 extension DetailViewController{
-    private func generateAudioCommentCell(outof cell:UITableViewCell, and commentInfo:Comment)->AudioCommentCell{
-        let commentCell = cell as! AudioCommentCell
-        commentCell.commentInfo = commentInfo
-        commentCell.delegate = self
-        return commentCell
-    }
-
-    private func generateMasterWaveCell(outof cell:UITableViewCell)->MasterWaveFormViewCell{
-        masterWaveCell = cell as! MasterWaveFormViewCell
-        NetworkController.main.downloadAudio(from: masterAudioRemoteURL, done: { (localURL) in
-            self.masterWaveCell.masterAudioURL = localURL
-            self.masterPlayer = AVPlayer(url: localURL)
-            DispatchQueue.main.async(execute: { self.playButton.isEnabled = true })
-        })
-        return masterWaveCell
-    }
-    
-    private func generateHeaderCell(with title:String)->UIView?{
-        let header = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 100))
-        header.backgroundColor = .white
-        let titleLabel = UILabel(frame: header.frame)
-        titleLabel.text = title
-        titleLabel.font = titleLabel.font.withSize(30)
-        header.addSubview(titleLabel)
-        return header
-    }
-    
     private func initializeDic<T>(of type: T.Type,with keys:[String])->[String:[T]]{
         var dic = [String:[T]]()
         for key in keys {
@@ -251,6 +227,15 @@ extension DetailViewController{
         }
     }
     
+    private func getInstrument(at section:Int)->String?{
+        if SectionRange.MixedTracks.range.contains(section){
+            return Instrument.cases[section - SectionRange.MixedTracks.range.lowerBound]
+        }
+        return nil
+    }
+}
+// MARK: Play and Pause Functions
+extension DetailViewController{
     private func playMusic(){
         switch playMode {
         case .master:
@@ -303,9 +288,8 @@ extension DetailViewController{
     }
 }
 
-
+// MARK: Helper Enums
 extension DetailViewController{
-    // MARK: Helper Enums
     private enum SectionRange:Int{
         case MainHeader
         case MixedTrackHeader
@@ -326,13 +310,7 @@ extension DetailViewController{
         }
     }
     
-    private func getInstrument(at section:Int)->String?{
-        if SectionRange.MixedTracks.range.contains(section){
-            return Instrument.cases[section - SectionRange.MixedTracks.range.lowerBound]
-        }
-        return nil
-    }
-    
+
     private enum Phase{
         case Ready
         case Playing
