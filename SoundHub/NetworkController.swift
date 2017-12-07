@@ -54,6 +54,7 @@ class NetworkController{
                 print("decoding failed")
                 return
             }
+            print(homePageData)
             DataCenter.main.homePages[category] = homePageData
             completion()
         }.resume()
@@ -115,8 +116,8 @@ class NetworkController{
                 let filename = localURL.lastPathComponent.split(separator: ".")[0]
                 multipartFormData.append(filename.data(using: .utf8)!, withName: "title")
                 multipartFormData.append(localURL, withName: "author_track")
-                multipartFormData.append(genre.data(using: .utf8)!, withName: "genre")
-                multipartFormData.append(instrument.data(using: .utf8)!, withName: "instrument")
+                multipartFormData.append(genre.lowercased().data(using: .utf8)!, withName: "genre")
+                multipartFormData.append(instrument.lowercased().data(using: .utf8)!, withName: "instrument")
         },
             to: postURL, headers:multipartFormDataHeader,
             encodingCompletion: { encodingResult in

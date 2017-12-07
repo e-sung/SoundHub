@@ -18,8 +18,8 @@ class GeneralChartViewController: UIViewController{
     private var tapOnMoreRanking = 1
     private var tapOnMoreRecent = 1
     private let sectionTitleList = ["CategoryTab", "Popular Musicians", "Ranking Chart", "Recent Upload"]
-    var category:Categori = .general
-    var option:String = ""
+    var category:Categori = .instrument
+    var option:String = "guitar/"
     
     // MARK: LifeCycle
     override func viewDidLoad() {
@@ -34,6 +34,7 @@ class GeneralChartViewController: UIViewController{
                 self.mainTV.reloadData()
                 if let popularMusiciansContainer = self.mainTV.cellForRow(at: IndexPath(item: 0, section: Section.PopularMusicians.rawValue)) as? PopularMusicianContainerCell
                 {
+                    popularMusiciansContainer.category = self.category
                     popularMusiciansContainer.popularMusicianFlowLayout.reloadData()
                 }
             }
