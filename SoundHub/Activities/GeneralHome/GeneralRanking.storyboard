@@ -28,6 +28,205 @@
             </objects>
             <point key="canvasLocation" x="636" y="-142"/>
         </scene>
+        <!--Genre Pick View Controller-->
+        <scene sceneID="n1r-S4-jqi">
+            <objects>
+                <viewController id="EE1-0h-xyh" customClass="GenrePickViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="g9b-DA-okt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="WIH-dD-h4e">
+                                <rect key="frame" x="0.0" y="120.5" width="375" height="446.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="dTE-d9-B1B">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="142"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CCB-NS-6fi">
+                                                <rect key="frame" x="0.0" y="0.0" width="118.5" height="142"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="33"/>
+                                                <state key="normal" title="Pop" backgroundImage="iu1">
+                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dlg-im-ech">
+                                                <rect key="frame" x="128.5" y="0.0" width="118" height="142"/>
+                                                <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="33"/>
+                                                <state key="normal" title="Jazz" backgroundImage="iu2">
+                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eHE-st-nc1">
+                                                <rect key="frame" x="256.5" y="0.0" width="118.5" height="142"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="33"/>
+                                                <state key="normal" title="Rock" backgroundImage="iu3">
+                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ab4-FO-r4g">
+                                        <rect key="frame" x="0.0" y="152" width="375" height="142.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="46A-QI-WjS">
+                                                <rect key="frame" x="0.0" y="0.0" width="118.5" height="142.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="33"/>
+                                                <state key="normal" title="HipHop" backgroundImage="iu4">
+                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fkp-VV-GBE">
+                                                <rect key="frame" x="128.5" y="0.0" width="118" height="142.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="33"/>
+                                                <state key="normal" title="Elec" backgroundImage="iu5">
+                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EdA-jA-HdG">
+                                                <rect key="frame" x="256.5" y="0.0" width="118.5" height="142.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="33"/>
+                                                <state key="normal" title="Classic" backgroundImage="iu6">
+                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zK0-7Z-DwX">
+                                        <rect key="frame" x="0.0" y="304.5" width="375" height="142"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hOy-E6-xYL">
+                                                <rect key="frame" x="0.0" y="0.0" width="118.5" height="142"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="33"/>
+                                                <state key="normal" title="Other" backgroundImage="iu_profile">
+                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="beW-oG-nai">
+                                                <rect key="frame" x="128.5" y="0.0" width="118" height="142"/>
+                                            </button>
+                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F5N-YA-2us">
+                                                <rect key="frame" x="256.5" y="0.0" width="118.5" height="142"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.12939515709877014" green="0.12942373752593994" blue="0.12938910722732544" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="WIH-dD-h4e" firstAttribute="leading" secondItem="vey-0W-kVV" secondAttribute="leading" id="F6z-f1-xVz"/>
+                            <constraint firstItem="WIH-dD-h4e" firstAttribute="top" secondItem="vey-0W-kVV" secondAttribute="top" constant="100" id="Hgh-cb-MN2"/>
+                            <constraint firstItem="WIH-dD-h4e" firstAttribute="bottom" secondItem="vey-0W-kVV" secondAttribute="bottom" constant="-100" id="orX-3F-LdH"/>
+                            <constraint firstItem="WIH-dD-h4e" firstAttribute="trailing" secondItem="vey-0W-kVV" secondAttribute="trailing" id="wbT-nG-Mbr"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="vey-0W-kVV"/>
+                    </view>
+                    <connections>
+                        <outletCollection property="buttons" destination="CCB-NS-6fi" collectionClass="NSMutableArray" id="EjE-Y3-St7"/>
+                        <outletCollection property="buttons" destination="dlg-im-ech" collectionClass="NSMutableArray" id="zOr-Lt-9iB"/>
+                        <outletCollection property="buttons" destination="eHE-st-nc1" collectionClass="NSMutableArray" id="S0Y-nY-FLc"/>
+                        <outletCollection property="buttons" destination="46A-QI-WjS" collectionClass="NSMutableArray" id="5FM-04-jse"/>
+                        <outletCollection property="buttons" destination="fkp-VV-GBE" collectionClass="NSMutableArray" id="CM2-tn-kYW"/>
+                        <outletCollection property="buttons" destination="EdA-jA-HdG" collectionClass="NSMutableArray" id="Mvc-J9-teW"/>
+                        <outletCollection property="buttons" destination="hOy-E6-xYL" collectionClass="NSMutableArray" id="ZIn-1T-FGp"/>
+                        <segue destination="5UL-pm-07i" kind="unwind" identifier="unwindToChart" unwindAction="unwindToChartFor:towardsViewController:" id="wO3-V0-vYk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8h8-4s-Elc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="5UL-pm-07i" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="970" y="-1259"/>
+        </scene>
+        <!--Instrument Picker View Controller-->
+        <scene sceneID="RJc-gU-tsT">
+            <objects>
+                <viewController id="751-AC-JtG" customClass="InstrumentPickerViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="d2K-tm-90t">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Enc-TY-Py9">
+                                <rect key="frame" x="0.0" y="120" width="375" height="447"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="TzX-d9-Saw">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="223.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="czM-G9-t7a">
+                                                <rect key="frame" x="0.0" y="0.0" width="125" height="223.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                                                <state key="normal" title="Vocal">
+                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rxb-lc-YbS">
+                                                <rect key="frame" x="125" y="0.0" width="125" height="223.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                                                <state key="normal" title="Guitar">
+                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F4y-gS-Jqn">
+                                                <rect key="frame" x="250" y="0.0" width="125" height="223.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                                                <state key="normal" title="Bass">
+                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hYR-cu-M5s">
+                                        <rect key="frame" x="0.0" y="223.5" width="375" height="223.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mky-pf-fvk">
+                                                <rect key="frame" x="0.0" y="0.0" width="125" height="223.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                <state key="normal" title="Keyboard">
+                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5IE-xd-Lg4">
+                                                <rect key="frame" x="125" y="0.0" width="125" height="223.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                                                <state key="normal" title="Drums">
+                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Khq-OV-mu8">
+                                                <rect key="frame" x="250" y="0.0" width="125" height="223.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                                                <state key="normal" title="Others">
+                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.12939515709877014" green="0.12942373752593994" blue="0.12938910722732544" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Enc-TY-Py9" firstAttribute="centerX" secondItem="ALx-sw-x9I" secondAttribute="centerX" id="Skc-YQ-J5T"/>
+                            <constraint firstItem="ALx-sw-x9I" firstAttribute="bottom" secondItem="Enc-TY-Py9" secondAttribute="bottom" constant="100" id="Xpe-B2-FZF"/>
+                            <constraint firstItem="Enc-TY-Py9" firstAttribute="width" secondItem="d2K-tm-90t" secondAttribute="width" id="rDd-sr-MbW"/>
+                            <constraint firstItem="Enc-TY-Py9" firstAttribute="top" secondItem="ALx-sw-x9I" secondAttribute="top" constant="100" id="u9u-tU-qFs"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ALx-sw-x9I"/>
+                    </view>
+                    <connections>
+                        <outletCollection property="buttons" destination="czM-G9-t7a" collectionClass="NSMutableArray" id="Dk9-od-aRB"/>
+                        <outletCollection property="buttons" destination="rxb-lc-YbS" collectionClass="NSMutableArray" id="7dn-zN-Egj"/>
+                        <outletCollection property="buttons" destination="F4y-gS-Jqn" collectionClass="NSMutableArray" id="6Dg-2W-LvW"/>
+                        <outletCollection property="buttons" destination="Mky-pf-fvk" collectionClass="NSMutableArray" id="RYe-kZ-vda"/>
+                        <outletCollection property="buttons" destination="5IE-xd-Lg4" collectionClass="NSMutableArray" id="auh-4Y-bht"/>
+                        <outletCollection property="buttons" destination="Khq-OV-mu8" collectionClass="NSMutableArray" id="hrO-Xa-6ZK"/>
+                        <segue destination="FUN-TS-SWe" kind="unwind" identifier="unwindFromInstrToChart" unwindAction="unwindToChartFor:towardsViewController:" id="Kue-kE-oas"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="46V-bM-cRB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="FUN-TS-SWe" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1600" y="-1262"/>
+        </scene>
         <!--SideMenu-->
         <scene sceneID="9Su-Q4-cfd">
             <objects>
@@ -41,11 +240,11 @@
             <objects>
                 <viewController id="YsJ-m6-ZEM" customClass="GeneralChartViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lPn-NK-CsK">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jw9-zx-7Mw">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="1436"/>
                                 <color key="backgroundColor" red="0.086261831223964691" green="0.086283676326274872" blue="0.086257167160511017" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="categoryTab" id="lfh-aw-81i">
@@ -65,6 +264,9 @@
                                                             <state key="normal" title="Genre">
                                                                 <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
+                                                            <connections>
+                                                                <segue destination="EE1-0h-xyh" kind="presentation" id="ViC-dj-yKb"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ipu-uU-1LK">
                                                             <rect key="frame" x="188" y="0.0" width="187" height="43.5"/>
@@ -73,6 +275,9 @@
                                                             <state key="normal" title="Instruments">
                                                                 <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
+                                                            <connections>
+                                                                <segue destination="751-AC-JtG" kind="presentation" id="HOv-g5-Nq1"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                 </stackView>
@@ -306,7 +511,8 @@
                                             <outlet property="authorProfileImageView" destination="BJM-2I-X5v" id="Zdc-KI-xpD"/>
                                             <outlet property="playTimeLB" destination="KPy-IC-NUa" id="MVK-aP-1lf"/>
                                             <outlet property="postTitleLB" destination="npg-Di-h6B" id="ylr-KJ-EKV"/>
-                                            <segue destination="eLA-kX-c1g" kind="show" identifier="generalChartToDetail" id="TPK-rG-A4D"/>
+                                            <outlet property="totalComments" destination="Au9-vT-CaZ" id="uYf-6s-T45"/>
+                                            <outlet property="totalLikesLB" destination="hX6-5L-9L6" id="odI-kY-TNu"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recentUploadCell" rowHeight="480" id="OG8-gg-dIU" customClass="PostListCell" customModule="SoundHub" customModuleProvider="target">
@@ -317,7 +523,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vkb-fG-3EF">
-                                                    <rect key="frame" x="13" y="11" width="349" height="60"/>
+                                                    <rect key="frame" x="20" y="11" width="335" height="60"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iu_profile" translatesAutoresizingMaskIntoConstraints="NO" id="pTd-Ju-idG">
                                                             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -343,7 +549,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Lb-BJ-PsF">
-                                                            <rect key="frame" x="266.5" y="24" width="82.5" height="36"/>
+                                                            <rect key="frame" x="252.5" y="24" width="82.5" height="36"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -364,13 +570,13 @@
                                                     </constraints>
                                                 </view>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="modernTImes" translatesAutoresizingMaskIntoConstraints="NO" id="Cgu-va-ehk">
-                                                    <rect key="frame" x="13" y="79" width="349" height="349"/>
+                                                    <rect key="frame" x="20" y="79" width="335" height="335"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Cgu-va-ehk" secondAttribute="height" multiplier="1:1" id="ZhQ-Pr-6ar"/>
                                                     </constraints>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cMk-UH-Xfy">
-                                                    <rect key="frame" x="13" y="438" width="349" height="50"/>
+                                                    <rect key="frame" x="20" y="424" width="335" height="50"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Vocal, #K-Pop" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsH-wi-w2i">
                                                             <rect key="frame" x="10" y="14" width="118.5" height="21"/>
@@ -379,25 +585,25 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="♥️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lcw-Yb-aRz">
-                                                            <rect key="frame" x="246.5" y="14.5" width="23" height="21"/>
+                                                            <rect key="frame" x="232.5" y="14.5" width="23" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wKh-2K-Wma">
-                                                            <rect key="frame" x="331" y="14.5" width="18" height="21"/>
+                                                            <rect key="frame" x="317" y="14.5" width="18" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🎵" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flH-fv-zgk">
-                                                            <rect key="frame" x="308" y="14.5" width="23" height="21"/>
+                                                            <rect key="frame" x="294" y="14.5" width="23" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="156" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2IN-v9-jlf">
-                                                            <rect key="frame" x="269.5" y="14.5" width="28.5" height="21"/>
+                                                            <rect key="frame" x="255.5" y="14.5" width="28.5" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -450,6 +656,8 @@
                                             <outlet property="authorProfileImageView" destination="pTd-Ju-idG" id="PWC-Z8-H7N"/>
                                             <outlet property="playTimeLB" destination="0Lb-BJ-PsF" id="3TH-y9-aw7"/>
                                             <outlet property="postTitleLB" destination="5Wt-sW-uW8" id="fHM-8v-RrL"/>
+                                            <outlet property="totalComments" destination="wKh-2K-Wma" id="IIK-H1-1KE"/>
+                                            <outlet property="totalLikesLB" destination="2IN-v9-jlf" id="4xa-1g-ccl"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -472,8 +680,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <size key="freeformSize" width="375" height="1500"/>
                     <connections>
                         <outlet property="mainTV" destination="Jw9-zx-7Mw" id="hRs-Nu-Oe3"/>
+                        <segue destination="eLA-kX-c1g" kind="show" identifier="generalChartToDetail" id="JMR-OB-ypT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7FQ-6n-cka" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -486,11 +696,17 @@
                 <viewControllerPlaceholder storyboardName="Detail" id="eLA-kX-c1g" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vpw-3l-VXv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2088" y="-121"/>
+            <point key="canvasLocation" x="2104" y="-119"/>
         </scene>
     </scenes>
     <resources>
         <image name="Hamburger_icon" width="32" height="32"/>
+        <image name="iu1" width="215" height="234"/>
+        <image name="iu2" width="199" height="253"/>
+        <image name="iu3" width="225" height="225"/>
+        <image name="iu4" width="225" height="225"/>
+        <image name="iu5" width="226" height="223"/>
+        <image name="iu6" width="225" height="225"/>
         <image name="iu_profile" width="128" height="128"/>
         <image name="modernTImes" width="316" height="316"/>
     </resources>

@@ -85,15 +85,13 @@ extension AudioRecorderViewController{
         recordButton.setTitle("그만 녹음하기", for: .normal)
         inputPlot.color = .red
         state = .recording
-        if AKSettings.headPhonesPlugged { RecordConductor.main.micBooster.gain = 1 }
-        do { try  RecordConductor.main.recorder.record() } catch { print("Errored recording.") }
+        RecordConductor.main.startRecording()
     }
     
     private func makeReadyToPlayState(){
         recordButton.setTitle("들어보기", for: .normal)
         state = .readyToPlay
         inputPlot.color = .orange
-        RecordConductor.main.micBooster.gain = 0
-        do { try RecordConductor.main.player.reloadFile() } catch { print("Errored reloading.") }
+        RecordConductor.main.stopRecording()
     }
 }

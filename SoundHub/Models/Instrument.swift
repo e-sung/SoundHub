@@ -12,9 +12,9 @@ enum Instrument:String{
     case Vocal = "Vocal"
     case Guitar = "Guitar"
     case Bass = "Bass"
-    case Drum = "Drum"
+    case Drum = "Drums"
     case Keyboard = "Keyboard"
     case Other = "Other"
     
-    static let cases = ["Vocal","Guitar","Bass","Drum","Keyboard" ]
+    static let cases = ["Vocal","Guitar","Bass","Drums","Keyboard" ]
 }

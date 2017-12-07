@@ -10,6 +10,7 @@ import UIKit
 
 class AudioCommentCell: UITableViewCell {
     
+    
     @IBOutlet weak private var profileImageView: UIImageView!
     @IBOutlet weak private var InstrumentLB: UILabel!
     @IBOutlet weak private var nickNameLB: UILabel!

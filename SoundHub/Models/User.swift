@@ -12,10 +12,11 @@ struct User:Codable{
     let id:Int
     let email:String
     let nickname:String
-    let instrument:String
+    let genre:String?
+    let instrument:String?
     let total_liked:Int?
-    let is_staff:Bool
-    let is_active:Bool
+    let is_staff:Bool?
+    let is_active:Bool?
     let last_login:String?
 }
 

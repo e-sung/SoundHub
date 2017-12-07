@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AudioKit
 import AVFoundation
 
 class DetailViewController: UIViewController{
@@ -16,22 +17,34 @@ class DetailViewController: UIViewController{
     
     // MARK: IBActions
     @IBAction private func playButtonHandler(_ sender: UIButton) {
-        if currentPhase == .ReadyToPlay {
+        if currentPhase == .Ready {
             sender.setImage(#imageLiteral(resourceName: "ic_pause_circle_outline_white"), for: .normal)
             currentPhase = .Playing
             playMusic()
         }else if currentPhase == .Playing{
             sender.setImage(#imageLiteral(resourceName: "ic_play_circle_outline_white"), for: .normal)
-            currentPhase = .ReadyToPlay
+            currentPhase = .Ready
             pauseMusic()
         }
     }
     
+    @IBAction func recordButtonHandler(_ sender: UIButton) {
+        if currentPhase != .Recording {
+            currentPhase = .Recording
+            playMusic()
+            RecordConductor.main.startRecording()
+        }else{
+            currentPhase = .Ready
+            pauseMusic()
+            RecordConductor.main.stopRecording()
+            RecordConductor.main.player.play()
+        }
+    }
     // MARK: Stored Properties
     var post:Post!
     var masterWaveCell:MasterWaveFormViewCell!
     var masterAudioRemoteURL:URL!
-    fileprivate var currentPhase = Phase.ReadyToPlay
+    private var currentPhase = Phase.Ready
     var currentInstrument:String?
     var audioPlayers:[String:[AVPlayer]]!
     var masterPlayer:AVPlayer!
@@ -98,23 +111,27 @@ extension DetailViewController:AudioCommentCellDelegate{
 extension DetailViewController:ModeToggleCellDelegate{
     func didModeToggled(to mode: Bool) {
         toggleMode()
-        for i in 0..<Instrument.cases.count{
-            if let comments = post.comment_tracks[Instrument.cases[i]] {
-                for j in 0..<comments.count{
-                    if let commentCell = detailTV.cellForRow(at: IndexPath(item: j, section: i+2)) as? AudioCommentCell
-                    {
-                        commentCell.toggleSwitch.setOn(mode, animated: true)
-                        switcheStates[Instrument.cases[i]]![j] = mode
-                    }
-                }
+        toggleSwitches(to: mode)
+
+    }
+    private func toggleMode(){
+        if playMode == .master { playMode = .mixed }
+        else { playMode = .master }
+    }
+    private func toggleSwitches(section:Int, to mode:Bool){
+        guard let instrument = getInstrument(at: section) else {return}
+        guard let comments = post.comment_tracks[instrument] else {return}
+        for i in 0..<comments.count{
+            let indexPath = IndexPath(item: i, section: section)
+            if let commentCell = detailTV.cellForRow(at: indexPath) as? AudioCommentCell{
+                commentCell.toggleSwitch.setOn(mode, animated: true)
+                switcheStates[instrument]![i] = mode
             }
         }
     }
-    private func toggleMode(){
-        if playMode == .master {
-            playMode = .mixed
-        }else {
-            playMode = .master
+    private func toggleSwitches(to mode:Bool){
+        for i in 0..<Instrument.cases.count{
+            toggleSwitches(section: i + SectionRange.MixedTracks.range.lowerBound, to: mode)
         }
     }
 }
@@ -123,22 +140,26 @@ extension DetailViewController:ModeToggleCellDelegate{
 extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
     /// Master / MixedHeader/ Mixed / CommentHeader / Comment
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1 + 1 + Instrument.cases.count
+        return SectionRange.MainHeader.range.count +
+        SectionRange.MixedTrackHeader.range.count +
+        SectionRange.MixedTracks.range.count +
+        SectionRange.commentTrackHeader.range.count
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section <= 1 { return nil }
-        let headerTitle = Instrument.cases[section - 2]
-        if post.comment_tracks[headerTitle] == nil { return nil }
-        return generateHeaderCell(with: headerTitle)
+        if SectionRange.MixedTracks.range.contains(section){
+            let headerTitle = Instrument.cases[section - SectionRange.MixedTracks.range.lowerBound]
+            if post.comment_tracks[headerTitle] == nil { return nil }
+            return UIView.generateHeaderView(with: headerTitle)
+        }
+        return nil
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section < 2 {
-            return 0.1
-        }else if let comments = post.comment_tracks[Instrument.cases[section-2]]{
-            if comments.count == 0 { return 0.1 }
-            else { return 100 }
+        if SectionRange.MixedTracks.range.contains(section) {
+            if let comments = post.comment_tracks[Instrument.cases[section-2]]{
+                if comments.count > 0 { return 100 }
+            }
         }
         return 0.1
     }
@@ -148,9 +169,12 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             return 2
         }else if section == 1{
             return 1
-        }
-        else{
+        }else if SectionRange.MixedTracks.range.contains(section) {
             return post.comment_tracks[Instrument.cases[section - 2]]?.count ?? 0
+        }else if  SectionRange.commentTrackHeader.range.contains(section){
+            return 1
+        }else {
+            return 2
         }
     }
     
@@ -162,18 +186,23 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             return cell
         }else if indexPath.section == 0 && indexPath.item == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "masterWaveCell", for: indexPath)
-            return generateMasterWaveCell(outof: cell)
-        }else if indexPath.section == 1 {
+            return cell.becomeMasterWaveCell(with: masterAudioRemoteURL, completion: { (localURL) in
+                self.masterPlayer = AVPlayer(url: localURL)
+                DispatchQueue.main.async(execute: { self.playButton.isEnabled = true })
+            })
+        }else if SectionRange.MixedTrackHeader.range.contains(indexPath.section) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MixedCommentHeaderCell", for: indexPath) as! ModeToggleCell
             cell.delegate = self
             return cell
-        }
-        else{
+        }else if SectionRange.MixedTracks.range.contains(indexPath.section) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "mixedTrackCell", for: indexPath)
             let comments = post.comment_tracks[Instrument.cases[indexPath.section-2]]!
             cell.tag = indexPath.item
-            return generateAudioCommentCell(outof: cell, and: comments[indexPath.item])
+            return cell.becomeAudioCommentCell(commentInfo: comments[indexPath.item], delegate: self)
+        }else{
+            return tableView.dequeueReusableCell(withIdentifier: "CommentTracksHeaderCell", for: indexPath)
         }
+        
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -183,33 +212,6 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
 
 // MARK: Helper Functions
 extension DetailViewController{
-    private func generateAudioCommentCell(outof cell:UITableViewCell, and commentInfo:Comment)->AudioCommentCell{
-        let commentCell = cell as! AudioCommentCell
-        commentCell.commentInfo = commentInfo
-        commentCell.delegate = self
-        return commentCell
-    }
-
-    private func generateMasterWaveCell(outof cell:UITableViewCell)->MasterWaveFormViewCell{
-        masterWaveCell = cell as! MasterWaveFormViewCell
-        NetworkController.main.downloadAudio(from: masterAudioRemoteURL, done: { (localURL) in
-            self.masterWaveCell.masterAudioURL = localURL
-            self.masterPlayer = AVPlayer(url: localURL)
-            DispatchQueue.main.async(execute: { self.playButton.isEnabled = true })
-        })
-        return masterWaveCell
-    }
-    
-    private func generateHeaderCell(with title:String)->UIView?{
-        let header = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 100))
-        header.backgroundColor = .white
-        let titleLabel = UILabel(frame: header.frame)
-        titleLabel.text = title
-        titleLabel.font = titleLabel.font.withSize(30)
-        header.addSubview(titleLabel)
-        return header
-    }
-    
     private func initializeDic<T>(of type: T.Type,with keys:[String])->[String:[T]]{
         var dic = [String:[T]]()
         for key in keys {
@@ -225,6 +227,15 @@ extension DetailViewController{
         }
     }
     
+    private func getInstrument(at section:Int)->String?{
+        if SectionRange.MixedTracks.range.contains(section){
+            return Instrument.cases[section - SectionRange.MixedTracks.range.lowerBound]
+        }
+        return nil
+    }
+}
+// MARK: Play and Pause Functions
+extension DetailViewController{
     private func playMusic(){
         switch playMode {
         case .master:
@@ -278,13 +289,33 @@ extension DetailViewController{
 }
 
 // MARK: Helper Enums
-fileprivate enum Section:Int{
-    case Header = 0
-    case MixedTracks = 1
-    case CommentTracks = 2
+extension DetailViewController{
+    private enum SectionRange:Int{
+        case MainHeader
+        case MixedTrackHeader
+        case MixedTracks
+        case commentTrackHeader
+
+        var range:CountableClosedRange<Int>{
+            switch self{
+            case .MainHeader:
+                return 0 ... 0
+            case .MixedTrackHeader:
+                return 1 ... 1
+            case .MixedTracks:
+                return 2...(2 + Instrument.cases.count - 1)
+            case .commentTrackHeader:
+                return (2 + Instrument.cases.count)...(2 + Instrument.cases.count)
+            }
+        }
+    }
+    
+
+    private enum Phase{
+        case Ready
+        case Playing
+        case Recording
+    }
 }
 
-fileprivate enum Phase{
-    case ReadyToPlay
-    case Playing
-}
+

@@ -13,6 +13,10 @@ class PostListCell: UITableViewCell {
     @IBOutlet weak private var postTitleLB: UILabel!
     @IBOutlet weak private var authorNameLB: UILabel!
     @IBOutlet weak private var playTimeLB: UILabel!
+    @IBOutlet weak var totalLikesLB: UILabel!
+    @IBOutlet weak var totalComments: UILabel!
+    
+    
     @IBOutlet weak private var authorProfileImageView: UIImageView!
     @IBOutlet weak private var albumCoverImageView: UIImageView!
     var postInfo:Post{
@@ -22,7 +26,9 @@ class PostListCell: UITableViewCell {
         set(newVal){
             _postInfo = newVal
             postTitleLB.text = newVal.title
-//            authorNameLB.text = newVal.author.nickname
+            authorNameLB.text = newVal.author.nickname
+            totalLikesLB.text = "\(newVal.num_liked)"
+            totalComments.text = "\(newVal.num_comments)"
         }
     }
     private var _postInfo:Post!
