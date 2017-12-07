@@ -46,7 +46,7 @@ class DetailViewController: UIViewController{
     var masterAudioRemoteURL:URL!
     private var currentPhase = Phase.Ready
     var currentInstrument:String?
-    var audioPlayers:[String:[AVPlayer]]!
+    var mixedAudioPlayers:[String:[AVPlayer]]!
     var masterPlayer:AVPlayer!
     private var playMode:PlayMode = .master
     
@@ -59,8 +59,8 @@ class DetailViewController: UIViewController{
     var mixedAudioLocalURLs:[String:[URL]]!{
         didSet(oldVal){
             guard let currentInstrument = currentInstrument else { return }
-            if audioPlayers[currentInstrument] != nil{
-                audioPlayers[currentInstrument]!.append(AVPlayer(url: (mixedAudioLocalURLs[currentInstrument]?.last!)!))
+            if let audioURL = mixedAudioLocalURLs[currentInstrument]?.last{
+                mixedAudioPlayers[currentInstrument]!.append(AVPlayer(url: audioURL))
             }
         }
     }
@@ -68,7 +68,7 @@ class DetailViewController: UIViewController{
         didSet(oldVal){
             for instrument in Instrument.cases{
                 guard let switches = switcheStates[instrument] else { return }
-                guard let players = audioPlayers[instrument] else {return}
+                guard let players = mixedAudioPlayers[instrument] else {return}
                 reflect(switchesStates: switches, to: players)
             }
         }
@@ -77,7 +77,7 @@ class DetailViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        audioPlayers = initializeDic(of: AVPlayer.self, with: Instrument.cases)
+        mixedAudioPlayers = initializeDic(of: AVPlayer.self, with: Instrument.cases)
         mixedAudioLocalURLs = initializeDic(of: URL.self, with: Instrument.cases)
         switcheStates = initializeDic(of: Bool.self, with: Instrument.cases)
 
@@ -89,9 +89,9 @@ class DetailViewController: UIViewController{
         let commentTracks = post.comment_tracks
         for instrument in commentTracks.keys{
             currentInstrument = instrument
-            for track in commentTracks[currentInstrument!]!{
+            for track in commentTracks[instrument]!{
                 NetworkController.main.downloadAudio( from: track.comment_track.url, done: { (localURL) in
-                    self.mixedAudioLocalURLs[self.currentInstrument!]!.append(localURL)
+                    self.mixedAudioLocalURLs[instrument]!.append(localURL)
                 })
                 switcheStates[instrument]!.append(false)
             }
@@ -241,7 +241,7 @@ extension DetailViewController{
         case .master:
             for instrument in Instrument.cases{
                 guard let switches = switcheStates[instrument] else { return }
-                guard let players = audioPlayers[instrument] else {return}
+                guard let players = mixedAudioPlayers[instrument] else {return}
                 reflect(switchesStates: switches, to: players)
             }
             masterPlayer.volume = 1
@@ -255,7 +255,7 @@ extension DetailViewController{
     }
     
     private func play(_ instrument:String){
-        guard let playlist = audioPlayers[instrument] else {return}
+        guard let playlist = mixedAudioPlayers[instrument] else {return}
         play(list: playlist)
     }
     
@@ -277,7 +277,7 @@ extension DetailViewController{
     }
     
     private func pause(_ instrument:String){
-        guard let playlist = audioPlayers[instrument] else {return}
+        guard let playlist = mixedAudioPlayers[instrument] else {return}
         pause(list: playlist)
     }
     
@@ -309,7 +309,6 @@ extension DetailViewController{
             }
         }
     }
-    
 
     private enum Phase{
         case Ready

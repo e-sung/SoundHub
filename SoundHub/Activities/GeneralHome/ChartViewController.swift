@@ -14,6 +14,7 @@ class ChartViewController: UIViewController{
     // MARK: IBOutlets
     @IBOutlet weak private var mainTV: UITableView!
     
+    // MARK: IBAction
     @IBAction func unwindToChart(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
     }
     
