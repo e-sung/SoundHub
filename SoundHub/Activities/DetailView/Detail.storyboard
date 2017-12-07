@@ -358,12 +358,23 @@
                                                     <action selector="playButtonHandler:" destination="1GI-i7-ZL1" eventType="touchUpInside" id="CZm-uy-uKT"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yVU-0T-Ztz">
+                                                <rect key="frame" x="25" y="15" width="52" height="30"/>
+                                                <state key="normal" title="녹음하기">
+                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="recordButtonHandler:" destination="1GI-i7-ZL1" eventType="touchUpInside" id="N5Q-FK-sD7"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="etS-zh-JoX" firstAttribute="height" secondItem="rrM-qV-Mws" secondAttribute="height" id="L8X-uw-G5C"/>
                                             <constraint firstItem="etS-zh-JoX" firstAttribute="centerX" secondItem="rrM-qV-Mws" secondAttribute="centerX" id="PMd-e4-e52"/>
+                                            <constraint firstItem="yVU-0T-Ztz" firstAttribute="centerY" secondItem="rrM-qV-Mws" secondAttribute="centerY" id="d4s-Xw-nLn"/>
                                             <constraint firstItem="etS-zh-JoX" firstAttribute="centerY" secondItem="rrM-qV-Mws" secondAttribute="centerY" id="hNG-5G-YD3"/>
+                                            <constraint firstItem="yVU-0T-Ztz" firstAttribute="leading" secondItem="rrM-qV-Mws" secondAttribute="leading" constant="25" id="jxh-2b-ZzY"/>
                                         </constraints>
                                     </view>
                                 </subviews>

@@ -38,6 +38,16 @@ class RecordConductor{
         AudioKit.stop()
     }
     
+    func startRecording(){
+        if AKSettings.headPhonesPlugged { self.micBooster.gain = 1 }
+        do { try self.recorder.record() } catch { print("Errored recording.") }
+    }
+    
+    func stopRecording(){
+        self.micBooster.gain = 0
+        do { try self.player.reloadFile() } catch { print("Errored reloading.") }
+    }
+    
 
     private func setUpSession(){
         // Clean tempFiles !

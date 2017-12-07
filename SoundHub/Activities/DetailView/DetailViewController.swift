@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AudioKit
 import AVFoundation
 
 class DetailViewController: UIViewController{
@@ -16,22 +17,33 @@ class DetailViewController: UIViewController{
     
     // MARK: IBActions
     @IBAction private func playButtonHandler(_ sender: UIButton) {
-        if currentPhase == .ReadyToPlay {
+        if currentPhase == .Ready {
             sender.setImage(#imageLiteral(resourceName: "ic_pause_circle_outline_white"), for: .normal)
             currentPhase = .Playing
             playMusic()
         }else if currentPhase == .Playing{
             sender.setImage(#imageLiteral(resourceName: "ic_play_circle_outline_white"), for: .normal)
-            currentPhase = .ReadyToPlay
+            currentPhase = .Ready
             pauseMusic()
         }
     }
     
+    @IBAction func recordButtonHandler(_ sender: UIButton) {
+        if currentPhase != .Recording {
+            currentPhase = .Recording
+            playMusic()
+            RecordConductor.main.startRecording()
+        }else{
+            pauseMusic()
+            RecordConductor.main.stopRecording()
+            RecordConductor.main.player.play()
+        }
+    }
     // MARK: Stored Properties
     var post:Post!
     var masterWaveCell:MasterWaveFormViewCell!
     var masterAudioRemoteURL:URL!
-    private var currentPhase = Phase.ReadyToPlay
+    private var currentPhase = Phase.Ready
     var currentInstrument:String?
     var audioPlayers:[String:[AVPlayer]]!
     var masterPlayer:AVPlayer!
@@ -126,13 +138,12 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         return SectionRange.MainHeader.range.count +
         SectionRange.MixedTrackHeader.range.count +
         SectionRange.MixedTracks.range.count +
-        SectionRange.commentTrackHeader.range.count +
-        SectionRange.commentTracks.range.count
+        SectionRange.commentTrackHeader.range.count
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if SectionRange.MixedTracks.range.contains(section){
-            let headerTitle = Instrument.cases[section - 2]
+            let headerTitle = Instrument.cases[section - SectionRange.MixedTracks.range.lowerBound]
             if post.comment_tracks[headerTitle] == nil { return nil }
             return generateHeaderCell(with: headerTitle)
         }
@@ -176,18 +187,15 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             let cell = tableView.dequeueReusableCell(withIdentifier: "MixedCommentHeaderCell", for: indexPath) as! ModeToggleCell
             cell.delegate = self
             return cell
-        }else if SectionRange.commentTrackHeader.range.contains(indexPath.section){
-            return tableView.dequeueReusableCell(withIdentifier: "CommentTracksHeaderCell", for: indexPath)
-        }
-        else if SectionRange.MixedTracks.range.contains(indexPath.section) {
+        }else if SectionRange.MixedTracks.range.contains(indexPath.section) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "mixedTrackCell", for: indexPath)
             let comments = post.comment_tracks[Instrument.cases[indexPath.section-2]]!
             cell.tag = indexPath.item
             return generateAudioCommentCell(outof: cell, and: comments[indexPath.item])
         }else{
-            return tableView.dequeueReusableCell(withIdentifier: "commentTrackCell", for: indexPath
-            )
+            return tableView.dequeueReusableCell(withIdentifier: "CommentTracksHeaderCell", for: indexPath)
         }
+        
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -299,10 +307,9 @@ extension DetailViewController{
         case MixedTrackHeader
         case MixedTracks
         case commentTrackHeader
-        case commentTracks
-        
+
         var range:CountableClosedRange<Int>{
-            switch self {
+            switch self{
             case .MainHeader:
                 return 0 ... 0
             case .MixedTrackHeader:
@@ -311,15 +318,14 @@ extension DetailViewController{
                 return 2...(2 + Instrument.cases.count - 1)
             case .commentTrackHeader:
                 return (2 + Instrument.cases.count)...(2 + Instrument.cases.count)
-            case .commentTracks:
-                return (2 + Instrument.cases.count + 1)...(2 + Instrument.cases.count*2 + 1)
             }
         }
     }
     
     private enum Phase{
-        case ReadyToPlay
+        case Ready
         case Playing
+        case Recording
     }
 }
 
