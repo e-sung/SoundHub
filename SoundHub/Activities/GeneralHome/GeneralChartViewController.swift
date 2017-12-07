@@ -92,7 +92,12 @@ extension GeneralChartViewController:UITableViewDelegate{
         }else if Section(rawValue: indexPath.section) == .PopularMusicians{
             return tableView.dequeueReusableCell(withIdentifier: "popularMusicianContainerCell", for: indexPath)
         }else if Section(rawValue: indexPath.section) == .RankingChart{
-            return tableView.dequeueReusableCell(withIdentifier: "rankingCell", for: indexPath) as! PostListCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "rankingCell", for: indexPath) as! PostListCell
+            var popularPost = DataCenter.main.homePages[.general]!.pop_posts
+            if popularPost.count - 1 >= indexPath.item {
+                cell.postInfo = popularPost[indexPath.item]
+            }
+            return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "recentUploadCell", for: indexPath) as! PostListCell
             var recentPosts = DataCenter.main.homePages[.general]!.recent_posts
@@ -110,6 +115,7 @@ extension GeneralChartViewController:UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         performSegue(withIdentifier: "generalChartToDetail", sender: indexPath)
     }
     
@@ -120,12 +126,18 @@ extension GeneralChartViewController:UITableViewDelegate{
 
 extension GeneralChartViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if let nextVC = segue.destination as? DetailViewController{
+            
             guard let indexPath = sender as? IndexPath else {
                 print("indexPath downcasting failed")
                 return
             }
-            nextVC.post = DataCenter.main.recentPosts[indexPath.item]
+            if Section(rawValue: indexPath.section) == .RankingChart{
+                nextVC.post = DataCenter.main.homePages[.general]!.pop_posts[indexPath.item]
+            }else{
+                nextVC.post = DataCenter.main.homePages[.general]!.recent_posts[indexPath.item]
+            }
         }
     }
 }

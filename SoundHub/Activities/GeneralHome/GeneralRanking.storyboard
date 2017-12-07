@@ -308,7 +308,6 @@
                                             <outlet property="postTitleLB" destination="npg-Di-h6B" id="ylr-KJ-EKV"/>
                                             <outlet property="totalComments" destination="Au9-vT-CaZ" id="uYf-6s-T45"/>
                                             <outlet property="totalLikesLB" destination="hX6-5L-9L6" id="odI-kY-TNu"/>
-                                            <segue destination="eLA-kX-c1g" kind="show" identifier="generalChartToDetail" id="TPK-rG-A4D"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recentUploadCell" rowHeight="480" id="OG8-gg-dIU" customClass="PostListCell" customModule="SoundHub" customModuleProvider="target">
@@ -479,6 +478,7 @@
                     <size key="freeformSize" width="375" height="1500"/>
                     <connections>
                         <outlet property="mainTV" destination="Jw9-zx-7Mw" id="hRs-Nu-Oe3"/>
+                        <segue destination="eLA-kX-c1g" kind="show" identifier="generalChartToDetail" id="JMR-OB-ypT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7FQ-6n-cka" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -491,7 +491,7 @@
                 <viewControllerPlaceholder storyboardName="Detail" id="eLA-kX-c1g" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vpw-3l-VXv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2088" y="-121"/>
+            <point key="canvasLocation" x="2083" y="-143"/>
         </scene>
     </scenes>
     <resources>
