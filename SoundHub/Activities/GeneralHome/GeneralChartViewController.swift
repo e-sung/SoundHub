@@ -157,8 +157,8 @@ extension GeneralChartViewController{
 
 extension GeneralChartViewController{
     @objc private func seeMoreButtonTapHandler(sender:UIButton){
-        if Section(rawValue: sender.tag) == .RankingChart && tapOnMoreRanking < 3 {tapOnMoreRanking += 1}
-        else if Section(rawValue: sender.tag) == .RecentUpload && tapOnMoreRecent < 3 {tapOnMoreRecent += 1}
+        if Section(rawValue: sender.tag) == .RankingChart {tapOnMoreRanking += 1}
+        else if Section(rawValue: sender.tag) == .RecentUpload {tapOnMoreRecent += 1}
         mainTV.reloadData()
 //        mainTV.reloadSections(IndexSet(integer: sender.tag), with: .bottom)
     }
