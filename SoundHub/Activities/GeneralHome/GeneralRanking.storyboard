@@ -28,6 +28,115 @@
             </objects>
             <point key="canvasLocation" x="636" y="-142"/>
         </scene>
+        <!--Genre Pick View Controller-->
+        <scene sceneID="n1r-S4-jqi">
+            <objects>
+                <viewController id="EE1-0h-xyh" customClass="GenrePickViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="g9b-DA-okt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="WIH-dD-h4e">
+                                <rect key="frame" x="0.0" y="120.5" width="375" height="446.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="dTE-d9-B1B">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="142"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CCB-NS-6fi">
+                                                <rect key="frame" x="0.0" y="0.0" width="118.5" height="142"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="33"/>
+                                                <state key="normal" title="Pop" backgroundImage="iu1">
+                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dlg-im-ech">
+                                                <rect key="frame" x="128.5" y="0.0" width="118" height="142"/>
+                                                <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="33"/>
+                                                <state key="normal" title="Jazz" backgroundImage="iu2">
+                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eHE-st-nc1">
+                                                <rect key="frame" x="256.5" y="0.0" width="118.5" height="142"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="33"/>
+                                                <state key="normal" title="Rock" backgroundImage="iu3">
+                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ab4-FO-r4g">
+                                        <rect key="frame" x="0.0" y="152" width="375" height="142.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="46A-QI-WjS">
+                                                <rect key="frame" x="0.0" y="0.0" width="118.5" height="142.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="33"/>
+                                                <state key="normal" title="HipHop" backgroundImage="iu4">
+                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fkp-VV-GBE">
+                                                <rect key="frame" x="128.5" y="0.0" width="118" height="142.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="33"/>
+                                                <state key="normal" title="Elec" backgroundImage="iu5">
+                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EdA-jA-HdG">
+                                                <rect key="frame" x="256.5" y="0.0" width="118.5" height="142.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="33"/>
+                                                <state key="normal" title="Classic" backgroundImage="iu6">
+                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zK0-7Z-DwX">
+                                        <rect key="frame" x="0.0" y="304.5" width="375" height="142"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hOy-E6-xYL">
+                                                <rect key="frame" x="0.0" y="0.0" width="118.5" height="142"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="33"/>
+                                                <state key="normal" title="Other" backgroundImage="iu_profile">
+                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="beW-oG-nai">
+                                                <rect key="frame" x="128.5" y="0.0" width="118" height="142"/>
+                                            </button>
+                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F5N-YA-2us">
+                                                <rect key="frame" x="256.5" y="0.0" width="118.5" height="142"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.12939515709877014" green="0.12942373752593994" blue="0.12938910722732544" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="WIH-dD-h4e" firstAttribute="leading" secondItem="vey-0W-kVV" secondAttribute="leading" id="F6z-f1-xVz"/>
+                            <constraint firstItem="WIH-dD-h4e" firstAttribute="top" secondItem="vey-0W-kVV" secondAttribute="top" constant="100" id="Hgh-cb-MN2"/>
+                            <constraint firstItem="WIH-dD-h4e" firstAttribute="bottom" secondItem="vey-0W-kVV" secondAttribute="bottom" constant="-100" id="orX-3F-LdH"/>
+                            <constraint firstItem="WIH-dD-h4e" firstAttribute="trailing" secondItem="vey-0W-kVV" secondAttribute="trailing" id="wbT-nG-Mbr"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="vey-0W-kVV"/>
+                    </view>
+                    <connections>
+                        <outletCollection property="buttons" destination="CCB-NS-6fi" collectionClass="NSMutableArray" id="EjE-Y3-St7"/>
+                        <outletCollection property="buttons" destination="dlg-im-ech" collectionClass="NSMutableArray" id="zOr-Lt-9iB"/>
+                        <outletCollection property="buttons" destination="eHE-st-nc1" collectionClass="NSMutableArray" id="S0Y-nY-FLc"/>
+                        <outletCollection property="buttons" destination="46A-QI-WjS" collectionClass="NSMutableArray" id="5FM-04-jse"/>
+                        <outletCollection property="buttons" destination="fkp-VV-GBE" collectionClass="NSMutableArray" id="CM2-tn-kYW"/>
+                        <outletCollection property="buttons" destination="EdA-jA-HdG" collectionClass="NSMutableArray" id="Mvc-J9-teW"/>
+                        <outletCollection property="buttons" destination="hOy-E6-xYL" collectionClass="NSMutableArray" id="ZIn-1T-FGp"/>
+                        <segue destination="5UL-pm-07i" kind="unwind" identifier="unwindToChart" unwindAction="unwindToChartFor:towardsViewController:" id="wO3-V0-vYk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8h8-4s-Elc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="5UL-pm-07i" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1382" y="-1147"/>
+        </scene>
         <!--SideMenu-->
         <scene sceneID="9Su-Q4-cfd">
             <objects>
@@ -65,6 +174,9 @@
                                                             <state key="normal" title="Genre">
                                                                 <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
+                                                            <connections>
+                                                                <segue destination="EE1-0h-xyh" kind="presentation" id="ViC-dj-yKb"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ipu-uU-1LK">
                                                             <rect key="frame" x="188" y="0.0" width="187" height="43.5"/>
@@ -491,11 +603,17 @@
                 <viewControllerPlaceholder storyboardName="Detail" id="eLA-kX-c1g" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vpw-3l-VXv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2083" y="-143"/>
+            <point key="canvasLocation" x="2104" y="-119"/>
         </scene>
     </scenes>
     <resources>
         <image name="Hamburger_icon" width="32" height="32"/>
+        <image name="iu1" width="215" height="234"/>
+        <image name="iu2" width="199" height="253"/>
+        <image name="iu3" width="225" height="225"/>
+        <image name="iu4" width="225" height="225"/>
+        <image name="iu5" width="226" height="223"/>
+        <image name="iu6" width="225" height="225"/>
         <image name="iu_profile" width="128" height="128"/>
         <image name="modernTImes" width="316" height="316"/>
     </resources>
