@@ -15,42 +15,25 @@ class MixedTracksContainerCell: UITableViewCell{
 
     @IBOutlet weak var commentTV: UITableView!
     
-//    func setUpAudio(){
-//        guard let allComments = allComments else { return }
-//        for instrument in Instrument.cases{
-//            if allComments.keys.contains(instrument){
-//                fetchAudios(of: instrument, In: allComments[instrument]!)
-//            }
-//        }
-//    }
-//
-//    private func fetchAudios(of instrument:String, In comments:[Comment]){
-//        for comment in comments{
-//            fetchAudio(of: instrument, In: comment)
-//        }
-//    }
-//
-//    private func fetchAudio(of instrument:String, In comment:Comment){
-//        let remoteURL = URL(string: comment.comment_track.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)!
-//        NetworkController.main.downloadAudio(from: remoteURL) { (localURL) in
-//            self.allAudios[instrument]!.append( AVPlayer(url: localURL))
-//        }
-//    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         commentTV.delegate = self
         commentTV.dataSource = self
-//        allAudios = initializeDic(of: AVPlayer.self, with: Instrument.cases)
-//        allSwitches = initializeDic(of: UISwitch.self, with: Instrument.cases)
-//        mixedAudioLocalURLs = initializeDic(of: URL.self, with: Instrument.cases)
-
     }
 
 }
 
 extension MixedTracksContainerCell{
     // MARK: Play and Pause Functions
+    func setInteractionability(to bool:Bool){
+        for i in 0..<commentTV.numberOfSections{
+            for j in 0..<commentTV.numberOfRows(inSection: i){
+                let cell = commentTV.cellForRow(at: IndexPath(item: j, section: i)) as! AudioCommentCell
+                cell.toggleSwitch.isEnabled = bool
+            }
+        }
+    }
+
     func playMusic(){
         for i in 0..<commentTV.numberOfSections{
             for j in 0..<commentTV.numberOfRows(inSection: i){
@@ -59,16 +42,7 @@ extension MixedTracksContainerCell{
             }
         }
     }
-    
-//    private func play(_ instrument:String){
-//        guard let playlist = allAudios[instrument] else {return}
-//        play(list: playlist)
-//    }
-//
-//    private func play(list:[AVPlayer]){
-//        for item in list{ item.play() }
-//    }
-//
+
     func pauseMusic(){
         for i in 0..<commentTV.numberOfSections{
             for j in 0..<commentTV.numberOfRows(inSection: i){
@@ -76,19 +50,7 @@ extension MixedTracksContainerCell{
                 cell.player.pause()
             }
         }
-//        for instrument in Instrument.cases{
-//            pause(instrument)
-//        }
     }
-//
-//    private func pause(_ instrument:String){
-//        guard let playlist = allAudios[instrument] else {return}
-//        pause(list: playlist)
-//    }
-//
-//    private func pause(list:[AVPlayer]){
-//        for item in list{ item.pause() }
-//    }
 }
 
 extension MixedTracksContainerCell:UITableViewDataSource, UITableViewDelegate{
