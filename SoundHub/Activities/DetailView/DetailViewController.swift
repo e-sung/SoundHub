@@ -18,8 +18,7 @@ class DetailViewController: UIViewController{
     var mixedCommentsContainer : MixedTracksContainerCell!
     var masterAudioRemoteURL:URL!
     private var currentPhase = Phase.Ready
-    var currentInstrument:String?
-    
+
     var masterPlayer:AVPlayer!
     private var playMode:PlayMode = .mixed
     
@@ -35,13 +34,15 @@ class DetailViewController: UIViewController{
     // MARK: IBActions
     @IBAction private func playButtonHandler(_ sender: UIButton) {
         if currentPhase == .Ready {
-            sender.setImage(#imageLiteral(resourceName: "ic_pause_circle_outline_white"), for: .normal)
+            playButton.setImage(#imageLiteral(resourceName: "ic_pause_circle_outline_white"), for: .normal)
             currentPhase = .Playing
-            mixedCommentsContainer.playMusic()
+            if playMode == .mixed { mixedCommentsContainer.playMusic() }
+            else { masterPlayer.play() }
         }else if currentPhase == .Playing{
-            sender.setImage(#imageLiteral(resourceName: "ic_play_circle_outline_white"), for: .normal)
+            playButton.setImage(#imageLiteral(resourceName: "ic_play_circle_outline_white"), for: .normal)
             currentPhase = .Ready
-            mixedCommentsContainer.pauseMusic()
+            if playMode == .mixed{ mixedCommentsContainer.pauseMusic() }
+            else{ masterPlayer.pause() }
         }
     }
 
@@ -56,6 +57,8 @@ class DetailViewController: UIViewController{
 
 extension DetailViewController:ModeToggleCellDelegate{
     func didModeToggled(to mode: Bool) {
+        playButton.sendActions(for: .touchUpInside)
+        if mode == true { playMode = .mixed} else { playMode = .master}
         mixedCommentsContainer.setInteractionability(to: mode)
     }
 }
@@ -91,7 +94,6 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         }
         else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "MixedTracksContainer", for: indexPath) as! MixedTracksContainerCell
-            
             cell.allComments = post.comment_tracks
             cell.commentTV.reloadData()
             mixedCommentsContainer = cell
