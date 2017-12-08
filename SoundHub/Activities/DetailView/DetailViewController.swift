@@ -20,7 +20,7 @@ class DetailViewController: UIViewController{
     private var currentPhase = Phase.Ready
 
     var masterPlayer:AVPlayer!
-    private var playMode:PlayMode = .mixed
+    private var playMode:PlayMode = .master
     
     private enum PlayMode{
         case master
@@ -34,16 +34,24 @@ class DetailViewController: UIViewController{
     // MARK: IBActions
     @IBAction private func playButtonHandler(_ sender: UIButton) {
         if currentPhase == .Ready {
-            playButton.setImage(#imageLiteral(resourceName: "ic_pause_circle_outline_white"), for: .normal)
-            currentPhase = .Playing
-            if playMode == .mixed { mixedCommentsContainer.playMusic() }
-            else { masterPlayer.play() }
+            playMusic()
         }else if currentPhase == .Playing{
-            playButton.setImage(#imageLiteral(resourceName: "ic_play_circle_outline_white"), for: .normal)
-            currentPhase = .Ready
-            if playMode == .mixed{ mixedCommentsContainer.pauseMusic() }
-            else{ masterPlayer.pause() }
+            pauseMusic()
         }
+    }
+    
+    func playMusic(){
+        playButton.setImage(#imageLiteral(resourceName: "ic_pause_circle_outline_white"), for: .normal)
+        currentPhase = .Playing
+        if playMode == .mixed { mixedCommentsContainer.playMusic() }
+        else { masterPlayer.play() }
+    }
+    
+    func pauseMusic(){
+        playButton.setImage(#imageLiteral(resourceName: "ic_play_circle_outline_white"), for: .normal)
+        currentPhase = .Ready
+        if playMode == .mixed{ mixedCommentsContainer.pauseMusic() }
+        else{ masterPlayer.pause() }
     }
 
     override func viewDidLoad() {
@@ -57,7 +65,7 @@ class DetailViewController: UIViewController{
 
 extension DetailViewController:ModeToggleCellDelegate{
     func didModeToggled(to mode: Bool) {
-        playButton.sendActions(for: .touchUpInside)
+        pauseMusic()
         if mode == true { playMode = .mixed} else { playMode = .master}
         mixedCommentsContainer.setInteractionability(to: mode)
     }
