@@ -187,7 +187,6 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             
             cell.allComments = post.comment_tracks
             cell.commentTV.reloadData()
-            cell.setUpAudio()
             mixedCommentsContainer = cell
             return cell
         }
