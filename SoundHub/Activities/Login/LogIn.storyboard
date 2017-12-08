@@ -485,23 +485,17 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="sNd-e9-KQ8">
-                                <rect key="frame" x="37" y="382.5" width="300" height="77"/>
+                                <rect key="frame" x="37" y="382.5" width="300" height="105"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bxd-3T-knO">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="36"/>
-                                        <color key="backgroundColor" red="0.81079471111297607" green="0.26289272308349609" blue="0.19538792967796326" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="구글로 로그인">
-                                            <color key="titleColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IEX-OO-YFx" customClass="GIDSignInButton">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <action selector="googleSIgnInHandler:" destination="wSx-Gg-sUf" eventType="touchUpInside" id="ST7-Vm-lm4"/>
+                                        </connections>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FWU-wo-uO5">
-                                        <rect key="frame" x="0.0" y="41" width="300" height="36"/>
+                                        <rect key="frame" x="0.0" y="55" width="300" height="50"/>
                                         <color key="backgroundColor" red="0.23640570044517517" green="0.40132328867912292" blue="0.76923906803131104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="페북으로 로그인">
@@ -534,6 +528,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="Fin-d5-EYt" id="AoT-F6-OSS"/>
                         <outlet property="passwordTextField" destination="Hi4-Ur-RHJ" id="Q4H-M8-pdK"/>
+                        <outlet property="signInButton" destination="IEX-OO-YFx" id="yg5-Xd-dS0"/>
                         <segue destination="Ikz-va-hjQ" kind="presentation" identifier="loginSuccessSegue" modalTransitionStyle="crossDissolve" id="X5d-yV-mOA"/>
                     </connections>
                 </viewController>
