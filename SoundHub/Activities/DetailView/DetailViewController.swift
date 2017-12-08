@@ -17,28 +17,29 @@ class DetailViewController: UIViewController{
     
     // MARK: IBActions
     @IBAction private func playButtonHandler(_ sender: UIButton) {
-        if currentPhase == .Ready {
-            sender.setImage(#imageLiteral(resourceName: "ic_pause_circle_outline_white"), for: .normal)
-            currentPhase = .Playing
-            playMusic()
-        }else if currentPhase == .Playing{
-            sender.setImage(#imageLiteral(resourceName: "ic_play_circle_outline_white"), for: .normal)
-            currentPhase = .Ready
-            pauseMusic()
-        }
+        
+//        if currentPhase == .Ready {
+//            sender.setImage(#imageLiteral(resourceName: "ic_pause_circle_outline_white"), for: .normal)
+//            currentPhase = .Playing
+//            playMusic()
+//        }else if currentPhase == .Playing{
+//            sender.setImage(#imageLiteral(resourceName: "ic_play_circle_outline_white"), for: .normal)
+//            currentPhase = .Ready
+//            pauseMusic()
+//        }
     }
     
     @IBAction func recordButtonHandler(_ sender: UIButton) {
-        if currentPhase != .Recording {
-            currentPhase = .Recording
-            playMusic()
-            RecordConductor.main.startRecording()
-        }else{
-            currentPhase = .Ready
-            pauseMusic()
-            RecordConductor.main.stopRecording()
-            RecordConductor.main.player.play()
-        }
+//        if currentPhase != .Recording {
+//            currentPhase = .Recording
+//            playMusic()
+//            RecordConductor.main.startRecording()
+//        }else{
+//            currentPhase = .Ready
+//            pauseMusic()
+//            RecordConductor.main.stopRecording()
+//            RecordConductor.main.player.play()
+//        }
     }
     // MARK: Stored Properties
     var post:Post!
@@ -46,7 +47,7 @@ class DetailViewController: UIViewController{
     var masterAudioRemoteURL:URL!
     private var currentPhase = Phase.Ready
     var currentInstrument:String?
-    var mixedAudioPlayers:[String:[AVPlayer]]!
+    
     var masterPlayer:AVPlayer!
     private var playMode:PlayMode = .master
     
@@ -56,23 +57,17 @@ class DetailViewController: UIViewController{
     }
     
     // MARK: Obserable Properties
-    var mixedAudioLocalURLs:[String:[URL]]!{
-        didSet(oldVal){
-            guard let currentInstrument = currentInstrument else { return }
-            if let audioURL = mixedAudioLocalURLs[currentInstrument]?.last{
-                mixedAudioPlayers[currentInstrument]!.append(AVPlayer(url: audioURL))
-            }
-        }
-    }
-    var switcheStates:[String:[Bool]]!{
-        didSet(oldVal){
-            for instrument in Instrument.cases{
-                guard let switches = switcheStates[instrument] else { return }
-                guard let players = mixedAudioPlayers[instrument] else {return}
-                reflect(switchesStates: switches, to: players)
-            }
-        }
-    }
+
+    var switcheStates:[String:[Bool]]!
+//    {
+//        didSet(oldVal){
+//            for instrument in Instrument.cases{
+//                guard let switches = switcheStates[instrument] else { return }
+//                guard let players = mixedAudioPlayers[instrument] else {return}
+//                reflect(switchesStates: switches, to: players)
+//            }
+//        }
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -188,6 +183,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             
             cell.allComments = post.comment_tracks
             cell.commentTV.reloadData()
+            cell.setUpAudio()
             return cell
         }
         
@@ -214,13 +210,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
 
 // MARK: Helper Functions
 extension DetailViewController{
-    private func initializeDic<T>(of type: T.Type,with keys:[String])->[String:[T]]{
-        var dic = [String:[T]]()
-        for key in keys {
-            dic[key] = []
-        }
-        return dic
-    }
+
     
     private func reflect(switchesStates:[Bool], to players:[AVPlayer]){
         for i in 0..<switchesStates.count{
@@ -237,58 +227,58 @@ extension DetailViewController{
     }
 }
 // MARK: Play and Pause Functions
-extension DetailViewController{
-    private func playMusic(){
-        switch playMode {
-        case .master:
-            for instrument in Instrument.cases{
-                guard let switches = switcheStates[instrument] else { return }
-                guard let players = mixedAudioPlayers[instrument] else {return}
-                reflect(switchesStates: switches, to: players)
-            }
-            masterPlayer.volume = 1
-            masterPlayer.play()
-        case .mixed:
-            masterPlayer.volume = 0
-            for instrument in Instrument.cases{
-                play(instrument)
-            }
-        }
-    }
-    
-    private func play(_ instrument:String){
-        guard let playlist = mixedAudioPlayers[instrument] else {return}
-        play(list: playlist)
-    }
-    
-    private func play(list:[AVPlayer]){
-        for item in list{
-            item.play()
-        }
-    }
-    
-    private func pauseMusic(){
-        switch playMode {
-        case .master:
-            masterPlayer.pause()
-        case .mixed:
-            for instrument in Instrument.cases{
-                pause(instrument)
-            }
-        }
-    }
-    
-    private func pause(_ instrument:String){
-        guard let playlist = mixedAudioPlayers[instrument] else {return}
-        pause(list: playlist)
-    }
-    
-    private func pause(list:[AVPlayer]){
-        for item in list{
-            item.pause()
-        }
-    }
-}
+//extension DetailViewController{
+//    private func playMusic(){
+//        switch playMode {
+//        case .master:
+//            for instrument in Instrument.cases{
+//                guard let switches = switcheStates[instrument] else { return }
+//                guard let players = mixedAudioPlayers[instrument] else {return}
+//                reflect(switchesStates: switches, to: players)
+//            }
+//            masterPlayer.volume = 1
+//            masterPlayer.play()
+//        case .mixed:
+//            masterPlayer.volume = 0
+//            for instrument in Instrument.cases{
+//                play(instrument)
+//            }
+//        }
+//    }
+//
+//    private func play(_ instrument:String){
+//        guard let playlist = mixedAudioPlayers[instrument] else {return}
+//        play(list: playlist)
+//    }
+//
+//    private func play(list:[AVPlayer]){
+//        for item in list{
+//            item.play()
+//        }
+//    }
+//
+//    private func pauseMusic(){
+//        switch playMode {
+//        case .master:
+//            masterPlayer.pause()
+//        case .mixed:
+//            for instrument in Instrument.cases{
+//                pause(instrument)
+//            }
+//        }
+//    }
+//
+//    private func pause(_ instrument:String){
+//        guard let playlist = mixedAudioPlayers[instrument] else {return}
+//        pause(list: playlist)
+//    }
+//
+//    private func pause(list:[AVPlayer]){
+//        for item in list{
+//            item.pause()
+//        }
+//    }
+//}
 
 // MARK: Helper Enums
 extension DetailViewController{
