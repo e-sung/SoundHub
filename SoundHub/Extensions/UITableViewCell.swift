@@ -10,9 +10,9 @@ import Foundation
 import UIKit
 
 extension UITableViewCell{
-    func becomeAudioCommentCell(commentInfo:Comment, delegate:AudioCommentCellDelegate)->AudioCommentCell{
+    func becomeAudioCommentCell(with comment:Comment, delegate:AudioCommentCellDelegate)->AudioCommentCell{
         let commentCell = self as! AudioCommentCell
-        commentCell.commentInfo = commentInfo
+        commentCell.comment = comment
         commentCell.delegate = delegate
         return commentCell
     }

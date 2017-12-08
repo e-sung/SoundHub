@@ -139,9 +139,14 @@ class NetworkController{
         let documentsDirectoryURL = DataCenter.documentsDirectoryURL
         let destinationUrl = documentsDirectoryURL.appendingPathComponent(remoteURL.lastPathComponent)
         
-        if FileManager.default.fileExists(atPath: destinationUrl.path) { done(destinationUrl); return }
+        if FileManager.default.fileExists(atPath: destinationUrl.path) {
+            
+            done(destinationUrl); return
+            
+        }
         
         URLSession.shared.downloadTask(with: remoteURL, completionHandler: { (location, response, error) -> Void in
+            
             guard let location = location, error == nil else { return }
             do {
                 try FileManager.default.moveItem(at: location, to: destinationUrl)
