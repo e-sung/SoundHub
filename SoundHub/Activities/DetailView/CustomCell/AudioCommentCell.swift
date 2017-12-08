@@ -17,12 +17,12 @@ class AudioCommentCell: UITableViewCell {
     @IBOutlet weak var toggleSwitch: UISwitch!
     
     @IBAction private func switchToggleHandler(_ sender: UISwitch) {
-        delegate?.didSwitchToggled(to: sender.isOn, by: self.tag, of: commentInfo.instrument)
+        delegate?.didSwitchToggled(to: sender.isOn, by: self.tag, of: comment.instrument)
     }
     
     var delegate:AudioCommentCellDelegate?
 
-    var commentInfo:Comment{
+    var comment:Comment{
         get{
             return _commentInfo
         }

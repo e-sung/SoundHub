@@ -77,9 +77,9 @@ class DetailViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        mixedAudioPlayers = initializeDic(of: AVPlayer.self, with: Instrument.cases)
-        mixedAudioLocalURLs = initializeDic(of: URL.self, with: Instrument.cases)
-        switcheStates = initializeDic(of: Bool.self, with: Instrument.cases)
+//        mixedAudioPlayers = initializeDic(of: AVPlayer.self, with: Instrument.cases)
+//        mixedAudioLocalURLs = initializeDic(of: URL.self, with: Instrument.cases)
+//        switcheStates = initializeDic(of: Bool.self, with: Instrument.cases)
 
         detailTV.delegate = self
         detailTV.dataSource = self
@@ -87,15 +87,15 @@ class DetailViewController: UIViewController{
         masterAudioRemoteURL = URL(string: post.author_track.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)
 
         let commentTracks = post.comment_tracks
-        for instrument in commentTracks.keys{
-            currentInstrument = instrument
-            for track in commentTracks[instrument]!{
-                NetworkController.main.downloadAudio( from: track.comment_track.url, done: { (localURL) in
-                    self.mixedAudioLocalURLs[instrument]!.append(localURL)
-                })
-                switcheStates[instrument]!.append(false)
-            }
-        }
+//        for instrument in commentTracks.keys{
+//            currentInstrument = instrument
+//            for track in commentTracks[instrument]!{
+//                NetworkController.main.downloadAudio( from: track.comment_track.url, done: { (localURL) in
+//                    self.mixedAudioLocalURLs[instrument]!.append(localURL)
+//                })
+//                switcheStates[instrument]!.append(false)
+//            }
+//        }
     }
 }
 
@@ -140,42 +140,29 @@ extension DetailViewController:ModeToggleCellDelegate{
 extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
     /// Master / MixedHeader/ Mixed / CommentHeader / Comment
     func numberOfSections(in tableView: UITableView) -> Int {
-        return SectionRange.MainHeader.range.count +
-        SectionRange.MixedTrackHeader.range.count +
-        SectionRange.MixedTracks.range.count +
-        SectionRange.commentTrackHeader.range.count
+        return 3
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if SectionRange.MixedTracks.range.contains(section){
-            let headerTitle = Instrument.cases[section - SectionRange.MixedTracks.range.lowerBound]
-            if post.comment_tracks[headerTitle] == nil { return nil }
-            return UIView.generateHeaderView(with: headerTitle)
-        }
-        return nil
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if SectionRange.MixedTracks.range.contains(section) {
-            if let comments = post.comment_tracks[Instrument.cases[section-2]]{
-                if comments.count > 0 { return 100 }
-            }
-        }
-        return 0.1
-    }
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        if SectionRange.MixedTracks.range.contains(section){
+//            let headerTitle = Instrument.cases[section - SectionRange.MixedTracks.range.lowerBound]
+//            if post.comment_tracks[headerTitle] == nil { return nil }
+//            return UIView.generateHeaderView(with: headerTitle)
+//        }
+//        return nil
+//    }
+//
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        if SectionRange.MixedTracks.range.contains(section) {
+//            if let comments = post.comment_tracks[Instrument.cases[section-2]]{
+//                if comments.count > 0 { return 100 }
+//            }
+//        }
+//        return 0.1
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 2
-        }else if section == 1{
-            return 1
-        }else if SectionRange.MixedTracks.range.contains(section) {
-            return post.comment_tracks[Instrument.cases[section - 2]]?.count ?? 0
-        }else if  SectionRange.commentTrackHeader.range.contains(section){
-            return 1
-        }else {
-            return 2
-        }
+        return section == 0 ? 2 : 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -190,23 +177,38 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
                 self.masterPlayer = AVPlayer(url: localURL)
                 DispatchQueue.main.async(execute: { self.playButton.isEnabled = true })
             })
-        }else if SectionRange.MixedTrackHeader.range.contains(indexPath.section) {
+        }
+        else if SectionRange.MixedTrackHeader.range.contains(indexPath.section) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MixedCommentHeaderCell", for: indexPath) as! ModeToggleCell
             cell.delegate = self
             return cell
-        }else if SectionRange.MixedTracks.range.contains(indexPath.section) {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "mixedTrackCell", for: indexPath)
-            let comments = post.comment_tracks[Instrument.cases[indexPath.section-2]]!
-            cell.tag = indexPath.item
-            return cell.becomeAudioCommentCell(commentInfo: comments[indexPath.item], delegate: self)
-        }else{
-            return tableView.dequeueReusableCell(withIdentifier: "CommentTracksHeaderCell", for: indexPath)
+        }
+        else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MixedTracksContainer", for: indexPath) as! MixedTracksContainerCell
+            
+            cell.allComments = post.comment_tracks
+            cell.commentTV.reloadData()
+            return cell
         }
         
+//        else if SectionRange.MixedTrackHeader.range.contains(indexPath.section) {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "MixedCommentHeaderCell", for: indexPath) as! ModeToggleCell
+//            cell.delegate = self
+//            return cell
+//        }else if SectionRange.MixedTracks.range.contains(indexPath.section) {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "mixedTrackCell", for: indexPath)
+//            let comments = post.comment_tracks[Instrument.cases[indexPath.section-2]]!
+//            cell.tag = indexPath.item
+//            return cell.becomeAudioCommentCell(with comment: comments[indexPath.item], delegate: self)
+//        }
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.section>=1 ? 100 : 200
+        if indexPath.section == 0 { return 200 }
+        else if indexPath.section == 1 { return 60 }
+        else {
+            return CGFloat(post.num_comments * 100)
+        }
     }
 }
 
