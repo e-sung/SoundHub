@@ -4,6 +4,26 @@ PODS:
     - AudioKit/UI (= 4.0.4)
   - AudioKit/UI (4.0.4)
   - FDWaveformView (3.0.0)
+  - GoogleSignIn (4.1.1):
+    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
+    - GoogleToolboxForMac/NSString+URLArguments (~> 2.1)
+    - GTMOAuth2 (~> 1.0)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GoogleToolboxForMac/DebugUtils (2.1.3):
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+  - GoogleToolboxForMac/Defines (2.1.3)
+  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.3):
+    - GoogleToolboxForMac/DebugUtils (= 2.1.3)
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.3)
+  - GoogleToolboxForMac/NSString+URLArguments (2.1.3)
+  - GTMOAuth2 (1.1.5):
+    - GTMSessionFetcher (~> 1.1)
+  - GTMSessionFetcher (1.1.12):
+    - GTMSessionFetcher/Full (= 1.1.12)
+  - GTMSessionFetcher/Core (1.1.12)
+  - GTMSessionFetcher/Full (1.1.12):
+    - GTMSessionFetcher/Core (= 1.1.12)
   - NVActivityIndicatorView (4.0.0):
     - NVActivityIndicatorView/Presenter (= 4.0.0)
   - NVActivityIndicatorView/Presenter (4.0.0)
@@ -13,6 +33,7 @@ DEPENDENCIES:
   - Alamofire
   - AudioKit
   - FDWaveformView
+  - GoogleSignIn
   - NVActivityIndicatorView
   - SideMenu
 
@@ -20,9 +41,13 @@ SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   AudioKit: 647145c0462dc9dc8a8582998cd6db5f2e1ea848
   FDWaveformView: 0635b5ef719f004ab6ede154521c87bedd4889ef
+  GoogleSignIn: 3fdaa34a2ba04dbd7a25d7db39aecb0da98d5bdc
+  GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
+  GTMOAuth2: be83fd28d63ae3087e7d351b1f39c1a7e24ab6e7
+  GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
   NVActivityIndicatorView: 54c9b93b6f25a4f467512680c0c90c09a1095cf2
   SideMenu: 99021e70b3f2eee65b5dd88e4274d09031b1221e
 
-PODFILE CHECKSUM: c48cb5195a9c72d6232aa524c257377062814ed3
+PODFILE CHECKSUM: 112d4ef8764dc826eeb9f037f5c5ecba7313cbbb
 
 COCOAPODS: 1.3.1

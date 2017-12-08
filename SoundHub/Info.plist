@@ -2,10 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>녹음을 하기 위해, 마이크를 쓸 수 있게 해주세요!</string>
-	<key>UISupportsDocumentBrowser</key>
-	<true/>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -23,10 +21,6 @@
 			</array>
 		</dict>
 	</array>
-	<key>NSCameraUsageDescription</key>
-	<string>직접 찍은 사진을 프로필로 설정하기 위해, 카메라를 쓸 수 있게 해주세요! </string>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -39,6 +33,29 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>googleSignIn</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.994723323319-i9us6kk5cod0ao23q29ccc7oif6s46li</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>bundel</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.sungdoo.soundhub</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -48,6 +65,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>직접 찍은 사진을 프로필로 설정하기 위해, 카메라를 쓸 수 있게 해주세요! </string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>녹음을 하기 위해, 마이크를 쓸 수 있게 해주세요!</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -69,5 +90,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UISupportsDocumentBrowser</key>
+	<true/>
 </dict>
 </plist>

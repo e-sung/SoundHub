@@ -9,17 +9,19 @@
 import UIKit
 
 
-class GeneralChartViewController: UIViewController{
+class ChartViewController: UIViewController{
     
     // MARK: IBOutlets
     @IBOutlet weak private var mainTV: UITableView!
     
+    // MARK: IBAction
     @IBAction func unwindToChart(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
     }
     
     // MARK: Stored Properties
     private var tapOnMoreRanking = 1
     private var tapOnMoreRecent = 1
+    private let dataCenter:DataCenter = DataCenter.main
     private let sectionTitleList = ["CategoryTab", "Popular Musicians", "Ranking Chart", "Recent Upload"]
     var category:Categori = .general
     var option:String = ""
@@ -33,49 +35,33 @@ class GeneralChartViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         NetworkController.main.fetchHomePage(of: category, with: option) {
-            DispatchQueue.main.async {
-                self.mainTV.reloadData()
-                if let popularMusiciansContainer = self.mainTV.cellForRow(at: IndexPath(item: 0, section: Section.PopularMusicians.rawValue)) as? PopularMusicianContainerCell
-                {
-                    popularMusiciansContainer.category = self.category
-                    popularMusiciansContainer.popularMusicianFlowLayout.reloadData()
-                }
-            }
+            DispatchQueue.main.async { self.refreshData() }
         }
     }
-
 }
 
 //MARK: TableViewDataSource
-extension GeneralChartViewController:UITableViewDataSource{
+extension ChartViewController:UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         return sectionTitleList.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if Section(rawValue: section) == .RankingChart{
-            return tapOnMoreRanking * 3
-        }else if Section(rawValue: section) == .RecentUpload{
-            if tapOnMoreRecent * 3 > DataCenter.main.recentPosts.count{
-                return DataCenter.main.homePages[category]!.recent_posts.count
-            }else{
-                return tapOnMoreRecent * 3
-            }
-        }else{
-            return 1
-        }
+        if Section(rawValue: section) == .RankingChart{ return tapOnMoreRanking * 3 }
+        else if Section(rawValue: section) == .RecentUpload{
+            if tapOnMoreRecent * 3 > dataCenter.recentPosts.count{
+                return dataCenter.homePages[category]!.recent_posts.count
+            }else{ return tapOnMoreRecent * 3 }
+        }else{ return 1 }
     }
 }
 
 // MARK: TableViewDelegate
-extension GeneralChartViewController:UITableViewDelegate{
+extension ChartViewController:UITableViewDelegate{
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if Section(rawValue: section) == .CategoryTab {return nil}
-        let headerView = generateHeaderViewFor(given: section)
-        let headerLabel = generateHeaderLableFor(given: section, with: headerView)
-        headerView.addSubview(headerLabel)
-        return headerView
+        return generateHeaderViewFor(given: section)
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -98,25 +84,19 @@ extension GeneralChartViewController:UITableViewDelegate{
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var posts:[Post] = []
         if Section(rawValue: indexPath.section) == .CategoryTab {
             return tableView.dequeueReusableCell(withIdentifier: "categoryTab", for: indexPath)
         }else if Section(rawValue: indexPath.section) == .PopularMusicians{
             return tableView.dequeueReusableCell(withIdentifier: "popularMusicianContainerCell", for: indexPath)
         }else if Section(rawValue: indexPath.section) == .RankingChart{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "rankingCell", for: indexPath) as! PostListCell
-            var popularPost = DataCenter.main.homePages[category]!.pop_posts
-            if popularPost.count - 1 >= indexPath.item {
-                cell.postInfo = popularPost[indexPath.item]
-            }
-            return cell
+            posts = dataCenter.homePages[category]!.pop_posts
         }else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "recentUploadCell", for: indexPath) as! PostListCell
-            var recentPosts = DataCenter.main.homePages[category]!.recent_posts
-            if recentPosts.count - 1 >= indexPath.item {
-                cell.postInfo = recentPosts[indexPath.item]
-            }
-            return cell
+            posts = dataCenter.homePages[category]!.recent_posts
         }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "recentUploadCell", for: indexPath) as! PostListCell
+        if posts.count > indexPath.item { cell.postInfo = posts[indexPath.item] }
+        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -126,46 +106,39 @@ extension GeneralChartViewController:UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         performSegue(withIdentifier: "generalChartToDetail", sender: indexPath)
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 500
     }
+    
+    private func refreshData(){
+        mainTV.reloadData()
+        guard let popularMusiciansContainer = mainTV.cellForRow(at: IndexPath(item: 0, section: Section.PopularMusicians.rawValue)) as? PopularMusicianContainerCell else { return }
+        popularMusiciansContainer.category = category
+        popularMusiciansContainer.popularMusicianFlowLayout.reloadData()
+    }
 }
 
-extension GeneralChartViewController{
+extension ChartViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if let nextVC = segue.destination as? DetailViewController{
-            
-            guard let indexPath = sender as? IndexPath else {
-                print("indexPath downcasting failed")
-                return
-            }
+            let indexPath = sender as! IndexPath
             if Section(rawValue: indexPath.section) == .RankingChart{
-                nextVC.post = DataCenter.main.homePages[category]!.pop_posts[indexPath.item]
+                nextVC.post = dataCenter.homePages[category]!.pop_posts[indexPath.item]
             }else{
-                nextVC.post = DataCenter.main.homePages[category]!.recent_posts[indexPath.item]
+                nextVC.post = dataCenter.homePages[category]!.recent_posts[indexPath.item]
             }
         }
     }
 }
 
-extension GeneralChartViewController{
+extension ChartViewController{
     private func generateHeaderViewFor(given section:Int)->UIView{
-        let headerView:UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 0))
-        headerView.setHeight(with: getHeaderHeighFor(given: section))
-        headerView.backgroundColor = .white
-        return headerView
-    }
-    
-    private func generateHeaderLableFor(given section:Int, with parentView:UIView)->UILabel{
-        let headerLabel = UILabel(frame: parentView.frame)
-        headerLabel.text = sectionTitleList[section]
-        headerLabel.font = headerLabel.font.withSize(30)
-        return headerLabel
+        let title = sectionTitleList[section]
+        let height = Section(rawValue: section) == .PopularMusicians ? 50 : 100
+        return UIView.generateHeaderView(with: title, and: height)
     }
 
     private func generateSeeMoreButtonFor(given section:Int, with parentView:UIView, and title:String)->UIButton{
@@ -175,14 +148,10 @@ extension GeneralChartViewController{
         seeMoreButton.addTarget(self, action: #selector(seeMoreButtonTapHandler), for: .touchUpInside)
         return seeMoreButton
     }
-    
-    private func getHeaderHeighFor(given section:Int)->CGFloat{
-        if Section(rawValue: section) == .PopularMusicians{return 50.0}
-        else{return 100.0}
-    }
+
 }
 
-extension GeneralChartViewController{
+extension ChartViewController{
     @objc private func seeMoreButtonTapHandler(sender:UIButton){
         if Section(rawValue: sender.tag) == .RankingChart {tapOnMoreRanking += 1}
         else if Section(rawValue: sender.tag) == .RecentUpload {tapOnMoreRecent += 1}
@@ -190,9 +159,11 @@ extension GeneralChartViewController{
     }
 }
 
-fileprivate enum Section:Int{
-    case CategoryTab = 0
-    case PopularMusicians = 1
-    case RankingChart = 2
-    case RecentUpload = 3
+extension ChartViewController{
+    private enum Section:Int{
+        case CategoryTab = 0
+        case PopularMusicians = 1
+        case RankingChart = 2
+        case RecentUpload = 3
+    }
 }

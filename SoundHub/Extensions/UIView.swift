@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 extension UIView{
-    static func generateHeaderView(with title:String)->UIView?{
-        let header = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100))
+    static func generateHeaderView(with title:String, and height:Int = 100)->UIView{
+        let header = UIView(frame: CGRect(x: 0, y: 0, width: Int(UIScreen.main.bounds.width), height: height))
         header.backgroundColor = .white
         let titleLabel = UILabel(frame: header.frame)
         titleLabel.text = title

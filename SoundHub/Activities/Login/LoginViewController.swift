@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import GoogleSignIn
 
-class LoginViewController: UIViewController, UITextViewDelegate {
+class LoginViewController: UIViewController, UITextViewDelegate,GIDSignInUIDelegate {
     
     // MARK: Stored Properties
     var isKeyboardUp = false
@@ -16,6 +17,7 @@ class LoginViewController: UIViewController, UITextViewDelegate {
     // MARK: IBOutlests
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var signInButton: GIDSignInButton!
     
     // MARK: IBActions
     @IBAction func emailPrimaryActionHandler(_ sender: UITextField) {
@@ -30,16 +32,28 @@ class LoginViewController: UIViewController, UITextViewDelegate {
     @IBAction func loginButtonHandler(_ sender: UIButton) {
         tryLogin()
     }
-    
+   
+    @IBAction func googleSIgnInHandler(_ sender: GIDSignInButton) {
+        
+        GIDSignIn.sharedInstance().signIn()
+    }
     
     @IBAction func viewTouchHandler(_ sender: UITapGestureRecognizer) {
         if isKeyboardUp { self.view.endEditing(true) }
-        else { self.dismiss(animated: true, completion: nil) }
+//        else { self.dismiss(animated: true, completion: nil) }
     }
     
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        GIDSignIn.sharedInstance().uiDelegate = self
+        //GIDSignIn.sharedInstance().signInSilently()
+       
+
+        NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: "ToggleAuthUINotification"), object: nil, queue: nil) { (noti) in
+            self.alert(msg: "\(noti.userInfo)")
+        }
+
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardDidShow, object: nil, queue: nil) { (noti) in
             self.isKeyboardUp = true
         }
