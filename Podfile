@@ -10,7 +10,7 @@ target 'SoundHub' do
   pod 'NVActivityIndicatorView'
   pod 'Alamofire'
   pod 'AudioKit'
-
+  pod 'GoogleSignIn'
   # Pods for SoundHub
 
   target 'SoundHubTests' do

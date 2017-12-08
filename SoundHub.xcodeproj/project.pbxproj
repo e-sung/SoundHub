@@ -38,6 +38,7 @@
 		FF4A7F9B1FCCEE0A0002E27A /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4A7F9A1FCCEE090002E27A /* UIViewController.swift */; };
 		FF5C013E1FD951B200F37CC9 /* GenrePickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5C013D1FD951B200F37CC9 /* GenrePickViewController.swift */; };
 		FF5C01401FD96D0500F37CC9 /* InstrumentPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5C013F1FD96D0500F37CC9 /* InstrumentPickerViewController.swift */; };
+		FF5C01421FDA188D00F37CC9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF5C01411FDA188D00F37CC9 /* GoogleService-Info.plist */; };
 		FF688F781FCE58B700F0A41F /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF688F771FCE58B700F0A41F /* SideMenuViewController.swift */; };
 		FF688F7A1FCE58D600F0A41F /* SideMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF688F791FCE58D600F0A41F /* SideMenu.storyboard */; };
 		FF9A84DD1FC9612200AC4780 /* MainTabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF9A84DC1FC9612200AC4780 /* MainTabBar.storyboard */; };
@@ -120,6 +121,7 @@
 		FF4A7F9A1FCCEE090002E27A /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		FF5C013D1FD951B200F37CC9 /* GenrePickViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenrePickViewController.swift; sourceTree = "<group>"; };
 		FF5C013F1FD96D0500F37CC9 /* InstrumentPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentPickerViewController.swift; sourceTree = "<group>"; };
+		FF5C01411FDA188D00F37CC9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FF688F771FCE58B700F0A41F /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		FF688F791FCE58D600F0A41F /* SideMenu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SideMenu.storyboard; sourceTree = "<group>"; };
 		FF9A84DC1FC9612200AC4780 /* MainTabBar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainTabBar.storyboard; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 		FFCF82BD1FC95D66003B7861 /* SoundHub */ = {
 			isa = PBXGroup;
 			children = (
+				FF5C01411FDA188D00F37CC9 /* GoogleService-Info.plist */,
 				FFCF82BE1FC95D66003B7861 /* AppDelegate.swift */,
 				FFA5A39E1FCCFD97001EA36F /* NetworkController.swift */,
 				FF000D981FD11F7F00678999 /* DataCenter.swift */,
@@ -514,6 +517,7 @@
 				FF3B20B81FCAC92D0019F87A /* Detail.storyboard in Resources */,
 				FFCF82C91FC95D66003B7861 /* LaunchScreen.storyboard in Resources */,
 				FFCF82C61FC95D66003B7861 /* Assets.xcassets in Resources */,
+				FF5C01421FDA188D00F37CC9 /* GoogleService-Info.plist in Resources */,
 				FF9A84E31FC962C300AC4780 /* GeneralRanking.storyboard in Resources */,
 				FFCF82C41FC95D66003B7861 /* Entry.storyboard in Resources */,
 			);
@@ -626,9 +630,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SoundHub/Pods-SoundHub-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -661,6 +668,9 @@
 				"${PODS_ROOT}/AudioKit/iOS/AudioKit.framework",
 				"${PODS_ROOT}/AudioKit/iOS/AudioKitUI.framework",
 				"${BUILT_PRODUCTS_DIR}/FDWaveformView/FDWaveformView.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
 			);
@@ -670,6 +680,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AudioKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AudioKitUI.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FDWaveformView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
 			);
