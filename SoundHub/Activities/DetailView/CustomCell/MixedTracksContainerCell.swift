@@ -60,6 +60,39 @@ class MixedTracksContainerCell: UITableViewCell{
 
 }
 
+extension MixedTracksContainerCell{
+    // MARK: Play and Pause Functions
+    func playMusic(){
+        for instrument in Instrument.cases{
+            play(instrument)
+        }
+    }
+    
+    private func play(_ instrument:String){
+        guard let playlist = mixedAudioPlayers[instrument] else {return}
+        play(list: playlist)
+    }
+    
+    private func play(list:[AVPlayer]){
+        for item in list{ item.play() }
+    }
+    
+    func pauseMusic(){
+        for instrument in Instrument.cases{
+            pause(instrument)
+        }
+    }
+    
+    private func pause(_ instrument:String){
+        guard let playlist = mixedAudioPlayers[instrument] else {return}
+        pause(list: playlist)
+    }
+    
+    private func pause(list:[AVPlayer]){
+        for item in list{ item.pause() }
+    }
+}
+
 extension MixedTracksContainerCell:UITableViewDataSource, UITableViewDelegate{
     func numberOfSections(in tableView: UITableView) -> Int {
         return Instrument.cases.count

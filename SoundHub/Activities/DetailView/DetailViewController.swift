@@ -11,25 +11,43 @@ import AudioKit
 import AVFoundation
 
 class DetailViewController: UIViewController{
+    
+    // MARK: Stored Properties
+    var post:Post!
+    var masterWaveCell:MasterWaveFormViewCell!
+    var mixedCommentsContainer : MixedTracksContainerCell!
+    var masterAudioRemoteURL:URL!
+    private var currentPhase = Phase.Ready
+    var currentInstrument:String?
+    
+    var masterPlayer:AVPlayer!
+    private var playMode:PlayMode = .mixed
+    
+    private enum PlayMode{
+        case master
+        case mixed
+    }
+    
     // MARK: IBOutlets
     @IBOutlet weak private var detailTV: UITableView!
     @IBOutlet weak private var playButton: UIButton!
     
     // MARK: IBActions
     @IBAction private func playButtonHandler(_ sender: UIButton) {
-        
-//        if currentPhase == .Ready {
-//            sender.setImage(#imageLiteral(resourceName: "ic_pause_circle_outline_white"), for: .normal)
-//            currentPhase = .Playing
+        if currentPhase == .Ready {
+            sender.setImage(#imageLiteral(resourceName: "ic_pause_circle_outline_white"), for: .normal)
+            currentPhase = .Playing
+            mixedCommentsContainer.playMusic()
 //            playMusic()
-//        }else if currentPhase == .Playing{
-//            sender.setImage(#imageLiteral(resourceName: "ic_play_circle_outline_white"), for: .normal)
-//            currentPhase = .Ready
+        }else if currentPhase == .Playing{
+            sender.setImage(#imageLiteral(resourceName: "ic_play_circle_outline_white"), for: .normal)
+            currentPhase = .Ready
+            mixedCommentsContainer.pauseMusic()
 //            pauseMusic()
-//        }
+        }
     }
     
-    @IBAction func recordButtonHandler(_ sender: UIButton) {
+//    @IBAction func recordButtonHandler(_ sender: UIButton) {
 //        if currentPhase != .Recording {
 //            currentPhase = .Recording
 //            playMusic()
@@ -40,22 +58,8 @@ class DetailViewController: UIViewController{
 //            RecordConductor.main.stopRecording()
 //            RecordConductor.main.player.play()
 //        }
-    }
-    // MARK: Stored Properties
-    var post:Post!
-    var masterWaveCell:MasterWaveFormViewCell!
-    var masterAudioRemoteURL:URL!
-    private var currentPhase = Phase.Ready
-    var currentInstrument:String?
-    
-    var masterPlayer:AVPlayer!
-    private var playMode:PlayMode = .master
-    
-    private enum PlayMode{
-        case master
-        case mixed
-    }
-    
+//    }
+
     // MARK: Obserable Properties
 
     var switcheStates:[String:[Bool]]!
@@ -184,6 +188,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             cell.allComments = post.comment_tracks
             cell.commentTV.reloadData()
             cell.setUpAudio()
+            mixedCommentsContainer = cell
             return cell
         }
         
