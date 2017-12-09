@@ -32,10 +32,10 @@ class ChartViewController: UIViewController{
         mainTV.delegate = self
         mainTV.dataSource = self
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        NetworkController.main.fetchHomePage(of: category, with: option) {
-            DispatchQueue.main.async { self.refreshData() }
+    override func viewDidAppear(_ animated: Bool) {
+        refreshData()
+        if DataCenter.main.homePages[category]?.recent_posts.count == 0{
+            performSegue(withIdentifier: "showLoadingIndicatingView", sender:self)
         }
     }
 }
@@ -113,7 +113,7 @@ extension ChartViewController:UITableViewDelegate{
         return 500
     }
     
-    private func refreshData(){
+    func refreshData(){
         mainTV.reloadData()
         guard let popularMusiciansContainer = mainTV.cellForRow(at: IndexPath(item: 0, section: Section.PopularMusicians.rawValue)) as? PopularMusicianContainerCell else { return }
         popularMusiciansContainer.category = category
@@ -130,6 +130,8 @@ extension ChartViewController{
             }else{
                 nextVC.post = dataCenter.homePages[category]!.recent_posts[indexPath.item]
             }
+        }else if let nextVC = segue.destination as? LoadingIndicatorViewController{
+            nextVC.previousVC = self
         }
     }
 }

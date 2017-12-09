@@ -235,6 +235,43 @@
             </objects>
             <point key="canvasLocation" x="1154" y="-619"/>
         </scene>
+        <!--Loading Indicator View Controller-->
+        <scene sceneID="BC5-Jy-9y5">
+            <objects>
+                <viewController id="jke-u9-fyi" customClass="LoadingIndicatorViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PhC-ly-j26">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RK3-jr-y34" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
+                                <rect key="frame" x="137" y="293.5" width="100" height="100"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="EKe-TX-0ZF"/>
+                                    <constraint firstAttribute="width" constant="100" id="hez-aX-9dj"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                        <color key="value" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.086274509803921567" green="0.086274509803921567" blue="0.086274509803921567" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="RK3-jr-y34" firstAttribute="centerX" secondItem="Phw-gG-MVb" secondAttribute="centerX" id="9wB-03-mM8"/>
+                            <constraint firstItem="RK3-jr-y34" firstAttribute="centerY" secondItem="Phw-gG-MVb" secondAttribute="centerY" id="Jq4-TY-cvv"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Phw-gG-MVb"/>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="RK3-jr-y34" id="Gma-8X-dFs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="efo-Eu-enl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2146" y="-518"/>
+        </scene>
         <!--SoundHub-->
         <scene sceneID="4Ly-xw-OQf">
             <objects>
@@ -684,6 +721,7 @@
                     <connections>
                         <outlet property="mainTV" destination="Jw9-zx-7Mw" id="hRs-Nu-Oe3"/>
                         <segue destination="eLA-kX-c1g" kind="show" identifier="generalChartToDetail" id="JMR-OB-ypT"/>
+                        <segue destination="jke-u9-fyi" kind="presentation" identifier="showLoadingIndicatingView" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="0BG-xn-Bgl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7FQ-6n-cka" userLabel="First Responder" sceneMemberID="firstResponder"/>

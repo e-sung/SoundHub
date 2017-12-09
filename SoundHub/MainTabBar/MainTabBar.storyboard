@@ -29,22 +29,11 @@
                     </tabBar>
                     <connections>
                         <segue destination="vQj-Ye-PUC" kind="relationship" relationship="viewControllers" id="Nsx-1a-4vI"/>
-                        <segue destination="39b-qt-fjI" kind="relationship" relationship="viewControllers" id="SPm-f5-zxj"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bF9-Sh-1Zi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-737" y="-177"/>
-        </scene>
-        <!--GenreRanking-->
-        <scene sceneID="SG1-Rc-iqH">
-            <objects>
-                <viewControllerPlaceholder storyboardName="GenreRanking" id="39b-qt-fjI" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="yQ1-W9-i7Z"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4tY-Nc-2Ts" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="178" y="85"/>
         </scene>
     </scenes>
 </document>
