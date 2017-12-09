@@ -233,7 +233,7 @@
                 <viewControllerPlaceholder storyboardName="SideMenu" id="E49-sP-aj0" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sTb-lc-ACr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1154" y="-619"/>
+            <point key="canvasLocation" x="1154" y="-895"/>
         </scene>
         <!--Loading Indicator View Controller-->
         <scene sceneID="BC5-Jy-9y5">
@@ -270,7 +270,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="efo-Eu-enl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2146" y="-518"/>
+            <point key="canvasLocation" x="2068" y="-518"/>
         </scene>
         <!--SoundHub-->
         <scene sceneID="4Ly-xw-OQf">
@@ -280,7 +280,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jw9-zx-7Mw">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bouncesZoom="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jw9-zx-7Mw">
                                 <rect key="frame" x="0.0" y="64" width="375" height="1436"/>
                                 <color key="backgroundColor" red="0.086261831223964691" green="0.086283676326274872" blue="0.086257167160511017" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -428,8 +428,8 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="npg-Di-h6B">
-                                                            <rect key="frame" x="70" y="0.0" width="59" height="36"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="npg-Di-h6B">
+                                                            <rect key="frame" x="70" y="0.0" width="167.5" height="36"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -441,8 +441,8 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPy-IC-NUa">
-                                                            <rect key="frame" x="252.5" y="24" width="82.5" height="36"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                            <rect key="frame" x="266" y="30" width="69" height="30"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -456,6 +456,7 @@
                                                         <constraint firstAttribute="bottom" secondItem="KPy-IC-NUa" secondAttribute="bottom" id="JQz-uG-gbw"/>
                                                         <constraint firstAttribute="bottom" secondItem="ujy-pv-A2u" secondAttribute="bottom" id="RJg-PZ-dKf"/>
                                                         <constraint firstItem="ujy-pv-A2u" firstAttribute="leading" secondItem="npg-Di-h6B" secondAttribute="leading" id="Viz-Jh-HS0"/>
+                                                        <constraint firstItem="npg-Di-h6B" firstAttribute="width" secondItem="NZ4-Z1-oHx" secondAttribute="width" multiplier="0.5" id="Yvj-RB-6Pw"/>
                                                         <constraint firstItem="BJM-2I-X5v" firstAttribute="top" secondItem="NZ4-Z1-oHx" secondAttribute="top" id="fTs-vY-7Hd"/>
                                                         <constraint firstItem="BJM-2I-X5v" firstAttribute="leading" secondItem="NZ4-Z1-oHx" secondAttribute="leading" id="fmQ-1d-Rh6"/>
                                                         <constraint firstItem="npg-Di-h6B" firstAttribute="top" secondItem="NZ4-Z1-oHx" secondAttribute="top" id="pKD-I1-p1o"/>
@@ -466,6 +467,11 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="e0f-HC-XuQ" secondAttribute="height" multiplier="1:1" id="9vz-pr-RYM"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="6"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pp4-Gw-glz">
                                                     <rect key="frame" x="20" y="424" width="335" height="50"/>
@@ -574,7 +580,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Wt-sW-uW8">
-                                                            <rect key="frame" x="70" y="0.0" width="59" height="36"/>
+                                                            <rect key="frame" x="70" y="0.0" width="167.5" height="36"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -586,8 +592,8 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Lb-BJ-PsF">
-                                                            <rect key="frame" x="252.5" y="24" width="82.5" height="36"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                            <rect key="frame" x="266" y="30" width="69" height="30"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -595,6 +601,7 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstItem="pTd-Ju-idG" firstAttribute="top" secondItem="vkb-fG-3EF" secondAttribute="top" id="6n4-7M-sL0"/>
+                                                        <constraint firstItem="5Wt-sW-uW8" firstAttribute="width" secondItem="vkb-fG-3EF" secondAttribute="width" multiplier="0.5" id="8sM-Fa-EES"/>
                                                         <constraint firstAttribute="bottom" secondItem="0Lb-BJ-PsF" secondAttribute="bottom" id="Bmh-rA-Z7u"/>
                                                         <constraint firstItem="pTd-Ju-idG" firstAttribute="leading" secondItem="vkb-fG-3EF" secondAttribute="leading" id="EbF-g9-guu"/>
                                                         <constraint firstAttribute="height" constant="60" id="Ed4-3T-wXl"/>
@@ -611,6 +618,11 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Cgu-va-ehk" secondAttribute="height" multiplier="1:1" id="ZhQ-Pr-6ar"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="6"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cMk-UH-Xfy">
                                                     <rect key="frame" x="20" y="424" width="335" height="50"/>

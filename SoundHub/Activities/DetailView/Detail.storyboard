@@ -229,6 +229,11 @@
                                                                                     <constraint firstAttribute="width" secondItem="tsO-om-n59" secondAttribute="height" multiplier="1:1" id="cBs-JI-Jfl"/>
                                                                                     <constraint firstAttribute="width" constant="70" id="nPu-1P-WUu"/>
                                                                                 </constraints>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                        <real key="value" value="6"/>
+                                                                                    </userDefinedRuntimeAttribute>
+                                                                                </userDefinedRuntimeAttributes>
                                                                             </imageView>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vocal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wyv-H1-dTo">
                                                                                 <rect key="frame" x="88" y="11" width="71" height="36"/>
@@ -329,6 +334,11 @@
                                                                 <constraint firstAttribute="width" constant="70" id="Dml-kN-AhF"/>
                                                                 <constraint firstAttribute="width" secondItem="ZOB-jw-Dc4" secondAttribute="height" multiplier="1:1" id="Ywp-SO-wjk"/>
                                                             </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                    <real key="value" value="6"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vocal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zhi-k8-DzF">
                                                             <rect key="frame" x="88" y="11" width="71" height="36"/>
