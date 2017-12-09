@@ -73,9 +73,7 @@ extension ChartViewController:UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if Section(rawValue: section) == .CategoryTab {return 0.1}
-        else if Section(rawValue: section) == .PopularMusicians {return 50}
-        else {return 100}
+        return Section(rawValue: section)!.headerHeight
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -100,9 +98,7 @@ extension ChartViewController:UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if Section(rawValue: indexPath.section) == .CategoryTab {return 50}
-        else if Section(rawValue: indexPath.section) == .PopularMusicians {return 200}
-        else {return 500}
+        return Section(rawValue: indexPath.section)!.rowHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -139,8 +135,8 @@ extension ChartViewController{
 extension ChartViewController{
     private func generateHeaderViewFor(given section:Int)->UIView{
         let title = sectionTitleList[section]
-        let height = Section(rawValue: section) == .PopularMusicians ? 50 : 100
-        return UIView.generateHeaderView(with: title, and: height)
+        let height = Section(rawValue: section)!.headerHeight
+        return UIView.generateHeaderView(with: title, and: Int(height))
     }
 
     private func generateSeeMoreButtonFor(given section:Int, with parentView:UIView, and title:String)->UIButton{
@@ -150,7 +146,6 @@ extension ChartViewController{
         seeMoreButton.addTarget(self, action: #selector(seeMoreButtonTapHandler), for: .touchUpInside)
         return seeMoreButton
     }
-
 }
 
 extension ChartViewController{
@@ -167,5 +162,27 @@ extension ChartViewController{
         case PopularMusicians = 1
         case RankingChart = 2
         case RecentUpload = 3
+        
+        var headerHeight:CGFloat{
+            switch self {
+            case .CategoryTab:
+                return 0.1
+            case .PopularMusicians:
+                return 50
+            default:
+                return 60
+            }
+        }
+        
+        var rowHeight:CGFloat{
+            switch self {
+            case .CategoryTab:
+                return 50
+            case .PopularMusicians:
+                return 200
+            default:
+                return 500
+            }
+        }
     }
 }
