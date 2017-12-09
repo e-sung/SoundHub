@@ -14,7 +14,7 @@ class MasterWaveFormViewCell: UITableViewCell, FDWaveformViewDelegate {
 
     @IBOutlet weak private var activityIndicator: NVActivityIndicatorView!
     @IBOutlet weak private var waveForm: FDWaveformView!
-    var masterAudioURL:URL!{
+    var masterAudioURL:URL?{
         willSet(newVal){
             waveForm.audioURL = newVal
         }
