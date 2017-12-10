@@ -51,6 +51,15 @@ extension MixedTracksContainerCell{
             }
         }
     }
+    
+    func stopMusic(){
+        for i in 0..<commentTV.numberOfSections{
+            for j in 0..<commentTV.numberOfRows(inSection: i){
+                let cell = commentTV.cellForRow(at: IndexPath(item: j, section: i)) as! AudioCommentCell
+                cell.player.stop()
+            }
+        }
+    }
 }
 
 extension MixedTracksContainerCell:UITableViewDataSource, UITableViewDelegate{

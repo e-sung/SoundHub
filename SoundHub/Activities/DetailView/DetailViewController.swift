@@ -21,7 +21,7 @@ class DetailViewController: UIViewController{
     var masterAudioLocalURL:URL?
     private var currentPhase = Phase.Ready
 
-    var masterPlayer:AVPlayer?
+    var masterPlayer:AVPlayer!
     private var playMode:PlayMode = .master
     
     private enum PlayMode{
@@ -47,23 +47,14 @@ class DetailViewController: UIViewController{
     }
     func stopMusic(){
         if playMode == .mixed {
-         //   mixedCommentsContainer.stopMusic()
+            mixedCommentsContainer.stopMusic()
         }
         else {
-            masterPlayer?.pause()
-            masterPlayer?.seek(to: CMTimeMake(0, 1))
-            playButton.setImage(#imageLiteral(resourceName: "play"), for: .normal)
-//            if let url = masterWaveCell.masterAudioURL{
-//                masterPlayer = AVPlayer(url: url)
-//            }else {  }
+            masterPlayer.stop()
         }
-//        func stop(inout avPlayer:AVPlayer?){
-//            let url = avPlayer?.currentItem?.asset.
-//            avPlayer?.pause()
-//            avPlayer = nil
-//        }
+        playButton.setImage(#imageLiteral(resourceName: "play"), for: .normal)
     }
-    
+
     func playMusic(){
         playButton.setImage( #imageLiteral(resourceName: "pause"), for: .normal)
         currentPhase = .Playing
@@ -93,8 +84,9 @@ class DetailViewController: UIViewController{
 
 extension DetailViewController:ModeToggleCellDelegate{
     func didModeToggled(to mode: Bool) {
-        pauseMusic()
+        stopMusic()
         if mode == true { playMode = .mixed} else { playMode = .master}
+        stopMusic()
         mixedCommentsContainer.setInteractionability(to: mode)
     }
 }
