@@ -39,6 +39,15 @@ class NetworkController{
         generalHomeURL = URL(string: "/home/", relativeTo: baseURL)!
     }
     
+    func patchUser(nickname:String, completion:@escaping()->Void){
+        let url = URL(string: "/user/\(UserDefaults.standard.string(forKey: id)!)/", relativeTo: baseURL)!
+        let headers: HTTPHeaders = ["Authorization": "Token \(UserDefaults.standard.string(forKey: token)!)"]
+        let parameters: Parameters = ["nickname":nickname]
+        Alamofire.request(url, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers:headers).response { (response) in
+            completion()
+        }
+    }
+    
     func fetchHomePage(of category:Categori, with option:String, completion:@escaping()->Void){
         var entryURL:URL?
         if category == .general {

@@ -66,9 +66,10 @@ class LoginViewController: UIViewController, UITextViewDelegate,GIDSignInUIDeleg
 
 extension LoginViewController{
     private func save(loginResponse:LoginResponse, on userDefault:UserDefaults){
-        userDefault.set(loginResponse.token, forKey: "token")
-        userDefault.set(loginResponse.user.nickname, forKey: "nickname")
-        userDefault.set(loginResponse.user.instrument, forKey: "instrument")
+        userDefault.set(loginResponse.token, forKey: token)
+        userDefault.set(loginResponse.user.nickname, forKey: nickname)
+        userDefault.set(loginResponse.user.instrument, forKey: instrument)
+        userDefault.set(loginResponse.user.id, forKey: id)
     }
     
     private func tryLogin(){

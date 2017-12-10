@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class DataCenter{
-    static let main = DataCenter()
+    static var main = DataCenter()
     static let documentsDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     
     var recentPosts:[Post] = []
