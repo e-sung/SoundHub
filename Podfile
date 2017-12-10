@@ -11,6 +11,7 @@ target 'SoundHub' do
   pod 'Alamofire'
   pod 'AudioKit'
   pod 'GoogleSignIn'
+  pod 'LPSnackbar'
   # Pods for SoundHub
 
   target 'SoundHubTests' do

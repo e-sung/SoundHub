@@ -196,7 +196,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="9vm-a1-xVF" kind="presentation" identifier="signUpToProfileSetUp" modalTransitionStyle="crossDissolve" id="N8f-qd-oKY"/>
+                                            <action selector="emailButtonHandler:" destination="y5Y-p4-nBj" eventType="touchUpInside" id="dFK-Ab-q7l"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -232,6 +232,12 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oBV-Lo-IKu">
+                                <rect key="frame" x="37.5" y="158.5" width="300" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.27450980392156865" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.086261831220000001" green="0.086283676330000003" blue="0.086257167159999995" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
@@ -239,8 +245,11 @@
                             <constraint firstItem="o80-Wi-AmO" firstAttribute="centerY" secondItem="nOk-16-R4d" secondAttribute="centerY" constant="-80" id="4JR-1W-7RL"/>
                             <constraint firstItem="PKB-4n-QUM" firstAttribute="width" secondItem="o80-Wi-AmO" secondAttribute="width" id="9lQ-41-6yH"/>
                             <constraint firstItem="o80-Wi-AmO" firstAttribute="width" secondItem="5V7-fE-40j" secondAttribute="width" multiplier="0.8" id="CGp-Sd-yoe"/>
+                            <constraint firstItem="jzZ-4N-eda" firstAttribute="top" secondItem="oBV-Lo-IKu" secondAttribute="bottom" constant="5" id="DZ6-qa-yTq"/>
                             <constraint firstItem="o80-Wi-AmO" firstAttribute="centerX" secondItem="nOk-16-R4d" secondAttribute="centerX" id="PuI-sE-f61"/>
                             <constraint firstItem="PKB-4n-QUM" firstAttribute="top" secondItem="o80-Wi-AmO" secondAttribute="bottom" constant="30" id="ZeX-s1-C3D"/>
+                            <constraint firstItem="oBV-Lo-IKu" firstAttribute="width" secondItem="jzZ-4N-eda" secondAttribute="width" id="fH8-xN-6aJ"/>
+                            <constraint firstItem="oBV-Lo-IKu" firstAttribute="leading" secondItem="jzZ-4N-eda" secondAttribute="leading" id="hAw-GZ-TRc"/>
                             <constraint firstItem="PKB-4n-QUM" firstAttribute="centerX" secondItem="o80-Wi-AmO" secondAttribute="centerX" id="iuY-c1-Wbn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nOk-16-R4d"/>
@@ -250,6 +259,7 @@
                     </view>
                     <connections>
                         <outlet property="emailTF" destination="jzZ-4N-eda" id="L8G-eW-COa"/>
+                        <outlet property="errorMsgLB" destination="oBV-Lo-IKu" id="Tu0-Pl-Itr"/>
                         <outlet property="nickNameTF" destination="W95-be-h4a" id="FQU-IC-ecw"/>
                         <outlet property="passwordConfirmTF" destination="svt-Fd-H32" id="gm0-Kw-c0Y"/>
                         <outlet property="passwordTF" destination="TeM-oW-WWD" id="VYn-rd-RnN"/>
@@ -257,6 +267,7 @@
                         <outletCollection property="textFields" destination="W95-be-h4a" collectionClass="NSMutableArray" id="VsP-Xa-2Zv"/>
                         <outletCollection property="textFields" destination="TeM-oW-WWD" collectionClass="NSMutableArray" id="SEI-eN-osM"/>
                         <outletCollection property="textFields" destination="svt-Fd-H32" collectionClass="NSMutableArray" id="cs1-v2-Xif"/>
+                        <segue destination="9vm-a1-xVF" kind="presentation" identifier="signUpToProfileSetUp" modalPresentationStyle="currentContext" modalTransitionStyle="crossDissolve" id="vcf-Hn-s5Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UKa-9n-brg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -266,7 +277,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-980" y="868"/>
+            <point key="canvasLocation" x="-980" y="867.61619190404804"/>
         </scene>
         <!--Profile Set Up View Controller-->
         <scene sceneID="g8S-8W-PJo">
