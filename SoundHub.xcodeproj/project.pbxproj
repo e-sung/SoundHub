@@ -39,6 +39,7 @@
 		FF5C013E1FD951B200F37CC9 /* GenrePickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5C013D1FD951B200F37CC9 /* GenrePickViewController.swift */; };
 		FF5C01401FD96D0500F37CC9 /* InstrumentPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5C013F1FD96D0500F37CC9 /* InstrumentPickerViewController.swift */; };
 		FF5C01421FDA188D00F37CC9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF5C01411FDA188D00F37CC9 /* GoogleService-Info.plist */; };
+		FF64BA0E1FDD36F4000A846B /* RecorderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF64BA0D1FDD36F4000A846B /* RecorderCell.swift */; };
 		FF688F781FCE58B700F0A41F /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF688F771FCE58B700F0A41F /* SideMenuViewController.swift */; };
 		FF688F7A1FCE58D600F0A41F /* SideMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF688F791FCE58D600F0A41F /* SideMenu.storyboard */; };
 		FF9A84DD1FC9612200AC4780 /* MainTabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF9A84DC1FC9612200AC4780 /* MainTabBar.storyboard */; };
@@ -124,6 +125,7 @@
 		FF5C013D1FD951B200F37CC9 /* GenrePickViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenrePickViewController.swift; sourceTree = "<group>"; };
 		FF5C013F1FD96D0500F37CC9 /* InstrumentPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentPickerViewController.swift; sourceTree = "<group>"; };
 		FF5C01411FDA188D00F37CC9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FF64BA0D1FDD36F4000A846B /* RecorderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderCell.swift; sourceTree = "<group>"; };
 		FF688F771FCE58B700F0A41F /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		FF688F791FCE58D600F0A41F /* SideMenu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SideMenu.storyboard; sourceTree = "<group>"; };
 		FF9A84DC1FC9612200AC4780 /* MainTabBar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainTabBar.storyboard; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 				FF02805D1FD805F500C0013A /* ModeToggleCell.swift */,
 				FFC32AE71FCFBFDB00651A31 /* MasterWaveFormViewCell.swift */,
 				FF9D18531FDA6012008D5FD1 /* MixedTracksContainerCell.swift */,
+				FF64BA0D1FDD36F4000A846B /* RecorderCell.swift */,
 			);
 			path = CustomCell;
 			sourceTree = "<group>";
@@ -751,6 +754,7 @@
 				FFC32AE61FCF9F0C00651A31 /* AudioCommentCell.swift in Sources */,
 				FF3B20B51FCAADD80019F87A /* PostListCell.swift in Sources */,
 				FF3B20BC1FCACE8D0019F87A /* DetailHeaderCell.swift in Sources */,
+				FF64BA0E1FDD36F4000A846B /* RecorderCell.swift in Sources */,
 				FFB85FCC1FCE652A000E47C8 /* ProfileHeaderCell.swift in Sources */,
 				FF02805E1FD805F600C0013A /* ModeToggleCell.swift in Sources */,
 				FF4A7F9B1FCCEE0A0002E27A /* UIViewController.swift in Sources */,
