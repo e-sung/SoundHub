@@ -19,8 +19,12 @@ class ProfileViewController: UIViewController{
     @IBAction private func confirmButtonHandler(_ sender: UIBarButtonItem) {
         confirmButton.title = ""
         confirmButton.isEnabled = false
+        UserDefaults.standard.set(headerCell.nickName, forKey: nickname)
+        NetworkController.main.patchUser(nickname: headerCell.nickName, completion: {
+            DataCenter.main = DataCenter()
+            self.dismiss(animated: true, completion: nil)
+        })
         headerCell.isSettingPhase = false
-        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction private func goBackButtonHandler(_ sender: UIBarButtonItem) {

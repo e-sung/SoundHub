@@ -11,3 +11,4 @@ import Foundation
 let token = "token"
 let nickname = "nickname"
 let instrument = "instrument"
+let id = "id"

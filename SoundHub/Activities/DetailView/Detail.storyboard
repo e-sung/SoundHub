@@ -17,17 +17,17 @@
             <objects>
                 <viewController id="1GI-i7-ZL1" customClass="DetailViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rzj-m7-OOC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="modernTImes" translatesAutoresizingMaskIntoConstraints="NO" id="63U-n4-OqK">
-                                <rect key="frame" x="0.0" y="20" width="375" height="880"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="1180"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AM7-pL-X1c">
-                                <rect key="frame" x="0.0" y="20" width="375" height="880"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="1180"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sPC-mL-dPH">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="820"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1120"/>
                                         <color key="backgroundColor" red="0.086261831220000001" green="0.086283676330000003" blue="0.086257167159999995" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="detailHeaderCell" rowHeight="200" id="P9h-w3-Lc5" customClass="DetailHeaderCell" customModule="SoundHub" customModuleProvider="target">
@@ -371,12 +371,48 @@
                                                         <constraint firstItem="ZOB-jw-Dc4" firstAttribute="leading" secondItem="5Cv-6m-PTy" secondAttribute="leading" constant="10" id="ivB-cO-VNr"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
-                                                <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </tableViewCell>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recorderCell" id="Lia-eD-eD2" customClass="RecorderCell" customModule="SoundHub" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="756" width="375" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Lia-eD-eD2" id="2ln-Zt-P5E">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgG-St-MdE">
+                                                            <rect key="frame" x="15" y="6" width="30" height="30"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                            <state key="normal" title="녹음">
+                                                                <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="recordButtonHandler:" destination="Lia-eD-eD2" eventType="touchUpInside" id="655-qp-laJ"/>
+                                                            </connections>
+                                                        </button>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F2b-XT-SDC" customClass="AKNodeOutputPlot" customModule="AudioKitUI">
+                                                            <rect key="frame" x="51" y="-1" width="317" height="44"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </view>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="xgG-St-MdE" firstAttribute="centerY" secondItem="2ln-Zt-P5E" secondAttribute="centerY" id="0Rl-1f-Lel"/>
+                                                        <constraint firstItem="xgG-St-MdE" firstAttribute="leading" secondItem="2ln-Zt-P5E" secondAttribute="leading" constant="15" id="9Wf-HE-OWK"/>
+                                                        <constraint firstItem="F2b-XT-SDC" firstAttribute="centerY" secondItem="2ln-Zt-P5E" secondAttribute="centerY" id="JU3-xw-bVE"/>
+                                                        <constraint firstItem="F2b-XT-SDC" firstAttribute="leading" secondItem="xgG-St-MdE" secondAttribute="trailing" constant="6" id="Rqe-2F-ugU"/>
+                                                        <constraint firstItem="F2b-XT-SDC" firstAttribute="height" secondItem="2ln-Zt-P5E" secondAttribute="height" id="dVM-Me-Bbo"/>
+                                                        <constraint firstAttribute="trailing" secondItem="F2b-XT-SDC" secondAttribute="trailing" constant="7" id="ypJ-Dc-BTd"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="inputPlot" destination="F2b-XT-SDC" id="uoa-rF-Zea"/>
+                                                    <outlet property="recordButton" destination="xgG-St-MdE" id="hqQ-7a-VMN"/>
+                                                </connections>
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rrM-qV-Mws">
-                                        <rect key="frame" x="0.0" y="820" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="1120" width="375" height="60"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleAspectFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="etS-zh-JoX">
                                                 <rect key="frame" x="157" y="0.0" width="60" height="60"/>
@@ -385,30 +421,30 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                 <color key="tintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" image="ic_play_circle_outline_white">
+                                                <state key="normal" image="play">
                                                     <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="playButtonHandler:" destination="1GI-i7-ZL1" eventType="touchUpInside" id="CZm-uy-uKT"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yVU-0T-Ztz">
-                                                <rect key="frame" x="25" y="15" width="52" height="30"/>
-                                                <state key="normal" title="녹음하기">
-                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C0f-NV-i4s">
+                                                <rect key="frame" x="232" y="15" width="46" height="30"/>
+                                                <state key="normal" backgroundImage="stop"/>
                                                 <connections>
-                                                    <action selector="recordButtonHandler:" destination="1GI-i7-ZL1" eventType="touchUpInside" id="N5Q-FK-sD7"/>
+                                                    <action selector="StopButtonHandler:" destination="1GI-i7-ZL1" eventType="touchUpInside" id="fdg-GA-mbH"/>
                                                 </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="etS-zh-JoX" firstAttribute="height" secondItem="rrM-qV-Mws" secondAttribute="height" id="L8X-uw-G5C"/>
+                                            <constraint firstItem="C0f-NV-i4s" firstAttribute="width" secondItem="etS-zh-JoX" secondAttribute="width" id="3Yw-ju-XKN"/>
+                                            <constraint firstItem="C0f-NV-i4s" firstAttribute="leading" secondItem="etS-zh-JoX" secondAttribute="trailing" constant="15" id="3dg-F7-wBI"/>
+                                            <constraint firstItem="etS-zh-JoX" firstAttribute="height" secondItem="rrM-qV-Mws" secondAttribute="height" multiplier="0.8" id="L8X-uw-G5C"/>
                                             <constraint firstItem="etS-zh-JoX" firstAttribute="centerX" secondItem="rrM-qV-Mws" secondAttribute="centerX" id="PMd-e4-e52"/>
-                                            <constraint firstItem="yVU-0T-Ztz" firstAttribute="centerY" secondItem="rrM-qV-Mws" secondAttribute="centerY" id="d4s-Xw-nLn"/>
                                             <constraint firstItem="etS-zh-JoX" firstAttribute="centerY" secondItem="rrM-qV-Mws" secondAttribute="centerY" id="hNG-5G-YD3"/>
-                                            <constraint firstItem="yVU-0T-Ztz" firstAttribute="leading" secondItem="rrM-qV-Mws" secondAttribute="leading" constant="25" id="jxh-2b-ZzY"/>
+                                            <constraint firstItem="C0f-NV-i4s" firstAttribute="height" secondItem="etS-zh-JoX" secondAttribute="height" id="jUc-nY-ed4"/>
+                                            <constraint firstItem="C0f-NV-i4s" firstAttribute="centerY" secondItem="etS-zh-JoX" secondAttribute="centerY" id="scu-Ae-kzr"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -441,7 +477,7 @@
                     <navigationItem key="navigationItem" id="HNV-bd-w2W">
                         <barButtonItem key="backBarButtonItem" title="Chart" id="qSC-S8-CYr"/>
                     </navigationItem>
-                    <size key="freeformSize" width="375" height="900"/>
+                    <size key="freeformSize" width="375" height="1200"/>
                     <connections>
                         <outlet property="detailTV" destination="sPC-mL-dPH" id="WcF-kh-Tnc"/>
                         <outlet property="playButton" destination="etS-zh-JoX" id="NsH-10-5yn"/>
@@ -453,8 +489,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_play_circle_outline_white" width="24" height="24"/>
         <image name="iu_profile" width="128" height="128"/>
         <image name="modernTImes" width="316" height="316"/>
+        <image name="play" width="100" height="100"/>
+        <image name="stop" width="100" height="100"/>
     </resources>
 </document>

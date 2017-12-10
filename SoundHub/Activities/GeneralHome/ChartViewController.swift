@@ -21,7 +21,6 @@ class ChartViewController: UIViewController{
     // MARK: Stored Properties
     private var tapOnMoreRanking = 1
     private var tapOnMoreRecent = 1
-    private let dataCenter:DataCenter = DataCenter.main
     private let sectionTitleList = ["CategoryTab", "Popular Musicians", "Ranking Chart", "Recent Upload"]
     var category:Categori = .general
     var option:String = ""
@@ -49,8 +48,8 @@ extension ChartViewController:UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if Section(rawValue: section) == .RankingChart{ return tapOnMoreRanking * 3 }
         else if Section(rawValue: section) == .RecentUpload{
-            if tapOnMoreRecent * 3 > dataCenter.recentPosts.count{
-                return dataCenter.homePages[category]!.recent_posts.count
+            if tapOnMoreRecent * 3 > DataCenter.main.recentPosts.count{
+                return DataCenter.main.homePages[category]!.recent_posts.count
             }else{ return tapOnMoreRecent * 3 }
         }else{ return 1 }
     }
@@ -88,9 +87,9 @@ extension ChartViewController:UITableViewDelegate{
         }else if Section(rawValue: indexPath.section) == .PopularMusicians{
             return tableView.dequeueReusableCell(withIdentifier: "popularMusicianContainerCell", for: indexPath)
         }else if Section(rawValue: indexPath.section) == .RankingChart{
-            posts = dataCenter.homePages[category]!.pop_posts
+            posts = DataCenter.main.homePages[category]!.pop_posts
         }else{
-            posts = dataCenter.homePages[category]!.recent_posts
+            posts = DataCenter.main.homePages[category]!.recent_posts
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "recentUploadCell", for: indexPath) as! PostListCell
         if posts.count > indexPath.item { cell.postInfo = posts[indexPath.item] }
@@ -122,9 +121,9 @@ extension ChartViewController{
         if let nextVC = segue.destination as? DetailViewController{
             let indexPath = sender as! IndexPath
             if Section(rawValue: indexPath.section) == .RankingChart{
-                nextVC.post = dataCenter.homePages[category]!.pop_posts[indexPath.item]
+                nextVC.post = DataCenter.main.homePages[category]!.pop_posts[indexPath.item]
             }else{
-                nextVC.post = dataCenter.homePages[category]!.recent_posts[indexPath.item]
+                nextVC.post = DataCenter.main.homePages[category]!.recent_posts[indexPath.item]
             }
         }else if let nextVC = segue.destination as? LoadingIndicatorViewController{
             nextVC.previousVC = self

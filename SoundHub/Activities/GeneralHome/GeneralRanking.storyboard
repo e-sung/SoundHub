@@ -277,7 +277,7 @@
         <!--SoundHub-->
         <scene sceneID="4Ly-xw-OQf">
             <objects>
-                <viewController id="YsJ-m6-ZEM" customClass="ChartViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChartViewController" id="YsJ-m6-ZEM" customClass="ChartViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lPn-NK-CsK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -8,19 +8,19 @@
 
 import UIKit
 
-class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate {
+class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate, UITextFieldDelegate{
 
     // MARK: IBOutlets
-    @IBOutlet weak var profileImageButton: UIButton!
-    @IBOutlet weak var headerImageButton: UIButton!
-    @IBOutlet weak var nickNameTF: UITextField!
+    @IBOutlet weak private var profileImageButton: UIButton!
+    @IBOutlet weak private var headerImageButton: UIButton!
+    @IBOutlet weak private var nickNameTF: UITextField!
     
     // MARK: IBActions
-    @IBAction func headerImageChangeHandler(_ sender: UIButton) {
+    @IBAction private func headerImageChangeHandler(_ sender: UIButton) {
         delegate?.changeImageOf(button: sender)
     }
     
-    @IBAction func profileImageChangeHandler(_ sender: UIButton) {
+    @IBAction private func profileImageChangeHandler(_ sender: UIButton) {
         delegate?.changeImageOf(button: sender)
     }
     
@@ -38,9 +38,23 @@ class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate {
         }
     }
     
+    var nickName:String{
+        get{
+            return nickNameTF.text!
+        }
+        set(newVal){
+            nickNameTF.text = newVal
+        }
+    }
+
     // MARK: Stored Properties
     var delegate:ProfileHeaderCellDelegate?
     private var _isSettingPhase = false
+    
+    override func awakeFromNib() {
+        nickNameTF.text = UserDefaults.standard.string(forKey: nickname)!
+        nickNameTF.delegate = self
+    }
 }
 
 // MARK: Protocol Defenition
