@@ -48,6 +48,15 @@ class NetworkController{
         }
     }
     
+    func fetchPost(id:Int, completion:@escaping(Post)->Void){
+        let url = URL(string: "\(id)/", relativeTo: postURL)!
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            print(response)
+            guard let data = data else {print ("data is corrupted") ; return}
+            guard let post = try? JSONDecoder().decode(Post.self, from: data) else { return }
+            completion(post)
+        }
+    }
     func fetchHomePage(of category:Categori, with option:String, completion:@escaping()->Void){
         var entryURL:URL?
         if category == .general {
@@ -93,6 +102,29 @@ class NetworkController{
             guard let result = try? JSONDecoder().decode(LoginResponse.self, from: data) else{return}
             done(result)
         }.resume()
+    }
+    
+    func uploadAudioComment(In localURL:URL, to postId:Int,instrument:String, completion:@escaping ()->Void){
+        let url = URL(string: "\(postId)/comments/", relativeTo: postURL)!
+        
+        Alamofire.upload(
+            multipartFormData: { multipartFormData in
+                multipartFormData.append(localURL, withName: "comment_track")
+                multipartFormData.append(instrument.data(using: .utf8)!, withName: "instrument")
+        },
+            to: url, headers:multipartFormDataHeader,
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    upload.responseJSON { response in
+                        debugPrint(response)
+                        completion()
+                    }
+                case .failure(let encodingError):
+                    print(encodingError)
+                    completion()
+                }
+        })
     }
     
     func uploadAudio(In localURL:URL, genre:String, instrument:String, completion:@escaping ()->Void){
