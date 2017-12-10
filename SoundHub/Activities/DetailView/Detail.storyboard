@@ -371,7 +371,7 @@
                                                         <constraint firstItem="ZOB-jw-Dc4" firstAttribute="leading" secondItem="5Cv-6m-PTy" secondAttribute="leading" constant="10" id="ivB-cO-VNr"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
-                                                <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recorderCell" id="Lia-eD-eD2" customClass="RecorderCell" customModule="SoundHub" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="756" width="375" height="44"/>
@@ -386,6 +386,9 @@
                                                             <state key="normal" title="녹음">
                                                                 <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="recordButtonHandler:" destination="Lia-eD-eD2" eventType="touchUpInside" id="655-qp-laJ"/>
+                                                            </connections>
                                                         </button>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F2b-XT-SDC" customClass="AKNodeOutputPlot" customModule="AudioKitUI">
                                                             <rect key="frame" x="51" y="-1" width="317" height="44"/>
@@ -425,23 +428,12 @@
                                                     <action selector="playButtonHandler:" destination="1GI-i7-ZL1" eventType="touchUpInside" id="CZm-uy-uKT"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yVU-0T-Ztz">
-                                                <rect key="frame" x="25" y="15" width="52" height="30"/>
-                                                <state key="normal" title="녹음하기">
-                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="recordButtonHandler:" destination="1GI-i7-ZL1" eventType="touchUpInside" id="N5Q-FK-sD7"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="etS-zh-JoX" firstAttribute="height" secondItem="rrM-qV-Mws" secondAttribute="height" id="L8X-uw-G5C"/>
                                             <constraint firstItem="etS-zh-JoX" firstAttribute="centerX" secondItem="rrM-qV-Mws" secondAttribute="centerX" id="PMd-e4-e52"/>
-                                            <constraint firstItem="yVU-0T-Ztz" firstAttribute="centerY" secondItem="rrM-qV-Mws" secondAttribute="centerY" id="d4s-Xw-nLn"/>
                                             <constraint firstItem="etS-zh-JoX" firstAttribute="centerY" secondItem="rrM-qV-Mws" secondAttribute="centerY" id="hNG-5G-YD3"/>
-                                            <constraint firstItem="yVU-0T-Ztz" firstAttribute="leading" secondItem="rrM-qV-Mws" secondAttribute="leading" constant="25" id="jxh-2b-ZzY"/>
                                         </constraints>
                                     </view>
                                 </subviews>

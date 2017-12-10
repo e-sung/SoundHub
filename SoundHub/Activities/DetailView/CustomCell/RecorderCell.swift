@@ -11,7 +11,7 @@ import AudioKitUI
 
 class RecorderCell: UITableViewCell {
 
-    var delegate:UIViewController?
+    var delegate:DetailViewController?
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var inputPlot: AKNodeOutputPlot!
     override func awakeFromNib() {
@@ -21,7 +21,7 @@ class RecorderCell: UITableViewCell {
     }
     
     @IBAction private func recordButtonHandler(_ sender: UIButton) {
-        
+        print("adf")
         switch state! {
         case .readyToRecord :
             makeRecordingState()
@@ -39,6 +39,12 @@ class RecorderCell: UITableViewCell {
             recordButton.setTitle("녹음", for: .normal)
             let recordedDuration = RecordConductor.main.player != nil ? RecordConductor.main.player.audioFile.duration  : 0
             if recordedDuration > 0.0 {
+                let alert = UIAlertController(title: "녹음 업로드", message: "녹음을 업로드 하시겠습니까?", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .cancel , handler: { (action) in
+                }))
+                alert.addAction(UIAlertAction(title: "취소", style: .destructive, handler: { (action) in
+                }))
+                delegate?.present(alert, animated: true, completion: nil)
                 RecordConductor.main.recorder.stop()
 //                showMetaInfoSetUpVC()
             }
@@ -72,6 +78,7 @@ class RecorderCell: UITableViewCell {
         recordButton.setTitle("중지", for: .normal)
         inputPlot.color = .red
         state = .recording
+        delegate?.playMusic()
         RecordConductor.main.startRecording()
     }
     
@@ -79,6 +86,7 @@ class RecorderCell: UITableViewCell {
         recordButton.setTitle("듣기", for: .normal)
         state = .readyToPlay
         inputPlot.color = .orange
+        delegate?.pauseMusic()
         RecordConductor.main.stopRecording()
     }
 }

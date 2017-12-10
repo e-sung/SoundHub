@@ -119,6 +119,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             return cell
         }else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "recorderCell", for: indexPath) as! RecorderCell
+            cell.delegate = self
             return cell
         }
     }
@@ -129,7 +130,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         else if Section(rawValue:indexPath.section) == .MixedTracks {
             return CGFloat(post.num_comments * 100)
         }else {
-            return 60
+            return 100
         }
     }
 }
