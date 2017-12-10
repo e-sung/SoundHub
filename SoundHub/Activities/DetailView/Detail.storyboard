@@ -431,6 +431,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C0f-NV-i4s">
                                                 <rect key="frame" x="232" y="15" width="46" height="30"/>
                                                 <state key="normal" backgroundImage="stop"/>
+                                                <connections>
+                                                    <action selector="StopButtonHandler:" destination="1GI-i7-ZL1" eventType="touchUpInside" id="fdg-GA-mbH"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -16,10 +16,12 @@ class DetailViewController: UIViewController{
     var post:Post!
     var masterWaveCell:MasterWaveFormViewCell!
     var mixedCommentsContainer : MixedTracksContainerCell!
+    var recorderCell: RecorderCell?
     var masterAudioRemoteURL:URL!
+    var masterAudioLocalURL:URL?
     private var currentPhase = Phase.Ready
 
-    var masterPlayer:AVPlayer!
+    var masterPlayer:AVPlayer?
     private var playMode:PlayMode = .master
     
     private enum PlayMode{
@@ -40,22 +42,40 @@ class DetailViewController: UIViewController{
         }
     }
     
+    @IBAction func StopButtonHandler(_ sender: UIButton) {
+        stopMusic()
+    }
     func stopMusic(){
-        
+        if playMode == .mixed {
+         //   mixedCommentsContainer.stopMusic()
+        }
+        else {
+            masterPlayer?.pause()
+            masterPlayer?.seek(to: CMTimeMake(0, 1))
+            playButton.setImage(#imageLiteral(resourceName: "play"), for: .normal)
+//            if let url = masterWaveCell.masterAudioURL{
+//                masterPlayer = AVPlayer(url: url)
+//            }else {  }
+        }
+//        func stop(inout avPlayer:AVPlayer?){
+//            let url = avPlayer?.currentItem?.asset.
+//            avPlayer?.pause()
+//            avPlayer = nil
+//        }
     }
     
     func playMusic(){
         playButton.setImage( #imageLiteral(resourceName: "pause"), for: .normal)
         currentPhase = .Playing
         if playMode == .mixed { mixedCommentsContainer.playMusic() }
-        else { masterPlayer.play() }
+        else { masterPlayer?.play() }
     }
     
     func pauseMusic(){
         playButton.setImage(#imageLiteral(resourceName: "play"), for: .normal)
         currentPhase = .Ready
         if playMode == .mixed{ mixedCommentsContainer.pauseMusic() }
-        else{ masterPlayer.pause() }
+        else{ masterPlayer?.pause() }
     }
 
     override func viewDidLoad() {
@@ -64,6 +84,10 @@ class DetailViewController: UIViewController{
         detailTV.dataSource = self
         
         masterAudioRemoteURL = URL(string: post.author_track.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        recorderCell?.inputPlot.node?.avAudioNode.removeTap(onBus: 0)
     }
 }
 
@@ -107,6 +131,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             let cell = tableView.dequeueReusableCell(withIdentifier: "masterWaveCell", for: indexPath)
             return cell.becomeMasterWaveCell(with: masterAudioRemoteURL, completion: { (localURL) in
                 self.masterPlayer = AVPlayer(url: localURL)
+                self.masterAudioLocalURL = localURL
                 DispatchQueue.main.async(execute: { self.playButton.isEnabled = true })
             })
         }
@@ -124,6 +149,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         }else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "recorderCell", for: indexPath) as! RecorderCell
             cell.delegate = self
+            recorderCell = cell
             return cell
         }
     }

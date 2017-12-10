@@ -89,4 +89,5 @@ class RecorderCell: UITableViewCell {
         delegate?.pauseMusic()
         RecordConductor.main.stopRecording()
     }
+    
 }
