@@ -44,56 +44,89 @@
                                 <rect key="frame" x="0.0" y="30" width="300" height="150"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="yeq-wX-GZM">
-                                        <rect key="frame" x="0.0" y="126" width="300" height="24"/>
+                                        <rect key="frame" x="0.0" y="110" width="300" height="40"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B91-uI-Mqp">
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="24"/>
-                                                <state key="normal" image="ic_account_box"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                        <color key="value" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                        <real key="value" value="1"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="3"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <segue destination="Qam-ff-f9z" kind="presentation" identifier="sideMenuToProfile" id="ULM-Vb-ZIS"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lrv-r2-fdJ">
-                                                <rect key="frame" x="100" y="0.0" width="100" height="24"/>
-                                                <state key="normal" image="ic_home"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                        <color key="value" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                        <real key="value" value="1"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="3"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xAs-Xw-7HU">
-                                                <rect key="frame" x="200" y="0.0" width="100" height="24"/>
-                                                <state key="normal" image="ic_mail_outline"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                        <color key="value" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                        <real key="value" value="1"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="3"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yzF-dJ-STX">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="40"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B91-uI-Mqp">
+                                                        <rect key="frame" x="30" y="0.0" width="40" height="40"/>
+                                                        <state key="normal" backgroundImage="profile"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                <real key="value" value="0.0"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="3"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <segue destination="Qam-ff-f9z" kind="presentation" identifier="sideMenuToProfile" id="ULM-Vb-ZIS"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="B91-uI-Mqp" firstAttribute="width" secondItem="yzF-dJ-STX" secondAttribute="height" multiplier="1:1" id="9Yy-Dm-zGq"/>
+                                                    <constraint firstItem="B91-uI-Mqp" firstAttribute="height" secondItem="yzF-dJ-STX" secondAttribute="height" id="ZUc-ji-cua"/>
+                                                    <constraint firstItem="B91-uI-Mqp" firstAttribute="centerY" secondItem="yzF-dJ-STX" secondAttribute="centerY" id="fd3-q7-xTZ"/>
+                                                    <constraint firstItem="B91-uI-Mqp" firstAttribute="centerX" secondItem="yzF-dJ-STX" secondAttribute="centerX" id="tEC-Pv-SJG"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V6m-CO-W3c">
+                                                <rect key="frame" x="100" y="0.0" width="100" height="40"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lrv-r2-fdJ">
+                                                        <rect key="frame" x="30" y="0.0" width="40" height="40"/>
+                                                        <state key="normal" backgroundImage="home page"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                <real key="value" value="0.0"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="3"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="Lrv-r2-fdJ" firstAttribute="centerY" secondItem="V6m-CO-W3c" secondAttribute="centerY" id="LR3-fg-pCi"/>
+                                                    <constraint firstItem="Lrv-r2-fdJ" firstAttribute="height" secondItem="V6m-CO-W3c" secondAttribute="height" id="gGV-65-7hf"/>
+                                                    <constraint firstItem="Lrv-r2-fdJ" firstAttribute="centerX" secondItem="V6m-CO-W3c" secondAttribute="centerX" id="gzW-2v-gyc"/>
+                                                    <constraint firstItem="Lrv-r2-fdJ" firstAttribute="width" secondItem="V6m-CO-W3c" secondAttribute="height" multiplier="1:1" id="ljE-3v-Cco"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tDH-zT-c9q">
+                                                <rect key="frame" x="200" y="0.0" width="100" height="40"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xAs-Xw-7HU">
+                                                        <rect key="frame" x="30" y="0.0" width="40" height="40"/>
+                                                        <state key="normal" image="mail"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                <real key="value" value="0.0"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="3"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="xAs-Xw-7HU" firstAttribute="centerY" secondItem="tDH-zT-c9q" secondAttribute="centerY" id="0Pu-44-Lvr"/>
+                                                    <constraint firstItem="xAs-Xw-7HU" firstAttribute="height" secondItem="tDH-zT-c9q" secondAttribute="height" id="RhZ-Aa-8Zx"/>
+                                                    <constraint firstItem="xAs-Xw-7HU" firstAttribute="centerX" secondItem="tDH-zT-c9q" secondAttribute="centerX" id="Xw4-4w-P1w"/>
+                                                    <constraint firstItem="xAs-Xw-7HU" firstAttribute="width" secondItem="tDH-zT-c9q" secondAttribute="height" multiplier="1:1" id="z2C-2S-akN"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1VT-dC-BDL">
@@ -125,6 +158,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="yeq-wX-GZM" firstAttribute="top" secondItem="1VT-dC-BDL" secondAttribute="bottom" constant="10" id="1c8-nG-EuO"/>
                                     <constraint firstItem="1VT-dC-BDL" firstAttribute="top" secondItem="pDK-cg-ezQ" secondAttribute="top" id="4BH-KA-Dt8"/>
                                     <constraint firstItem="h9I-fv-WSY" firstAttribute="leading" secondItem="1VT-dC-BDL" secondAttribute="trailing" constant="10" id="FVw-hp-s8V"/>
                                     <constraint firstItem="h9I-fv-WSY" firstAttribute="centerY" secondItem="1VT-dC-BDL" secondAttribute="centerY" id="HT3-bK-2yB"/>
@@ -134,6 +168,14 @@
                                     <constraint firstAttribute="height" constant="150" id="o14-bJ-5Ru"/>
                                     <constraint firstItem="1VT-dC-BDL" firstAttribute="leading" secondItem="pDK-cg-ezQ" secondAttribute="leading" id="wTE-dH-p3l"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kF9-uD-Atn">
                                 <rect key="frame" x="176" y="599" width="104" height="48"/>
@@ -331,11 +373,11 @@
     </scenes>
     <resources>
         <image name="guitar_main" width="960" height="562"/>
-        <image name="ic_account_box" width="24" height="24"/>
-        <image name="ic_home" width="24" height="24"/>
-        <image name="ic_mail_outline" width="24" height="24"/>
+        <image name="home page" width="100" height="100"/>
         <image name="ic_settings" width="24" height="24"/>
         <image name="iu_profile" width="128" height="128"/>
+        <image name="mail" width="100" height="100"/>
+        <image name="profile" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ngR-Uh-qLE"/>
