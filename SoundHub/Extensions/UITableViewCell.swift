@@ -10,9 +10,9 @@ import Foundation
 import UIKit
 
 extension UITableViewCell{
-    func becomeAudioCommentCell(commentInfo:Comment, delegate:AudioCommentCellDelegate)->AudioCommentCell{
+    func becomeAudioCommentCell(with comment:Comment, delegate:AudioCommentCellDelegate)->AudioCommentCell{
         let commentCell = self as! AudioCommentCell
-        commentCell.commentInfo = commentInfo
+        commentCell.comment = comment
         commentCell.delegate = delegate
         return commentCell
     }
@@ -20,7 +20,9 @@ extension UITableViewCell{
     func becomeMasterWaveCell(with audioURL:URL, completion:@escaping (URL)->Void)->MasterWaveFormViewCell{
         let masterWaveCell = self as! MasterWaveFormViewCell
         NetworkController.main.downloadAudio(from: audioURL) { (localURL) in
-            masterWaveCell.masterAudioURL = localURL
+            if masterWaveCell.masterAudioURL == nil {
+                masterWaveCell.masterAudioURL = localURL
+            }
             completion(localURL)
         }
         return masterWaveCell

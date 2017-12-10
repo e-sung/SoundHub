@@ -59,30 +59,6 @@ class NetworkController{
             completion()
         }.resume()
     }
-    
-    func fetchGenreHomePage(genre:Genre){
-        let url = URL(string: "\(genre.rawValue.lowercased())/", relativeTo: generalHomeURL)!
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let error = error { print(error) }
-            guard let data = data else { print("data is invalid"); return}
-            guard let homePageData = try? JSONDecoder().decode(HomePage.self, from: data) else {
-                print("decoding failed")
-                return
-            }
-            print(homePageData)
-            DataCenter.main.homePages[.genre] = homePageData
-        }.resume()
-    }
-    
-    func fetchRecentPost(on tableView:UITableView){
-        URLSession.shared.dataTask(with: postURL) { (data, response, error) in
-            if let error = error { print(error) }
-            guard let data = data else { print("data is invalid"); return}
-            guard let postlist = try? JSONDecoder().decode([Post].self, from: data) else { print("Decoding failed");return }
-            DataCenter.main.recentPosts = postlist
-            DispatchQueue.main.async(execute: { tableView.reloadData() })
-        }.resume()
-    }
 
     func sendRequest(with signUpContent:signUpRequest, from VC:UIViewController){
         guard let signUpData = try? JSONEncoder().encode(signUpContent) else {return}
@@ -142,22 +118,37 @@ class NetworkController{
         if FileManager.default.fileExists(atPath: destinationUrl.path) { done(destinationUrl); return }
         
         URLSession.shared.downloadTask(with: remoteURL, completionHandler: { (location, response, error) -> Void in
+            
             guard let location = location, error == nil else { return }
             do {
                 try FileManager.default.moveItem(at: location, to: destinationUrl)
                 done(destinationUrl)
-            } catch let error as NSError {
-                print(error)
-            }
+            } catch let error as NSError { print(error) }
         }).resume()
     }
     
+    func sendLikeRequest(on postId:Int, completion:@escaping (_ num_liked:Int)->Void){
+        let url = URL(string: "\(postId)/like/", relativeTo: postURL)!
+        var request = generatePostRequest(with: url, and: nil)
+        
+        request.addValue("Token \(UserDefaults.standard.string(forKey: token)!)", forHTTPHeaderField: "Authorization")
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard let data = data else { print("data is corrupted") ; return }
+            do{
+                let post = try JSONDecoder().decode([String:Post].self, from: data)
+                completion(post["post"]!.num_liked)
+            }catch let err as NSError { print(err) }
+        }.resume()
+    }
+    
 
-    func generatePostRequest(with url:URL, and body:Data)->URLRequest{
+    func generatePostRequest(with url:URL, and body:Data?)->URLRequest{
         var request = URLRequest(url: url)
         request.addValue("application/json", forHTTPHeaderField: "Content-type")
         request.httpMethod = "POST"
-        request.httpBody = body
+        if let body = body {
+            request.httpBody = body
+        }
         return request
     }
 }

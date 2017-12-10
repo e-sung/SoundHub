@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import AVFoundation
 
 class AudioCommentCell: UITableViewCell {
     
+    var player:AVPlayer!
     
     @IBOutlet weak private var profileImageView: UIImageView!
     @IBOutlet weak private var InstrumentLB: UILabel!
@@ -17,12 +19,13 @@ class AudioCommentCell: UITableViewCell {
     @IBOutlet weak var toggleSwitch: UISwitch!
     
     @IBAction private func switchToggleHandler(_ sender: UISwitch) {
-        delegate?.didSwitchToggled(to: sender.isOn, by: self.tag, of: commentInfo.instrument)
+        if sender.isOn { player.volume = 1.0 }
+        else { player.volume = 0.0 }
     }
     
     var delegate:AudioCommentCellDelegate?
 
-    var commentInfo:Comment{
+    var comment:Comment{
         get{
             return _commentInfo
         }
@@ -30,6 +33,10 @@ class AudioCommentCell: UITableViewCell {
            _commentInfo = newVal
             InstrumentLB.text = newVal.instrument
             nickNameLB.text = newVal.author
+            let remoteURL = URL(string: newVal.comment_track.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)!
+            NetworkController.main.downloadAudio(from: remoteURL) { (localURL) in
+                self.player = AVPlayer(url: localURL)
+            }
         }
     }
     private var _commentInfo:Comment!
