@@ -421,19 +421,27 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                 <color key="tintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" image="ic_play_circle_outline_white">
+                                                <state key="normal" image="play">
                                                     <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="playButtonHandler:" destination="1GI-i7-ZL1" eventType="touchUpInside" id="CZm-uy-uKT"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C0f-NV-i4s">
+                                                <rect key="frame" x="232" y="15" width="46" height="30"/>
+                                                <state key="normal" backgroundImage="stop"/>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="etS-zh-JoX" firstAttribute="height" secondItem="rrM-qV-Mws" secondAttribute="height" id="L8X-uw-G5C"/>
+                                            <constraint firstItem="C0f-NV-i4s" firstAttribute="width" secondItem="etS-zh-JoX" secondAttribute="width" id="3Yw-ju-XKN"/>
+                                            <constraint firstItem="C0f-NV-i4s" firstAttribute="leading" secondItem="etS-zh-JoX" secondAttribute="trailing" constant="15" id="3dg-F7-wBI"/>
+                                            <constraint firstItem="etS-zh-JoX" firstAttribute="height" secondItem="rrM-qV-Mws" secondAttribute="height" multiplier="0.8" id="L8X-uw-G5C"/>
                                             <constraint firstItem="etS-zh-JoX" firstAttribute="centerX" secondItem="rrM-qV-Mws" secondAttribute="centerX" id="PMd-e4-e52"/>
                                             <constraint firstItem="etS-zh-JoX" firstAttribute="centerY" secondItem="rrM-qV-Mws" secondAttribute="centerY" id="hNG-5G-YD3"/>
+                                            <constraint firstItem="C0f-NV-i4s" firstAttribute="height" secondItem="etS-zh-JoX" secondAttribute="height" id="jUc-nY-ed4"/>
+                                            <constraint firstItem="C0f-NV-i4s" firstAttribute="centerY" secondItem="etS-zh-JoX" secondAttribute="centerY" id="scu-Ae-kzr"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -478,8 +486,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_play_circle_outline_white" width="24" height="24"/>
         <image name="iu_profile" width="128" height="128"/>
         <image name="modernTImes" width="316" height="316"/>
+        <image name="play" width="100" height="100"/>
+        <image name="stop" width="100" height="100"/>
     </resources>
 </document>

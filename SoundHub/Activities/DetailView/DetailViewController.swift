@@ -40,15 +40,19 @@ class DetailViewController: UIViewController{
         }
     }
     
+    func stopMusic(){
+        
+    }
+    
     func playMusic(){
-        playButton.setImage(#imageLiteral(resourceName: "ic_pause_circle_outline_white"), for: .normal)
+        playButton.setImage( #imageLiteral(resourceName: "pause"), for: .normal)
         currentPhase = .Playing
         if playMode == .mixed { mixedCommentsContainer.playMusic() }
         else { masterPlayer.play() }
     }
     
     func pauseMusic(){
-        playButton.setImage(#imageLiteral(resourceName: "ic_play_circle_outline_white"), for: .normal)
+        playButton.setImage(#imageLiteral(resourceName: "play"), for: .normal)
         currentPhase = .Ready
         if playMode == .mixed{ mixedCommentsContainer.pauseMusic() }
         else{ masterPlayer.pause() }
