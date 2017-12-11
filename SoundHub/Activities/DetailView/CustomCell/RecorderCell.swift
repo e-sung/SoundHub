@@ -12,12 +12,15 @@ import AudioKitUI
 class RecorderCell: UITableViewCell {
 
     var delegate:DetailViewController?
+//    var playBarVC:PlayBarViewController!
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var inputPlot: AKNodeOutputPlot!
     override func awakeFromNib() {
         super.awakeFromNib()
         state = .readyToRecord
         inputPlot.node = RecordConductor.main.mic
+        let storyboard = UIStoryboard(name: "Detail", bundle: nil)
+//        playBarVC = storyboard.instantiateViewController(withIdentifier: "playBar") as! PlayBarViewController
     }
     
     @IBAction private func recordButtonHandler(_ sender: UIButton) {
@@ -72,9 +75,9 @@ class RecorderCell: UITableViewCell {
                     NetworkController.main.uploadAudioComment(In: outputURL, to: postId, instrument: "Guitar", completion: {
                         NetworkController.main.fetchPost(id: postId, completion: { (post) in
                             self.delegate?.post = post
-                            self.delegate?.mixedCommentsContainer.allComments = post.comment_tracks
+//                            self.playBarVC.mixedTrackContainer?.allComments = post.comment_tracks
                             DispatchQueue.main.async {
-                                self.delegate?.mixedCommentsContainer.commentTV.reloadData()
+//                                self.playBarVC.mixedTrackContainer?.commentTV.reloadData()
                             }
                         })
                     })
@@ -89,7 +92,7 @@ class RecorderCell: UITableViewCell {
         recordButton.setTitle("중지", for: .normal)
         inputPlot.color = .red
         state = .recording
-        delegate?.playMusic()
+//        playBarVC.playMusic()
         RecordConductor.main.startRecording()
     }
     
@@ -97,7 +100,7 @@ class RecorderCell: UITableViewCell {
         recordButton.setTitle("듣기", for: .normal)
         state = .readyToPlay
         inputPlot.color = .orange
-        delegate?.pauseMusic()
+//        playBarVC.pauseMusic()
         RecordConductor.main.stopRecording()
     }
     

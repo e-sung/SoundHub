@@ -32,9 +32,17 @@ class ChartViewController: UIViewController{
         mainTV.dataSource = self
     }
     override func viewDidAppear(_ animated: Bool) {
-        refreshData()
         if DataCenter.main.homePages[category]?.recent_posts.count == 0{
             performSegue(withIdentifier: "showLoadingIndicatingView", sender:self)
+        }
+        NetworkController.main.fetchHomePage(of: category, with: option) {
+            DispatchQueue.main.async {
+                self.refreshData()
+                if let loadIndicator = self.presentedViewController as? LoadingIndicatorViewController {
+                    loadIndicator.activityIndicator.stopAnimating()
+                    loadIndicator.dismiss(animated: true, completion: nil)
+                }
+            }
         }
     }
 }

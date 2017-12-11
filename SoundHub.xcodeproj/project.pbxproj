@@ -68,6 +68,7 @@
 		FFCF82DF1FC95D66003B7861 /* soundHubPracticeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCF82DE1FC95D66003B7861 /* soundHubPracticeUITests.swift */; };
 		FFCF82ED1FC95E07003B7861 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCF82EC1FC95E07003B7861 /* EntryViewController.swift */; };
 		FFCF82EF1FC95E6D003B7861 /* LogIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFCF82EE1FC95E6D003B7861 /* LogIn.storyboard */; };
+		FFD500AC1FDE509F008464A8 /* PlayBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD500AB1FDE509F008464A8 /* PlayBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -161,6 +162,7 @@
 		FFCF82E01FC95D66003B7861 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFCF82EC1FC95E07003B7861 /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
 		FFCF82EE1FC95E6D003B7861 /* LogIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LogIn.storyboard; sourceTree = "<group>"; };
+		FFD500AB1FDE509F008464A8 /* PlayBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -316,6 +318,7 @@
 			isa = PBXGroup;
 			children = (
 				FF9A84DC1FC9612200AC4780 /* MainTabBar.storyboard */,
+				FFD500AB1FDE509F008464A8 /* PlayBarController.swift */,
 				FF9A84DF1FC961AF00AC4780 /* MainTabBarController.swift */,
 			);
 			path = MainTabBar;
@@ -742,6 +745,7 @@
 				FF3B20B11FCA98C50019F87A /* ChartViewController.swift in Sources */,
 				FF1054321FD518BA00A46443 /* AudioRecorderViewController.swift in Sources */,
 				FF3B20C91FCC434B0019F87A /* ProfileSetUpViewController.swift in Sources */,
+				FFD500AC1FDE509F008464A8 /* PlayBarController.swift in Sources */,
 				FF0280621FD8ECD300C0013A /* UIView.swift in Sources */,
 				FF000D991FD11F7F00678999 /* DataCenter.swift in Sources */,
 				FF9D18541FDA6012008D5FD1 /* MixedTracksContainerCell.swift in Sources */,
