@@ -414,9 +414,6 @@
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Imt-dF-c6b">
                                         <rect key="frame" x="0.0" y="1120" width="375" height="60"/>
                                         <color key="backgroundColor" red="0.090183012189999995" green="0.090205498039999998" blue="0.090178228910000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <connections>
-                                            <segue destination="t6A-uF-YoM" kind="embed" id="6lm-8Y-6DX"/>
-                                        </connections>
                                     </containerView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.086261831220000001" green="0.086283676330000003" blue="0.086257167159999995" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
@@ -458,62 +455,9 @@
             </objects>
             <point key="canvasLocation" x="248.80000000000001" y="98.050974512743636"/>
         </scene>
-        <!--Play Bar View Controller-->
-        <scene sceneID="BNG-4m-A75">
-            <objects>
-                <viewController storyboardIdentifier="playBar" useStoryboardIdentifierAsRestorationIdentifier="YES" id="t6A-uF-YoM" customClass="PlayBarViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="95p-f7-klp">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="2s0-cP-Lzj">
-                                <rect key="frame" x="127" y="0.0" width="120" height="60"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dpq-h6-iWd">
-                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="dpq-h6-iWd" secondAttribute="height" multiplier="1:1" id="3WT-1Z-SiI"/>
-                                        </constraints>
-                                        <state key="normal" backgroundImage="play"/>
-                                        <connections>
-                                            <action selector="playButtonHandler:" destination="t6A-uF-YoM" eventType="touchUpInside" id="drB-fq-wxt"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DiK-fr-o6V">
-                                        <rect key="frame" x="60" y="0.0" width="60" height="60"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="DiK-fr-o6V" secondAttribute="height" multiplier="1:1" id="I7V-Lp-Jip"/>
-                                        </constraints>
-                                        <state key="normal" backgroundImage="stop"/>
-                                        <connections>
-                                            <action selector="stopButtonHandler:" destination="t6A-uF-YoM" eventType="touchUpInside" id="28k-Qn-7uA"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="2s0-cP-Lzj" firstAttribute="height" secondItem="Dh8-Gr-yNV" secondAttribute="height" id="OFl-RW-uGl"/>
-                            <constraint firstItem="2s0-cP-Lzj" firstAttribute="centerX" secondItem="Dh8-Gr-yNV" secondAttribute="centerX" id="Szx-kV-J5O"/>
-                            <constraint firstItem="2s0-cP-Lzj" firstAttribute="centerY" secondItem="Dh8-Gr-yNV" secondAttribute="centerY" id="t0g-is-avc"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="Dh8-Gr-yNV"/>
-                    </view>
-                    <connections>
-                        <outlet property="playButton" destination="dpq-h6-iWd" id="J8G-30-FK6"/>
-                        <outlet property="stopButton" destination="DiK-fr-o6V" id="q3E-qE-jiy"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="52m-cg-DxM" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-457" y="633"/>
-        </scene>
     </scenes>
     <resources>
         <image name="iu_profile" width="128" height="128"/>
         <image name="modernTImes" width="316" height="316"/>
-        <image name="play" width="100" height="100"/>
-        <image name="stop" width="100" height="100"/>
     </resources>
 </document>

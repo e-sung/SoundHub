@@ -9,16 +9,30 @@
 import UIKit
 import AVFoundation
 
-class PlayBarViewController: UIViewController {
+class PlayBarController{
     
-    private var currentPhase:Phase = .Ready
-    private var playMode:PlayMode = .master
-    var masterAudioPlayer:AVPlayer?
+    var currentPhase:PlayPhase = .Ready
+    var playMode:PlayMode = .master
+    var masterAudioPlayer:AVPlayer?{
+        didSet(oldval){
+            playButton?.isEnabled = true
+            stopButton?.isEnabled = true
+        }
+    }
     var mixedTrackContainer:MixedTracksContainerCell?
 
-    @IBOutlet weak var playButton: UIButton!
-    @IBOutlet weak var stopButton: UIButton!
-    @IBAction func playButtonHandler(_ sender: UIButton) {
+    var playButton: UIButton?{
+        didSet(oldval){
+            playButton?.addTarget(self, action: #selector(playButtonHandler), for: .touchUpInside)
+        }
+    }
+    var stopButton: UIButton?{
+        didSet(oldVal){
+            stopButton?.addTarget(self, action: #selector(stopMusic), for: .touchUpInside)
+        }
+    }
+    
+    @objc func playButtonHandler(_ sender: UIButton) {
         if currentPhase == .Ready {
             playMusic()
         }else if currentPhase == .Playing{
@@ -26,48 +40,38 @@ class PlayBarViewController: UIViewController {
         }
     }
     func playMusic(){
-        
-        playButton.setImage( #imageLiteral(resourceName: "pause"), for: .normal)
+        playButton?.setBackgroundImage(#imageLiteral(resourceName: "pause"), for: .normal)
         currentPhase = .Playing
         if playMode == .mixed { mixedTrackContainer?.playMusic() }
         else { masterAudioPlayer?.play() }
     }
     func pauseMusic(){
-        playButton.setImage(#imageLiteral(resourceName: "play"), for: .normal)
+        playButton?.setBackgroundImage(#imageLiteral(resourceName: "play"), for: .normal)
         currentPhase = .Ready
         if playMode == .mixed{ mixedTrackContainer?.pauseMusic() }
         else{ masterAudioPlayer?.pause() }
     }
-    func stopMusic(){
+    
+    @objc func stopMusic(){
         if playMode == .mixed { mixedTrackContainer?.stopMusic() }
         else { masterAudioPlayer?.stop() }
-        playButton.setImage(#imageLiteral(resourceName: "play"), for: .normal)
-    }
+        playButton?.setBackgroundImage(#imageLiteral(resourceName: "play"), for: .normal)
+    
     func toggle(to mode:Bool){
         stopMusic()
         if mode == true { playMode = .mixed} else { playMode = .master}
         stopMusic()
     }
-
-    @IBAction func stopButtonHandler(_ sender: UIButton) {
-        stopMusic()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
 }
 
 
-extension PlayBarViewController{
-    private enum Phase{
+extension PlayBarController{
+    enum PlayPhase{
         case Ready
         case Playing
         case Recording
     }
-    private enum PlayMode{
+    enum PlayMode{
         case master
         case mixed
     }

@@ -9,9 +9,10 @@
 import UIKit
 
 class MainTabBarController: UITabBarController{
+    let playBarController:PlayBarController = PlayBarController()
     let mainTabBarView = UIView()
     let uploadMusicButton = UIButton()
-    let tabBarItems:[String] = ["Genre", "Instruments"]
+    let tabBarItems:[UIImage] = [#imageLiteral(resourceName: "play"),#imageLiteral(resourceName: "stop")]
     var tabBarButtons:[UIButton] = []
     
     private var heightOfTabBar:CGFloat!
@@ -21,7 +22,7 @@ class MainTabBarController: UITabBarController{
         initializeGlobalProperties()
         setUploadButton()
         self.view.addSubview(uploadMusicButton)
-//        setUpperTabBar()
+        setUpperTabBar()
 //        setUpSwipeRecognizer()
         self.tabBar.isHidden = true
     }
@@ -70,26 +71,42 @@ extension MainTabBarController{
     }
     
     private func setUpperTabBar(){
-        mainTabBarView.frame = CGRect(x: 0, y: heightOfTabBar, width: self.view.frame.width, height: heightOfTabBar)
+        mainTabBarView.frame = CGRect(x: 0, y: self.view.frame.height - heightOfTabBar, width: self.view.frame.width, height: heightOfTabBar)
         mainTabBarView.backgroundColor = .black
         self.view.addSubview(mainTabBarView)
-        setUpTabBarButtons(with: tabBarItems.count)
+        
+        let buttonSize = CGSize(width: heightOfTabBar*0.8, height: heightOfTabBar*0.8)
+        let playButton = UIButton()
+        let playButtonOrigin = CGPoint(x: mainTabBarView.frame.width/2 - buttonSize.width, y: heightOfTabBar*0.2)
+        playButton.frame = CGRect(origin: playButtonOrigin, size: buttonSize)
+        playButton.setBackgroundImage(#imageLiteral(resourceName: "play"), for: .normal)
+        playButton.isEnabled = false
+        playBarController.playButton = playButton
+        mainTabBarView.addSubview(playButton)
+        
+        let stopButton = UIButton()
+        stopButton.setBackgroundImage(#imageLiteral(resourceName: "stop"), for: .normal)
+        let stopButtonOrigin = CGPoint(x: mainTabBarView.frame.width/2, y: heightOfTabBar*0.2)
+        stopButton.frame = CGRect(origin: stopButtonOrigin, size: buttonSize)
+        stopButton.isEnabled = false
+        playBarController.stopButton = stopButton
+        mainTabBarView.addSubview(stopButton)
+//        setUpTabBarButtons(with: tabBarItems.count)
     }
     
     private func setUpTabBarButtons(with count:Int){
-        tabBarButtons = generateArrayOfButtons(with: count)
-        set(buttons: tabBarButtons, height: heightOfTabBar)
-        set(titles: tabBarItems, on: tabBarButtons)
-        setFontColor(of: tabBarButtons, with: .white)
-        setTargetAction(of: tabBarButtons, with: #selector(changeTabbar))
-        setTags(on: tabBarButtons)
-        add(buttons: tabBarButtons, on: mainTabBarView)
+//        tabBarButtons = generateArrayOfButtons(with: count)
+//        set(buttons: tabBarButtons, height: heightOfTabBar)
+//        set(images: tabBarItems, on: tabBarButtons)
+//        setTargetAction(of: tabBarButtons, with: #selector(changeTabbar))
+//        setTags(on: tabBarButtons)
+//        add(buttons: tabBarButtons, on: mainTabBarView)
     }
     
-    private func set(titles:[String], on buttons:[UIButton]){
-        if titles.count != buttons.count {print("Length of titles and buttons are not equal!!!")}
-        for i in 0..<titles.count{
-            buttons[i].setTitle(titles[i], for: .normal)
+    private func set(images:[UIImage], on buttons:[UIButton]){
+        if images.count != buttons.count {print("Length of titles and buttons are not equal!!!")}
+        for i in 0..<images.count{
+            buttons[i].setBackgroundImage(images[i], for: .normal)
         }
     }
     
@@ -98,13 +115,7 @@ extension MainTabBarController{
             buttons[i].frame = CGRect(x: CGFloat(i)*widthOfButton, y: 0, width: widthOfButton, height: height)
         }
     }
-    
-    private func setFontColor(of buttons:[UIButton], with color:UIColor){
-        for button in buttons{
-            button.titleLabel?.textColor = color
-        }
-    }
-    
+
     private func setTargetAction(of buttons:[UIButton], with action:Selector){
         for button in buttons{
             button.addTarget(self, action: action, for: .touchUpInside)

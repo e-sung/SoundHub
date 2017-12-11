@@ -242,7 +242,6 @@
 			children = (
 				FFC32AE91FCFBFEA00651A31 /* CustomCell */,
 				FF3B20B71FCAC92D0019F87A /* Detail.storyboard */,
-				FFD500AB1FDE509F008464A8 /* PlayBarViewController.swift */,
 				FF3B20B91FCACD4A0019F87A /* DetailViewController.swift */,
 			);
 			path = DetailView;
@@ -319,6 +318,7 @@
 			isa = PBXGroup;
 			children = (
 				FF9A84DC1FC9612200AC4780 /* MainTabBar.storyboard */,
+				FFD500AB1FDE509F008464A8 /* PlayBarViewController.swift */,
 				FF9A84DF1FC961AF00AC4780 /* MainTabBarController.swift */,
 			);
 			path = MainTabBar;
