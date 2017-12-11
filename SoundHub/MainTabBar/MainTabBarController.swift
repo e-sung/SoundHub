@@ -63,7 +63,7 @@ extension MainTabBarController{
     }
     
     private func setUploadButton(){
-        uploadMusicButton.frame = CGRect(x: self.view.frame.width - 70, y: self.view.frame.height-70, width: 60, height: 60)
+        uploadMusicButton.frame = CGRect(x: self.view.frame.width - 70, y: self.view.frame.height-(70 + heightOfTabBar), width: 60, height: 60)
         uploadMusicButton.setTitle("+", for: .normal)
         uploadMusicButton.setTitleColor(.green, for: .normal)
         uploadMusicButton.titleLabel?.font = uploadMusicButton.titleLabel?.font.withSize(40)

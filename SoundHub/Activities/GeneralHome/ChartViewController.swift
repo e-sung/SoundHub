@@ -133,8 +133,6 @@ extension ChartViewController{
             }else{
                 nextVC.post = DataCenter.main.homePages[category]!.recent_posts[indexPath.item]
             }
-        }else if let nextVC = segue.destination as? LoadingIndicatorViewController{
-            nextVC.previousVC = self
         }
     }
 }
