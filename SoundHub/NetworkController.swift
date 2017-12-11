@@ -55,7 +55,7 @@ class NetworkController{
             guard let data = data else {print ("data is corrupted") ; return}
             guard let post = try? JSONDecoder().decode(Post.self, from: data) else { return }
             completion(post)
-        }
+        }.resume()
     }
     func fetchHomePage(of category:Categori, with option:String, completion:@escaping()->Void){
         var entryURL:URL?

@@ -47,7 +47,6 @@ class RecorderCell: UITableViewCell {
                 }))
                 delegate?.present(alert, animated: true, completion: nil)
                 RecordConductor.main.recorder.stop()
-//                showMetaInfoSetUpVC()
             }
         }
     }
@@ -62,12 +61,6 @@ class RecorderCell: UITableViewCell {
     
     private var state:State!
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
     private func export(asset:AVAsset){
         let outputURL = URL(string: "comment.m4a".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)! , relativeTo: DataCenter.documentsDirectoryURL)!
         if let session = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetAppleM4A){
@@ -79,7 +72,10 @@ class RecorderCell: UITableViewCell {
                     NetworkController.main.uploadAudioComment(In: outputURL, to: postId, instrument: "Guitar", completion: {
                         NetworkController.main.fetchPost(id: postId, completion: { (post) in
                             self.delegate?.post = post
-                            self.delegate?.detailTV.reloadData()
+                            self.delegate?.mixedCommentsContainer.allComments = post.comment_tracks
+                            DispatchQueue.main.async {
+                                self.delegate?.mixedCommentsContainer.commentTV.reloadData()
+                            }
                         })
                     })
                 })
@@ -89,13 +85,6 @@ class RecorderCell: UITableViewCell {
         }
     }
 
-//    private func showMetaInfoSetUpVC(){
-//        let storyBoard = UIStoryboard(name: "Entry", bundle: nil)
-//        let metaInfoSetUpVC = storyBoard.instantiateViewController(withIdentifier: "SetUpMetaInfoViewController") as! SetUpMetaInfoViewController
-//        metaInfoSetUpVC.player = RecordConductor.main.player
-//        delegate?.present(metaInfoSetUpVC, animated: true, completion: nil)
-//    }
-    
     private func makeRecordingState(){
         recordButton.setTitle("중지", for: .normal)
         inputPlot.color = .red
