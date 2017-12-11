@@ -12,6 +12,7 @@ class PopularMusicianContainerCell: UITableViewCell, UICollectionViewDataSource,
 
     @IBOutlet weak var popularMusicianFlowLayout: UICollectionView!
     var category:Categori = .general
+    var delegate:ChartViewController?
     override func awakeFromNib() {
         super.awakeFromNib()
         popularMusicianFlowLayout.delegate = self
@@ -34,5 +35,13 @@ class PopularMusicianContainerCell: UITableViewCell, UICollectionViewDataSource,
             cell.artistNameLabel.text = "\(userName)"
         }
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let musician = DataCenter.main.homePages[category]!.pop_users[indexPath.item]
+        let storyboard = UIStoryboard(name: "SideMenu", bundle: nil)
+        let profileVC = storyboard.instantiateViewController(withIdentifier: "profileViewController") as! ProfileViewController
+        profileVC.userInfo = musician
+        delegate?.tabBarController?.present(profileVC, animated: true, completion: nil)
     }
 }

@@ -93,7 +93,9 @@ extension ChartViewController:UITableViewDelegate{
         if Section(rawValue: indexPath.section) == .CategoryTab {
             return tableView.dequeueReusableCell(withIdentifier: "categoryTab", for: indexPath)
         }else if Section(rawValue: indexPath.section) == .PopularMusicians{
-            return tableView.dequeueReusableCell(withIdentifier: "popularMusicianContainerCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "popularMusicianContainerCell", for: indexPath) as! PopularMusicianContainerCell
+            cell.delegate = self
+            return cell
         }else if Section(rawValue: indexPath.section) == .RankingChart{
             posts = DataCenter.main.homePages[category]!.pop_posts
         }else{

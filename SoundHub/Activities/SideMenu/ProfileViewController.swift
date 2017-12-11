@@ -14,6 +14,7 @@ class ProfileViewController: UIViewController{
     private var buttonToChange:UIButton?
     private var headerCell:ProfileHeaderCell!
     private let imagePicker = UIImagePickerController()
+    var userInfo:User?
     
     // MARK: IBActions
     @IBAction private func confirmButtonHandler(_ sender: UIBarButtonItem) {
@@ -40,7 +41,7 @@ class ProfileViewController: UIViewController{
     // MARK: IBOutlets
     @IBOutlet weak private var mainTV: UITableView!
     @IBOutlet weak private var confirmButton: UIBarButtonItem!
-    
+
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,9 +80,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        self.headerCell = tableView.dequeueReusableCell(withIdentifier: "profileHeaderCell", for: indexPath) as! ProfileHeaderCell
-        self.headerCell.delegate = self
-        return self.headerCell
+        headerCell = tableView.dequeueReusableCell(withIdentifier: "profileHeaderCell", for: indexPath) as! ProfileHeaderCell
+        headerCell.delegate = self
+        headerCell.userInfo = self.userInfo
+        return headerCell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -212,7 +212,7 @@
         <!--Profile View Controller-->
         <scene sceneID="yAu-yw-e6A">
             <objects>
-                <viewController id="Qam-ff-f9z" customClass="ProfileViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="profileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Qam-ff-f9z" customClass="ProfileViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="L4o-3L-Xjs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -325,6 +325,7 @@
                                             <outlet property="headerImageButton" destination="e4K-aU-IoP" id="WRT-yD-b3E"/>
                                             <outlet property="nickNameTF" destination="tM6-Ze-Yg3" id="yV0-6g-Fe2"/>
                                             <outlet property="profileImageButton" destination="cdx-mN-D95" id="GdG-OZ-m4H"/>
+                                            <outlet property="settingButton" destination="yxQ-Bt-CPW" id="F1M-cr-4uV"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
