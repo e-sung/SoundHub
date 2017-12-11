@@ -34,6 +34,10 @@ class DetailViewController: UIViewController{
         playBarController = mainTabBar.playBarController
     }
     override func viewWillAppear(_ animated: Bool) {
+        
+        let cancel = UIBarButtonItem(title: "cancel", style: .done, target: self, action: nil)
+        navigationItem.setRightBarButton(cancel, animated: false)
+
         playBarController.stopMusic()
         playBarController.masterAudioPlayer = nil
         playBarController.mixedAudioPlayers = nil
