@@ -64,7 +64,7 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <segue destination="Qam-ff-f9z" kind="presentation" identifier="sideMenuToProfile" id="ULM-Vb-ZIS"/>
+                                                            <action selector="profileButtonHandler:" destination="dVf-D0-RBE" eventType="touchUpInside" id="EBA-Zm-gIj"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -142,7 +142,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="Qam-ff-f9z" kind="presentation" id="ngR-Uh-qLE"/>
+                                            <action selector="profileImageButtonHandler:" destination="dVf-D0-RBE" eventType="touchUpInside" id="haa-HL-bYD"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h9I-fv-WSY">
@@ -152,7 +152,7 @@
                                             <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="Qam-ff-f9z" kind="presentation" id="qCF-t8-1qe"/>
+                                            <action selector="nickNameButtonHandler:" destination="dVf-D0-RBE" eventType="touchUpInside" id="qXm-Ay-3ND"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -203,6 +203,7 @@
                     <connections>
                         <outlet property="nickNameButton" destination="h9I-fv-WSY" id="GH8-6i-AGI"/>
                         <outlet property="profileImageButton" destination="1VT-dC-BDL" id="OCJ-xI-qil"/>
+                        <segue destination="Qam-ff-f9z" kind="show" identifier="sideMenuToProfileVC" id="9Tp-PR-Sqd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JJZ-1o-Ru6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -380,7 +381,4 @@
         <image name="mail" width="100" height="100"/>
         <image name="profile" width="100" height="100"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="ngR-Uh-qLE"/>
-    </inferredMetricsTieBreakers>
 </document>

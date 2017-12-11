@@ -47,26 +47,20 @@ class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate, UITex
             nickNameTF.text = newVal
         }
     }
+    
+    func refresh(with userInfo:User?){
+        if userInfo == nil {
+            nickName = UserDefaults.standard.string(forKey: nickname)!
+            settingButton.isHidden = false
+        }else {
+            nickName = userInfo!.nickname
+            settingButton.isHidden = true
+        }
+    }
 
     // MARK: Stored Properties
     var delegate:ProfileHeaderCellDelegate?
-    var userInfo:User?{
-        didSet(oldVal){
-            settingButton.isHidden = true
-            nickNameTF.text = userInfo?.nickname
-        }
-    }
     private var _isSettingPhase = false
-    
-    override func awakeFromNib() {
-        if userInfo == nil {
-            nickNameTF.text = UserDefaults.standard.string(forKey: nickname)!
-        }else{
-            settingButton.isHidden = true
-            nickNameTF.text = userInfo?.nickname
-        }
-        nickNameTF.delegate = self
-    }
 }
 
 // MARK: Protocol Defenition
