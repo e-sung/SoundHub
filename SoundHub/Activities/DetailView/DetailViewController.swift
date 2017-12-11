@@ -42,6 +42,7 @@ class DetailViewController: UIViewController{
         }else{
             playBarController.masterAudioPlayer = AVPlayer(url:masterAudioLocalURL!)
         }
+        playBarController.currentPostView = self
     }
     
     override func viewDidAppear(_ animated: Bool) {

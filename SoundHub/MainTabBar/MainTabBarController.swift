@@ -91,49 +91,17 @@ extension MainTabBarController{
         stopButton.isEnabled = false
         playBarController.stopButton = stopButton
         mainTabBarView.addSubview(stopButton)
-//        setUpTabBarButtons(with: tabBarItems.count)
+        
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(showCurrentPlayingPost))
+        mainTabBarView.addGestureRecognizer(tapRecognizer)
     }
     
-    private func setUpTabBarButtons(with count:Int){
-//        tabBarButtons = generateArrayOfButtons(with: count)
-//        set(buttons: tabBarButtons, height: heightOfTabBar)
-//        set(images: tabBarItems, on: tabBarButtons)
-//        setTargetAction(of: tabBarButtons, with: #selector(changeTabbar))
-//        setTags(on: tabBarButtons)
-//        add(buttons: tabBarButtons, on: mainTabBarView)
-    }
-    
-    private func set(images:[UIImage], on buttons:[UIButton]){
-        if images.count != buttons.count {print("Length of titles and buttons are not equal!!!")}
-        for i in 0..<images.count{
-            buttons[i].setBackgroundImage(images[i], for: .normal)
-        }
-    }
-    
-    private func set(buttons:[UIButton], height:CGFloat){
-        for i in 0..<buttons.count{
-            buttons[i].frame = CGRect(x: CGFloat(i)*widthOfButton, y: 0, width: widthOfButton, height: height)
+    @objc func showCurrentPlayingPost(){
+        if let currentPlayingVC = playBarController.currentPostView{
+            self.present(currentPlayingVC, animated: true, completion: nil)
         }
     }
 
-    private func setTargetAction(of buttons:[UIButton], with action:Selector){
-        for button in buttons{
-            button.addTarget(self, action: action, for: .touchUpInside)
-        }
-    }
-    
-    private func setTags(on buttons:[UIButton]){
-        for i in 0..<buttons.count{
-            buttons[i].tag = i
-        }
-    }
-    
-    private func add(buttons:[UIButton], on tabBarView:UIView){
-        for button in buttons{
-            tabBarView.addSubview(button)
-        }
-    }
-    
     private func setUpSwipeRecognizer(){
         let swipeUpRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeHandler))
         swipeUpRecognizer.direction = .up

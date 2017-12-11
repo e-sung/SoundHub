@@ -11,6 +11,7 @@ import AVFoundation
 
 class PlayBarController{
     
+    var currentPostView:DetailViewController?
     var currentPhase:PlayPhase = .Ready
     var playMode:PlayMode = .master
     var masterAudioPlayer:AVPlayer?{
