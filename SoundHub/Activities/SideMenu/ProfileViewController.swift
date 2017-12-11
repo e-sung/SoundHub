@@ -12,19 +12,24 @@ class ProfileViewController: UIViewController{
 
     // MARK: Stored Properties
     private var buttonToChange:UIButton?
-    private var headerCell:ProfileHeaderCell!
+    private var headerCell:ProfileHeaderCell?
     private let imagePicker = UIImagePickerController()
+    var userInfo:User?{
+        didSet(oldVal){
+            headerCell?.refresh(with: userInfo)
+        }
+    }
     
     // MARK: IBActions
     @IBAction private func confirmButtonHandler(_ sender: UIBarButtonItem) {
         confirmButton.title = ""
         confirmButton.isEnabled = false
-        UserDefaults.standard.set(headerCell.nickName, forKey: nickname)
-        NetworkController.main.patchUser(nickname: headerCell.nickName, completion: {
+        UserDefaults.standard.set(headerCell!.nickName, forKey: nickname)
+        NetworkController.main.patchUser(nickname: headerCell!.nickName, completion: {
             DataCenter.main = DataCenter()
             self.dismiss(animated: true, completion: nil)
         })
-        headerCell.isSettingPhase = false
+        headerCell!.isSettingPhase = false
     }
     
     @IBAction private func goBackButtonHandler(_ sender: UIBarButtonItem) {
@@ -34,13 +39,13 @@ class ProfileViewController: UIViewController{
     @IBAction private func changeProfileButtnHandler(_ sender: UIButton) {
         confirmButton.title = "확인"
         confirmButton.isEnabled = true
-        headerCell.isSettingPhase = true
+        headerCell!.isSettingPhase = true
     }
     
     // MARK: IBOutlets
     @IBOutlet weak private var mainTV: UITableView!
     @IBOutlet weak private var confirmButton: UIBarButtonItem!
-    
+
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,9 +84,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        self.headerCell = tableView.dequeueReusableCell(withIdentifier: "profileHeaderCell", for: indexPath) as! ProfileHeaderCell
-        self.headerCell.delegate = self
-        return self.headerCell
+        headerCell = tableView.dequeueReusableCell(withIdentifier: "profileHeaderCell", for: indexPath) as! ProfileHeaderCell
+        headerCell!.delegate = self
+        headerCell!.refresh(with: userInfo)
+        return headerCell!
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
