@@ -17,8 +17,15 @@ class DetailViewController: UIViewController{
     var playBarController:PlayBarController!
     var mixedTrackContainer:MixedTracksContainerCell!
     var recorderCell: RecorderCell?
+    var presentedByPlayBar = false
     var masterAudioLocalURL:URL?
     var masterAudioRemoteURL:URL!
+    
+    @objc func cancelButtonHandler(sender:UIBarButtonItem){
+        self.dismiss(animated: true, completion: {
+            self.navigationItem.setRightBarButton(nil, animated: false)
+        })
+    }
 
     // MARK: IBOutlets
     
@@ -31,21 +38,27 @@ class DetailViewController: UIViewController{
         detailTV.dataSource = self
         masterAudioRemoteURL = URL(string: post.author_track.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)
         let mainTabBar = tabBarController as! MainTabBarController
+        mainTabBar.mainTabBarView.isHidden = false
         playBarController = mainTabBar.playBarController
     }
     override func viewWillAppear(_ animated: Bool) {
-        
-        let cancel = UIBarButtonItem(title: "cancel", style: .done, target: self, action: nil)
-        navigationItem.setRightBarButton(cancel, animated: false)
-
-        playBarController.stopMusic()
-        playBarController.masterAudioPlayer = nil
-        playBarController.mixedAudioPlayers = nil
-        if masterAudioLocalURL == nil {
-            playBarController.masterAudioPlayer = AVPlayer(url:masterAudioRemoteURL)
-        }else{
-            playBarController.masterAudioPlayer = AVPlayer(url:masterAudioLocalURL!)
+        if presentedByPlayBar {
+            let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(cancelButtonHandler))
+            navigationItem.setRightBarButton(doneButton, animated: false)
         }
+        
+        if playBarController.currentPostView !== self {
+            playBarController.stopMusic()
+            playBarController.masterAudioPlayer = nil
+            playBarController.mixedAudioPlayers = nil
+            if masterAudioLocalURL == nil {
+                playBarController.masterAudioPlayer = AVPlayer(url:masterAudioRemoteURL)
+            }else{
+                playBarController.masterAudioPlayer = AVPlayer(url:masterAudioLocalURL!)
+            }
+        }
+
+
         playBarController.currentPostView = self
     }
     

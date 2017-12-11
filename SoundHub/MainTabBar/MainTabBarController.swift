@@ -94,11 +94,14 @@ extension MainTabBarController{
         
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(showCurrentPlayingPost))
         mainTabBarView.addGestureRecognizer(tapRecognizer)
+        mainTabBarView.isHidden = true
     }
     
     @objc func showCurrentPlayingPost(){
         if let currentPlayingVC = playBarController.currentPostView{
-            self.present(currentPlayingVC, animated: true, completion: nil)
+//            let storyboard = UIStoryboard(name: "GeneralRanking", bundle: nil)
+//            let rootVC = storyboard.instantiateViewController(withIdentifier: "ChartViewController") as! UIViewController
+//            rootVC.navigationController?.pushViewController(currentPlayingVC, animated: true)
         }
     }
 
