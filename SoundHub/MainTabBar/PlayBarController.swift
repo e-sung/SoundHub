@@ -11,28 +11,31 @@ import AVFoundation
 
 class PlayBarController{
     
+    let view = UIView()
+    var delegate:MainTabBarController!
+    func setUpView(){
+        view.frame = delegate.tabBar.frame
+        view.backgroundColor = .black
+        
+        playButton = makePlayButton()
+        view.addSubview(playButton!)
+
+        view.isHidden = true
+    }
+
+    private var playButton: UIButton!
+    var mixedAudioPlayers:[AVPlayer]?
     var currentPostView:DetailViewController?
     var currentPhase:PlayPhase = .Ready
     var playMode:PlayMode = .master
     var masterAudioPlayer:AVPlayer?{
         didSet(oldval){
             playButton?.isEnabled = true
-            stopButton?.isEnabled = true
         }
     }
-    var mixedAudioPlayers:[AVPlayer]?
+}
 
-    var playButton: UIButton?{
-        didSet(oldval){
-            playButton?.addTarget(self, action: #selector(playButtonHandler), for: .touchUpInside)
-        }
-    }
-    var stopButton: UIButton?{
-        didSet(oldVal){
-            stopButton?.addTarget(self, action: #selector(stopMusic), for: .touchUpInside)
-        }
-    }
-    
+extension PlayBarController{
     @objc func playButtonHandler(_ sender: UIButton) {
         if currentPhase == .Ready {
             playMusic()
@@ -72,6 +75,19 @@ class PlayBarController{
     }
 }
 
+extension PlayBarController{
+    func makePlayButton()->UIButton{
+        let buttonWidth = delegate.tabBar.frame.height * 0.8
+        let buttonSize = CGSize(width: buttonWidth, height: buttonWidth)
+        let playButton = UIButton()
+        let playButtonOrigin = CGPoint(x: delegate.tabBar.frame.width/2 - buttonWidth/2, y: delegate.tabBar.frame.height*0.2)
+        playButton.frame = CGRect(origin: playButtonOrigin, size: buttonSize)
+        playButton.setBackgroundImage(#imageLiteral(resourceName: "play"), for: .normal)
+        playButton.isEnabled = false
+        playButton.addTarget(self, action: #selector(playButtonHandler), for: .touchUpInside)
+        return playButton
+    }
+}
 
 extension PlayBarController{
     enum PlayPhase{

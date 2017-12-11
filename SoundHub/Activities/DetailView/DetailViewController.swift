@@ -38,7 +38,7 @@ class DetailViewController: UIViewController{
         detailTV.dataSource = self
         masterAudioRemoteURL = URL(string: post.author_track.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)
         let mainTabBar = tabBarController as! MainTabBarController
-        mainTabBar.mainTabBarView.isHidden = false
+        mainTabBar.playBarController.view.isHidden = false
         playBarController = mainTabBar.playBarController
     }
     override func viewWillAppear(_ animated: Bool) {
