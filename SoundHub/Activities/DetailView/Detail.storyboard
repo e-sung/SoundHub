@@ -411,53 +411,24 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rrM-qV-Mws">
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Imt-dF-c6b">
                                         <rect key="frame" x="0.0" y="1120" width="375" height="60"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleAspectFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="etS-zh-JoX">
-                                                <rect key="frame" x="163" y="6" width="48" height="48"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="etS-zh-JoX" secondAttribute="height" multiplier="1:1" id="xxc-rr-AgK"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                                <color key="tintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" image="play">
-                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="playButtonHandler:" destination="1GI-i7-ZL1" eventType="touchUpInside" id="CZm-uy-uKT"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C0f-NV-i4s">
-                                                <rect key="frame" x="226" y="6" width="48" height="48"/>
-                                                <state key="normal" backgroundImage="stop"/>
-                                                <connections>
-                                                    <action selector="StopButtonHandler:" destination="1GI-i7-ZL1" eventType="touchUpInside" id="fdg-GA-mbH"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstItem="C0f-NV-i4s" firstAttribute="width" secondItem="etS-zh-JoX" secondAttribute="width" id="3Yw-ju-XKN"/>
-                                            <constraint firstItem="C0f-NV-i4s" firstAttribute="leading" secondItem="etS-zh-JoX" secondAttribute="trailing" constant="15" id="3dg-F7-wBI"/>
-                                            <constraint firstItem="etS-zh-JoX" firstAttribute="height" secondItem="rrM-qV-Mws" secondAttribute="height" multiplier="0.8" id="L8X-uw-G5C"/>
-                                            <constraint firstItem="etS-zh-JoX" firstAttribute="centerX" secondItem="rrM-qV-Mws" secondAttribute="centerX" id="PMd-e4-e52"/>
-                                            <constraint firstItem="etS-zh-JoX" firstAttribute="centerY" secondItem="rrM-qV-Mws" secondAttribute="centerY" id="hNG-5G-YD3"/>
-                                            <constraint firstItem="C0f-NV-i4s" firstAttribute="height" secondItem="etS-zh-JoX" secondAttribute="height" id="jUc-nY-ed4"/>
-                                            <constraint firstItem="C0f-NV-i4s" firstAttribute="centerY" secondItem="etS-zh-JoX" secondAttribute="centerY" id="scu-Ae-kzr"/>
-                                        </constraints>
-                                    </view>
+                                        <color key="backgroundColor" red="0.090183012189999995" green="0.090205498039999998" blue="0.090178228910000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <segue destination="t6A-uF-YoM" kind="embed" id="6lm-8Y-6DX"/>
+                                        </connections>
+                                    </containerView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.086261831220000001" green="0.086283676330000003" blue="0.086257167159999995" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Imt-dF-c6b" secondAttribute="bottom" id="0LZ-1y-cdo"/>
                                     <constraint firstItem="sPC-mL-dPH" firstAttribute="leading" secondItem="AM7-pL-X1c" secondAttribute="leading" id="LPl-R4-Ngs"/>
+                                    <constraint firstItem="Imt-dF-c6b" firstAttribute="top" secondItem="sPC-mL-dPH" secondAttribute="bottom" id="NXV-nK-sdS"/>
                                     <constraint firstAttribute="bottom" secondItem="sPC-mL-dPH" secondAttribute="bottom" constant="60" id="P6g-yh-2lF"/>
-                                    <constraint firstAttribute="bottom" secondItem="rrM-qV-Mws" secondAttribute="bottom" id="Umc-jJ-Xpu"/>
-                                    <constraint firstItem="rrM-qV-Mws" firstAttribute="top" secondItem="sPC-mL-dPH" secondAttribute="bottom" id="ava-kw-lzd"/>
-                                    <constraint firstItem="rrM-qV-Mws" firstAttribute="leading" secondItem="AM7-pL-X1c" secondAttribute="leading" id="gx8-d1-dqA"/>
+                                    <constraint firstItem="Imt-dF-c6b" firstAttribute="leading" secondItem="AM7-pL-X1c" secondAttribute="leading" id="dvB-u8-2JE"/>
                                     <constraint firstAttribute="trailing" secondItem="sPC-mL-dPH" secondAttribute="trailing" id="wu7-Ks-xOS"/>
+                                    <constraint firstAttribute="trailing" secondItem="Imt-dF-c6b" secondAttribute="trailing" id="xTZ-Qh-63P"/>
                                     <constraint firstItem="sPC-mL-dPH" firstAttribute="top" secondItem="AM7-pL-X1c" secondAttribute="top" id="xnP-CR-C10"/>
-                                    <constraint firstAttribute="trailing" secondItem="rrM-qV-Mws" secondAttribute="trailing" id="zfq-TS-DWZ"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -480,12 +451,63 @@
                     <size key="freeformSize" width="375" height="1200"/>
                     <connections>
                         <outlet property="detailTV" destination="sPC-mL-dPH" id="WcF-kh-Tnc"/>
-                        <outlet property="playButton" destination="etS-zh-JoX" id="NsH-10-5yn"/>
+                        <outlet property="playBarView" destination="Imt-dF-c6b" id="VTb-lc-OcK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Asy-Nl-xOg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="248.80000000000001" y="98.050974512743636"/>
+        </scene>
+        <!--Play Bar View Controller-->
+        <scene sceneID="BNG-4m-A75">
+            <objects>
+                <viewController storyboardIdentifier="playBar" useStoryboardIdentifierAsRestorationIdentifier="YES" id="t6A-uF-YoM" customClass="PlayBarViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="95p-f7-klp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="2s0-cP-Lzj">
+                                <rect key="frame" x="127" y="0.0" width="120" height="60"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dpq-h6-iWd">
+                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="dpq-h6-iWd" secondAttribute="height" multiplier="1:1" id="3WT-1Z-SiI"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="play"/>
+                                        <connections>
+                                            <action selector="playButtonHandler:" destination="t6A-uF-YoM" eventType="touchUpInside" id="drB-fq-wxt"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DiK-fr-o6V">
+                                        <rect key="frame" x="60" y="0.0" width="60" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="DiK-fr-o6V" secondAttribute="height" multiplier="1:1" id="I7V-Lp-Jip"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="stop"/>
+                                        <connections>
+                                            <action selector="stopButtonHandler:" destination="t6A-uF-YoM" eventType="touchUpInside" id="28k-Qn-7uA"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="2s0-cP-Lzj" firstAttribute="height" secondItem="Dh8-Gr-yNV" secondAttribute="height" id="OFl-RW-uGl"/>
+                            <constraint firstItem="2s0-cP-Lzj" firstAttribute="centerX" secondItem="Dh8-Gr-yNV" secondAttribute="centerX" id="Szx-kV-J5O"/>
+                            <constraint firstItem="2s0-cP-Lzj" firstAttribute="centerY" secondItem="Dh8-Gr-yNV" secondAttribute="centerY" id="t0g-is-avc"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Dh8-Gr-yNV"/>
+                    </view>
+                    <connections>
+                        <outlet property="playButton" destination="dpq-h6-iWd" id="J8G-30-FK6"/>
+                        <outlet property="stopButton" destination="DiK-fr-o6V" id="q3E-qE-jiy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="52m-cg-DxM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-457" y="633"/>
         </scene>
     </scenes>
     <resources>
