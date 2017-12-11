@@ -21,7 +21,6 @@ class RecorderCell: UITableViewCell {
     }
     
     @IBAction private func recordButtonHandler(_ sender: UIButton) {
-        print("adf")
         switch state! {
         case .readyToRecord :
             makeRecordingState()
@@ -41,12 +40,13 @@ class RecorderCell: UITableViewCell {
             if recordedDuration > 0.0 {
                 let alert = UIAlertController(title: "녹음 업로드", message: "녹음을 업로드 하시겠습니까?", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "확인", style: .cancel , handler: { (action) in
+                    let asset = RecordConductor.main.player.audioFile.avAsset
+                    self.export(asset: asset)
                 }))
                 alert.addAction(UIAlertAction(title: "취소", style: .destructive, handler: { (action) in
                 }))
                 delegate?.present(alert, animated: true, completion: nil)
                 RecordConductor.main.recorder.stop()
-//                showMetaInfoSetUpVC()
             }
         }
     }
@@ -61,19 +61,30 @@ class RecorderCell: UITableViewCell {
     
     private var state:State!
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    private func export(asset:AVAsset){
+        let outputURL = URL(string: "comment.m4a".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)! , relativeTo: DataCenter.documentsDirectoryURL)!
+        if let session = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetAppleM4A){
+            session.outputFileType = AVFileType.m4a
+            session.outputURL = outputURL
+            session.exportAsynchronously {
+                DispatchQueue.main.async(execute: {
+                    let postId = self.delegate!.post.id
+                    NetworkController.main.uploadAudioComment(In: outputURL, to: postId, instrument: "Guitar", completion: {
+                        NetworkController.main.fetchPost(id: postId, completion: { (post) in
+                            self.delegate?.post = post
+                            self.delegate?.mixedCommentsContainer.allComments = post.comment_tracks
+                            DispatchQueue.main.async {
+                                self.delegate?.mixedCommentsContainer.commentTV.reloadData()
+                            }
+                        })
+                    })
+                })
+            }
+        }else {
+            print("AVAssetExportSession wasn't generated")
+        }
     }
 
-//    private func showMetaInfoSetUpVC(){
-//        let storyBoard = UIStoryboard(name: "Entry", bundle: nil)
-//        let metaInfoSetUpVC = storyBoard.instantiateViewController(withIdentifier: "SetUpMetaInfoViewController") as! SetUpMetaInfoViewController
-//        metaInfoSetUpVC.player = RecordConductor.main.player
-//        delegate?.present(metaInfoSetUpVC, animated: true, completion: nil)
-//    }
-    
     private func makeRecordingState(){
         recordButton.setTitle("중지", for: .normal)
         inputPlot.color = .red

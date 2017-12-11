@@ -30,7 +30,7 @@ class DetailViewController: UIViewController{
     }
     
     // MARK: IBOutlets
-    @IBOutlet weak private var detailTV: UITableView!
+    @IBOutlet weak var detailTV: UITableView!
     @IBOutlet weak private var playButton: UIButton!
     
     // MARK: IBActions

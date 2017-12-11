@@ -415,7 +415,7 @@
                                         <rect key="frame" x="0.0" y="1120" width="375" height="60"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleAspectFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="etS-zh-JoX">
-                                                <rect key="frame" x="157" y="0.0" width="60" height="60"/>
+                                                <rect key="frame" x="163" y="6" width="48" height="48"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="etS-zh-JoX" secondAttribute="height" multiplier="1:1" id="xxc-rr-AgK"/>
                                                 </constraints>
@@ -428,7 +428,7 @@
                                                     <action selector="playButtonHandler:" destination="1GI-i7-ZL1" eventType="touchUpInside" id="CZm-uy-uKT"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C0f-NV-i4s">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C0f-NV-i4s">
                                                 <rect key="frame" x="232" y="15" width="46" height="30"/>
                                                 <state key="normal" backgroundImage="stop"/>
                                                 <connections>
