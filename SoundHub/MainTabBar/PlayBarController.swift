@@ -19,7 +19,7 @@ class PlayBarController{
             stopButton?.isEnabled = true
         }
     }
-    var mixedTrackContainer:MixedTracksContainerCell?
+    var mixedAudioPlayers:[AVPlayer]?
 
     var playButton: UIButton?{
         didSet(oldval){
@@ -42,20 +42,27 @@ class PlayBarController{
     func playMusic(){
         playButton?.setBackgroundImage(#imageLiteral(resourceName: "pause"), for: .normal)
         currentPhase = .Playing
-        if playMode == .mixed { mixedTrackContainer?.playMusic() }
-        else { masterAudioPlayer?.play() }
+        if playMode == .mixed {
+            guard let mixedAudioPlayers = mixedAudioPlayers else { return }
+            for player in mixedAudioPlayers { player.play() }
+        }else { masterAudioPlayer?.play() }
     }
     func pauseMusic(){
         playButton?.setBackgroundImage(#imageLiteral(resourceName: "play"), for: .normal)
         currentPhase = .Ready
-        if playMode == .mixed{ mixedTrackContainer?.pauseMusic() }
-        else{ masterAudioPlayer?.pause() }
+        if playMode == .mixed{
+            guard let mixedAudioPlayers = mixedAudioPlayers else { return }
+            for player in mixedAudioPlayers { player.pause() }
+        }else{ masterAudioPlayer?.pause() }
     }
     
     @objc func stopMusic(){
-        if playMode == .mixed { mixedTrackContainer?.stopMusic() }
-        else { masterAudioPlayer?.stop() }
+        if playMode == .mixed {
+            guard let mixedAudioPlayers = mixedAudioPlayers else { return }
+            for player in mixedAudioPlayers { player.stop() }
+        }else { masterAudioPlayer?.stop() }
         playButton?.setBackgroundImage(#imageLiteral(resourceName: "play"), for: .normal)
+    }
     
     func toggle(to mode:Bool){
         stopMusic()
