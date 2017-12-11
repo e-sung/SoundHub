@@ -42,6 +42,6 @@ class PopularMusicianContainerCell: UITableViewCell, UICollectionViewDataSource,
         let storyboard = UIStoryboard(name: "SideMenu", bundle: nil)
         let profileVC = storyboard.instantiateViewController(withIdentifier: "profileViewController") as! ProfileViewController
         profileVC.userInfo = musician
-        delegate?.tabBarController?.present(profileVC, animated: true, completion: nil)
+        delegate?.show(profileVC, sender: nil)
     }
 }

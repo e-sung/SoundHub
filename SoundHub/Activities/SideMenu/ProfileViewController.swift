@@ -21,38 +21,37 @@ class ProfileViewController: UIViewController{
     }
     
     // MARK: IBActions
-    @IBAction private func confirmButtonHandler(_ sender: UIBarButtonItem) {
-        confirmButton.title = ""
-        confirmButton.isEnabled = false
+    var doneButton:UIBarButtonItem!
+    @objc func doneButtonHandler(){
+        doneButton.title = ""
+        doneButton.isEnabled = false
         UserDefaults.standard.set(headerCell!.nickName, forKey: nickname)
         NetworkController.main.patchUser(nickname: headerCell!.nickName, completion: {
             DataCenter.main = DataCenter()
-            self.dismiss(animated: true, completion: nil)
+            self.navigationController?.popViewController(animated: true)
         })
         headerCell!.isSettingPhase = false
     }
-    
-    @IBAction private func goBackButtonHandler(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
+
     @IBAction private func changeProfileButtnHandler(_ sender: UIButton) {
-        confirmButton.title = "확인"
-        confirmButton.isEnabled = true
+        doneButton.title = "확인"
+        doneButton.isEnabled = true
         headerCell!.isSettingPhase = true
     }
     
     // MARK: IBOutlets
     @IBOutlet weak private var mainTV: UITableView!
-    @IBOutlet weak private var confirmButton: UIBarButtonItem!
 
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         mainTV.delegate = self
         mainTV.dataSource = self
-        confirmButton.title = ""
-        confirmButton.isEnabled = false
+        
+        doneButton = UIBarButtonItem(title: "", style: .done, target: self, action: #selector(doneButtonHandler))
+        navigationItem.setRightBarButton(doneButton, animated: false)
+        doneButton.isEnabled = false
+
         imagePicker.allowsEditing = false
         imagePicker.delegate = self
     }
@@ -84,7 +83,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        headerCell = tableView.dequeueReusableCell(withIdentifier: "profileHeaderCell", for: indexPath) as! ProfileHeaderCell
+        headerCell = tableView.dequeueReusableCell(withIdentifier: "profileHeaderCell", for: indexPath) as? ProfileHeaderCell
         headerCell!.delegate = self
         headerCell!.refresh(with: userInfo)
         return headerCell!
