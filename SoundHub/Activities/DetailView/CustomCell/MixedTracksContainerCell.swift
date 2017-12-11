@@ -12,6 +12,18 @@ import AVFoundation
 class MixedTracksContainerCell: UITableViewCell{
     
     var allComments:[String:[Comment]]?
+    var players:[AVPlayer]{
+        get{
+            var players:[AVPlayer] = []
+            for i in 0..<commentTV.numberOfSections{
+                for j in 0..<commentTV.numberOfRows(inSection: i){
+                    let cell = commentTV.cellForRow(at: IndexPath(item: j, section: i)) as! AudioCommentCell
+                    players.append(cell.player)
+                }
+            }
+            return players
+        }
+    }
 
     @IBOutlet weak var commentTV: UITableView!
     
@@ -51,6 +63,15 @@ extension MixedTracksContainerCell{
             }
         }
     }
+    
+    func stopMusic(){
+        for i in 0..<commentTV.numberOfSections{
+            for j in 0..<commentTV.numberOfRows(inSection: i){
+                let cell = commentTV.cellForRow(at: IndexPath(item: j, section: i)) as! AudioCommentCell
+                cell.player.stop()
+            }
+        }
+    }
 }
 
 extension MixedTracksContainerCell:UITableViewDataSource, UITableViewDelegate{
@@ -80,6 +101,9 @@ extension MixedTracksContainerCell:UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
 

@@ -411,42 +411,21 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rrM-qV-Mws">
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Imt-dF-c6b">
                                         <rect key="frame" x="0.0" y="1120" width="375" height="60"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleAspectFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="etS-zh-JoX">
-                                                <rect key="frame" x="157" y="0.0" width="60" height="60"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="etS-zh-JoX" secondAttribute="height" multiplier="1:1" id="xxc-rr-AgK"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                                <color key="tintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" image="ic_play_circle_outline_white">
-                                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="playButtonHandler:" destination="1GI-i7-ZL1" eventType="touchUpInside" id="CZm-uy-uKT"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstItem="etS-zh-JoX" firstAttribute="height" secondItem="rrM-qV-Mws" secondAttribute="height" id="L8X-uw-G5C"/>
-                                            <constraint firstItem="etS-zh-JoX" firstAttribute="centerX" secondItem="rrM-qV-Mws" secondAttribute="centerX" id="PMd-e4-e52"/>
-                                            <constraint firstItem="etS-zh-JoX" firstAttribute="centerY" secondItem="rrM-qV-Mws" secondAttribute="centerY" id="hNG-5G-YD3"/>
-                                        </constraints>
-                                    </view>
+                                        <color key="backgroundColor" red="0.090183012189999995" green="0.090205498039999998" blue="0.090178228910000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </containerView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.086261831220000001" green="0.086283676330000003" blue="0.086257167159999995" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Imt-dF-c6b" secondAttribute="bottom" id="0LZ-1y-cdo"/>
                                     <constraint firstItem="sPC-mL-dPH" firstAttribute="leading" secondItem="AM7-pL-X1c" secondAttribute="leading" id="LPl-R4-Ngs"/>
+                                    <constraint firstItem="Imt-dF-c6b" firstAttribute="top" secondItem="sPC-mL-dPH" secondAttribute="bottom" id="NXV-nK-sdS"/>
                                     <constraint firstAttribute="bottom" secondItem="sPC-mL-dPH" secondAttribute="bottom" constant="60" id="P6g-yh-2lF"/>
-                                    <constraint firstAttribute="bottom" secondItem="rrM-qV-Mws" secondAttribute="bottom" id="Umc-jJ-Xpu"/>
-                                    <constraint firstItem="rrM-qV-Mws" firstAttribute="top" secondItem="sPC-mL-dPH" secondAttribute="bottom" id="ava-kw-lzd"/>
-                                    <constraint firstItem="rrM-qV-Mws" firstAttribute="leading" secondItem="AM7-pL-X1c" secondAttribute="leading" id="gx8-d1-dqA"/>
+                                    <constraint firstItem="Imt-dF-c6b" firstAttribute="leading" secondItem="AM7-pL-X1c" secondAttribute="leading" id="dvB-u8-2JE"/>
                                     <constraint firstAttribute="trailing" secondItem="sPC-mL-dPH" secondAttribute="trailing" id="wu7-Ks-xOS"/>
+                                    <constraint firstAttribute="trailing" secondItem="Imt-dF-c6b" secondAttribute="trailing" id="xTZ-Qh-63P"/>
                                     <constraint firstItem="sPC-mL-dPH" firstAttribute="top" secondItem="AM7-pL-X1c" secondAttribute="top" id="xnP-CR-C10"/>
-                                    <constraint firstAttribute="trailing" secondItem="rrM-qV-Mws" secondAttribute="trailing" id="zfq-TS-DWZ"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -469,7 +448,7 @@
                     <size key="freeformSize" width="375" height="1200"/>
                     <connections>
                         <outlet property="detailTV" destination="sPC-mL-dPH" id="WcF-kh-Tnc"/>
-                        <outlet property="playButton" destination="etS-zh-JoX" id="NsH-10-5yn"/>
+                        <outlet property="playBarView" destination="Imt-dF-c6b" id="VTb-lc-OcK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Asy-Nl-xOg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -478,7 +457,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_play_circle_outline_white" width="24" height="24"/>
         <image name="iu_profile" width="128" height="128"/>
         <image name="modernTImes" width="316" height="316"/>
     </resources>
