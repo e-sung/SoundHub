@@ -65,7 +65,11 @@ extension PlayBarController{
     @objc func progressBarHandler(_ sender:UISlider){
         progressBarBeingTouched = true
         pauseMusic()
-        skimMusic(to: sender.value, of: masterAudioPlayer!.currentItem!.duration.seconds)
+        if playMode == .mixed {
+            mixedAudioContainer?.skimMusic(to: sender.value, of: masterAudioPlayer!.currentItem!.duration.seconds)
+        }else{
+            skimMusic(to: sender.value, of: masterAudioPlayer!.currentItem!.duration.seconds)
+        }
     }
 //    @objc func progressBarTouchDown(_ sender:UISlider){
 //        pauseMusic()
