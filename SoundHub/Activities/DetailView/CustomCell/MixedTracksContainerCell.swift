@@ -12,34 +12,11 @@ import AVFoundation
 class MixedTracksContainerCell: UITableViewCell{
     
     var allComments:[String:[Comment]]?
-//    var players:[AVPlayer]{
-//        get{
-//            var players:[AVPlayer] = []
-//            for i in 0..<commentTV.numberOfSections{
-//                for j in 0..<commentTV.numberOfRows(inSection: i){
-//                    let cell = commentTV.cellForRow(at: IndexPath(item: j, section: i)) as! AudioCommentCell
-//                    players.append(cell.player)
-//                }
-//            }
-//            return players
-//        }
-//    }
-//    var currentPlayRate:CGFloat{
-//        get{
-//            let player = (commentTV.cellForRow(at: IndexPath(item: 0, section: 0)) as! AudioCommentCell).player
-//            player?.currentTime()
-//            player?.currentItem?.timebase
-//            return CGFloat(player?.currentTime())
-//        }
-//    }
-    
-    
     var aPlayer:AVPlayer!{
         didSet(oldVal){
             let cmt = CMTime(value: 1, timescale: 10)
             aPlayer.addPeriodicTimeObserver(forInterval: cmt, queue: DispatchQueue.main, using: { (cmt) in
                 let progress = self.aPlayer.currentTime().seconds/self.aPlayer.currentItem!.duration.seconds
-                print("a")
                 if PlayBarController.main.progressBarBeingTouched == false{
                     PlayBarController.main.progressBar.setValue(Float(progress), animated: true)
                 }

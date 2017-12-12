@@ -44,7 +44,6 @@ class DetailViewController: UIViewController{
         if playBarController.currentPostView !== self {
             playBarController.stopMusic()
             playBarController.masterAudioPlayer = nil
-            playBarController.mixedAudioPlayers = nil
             if masterAudioLocalURL == nil {
                 playBarController.masterAudioPlayer = AVPlayer(url:masterAudioRemoteURL)
             }else{
