@@ -31,8 +31,8 @@ class PlayBarController{
     }
 
     private var playButton: UIButton!
-    private var progressBar: UISlider!
-    private var progressBarBeingTouched = false
+    var progressBar: UISlider!
+    var progressBarBeingTouched = false
     var mixedAudioPlayers:[AVPlayer]?
     var currentPostView:DetailViewController?
     var mixedAudioContainer:MixedTracksContainerCell?

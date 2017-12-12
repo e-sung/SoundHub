@@ -34,18 +34,18 @@ class MixedTracksContainerCell: UITableViewCell{
 //    }
     
     
-//    var aPlayer:AVPlayer{
-//        didSet(oldVal){
-//            let cmt = CMTime(value: 1, timescale: 10)
-//            aPlayer.addPeriodicTimeObserver(forInterval: cmt, queue: DispatchQueue.main, using: { (cmt) in
-//                let progress = self.aPlayer.currentTime().seconds/self.aPlayer.currentItem.duration.seconds
-//                if self.progressBarBeingTouched == false {
-//                    self.progressBar.setValue(Float(progress), animated: true)
-//                }
-//            })
-//        }
-//    }
-    var playBarController:PlayBarController!
+    var aPlayer:AVPlayer!{
+        didSet(oldVal){
+            let cmt = CMTime(value: 1, timescale: 10)
+            aPlayer.addPeriodicTimeObserver(forInterval: cmt, queue: DispatchQueue.main, using: { (cmt) in
+                let progress = self.aPlayer.currentTime().seconds/self.aPlayer.currentItem!.duration.seconds
+                print("a")
+                if PlayBarController.main.progressBarBeingTouched == false{
+                    PlayBarController.main.progressBar.setValue(Float(progress), animated: true)
+                }
+            })
+        }
+    }
 
     @IBOutlet weak var commentTV: UITableView!
     
@@ -129,7 +129,7 @@ extension MixedTracksContainerCell:UITableViewDataSource, UITableViewDelegate{
             }
         }
         cell.tag = indexPath.item
-//        if indexPath == IndexPath(item: 0, section: 0) { aPlayer = cell.player }
+        if indexPath == IndexPath(item: 0, section: 0) { aPlayer = cell.player }
         return cell
     }
     
