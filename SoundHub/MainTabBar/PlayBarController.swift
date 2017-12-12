@@ -18,14 +18,20 @@ class PlayBarController{
         view.backgroundColor = .black
         
         playButton = makePlayButton()
-        view.addSubview(playButton!)
+        view.addSubview(playButton)
+        
+        progressBar = makeProgressBar()
+        view.addSubview(progressBar)
 
         view.isHidden = true
     }
 
     private var playButton: UIButton!
+    private var progressBar: UISlider!
     var mixedAudioPlayers:[AVPlayer]?
     var currentPostView:DetailViewController?
+    var mixedAudioContainer:MixedTracksContainerCell?
+    
     var currentPhase:PlayPhase = .Ready
     var playMode:PlayMode = .master
     var masterAudioPlayer:AVPlayer?{
@@ -43,27 +49,38 @@ extension PlayBarController{
             pauseMusic()
         }
     }
+    @objc func progressBarHandler(_ sender:UISlider){
+        print(sender.value)
+        pauseMusic()
+    }
     func playMusic(){
         playButton?.setBackgroundImage(#imageLiteral(resourceName: "pause"), for: .normal)
         currentPhase = .Playing
         if playMode == .mixed {
-            guard let mixedAudioPlayers = mixedAudioPlayers else { return }
-            for player in mixedAudioPlayers { player.play() }
+            mixedAudioContainer?.playMusic()
+//            guard let mixedAudioPlayers = mixedAudioPlayers else { return }
+//            for player in mixedAudioPlayers { player.play() }
         }else { masterAudioPlayer?.play() }
     }
     func pauseMusic(){
         playButton?.setBackgroundImage(#imageLiteral(resourceName: "play"), for: .normal)
         currentPhase = .Ready
         if playMode == .mixed{
-            guard let mixedAudioPlayers = mixedAudioPlayers else { return }
-            for player in mixedAudioPlayers { player.pause() }
+            mixedAudioContainer?.pauseMusic()
+//            guard let mixedAudioPlayers = mixedAudioPlayers else { return }
+//            for player in mixedAudioPlayers { player.pause() }
         }else{ masterAudioPlayer?.pause() }
+    }
+    func skimMusic(to point:CGFloat){
+        let pointToSeek = CMTimeMake(Int64(point*1000), Int32(1000))
+        masterAudioPlayer?.seek(to: pointToSeek)
     }
     
     @objc func stopMusic(){
         if playMode == .mixed {
-            guard let mixedAudioPlayers = mixedAudioPlayers else { return }
-            for player in mixedAudioPlayers { player.stop() }
+            mixedAudioContainer?.stopMusic()
+//            guard let mixedAudioPlayers = mixedAudioPlayers else { return }
+//            for player in mixedAudioPlayers { player.stop() }
         }else { masterAudioPlayer?.stop() }
         playButton?.setBackgroundImage(#imageLiteral(resourceName: "play"), for: .normal)
     }
@@ -76,6 +93,12 @@ extension PlayBarController{
 }
 
 extension PlayBarController{
+    func makeProgressBar()->UISlider{
+        let slider = UISlider(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 10))
+        slider.addTarget(self, action: #selector(progressBarHandler), for: .valueChanged)
+        return slider
+    }
+    
     func makePlayButton()->UIButton{
         let buttonWidth = delegate.tabBar.frame.height * 0.8
         let buttonSize = CGSize(width: buttonWidth, height: buttonWidth)

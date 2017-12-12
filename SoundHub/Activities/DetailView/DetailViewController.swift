@@ -42,10 +42,10 @@ class DetailViewController: UIViewController{
         playBarController = mainTabBar.playBarController
     }
     override func viewWillAppear(_ animated: Bool) {
-        if presentedByPlayBar {
-            let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(cancelButtonHandler))
-            navigationItem.setRightBarButton(doneButton, animated: false)
-        }
+//        if presentedByPlayBar {
+//            let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(cancelButtonHandler))
+//            navigationItem.setRightBarButton(doneButton, animated: false)
+//        }
         
         if playBarController.currentPostView !== self {
             playBarController.stopMusic()
@@ -57,15 +57,13 @@ class DetailViewController: UIViewController{
                 playBarController.masterAudioPlayer = AVPlayer(url:masterAudioLocalURL!)
             }
         }
-
-
         playBarController.currentPostView = self
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        playBarController.mixedAudioPlayers = mixedTrackContainer.players
-    }
-    
+//    override func viewDidAppear(_ animated: Bool) {
+//        playBarController.mixedAudioPlayers = mixedTrackContainer.players
+//    }
+//    
     override func viewWillDisappear(_ animated: Bool) {
         recorderCell?.inputPlot.node?.avAudioNode.removeTap(onBus: 0)
     }
@@ -123,6 +121,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             cell.allComments = post.comment_tracks
             cell.commentTV.reloadData()
             mixedTrackContainer = cell
+            playBarController.mixedAudioContainer = cell
             return cell
         }else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "recorderCell", for: indexPath) as! RecorderCell
