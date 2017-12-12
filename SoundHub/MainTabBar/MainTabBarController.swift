@@ -15,12 +15,12 @@ class MainTabBarController: UITabBarController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBar.isHidden = true
-        setUploadButton()
-        self.view.addSubview(uploadMusicButton)
+//        setUploadButton()
+//        self.view.addSubview(uploadMusicButton)
         playBarController = PlayBarController.main
         self.view.addSubview(playBarController.view)
         playBarController.setUpView(In: self.view)
-        
+
     }
 
     override func viewDidAppear(_ animated: Bool) {

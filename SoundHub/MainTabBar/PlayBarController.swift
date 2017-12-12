@@ -109,37 +109,32 @@ extension PlayBarController{
 extension PlayBarController{
     func setUpView(In containerView:UIView){
         
-        let margins = containerView.layoutMarginsGuide
-        
-        // Pin the leading edge of myView to the margin's leading edge
-        view.frame = CGRect(x: 0, y: containerView.frame.height - 60, width: containerView.frame.width, height: 60)
-//        view.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-//        view.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-//        view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-//        //        playBarControllerview.topAnchor.constraint(equalTo: margins.topAnchor, constant: 100).isActive = true
-//        view.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
+        view.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+        view.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
+        view.heightAnchor.constraint(equalToConstant: 60).isActive = true
         view.backgroundColor = .black
         
         playButton = UIButton()
         view.addSubview(playButton)
-        playButton = setFrame(of:playButton)
-        
+        playButton = setAutoLayout(of:playButton)
+
         progressBar = UISlider()
         view.addSubview(progressBar)
-        progressBar = setFrame(of: progressBar)
+        progressBar = setAutoLayout(of: progressBar)
         
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(showCurrentMusicContainer))
         view.addGestureRecognizer(tapRecognizer)
         
-//        view.isHidden = true
+        view.isHidden = true
     }
     
     private func setAutoLayout(of slider:UISlider)->UISlider{
-        let margins = view.layoutMarginsGuide
-        
-        slider.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
-        slider.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
-        slider.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
+        slider.translatesAutoresizingMaskIntoConstraints = false
+        slider.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        slider.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        slider.centerYAnchor.constraint(equalTo: view.topAnchor).isActive = true
         slider.addTarget(self, action: #selector(progressBarHandler), for: .valueChanged)
         return slider
     }
@@ -161,10 +156,10 @@ extension PlayBarController{
     
     private func setAutoLayout(of button:UIButton)->UIButton{
         let margins = view.layoutMarginsGuide
-
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.centerXAnchor.constraint(equalTo: margins.centerXAnchor).isActive = true
         button.centerYAnchor.constraint(equalTo: margins.centerYAnchor).isActive = true
-        button.heightAnchor.constraint(equalTo: margins.heightAnchor, multiplier: 0.8).isActive = true
+        button.heightAnchor.constraint(equalTo: margins.heightAnchor, multiplier: 0.9).isActive = true
         button.widthAnchor.constraint(equalTo: playButton.heightAnchor, multiplier: 1.0).isActive = true
         button.setBackgroundImage(#imageLiteral(resourceName: "play"), for: .normal)
         button.isEnabled = false
