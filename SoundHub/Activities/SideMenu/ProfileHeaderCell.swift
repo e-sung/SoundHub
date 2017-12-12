@@ -13,8 +13,9 @@ class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate, UITex
     // MARK: IBOutlets
     @IBOutlet weak private var profileImageButton: UIButton!
     @IBOutlet weak private var headerImageButton: UIButton!
+    @IBOutlet weak var settingButton: UIButton!
     @IBOutlet weak private var nickNameTF: UITextField!
-    
+
     // MARK: IBActions
     @IBAction private func headerImageChangeHandler(_ sender: UIButton) {
         delegate?.changeImageOf(button: sender)
@@ -46,15 +47,20 @@ class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate, UITex
             nickNameTF.text = newVal
         }
     }
+    
+    func refresh(with userInfo:User?){
+        if userInfo == nil {
+            nickName = UserDefaults.standard.string(forKey: nickname)!
+            settingButton.isHidden = false
+        }else {
+            nickName = userInfo!.nickname
+            settingButton.isHidden = true
+        }
+    }
 
     // MARK: Stored Properties
     var delegate:ProfileHeaderCellDelegate?
     private var _isSettingPhase = false
-    
-    override func awakeFromNib() {
-        nickNameTF.text = UserDefaults.standard.string(forKey: nickname)!
-        nickNameTF.delegate = self
-    }
 }
 
 // MARK: Protocol Defenition

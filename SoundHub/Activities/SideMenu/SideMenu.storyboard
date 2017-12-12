@@ -64,7 +64,7 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <segue destination="Qam-ff-f9z" kind="presentation" identifier="sideMenuToProfile" id="ULM-Vb-ZIS"/>
+                                                            <action selector="profileButtonHandler:" destination="dVf-D0-RBE" eventType="touchUpInside" id="EBA-Zm-gIj"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -142,7 +142,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="Qam-ff-f9z" kind="presentation" id="ngR-Uh-qLE"/>
+                                            <action selector="profileImageButtonHandler:" destination="dVf-D0-RBE" eventType="touchUpInside" id="haa-HL-bYD"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h9I-fv-WSY">
@@ -152,7 +152,7 @@
                                             <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="Qam-ff-f9z" kind="presentation" id="qCF-t8-1qe"/>
+                                            <action selector="nickNameButtonHandler:" destination="dVf-D0-RBE" eventType="touchUpInside" id="qXm-Ay-3ND"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -203,6 +203,7 @@
                     <connections>
                         <outlet property="nickNameButton" destination="h9I-fv-WSY" id="GH8-6i-AGI"/>
                         <outlet property="profileImageButton" destination="1VT-dC-BDL" id="OCJ-xI-qil"/>
+                        <segue destination="Qam-ff-f9z" kind="show" identifier="sideMenuToProfileVC" id="9Tp-PR-Sqd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JJZ-1o-Ru6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -212,13 +213,13 @@
         <!--Profile View Controller-->
         <scene sceneID="yAu-yw-e6A">
             <objects>
-                <viewController id="Qam-ff-f9z" customClass="ProfileViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="profileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Qam-ff-f9z" customClass="ProfileViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="L4o-3L-Xjs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="86P-hi-uWu">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="profileHeaderCell" rowHeight="330" id="wBt-Lf-jqh" customClass="ProfileHeaderCell" customModule="SoundHub" customModuleProvider="target">
@@ -325,44 +326,22 @@
                                             <outlet property="headerImageButton" destination="e4K-aU-IoP" id="WRT-yD-b3E"/>
                                             <outlet property="nickNameTF" destination="tM6-Ze-Yg3" id="yV0-6g-Fe2"/>
                                             <outlet property="profileImageButton" destination="cdx-mN-D95" id="GdG-OZ-m4H"/>
+                                            <outlet property="settingButton" destination="yxQ-Bt-CPW" id="F1M-cr-4uV"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="9ms-to-UBg">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <items>
-                                    <navigationItem title="Profile" id="DiO-rk-8HP">
-                                        <barButtonItem key="leftBarButtonItem" title="뒤로" id="pTY-qW-YGO">
-                                            <color key="tintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <connections>
-                                                <action selector="goBackButtonHandler:" destination="Qam-ff-f9z" id="PxC-N4-2cO"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="확인" id="kjQ-L8-b7c">
-                                            <color key="tintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <connections>
-                                                <action selector="confirmButtonHandler:" destination="Qam-ff-f9z" id="6jN-oN-Axw"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="24D-am-hlx" firstAttribute="bottom" secondItem="86P-hi-uWu" secondAttribute="bottom" id="R7l-vq-8Eg"/>
                             <constraint firstItem="86P-hi-uWu" firstAttribute="leading" secondItem="24D-am-hlx" secondAttribute="leading" id="Sbg-Rx-RHO"/>
-                            <constraint firstItem="9ms-to-UBg" firstAttribute="top" secondItem="24D-am-hlx" secondAttribute="top" id="VFv-jn-50k"/>
-                            <constraint firstItem="9ms-to-UBg" firstAttribute="trailing" secondItem="24D-am-hlx" secondAttribute="trailing" id="ZBx-C9-e8w"/>
-                            <constraint firstItem="86P-hi-uWu" firstAttribute="top" secondItem="9ms-to-UBg" secondAttribute="bottom" id="bUZ-gW-AfF"/>
+                            <constraint firstItem="86P-hi-uWu" firstAttribute="top" secondItem="24D-am-hlx" secondAttribute="top" id="aLZ-gj-ZPf"/>
                             <constraint firstItem="24D-am-hlx" firstAttribute="trailing" secondItem="86P-hi-uWu" secondAttribute="trailing" id="fdc-jp-gB9"/>
-                            <constraint firstItem="9ms-to-UBg" firstAttribute="leading" secondItem="24D-am-hlx" secondAttribute="leading" id="tRb-yC-5m9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="24D-am-hlx"/>
                     </view>
                     <connections>
-                        <outlet property="confirmButton" destination="kjQ-L8-b7c" id="6EK-ua-0YC"/>
                         <outlet property="mainTV" destination="86P-hi-uWu" id="p9x-4L-LaJ"/>
                     </connections>
                 </viewController>
@@ -379,7 +358,4 @@
         <image name="mail" width="100" height="100"/>
         <image name="profile" width="100" height="100"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="ngR-Uh-qLE"/>
-    </inferredMetricsTieBreakers>
 </document>

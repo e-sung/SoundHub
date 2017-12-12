@@ -21,7 +21,7 @@
         <!--Main Tab Bar Controller-->
         <scene sceneID="mNv-68-fkT">
             <objects>
-                <tabBarController id="56r-BQ-Aek" customClass="MainTabBarController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainTabBarController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="56r-BQ-Aek" customClass="MainTabBarController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0RO-bH-8g5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

@@ -37,35 +37,22 @@ class DetailViewController: UIViewController{
         detailTV.delegate = self
         detailTV.dataSource = self
         masterAudioRemoteURL = URL(string: post.author_track.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)
-        let mainTabBar = tabBarController as! MainTabBarController
-        mainTabBar.mainTabBarView.isHidden = false
-        playBarController = mainTabBar.playBarController
+        playBarController = PlayBarController.main
+        playBarController.view.isHidden = false
     }
     override func viewWillAppear(_ animated: Bool) {
-        if presentedByPlayBar {
-            let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(cancelButtonHandler))
-            navigationItem.setRightBarButton(doneButton, animated: false)
-        }
-        
         if playBarController.currentPostView !== self {
             playBarController.stopMusic()
             playBarController.masterAudioPlayer = nil
-            playBarController.mixedAudioPlayers = nil
             if masterAudioLocalURL == nil {
                 playBarController.masterAudioPlayer = AVPlayer(url:masterAudioRemoteURL)
             }else{
                 playBarController.masterAudioPlayer = AVPlayer(url:masterAudioLocalURL!)
             }
         }
-
-
         playBarController.currentPostView = self
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        playBarController.mixedAudioPlayers = mixedTrackContainer.players
-    }
-    
+  
     override func viewWillDisappear(_ animated: Bool) {
         recorderCell?.inputPlot.node?.avAudioNode.removeTap(onBus: 0)
     }
@@ -110,7 +97,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             let cell = tableView.dequeueReusableCell(withIdentifier: "masterWaveCell", for: indexPath)
             return cell.becomeMasterWaveCell(with: masterAudioRemoteURL, completion: { (localURL) in
                 self.masterAudioLocalURL = localURL
-                self.playBarController.masterAudioPlayer = AVPlayer(url: localURL)
+                PlayBarController.main.masterAudioPlayer = AVPlayer(url: localURL)
             })
         }
         else if Section(rawValue: indexPath.section) == .MixedTrackToggler {
@@ -123,6 +110,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             cell.allComments = post.comment_tracks
             cell.commentTV.reloadData()
             mixedTrackContainer = cell
+            playBarController.mixedAudioContainer = cell
             return cell
         }else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "recorderCell", for: indexPath) as! RecorderCell

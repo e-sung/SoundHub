@@ -24,6 +24,7 @@ class ChartViewController: UIViewController{
     private let sectionTitleList = ["CategoryTab", "Popular Musicians", "Ranking Chart", "Recent Upload"]
     var category:Categori = .general
     var option:String = ""
+    var playBarController:PlayBarController?
     
     // MARK: LifeCycle
     override func viewDidLoad() {
@@ -32,6 +33,8 @@ class ChartViewController: UIViewController{
         mainTV.dataSource = self
     }
     override func viewDidAppear(_ animated: Bool) {
+        playBarController = PlayBarController.main
+        playBarController?.delegate = self
         if DataCenter.main.homePages[category]?.recent_posts.count == 0{
             performSegue(withIdentifier: "showLoadingIndicatingView", sender:self)
         }
@@ -93,7 +96,9 @@ extension ChartViewController:UITableViewDelegate{
         if Section(rawValue: indexPath.section) == .CategoryTab {
             return tableView.dequeueReusableCell(withIdentifier: "categoryTab", for: indexPath)
         }else if Section(rawValue: indexPath.section) == .PopularMusicians{
-            return tableView.dequeueReusableCell(withIdentifier: "popularMusicianContainerCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "popularMusicianContainerCell", for: indexPath) as! PopularMusicianContainerCell
+            cell.delegate = self
+            return cell
         }else if Section(rawValue: indexPath.section) == .RankingChart{
             posts = DataCenter.main.homePages[category]!.pop_posts
         }else{
@@ -109,7 +114,12 @@ extension ChartViewController:UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "generalChartToDetail", sender: indexPath)
+        let destinationPost:Post? = getDestinationPost(from: indexPath)
+        if destinationPost?.author_track != playBarController?.currentPostView?.post.author_track{
+            performSegue(withIdentifier: "generalChartToDetail", sender: indexPath)
+        }else{
+            navigationController?.show((playBarController?.currentPostView)!, sender: nil)
+        }
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -137,6 +147,14 @@ extension ChartViewController{
     }
 }
 
+extension ChartViewController:PlayBarControllerDelegate{
+    func playBarDidTapped() {
+        if navigationController?.topViewController !== playBarController?.currentPostView{
+            navigationController?.show((playBarController?.currentPostView)!, sender: nil)
+        }
+    }
+}
+
 extension ChartViewController{
     private func generateHeaderViewFor(given section:Int)->UIView{
         let title = sectionTitleList[section]
@@ -150,6 +168,16 @@ extension ChartViewController{
         seeMoreButton.tag = section
         seeMoreButton.addTarget(self, action: #selector(seeMoreButtonTapHandler), for: .touchUpInside)
         return seeMoreButton
+    }
+    
+    func getDestinationPost(from indexPath:IndexPath)->Post?{
+        var destinationPost:Post? = nil
+        if Section(rawValue: indexPath.section) == .RankingChart{
+            destinationPost = DataCenter.main.homePages[category]?.pop_posts[indexPath.item]
+        }else{
+            destinationPost = DataCenter.main.homePages[category]?.recent_posts[indexPath.item]
+        }
+        return destinationPost
     }
 }
 

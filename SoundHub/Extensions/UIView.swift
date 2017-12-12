@@ -18,4 +18,10 @@ extension UIView{
         header.addSubview(titleLabel)
         return header
     }
+    
+    func setHeight(with height:CGFloat){
+        self.frame = CGRect(x: self.frame.minX, y: self.frame.minY, width: self.frame.width, height: height)
+    }
+
+
 }
