@@ -11,6 +11,7 @@ import AVFoundation
 
 class PlayBarController{
     
+    static let main:PlayBarController = PlayBarController()
     let view = UIView()
     var delegate:MainTabBarController!
     func setUpView(){

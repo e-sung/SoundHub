@@ -37,9 +37,8 @@ class DetailViewController: UIViewController{
         detailTV.delegate = self
         detailTV.dataSource = self
         masterAudioRemoteURL = URL(string: post.author_track.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)
-        let mainTabBar = tabBarController as! MainTabBarController
-        mainTabBar.playBarController.view.isHidden = false
-        playBarController = mainTabBar.playBarController
+        playBarController = PlayBarController.main
+        playBarController.view.isHidden = false
     }
     override func viewWillAppear(_ animated: Bool) {
         if playBarController.currentPostView !== self {
@@ -99,7 +98,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             let cell = tableView.dequeueReusableCell(withIdentifier: "masterWaveCell", for: indexPath)
             return cell.becomeMasterWaveCell(with: masterAudioRemoteURL, completion: { (localURL) in
                 self.masterAudioLocalURL = localURL
-                self.playBarController.masterAudioPlayer = AVPlayer(url: localURL)
+                PlayBarController.main.masterAudioPlayer = AVPlayer(url: localURL)
             })
         }
         else if Section(rawValue: indexPath.section) == .MixedTrackToggler {

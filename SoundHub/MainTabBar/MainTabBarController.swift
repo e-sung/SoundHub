@@ -9,7 +9,7 @@
 import UIKit
 
 class MainTabBarController: UITabBarController{
-    let playBarController:PlayBarController = PlayBarController()
+    var playBarController = PlayBarController.main
     let uploadMusicButton = UIButton()
 
     override func viewDidLoad() {

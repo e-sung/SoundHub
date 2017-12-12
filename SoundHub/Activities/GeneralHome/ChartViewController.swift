@@ -33,7 +33,7 @@ class ChartViewController: UIViewController{
         mainTV.dataSource = self
     }
     override func viewDidAppear(_ animated: Bool) {
-        playBarController = (tabBarController as! MainTabBarController).playBarController
+        playBarController = PlayBarController.main
         
         if DataCenter.main.homePages[category]?.recent_posts.count == 0{
             performSegue(withIdentifier: "showLoadingIndicatingView", sender:self)
