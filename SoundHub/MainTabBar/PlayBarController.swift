@@ -31,6 +31,7 @@ class PlayBarController{
 
     private var playButton: UIButton!
     private var progressBar: UISlider!
+    private var progressBarBeingTouched = false
     var mixedAudioPlayers:[AVPlayer]?
     var currentPostView:DetailViewController?
     var mixedAudioContainer:MixedTracksContainerCell?
@@ -43,7 +44,9 @@ class PlayBarController{
             let cmt = CMTime(value: 1, timescale: 10)
             masterAudioPlayer?.addPeriodicTimeObserver(forInterval: cmt, queue: DispatchQueue.main, using: { (cmt) in
                 let progress = self.masterAudioPlayer!.currentTime().seconds/self.masterAudioPlayer!.currentItem!.duration.seconds
-                self.progressBar.setValue(Float(progress), animated: true)
+                if self.progressBarBeingTouched == false {
+                    self.progressBar.setValue(Float(progress), animated: true)
+                }
             })
         }
     }
@@ -51,6 +54,7 @@ class PlayBarController{
 
 extension PlayBarController{
     @objc func playButtonHandler(_ sender: UIButton) {
+        progressBarBeingTouched = false
         if currentPhase == .Ready {
             playMusic()
         }else if currentPhase == .Playing{
@@ -58,16 +62,23 @@ extension PlayBarController{
         }
     }
     @objc func progressBarHandler(_ sender:UISlider){
-        print(sender.value)
+        progressBarBeingTouched = true
         pauseMusic()
+        skimMusic(to: sender.value, of: masterAudioPlayer!.currentItem!.duration.seconds)
     }
+//    @objc func progressBarTouchDown(_ sender:UISlider){
+//        pauseMusic()
+//        progressBarBeingTouched = true
+//    }
+//    @objc func progressBarTouchUp(_ sender:UISlider){
+//        progressBarBeingTouched = false
+//        playMusic()
+//    }
     func playMusic(){
         playButton?.setBackgroundImage(#imageLiteral(resourceName: "pause"), for: .normal)
         currentPhase = .Playing
         if playMode == .mixed {
             mixedAudioContainer?.playMusic()
-//            guard let mixedAudioPlayers = mixedAudioPlayers else { return }
-//            for player in mixedAudioPlayers { player.play() }
         }else { masterAudioPlayer?.play() }
     }
     func pauseMusic(){
@@ -79,8 +90,8 @@ extension PlayBarController{
 //            for player in mixedAudioPlayers { player.pause() }
         }else{ masterAudioPlayer?.pause() }
     }
-    func skimMusic(to point:CGFloat){
-        let pointToSeek = CMTimeMake(Int64(point*1000), Int32(1000))
+    func skimMusic(to point:Float, of duration:Double){
+        let pointToSeek = CMTimeMake(Int64(point*1000*Float(duration)), Int32(1000))
         masterAudioPlayer?.seek(to: pointToSeek)
     }
     
@@ -112,6 +123,8 @@ extension PlayBarController{
     func makeProgressBar()->UISlider{
         let slider = UISlider(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 10))
         slider.addTarget(self, action: #selector(progressBarHandler), for: .valueChanged)
+//        slider.addTarget(self, action: #selector(progressBarTouchDown), for: .touchDown)
+//        slider.addTarget(self, action: #selector(progressBarTouchUp), for: .touchUpInside )
         return slider
     }
     
