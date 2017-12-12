@@ -22,6 +22,9 @@ class PlayBarController{
         
         progressBar = makeProgressBar()
         view.addSubview(progressBar)
+        
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(showCurrentMusicContainer))
+        view.addGestureRecognizer(tapRecognizer)
 
         view.isHidden = true
     }
@@ -37,6 +40,11 @@ class PlayBarController{
     var masterAudioPlayer:AVPlayer?{
         didSet(oldval){
             playButton?.isEnabled = true
+            let cmt = CMTime(value: 1, timescale: 10)
+            masterAudioPlayer?.addPeriodicTimeObserver(forInterval: cmt, queue: DispatchQueue.main, using: { (cmt) in
+                let progress = self.masterAudioPlayer!.currentTime().seconds/self.masterAudioPlayer!.currentItem!.duration.seconds
+                self.progressBar.setValue(Float(progress), animated: true)
+            })
         }
     }
 }
@@ -83,6 +91,14 @@ extension PlayBarController{
 //            for player in mixedAudioPlayers { player.stop() }
         }else { masterAudioPlayer?.stop() }
         playButton?.setBackgroundImage(#imageLiteral(resourceName: "play"), for: .normal)
+    }
+    
+    @objc func showCurrentMusicContainer(){
+        let length = masterAudioPlayer!.currentItem!.duration.seconds
+        let current = masterAudioPlayer!.currentTime().seconds
+        print(current/length)
+//        let chartVC = UIStoryboard(name: "GeneralRanking", bundle: nil).instantiateViewController(withIdentifier: "ChartViewController") as! ChartViewController
+//        chartVC.show(currentPostView!, sender: nil)
     }
     
     func toggle(to mode:Bool){

@@ -42,11 +42,6 @@ class DetailViewController: UIViewController{
         playBarController = mainTabBar.playBarController
     }
     override func viewWillAppear(_ animated: Bool) {
-//        if presentedByPlayBar {
-//            let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(cancelButtonHandler))
-//            navigationItem.setRightBarButton(doneButton, animated: false)
-//        }
-        
         if playBarController.currentPostView !== self {
             playBarController.stopMusic()
             playBarController.masterAudioPlayer = nil
@@ -59,11 +54,7 @@ class DetailViewController: UIViewController{
         }
         playBarController.currentPostView = self
     }
-    
-//    override func viewDidAppear(_ animated: Bool) {
-//        playBarController.mixedAudioPlayers = mixedTrackContainer.players
-//    }
-//    
+  
     override func viewWillDisappear(_ animated: Bool) {
         recorderCell?.inputPlot.node?.avAudioNode.removeTap(onBus: 0)
     }

@@ -12,18 +12,26 @@ import AVFoundation
 class MixedTracksContainerCell: UITableViewCell{
     
     var allComments:[String:[Comment]]?
-    var players:[AVPlayer]{
-        get{
-            var players:[AVPlayer] = []
-            for i in 0..<commentTV.numberOfSections{
-                for j in 0..<commentTV.numberOfRows(inSection: i){
-                    let cell = commentTV.cellForRow(at: IndexPath(item: j, section: i)) as! AudioCommentCell
-                    players.append(cell.player)
-                }
-            }
-            return players
-        }
-    }
+//    var players:[AVPlayer]{
+//        get{
+//            var players:[AVPlayer] = []
+//            for i in 0..<commentTV.numberOfSections{
+//                for j in 0..<commentTV.numberOfRows(inSection: i){
+//                    let cell = commentTV.cellForRow(at: IndexPath(item: j, section: i)) as! AudioCommentCell
+//                    players.append(cell.player)
+//                }
+//            }
+//            return players
+//        }
+//    }
+//    var currentPlayRate:CGFloat{
+//        get{
+//            let player = (commentTV.cellForRow(at: IndexPath(item: 0, section: 0)) as! AudioCommentCell).player
+//            player?.currentTime()
+//            player?.currentItem?.timebase
+//            return CGFloat(player?.currentTime())
+//        }
+//    }
 
     @IBOutlet weak var commentTV: UITableView!
     
