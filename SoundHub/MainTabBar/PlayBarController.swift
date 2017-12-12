@@ -13,22 +13,6 @@ class PlayBarController{
     
     static let main:PlayBarController = PlayBarController()
     let view = UIView()
-    var delegate:MainTabBarController!
-    func setUpView(){
-        view.frame = delegate.tabBar.frame
-        view.backgroundColor = .black
-        
-        playButton = makePlayButton()
-        view.addSubview(playButton)
-        
-        progressBar = makeProgressBar()
-        view.addSubview(progressBar)
-        
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(showCurrentMusicContainer))
-        view.addGestureRecognizer(tapRecognizer)
-
-        view.isHidden = true
-    }
 
     private var playButton: UIButton!
     var progressBar: UISlider!
@@ -66,9 +50,9 @@ extension PlayBarController{
         progressBarBeingTouched = true
         pauseMusic()
         if playMode == .mixed {
-            mixedAudioContainer?.skimMusic(to: sender.value, of: masterAudioPlayer!.currentItem!.duration.seconds)
+            mixedAudioContainer?.seek(to: sender.value)
         }else{
-            skimMusic(to: sender.value, of: masterAudioPlayer!.currentItem!.duration.seconds)
+            masterAudioPlayer?.seek(to: sender.value)
         }
     }
 //    @objc func progressBarTouchDown(_ sender:UISlider){
@@ -79,26 +63,6 @@ extension PlayBarController{
 //        progressBarBeingTouched = false
 //        playMusic()
 //    }
-    func playMusic(){
-        playButton?.setBackgroundImage(#imageLiteral(resourceName: "pause"), for: .normal)
-        currentPhase = .Playing
-        if playMode == .mixed {
-            mixedAudioContainer?.playMusic()
-        }else { masterAudioPlayer?.play() }
-    }
-    func pauseMusic(){
-        playButton?.setBackgroundImage(#imageLiteral(resourceName: "play"), for: .normal)
-        currentPhase = .Ready
-        if playMode == .mixed{
-            mixedAudioContainer?.pauseMusic()
-//            guard let mixedAudioPlayers = mixedAudioPlayers else { return }
-//            for player in mixedAudioPlayers { player.pause() }
-        }else{ masterAudioPlayer?.pause() }
-    }
-    func skimMusic(to point:Float, of duration:Double){
-        let pointToSeek = CMTimeMake(Int64(point*1000*Float(duration)), Int32(1000))
-        masterAudioPlayer?.seek(to: pointToSeek)
-    }
     
     @objc func stopMusic(){
         if playMode == .mixed {
@@ -116,7 +80,25 @@ extension PlayBarController{
 //        let chartVC = UIStoryboard(name: "GeneralRanking", bundle: nil).instantiateViewController(withIdentifier: "ChartViewController") as! ChartViewController
 //        chartVC.show(currentPostView!, sender: nil)
     }
-    
+}
+
+extension PlayBarController{
+    func playMusic(){
+        playButton?.setBackgroundImage(#imageLiteral(resourceName: "pause"), for: .normal)
+        currentPhase = .Playing
+        if playMode == .mixed {
+            mixedAudioContainer?.playMusic()
+        }else { masterAudioPlayer?.play() }
+    }
+    func pauseMusic(){
+        playButton?.setBackgroundImage(#imageLiteral(resourceName: "play"), for: .normal)
+        currentPhase = .Ready
+        if playMode == .mixed{
+            mixedAudioContainer?.pauseMusic()
+            //            guard let mixedAudioPlayers = mixedAudioPlayers else { return }
+            //            for player in mixedAudioPlayers { player.pause() }
+        }else{ masterAudioPlayer?.pause() }
+    }
     func toggle(to mode:Bool){
         stopMusic()
         if mode == true { playMode = .mixed} else { playMode = .master}
@@ -125,23 +107,68 @@ extension PlayBarController{
 }
 
 extension PlayBarController{
-    func makeProgressBar()->UISlider{
-        let slider = UISlider(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 10))
+    func setUpView(In containerView:UIView){
+        
+        let margins = containerView.layoutMarginsGuide
+        
+        // Pin the leading edge of myView to the margin's leading edge
+        view.frame = CGRect(x: 0, y: containerView.frame.height - 60, width: containerView.frame.width, height: 60)
+//        view.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+//        view.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+//        view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+//        //        playBarControllerview.topAnchor.constraint(equalTo: margins.topAnchor, constant: 100).isActive = true
+//        view.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        view.backgroundColor = .black
+        
+        playButton = UIButton()
+        view.addSubview(playButton)
+        playButton = setFrame(of:playButton)
+        
+        progressBar = UISlider()
+        view.addSubview(progressBar)
+        progressBar = setFrame(of: progressBar)
+        
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(showCurrentMusicContainer))
+        view.addGestureRecognizer(tapRecognizer)
+        
+//        view.isHidden = true
+    }
+    
+    private func setAutoLayout(of slider:UISlider)->UISlider{
+        let margins = view.layoutMarginsGuide
+        
+        slider.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+        slider.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+        slider.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
         slider.addTarget(self, action: #selector(progressBarHandler), for: .valueChanged)
-//        slider.addTarget(self, action: #selector(progressBarTouchDown), for: .touchDown)
-//        slider.addTarget(self, action: #selector(progressBarTouchUp), for: .touchUpInside )
         return slider
     }
     
-    func makePlayButton()->UIButton{
-        let buttonWidth = delegate.tabBar.frame.height * 0.8
-        let buttonSize = CGSize(width: buttonWidth, height: buttonWidth)
-        let playButton = UIButton()
-        let playButtonOrigin = CGPoint(x: delegate.tabBar.frame.width/2 - buttonWidth/2, y: delegate.tabBar.frame.height*0.2)
-        playButton.frame = CGRect(origin: playButtonOrigin, size: buttonSize)
-        playButton.setBackgroundImage(#imageLiteral(resourceName: "play"), for: .normal)
-        playButton.isEnabled = false
-        playButton.addTarget(self, action: #selector(playButtonHandler), for: .touchUpInside)
+    private func setFrame(of slider:UISlider)->UISlider{
+        slider.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 10)
+        slider.addTarget(self, action: #selector(progressBarHandler), for: .valueChanged)
+        return slider
+    }
+    
+    private func setFrame(of button:UIButton)->UIButton{
+        let buttonWidth = self.view.frame.height * 0.8
+        button.frame = CGRect(x: view.frame.width/2 - buttonWidth/2, y:self.view.frame.height*0.2 , width: buttonWidth, height: buttonWidth)
+        button.setBackgroundImage(#imageLiteral(resourceName: "play"), for: .normal)
+        button.isEnabled = false
+        button.addTarget(self, action: #selector(playButtonHandler), for: .touchUpInside)
+        return playButton
+    }
+    
+    private func setAutoLayout(of button:UIButton)->UIButton{
+        let margins = view.layoutMarginsGuide
+
+        button.centerXAnchor.constraint(equalTo: margins.centerXAnchor).isActive = true
+        button.centerYAnchor.constraint(equalTo: margins.centerYAnchor).isActive = true
+        button.heightAnchor.constraint(equalTo: margins.heightAnchor, multiplier: 0.8).isActive = true
+        button.widthAnchor.constraint(equalTo: playButton.heightAnchor, multiplier: 1.0).isActive = true
+        button.setBackgroundImage(#imageLiteral(resourceName: "play"), for: .normal)
+        button.isEnabled = false
+        button.addTarget(self, action: #selector(playButtonHandler), for: .touchUpInside)
         return playButton
     }
 }

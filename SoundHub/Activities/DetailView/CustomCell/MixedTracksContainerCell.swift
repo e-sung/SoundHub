@@ -95,12 +95,11 @@ extension MixedTracksContainerCell{
         }
     }
     
-    func skimMusic(to point:Float, of duration:Double){
-        let pointToSeek = CMTimeMake(Int64(point*1000*Float(duration)), Int32(1000))
+    func seek(to proportion:Float){
         for i in 0..<commentTV.numberOfSections{
             for j in 0..<commentTV.numberOfRows(inSection: i){
                 let cell = commentTV.cellForRow(at: IndexPath(item: j, section: i)) as! AudioCommentCell
-                cell.player.seek(to: pointToSeek)
+                cell.player.seek(to:proportion)
             }
         }
     }

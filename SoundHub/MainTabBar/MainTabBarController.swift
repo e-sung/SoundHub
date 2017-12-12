@@ -9,16 +9,22 @@
 import UIKit
 
 class MainTabBarController: UITabBarController{
-    var playBarController = PlayBarController.main
+    var playBarController:PlayBarController!
     let uploadMusicButton = UIButton()
 
     override func viewDidLoad() {
+        super.viewDidLoad()
+        self.tabBar.isHidden = true
         setUploadButton()
         self.view.addSubview(uploadMusicButton)
-        playBarController.delegate = self
-        playBarController.setUpView()
+        playBarController = PlayBarController.main
         self.view.addSubview(playBarController.view)
-        self.tabBar.isHidden = true
+        playBarController.setUpView(In: self.view)
+        
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     @objc func uploadButtonHandler(sender:UIButton){
