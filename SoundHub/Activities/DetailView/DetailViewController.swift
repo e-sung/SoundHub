@@ -20,7 +20,7 @@ class DetailViewController: UIViewController{
     var presentedByPlayBar = false
     var masterAudioLocalURL:URL?
     var masterAudioRemoteURL:URL!
-    
+    var currentSelectedComments:[Comment]?
     @objc func cancelButtonHandler(sender:UIBarButtonItem){
         self.dismiss(animated: true, completion: {
             self.navigationItem.setRightBarButton(nil, animated: false)
@@ -71,12 +71,9 @@ extension DetailViewController:MixedTracksContainerCellDelegate{
             navigationItem.setRightBarButton(nil, animated: true)
             return
         }
+        currentSelectedComments = comments
         let mergeButton = UIBarButtonItem(title: "Merge", style: .plain, target: self, action: #selector(merge))
         navigationItem.setRightBarButton(mergeButton, animated: true)
-        print("============")
-        for comment in comments{
-            print(comment.comment_track)
-        }
     }
 
     @objc func merge(){
@@ -129,7 +126,9 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             cell.allComments = post.comment_tracks
             cell.delegate = self
             cell.commentTV.reloadData()
-            if DataCenter.main.userId == post.author.id { cell.commentTV.allowsMultipleSelection = true }
+            if DataCenter.main.userId == post.author.id {
+                cell.commentTV.allowsMultipleSelection = true
+            }
             mixedTrackContainer = cell
             
             playBarController.mixedAudioContainer = cell

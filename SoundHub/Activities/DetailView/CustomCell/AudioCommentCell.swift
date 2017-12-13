@@ -40,6 +40,11 @@ class AudioCommentCell: UITableViewCell {
         }
     }
     private var _commentInfo:Comment!
+    override func awakeFromNib() {
+        let bgColorView = UIView(frame: contentView.frame)
+        bgColorView.backgroundColor = UIColor(red: 0, green: 1.0, blue: 0, alpha: 0.3)
+        self.selectedBackgroundView = bgColorView
+    }
 }
 
 protocol AudioCommentCellDelegate {

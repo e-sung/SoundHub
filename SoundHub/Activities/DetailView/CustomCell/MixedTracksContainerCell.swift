@@ -107,6 +107,7 @@ extension MixedTracksContainerCell:UITableViewDataSource, UITableViewDelegate{
         }
         cell.tag = indexPath.item
         if indexPath == IndexPath(item: 0, section: 0) { aPlayer = cell.player }
+        if tableView.allowsMultipleSelection == true { cell.borderWidth = 2; cell.borderColor = .orange }
         return cell
     }
     
