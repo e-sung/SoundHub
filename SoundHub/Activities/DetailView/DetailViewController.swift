@@ -20,7 +20,7 @@ class DetailViewController: UIViewController{
     var presentedByPlayBar = false
     var masterAudioLocalURL:URL?
     var masterAudioRemoteURL:URL!
-    
+    var currentSelectedComments:[Comment]?
     @objc func cancelButtonHandler(sender:UIBarButtonItem){
         self.dismiss(animated: true, completion: {
             self.navigationItem.setRightBarButton(nil, animated: false)
@@ -62,6 +62,22 @@ extension DetailViewController:ModeToggleCellDelegate{
     func didModeToggled(to mode: Bool) {
         playBarController.toggle(to: mode)
         mixedTrackContainer.setInteractionability(to: mode)
+    }
+}
+
+extension DetailViewController:MixedTracksContainerCellDelegate{
+    func didSelectionOccured(on comments: [Comment]) {
+        if comments.count == 0 {
+            navigationItem.setRightBarButton(nil, animated: true)
+            return
+        }
+        currentSelectedComments = comments
+        let mergeButton = UIBarButtonItem(title: "Merge", style: .plain, target: self, action: #selector(merge))
+        navigationItem.setRightBarButton(mergeButton, animated: true)
+    }
+
+    @objc func merge(){
+        alert(msg: "Merge!")
     }
 }
 
@@ -108,8 +124,13 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         else if Section(rawValue: indexPath.section) == .MixedTracks {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MixedTracksContainer", for: indexPath) as! MixedTracksContainerCell
             cell.allComments = post.comment_tracks
+            cell.delegate = self
             cell.commentTV.reloadData()
+            if DataCenter.main.userId == post.author.id {
+                cell.commentTV.allowsMultipleSelection = true
+            }
             mixedTrackContainer = cell
+            
             playBarController.mixedAudioContainer = cell
             return cell
         }else {

@@ -51,7 +51,6 @@ class NetworkController{
     func fetchPost(id:Int, completion:@escaping(Post)->Void){
         let url = URL(string: "\(id)/", relativeTo: postURL)!
         URLSession.shared.dataTask(with: url) { (data, response, error) in
-            print(response)
             guard let data = data else {print ("data is corrupted") ; return}
             guard let post = try? JSONDecoder().decode(Post.self, from: data) else { return }
             completion(post)
