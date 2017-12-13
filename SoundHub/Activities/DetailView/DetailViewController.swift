@@ -109,6 +109,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             let cell = tableView.dequeueReusableCell(withIdentifier: "MixedTracksContainer", for: indexPath) as! MixedTracksContainerCell
             cell.allComments = post.comment_tracks
             cell.commentTV.reloadData()
+            if DataCenter.main.userId == post.author.id { cell.commentTV.allowsMultipleSelection = true }
             mixedTrackContainer = cell
             playBarController.mixedAudioContainer = cell
             return cell
