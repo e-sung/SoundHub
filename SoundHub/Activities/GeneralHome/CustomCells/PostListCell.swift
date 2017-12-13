@@ -26,7 +26,7 @@ class PostListCell: UITableViewCell {
         set(newVal){
             _postInfo = newVal
             postTitleLB.text = newVal.title
-            authorNameLB.text = newVal.author.nickname
+            authorNameLB.text = newVal.author
             totalLikesLB.text = "\(newVal.num_liked)"
             totalComments.text = "\(newVal.num_comments)"
         }

@@ -12,6 +12,7 @@ struct Comment:Codable{
     let id:Int
     let author:String
     let post:String
+    let is_mixed:Bool?
     let comment_track:String
     let instrument:Instrument.RawValue
 }

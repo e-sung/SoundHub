@@ -126,7 +126,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             cell.allComments = post.comment_tracks
             cell.delegate = self
             cell.commentTV.reloadData()
-            if DataCenter.main.userId == post.author.id {
+            if DataCenter.main.userNickName == post.author {
                 cell.commentTV.allowsMultipleSelection = true
             }
             mixedTrackContainer = cell
