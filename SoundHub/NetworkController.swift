@@ -67,13 +67,17 @@ class NetworkController{
         URLSession.shared.dataTask(with: homeURL) { (data, response, error) in
             if let error = error { print(error) }
             guard let data = data else { print("data is invalid"); return}
-            guard let homePageData = try? JSONDecoder().decode(HomePage.self, from: data) else {
-                print("decoding failed")
-                return
+            
+            do{
+                let homePageData = try JSONDecoder().decode(HomePage.self, from: data)
+                print(homePageData)
+                DataCenter.main.homePages[category] = homePageData
+                completion()
+            }catch let err as NSError{
+                print(err)
             }
-            print(homePageData)
-            DataCenter.main.homePages[category] = homePageData
-            completion()
+            
+
         }.resume()
     }
 

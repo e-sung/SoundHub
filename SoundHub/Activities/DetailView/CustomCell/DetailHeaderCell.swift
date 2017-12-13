@@ -29,7 +29,7 @@ class DetailHeaderCell: UITableViewCell {
         set(newVal){
             _postInfo = newVal
             postTitleLB.text = newVal.title
-            authorNameLB.text = newVal.author.nickname
+            authorNameLB.text = newVal.author
             numberOfLikesLB.text = "\(newVal.num_liked)"
             numberOfComments.text = "\(newVal.num_comments)"
         }
