@@ -17,25 +17,38 @@ class MasterWaveFormViewCell: UITableViewCell, FDWaveformViewDelegate {
 //    @IBOutlet weak var audioPlot: EZAudioPlot!
     
     @IBOutlet weak private var activityIndicator: NVActivityIndicatorView!
- 
+    var audioPlot:EZAudioPlot?
     var masterAudioURL:URL?{
-        willSet(newVal){
-            let audioPlot = EZAudioPlot(frame:self.contentView.frame)
-            audioPlot.shouldFill = true
-            audioPlot.plotType = .buffer
-            audioPlot.shouldMirror = true
-            audioPlot.color = .orange
-            self.addSubview(audioPlot)
-            DispatchQueue.global().async {
-                let file = EZAudioFile(url: newVal!)!
-                let bufferLength:UInt32 = 512
-                let waveData = file.getWaveformData(withNumberOfPoints: bufferLength)
-                let buffer = waveData?.buffers[0]
-                DispatchQueue.main.async {
-                    audioPlot.updateBuffer(buffer, withBufferSize: bufferLength)
-                    self.activityIndicator.stopAnimating()
+        didSet(oldVal){
+            if audioPlot == nil {
+                audioPlot = EZAudioPlot(frame:self.contentView.frame)
+                audioPlot!.shouldFill = true
+                audioPlot!.plotType = .buffer
+                audioPlot!.shouldMirror = true
+                audioPlot!.color = .orange
+                
+                DispatchQueue.global(qos: .userInteractive).async {
+                    let file = EZAudioFile(url: self.masterAudioURL!)!
+                    let bufferLength:UInt32 = 128
+                    let waveData = file.getWaveformData(withNumberOfPoints: bufferLength)
+                    let buffer = waveData?.buffers[0]
+                    
+                    self.audioPlot!.updateBuffer(buffer, withBufferSize: bufferLength)
+                    DispatchQueue.main.async {
+                        self.activityIndicator.stopAnimating()
+                        self.addSubview(self.audioPlot!)
+                    }
                 }
+
+//                DispatchQueue.global().async {
+//
+//                    DispatchQueue.main.async {
+//
+//
+//                    }
+//                }
             }
+
 
 //            waveForm.audioURL = newVal
         }
