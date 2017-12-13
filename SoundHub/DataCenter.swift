@@ -23,6 +23,24 @@ class DataCenter{
     
     var userProfileImage:UIImage?
     var userHeaderImage:UIImage?
+    var userId:Int{
+        get{
+            if _userId == nil {
+                _userId = UserDefaults.standard.integer(forKey: id)
+            }
+            return _userId!
+        }
+    }
+    private var _userId:Int?
+    var userNickName:String{
+        get{
+            if _userNickName == nil{
+                _userNickName = UserDefaults.standard.string(forKey: nickname)
+            }
+            return _userNickName!
+        }
+    }
+    private var _userNickName:String?
 }
 struct HomePage:Codable{
     var pop_users:[User]

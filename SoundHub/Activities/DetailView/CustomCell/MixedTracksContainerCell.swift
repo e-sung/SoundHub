@@ -23,6 +23,7 @@ class MixedTracksContainerCell: UITableViewCell{
             })
         }
     }
+    var delegate:MixedTracksContainerCellDelegate?
 
     @IBOutlet weak var commentTV: UITableView!
     
@@ -106,6 +107,7 @@ extension MixedTracksContainerCell:UITableViewDataSource, UITableViewDelegate{
         }
         cell.tag = indexPath.item
         if indexPath == IndexPath(item: 0, section: 0) { aPlayer = cell.player }
+        if tableView.allowsMultipleSelection == true { cell.borderWidth = 2; cell.borderColor = .orange }
         return cell
     }
     
@@ -115,5 +117,35 @@ extension MixedTracksContainerCell:UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let comments = getComments(In: selectedCells)
+        delegate?.didSelectionOccured(on: comments)
+    }
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let comments = getComments(In: selectedCells)
+        delegate?.didSelectionOccured(on: comments)
+    }
+    private var selectedCells:[AudioCommentCell]{
+        get{
+            var selectedCells:[AudioCommentCell] = []
+            if let selectedIndexes = commentTV.indexPathsForSelectedRows {
+                for idx in selectedIndexes{
+                    let cell = commentTV.cellForRow(at: idx) as! AudioCommentCell
+                    selectedCells.append(cell)
+                }
+            }
+            return selectedCells
+        }
+    }
+    private func getComments(In cells:[AudioCommentCell])->[Comment]{
+        var array:[Comment] = []
+        for cell in cells{
+            array.append(cell.comment)
+        }
+        return array
+    }
+}
 
+protocol MixedTracksContainerCellDelegate{
+    func didSelectionOccured(on comments:[Comment])->Void
 }
