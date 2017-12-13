@@ -66,10 +66,19 @@ extension DetailViewController:ModeToggleCellDelegate{
 }
 
 extension DetailViewController:MixedTracksContainerCellDelegate{
-    func didSelectionOccured() {
+    func didSelectionOccured(on comments: [Comment]) {
+        if comments.count == 0 {
+            navigationItem.setRightBarButton(nil, animated: true)
+            return
+        }
         let mergeButton = UIBarButtonItem(title: "Merge", style: .plain, target: self, action: #selector(merge))
         navigationItem.setRightBarButton(mergeButton, animated: true)
+        print("============")
+        for comment in comments{
+            print(comment.comment_track)
+        }
     }
+
     @objc func merge(){
         alert(msg: "Merge!")
     }

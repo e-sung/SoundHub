@@ -117,10 +117,17 @@ extension MixedTracksContainerCell:UITableViewDataSource, UITableViewDelegate{
         return 100
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.didSelectionOccured()
+        if let selectedIndexes = tableView.indexPathsForSelectedRows {
+            var selectedCells:[Comment] = []
+            for idx in selectedIndexes{
+                let cell = tableView.cellForRow(at: idx) as! AudioCommentCell
+                selectedCells.append(cell.comment)
+            }
+            delegate?.didSelectionOccured(on: selectedCells)
+        }
     }
 }
 
 protocol MixedTracksContainerCellDelegate{
-    func didSelectionOccured()->Void
+    func didSelectionOccured(on comments:[Comment])->Void
 }
