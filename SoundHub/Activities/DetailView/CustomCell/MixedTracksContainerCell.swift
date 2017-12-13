@@ -117,14 +117,31 @@ extension MixedTracksContainerCell:UITableViewDataSource, UITableViewDelegate{
         return 100
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let selectedIndexes = tableView.indexPathsForSelectedRows {
-            var selectedCells:[Comment] = []
-            for idx in selectedIndexes{
-                let cell = tableView.cellForRow(at: idx) as! AudioCommentCell
-                selectedCells.append(cell.comment)
+        let comments = getComments(In: selectedCells)
+        delegate?.didSelectionOccured(on: comments)
+    }
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let comments = getComments(In: selectedCells)
+        delegate?.didSelectionOccured(on: comments)
+    }
+    private var selectedCells:[AudioCommentCell]{
+        get{
+            var selectedCells:[AudioCommentCell] = []
+            if let selectedIndexes = commentTV.indexPathsForSelectedRows {
+                for idx in selectedIndexes{
+                    let cell = commentTV.cellForRow(at: idx) as! AudioCommentCell
+                    selectedCells.append(cell)
+                }
             }
-            delegate?.didSelectionOccured(on: selectedCells)
+            return selectedCells
         }
+    }
+    private func getComments(In cells:[AudioCommentCell])->[Comment]{
+        var array:[Comment] = []
+        for cell in cells{
+            array.append(cell.comment)
+        }
+        return array
     }
 }
 
