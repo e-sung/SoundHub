@@ -23,6 +23,7 @@ class MixedTracksContainerCell: UITableViewCell{
             })
         }
     }
+    var delegate:MixedTracksContainerCellDelegate?
 
     @IBOutlet weak var commentTV: UITableView!
     
@@ -115,5 +116,11 @@ extension MixedTracksContainerCell:UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate?.didSelectionOccured()
+    }
+}
 
+protocol MixedTracksContainerCellDelegate{
+    func didSelectionOccured()->Void
 }

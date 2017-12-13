@@ -65,6 +65,16 @@ extension DetailViewController:ModeToggleCellDelegate{
     }
 }
 
+extension DetailViewController:MixedTracksContainerCellDelegate{
+    func didSelectionOccured() {
+        let mergeButton = UIBarButtonItem(title: "Merge", style: .plain, target: self, action: #selector(merge))
+        navigationItem.setRightBarButton(mergeButton, animated: true)
+    }
+    @objc func merge(){
+        alert(msg: "Merge!")
+    }
+}
+
 // MARK: TableView Delegate
 extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
     /// Master / MixedHeader/ Mixed / CommentHeader / Comment
@@ -108,9 +118,11 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         else if Section(rawValue: indexPath.section) == .MixedTracks {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MixedTracksContainer", for: indexPath) as! MixedTracksContainerCell
             cell.allComments = post.comment_tracks
+            cell.delegate = self
             cell.commentTV.reloadData()
             if DataCenter.main.userId == post.author.id { cell.commentTV.allowsMultipleSelection = true }
             mixedTrackContainer = cell
+            
             playBarController.mixedAudioContainer = cell
             return cell
         }else {
