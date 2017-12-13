@@ -21,24 +21,39 @@ class MasterWaveFormViewCell: UITableViewCell, FDWaveformViewDelegate {
     var masterAudioURL:URL?{
         didSet(oldVal){
             if audioPlot == nil {
-                audioPlot = EZAudioPlot(frame:self.contentView.frame)
-                audioPlot!.shouldFill = true
-                audioPlot!.plotType = .buffer
-                audioPlot!.shouldMirror = true
-                audioPlot!.color = .orange
+
+                let file = try! AKAudioFile(forReading: masterAudioURL!)
+                let floatfile.floatChannelData
+                let player = try! AKAudioPlayer(file: file)
+                let akpot = AKNodeOutputPlot(player, frame: self.contentView.frame, bufferSize: 128)
+                akpot.node = player
                 
-                DispatchQueue.global(qos: .userInteractive).async {
-                    let file = EZAudioFile(url: self.masterAudioURL!)!
-                    let bufferLength:UInt32 = 128
-                    let waveData = file.getWaveformData(withNumberOfPoints: bufferLength)
-                    let buffer = waveData?.buffers[0]
-                    
-                    self.audioPlot!.updateBuffer(buffer, withBufferSize: bufferLength)
-                    DispatchQueue.main.async {
-                        self.activityIndicator.stopAnimating()
-                        self.addSubview(self.audioPlot!)
-                    }
-                }
+                contentView.addSubview(akpot)
+                akpot.plotType = .rolling
+                akpot.shouldFill = true
+                akpot.shouldMirror = true
+                akpot.color = .orange
+                player.play()
+
+                
+                
+//                audioPlot = EZAudioPlot(frame:self.contentView.frame)
+//                audioPlot!.shouldFill = true
+//                audioPlot!.plotType = .buffer
+//                audioPlot!.shouldMirror = true
+//                audioPlot!.color = .orange
+//                DispatchQueue.global(qos: .userInteractive).async {
+//                    let file = EZAudioFile(url: self.masterAudioURL!)!
+//                    let bufferLength:UInt32 = 128
+//                    let waveData = file.getWaveformData(withNumberOfPoints: bufferLength)
+//                    let buffer = waveData?.buffers[0]
+//
+//                    self.audioPlot!.updateBuffer(buffer, withBufferSize: bufferLength)
+//                    DispatchQueue.main.async {
+//                        self.activityIndicator.stopAnimating()
+//                        self.addSubview(self.audioPlot!)
+//                    }
+//                }
 
 //                DispatchQueue.global().async {
 //

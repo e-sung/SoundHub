@@ -25,6 +25,7 @@ class ChartViewController: UIViewController{
     var category:Categori = .general
     var option:String = ""
     var playBarController:PlayBarController?
+    let condoctor = RecordConductor.main
     
     // MARK: LifeCycle
     override func viewDidLoad() {
