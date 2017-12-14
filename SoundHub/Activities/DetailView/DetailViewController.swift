@@ -76,15 +76,16 @@ class DetailViewController: UIViewController{
 
 extension DetailViewController:ModeToggleCellDelegate{
     func didModeToggled(to mode: Bool) {
-        playBarController.stopMusic()
+//        playBarController.stopMusic()
         if mode == true {
             currentPlayMode = .mixed
-            mainAudioPlayer = mixedTrackContainer.aPlayer
+            mixedTrackContainer.setVolume(to: 1)
+            mainAudioPlayer?.volume = 0
         } else {
             currentPlayMode = .master
-            mainAudioPlayer = masterAudioPlayer
+            mixedTrackContainer.setVolume(to: 0)
+            mainAudioPlayer?.volume = 1
         }
-        playBarController.stopMusic()
         mixedTrackContainer.setInteractionability(to: mode)
     }
 }
@@ -97,24 +98,25 @@ extension DetailViewController{
     func stopMusic(){
         currentPhase = .Ready
         mainAudioPlayer?.stop()
-        if currentPlayMode == .mixed { mixedTrackContainer?.stopMusic() }
+        mixedTrackContainer?.stopMusic()
+        
     }
     
     func playMusic(){
         currentPhase = .Playing
         mainAudioPlayer?.play()
-        if currentPlayMode == .mixed { mixedTrackContainer.playMusic()}
+        mixedTrackContainer.playMusic()
     }
     
     func pauseMusic(){
         currentPhase = .Ready
         mainAudioPlayer?.pause()
-        if currentPlayMode == .mixed{ mixedTrackContainer?.pauseMusic() }
+        mixedTrackContainer?.pauseMusic()
     }
     
     func seek(to point:Float){
         mainAudioPlayer?.seek(to: point)
-        if currentPlayMode == .mixed { self.mixedTrackContainer.seek(to: point) }
+        mixedTrackContainer.seek(to: point)
         reflect(progress: point)
     }
 }
