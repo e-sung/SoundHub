@@ -10,30 +10,37 @@ import UIKit
 import AudioKit
 import AudioKitUI
 import FDWaveformView
+import NCSoundHistogram
 import NVActivityIndicatorView
 
-class MasterWaveFormViewCell: UITableViewCell, FDWaveformViewDelegate {
+class MasterWaveFormViewCell: UITableViewCell, FDWaveformViewDelegate, NCSoundHistogramDelegate {
+    func didFinishRendering() {
+        activityIndicator.stopAnimating()
+    }
+    
 
 //    @IBOutlet weak var audioPlot: EZAudioPlot!
     
     @IBOutlet weak private var activityIndicator: NVActivityIndicatorView!
     var audioPlot:EZAudioPlot?
+    var plot:NCSoundHistogram!
     var masterAudioURL:URL?{
         didSet(oldVal){
+            
+            plot = NCSoundHistogram(frame: contentView.frame)
+            plot.delegate = self
+//            plot.backgroundColor = .green
+            plot.waveColor = .orange
+            plot.animationColor = .yellow
+            plot.drawSpaces = true
+            plot.barLineWidth = 2.5
+            contentView.addSubview(plot)
+//            plot.soundURL = masterAudioURL!
+//            plot.animatePlaying(withDuration: 10)
+            
             if audioPlot == nil {
 
-                let file = try! AKAudioFile(forReading: masterAudioURL!)
-                let floatfile.floatChannelData
-                let player = try! AKAudioPlayer(file: file)
-                let akpot = AKNodeOutputPlot(player, frame: self.contentView.frame, bufferSize: 128)
-                akpot.node = player
                 
-                contentView.addSubview(akpot)
-                akpot.plotType = .rolling
-                akpot.shouldFill = true
-                akpot.shouldMirror = true
-                akpot.color = .orange
-                player.play()
 
                 
                 

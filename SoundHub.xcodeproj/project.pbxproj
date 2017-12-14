@@ -21,6 +21,7 @@
 		FF0280601FD8E64A00C0013A /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF02805F1FD8E64900C0013A /* UITableViewCell.swift */; };
 		FF0280621FD8ECD300C0013A /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0280611FD8ECD300C0013A /* UIView.swift */; };
 		FF0280661FD901AB00C0013A /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0280651FD901AB00C0013A /* Genre.swift */; };
+		FF038E431FE17B1500AED2B5 /* asdf.m in Sources */ = {isa = PBXBuildFile; fileRef = FF038E421FE17B1500AED2B5 /* asdf.m */; };
 		FF1054321FD518BA00A46443 /* AudioRecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1054311FD518BA00A46443 /* AudioRecorderViewController.swift */; };
 		FF3B20AF1FCA96E30019F87A /* PopularMusicianContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20AE1FCA96E30019F87A /* PopularMusicianContainerCell.swift */; };
 		FF3B20B11FCA98C50019F87A /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20B01FCA98C50019F87A /* ChartViewController.swift */; };
@@ -109,6 +110,8 @@
 		FF02805F1FD8E64900C0013A /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
 		FF0280611FD8ECD300C0013A /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		FF0280651FD901AB00C0013A /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		FF038E411FE17B1400AED2B5 /* SoundHub-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoundHub-Bridging-Header.h"; sourceTree = "<group>"; };
+		FF038E421FE17B1500AED2B5 /* asdf.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = asdf.m; sourceTree = "<group>"; };
 		FF1054311FD518BA00A46443 /* AudioRecorderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderViewController.swift; sourceTree = "<group>"; };
 		FF3B20AE1FCA96E30019F87A /* PopularMusicianContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMusicianContainerCell.swift; sourceTree = "<group>"; };
 		FF3B20B01FCA98C50019F87A /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
@@ -379,6 +382,7 @@
 				FFCF82BE1FC95D66003B7861 /* AppDelegate.swift */,
 				FFA5A39E1FCCFD97001EA36F /* NetworkController.swift */,
 				FF000D981FD11F7F00678999 /* DataCenter.swift */,
+				FF038E421FE17B1500AED2B5 /* asdf.m */,
 				FF3B20C71FCC3C9F0019F87A /* Models */,
 				FF4A7F9C1FCCEE180002E27A /* Extensions */,
 				FF000D971FD0FB8900678999 /* Activities */,
@@ -387,6 +391,7 @@
 				FFCF82C51FC95D66003B7861 /* Assets.xcassets */,
 				FFCF82C71FC95D66003B7861 /* LaunchScreen.storyboard */,
 				FFCF82CA1FC95D66003B7861 /* Info.plist */,
+				FF038E411FE17B1400AED2B5 /* SoundHub-Bridging-Header.h */,
 			);
 			path = SoundHub;
 			sourceTree = "<group>";
@@ -486,6 +491,7 @@
 				TargetAttributes = {
 					FFCF82BA1FC95D66003B7861 = {
 						CreatedOnToolsVersion = 9.1;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					FFCF82CE1FC95D66003B7861 = {
@@ -752,6 +758,7 @@
 				FF000D991FD11F7F00678999 /* DataCenter.swift in Sources */,
 				FF9D18541FDA6012008D5FD1 /* MixedTracksContainerCell.swift in Sources */,
 				FF3B20B31FCAA2700019F87A /* InspectableView.swift in Sources */,
+				FF038E431FE17B1500AED2B5 /* asdf.m in Sources */,
 				FF0280561FD776CF00C0013A /* UserDefaultKey.swift in Sources */,
 				FFC32AED1FCFD96500651A31 /* LoginResponse.swift in Sources */,
 				FF3B20C21FCC31930019F87A /* SignUpViewController.swift in Sources */,
@@ -945,6 +952,7 @@
 			baseConfigurationReference = CCF9A4D681C26D32FDD78A4F /* Pods-SoundHub.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G4MM77V7NH;
 				INFOPLIST_FILE = SoundHub/Info.plist;
@@ -952,6 +960,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sungdoo.soundhub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SoundHub/SoundHub-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -962,6 +972,7 @@
 			baseConfigurationReference = AE770600F915C8F1A790C952 /* Pods-SoundHub.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G4MM77V7NH;
 				INFOPLIST_FILE = SoundHub/Info.plist;
@@ -969,6 +980,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sungdoo.soundhub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SoundHub/SoundHub-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
