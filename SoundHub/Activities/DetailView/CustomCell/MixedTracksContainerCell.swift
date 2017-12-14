@@ -11,18 +11,12 @@ import AVFoundation
 
 class MixedTracksContainerCell: UITableViewCell{
     
-    var allComments:[String:[Comment]]?
-    var aPlayer:AVPlayer!{
-        didSet(oldVal){
-            let cmt = CMTime(value: 1, timescale: 10)
-            aPlayer.addPeriodicTimeObserver(forInterval: cmt, queue: DispatchQueue.main, using: { (cmt) in
-                let progress = self.aPlayer.currentTime().seconds/self.aPlayer.currentItem!.duration.seconds
-                if PlayBarController.main.progressBarBeingTouched == false{
-                    PlayBarController.main.progressBar.setValue(Float(progress), animated: true)
-                }
-            })
+    var allComments:[String:[Comment]]?{
+        didSet(oldval){
+            commentTV.reloadData()
         }
     }
+    var aPlayer:AVPlayer?
     var delegate:MixedTracksContainerCellDelegate?
 
     @IBOutlet weak var commentTV: UITableView!
@@ -41,7 +35,16 @@ extension MixedTracksContainerCell{
         for i in 0..<commentTV.numberOfSections{
             for j in 0..<commentTV.numberOfRows(inSection: i){
                 let cell = commentTV.cellForRow(at: IndexPath(item: j, section: i)) as! AudioCommentCell
-                cell.toggleSwitch.isEnabled = bool
+                cell.isInterActive = bool
+            }
+        }
+    }
+    
+    func setVolume(to value:Float){
+        for i in 0..<commentTV.numberOfSections{
+            for j in 0..<commentTV.numberOfRows(inSection: i){
+                let cell = commentTV.cellForRow(at: IndexPath(item: j, section: i)) as! AudioCommentCell
+                if cell.isActive { cell.player.volume = value }
             }
         }
     }
@@ -105,8 +108,8 @@ extension MixedTracksContainerCell:UITableViewDataSource, UITableViewDelegate{
                 cell.comment = allComments[instrument]![indexPath.item]
             }
         }
-        cell.tag = indexPath.item
-        if indexPath == IndexPath(item: 0, section: 0) { aPlayer = cell.player }
+        cell.player.volume = 0
+        if indexPath == IndexPath(item: 0, section: 1){ aPlayer = cell.player }
         if tableView.allowsMultipleSelection == true { cell.borderWidth = 2; cell.borderColor = .orange }
         return cell
     }

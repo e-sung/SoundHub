@@ -6,7 +6,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -147,10 +146,6 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Gu-Dv-h9L" customClass="FDWaveformView" customModule="FDWaveformView">
-                                                            <rect key="frame" x="15" y="11" width="345" height="178"/>
-                                                            <color key="backgroundColor" red="0.086261831220000001" green="0.086283676330000003" blue="0.086257167159999995" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kO8-44-d6T" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
                                                             <rect key="frame" x="147" y="59" width="80" height="80"/>
                                                             <color key="backgroundColor" red="0.2364057004" green="0.4013232887" blue="0.76923906799999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -162,17 +157,12 @@
                                                     <constraints>
                                                         <constraint firstItem="kO8-44-d6T" firstAttribute="height" secondItem="pf2-LJ-aOb" secondAttribute="height" multiplier="0.4" id="CFW-5e-Q3R"/>
                                                         <constraint firstItem="kO8-44-d6T" firstAttribute="centerX" secondItem="pf2-LJ-aOb" secondAttribute="centerX" id="POO-ej-50Q"/>
-                                                        <constraint firstItem="6Gu-Dv-h9L" firstAttribute="top" secondItem="pf2-LJ-aOb" secondAttribute="topMargin" id="cSm-zw-pgq"/>
-                                                        <constraint firstAttribute="trailingMargin" secondItem="6Gu-Dv-h9L" secondAttribute="trailing" id="eLl-er-sgS"/>
-                                                        <constraint firstAttribute="bottomMargin" secondItem="6Gu-Dv-h9L" secondAttribute="bottom" id="fXm-ZV-cIm"/>
-                                                        <constraint firstItem="6Gu-Dv-h9L" firstAttribute="leading" secondItem="pf2-LJ-aOb" secondAttribute="leadingMargin" id="hpm-vm-0GS"/>
                                                         <constraint firstItem="kO8-44-d6T" firstAttribute="centerY" secondItem="pf2-LJ-aOb" secondAttribute="centerY" id="qyJ-bu-zbL"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <connections>
                                                     <outlet property="activityIndicator" destination="kO8-44-d6T" id="Pgk-wE-Era"/>
-                                                    <outlet property="waveForm" destination="6Gu-Dv-h9L" id="LvM-fD-sXH"/>
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MixedCommentHeaderCell" id="Obr-AQ-mQb" customClass="ModeToggleCell" customModule="SoundHub" customModuleProvider="target">

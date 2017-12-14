@@ -7,32 +7,40 @@
 //
 
 import UIKit
-import FDWaveformView
+import NCSoundHistogram
 import NVActivityIndicatorView
 
-class MasterWaveFormViewCell: UITableViewCell, FDWaveformViewDelegate {
-
-    @IBOutlet weak private var activityIndicator: NVActivityIndicatorView!
-    @IBOutlet weak private var waveForm: FDWaveformView!
-    var masterAudioURL:URL?{
-        willSet(newVal){
-            waveForm.audioURL = newVal
-        }
+class MasterWaveFormViewCell: UITableViewCell, NCSoundHistogramDelegate {
+    
+    func reflect(progress:Float){
+        plot?.progress = progress
+    }
+    
+    func didFinishRendering() {
+        activityIndicator.stopAnimating()
     }
 
-    func waveformViewDidRender(_ waveformView: FDWaveformView) {
-        activityIndicator.stopAnimating()
+    @IBOutlet weak private var activityIndicator: NVActivityIndicatorView!
+    private var plot:NCSoundHistogram?
+    var masterAudioURL:URL?{
+        didSet(oldVal){
+            plot = NCSoundHistogram(frame: contentView.frame)
+            plot!.delegate = self
+            plot!.waveColor = .orange
+            plot!.progressColor = .green
+            plot!.drawSpaces = true
+            plot!.barLineWidth = 2.5
+            contentView.addSubview(plot!)
+        }
+    }
+    func renderWave(){
+        plot?.soundURL = masterAudioURL
     }
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
-        waveForm.delegate = self
-        waveForm.wavesColor = .orange
-        waveForm.loadingInProgress = true
         activityIndicator.color = .orange
         activityIndicator.type = .audioEqualizer
         activityIndicator.startAnimating()
     }
-
 }
