@@ -22,6 +22,7 @@
 		FF0280621FD8ECD300C0013A /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0280611FD8ECD300C0013A /* UIView.swift */; };
 		FF0280661FD901AB00C0013A /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0280651FD901AB00C0013A /* Genre.swift */; };
 		FF038E431FE17B1500AED2B5 /* asdf.m in Sources */ = {isa = PBXBuildFile; fileRef = FF038E421FE17B1500AED2B5 /* asdf.m */; };
+		FF038E451FE1FEA300AED2B5 /* profileing.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF038E441FE1FEA300AED2B5 /* profileing.swift */; };
 		FF1054321FD518BA00A46443 /* AudioRecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1054311FD518BA00A46443 /* AudioRecorderViewController.swift */; };
 		FF3B20AF1FCA96E30019F87A /* PopularMusicianContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20AE1FCA96E30019F87A /* PopularMusicianContainerCell.swift */; };
 		FF3B20B11FCA98C50019F87A /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20B01FCA98C50019F87A /* ChartViewController.swift */; };
@@ -112,6 +113,7 @@
 		FF0280651FD901AB00C0013A /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		FF038E411FE17B1400AED2B5 /* SoundHub-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoundHub-Bridging-Header.h"; sourceTree = "<group>"; };
 		FF038E421FE17B1500AED2B5 /* asdf.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = asdf.m; sourceTree = "<group>"; };
+		FF038E441FE1FEA300AED2B5 /* profileing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileing.swift; sourceTree = "<group>"; };
 		FF1054311FD518BA00A46443 /* AudioRecorderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderViewController.swift; sourceTree = "<group>"; };
 		FF3B20AE1FCA96E30019F87A /* PopularMusicianContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMusicianContainerCell.swift; sourceTree = "<group>"; };
 		FF3B20B01FCA98C50019F87A /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
@@ -382,6 +384,7 @@
 				FFCF82BE1FC95D66003B7861 /* AppDelegate.swift */,
 				FFA5A39E1FCCFD97001EA36F /* NetworkController.swift */,
 				FF000D981FD11F7F00678999 /* DataCenter.swift */,
+				FF038E441FE1FEA300AED2B5 /* profileing.swift */,
 				FF038E421FE17B1500AED2B5 /* asdf.m */,
 				FF3B20C71FCC3C9F0019F87A /* Models */,
 				FF4A7F9C1FCCEE180002E27A /* Extensions */,
@@ -769,6 +772,7 @@
 				FF9A84E01FC961AF00AC4780 /* MainTabBarController.swift in Sources */,
 				FF9A84EC1FC9AE6500AC4780 /* PopularMusicianCell.swift in Sources */,
 				FFC32AE61FCF9F0C00651A31 /* AudioCommentCell.swift in Sources */,
+				FF038E451FE1FEA300AED2B5 /* profileing.swift in Sources */,
 				FF3B20B51FCAADD80019F87A /* PostListCell.swift in Sources */,
 				FF3B20BC1FCACE8D0019F87A /* DetailHeaderCell.swift in Sources */,
 				FF64BA0E1FDD36F4000A846B /* RecorderCell.swift in Sources */,

@@ -15,6 +15,11 @@ import NVActivityIndicatorView
 
 class MasterWaveFormViewCell: UITableViewCell, FDWaveformViewDelegate, NCSoundHistogramDelegate {
     func didFinishRendering() {
+        endingPoint = Date()
+        let executionTime = endingPoint!.timeIntervalSince(startingPoint!)
+        print("=================================")
+        print("Execution time: \(executionTime)")
+        print("=================================")
         activityIndicator.stopAnimating()
     }
     

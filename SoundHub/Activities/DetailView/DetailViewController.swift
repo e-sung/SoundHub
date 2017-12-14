@@ -55,6 +55,7 @@ class DetailViewController: UIViewController{
         playBarController.currentPostView = self
     }
     override func viewDidAppear(_ animated: Bool) {
+        startingPoint = Date()
         masterWaveCell.plot.soundURL = masterAudioLocalURL!
     }
   
