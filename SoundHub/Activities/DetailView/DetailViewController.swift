@@ -9,12 +9,14 @@
 import UIKit
 import AudioKit
 import AVFoundation
+import NCSoundHistogram
 
 class DetailViewController: UIViewController{
     
     // MARK: Stored Properties
     var post:Post!
     var playBarController:PlayBarController!
+    var masterWaveCell:MasterWaveFormViewCell!
     var mixedTrackContainer:MixedTracksContainerCell!
     var recorderCell: RecorderCell?
     var presentedByPlayBar = false
@@ -52,7 +54,9 @@ class DetailViewController: UIViewController{
         }
         playBarController.currentPostView = self
     }
-  
+    override func viewDidAppear(_ animated: Bool) {
+        masterWaveCell.plot.soundURL = masterAudioLocalURL!
+    }
     override func viewWillDisappear(_ animated: Bool) {
         recorderCell?.inputPlot.node?.avAudioNode.removeTap(onBus: 0)
     }
@@ -111,10 +115,11 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             return cell
         }else if indexPath.section == 0 && indexPath.item == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "masterWaveCell", for: indexPath)
-            return cell.becomeMasterWaveCell(with: masterAudioRemoteURL, completion: { (localURL) in
+            masterWaveCell = cell.becomeMasterWaveCell(with: masterAudioRemoteURL, completion: { (localURL) in
                 self.masterAudioLocalURL = localURL
                 PlayBarController.main.masterAudioPlayer = AVPlayer(url: localURL)
             })
+            return masterWaveCell
         }
         else if Section(rawValue: indexPath.section) == .MixedTrackToggler {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MixedCommentHeaderCell", for: indexPath) as! ModeToggleCell

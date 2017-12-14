@@ -25,6 +25,7 @@ PODS:
   - GTMSessionFetcher/Full (1.1.12):
     - GTMSessionFetcher/Core (= 1.1.12)
   - LPSnackbar (1.1.2)
+  - NCSoundHistogram (0.1.7)
   - NVActivityIndicatorView (4.0.0):
     - NVActivityIndicatorView/Presenter (= 4.0.0)
   - NVActivityIndicatorView/Presenter (4.0.0)
@@ -36,6 +37,7 @@ DEPENDENCIES:
   - FDWaveformView
   - GoogleSignIn
   - LPSnackbar
+  - NCSoundHistogram
   - NVActivityIndicatorView
   - SideMenu
 
@@ -48,9 +50,10 @@ SPEC CHECKSUMS:
   GTMOAuth2: be83fd28d63ae3087e7d351b1f39c1a7e24ab6e7
   GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
   LPSnackbar: 67db43a51fa744f5d6978c249a39e3a5e71a3de6
+  NCSoundHistogram: 9453569aff64319c898417b597fb0e49b0052540
   NVActivityIndicatorView: 54c9b93b6f25a4f467512680c0c90c09a1095cf2
   SideMenu: 99021e70b3f2eee65b5dd88e4274d09031b1221e
 
-PODFILE CHECKSUM: dcb58820db480ba307dbcd541abc5f0c02314639
+PODFILE CHECKSUM: f8057e9e395855a586a7c444a3dac9d2f9a41e17
 
 COCOAPODS: 1.3.1
