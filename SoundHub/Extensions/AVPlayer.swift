@@ -9,7 +9,10 @@
 import Foundation
 import AVFoundation
 
+var AVPlayerTimeObserver:Any?
+
 extension AVPlayer{
+    
     func stop(){
         self.pause()
         self.seek(to: CMTimeMake(0, 1))
@@ -29,5 +32,4 @@ extension AVPlayer{
             return false
         }
     }
-    
 }

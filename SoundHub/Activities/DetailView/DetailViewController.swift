@@ -22,17 +22,23 @@ class DetailViewController: UIViewController{
     var presentedByPlayBar = false
     var currentPhase:PlayPhase = .Ready
     var currentPlayMode:PlayMode = .master
-    var masterAudioRemoteURL:URL!
-    var masterAudioPlayer:AVPlayer?{
-        didSet(oldval){
+    var mainAudioPlayer:AVPlayer?{
+        didSet(oldVal){
+            if let timeObserver = AVPlayerTimeObserver { oldVal?.removeTimeObserver(timeObserver) }
             let cmt = CMTime(value: 1, timescale: 10)
-            masterAudioPlayer?.addPeriodicTimeObserver(forInterval: cmt, queue: DispatchQueue.main, using: { (cmt) in
-                let progress = Float(self.masterAudioPlayer!.currentTime().seconds/self.masterAudioPlayer!.currentItem!.duration.seconds)
-                if self.playBarController.progressBarBeingTouched == false
-                    && self.masterAudioPlayer?.isPlaying == true{
-                    self.reflect(progress: progress)
+            AVPlayerTimeObserver = mainAudioPlayer?.addPeriodicTimeObserver(forInterval: cmt, queue: DispatchQueue.main, using: {
+                (cmt) in
+                if self.mainAudioPlayer!.isPlaying == true {
+                    let progress = Float(self.mainAudioPlayer!.currentTime().seconds/self.mainAudioPlayer!.currentItem!.duration.seconds)
+                    PlayBarController.main.reflect(progress: progress)
                 }
             })
+        }
+    }
+    var masterAudioRemoteURL:URL!
+    var masterAudioPlayer:AVPlayer?{
+        didSet(oldVal){
+            
         }
     }
     var currentSelectedComments:[Comment]?
@@ -53,6 +59,7 @@ class DetailViewController: UIViewController{
         detailTV.dataSource = self
         masterAudioRemoteURL = URL(string: post.author_track.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)
         masterAudioPlayer = AVPlayer(url: masterAudioRemoteURL)
+        mainAudioPlayer = masterAudioPlayer
         playBarController = PlayBarController.main
         playBarController.view.isHidden = false
     }
@@ -69,9 +76,15 @@ class DetailViewController: UIViewController{
 
 extension DetailViewController:ModeToggleCellDelegate{
     func didModeToggled(to mode: Bool) {
-        stopMusic()
-        if mode == true { currentPlayMode = .mixed} else { currentPlayMode = .master}
-        stopMusic()
+        playBarController.stopMusic()
+        if mode == true {
+            currentPlayMode = .mixed
+            mainAudioPlayer = mixedTrackContainer.aPlayer
+        } else {
+            currentPlayMode = .master
+            mainAudioPlayer = masterAudioPlayer
+        }
+        playBarController.stopMusic()
         mixedTrackContainer.setInteractionability(to: mode)
     }
 }
@@ -83,25 +96,25 @@ extension DetailViewController{
     
     func stopMusic(){
         currentPhase = .Ready
+        mainAudioPlayer?.stop()
         if currentPlayMode == .mixed { mixedTrackContainer?.stopMusic() }
-        else { masterAudioPlayer?.stop() }
     }
     
     func playMusic(){
         currentPhase = .Playing
-        if currentPlayMode == .mixed { mixedTrackContainer.playMusic() }
-        else { masterAudioPlayer?.play() }
+        mainAudioPlayer?.play()
+        if currentPlayMode == .mixed { mixedTrackContainer.playMusic()}
     }
     
     func pauseMusic(){
         currentPhase = .Ready
+        mainAudioPlayer?.pause()
         if currentPlayMode == .mixed{ mixedTrackContainer?.pauseMusic() }
-        else{ masterAudioPlayer?.pause() }
     }
     
     func seek(to point:Float){
+        mainAudioPlayer?.seek(to: point)
         if currentPlayMode == .mixed { self.mixedTrackContainer.seek(to: point) }
-        else { masterAudioPlayer?.seek(to: point)}
         reflect(progress: point)
     }
 }
@@ -166,7 +179,6 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             let cell = tableView.dequeueReusableCell(withIdentifier: "MixedTracksContainer", for: indexPath) as! MixedTracksContainerCell
             cell.allComments = post.comment_tracks
             cell.delegate = self
-            cell.commentTV.reloadData()
             if DataCenter.main.userNickName == post.author {
                 cell.commentTV.allowsMultipleSelection = true
             }
