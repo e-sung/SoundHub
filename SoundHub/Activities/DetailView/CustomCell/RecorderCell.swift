@@ -13,14 +13,12 @@ class RecorderCell: UITableViewCell {
 
     var delegate:DetailViewController?
 //    var playBarVC:PlayBarViewController!
-    @IBOutlet weak var recordButton: UIButton!
-    @IBOutlet weak var inputPlot: AKNodeOutputPlot!
+    @IBOutlet private weak var recordButton: UIButton!
+    @IBOutlet private weak var inputPlot: AKNodeOutputPlot!
     override func awakeFromNib() {
         super.awakeFromNib()
         state = .readyToRecord
         inputPlot.node = RecordConductor.main.mic
-        let storyboard = UIStoryboard(name: "Detail", bundle: nil)
-//        playBarVC = storyboard.instantiateViewController(withIdentifier: "playBar") as! PlayBarViewController
     }
     
     @IBAction private func recordButtonHandler(_ sender: UIButton) {
@@ -86,6 +84,10 @@ class RecorderCell: UITableViewCell {
         }else {
             print("AVAssetExportSession wasn't generated")
         }
+    }
+    
+    func deinitialize(){
+        inputPlot.node?.avAudioNode.removeTap(onBus: 0)
     }
 
     private func makeRecordingState(){

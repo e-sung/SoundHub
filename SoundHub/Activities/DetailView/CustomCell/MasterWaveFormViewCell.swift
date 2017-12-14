@@ -7,13 +7,10 @@
 //
 
 import UIKit
-import AudioKit
-import AudioKitUI
-import FDWaveformView
 import NCSoundHistogram
 import NVActivityIndicatorView
 
-class MasterWaveFormViewCell: UITableViewCell, FDWaveformViewDelegate, NCSoundHistogramDelegate {
+class MasterWaveFormViewCell: UITableViewCell, NCSoundHistogramDelegate {
     
     func reflect(progress:Float){
         plot?.progress = progress
@@ -24,7 +21,7 @@ class MasterWaveFormViewCell: UITableViewCell, FDWaveformViewDelegate, NCSoundHi
     }
 
     @IBOutlet weak private var activityIndicator: NVActivityIndicatorView!
-    var plot:NCSoundHistogram?
+    private var plot:NCSoundHistogram?
     var masterAudioURL:URL?{
         didSet(oldVal){
             plot = NCSoundHistogram(frame: contentView.frame)
@@ -35,6 +32,9 @@ class MasterWaveFormViewCell: UITableViewCell, FDWaveformViewDelegate, NCSoundHi
             plot!.barLineWidth = 2.5
             contentView.addSubview(plot!)
         }
+    }
+    func renderWave(){
+        plot?.soundURL = masterAudioURL
     }
 
     override func awakeFromNib() {
