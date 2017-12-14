@@ -14,6 +14,11 @@ import NCSoundHistogram
 import NVActivityIndicatorView
 
 class MasterWaveFormViewCell: UITableViewCell, FDWaveformViewDelegate, NCSoundHistogramDelegate {
+    
+    func reflect(progress:Float){
+        plot.progress = progress
+    }
+    
     func didFinishRendering() {
         activityIndicator.stopAnimating()
     }
@@ -26,7 +31,7 @@ class MasterWaveFormViewCell: UITableViewCell, FDWaveformViewDelegate, NCSoundHi
             plot = NCSoundHistogram(frame: contentView.frame)
             plot.delegate = self
             plot.waveColor = .orange
-            plot.animationColor = .yellow
+            plot.progressColor = .green
             plot.drawSpaces = true
             plot.barLineWidth = 2.5
             contentView.addSubview(plot)

@@ -28,9 +28,9 @@ class PlayBarController{
             playButton!.isEnabled = true
             let cmt = CMTime(value: 1, timescale: 10)
             masterAudioPlayer?.addPeriodicTimeObserver(forInterval: cmt, queue: DispatchQueue.main, using: { (cmt) in
-                let progress = self.masterAudioPlayer!.currentTime().seconds/self.masterAudioPlayer!.currentItem!.duration.seconds
+                let progress = Float(self.masterAudioPlayer!.currentTime().seconds/self.masterAudioPlayer!.currentItem!.duration.seconds)
                 if self.progressBarBeingTouched == false {
-                    self.progressBar.setValue(Float(progress), animated: true)
+                    self.reflect(progress: progress)
                 }
             })
         }
@@ -49,6 +49,7 @@ extension PlayBarController{
     @objc func progressBarHandler(_ sender:UISlider){
         progressBarBeingTouched = true
         pauseMusic()
+        self.currentPostView?.reflect(progress: sender.value)
         if playMode == .mixed {
             mixedAudioContainer?.seek(to: sender.value)
         }else{
@@ -93,6 +94,10 @@ extension PlayBarController{
         stopMusic()
         if mode == true { playMode = .mixed} else { playMode = .master}
         stopMusic()
+    }
+    private func reflect(progress:Float){
+        progressBar.setValue(progress, animated: true)
+        currentPostView?.reflect(progress:progress)
     }
 }
 

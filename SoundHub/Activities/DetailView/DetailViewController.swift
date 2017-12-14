@@ -60,6 +60,10 @@ class DetailViewController: UIViewController{
     override func viewWillDisappear(_ animated: Bool) {
         recorderCell?.inputPlot.node?.avAudioNode.removeTap(onBus: 0)
     }
+    
+    func reflect(progress:Float){
+        self.masterWaveCell.reflect(progress: progress)
+    }
 }
 
 extension DetailViewController:ModeToggleCellDelegate{
