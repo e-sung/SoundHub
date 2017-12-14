@@ -17,6 +17,7 @@ class PlayBarController{
     private var playButton: UIButton!
     var progressBar: UISlider!
     var progressBarBeingTouched = false
+    var phaseBeforeProgressBarDrag:DetailViewController.PlayPhase = .Ready
     var delegate:PlayBarControllerDelegate?
     var currentPostView:DetailViewController?{
         willSet(newVal){
@@ -37,19 +38,20 @@ extension PlayBarController{
             pauseMusic()
         }
     }
+    @objc func progressBarDragingDidEnded(_ sender:UISlider){
+        progressBarBeingTouched = false
+        if phaseBeforeProgressBarDrag == .Playing {
+            playMusic()
+        }
+    }
     @objc func progressBarHandler(_ sender:UISlider){
+        if progressBarBeingTouched == false {
+            phaseBeforeProgressBarDrag = (currentPostView?.currentPhase)!
+        }
         progressBarBeingTouched = true
         pauseMusic()
         currentPostView?.seek(to: sender.value)
     }
-//    @objc func progressBarTouchDown(_ sender:UISlider){
-//        pauseMusic()
-//        progressBarBeingTouched = true
-//    }
-//    @objc func progressBarTouchUp(_ sender:UISlider){
-//        progressBarBeingTouched = false
-//        playMusic()
-//    }
     
     @objc func stopMusic(){
         currentPostView?.stopMusic()
@@ -106,6 +108,8 @@ extension PlayBarController{
         view.addSubview(progressBar)
         setAutoLayoutOfProgressBar()
         progressBar.addTarget(self, action: #selector(progressBarHandler), for: .valueChanged)
+        progressBar.addTarget(self, action: #selector(progressBarDragingDidEnded), for: .touchUpInside)
+        progressBar.addTarget(self, action: #selector(progressBarDragingDidEnded), for: .touchUpOutside)
     }
     
     private func setUpGestureRecognizer(){
