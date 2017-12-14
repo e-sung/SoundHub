@@ -29,7 +29,7 @@ class PlayBarController{
             let cmt = CMTime(value: 1, timescale: 10)
             masterAudioPlayer?.addPeriodicTimeObserver(forInterval: cmt, queue: DispatchQueue.main, using: { (cmt) in
                 let progress = Float(self.masterAudioPlayer!.currentTime().seconds/self.masterAudioPlayer!.currentItem!.duration.seconds)
-                if self.progressBarBeingTouched == false {
+                if self.progressBarBeingTouched == false && self.masterAudioPlayer?.isPlaying == true{
                     self.reflect(progress: progress)
                 }
             })

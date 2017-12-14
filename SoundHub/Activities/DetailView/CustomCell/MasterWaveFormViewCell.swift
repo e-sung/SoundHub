@@ -16,7 +16,7 @@ import NVActivityIndicatorView
 class MasterWaveFormViewCell: UITableViewCell, FDWaveformViewDelegate, NCSoundHistogramDelegate {
     
     func reflect(progress:Float){
-        plot.progress = progress
+        plot?.progress = progress
     }
     
     func didFinishRendering() {
@@ -24,17 +24,16 @@ class MasterWaveFormViewCell: UITableViewCell, FDWaveformViewDelegate, NCSoundHi
     }
 
     @IBOutlet weak private var activityIndicator: NVActivityIndicatorView!
-    var audioPlot:EZAudioPlot?
-    var plot:NCSoundHistogram!
+    var plot:NCSoundHistogram?
     var masterAudioURL:URL?{
         didSet(oldVal){
             plot = NCSoundHistogram(frame: contentView.frame)
-            plot.delegate = self
-            plot.waveColor = .orange
-            plot.progressColor = .green
-            plot.drawSpaces = true
-            plot.barLineWidth = 2.5
-            contentView.addSubview(plot)
+            plot!.delegate = self
+            plot!.waveColor = .orange
+            plot!.progressColor = .green
+            plot!.drawSpaces = true
+            plot!.barLineWidth = 2.5
+            contentView.addSubview(plot!)
         }
     }
 

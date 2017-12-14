@@ -21,4 +21,13 @@ extension AVPlayer{
         let point = CMTimeMake(Int64(proportion*duration*scale), Int32(scale))
         self.seek(to: point)
     }
+    
+    var isPlaying: Bool {
+        if (self.rate != 0 && self.error == nil) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
 }

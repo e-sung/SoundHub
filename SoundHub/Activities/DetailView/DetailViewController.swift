@@ -16,7 +16,7 @@ class DetailViewController: UIViewController{
     // MARK: Stored Properties
     var post:Post!
     var playBarController:PlayBarController!
-    var masterWaveCell:MasterWaveFormViewCell!
+    var masterWaveCell:MasterWaveFormViewCell?
     var mixedTrackContainer:MixedTracksContainerCell!
     var recorderCell: RecorderCell?
     var presentedByPlayBar = false
@@ -45,6 +45,7 @@ class DetailViewController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         if playBarController.currentPostView !== self {
             playBarController.stopMusic()
+            
             playBarController.masterAudioPlayer = nil
             if masterAudioLocalURL == nil {
                 playBarController.masterAudioPlayer = AVPlayer(url:masterAudioRemoteURL)
@@ -55,14 +56,14 @@ class DetailViewController: UIViewController{
         playBarController.currentPostView = self
     }
     override func viewDidAppear(_ animated: Bool) {
-        masterWaveCell.plot.soundURL = masterAudioLocalURL!
+        masterWaveCell?.plot?.soundURL = masterAudioLocalURL!
     }
     override func viewWillDisappear(_ animated: Bool) {
         recorderCell?.inputPlot.node?.avAudioNode.removeTap(onBus: 0)
     }
     
     func reflect(progress:Float){
-        self.masterWaveCell.reflect(progress: progress)
+        self.masterWaveCell?.reflect(progress: progress)
     }
 }
 
@@ -123,7 +124,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
                 self.masterAudioLocalURL = localURL
                 PlayBarController.main.masterAudioPlayer = AVPlayer(url: localURL)
             })
-            return masterWaveCell
+            return masterWaveCell!
         }
         else if Section(rawValue: indexPath.section) == .MixedTrackToggler {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MixedCommentHeaderCell", for: indexPath) as! ModeToggleCell
