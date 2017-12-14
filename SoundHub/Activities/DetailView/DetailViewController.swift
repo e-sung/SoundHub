@@ -55,10 +55,8 @@ class DetailViewController: UIViewController{
         playBarController.currentPostView = self
     }
     override func viewDidAppear(_ animated: Bool) {
-        startingPoint = Date()
         masterWaveCell.plot.soundURL = masterAudioLocalURL!
     }
-  
     override func viewWillDisappear(_ animated: Bool) {
         recorderCell?.inputPlot.node?.avAudioNode.removeTap(onBus: 0)
     }
