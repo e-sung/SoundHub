@@ -203,6 +203,27 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             return 100
         }
     }
+    
+    /**
+     특정 post를 보여주는 DetailViewController로 이동하는 함수
+     - parameter post : 도착한 DetailVC가 보여줘야 할 post 정보
+     - parameter vc : 출발하는 ViewController 
+    */
+    static func goToDetailPage(of post:Post, from vc:UIViewController){
+        /// 보려는 포스트가, 현재 플레이바에서 재생중인 포스트라면
+        if post.title == PlayBarController.main.currentPostView?.post.title {
+            /// 그 포스트객체는 PlayBarController.main에 저장되어 있으니, 그걸 보여주면 됨.
+            vc.navigationController?.show(PlayBarController.main.currentPostView!, sender: nil)
+        }
+        
+        /// 그게 아니라면, 프로필 페이지에 있는 Post객체는 제한된 정보만 가지고 있기 때문에,
+        /// 온전한 Post객체를 다시 서버에서 받아와야 함.
+        NetworkController.main.fetchPost(id: post.id) { (fetchedPost) in
+            let nextVC = UIStoryboard(name: "Detail", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+            nextVC.post = fetchedPost
+            DispatchQueue.main.async { vc.navigationController?.show(nextVC, sender: nil) }
+        }
+    }
 }
 
 // MARK: Helper Enums

@@ -11,11 +11,7 @@ import AVFoundation
 
 class MixedTracksContainerCell: UITableViewCell{
     
-    var allComments:[String:[Comment]]?{
-        didSet(oldval){
-            commentTV.reloadData()
-        }
-    }
+    var allComments:[String:[Comment]]?{ didSet(oldval){ commentTV.reloadData() }}
     var aPlayer:AVPlayer?
     var delegate:MixedTracksContainerCellDelegate?
 
