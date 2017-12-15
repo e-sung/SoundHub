@@ -44,7 +44,7 @@ extension MixedTracksContainerCell{
         for i in 0..<commentTV.numberOfSections{
             for j in 0..<commentTV.numberOfRows(inSection: i){
                 let cell = commentTV.cellForRow(at: IndexPath(item: j, section: i)) as! AudioCommentCell
-                if cell.isActive { cell.player.volume = value }
+                if cell.isActive { cell.player?.volume = value }
             }
         }
     }
@@ -53,7 +53,7 @@ extension MixedTracksContainerCell{
         for i in 0..<commentTV.numberOfSections{
             for j in 0..<commentTV.numberOfRows(inSection: i){
                 let cell = commentTV.cellForRow(at: IndexPath(item: j, section: i)) as! AudioCommentCell
-                cell.player.play()
+                cell.player?.play()
             }
         }
     }
@@ -62,7 +62,7 @@ extension MixedTracksContainerCell{
         for i in 0..<commentTV.numberOfSections{
             for j in 0..<commentTV.numberOfRows(inSection: i){
                 let cell = commentTV.cellForRow(at: IndexPath(item: j, section: i)) as! AudioCommentCell
-                cell.player.pause()
+                cell.player?.pause()
             }
         }
     }
@@ -71,7 +71,7 @@ extension MixedTracksContainerCell{
         for i in 0..<commentTV.numberOfSections{
             for j in 0..<commentTV.numberOfRows(inSection: i){
                 let cell = commentTV.cellForRow(at: IndexPath(item: j, section: i)) as! AudioCommentCell
-                cell.player.stop()
+                cell.player?.stop()
             }
         }
     }
@@ -80,7 +80,7 @@ extension MixedTracksContainerCell{
         for i in 0..<commentTV.numberOfSections{
             for j in 0..<commentTV.numberOfRows(inSection: i){
                 let cell = commentTV.cellForRow(at: IndexPath(item: j, section: i)) as! AudioCommentCell
-                cell.player.seek(to:proportion)
+                cell.player?.seek(to:proportion)
             }
         }
     }
@@ -108,7 +108,6 @@ extension MixedTracksContainerCell:UITableViewDataSource, UITableViewDelegate{
                 cell.comment = allComments[instrument]![indexPath.item]
             }
         }
-        cell.player.volume = 0
         if indexPath == IndexPath(item: 0, section: 1){ aPlayer = cell.player }
         if tableView.allowsMultipleSelection == true { cell.borderWidth = 2; cell.borderColor = .orange }
         return cell

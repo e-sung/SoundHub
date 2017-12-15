@@ -124,7 +124,7 @@ extension ChartViewController:UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 500
+        return PostListCell.defaultHeight
     }
     
     func refreshData(){
@@ -215,7 +215,7 @@ extension ChartViewController{
             case .PopularMusicians:
                 return 200
             default:
-                return 500
+                return PostListCell.defaultHeight
             }
         }
     }

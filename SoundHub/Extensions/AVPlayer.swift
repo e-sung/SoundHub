@@ -21,6 +21,7 @@ extension AVPlayer{
     func seek(to proportion:Float){
         let scale:Float = 1000
         let duration = Float(self.currentItem!.duration.seconds)
+        if duration.isNaN { return }
         let point = CMTimeMake(Int64(proportion*duration*scale), Int32(scale))
         self.seek(to: point)
     }
