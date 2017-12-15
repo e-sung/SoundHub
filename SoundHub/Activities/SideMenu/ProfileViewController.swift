@@ -90,7 +90,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
             return headerCell!
         }else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "flowContainerCell", for: indexPath) as! FlowContainerCell
-            cell.posts = userInfo?.post_set
+            cell.userInfo = userInfo
             return cell
         }
 

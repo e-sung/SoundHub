@@ -10,25 +10,34 @@ import UIKit
 
 class FlowContainerCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postedPostContainer", for: indexPath) as! PostContainerCell
+        var identifier = ""
+        var posts:[Post]? = nil
+        if indexPath.item == 0 {
+            identifier = "postedPostContainer"
+            posts = userInfo?.post_set
+        }else{
+            identifier = "likedPostContainer"
+            posts = userInfo?.liked_posts
+        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! PostContainerCell
         cell.posts = posts
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.frame.width, height: CGFloat(posts!.count)*PostListCell.defaultHeight)
+        return CGSize(width: self.frame.width, height: CGFloat(userInfo!.largerPosts.count)*PostListCell.defaultHeight)
     }
-
-
-    var posts:[Post]?{
+    
+    var userInfo:User?{
         didSet(oldVal){
-            flowContainer.setHeight(with: CGFloat(posts!.count)*PostListCell.defaultHeight)
+            flowContainer.setHeight(with: CGFloat(userInfo!.largerPosts.count)*PostListCell.defaultHeight)
         }
     }
+
     @IBOutlet weak var flowContainer: UICollectionView!
     
     
