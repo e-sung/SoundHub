@@ -8,30 +8,39 @@
 
 import UIKit
 
-class FlowContainerCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, PostContainerCellDelegate {
-    func shouldGoTo(post: Post) {
-        delegate?.shouldGoTo(post: post)
-    }
+class FlowContainerCell: UITableViewCell{
     
+    @IBOutlet weak var flowContainer: UICollectionView!
+    var delegate:FlowContainerCellDelegate?
+    var userInfo:User?{
+        didSet(oldVal){
+            flowContainer.setHeight(with: CGFloat(userInfo!.largerPosts.count)*PostListCell.defaultHeight)
+        }
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        flowContainer.delegate = self
+        flowContainer.dataSource = self
+    }
+}
+
+extension FlowContainerCell:UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var identifier = ""
-        var headerTitle = ""
         var posts:[Post]? = nil
         if indexPath.item == 0 {
             identifier = "postedPostContainer"
-            headerTitle = "올린 포스트들"
             posts = userInfo?.post_set
         }else{
             identifier = "likedPostContainer"
-            headerTitle = "좋아한 포스트들"
             posts = userInfo?.liked_posts
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! PostContainerCell
-        cell.headerTitle = headerTitle
         cell.posts = posts
         cell.delegate = self
         return cell
@@ -44,21 +53,12 @@ class FlowContainerCell: UITableViewCell, UICollectionViewDelegate, UICollection
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         delegate?.didScrolledTo(page: indexPath.item)
     }
-    
-    var userInfo:User?{
-        didSet(oldVal){
-            flowContainer.setHeight(with: CGFloat(userInfo!.largerPosts.count)*PostListCell.defaultHeight)
-        }
-    }
+}
 
-    @IBOutlet weak var flowContainer: UICollectionView!
-    var delegate:FlowContainerCellDelegate?
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        flowContainer.delegate = self
-        flowContainer.dataSource = self
+extension FlowContainerCell:PostContainerCellDelegate{
+    func shouldGoTo(post: Post) {
+        delegate?.shouldGoTo(post: post)
     }
-
 }
 
 protocol FlowContainerCellDelegate {
