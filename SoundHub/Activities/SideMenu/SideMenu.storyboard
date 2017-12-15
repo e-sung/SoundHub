@@ -309,17 +309,51 @@
                                                         <action selector="profileImageChangeHandler:" destination="wBt-Lf-jqh" eventType="touchUpInside" id="6CO-1P-5zu"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Following" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RSY-co-KOk">
+                                                    <rect key="frame" x="0.0" y="190.5" width="137" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Follower" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dM5-Ad-Y4N">
+                                                    <rect key="frame" x="237" y="190" width="138" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsI-S4-61M">
+                                                    <rect key="frame" x="47" y="219" width="42" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUM-IY-v58">
+                                                    <rect key="frame" x="285" y="218.5" width="42" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="vUM-IY-v58" firstAttribute="centerY" secondItem="tsI-S4-61M" secondAttribute="centerY" id="4qj-dX-Bkh"/>
+                                                <constraint firstItem="tsI-S4-61M" firstAttribute="centerX" secondItem="RSY-co-KOk" secondAttribute="centerX" id="5Zd-mM-RnD"/>
                                                 <constraint firstItem="yxQ-Bt-CPW" firstAttribute="trailing" secondItem="EEV-Bm-TBg" secondAttribute="trailingMargin" constant="10" id="656-LU-Jnl"/>
                                                 <constraint firstItem="tM6-Ze-Yg3" firstAttribute="top" secondItem="cdx-mN-D95" secondAttribute="bottom" id="7Tx-vV-c9s"/>
+                                                <constraint firstItem="RSY-co-KOk" firstAttribute="trailing" secondItem="cdx-mN-D95" secondAttribute="leading" id="DKp-aS-XAu"/>
                                                 <constraint firstItem="e4K-aU-IoP" firstAttribute="top" secondItem="EEV-Bm-TBg" secondAttribute="top" id="IcA-TU-JBE"/>
                                                 <constraint firstItem="iKK-W8-jrT" firstAttribute="centerX" secondItem="EEV-Bm-TBg" secondAttribute="centerX" id="Lcn-r9-KoW"/>
+                                                <constraint firstItem="dM5-Ad-Y4N" firstAttribute="leading" secondItem="cdx-mN-D95" secondAttribute="trailing" id="V4R-k5-0HR"/>
                                                 <constraint firstItem="e4K-aU-IoP" firstAttribute="width" secondItem="EEV-Bm-TBg" secondAttribute="width" id="VQj-bD-sNk"/>
                                                 <constraint firstItem="cdx-mN-D95" firstAttribute="centerX" secondItem="e4K-aU-IoP" secondAttribute="centerX" id="W5G-QI-HYB"/>
                                                 <constraint firstItem="yxQ-Bt-CPW" firstAttribute="bottom" secondItem="cdx-mN-D95" secondAttribute="bottom" id="ZlL-1M-gEF"/>
+                                                <constraint firstItem="tsI-S4-61M" firstAttribute="top" secondItem="RSY-co-KOk" secondAttribute="bottom" constant="8" id="apK-Ec-oEu"/>
                                                 <constraint firstItem="cdx-mN-D95" firstAttribute="top" secondItem="e4K-aU-IoP" secondAttribute="bottom" constant="-50" id="dEK-xQ-vZK"/>
                                                 <constraint firstItem="iKK-W8-jrT" firstAttribute="top" secondItem="tM6-Ze-Yg3" secondAttribute="bottom" id="dEl-SY-gU8"/>
+                                                <constraint firstItem="RSY-co-KOk" firstAttribute="leading" secondItem="e4K-aU-IoP" secondAttribute="leading" id="fgM-T5-16p"/>
+                                                <constraint firstItem="RSY-co-KOk" firstAttribute="bottom" secondItem="e4K-aU-IoP" secondAttribute="bottom" id="ga9-I0-Alx"/>
+                                                <constraint firstItem="vUM-IY-v58" firstAttribute="centerX" secondItem="dM5-Ad-Y4N" secondAttribute="centerX" id="h3a-On-A0Q"/>
+                                                <constraint firstItem="dM5-Ad-Y4N" firstAttribute="bottom" secondItem="e4K-aU-IoP" secondAttribute="bottom" id="pS3-DD-o2f"/>
+                                                <constraint firstItem="dM5-Ad-Y4N" firstAttribute="trailing" secondItem="e4K-aU-IoP" secondAttribute="trailing" id="s5R-Zl-00C"/>
                                                 <constraint firstItem="e4K-aU-IoP" firstAttribute="leading" secondItem="EEV-Bm-TBg" secondAttribute="leading" id="uLy-X2-DNn"/>
                                                 <constraint firstItem="tM6-Ze-Yg3" firstAttribute="centerX" secondItem="cdx-mN-D95" secondAttribute="centerX" id="z5u-Nc-UI2"/>
                                             </constraints>
@@ -327,6 +361,8 @@
                                         <connections>
                                             <outlet property="headerImageButton" destination="e4K-aU-IoP" id="WRT-yD-b3E"/>
                                             <outlet property="nickNameTF" destination="tM6-Ze-Yg3" id="yV0-6g-Fe2"/>
+                                            <outlet property="numFollowerLB" destination="vUM-IY-v58" id="C9d-pE-j3q"/>
+                                            <outlet property="numFollowingLB" destination="tsI-S4-61M" id="mla-Ui-d6I"/>
                                             <outlet property="profileImageButton" destination="cdx-mN-D95" id="GdG-OZ-m4H"/>
                                             <outlet property="settingButton" destination="yxQ-Bt-CPW" id="F1M-cr-4uV"/>
                                         </connections>
@@ -729,7 +765,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b8F-Tx-6Ua" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2575" y="-948"/>
+            <point key="canvasLocation" x="2573.5999999999999" y="-948.12593703148434"/>
         </scene>
     </scenes>
     <resources>

@@ -20,6 +20,8 @@ struct User:Codable{
     let last_login:String?
     let post_set:[Post]?
     let liked_posts:[Post]?
+    let num_followings:Int?
+    let num_followers:Int?
     var largerPosts:[Post]{
         get{
             if let postedPosts = self.post_set{
