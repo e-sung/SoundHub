@@ -79,18 +79,29 @@ extension ProfileViewController: UIImagePickerControllerDelegate,UINavigationCon
 // MARK: TableViewDelegate
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        headerCell = tableView.dequeueReusableCell(withIdentifier: "profileHeaderCell", for: indexPath) as? ProfileHeaderCell
-        headerCell!.delegate = self
-        headerCell!.refresh(with: userInfo)
-        return headerCell!
+        if indexPath.item == 0 {
+            headerCell = tableView.dequeueReusableCell(withIdentifier: "profileHeaderCell", for: indexPath) as? ProfileHeaderCell
+            headerCell!.delegate = self
+            headerCell!.refresh(with: userInfo)
+            return headerCell!
+        }else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "postedPostContainerCell", for: indexPath) as! PostedPostContainerCell
+            return cell
+        }
+
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 330
+        if indexPath.item == 0 {
+            return 330
+        }else{
+            return 500*10
+        }
+
     }
 }
 

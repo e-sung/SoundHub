@@ -36,6 +36,7 @@
 		FF3B20C91FCC434B0019F87A /* ProfileSetUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20C81FCC434B0019F87A /* ProfileSetUpViewController.swift */; };
 		FF4A5C021FD68CAD00E8189F /* SetUpMetaInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4A5C011FD68CAD00E8189F /* SetUpMetaInfoViewController.swift */; };
 		FF4A7F9B1FCCEE0A0002E27A /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4A7F9A1FCCEE090002E27A /* UIViewController.swift */; };
+		FF57BDF61FE3617B00A0AEB0 /* PostedPostContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF57BDF51FE3617A00A0AEB0 /* PostedPostContainerCell.swift */; };
 		FF5C013E1FD951B200F37CC9 /* GenrePickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5C013D1FD951B200F37CC9 /* GenrePickViewController.swift */; };
 		FF5C01401FD96D0500F37CC9 /* InstrumentPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5C013F1FD96D0500F37CC9 /* InstrumentPickerViewController.swift */; };
 		FF5C01421FDA188D00F37CC9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF5C01411FDA188D00F37CC9 /* GoogleService-Info.plist */; };
@@ -125,6 +126,7 @@
 		FF3B20C81FCC434B0019F87A /* ProfileSetUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetUpViewController.swift; sourceTree = "<group>"; };
 		FF4A5C011FD68CAD00E8189F /* SetUpMetaInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUpMetaInfoViewController.swift; sourceTree = "<group>"; };
 		FF4A7F9A1FCCEE090002E27A /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		FF57BDF51FE3617A00A0AEB0 /* PostedPostContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostedPostContainerCell.swift; sourceTree = "<group>"; };
 		FF5C013D1FD951B200F37CC9 /* GenrePickViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenrePickViewController.swift; sourceTree = "<group>"; };
 		FF5C013F1FD96D0500F37CC9 /* InstrumentPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentPickerViewController.swift; sourceTree = "<group>"; };
 		FF5C01411FDA188D00F37CC9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				FF688F791FCE58D600F0A41F /* SideMenu.storyboard */,
+				FF57BDF51FE3617A00A0AEB0 /* PostedPostContainerCell.swift */,
 				FFB85FCD1FCE657F000E47C8 /* ProfileViewController.swift */,
 				FFB85FCB1FCE652A000E47C8 /* ProfileHeaderCell.swift */,
 				FF688F771FCE58B700F0A41F /* SideMenuViewController.swift */,
@@ -756,6 +759,7 @@
 				FF9D18541FDA6012008D5FD1 /* MixedTracksContainerCell.swift in Sources */,
 				FF3B20B31FCAA2700019F87A /* InspectableView.swift in Sources */,
 				FF0280561FD776CF00C0013A /* UserDefaultKey.swift in Sources */,
+				FF57BDF61FE3617B00A0AEB0 /* PostedPostContainerCell.swift in Sources */,
 				FFC32AED1FCFD96500651A31 /* LoginResponse.swift in Sources */,
 				FF3B20C21FCC31930019F87A /* SignUpViewController.swift in Sources */,
 				FF3B20C41FCC3B4C0019F87A /* SignUpRequest.swift in Sources */,
