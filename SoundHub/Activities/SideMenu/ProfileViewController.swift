@@ -14,6 +14,8 @@ class ProfileViewController: UIViewController{
     private var buttonToChange:UIButton?
     private var headerCell:ProfileHeaderCell?
     private let imagePicker = UIImagePickerController()
+    var headerTitles = ["올린 포스트들","좋아한 포스트들"]
+    var headerTitle = ""
     var userInfo:User?{
         didSet(oldVal){
             headerCell?.refresh(with: userInfo)
@@ -42,6 +44,7 @@ class ProfileViewController: UIViewController{
     // MARK: IBOutlets
     @IBOutlet weak private var mainTV: UITableView!
 
+    
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,19 +81,72 @@ extension ProfileViewController: UIImagePickerControllerDelegate,UINavigationCon
 
 // MARK: TableViewDelegate
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        headerCell = tableView.dequeueReusableCell(withIdentifier: "profileHeaderCell", for: indexPath) as? ProfileHeaderCell
-        headerCell!.delegate = self
-        headerCell!.refresh(with: userInfo)
-        return headerCell!
+        if indexPath.section == 0 {
+            headerCell = tableView.dequeueReusableCell(withIdentifier: "profileHeaderCell", for: indexPath) as? ProfileHeaderCell
+            headerCell!.delegate = self
+            headerCell!.refresh(with: userInfo)
+            return headerCell!
+        }else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "flowContainerCell", for: indexPath) as! FlowContainerCell
+            cell.userInfo = userInfo
+            cell.delegate = self
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 330
+        if indexPath.section == 0 {
+            return 330
+        }else{
+            guard let userInfo = userInfo else { return 0 }
+            guard let posts = userInfo.post_set else { return 0 }
+            return PostListCell.defaultHeight*CGFloat(posts.count)
+        }
+    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 1 { return headerTitle }
+        return nil
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 0
+        }
+        return 60
+    }
+}
+
+extension ProfileViewController:FlowContainerCellDelegate{
+    func shouldGoTo(post: Post) {
+        NetworkController.main.fetchPost(id: post.id) { (post) in
+            if post.title != PlayBarController.main.currentPostView?.post.title{
+                let detailSB = UIStoryboard(name: "Detail", bundle: nil)
+                let nextVC = detailSB.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+                nextVC.post = post
+                DispatchQueue.main.async {
+                    self.navigationController?.show(nextVC, sender: nil)
+                }
+                
+            }else if let currentPostView = PlayBarController.main.currentPostView{
+                DispatchQueue.main.async {
+                    self.navigationController?.show(currentPostView, sender: nil)
+                }
+            }
+        }
+    }
+    
+    func didScrolledTo(page: Int) {
+        headerTitle = headerTitles[page]
+        mainTV.headerView(forSection: page)?.textLabel?.text = headerTitle
     }
 }
 

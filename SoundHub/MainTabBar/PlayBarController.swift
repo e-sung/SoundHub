@@ -17,58 +17,46 @@ class PlayBarController{
     private var playButton: UIButton!
     var progressBar: UISlider!
     var progressBarBeingTouched = false
+    var phaseBeforeProgressBarDrag:DetailViewController.PlayPhase = .Ready
     var delegate:PlayBarControllerDelegate?
-    var currentPostView:DetailViewController?
-    var mixedAudioContainer:MixedTracksContainerCell?
-    
-    var currentPhase:PlayPhase = .Ready
-    var playMode:PlayMode = .master
-    var masterAudioPlayer:AVPlayer?{
-        didSet(oldval){
-            playButton!.isEnabled = true
-            let cmt = CMTime(value: 1, timescale: 10)
-            masterAudioPlayer?.addPeriodicTimeObserver(forInterval: cmt, queue: DispatchQueue.main, using: { (cmt) in
-                let progress = self.masterAudioPlayer!.currentTime().seconds/self.masterAudioPlayer!.currentItem!.duration.seconds
-                if self.progressBarBeingTouched == false {
-                    self.progressBar.setValue(Float(progress), animated: true)
-                }
-            })
+    var currentPostView:DetailViewController?{
+        willSet(newVal){
+            if currentPostView !== newVal {
+                stopMusic()
+            }
         }
     }
+    var masterAudioPlayer:AVPlayer?
 }
 
 extension PlayBarController{
     @objc func playButtonHandler(_ sender: UIButton) {
         progressBarBeingTouched = false
-        if currentPhase == .Ready {
+        if currentPostView?.currentPhase == .Ready {
             playMusic()
-        }else if currentPhase == .Playing{
+        }else if currentPostView?.currentPhase == .Playing{
             pauseMusic()
         }
     }
-    @objc func progressBarHandler(_ sender:UISlider){
-        progressBarBeingTouched = true
-        pauseMusic()
-        if playMode == .mixed {
-            mixedAudioContainer?.seek(to: sender.value)
-        }else{
-            masterAudioPlayer?.seek(to: sender.value)
+    @objc func progressBarDragingDidEnded(_ sender:UISlider){
+        progressBarBeingTouched = false
+        if phaseBeforeProgressBarDrag == .Playing {
+            playMusic()
         }
     }
-//    @objc func progressBarTouchDown(_ sender:UISlider){
-//        pauseMusic()
-//        progressBarBeingTouched = true
-//    }
-//    @objc func progressBarTouchUp(_ sender:UISlider){
-//        progressBarBeingTouched = false
-//        playMusic()
-//    }
+    @objc func progressBarHandler(_ sender:UISlider){
+        if progressBarBeingTouched == false {
+            phaseBeforeProgressBarDrag = (currentPostView?.currentPhase)!
+        }
+        progressBarBeingTouched = true
+        pauseMusic()
+        currentPostView?.seek(to: sender.value)
+    }
     
     @objc func stopMusic(){
-        if playMode == .mixed {
-            mixedAudioContainer?.stopMusic()
-        }else { masterAudioPlayer?.stop() }
+        currentPostView?.stopMusic()
         playButton?.setBackgroundImage(#imageLiteral(resourceName: "play"), for: .normal)
+        reflect(progress: 0)
     }
     
     @objc func showCurrentMusicContainer(){
@@ -79,20 +67,17 @@ extension PlayBarController{
 extension PlayBarController{
     func playMusic(){
         playButton?.setBackgroundImage(#imageLiteral(resourceName: "pause"), for: .normal)
-        currentPhase = .Playing
-        if playMode == .mixed { mixedAudioContainer?.playMusic() }
-        else { masterAudioPlayer?.play() }
+        currentPostView?.playMusic()
     }
     func pauseMusic(){
         playButton?.setBackgroundImage(#imageLiteral(resourceName: "play"), for: .normal)
-        currentPhase = .Ready
-        if playMode == .mixed{ mixedAudioContainer?.pauseMusic() }
-        else{ masterAudioPlayer?.pause() }
+        currentPostView?.pauseMusic()
     }
-    func toggle(to mode:Bool){
-        stopMusic()
-        if mode == true { playMode = .mixed} else { playMode = .master}
-        stopMusic()
+    func reflect(progress:Float){
+        if progressBarBeingTouched == false{
+            progressBar.setValue(progress, animated: true)
+            currentPostView?.reflect(progress:progress)
+        }
     }
 }
 
@@ -114,7 +99,6 @@ extension PlayBarController{
         playButton = UIButton()
         view.addSubview(playButton)
         setAutoLayoutOfPlayButton()
-        playButton.isEnabled = false
         playButton.setBackgroundImage(#imageLiteral(resourceName: "play"), for: .normal)
         playButton.addTarget(self, action: #selector(playButtonHandler), for: .touchUpInside)
     }
@@ -124,6 +108,8 @@ extension PlayBarController{
         view.addSubview(progressBar)
         setAutoLayoutOfProgressBar()
         progressBar.addTarget(self, action: #selector(progressBarHandler), for: .valueChanged)
+        progressBar.addTarget(self, action: #selector(progressBarDragingDidEnded), for: .touchUpInside)
+        progressBar.addTarget(self, action: #selector(progressBarDragingDidEnded), for: .touchUpOutside)
     }
     
     private func setUpGestureRecognizer(){
@@ -153,18 +139,6 @@ extension PlayBarController{
         progressBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         progressBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         progressBar.centerYAnchor.constraint(equalTo: view.topAnchor).isActive = true
-    }
-}
-
-extension PlayBarController{
-    enum PlayPhase{
-        case Ready
-        case Playing
-        case Recording
-    }
-    enum PlayMode{
-        case master
-        case mixed
     }
 }
 

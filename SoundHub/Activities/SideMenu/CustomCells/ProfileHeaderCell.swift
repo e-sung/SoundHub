@@ -16,6 +16,9 @@ class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate, UITex
     @IBOutlet weak var settingButton: UIButton!
     @IBOutlet weak private var nickNameTF: UITextField!
 
+    @IBOutlet weak var numFollowingLB: UILabel!
+    @IBOutlet weak var numFollowerLB: UILabel!
+    
     // MARK: IBActions
     @IBAction private func headerImageChangeHandler(_ sender: UIButton) {
         delegate?.changeImageOf(button: sender)
@@ -54,6 +57,8 @@ class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate, UITex
             settingButton.isHidden = false
         }else {
             nickName = userInfo!.nickname
+            numFollowingLB.text = "\(userInfo!.num_followings!)"
+            numFollowerLB.text = "\(userInfo!.num_followers!)"
             settingButton.isHidden = true
         }
     }
