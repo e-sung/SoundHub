@@ -9,12 +9,22 @@
 import UIKit
 
 class PostedPostContainerCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource {
+    
+    var posts:[Post]?{
+        didSet(oldVal){
+            postTB.reloadData()
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        guard let posts = posts else { return 0 }
+        return posts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "postedPostCell", for: indexPath) as! PostListCell
+        guard let posts = posts else { return cell }
+        cell.postInfo = posts[indexPath.item]
         return cell
     }
     

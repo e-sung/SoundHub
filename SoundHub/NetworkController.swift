@@ -48,6 +48,18 @@ class NetworkController{
         }
     }
     
+    func fetchUser(id:Int, completion:@escaping(User)->Void){
+        let url = URL(string: "/user/\(id)/", relativeTo: baseURL)!
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let data = data else { print("data is corrupted") ; return }
+            guard let userInfo = try? JSONDecoder().decode(User.self, from: data) else {
+                print("User Info Decoding failed")
+                return
+            }
+            completion(userInfo)
+        }
+    }
+    
     func fetchPost(id:Int, completion:@escaping(Post)->Void){
         let url = URL(string: "\(id)/", relativeTo: postURL)!
         URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -180,7 +192,8 @@ class NetworkController{
             guard let data = data else { print("data is corrupted") ; return }
             do{
                 let post = try JSONDecoder().decode([String:Post].self, from: data)
-                completion(post["post"]!.num_liked)
+                if let numLiked = post["post"]!.num_liked{ completion(numLiked) }
+                else{ completion(0) }
             }catch let err as NSError { print(err) }
         }.resume()
     }

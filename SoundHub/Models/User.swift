@@ -18,5 +18,6 @@ struct User:Codable{
     let is_staff:Bool?
     let is_active:Bool?
     let last_login:String?
+    let post_set:[Post]?
 }
 

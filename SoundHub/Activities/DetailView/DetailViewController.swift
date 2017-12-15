@@ -57,7 +57,7 @@ class DetailViewController: UIViewController{
         super.viewDidLoad()
         detailTV.delegate = self
         detailTV.dataSource = self
-        masterAudioRemoteURL = URL(string: post.author_track.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)
+        masterAudioRemoteURL = URL(string: post.author_track!.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)
         masterAudioPlayer = AVPlayer(url: masterAudioRemoteURL)
         mainAudioPlayer = masterAudioPlayer
         playBarController = PlayBarController.main
@@ -198,7 +198,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         if Section(rawValue:indexPath.section) == .MainHeader { return 200 }
         else if Section(rawValue:indexPath.section) == .MixedTrackToggler { return 60 }
         else if Section(rawValue:indexPath.section) == .MixedTracks {
-            return CGFloat(post.num_comments * 100)
+            return CGFloat(post.num_comments! * 100)
         }else {
             return 100
         }
