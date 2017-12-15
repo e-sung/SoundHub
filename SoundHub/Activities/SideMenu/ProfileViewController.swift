@@ -99,7 +99,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
         if indexPath.item == 0 {
             return 330
         }else{
-            return 500*10
+            return PostListCell.defaultHeight*10
         }
 
     }

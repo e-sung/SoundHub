@@ -16,7 +16,7 @@ class PostListCell: UITableViewCell {
     @IBOutlet weak var totalLikesLB: UILabel!
     @IBOutlet weak var totalComments: UILabel!
     
-    
+    static let defaultHeight:CGFloat = 500
     @IBOutlet weak private var authorProfileImageView: UIImageView!
     @IBOutlet weak private var albumCoverImageView: UIImageView!
     var postInfo:Post{
