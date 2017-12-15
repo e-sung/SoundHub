@@ -15,21 +15,29 @@ class FlowContainerCell: UITableViewCell, UICollectionViewDelegate, UICollection
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var identifier = ""
+        var headerTitle = ""
         var posts:[Post]? = nil
         if indexPath.item == 0 {
             identifier = "postedPostContainer"
+            headerTitle = "올린 포스트들"
             posts = userInfo?.post_set
         }else{
             identifier = "likedPostContainer"
+            headerTitle = "좋아한 포스트들"
             posts = userInfo?.liked_posts
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! PostContainerCell
+        cell.headerTitle = headerTitle
         cell.posts = posts
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: self.frame.width, height: CGFloat(userInfo!.largerPosts.count)*PostListCell.defaultHeight)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        delegate?.didScrolledTo(page: indexPath.item)
     }
     
     var userInfo:User?{
@@ -39,12 +47,15 @@ class FlowContainerCell: UITableViewCell, UICollectionViewDelegate, UICollection
     }
 
     @IBOutlet weak var flowContainer: UICollectionView!
-    
-    
+    var delegate:FlowContainerCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
         flowContainer.delegate = self
         flowContainer.dataSource = self
     }
 
+}
+
+protocol FlowContainerCellDelegate {
+    func didScrolledTo(page:Int)->Void
 }

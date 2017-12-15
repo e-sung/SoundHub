@@ -14,6 +14,8 @@ class ProfileViewController: UIViewController{
     private var buttonToChange:UIButton?
     private var headerCell:ProfileHeaderCell?
     private let imagePicker = UIImagePickerController()
+    var headerTitles = ["올린 포스트들","좋아한 포스트들"]
+    var headerTitle = ""
     var userInfo:User?{
         didSet(oldVal){
             headerCell?.refresh(with: userInfo)
@@ -78,12 +80,17 @@ extension ProfileViewController: UIImagePickerControllerDelegate,UINavigationCon
 
 // MARK: TableViewDelegate
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.item == 0 {
+        if indexPath.section == 0 {
             headerCell = tableView.dequeueReusableCell(withIdentifier: "profileHeaderCell", for: indexPath) as? ProfileHeaderCell
             headerCell!.delegate = self
             headerCell!.refresh(with: userInfo)
@@ -91,20 +98,36 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
         }else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "flowContainerCell", for: indexPath) as! FlowContainerCell
             cell.userInfo = userInfo
+            cell.delegate = self
             return cell
         }
-
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.item == 0 {
+        if indexPath.section == 0 {
             return 330
         }else{
             guard let userInfo = userInfo else { return 0 }
             guard let posts = userInfo.post_set else { return 0 }
             return PostListCell.defaultHeight*CGFloat(posts.count)
         }
+    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 1 { return headerTitle }
+        return nil
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 0
+        }
+        return 60
+    }
+}
 
+extension ProfileViewController:FlowContainerCellDelegate{
+    func didScrolledTo(page: Int) {
+        headerTitle = headerTitles[page]
+        mainTV.headerView(forSection: page)?.textLabel?.text = headerTitle
     }
 }
 

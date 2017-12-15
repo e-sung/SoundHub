@@ -10,6 +10,8 @@ import UIKit
 
 class PostContainerCell: UICollectionViewCell, UITableViewDelegate, UITableViewDataSource {
     var posts:[Post]?
+    var headerTitle = ""
+    let headerHeight = 60
     @IBOutlet weak var postTB: UITableView!
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let posts = posts else { return 0 }
@@ -27,9 +29,14 @@ class PostContainerCell: UICollectionViewCell, UITableViewDelegate, UITableViewD
         return PostListCell.defaultHeight
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 1
-    }
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return CGFloat(headerHeight)
+//    }
+//    
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        return UIView.generateHeaderView(with: headerTitle, and: headerHeight)
+//    }
+    
     override func awakeFromNib() {
         postTB.delegate = self
         postTB.dataSource = self
