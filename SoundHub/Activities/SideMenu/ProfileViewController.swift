@@ -126,6 +126,24 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
 }
 
 extension ProfileViewController:FlowContainerCellDelegate{
+    func shouldGoTo(post: Post) {
+        NetworkController.main.fetchPost(id: post.id) { (post) in
+            if post.title != PlayBarController.main.currentPostView?.post.title{
+                let detailSB = UIStoryboard(name: "Detail", bundle: nil)
+                let nextVC = detailSB.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+                nextVC.post = post
+                DispatchQueue.main.async {
+                    self.navigationController?.show(nextVC, sender: nil)
+                }
+                
+            }else if let currentPostView = PlayBarController.main.currentPostView{
+                DispatchQueue.main.async {
+                    self.navigationController?.show(currentPostView, sender: nil)
+                }
+            }
+        }
+    }
+    
     func didScrolledTo(page: Int) {
         headerTitle = headerTitles[page]
         mainTV.headerView(forSection: page)?.textLabel?.text = headerTitle

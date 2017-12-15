@@ -8,7 +8,11 @@
 
 import UIKit
 
-class FlowContainerCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class FlowContainerCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, PostContainerCellDelegate {
+    func shouldGoTo(post: Post) {
+        delegate?.shouldGoTo(post: post)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 2
     }
@@ -29,6 +33,7 @@ class FlowContainerCell: UITableViewCell, UICollectionViewDelegate, UICollection
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! PostContainerCell
         cell.headerTitle = headerTitle
         cell.posts = posts
+        cell.delegate = self
         return cell
     }
     
@@ -58,4 +63,5 @@ class FlowContainerCell: UITableViewCell, UICollectionViewDelegate, UICollection
 
 protocol FlowContainerCellDelegate {
     func didScrolledTo(page:Int)->Void
+    func shouldGoTo(post:Post)->Void
 }

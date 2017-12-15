@@ -12,6 +12,7 @@ class PostContainerCell: UICollectionViewCell, UITableViewDelegate, UITableViewD
     var posts:[Post]?
     var headerTitle = ""
     let headerHeight = 60
+    var delegate:PostContainerCellDelegate?
     @IBOutlet weak var postTB: UITableView!
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let posts = posts else { return 0 }
@@ -29,6 +30,11 @@ class PostContainerCell: UICollectionViewCell, UITableViewDelegate, UITableViewD
         return PostListCell.defaultHeight
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let posts = posts else { return }
+        delegate?.shouldGoTo(post: posts[indexPath.item])
+    }
+    
 //    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 //        return CGFloat(headerHeight)
 //    }
@@ -42,4 +48,8 @@ class PostContainerCell: UICollectionViewCell, UITableViewDelegate, UITableViewD
         postTB.dataSource = self
        
     }
+}
+
+protocol PostContainerCellDelegate {
+    func shouldGoTo(post:Post) -> Void
 }
