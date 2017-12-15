@@ -89,7 +89,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
             headerCell!.refresh(with: userInfo)
             return headerCell!
         }else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "postedPostContainerCell", for: indexPath) as! PostedPostContainerCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "flowContainerCell", for: indexPath) as! FlowContainerCell
             cell.posts = userInfo?.post_set
             return cell
         }
@@ -102,7 +102,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
         }else{
             guard let userInfo = userInfo else { return 0 }
             guard let posts = userInfo.post_set else { return 0 }
-            return PostListCell.defaultHeight * CGFloat(posts.count)
+            return PostListCell.defaultHeight*CGFloat(posts.count)
         }
 
     }

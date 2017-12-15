@@ -23,6 +23,7 @@
 		FF0280661FD901AB00C0013A /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0280651FD901AB00C0013A /* Genre.swift */; };
 		FF1054321FD518BA00A46443 /* AudioRecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1054311FD518BA00A46443 /* AudioRecorderViewController.swift */; };
 		FF3995D81FE3878F004B1F86 /* FlowContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3995D71FE3878F004B1F86 /* FlowContainerCell.swift */; };
+		FF3995DA1FE38C4A004B1F86 /* PostedPostContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3995D91FE38C4A004B1F86 /* PostedPostContainerCell.swift */; };
 		FF3B20AF1FCA96E30019F87A /* PopularMusicianContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20AE1FCA96E30019F87A /* PopularMusicianContainerCell.swift */; };
 		FF3B20B11FCA98C50019F87A /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20B01FCA98C50019F87A /* ChartViewController.swift */; };
 		FF3B20B31FCAA2700019F87A /* InspectableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20B21FCAA2700019F87A /* InspectableView.swift */; };
@@ -37,7 +38,6 @@
 		FF3B20C91FCC434B0019F87A /* ProfileSetUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20C81FCC434B0019F87A /* ProfileSetUpViewController.swift */; };
 		FF4A5C021FD68CAD00E8189F /* SetUpMetaInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4A5C011FD68CAD00E8189F /* SetUpMetaInfoViewController.swift */; };
 		FF4A7F9B1FCCEE0A0002E27A /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4A7F9A1FCCEE090002E27A /* UIViewController.swift */; };
-		FF57BDF61FE3617B00A0AEB0 /* PostedPostContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF57BDF51FE3617A00A0AEB0 /* PostedPostContainerCell.swift */; };
 		FF5C013E1FD951B200F37CC9 /* GenrePickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5C013D1FD951B200F37CC9 /* GenrePickViewController.swift */; };
 		FF5C01401FD96D0500F37CC9 /* InstrumentPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5C013F1FD96D0500F37CC9 /* InstrumentPickerViewController.swift */; };
 		FF5C01421FDA188D00F37CC9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF5C01411FDA188D00F37CC9 /* GoogleService-Info.plist */; };
@@ -114,6 +114,7 @@
 		FF038E411FE17B1400AED2B5 /* SoundHub-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoundHub-Bridging-Header.h"; sourceTree = "<group>"; };
 		FF1054311FD518BA00A46443 /* AudioRecorderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderViewController.swift; sourceTree = "<group>"; };
 		FF3995D71FE3878F004B1F86 /* FlowContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowContainerCell.swift; sourceTree = "<group>"; };
+		FF3995D91FE38C4A004B1F86 /* PostedPostContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostedPostContainerCell.swift; sourceTree = "<group>"; };
 		FF3B20AE1FCA96E30019F87A /* PopularMusicianContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMusicianContainerCell.swift; sourceTree = "<group>"; };
 		FF3B20B01FCA98C50019F87A /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		FF3B20B21FCAA2700019F87A /* InspectableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectableView.swift; sourceTree = "<group>"; };
@@ -128,7 +129,6 @@
 		FF3B20C81FCC434B0019F87A /* ProfileSetUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetUpViewController.swift; sourceTree = "<group>"; };
 		FF4A5C011FD68CAD00E8189F /* SetUpMetaInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUpMetaInfoViewController.swift; sourceTree = "<group>"; };
 		FF4A7F9A1FCCEE090002E27A /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
-		FF57BDF51FE3617A00A0AEB0 /* PostedPostContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostedPostContainerCell.swift; sourceTree = "<group>"; };
 		FF5C013D1FD951B200F37CC9 /* GenrePickViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenrePickViewController.swift; sourceTree = "<group>"; };
 		FF5C013F1FD96D0500F37CC9 /* InstrumentPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentPickerViewController.swift; sourceTree = "<group>"; };
 		FF5C01411FDA188D00F37CC9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -232,6 +232,16 @@
 			path = Activities;
 			sourceTree = "<group>";
 		};
+		FF3995DB1FE38C55004B1F86 /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				FF3995D91FE38C4A004B1F86 /* PostedPostContainerCell.swift */,
+				FFB85FCB1FCE652A000E47C8 /* ProfileHeaderCell.swift */,
+				FF3995D71FE3878F004B1F86 /* FlowContainerCell.swift */,
+			);
+			path = CustomCells;
+			sourceTree = "<group>";
+		};
 		FF3B20B61FCAC7B70019F87A /* CustomCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -297,10 +307,8 @@
 			isa = PBXGroup;
 			children = (
 				FF688F791FCE58D600F0A41F /* SideMenu.storyboard */,
-				FF57BDF51FE3617A00A0AEB0 /* PostedPostContainerCell.swift */,
+				FF3995DB1FE38C55004B1F86 /* CustomCells */,
 				FFB85FCD1FCE657F000E47C8 /* ProfileViewController.swift */,
-				FFB85FCB1FCE652A000E47C8 /* ProfileHeaderCell.swift */,
-				FF3995D71FE3878F004B1F86 /* FlowContainerCell.swift */,
 				FF688F771FCE58B700F0A41F /* SideMenuViewController.swift */,
 			);
 			path = SideMenu;
@@ -762,7 +770,6 @@
 				FF9D18541FDA6012008D5FD1 /* MixedTracksContainerCell.swift in Sources */,
 				FF3B20B31FCAA2700019F87A /* InspectableView.swift in Sources */,
 				FF0280561FD776CF00C0013A /* UserDefaultKey.swift in Sources */,
-				FF57BDF61FE3617B00A0AEB0 /* PostedPostContainerCell.swift in Sources */,
 				FFC32AED1FCFD96500651A31 /* LoginResponse.swift in Sources */,
 				FF3B20C21FCC31930019F87A /* SignUpViewController.swift in Sources */,
 				FF3B20C41FCC3B4C0019F87A /* SignUpRequest.swift in Sources */,
@@ -780,6 +787,7 @@
 				FF4A7F9B1FCCEE0A0002E27A /* UIViewController.swift in Sources */,
 				FF000D9F1FD136BA00678999 /* Document.swift in Sources */,
 				FF3995D81FE3878F004B1F86 /* FlowContainerCell.swift in Sources */,
+				FF3995DA1FE38C4A004B1F86 /* PostedPostContainerCell.swift in Sources */,
 				FF000D9B1FD135D400678999 /* DocumentBrowserViewController.swift in Sources */,
 				FFC32AE41FCF8E1500651A31 /* Comment.swift in Sources */,
 				FF02805C1FD7B9A400C0013A /* String.swift in Sources */,

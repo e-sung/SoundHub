@@ -8,14 +8,9 @@
 
 import UIKit
 
-class PostedPostContainerCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource {
-    
-    var posts:[Post]?{
-        didSet(oldVal){
-            postTB.reloadData()
-        }
-    }
-    
+class PostContainerCell: UICollectionViewCell, UITableViewDelegate, UITableViewDataSource {
+    var posts:[Post]?
+    @IBOutlet weak var postTB: UITableView!
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let posts = posts else { return 0 }
         return posts.count
@@ -35,22 +30,9 @@ class PostedPostContainerCell: UITableViewCell, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 1
     }
-    
-    
-    
-    @IBOutlet weak var postTB: UITableView!
-    
     override func awakeFromNib() {
-        super.awakeFromNib()
         postTB.delegate = self
         postTB.dataSource = self
-        // Initialization code
+       
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }
