@@ -12,20 +12,6 @@ import AVFoundation
 class AudioCommentCell: UITableViewCell {
     
     var player:AVPlayer?
-    var isMuted:Bool?{
-        get{ return player?.isMuted }
-        set(newVal){
-            player?.isMuted = newVal == nil ? true : newVal!
-        }
-    }
-    var volume:Float{
-        get{
-            return player?.volume ?? 0
-        }
-        set(newVal){
-            player?.volume = newVal
-        }
-    }
     
     @IBOutlet weak private var profileImageView: UIImageView!
     @IBOutlet weak private var InstrumentLB: UILabel!
@@ -39,18 +25,6 @@ class AudioCommentCell: UITableViewCell {
     func toggleSwitch(to value:Bool){
         toggleSwitch.isOn = value
         player?.isMuted = !value
-    }
-    func play(){
-        player?.play()
-    }
-    func pause(){
-        player?.pause()
-    }
-    func stop(){
-        player?.stop()
-    }
-    func seek(to proportion:Float){
-        player?.seek(to: proportion)
     }
     var delegate:AudioCommentCellDelegate?
     var isActive:Bool{
@@ -89,6 +63,27 @@ class AudioCommentCell: UITableViewCell {
         let bgColorView = UIView(frame: contentView.frame)
         bgColorView.backgroundColor = UIColor(red: 0, green: 1.0, blue: 0, alpha: 0.3)
         self.selectedBackgroundView = bgColorView
+    }
+}
+
+extension AudioCommentCell:Playable{
+    func play(){
+        player?.play()
+    }
+    func pause(){
+        player?.pause()
+    }
+    func stop(){
+        player?.stop()
+    }
+    func seek(to proportion:Float){
+        player?.seek(to: proportion)
+    }
+    func setVolume(to value: Float) {
+        player?.volume = value
+    }
+    func setMute(to value: Bool) {
+        player?.isMuted = value
     }
 }
 

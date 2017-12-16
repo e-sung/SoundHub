@@ -40,11 +40,6 @@ extension MixedTracksContainerCell: Playable{
     func setInteractionability(to bool:Bool){
         for cell in allCells{ cell.isInterActive = bool }
     }
-    
-    var volume:Float{
-        get{ return aPlayer?.volume ?? 0 }
-        set(newVal){ for cell in allCells { if cell.isActive { cell.volume = newVal } } }
-    }
 
     func play(){
         for cell in allCells { cell.play() }
@@ -62,11 +57,12 @@ extension MixedTracksContainerCell: Playable{
         for cell in allCells { cell.seek(to: proportion) }
     }
     
-    var isMuted:Bool{
-        get{ return aPlayer?.isMuted ?? true }
-        set(newVal){
-            for cell in allCells { if cell.isActive { cell.isMuted = newVal } }
-        }
+    func setVolume(to value: Float) {
+        for cell in allCells { if cell.isActive { cell.setVolume(to: value)} }
+    }
+    
+    func setMute(to value: Bool) {
+        for cell in allCells { if cell.isActive { cell.setMute(to: value) } }
     }
 }
 

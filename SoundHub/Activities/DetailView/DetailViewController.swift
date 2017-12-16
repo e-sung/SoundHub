@@ -9,59 +9,60 @@
 import UIKit
 import AudioKit
 import AVFoundation
-import NCSoundHistogram
 
 class DetailViewController: UIViewController{
     
-    // MARK: Stored Properties
+    // MARK: Internal Stored Properties
+    /// 이 디테일뷰에서 표시해야 할 Post객체
     var post:Post!
-    var playBarController:PlayBarController!
-    var masterWaveCell:MasterWaveFormViewCell?
-    var mixedTrackContainer:MixedTracksContainerCell!
-    var recorderCell: RecorderCell?
+    /// 현재 뭐하는 중인지 (대기중/재생중/녹음중)
     var currentPhase:PlayPhase = .Ready
-    var currentPlayMode:PlayMode = .master
-    var masterAudioRemoteURL:URL!
-    var allAudioPlayers:[Playable?]{
-        return [ masterAudioPlayer, mixedTrackContainer ]
-    }
-    var masterAudioPlayer:AVPlayer?{
+    // MARK: Private Stored Properties
+    /// 음악 파형이 표시되는 셀
+    private var masterWaveCell:MasterWaveFormViewCell?
+    /// 녹음하는 셀
+    private var recorderCell: RecorderCell?
+    private var masterAudioRemoteURL:URL!
+    private var masterAudioPlayer:AVPlayer?{
         didSet(oldVal){
             if let timeObserver = AVPlayerTimeObserver { oldVal?.removeTimeObserver(timeObserver) }
+            guard let masterAudioPlayer = masterAudioPlayer else { return }
             let cmt = CMTime(value: 1, timescale: 10)
-            AVPlayerTimeObserver = masterAudioPlayer?.addPeriodicTimeObserver(forInterval: cmt, queue: DispatchQueue.main, using: {
-                (cmt) in
-                if self.masterAudioPlayer!.isPlaying == true {
-                    let progress = Float(self.masterAudioPlayer!.currentTime().seconds/self.masterAudioPlayer!.currentItem!.duration.seconds)
-                    PlayBarController.main.reflect(progress: progress)
+            AVPlayerTimeObserver = masterAudioPlayer.addPeriodicTimeObserver(forInterval: cmt, queue: DispatchQueue.main, using: { (cmt) in
+                if masterAudioPlayer.isPlaying {
+                    PlayBarController.main.reflect(progress: masterAudioPlayer.progress)
                 }
             })
         }
     }
-    var selectedComments:[Comment]?
-    
-    
-    @objc func cancelButtonHandler(sender:UIBarButtonItem){
-        self.dismiss(animated: true, completion: {
-            self.navigationItem.setRightBarButton(nil, animated: false)
-        })
+    private var mixedTrackContainer:MixedTracksContainerCell!
+    private var allAudioPlayers:[Playable?]{
+        return [ masterAudioPlayer, mixedTrackContainer ]
     }
+    private var mainAudioPlayer:Playable?{
+        didSet(oldVal){
+            oldVal?.setMute(to: true)
+            mainAudioPlayer?.setMute(to: false)
+        }
+    }
+    private var selectedComments:[Comment]?
 
     // MARK: IBOutlets
-    @IBOutlet weak var playBarView: UIView!
-    @IBOutlet weak var detailTV: UITableView!
+    @IBOutlet weak private var playBarView: UIView!
+    @IBOutlet weak private var detailTV: UITableView!
 
+    // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         detailTV.delegate = self
         detailTV.dataSource = self
         masterAudioRemoteURL = URL(string: post.author_track!.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)
         masterAudioPlayer = AVPlayer(url: masterAudioRemoteURL)
-        playBarController = PlayBarController.main
-        playBarController.view.isHidden = false
+        mainAudioPlayer = masterAudioPlayer
+        PlayBarController.main.view.isHidden = false
     }
     override func viewWillAppear(_ animated: Bool) {
-        playBarController.currentPostView = self
+        PlayBarController.main.currentPostView = self
     }
     override func viewDidAppear(_ animated: Bool) {
         masterWaveCell?.renderWave()
@@ -71,16 +72,16 @@ class DetailViewController: UIViewController{
     }
 }
 
+// MARK: 모드가 변경되었을 때 처리
 extension DetailViewController:ModeToggleCellDelegate{
     func didModeToggled(to mode: Bool) {
         if mode == true {
-            currentPlayMode = .mixed
-            mixedTrackContainer.isMuted = false
-            masterAudioPlayer?.isMuted = true
-        } else {
-            currentPlayMode = .master
-            mixedTrackContainer.isMuted = true
-            masterAudioPlayer?.isMuted = false
+            mainAudioPlayer = mixedTrackContainer
+            masterAudioPlayer?.setMute(to: true)
+        }
+        else {
+            mainAudioPlayer = masterAudioPlayer
+            mixedTrackContainer.setMute(to: true)
         }
         mixedTrackContainer.setInteractionability(to: mode)
     }
@@ -110,22 +111,12 @@ extension DetailViewController:Playable{
         for player in allAudioPlayers { player?.seek(to: point) }
         reflect(progress: point)
     }
-    
-    var volume:Float{
-        get{ return masterAudioPlayer?.volume ?? 0}
-        set(newVal){
-            masterAudioPlayer?.volume = newVal
-            mixedTrackContainer.volume = newVal
-        }
+    func setVolume(to value: Float) {
+        for player in allAudioPlayers { player?.setVolume(to: value) }
     }
-    var isMuted: Bool {
-        get {
-            return (masterAudioPlayer?.isMuted ?? true || mixedTrackContainer?.isMuted ?? true)
-        }
-        set(newVal) {
-            masterAudioPlayer?.isMuted = newVal
-            mixedTrackContainer?.isMuted = newVal
-        }
+    
+    func setMute(to value: Bool) {
+        for player in allAudioPlayers { player?.setMute(to: value) }
     }
 }
 
@@ -140,7 +131,7 @@ extension DetailViewController:MixedTracksContainerCellDelegate{
         let mergeButton = UIBarButtonItem(title: "Merge", style: .plain, target: self, action: #selector(merge))
         navigationItem.setRightBarButton(mergeButton, animated: true)
     }
-    @objc func merge(){
+    @objc private func merge(){
         alert(msg: "Merge!")
     }
 }
@@ -261,6 +252,6 @@ protocol Playable {
     func pause()
     func stop()
     func seek(to point:Float)
-    var volume:Float{ get set }
-    var isMuted:Bool{ get set }
+    func setVolume(to value:Float)
+    func setMute(to value:Bool)
 }
