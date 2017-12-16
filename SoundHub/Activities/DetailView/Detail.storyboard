@@ -66,7 +66,7 @@
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Master Track" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tu0-HF-IHT">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Master Track" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tu0-HF-IHT">
                                                             <rect key="frame" x="10" y="120" width="266" height="60"/>
                                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="50"/>
                                                             <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -78,7 +78,7 @@
                                                             <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="BPM:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kd0-QK-pF7">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BPM:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kd0-QK-pF7">
                                                             <rect key="frame" x="299" y="139" width="40.5" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -92,7 +92,7 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V24-W6-Deb">
-                                                            <rect key="frame" x="10" y="-0.5" width="100" height="100.5"/>
+                                                            <rect key="frame" x="10" y="19.5" width="100" height="100.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="100" id="Der-j9-sqy"/>
                                                                 <constraint firstAttribute="width" constant="100" id="VjM-in-jQ5"/>
@@ -399,20 +399,12 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
-                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Imt-dF-c6b">
-                                        <rect key="frame" x="0.0" y="1120" width="375" height="60"/>
-                                        <color key="backgroundColor" red="0.090183012189999995" green="0.090205498039999998" blue="0.090178228910000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </containerView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.086261831220000001" green="0.086283676330000003" blue="0.086257167159999995" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="Imt-dF-c6b" secondAttribute="bottom" id="0LZ-1y-cdo"/>
                                     <constraint firstItem="sPC-mL-dPH" firstAttribute="leading" secondItem="AM7-pL-X1c" secondAttribute="leading" id="LPl-R4-Ngs"/>
-                                    <constraint firstItem="Imt-dF-c6b" firstAttribute="top" secondItem="sPC-mL-dPH" secondAttribute="bottom" id="NXV-nK-sdS"/>
                                     <constraint firstAttribute="bottom" secondItem="sPC-mL-dPH" secondAttribute="bottom" constant="60" id="P6g-yh-2lF"/>
-                                    <constraint firstItem="Imt-dF-c6b" firstAttribute="leading" secondItem="AM7-pL-X1c" secondAttribute="leading" id="dvB-u8-2JE"/>
                                     <constraint firstAttribute="trailing" secondItem="sPC-mL-dPH" secondAttribute="trailing" id="wu7-Ks-xOS"/>
-                                    <constraint firstAttribute="trailing" secondItem="Imt-dF-c6b" secondAttribute="trailing" id="xTZ-Qh-63P"/>
                                     <constraint firstItem="sPC-mL-dPH" firstAttribute="top" secondItem="AM7-pL-X1c" secondAttribute="top" id="xnP-CR-C10"/>
                                 </constraints>
                             </view>
@@ -435,8 +427,7 @@
                     </navigationItem>
                     <size key="freeformSize" width="375" height="1200"/>
                     <connections>
-                        <outlet property="detailTV" destination="sPC-mL-dPH" id="WcF-kh-Tnc"/>
-                        <outlet property="playBarView" destination="Imt-dF-c6b" id="VTb-lc-OcK"/>
+                        <outlet property="mainTV" destination="sPC-mL-dPH" id="WcF-kh-Tnc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Asy-Nl-xOg" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -55,17 +55,19 @@ class DetailViewController: UIViewController{
     private var selectedComments:[Comment]?
 
     // MARK: IBOutlets
-    @IBOutlet weak private var playBarView: UIView!
-    @IBOutlet weak private var detailTV: UITableView!
+    /// 이 VC의 최상단 테이블뷰
+    @IBOutlet weak private var mainTV: UITableView!
 
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        detailTV.delegate = self
-        detailTV.dataSource = self
-        if let materRemoteURL = post.authorTrackRemoteURL{ masterAudioPlayer = AVPlayer(url: materRemoteURL) }
+        mainTV.delegate = self
+        mainTV.dataSource = self
+        if let materRemoteURL = post.authorTrackRemoteURL{
+            masterAudioPlayer = AVPlayer(url: materRemoteURL)
+            PlayBarController.main.view.isHidden = false
+        }
         mainAudioPlayer = masterAudioPlayer
-        PlayBarController.main.view.isHidden = false
     }
     override func viewWillAppear(_ animated: Bool) {
         PlayBarController.main.currentPostView = self
@@ -129,13 +131,11 @@ extension DetailViewController:Playable{
 
 extension DetailViewController:MixedTracksContainerCellDelegate{
     func didSelectionOccured(on comments: [Comment]) {
-        if comments.count == 0 {
-            navigationItem.setRightBarButton(nil, animated: true)
-            return
-        }
+        if comments.count == 0 { navigationItem.setRightBarButton(nil, animated: true); return }
         selectedComments = comments
-        let mergeButton = UIBarButtonItem(title: "Merge", style: .plain, target: self, action: #selector(merge))
-        navigationItem.setRightBarButton(mergeButton, animated: true)
+        navigationItem.setRightBarButton(
+            UIBarButtonItem(title: "Merge", style: .plain, target: self, action: #selector(merge)),
+            animated: true)
     }
     @objc private func merge(){
         alert(msg: "Merge!")
@@ -144,24 +144,10 @@ extension DetailViewController:MixedTracksContainerCellDelegate{
 
 // MARK: TableView Delegate
 extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
-    /// Master / MixedHeader/ Mixed / CommentHeader / Comment
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 6
-    }
+    func numberOfSections(in tableView: UITableView) -> Int { return Section.cases }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch Section(rawValue:section)!{
-        case .MainHeader:
-            return 2
-        case .MixedTrackToggler:
-            return 1
-        case .MixedTracks:
-            return 1
-        case .RecordCell:
-            return 1
-        default:
-            return 0
-        }
+        return Section(rawValue:section)!.rows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -203,10 +189,11 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         if Section(rawValue:indexPath.section) == .MainHeader { return 200 }
         else if Section(rawValue:indexPath.section) == .MixedTrackToggler { return 60 }
         else if Section(rawValue:indexPath.section) == .MixedTracks {
-            return CGFloat(post.num_comments! * 100)
-        }else {
-            return 100
+            if let numberOfComments = post.num_comments{
+                return CGFloat(numberOfComments * 100)
+            }else { return 0 }
         }
+        return 100
     }
     
     /**
@@ -240,16 +227,30 @@ extension DetailViewController{
         case CommentTrackToggler = 3
         case CommentTracks = 4
         case RecordCell = 5
+        /**
+         모든 Section의 경우의 수
+         
+         MainHeader/ MasterWave / MixedHeader/ Mixed / CommentHeader / Comment
+        */
+        static var cases:Int{get{return 6}}
+        var rows:Int{
+            get{
+                switch self {
+                case .MainHeader: return 2
+                case .MixedTrackToggler: return 1
+                case .MixedTracks: return 1
+                case .RecordCell: return 1
+                default:
+                    return 0
+                }
+            }
+        }
     }
 
     enum PlayPhase{
         case Ready
         case Playing
         case Recording
-    }
-    enum PlayMode{
-        case master
-        case mixed
     }
 }
 
