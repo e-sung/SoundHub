@@ -19,29 +19,27 @@ class SideMenuViewController: UIViewController {
     }
     
     
-    @IBAction func nickNameButtonHandler(_ sender: UIButton) {
-        showProfile()
-    }
+    @IBAction func nickNameButtonHandler(_ sender: UIButton) { showProfile() }
     
-    @IBAction func profileImageButtonHandler(_ sender: UIButton) {
-        showProfile()
-    }
+    @IBAction func profileImageButtonHandler(_ sender: UIButton) { showProfile() }
     
-    @IBAction func profileButtonHandler(_ sender: UIButton) {
-        showProfile()
-    }
+    @IBAction func profileButtonHandler(_ sender: UIButton) { showProfile() }
     
     func showProfile(){
-        performSegue(withIdentifier: "sideMenuToProfileVC", sender: nil)
+        guard let userId = UserDefaults.standard.string(forKey: id) else { return }
+        guard let userID = Int(userId) else { return }
+        NetworkController.main.fetchUser(id: userID) { (userInfo) in
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "sideMenuToProfileVC", sender: userInfo)
+            }
+        }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let nextVC = segue.destination as? ProfileViewController {
-            nextVC.userInfo = nil
+            nextVC.userInfo = sender as? User
         }
     }
-    
-    
-    
+
     override func viewDidLoad(){
         nickNameButton.setTitle(UserDefaults.standard.string(forKey: nickname) , for: .normal)
     }

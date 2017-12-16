@@ -20,11 +20,19 @@ class NetworkController{
     private let postURL:URL
     internal let baseMediaURL:URL
     internal let generalHomeURL:URL
+    
+    
+    var authToken:String{
+        get{
+            guard let tkn = UserDefaults.standard.string(forKey: token) else { return "invalid Token" }
+            return "Token \(tkn)"
+        }
+    }
 
     var multipartFormDataHeader:HTTPHeaders{
         get{
             return [
-                "Authorization": "Token \(UserDefaults.standard.string(forKey: token)!)",
+                 "Authorization": "Token \(authToken)",
                 "Content-type": "multipart/form-data"
             ]
         }
@@ -39,25 +47,32 @@ class NetworkController{
         generalHomeURL = URL(string: "/home/", relativeTo: baseURL)!
     }
     
-    func patchUser(nickname:String, completion:@escaping()->Void){
-        let url = URL(string: "/user/\(UserDefaults.standard.string(forKey: id)!)/", relativeTo: baseURL)!
-        let headers: HTTPHeaders = ["Authorization": "Token \(UserDefaults.standard.string(forKey: token)!)"]
+    func patchUser(nickname:String, completion:@escaping(_ hasSuccess:Bool)->Void){
+        guard let userId = UserDefaults.standard.string(forKey: id) else {
+            completion(false)
+            return
+        }
+        let url = URL(string: "/user/\(userId)/", relativeTo: baseURL)!
+        let headers: HTTPHeaders = ["Authorization": authToken]
         let parameters: Parameters = ["nickname":nickname]
         Alamofire.request(url, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers:headers).response { (response) in
-            completion()
+            
+            if response.response?.statusCode == 200 { completion(true) }
+            else{ completion(false) }
         }
     }
     
     func fetchUser(id:Int, completion:@escaping(User)->Void){
         let url = URL(string: "/user/\(id)/", relativeTo: baseURL)!
         URLSession.shared.dataTask(with: url) { (data, response, error) in
+            
             guard let data = data else { print("data is corrupted") ; return }
             guard let userInfo = try? JSONDecoder().decode(User.self, from: data) else {
                 print("User Info Decoding failed")
                 return
             }
             completion(userInfo)
-        }
+        }.resume()
     }
     
     func fetchPost(id:Int, completion:@escaping(Post)->Void){
