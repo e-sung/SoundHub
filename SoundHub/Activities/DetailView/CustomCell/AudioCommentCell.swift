@@ -48,8 +48,8 @@ class AudioCommentCell: UITableViewCell {
            _commentInfo = newVal
             InstrumentLB.text = newVal.instrument
             nickNameLB.text = newVal.author
-            let remoteURL = URL(string: newVal.comment_track.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)!
-            NetworkController.main.downloadAudio(from: remoteURL) { (localURL) in
+            guard let audioURL = newVal.commentTrackURL else { return }
+            NetworkController.main.downloadAudio(from: audioURL) { (localURL) in
                 self.player = AVPlayer(url: localURL)
                 self.player?.isMuted = true
             }

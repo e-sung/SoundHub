@@ -10,9 +10,15 @@ import Foundation
 
 struct Comment:Codable{
     let id:Int
-    let author:String
-    let post:String
+    let author:String?
+    let post:String?
     let is_mixed:Bool?
-    let comment_track:String
-    let instrument:Instrument.RawValue
+    let comment_track:String?
+    let instrument:Instrument.RawValue?
+    var commentTrackURL:URL?{
+        get{
+            guard let commentTrack = self.comment_track else { return nil }
+            return URL(string: commentTrack.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)!
+        }
+    }
 }

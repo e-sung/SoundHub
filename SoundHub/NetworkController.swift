@@ -20,11 +20,18 @@ class NetworkController{
     private let postURL:URL
     internal let baseMediaURL:URL
     internal let generalHomeURL:URL
+    
+    private var authToken:String{
+        get{
+            guard let tkn = UserDefaults.standard.string(forKey: token) else { return "invalid Token" }
+            return "Token \(tkn)"
+        }
+    }
 
-    var multipartFormDataHeader:HTTPHeaders{
+    private var multipartFormDataHeader:HTTPHeaders{
         get{
             return [
-                "Authorization": "Token \(UserDefaults.standard.string(forKey: token)!)",
+                 "Authorization": "Token \(authToken)",
                 "Content-type": "multipart/form-data"
             ]
         }
@@ -39,12 +46,17 @@ class NetworkController{
         generalHomeURL = URL(string: "/home/", relativeTo: baseURL)!
     }
     
-    func patchUser(nickname:String, completion:@escaping()->Void){
-        let url = URL(string: "/user/\(UserDefaults.standard.string(forKey: id)!)/", relativeTo: baseURL)!
-        let headers: HTTPHeaders = ["Authorization": "Token \(UserDefaults.standard.string(forKey: token)!)"]
+    func patchUser(nickname:String, completion:@escaping(_ hasSuccess:Bool)->Void){
+        guard let userId = UserDefaults.standard.string(forKey: id) else {
+            completion(false)
+            return
+        }
+        let url = URL(string: "/user/\(userId)/", relativeTo: baseURL)!
+        let headers: HTTPHeaders = ["Authorization": authToken]
         let parameters: Parameters = ["nickname":nickname]
         Alamofire.request(url, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers:headers).response { (response) in
-            completion()
+            if response.response?.statusCode == 200 { completion(true) }
+            else{ completion(false) }
         }
     }
     
@@ -57,7 +69,7 @@ class NetworkController{
                 return
             }
             completion(userInfo)
-        }
+        }.resume()
     }
     
     func fetchPost(id:Int, completion:@escaping(Post)->Void){
@@ -70,26 +82,20 @@ class NetworkController{
     }
     func fetchHomePage(of category:Categori, with option:String, completion:@escaping()->Void){
         var entryURL:URL?
-        if category == .general {
-            entryURL = generalHomeURL
-        }else{
-            entryURL = URL(string: "\(category.rawValue)", relativeTo: generalHomeURL)
-        }
+        if category == .general { entryURL = generalHomeURL }
+        else{ entryURL = URL(string: "\(category.rawValue)", relativeTo: generalHomeURL) }
+        
         let homeURL = entryURL!.appendingPathComponent(option)
         URLSession.shared.dataTask(with: homeURL) { (data, response, error) in
             if let error = error { print(error) }
             guard let data = data else { print("data is invalid"); return}
-            
             do{
                 let homePageData = try JSONDecoder().decode(HomePage.self, from: data)
-                print(homePageData)
                 DataCenter.main.homePages[category] = homePageData
                 completion()
             }catch let err as NSError{
                 print(err)
             }
-            
-
         }.resume()
     }
 

@@ -22,7 +22,7 @@ class DetailViewController: UIViewController{
     private var masterWaveCell:MasterWaveFormViewCell?
     /// 녹음하는 셀
     private var recorderCell: RecorderCell?
-    private var masterAudioRemoteURL:URL!
+    /// Master Track을 재생하는 플레이어
     private var masterAudioPlayer:AVPlayer?{
         didSet(oldVal){
             if let timeObserver = AVPlayerTimeObserver { oldVal?.removeTimeObserver(timeObserver) }
@@ -35,31 +35,39 @@ class DetailViewController: UIViewController{
             })
         }
     }
-    private var mixedTrackContainer:MixedTracksContainerCell!
+    /**
+     mixedTrack들을 담고있는 셀. Playable 프로토콜을 상속받았다.
+     따라서 **mixedTrackContainer.play()** 같은 것들이 가능하다.
+    */
+    private var mixedTrackContainer:MixedTracksContainerCell?
     private var allAudioPlayers:[Playable?]{
         return [ masterAudioPlayer, mixedTrackContainer ]
     }
+    /// 마스터, 혹은 mixedTrackContainer 등이 번갈아가면서 mainAudioPlayer가 된다.
+    /// 이전의 mainAUdioPlayer는 뮤트된다.
     private var mainAudioPlayer:Playable?{
         didSet(oldVal){
             oldVal?.setMute(to: true)
             mainAudioPlayer?.setMute(to: false)
         }
     }
+    /// 원저작자에게만 보이는, "머지"하기 위해 multiselection을 통해 고른 셀들에 담겨있는 Comment 정보
     private var selectedComments:[Comment]?
 
     // MARK: IBOutlets
-    @IBOutlet weak private var playBarView: UIView!
-    @IBOutlet weak private var detailTV: UITableView!
+    /// 이 VC의 최상단 테이블뷰
+    @IBOutlet weak private var mainTV: UITableView!
 
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        detailTV.delegate = self
-        detailTV.dataSource = self
-        masterAudioRemoteURL = URL(string: post.author_track!.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)
-        masterAudioPlayer = AVPlayer(url: masterAudioRemoteURL)
+        mainTV.delegate = self
+        mainTV.dataSource = self
+        if let materRemoteURL = post.authorTrackRemoteURL{
+            masterAudioPlayer = AVPlayer(url: materRemoteURL)
+            PlayBarController.main.view.isHidden = false
+        }
         mainAudioPlayer = masterAudioPlayer
-        PlayBarController.main.view.isHidden = false
     }
     override func viewWillAppear(_ animated: Bool) {
         PlayBarController.main.currentPostView = self
@@ -81,9 +89,9 @@ extension DetailViewController:ModeToggleCellDelegate{
         }
         else {
             mainAudioPlayer = masterAudioPlayer
-            mixedTrackContainer.setMute(to: true)
+            mixedTrackContainer?.setMute(to: true)
         }
-        mixedTrackContainer.setInteractionability(to: mode)
+        mixedTrackContainer?.setInteractionability(to: mode)
     }
 }
 
@@ -123,13 +131,11 @@ extension DetailViewController:Playable{
 
 extension DetailViewController:MixedTracksContainerCellDelegate{
     func didSelectionOccured(on comments: [Comment]) {
-        if comments.count == 0 {
-            navigationItem.setRightBarButton(nil, animated: true)
-            return
-        }
+        if comments.count == 0 { navigationItem.setRightBarButton(nil, animated: true); return }
         selectedComments = comments
-        let mergeButton = UIBarButtonItem(title: "Merge", style: .plain, target: self, action: #selector(merge))
-        navigationItem.setRightBarButton(mergeButton, animated: true)
+        navigationItem.setRightBarButton(
+            UIBarButtonItem(title: "Merge", style: .plain, target: self, action: #selector(merge)),
+            animated: true)
     }
     @objc private func merge(){
         alert(msg: "Merge!")
@@ -138,24 +144,10 @@ extension DetailViewController:MixedTracksContainerCellDelegate{
 
 // MARK: TableView Delegate
 extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
-    /// Master / MixedHeader/ Mixed / CommentHeader / Comment
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 6
-    }
+    func numberOfSections(in tableView: UITableView) -> Int { return Section.cases }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch Section(rawValue:section)!{
-        case .MainHeader:
-            return 2
-        case .MixedTrackToggler:
-            return 1
-        case .MixedTracks:
-            return 1
-        case .RecordCell:
-            return 1
-        default:
-            return 0
-        }
+        return Section(rawValue:section)!.rows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -166,7 +158,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             return cell
         }else if indexPath.section == 0 && indexPath.item == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "masterWaveCell", for: indexPath)
-            masterWaveCell = cell.becomeMasterWaveCell(with: masterAudioRemoteURL, completion: { (localURL) in
+            masterWaveCell = cell.becomeMasterWaveCell(with: post.authorTrackRemoteURL, completion: { (localURL) in
                 self.masterAudioPlayer = AVPlayer(url: localURL)
             })
             return masterWaveCell!
@@ -197,10 +189,11 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         if Section(rawValue:indexPath.section) == .MainHeader { return 200 }
         else if Section(rawValue:indexPath.section) == .MixedTrackToggler { return 60 }
         else if Section(rawValue:indexPath.section) == .MixedTracks {
-            return CGFloat(post.num_comments! * 100)
-        }else {
-            return 100
+            if let numberOfComments = post.num_comments{
+                return CGFloat(numberOfComments * 100)
+            }else { return 0 }
         }
+        return 100
     }
     
     /**
@@ -234,16 +227,30 @@ extension DetailViewController{
         case CommentTrackToggler = 3
         case CommentTracks = 4
         case RecordCell = 5
+        /**
+         모든 Section의 경우의 수
+         
+         MainHeader/ MasterWave / MixedHeader/ Mixed / CommentHeader / Comment
+        */
+        static var cases:Int{get{return 6}}
+        var rows:Int{
+            get{
+                switch self {
+                case .MainHeader: return 2
+                case .MixedTrackToggler: return 1
+                case .MixedTracks: return 1
+                case .RecordCell: return 1
+                default:
+                    return 0
+                }
+            }
+        }
     }
 
     enum PlayPhase{
         case Ready
         case Playing
         case Recording
-    }
-    enum PlayMode{
-        case master
-        case mixed
     }
 }
 

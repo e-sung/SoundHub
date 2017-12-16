@@ -52,15 +52,17 @@ class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate, UITex
     }
 
     func refresh(with userInfo:User?){
-        if userInfo == nil {
-            nickName = UserDefaults.standard.string(forKey: nickname)!
+        guard let userInfo = userInfo else { return }
+        nickName = userInfo.nickname
+        numFollowingLB.text = "\(userInfo.num_followings ?? 0)"
+        numFollowerLB.text = "\(userInfo.num_followers ?? 0)"
+        settingButton.isHidden = true
+        guard let userId = UserDefaults.standard.string(forKey: id) else { return }
+        guard let uid = Int(userId) else { return }
+        if userInfo.id == uid {
             settingButton.isHidden = false
-        }else {
-            nickName = userInfo!.nickname
-            numFollowingLB.text = "\(userInfo!.num_followings ?? 0)"
-            numFollowerLB.text = "\(userInfo!.num_followers ?? 0)"
-            settingButton.isHidden = true
         }
+        
     }
 }
 

@@ -14,7 +14,8 @@ class FlowContainerCell: UITableViewCell{
     var delegate:FlowContainerCellDelegate?
     var userInfo:User?{
         didSet(oldVal){
-            flowContainer.setHeight(with: CGFloat(userInfo!.largerPosts.count)*PostListCell.defaultHeight)
+            guard let userInfo = userInfo else { return }
+            flowContainer.setHeight(with: CGFloat(userInfo.largerPosts.count)*PostListCell.defaultHeight)
         }
     }
 
