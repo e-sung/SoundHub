@@ -54,7 +54,7 @@ extension PlayBarController{
     }
     
     @objc func stopMusic(){
-        currentPostView?.stopMusic()
+        currentPostView?.stop()
         playButton?.setBackgroundImage(#imageLiteral(resourceName: "play"), for: .normal)
         reflect(progress: 0)
     }
@@ -67,11 +67,11 @@ extension PlayBarController{
 extension PlayBarController{
     func playMusic(){
         playButton?.setBackgroundImage(#imageLiteral(resourceName: "pause"), for: .normal)
-        currentPostView?.playMusic()
+        currentPostView?.play()
     }
     func pauseMusic(){
         playButton?.setBackgroundImage(#imageLiteral(resourceName: "play"), for: .normal)
-        currentPostView?.pauseMusic()
+        currentPostView?.pause()
     }
     func reflect(progress:Float){
         if progressBarBeingTouched == false{

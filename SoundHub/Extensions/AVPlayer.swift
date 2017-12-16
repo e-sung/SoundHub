@@ -11,7 +11,7 @@ import AVFoundation
 
 var AVPlayerTimeObserver:Any?
 
-extension AVPlayer{
+extension AVPlayer:Playable{
     
     func stop(){
         self.pause()

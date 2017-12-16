@@ -12,6 +12,20 @@ import AVFoundation
 class AudioCommentCell: UITableViewCell {
     
     var player:AVPlayer?
+    var isMuted:Bool?{
+        get{ return player?.isMuted }
+        set(newVal){
+            player?.isMuted = newVal == nil ? true : newVal!
+        }
+    }
+    var volume:Float{
+        get{
+            return player?.volume ?? 0
+        }
+        set(newVal){
+            player?.volume = newVal
+        }
+    }
     
     @IBOutlet weak private var profileImageView: UIImageView!
     @IBOutlet weak private var InstrumentLB: UILabel!
@@ -19,12 +33,24 @@ class AudioCommentCell: UITableViewCell {
     @IBOutlet weak private var toggleSwitch: UISwitch!
     
     @IBAction private func switchToggleHandler(_ sender: UISwitch) {
-        if sender.isOn { player?.volume = 1.0 }
-        else { player?.volume = 0.0 }
+        if sender.isOn { player?.isMuted = false }
+        else { player?.isMuted = true }
     }
     func toggleSwitch(to value:Bool){
         toggleSwitch.isOn = value
-        player?.volume = toggleSwitch.isOn ? 1.0 : 0.0
+        player?.isMuted = !value
+    }
+    func play(){
+        player?.play()
+    }
+    func pause(){
+        player?.pause()
+    }
+    func stop(){
+        player?.stop()
+    }
+    func seek(to proportion:Float){
+        player?.seek(to: proportion)
     }
     var delegate:AudioCommentCellDelegate?
     var isActive:Bool{
@@ -51,10 +77,13 @@ class AudioCommentCell: UITableViewCell {
             let remoteURL = URL(string: newVal.comment_track.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)!
             NetworkController.main.downloadAudio(from: remoteURL) { (localURL) in
                 self.player = AVPlayer(url: localURL)
-                self.player?.volume = 0
+                self.player?.isMuted = true
             }
         }
     }
+    
+    
+    
     private var _commentInfo:Comment!
     override func awakeFromNib() {
         let bgColorView = UIView(frame: contentView.frame)

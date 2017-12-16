@@ -19,29 +19,28 @@ class DetailViewController: UIViewController{
     var masterWaveCell:MasterWaveFormViewCell?
     var mixedTrackContainer:MixedTracksContainerCell!
     var recorderCell: RecorderCell?
-    var presentedByPlayBar = false
     var currentPhase:PlayPhase = .Ready
     var currentPlayMode:PlayMode = .master
-    var mainAudioPlayer:AVPlayer?{
+    var masterAudioRemoteURL:URL!
+    var allAudioPlayers:[Playable?]{
+        return [ masterAudioPlayer, mixedTrackContainer ]
+    }
+    var masterAudioPlayer:AVPlayer?{
         didSet(oldVal){
             if let timeObserver = AVPlayerTimeObserver { oldVal?.removeTimeObserver(timeObserver) }
             let cmt = CMTime(value: 1, timescale: 10)
-            AVPlayerTimeObserver = mainAudioPlayer?.addPeriodicTimeObserver(forInterval: cmt, queue: DispatchQueue.main, using: {
+            AVPlayerTimeObserver = masterAudioPlayer?.addPeriodicTimeObserver(forInterval: cmt, queue: DispatchQueue.main, using: {
                 (cmt) in
-                if self.mainAudioPlayer!.isPlaying == true {
-                    let progress = Float(self.mainAudioPlayer!.currentTime().seconds/self.mainAudioPlayer!.currentItem!.duration.seconds)
+                if self.masterAudioPlayer!.isPlaying == true {
+                    let progress = Float(self.masterAudioPlayer!.currentTime().seconds/self.masterAudioPlayer!.currentItem!.duration.seconds)
                     PlayBarController.main.reflect(progress: progress)
                 }
             })
         }
     }
-    var masterAudioRemoteURL:URL!
-    var masterAudioPlayer:AVPlayer?{
-        didSet(oldVal){
-            
-        }
-    }
-    var currentSelectedComments:[Comment]?
+    var selectedComments:[Comment]?
+    
+    
     @objc func cancelButtonHandler(sender:UIBarButtonItem){
         self.dismiss(animated: true, completion: {
             self.navigationItem.setRightBarButton(nil, animated: false)
@@ -49,7 +48,6 @@ class DetailViewController: UIViewController{
     }
 
     // MARK: IBOutlets
-    
     @IBOutlet weak var playBarView: UIView!
     @IBOutlet weak var detailTV: UITableView!
 
@@ -59,7 +57,6 @@ class DetailViewController: UIViewController{
         detailTV.dataSource = self
         masterAudioRemoteURL = URL(string: post.author_track!.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)
         masterAudioPlayer = AVPlayer(url: masterAudioRemoteURL)
-        mainAudioPlayer = masterAudioPlayer
         playBarController = PlayBarController.main
         playBarController.view.isHidden = false
     }
@@ -76,48 +73,59 @@ class DetailViewController: UIViewController{
 
 extension DetailViewController:ModeToggleCellDelegate{
     func didModeToggled(to mode: Bool) {
-//        playBarController.stopMusic()
         if mode == true {
             currentPlayMode = .mixed
-            mixedTrackContainer.setVolume(to: 1)
-            mainAudioPlayer?.volume = 0
+            mixedTrackContainer.isMuted = false
+            masterAudioPlayer?.isMuted = true
         } else {
             currentPlayMode = .master
-            mixedTrackContainer.setVolume(to: 0)
-            mainAudioPlayer?.volume = 1
+            mixedTrackContainer.isMuted = true
+            masterAudioPlayer?.isMuted = false
         }
         mixedTrackContainer.setInteractionability(to: mode)
     }
 }
 
-extension DetailViewController{
+extension DetailViewController:Playable{
     func reflect(progress:Float){
         self.masterWaveCell?.reflect(progress: progress)
     }
     
-    func stopMusic(){
+    func stop(){
         currentPhase = .Ready
-        mainAudioPlayer?.stop()
-        mixedTrackContainer?.stopMusic()
-        
+        for player in allAudioPlayers { player?.stop() }
     }
     
-    func playMusic(){
+    func play(){
         currentPhase = .Playing
-        mainAudioPlayer?.play()
-        mixedTrackContainer.playMusic()
+        for player in allAudioPlayers { player?.play() }
     }
     
-    func pauseMusic(){
+    func pause(){
         currentPhase = .Ready
-        mainAudioPlayer?.pause()
-        mixedTrackContainer?.pauseMusic()
+        for player in allAudioPlayers { player?.pause() }
     }
     
     func seek(to point:Float){
-        mainAudioPlayer?.seek(to: point)
-        mixedTrackContainer.seek(to: point)
+        for player in allAudioPlayers { player?.seek(to: point) }
         reflect(progress: point)
+    }
+    
+    var volume:Float{
+        get{ return masterAudioPlayer?.volume ?? 0}
+        set(newVal){
+            masterAudioPlayer?.volume = newVal
+            mixedTrackContainer.volume = newVal
+        }
+    }
+    var isMuted: Bool {
+        get {
+            return (masterAudioPlayer?.isMuted ?? true || mixedTrackContainer?.isMuted ?? true)
+        }
+        set(newVal) {
+            masterAudioPlayer?.isMuted = newVal
+            mixedTrackContainer?.isMuted = newVal
+        }
     }
 }
 
@@ -128,7 +136,7 @@ extension DetailViewController:MixedTracksContainerCellDelegate{
             navigationItem.setRightBarButton(nil, animated: true)
             return
         }
-        currentSelectedComments = comments
+        selectedComments = comments
         let mergeButton = UIBarButtonItem(title: "Merge", style: .plain, target: self, action: #selector(merge))
         navigationItem.setRightBarButton(mergeButton, animated: true)
     }
@@ -246,4 +254,13 @@ extension DetailViewController{
         case master
         case mixed
     }
+}
+
+protocol Playable {
+    func play()
+    func pause()
+    func stop()
+    func seek(to point:Float)
+    var volume:Float{ get set }
+    var isMuted:Bool{ get set }
 }
