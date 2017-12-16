@@ -10,7 +10,8 @@ import UIKit
 
 class DetailHeaderCell: UITableViewCell {
 
-    @IBOutlet weak private var authorProfileImage: UIImageView!
+
+    @IBOutlet weak var authorProfileImageButton: UIButton!
     @IBOutlet weak private var postTitleLB: UILabel!
     @IBOutlet weak private var authorNameLB: UILabel!
     @IBOutlet weak private var numberOfLikesLB: UILabel!
@@ -21,7 +22,9 @@ class DetailHeaderCell: UITableViewCell {
         }
     }
     
-    
+    @IBAction func authorProfileImageButtonHandler(_ sender: UIButton) {
+
+    }
     var postInfo:Post{
         get{
             return _postInfo
@@ -30,8 +33,8 @@ class DetailHeaderCell: UITableViewCell {
             _postInfo = newVal
             postTitleLB.text = newVal.title
             authorNameLB.text = newVal.author
-            numberOfLikesLB.text = "\(newVal.num_liked)"
-            numberOfComments.text = "\(newVal.num_comments)"
+            numberOfLikesLB.text = "\(newVal.num_liked ?? 0)"
+            numberOfComments.text = "\(newVal.num_comments ?? 0)"
         }
     }
     private var _postInfo:Post!

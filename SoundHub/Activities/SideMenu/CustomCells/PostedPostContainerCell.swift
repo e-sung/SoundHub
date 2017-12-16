@@ -8,12 +8,18 @@
 
 import UIKit
 
-class PostContainerCell: UICollectionViewCell, UITableViewDelegate, UITableViewDataSource {
+class PostContainerCell: UICollectionViewCell{
     var posts:[Post]?
-    var headerTitle = ""
-    let headerHeight = 60
     var delegate:PostContainerCellDelegate?
     @IBOutlet weak var postTB: UITableView!
+    
+    override func awakeFromNib() {
+        postTB.delegate = self
+        postTB.dataSource = self
+    }
+}
+
+extension PostContainerCell: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let posts = posts else { return 0 }
         return posts.count
@@ -33,20 +39,6 @@ class PostContainerCell: UICollectionViewCell, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let posts = posts else { return }
         delegate?.shouldGoTo(post: posts[indexPath.item])
-    }
-    
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return CGFloat(headerHeight)
-//    }
-//    
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        return UIView.generateHeaderView(with: headerTitle, and: headerHeight)
-//    }
-    
-    override func awakeFromNib() {
-        postTB.delegate = self
-        postTB.dataSource = self
-       
     }
 }
 

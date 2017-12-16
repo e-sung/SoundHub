@@ -11,13 +11,19 @@ import AVFoundation
 
 class MixedTracksContainerCell: UITableViewCell{
     
-    var allComments:[String:[Comment]]?{
-        didSet(oldval){
-            commentTV.reloadData()
-        }
-    }
+    var allComments:[String:[Comment]]?{ didSet(oldval){ commentTV.reloadData() }}
     var aPlayer:AVPlayer?
     var delegate:MixedTracksContainerCellDelegate?
+    private var allCells:[AudioCommentCell]{
+        var cells:[AudioCommentCell] = []
+        for i in 0..<commentTV.numberOfSections{
+            for j in 0..<commentTV.numberOfRows(inSection: i){
+                let cell = commentTV.cellForRow(at: IndexPath(item: j, section: i)) as! AudioCommentCell
+                cells.append(cell)
+            }
+        }
+        return cells
+    }
 
     @IBOutlet weak var commentTV: UITableView!
     
@@ -29,60 +35,34 @@ class MixedTracksContainerCell: UITableViewCell{
 
 }
 
-extension MixedTracksContainerCell{
+extension MixedTracksContainerCell: Playable{
     // MARK: Play and Pause Functions
     func setInteractionability(to bool:Bool){
-        for i in 0..<commentTV.numberOfSections{
-            for j in 0..<commentTV.numberOfRows(inSection: i){
-                let cell = commentTV.cellForRow(at: IndexPath(item: j, section: i)) as! AudioCommentCell
-                cell.isInterActive = bool
-            }
-        }
-    }
-    
-    func setVolume(to value:Float){
-        for i in 0..<commentTV.numberOfSections{
-            for j in 0..<commentTV.numberOfRows(inSection: i){
-                let cell = commentTV.cellForRow(at: IndexPath(item: j, section: i)) as! AudioCommentCell
-                if cell.isActive { cell.player?.volume = value }
-            }
-        }
+        for cell in allCells{ cell.isInterActive = bool }
     }
 
-    func playMusic(){
-        for i in 0..<commentTV.numberOfSections{
-            for j in 0..<commentTV.numberOfRows(inSection: i){
-                let cell = commentTV.cellForRow(at: IndexPath(item: j, section: i)) as! AudioCommentCell
-                cell.player?.play()
-            }
-        }
+    func play(){
+        for cell in allCells { cell.play() }
     }
 
-    func pauseMusic(){
-        for i in 0..<commentTV.numberOfSections{
-            for j in 0..<commentTV.numberOfRows(inSection: i){
-                let cell = commentTV.cellForRow(at: IndexPath(item: j, section: i)) as! AudioCommentCell
-                cell.player?.pause()
-            }
-        }
+    func pause(){
+        for cell in allCells { cell.pause() }
     }
     
-    func stopMusic(){
-        for i in 0..<commentTV.numberOfSections{
-            for j in 0..<commentTV.numberOfRows(inSection: i){
-                let cell = commentTV.cellForRow(at: IndexPath(item: j, section: i)) as! AudioCommentCell
-                cell.player?.stop()
-            }
-        }
+    func stop(){
+        for cell in allCells { cell.stop() }
     }
     
     func seek(to proportion:Float){
-        for i in 0..<commentTV.numberOfSections{
-            for j in 0..<commentTV.numberOfRows(inSection: i){
-                let cell = commentTV.cellForRow(at: IndexPath(item: j, section: i)) as! AudioCommentCell
-                cell.player?.seek(to:proportion)
-            }
-        }
+        for cell in allCells { cell.seek(to: proportion) }
+    }
+    
+    func setVolume(to value: Float) {
+        for cell in allCells { if cell.isActive { cell.setVolume(to: value)} }
+    }
+    
+    func setMute(to value: Bool) {
+        for cell in allCells { if cell.isActive { cell.setMute(to: value) } }
     }
 }
 
@@ -92,10 +72,8 @@ extension MixedTracksContainerCell:UITableViewDataSource, UITableViewDelegate{
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let instrument = Instrument.cases[section]
-        if let allComments = allComments {
-            if allComments.keys.contains(instrument){
-                return allComments[instrument]!.count
-            }
+        if let allComments = allComments{
+            if allComments.keys.contains(instrument){ return allComments[instrument]!.count }
         }
         return 0
     }

@@ -9,62 +9,66 @@
 import UIKit
 import AudioKit
 import AVFoundation
-import NCSoundHistogram
 
 class DetailViewController: UIViewController{
     
-    // MARK: Stored Properties
+    // MARK: Internal Stored Properties
+    /// 이 디테일뷰에서 표시해야 할 Post객체
     var post:Post!
-    var playBarController:PlayBarController!
-    var masterWaveCell:MasterWaveFormViewCell?
-    var mixedTrackContainer:MixedTracksContainerCell!
-    var recorderCell: RecorderCell?
-    var presentedByPlayBar = false
+    /// 현재 뭐하는 중인지 (대기중/재생중/녹음중)
     var currentPhase:PlayPhase = .Ready
-    var currentPlayMode:PlayMode = .master
-    var mainAudioPlayer:AVPlayer?{
+    // MARK: Private Stored Properties
+    /// 음악 파형이 표시되는 셀
+    private var masterWaveCell:MasterWaveFormViewCell?
+    /// 녹음하는 셀
+    private var recorderCell: RecorderCell?
+    /// Master Track을 재생하는 플레이어
+    private var masterAudioPlayer:AVPlayer?{
         didSet(oldVal){
             if let timeObserver = AVPlayerTimeObserver { oldVal?.removeTimeObserver(timeObserver) }
+            guard let masterAudioPlayer = masterAudioPlayer else { return }
             let cmt = CMTime(value: 1, timescale: 10)
-            AVPlayerTimeObserver = mainAudioPlayer?.addPeriodicTimeObserver(forInterval: cmt, queue: DispatchQueue.main, using: {
-                (cmt) in
-                if self.mainAudioPlayer!.isPlaying == true {
-                    let progress = Float(self.mainAudioPlayer!.currentTime().seconds/self.mainAudioPlayer!.currentItem!.duration.seconds)
-                    PlayBarController.main.reflect(progress: progress)
+            AVPlayerTimeObserver = masterAudioPlayer.addPeriodicTimeObserver(forInterval: cmt, queue: DispatchQueue.main, using: { (cmt) in
+                if masterAudioPlayer.isPlaying {
+                    PlayBarController.main.reflect(progress: masterAudioPlayer.progress)
                 }
             })
         }
     }
-    var masterAudioRemoteURL:URL!
-    var masterAudioPlayer:AVPlayer?{
+    /**
+     mixedTrack들을 담고있는 셀. Playable 프로토콜을 상속받았다.
+     따라서 **mixedTrackContainer.play()** 같은 것들이 가능하다.
+    */
+    private var mixedTrackContainer:MixedTracksContainerCell?
+    private var allAudioPlayers:[Playable?]{
+        return [ masterAudioPlayer, mixedTrackContainer ]
+    }
+    /// 마스터, 혹은 mixedTrackContainer 등이 번갈아가면서 mainAudioPlayer가 된다.
+    /// 이전의 mainAUdioPlayer는 뮤트된다.
+    private var mainAudioPlayer:Playable?{
         didSet(oldVal){
-            
+            oldVal?.setMute(to: true)
+            mainAudioPlayer?.setMute(to: false)
         }
     }
-    var currentSelectedComments:[Comment]?
-    @objc func cancelButtonHandler(sender:UIBarButtonItem){
-        self.dismiss(animated: true, completion: {
-            self.navigationItem.setRightBarButton(nil, animated: false)
-        })
-    }
+    /// 원저작자에게만 보이는, "머지"하기 위해 multiselection을 통해 고른 셀들에 담겨있는 Comment 정보
+    private var selectedComments:[Comment]?
 
     // MARK: IBOutlets
-    
-    @IBOutlet weak var playBarView: UIView!
-    @IBOutlet weak var detailTV: UITableView!
+    @IBOutlet weak private var playBarView: UIView!
+    @IBOutlet weak private var detailTV: UITableView!
 
+    // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         detailTV.delegate = self
         detailTV.dataSource = self
-        masterAudioRemoteURL = URL(string: post.author_track!.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)
-        masterAudioPlayer = AVPlayer(url: masterAudioRemoteURL)
+        if let materRemoteURL = post.authorTrackRemoteURL{ masterAudioPlayer = AVPlayer(url: materRemoteURL) }
         mainAudioPlayer = masterAudioPlayer
-        playBarController = PlayBarController.main
-        playBarController.view.isHidden = false
+        PlayBarController.main.view.isHidden = false
     }
     override func viewWillAppear(_ animated: Bool) {
-        playBarController.currentPostView = self
+        PlayBarController.main.currentPostView = self
     }
     override func viewDidAppear(_ animated: Bool) {
         masterWaveCell?.renderWave()
@@ -74,50 +78,51 @@ class DetailViewController: UIViewController{
     }
 }
 
+// MARK: 모드가 변경되었을 때 처리
 extension DetailViewController:ModeToggleCellDelegate{
     func didModeToggled(to mode: Bool) {
-//        playBarController.stopMusic()
         if mode == true {
-            currentPlayMode = .mixed
-            mixedTrackContainer.setVolume(to: 1)
-            mainAudioPlayer?.volume = 0
-        } else {
-            currentPlayMode = .master
-            mixedTrackContainer.setVolume(to: 0)
-            mainAudioPlayer?.volume = 1
+            mainAudioPlayer = mixedTrackContainer
+            masterAudioPlayer?.setMute(to: true)
         }
-        mixedTrackContainer.setInteractionability(to: mode)
+        else {
+            mainAudioPlayer = masterAudioPlayer
+            mixedTrackContainer?.setMute(to: true)
+        }
+        mixedTrackContainer?.setInteractionability(to: mode)
     }
 }
 
-extension DetailViewController{
+extension DetailViewController:Playable{
     func reflect(progress:Float){
         self.masterWaveCell?.reflect(progress: progress)
     }
     
-    func stopMusic(){
+    func stop(){
         currentPhase = .Ready
-        mainAudioPlayer?.stop()
-        mixedTrackContainer?.stopMusic()
-        
+        for player in allAudioPlayers { player?.stop() }
     }
     
-    func playMusic(){
+    func play(){
         currentPhase = .Playing
-        mainAudioPlayer?.play()
-        mixedTrackContainer.playMusic()
+        for player in allAudioPlayers { player?.play() }
     }
     
-    func pauseMusic(){
+    func pause(){
         currentPhase = .Ready
-        mainAudioPlayer?.pause()
-        mixedTrackContainer?.pauseMusic()
+        for player in allAudioPlayers { player?.pause() }
     }
     
     func seek(to point:Float){
-        mainAudioPlayer?.seek(to: point)
-        mixedTrackContainer.seek(to: point)
+        for player in allAudioPlayers { player?.seek(to: point) }
         reflect(progress: point)
+    }
+    func setVolume(to value: Float) {
+        for player in allAudioPlayers { player?.setVolume(to: value) }
+    }
+    
+    func setMute(to value: Bool) {
+        for player in allAudioPlayers { player?.setMute(to: value) }
     }
 }
 
@@ -128,11 +133,11 @@ extension DetailViewController:MixedTracksContainerCellDelegate{
             navigationItem.setRightBarButton(nil, animated: true)
             return
         }
-        currentSelectedComments = comments
+        selectedComments = comments
         let mergeButton = UIBarButtonItem(title: "Merge", style: .plain, target: self, action: #selector(merge))
         navigationItem.setRightBarButton(mergeButton, animated: true)
     }
-    @objc func merge(){
+    @objc private func merge(){
         alert(msg: "Merge!")
     }
 }
@@ -167,7 +172,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             return cell
         }else if indexPath.section == 0 && indexPath.item == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "masterWaveCell", for: indexPath)
-            masterWaveCell = cell.becomeMasterWaveCell(with: masterAudioRemoteURL, completion: { (localURL) in
+            masterWaveCell = cell.becomeMasterWaveCell(with: post.authorTrackRemoteURL, completion: { (localURL) in
                 self.masterAudioPlayer = AVPlayer(url: localURL)
             })
             return masterWaveCell!
@@ -203,6 +208,27 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             return 100
         }
     }
+    
+    /**
+     특정 post를 보여주는 DetailViewController로 이동하는 함수
+     - parameter post : 도착한 DetailVC가 보여줘야 할 post 정보
+     - parameter vc : 출발하는 ViewController 
+    */
+    static func goToDetailPage(of post:Post, from vc:UIViewController){
+        /// 보려는 포스트가, 현재 플레이바에서 재생중인 포스트라면
+        if post.title == PlayBarController.main.currentPostView?.post.title {
+            /// 그 포스트객체는 PlayBarController.main에 저장되어 있으니, 그걸 보여주면 됨.
+            vc.navigationController?.show(PlayBarController.main.currentPostView!, sender: nil)
+        }
+        
+        /// 그게 아니라면, 프로필 페이지에 있는 Post객체는 제한된 정보만 가지고 있기 때문에,
+        /// 온전한 Post객체를 다시 서버에서 받아와야 함.
+        NetworkController.main.fetchPost(id: post.id) { (fetchedPost) in
+            let nextVC = UIStoryboard(name: "Detail", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+            nextVC.post = fetchedPost
+            DispatchQueue.main.async { vc.navigationController?.show(nextVC, sender: nil) }
+        }
+    }
 }
 
 // MARK: Helper Enums
@@ -225,4 +251,13 @@ extension DetailViewController{
         case master
         case mixed
     }
+}
+
+protocol Playable {
+    func play()
+    func pause()
+    func stop()
+    func seek(to point:Float)
+    func setVolume(to value:Float)
+    func setMute(to value:Bool)
 }

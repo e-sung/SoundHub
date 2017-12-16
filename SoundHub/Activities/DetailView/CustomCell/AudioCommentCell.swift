@@ -19,12 +19,12 @@ class AudioCommentCell: UITableViewCell {
     @IBOutlet weak private var toggleSwitch: UISwitch!
     
     @IBAction private func switchToggleHandler(_ sender: UISwitch) {
-        if sender.isOn { player?.volume = 1.0 }
-        else { player?.volume = 0.0 }
+        if sender.isOn { player?.isMuted = false }
+        else { player?.isMuted = true }
     }
     func toggleSwitch(to value:Bool){
         toggleSwitch.isOn = value
-        player?.volume = toggleSwitch.isOn ? 1.0 : 0.0
+        player?.isMuted = !value
     }
     var delegate:AudioCommentCellDelegate?
     var isActive:Bool{
@@ -48,18 +48,42 @@ class AudioCommentCell: UITableViewCell {
            _commentInfo = newVal
             InstrumentLB.text = newVal.instrument
             nickNameLB.text = newVal.author
-            let remoteURL = URL(string: newVal.comment_track.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)!
-            NetworkController.main.downloadAudio(from: remoteURL) { (localURL) in
+            guard let audioURL = newVal.commentTrackURL else { return }
+            NetworkController.main.downloadAudio(from: audioURL) { (localURL) in
                 self.player = AVPlayer(url: localURL)
-                self.player?.volume = 0
+                self.player?.isMuted = true
             }
         }
     }
+    
+    
+    
     private var _commentInfo:Comment!
     override func awakeFromNib() {
         let bgColorView = UIView(frame: contentView.frame)
         bgColorView.backgroundColor = UIColor(red: 0, green: 1.0, blue: 0, alpha: 0.3)
         self.selectedBackgroundView = bgColorView
+    }
+}
+
+extension AudioCommentCell:Playable{
+    func play(){
+        player?.play()
+    }
+    func pause(){
+        player?.pause()
+    }
+    func stop(){
+        player?.stop()
+    }
+    func seek(to proportion:Float){
+        player?.seek(to: proportion)
+    }
+    func setVolume(to value: Float) {
+        player?.volume = value
+    }
+    func setMute(to value: Bool) {
+        player?.isMuted = value
     }
 }
 
