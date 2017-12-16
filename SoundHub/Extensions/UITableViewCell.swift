@@ -17,7 +17,8 @@ extension UITableViewCell{
         return commentCell
     }
     
-    func becomeMasterWaveCell(with audioURL:URL, completion:@escaping (URL)->Void)->MasterWaveFormViewCell{
+    func becomeMasterWaveCell(with audioURL:URL?, completion:@escaping (URL)->Void)->MasterWaveFormViewCell?{
+        guard let audioURL = audioURL else { return nil }
         let masterWaveCell = self as! MasterWaveFormViewCell
         NetworkController.main.downloadAudio(from: audioURL) { (localURL) in
             if masterWaveCell.masterAudioURL == nil {

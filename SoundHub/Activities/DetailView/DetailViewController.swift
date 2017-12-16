@@ -22,7 +22,7 @@ class DetailViewController: UIViewController{
     private var masterWaveCell:MasterWaveFormViewCell?
     /// 녹음하는 셀
     private var recorderCell: RecorderCell?
-    private var masterAudioRemoteURL:URL!
+    /// Master Track을 재생하는 플레이어
     private var masterAudioPlayer:AVPlayer?{
         didSet(oldVal){
             if let timeObserver = AVPlayerTimeObserver { oldVal?.removeTimeObserver(timeObserver) }
@@ -35,16 +35,23 @@ class DetailViewController: UIViewController{
             })
         }
     }
-    private var mixedTrackContainer:MixedTracksContainerCell!
+    /**
+     mixedTrack들을 담고있는 셀. Playable 프로토콜을 상속받았다.
+     따라서 **mixedTrackContainer.play()** 같은 것들이 가능하다.
+    */
+    private var mixedTrackContainer:MixedTracksContainerCell?
     private var allAudioPlayers:[Playable?]{
         return [ masterAudioPlayer, mixedTrackContainer ]
     }
+    /// 마스터, 혹은 mixedTrackContainer 등이 번갈아가면서 mainAudioPlayer가 된다.
+    /// 이전의 mainAUdioPlayer는 뮤트된다.
     private var mainAudioPlayer:Playable?{
         didSet(oldVal){
             oldVal?.setMute(to: true)
             mainAudioPlayer?.setMute(to: false)
         }
     }
+    /// 원저작자에게만 보이는, "머지"하기 위해 multiselection을 통해 고른 셀들에 담겨있는 Comment 정보
     private var selectedComments:[Comment]?
 
     // MARK: IBOutlets
@@ -56,8 +63,7 @@ class DetailViewController: UIViewController{
         super.viewDidLoad()
         detailTV.delegate = self
         detailTV.dataSource = self
-        masterAudioRemoteURL = URL(string: post.author_track!.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)
-        masterAudioPlayer = AVPlayer(url: masterAudioRemoteURL)
+        if let materRemoteURL = post.authorTrackRemoteURL{ masterAudioPlayer = AVPlayer(url: materRemoteURL) }
         mainAudioPlayer = masterAudioPlayer
         PlayBarController.main.view.isHidden = false
     }
@@ -81,9 +87,9 @@ extension DetailViewController:ModeToggleCellDelegate{
         }
         else {
             mainAudioPlayer = masterAudioPlayer
-            mixedTrackContainer.setMute(to: true)
+            mixedTrackContainer?.setMute(to: true)
         }
-        mixedTrackContainer.setInteractionability(to: mode)
+        mixedTrackContainer?.setInteractionability(to: mode)
     }
 }
 
@@ -166,7 +172,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             return cell
         }else if indexPath.section == 0 && indexPath.item == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "masterWaveCell", for: indexPath)
-            masterWaveCell = cell.becomeMasterWaveCell(with: masterAudioRemoteURL, completion: { (localURL) in
+            masterWaveCell = cell.becomeMasterWaveCell(with: post.authorTrackRemoteURL, completion: { (localURL) in
                 self.masterAudioPlayer = AVPlayer(url: localURL)
             })
             return masterWaveCell!

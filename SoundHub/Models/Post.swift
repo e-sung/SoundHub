@@ -22,5 +22,11 @@ struct Post:Codable{
     let author_track:String?
     let mixed_tracks:[String:[Comment]]?
     let comment_tracks:[String:[Comment]]?
+    var authorTrackRemoteURL:URL?{
+        get{
+            guard let authorTrack = self.author_track else { return nil }
+            return URL(string: authorTrack.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)!
+        }
+    }
 }
 
