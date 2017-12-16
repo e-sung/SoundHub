@@ -21,15 +21,14 @@ class NetworkController{
     internal let baseMediaURL:URL
     internal let generalHomeURL:URL
     
-    
-    var authToken:String{
+    private var authToken:String{
         get{
             guard let tkn = UserDefaults.standard.string(forKey: token) else { return "invalid Token" }
             return "Token \(tkn)"
         }
     }
 
-    var multipartFormDataHeader:HTTPHeaders{
+    private var multipartFormDataHeader:HTTPHeaders{
         get{
             return [
                  "Authorization": "Token \(authToken)",
@@ -56,7 +55,6 @@ class NetworkController{
         let headers: HTTPHeaders = ["Authorization": authToken]
         let parameters: Parameters = ["nickname":nickname]
         Alamofire.request(url, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers:headers).response { (response) in
-            
             if response.response?.statusCode == 200 { completion(true) }
             else{ completion(false) }
         }
@@ -65,7 +63,6 @@ class NetworkController{
     func fetchUser(id:Int, completion:@escaping(User)->Void){
         let url = URL(string: "/user/\(id)/", relativeTo: baseURL)!
         URLSession.shared.dataTask(with: url) { (data, response, error) in
-            
             guard let data = data else { print("data is corrupted") ; return }
             guard let userInfo = try? JSONDecoder().decode(User.self, from: data) else {
                 print("User Info Decoding failed")
@@ -85,26 +82,20 @@ class NetworkController{
     }
     func fetchHomePage(of category:Categori, with option:String, completion:@escaping()->Void){
         var entryURL:URL?
-        if category == .general {
-            entryURL = generalHomeURL
-        }else{
-            entryURL = URL(string: "\(category.rawValue)", relativeTo: generalHomeURL)
-        }
+        if category == .general { entryURL = generalHomeURL }
+        else{ entryURL = URL(string: "\(category.rawValue)", relativeTo: generalHomeURL) }
+        
         let homeURL = entryURL!.appendingPathComponent(option)
         URLSession.shared.dataTask(with: homeURL) { (data, response, error) in
             if let error = error { print(error) }
             guard let data = data else { print("data is invalid"); return}
-            
             do{
                 let homePageData = try JSONDecoder().decode(HomePage.self, from: data)
-                print(homePageData)
                 DataCenter.main.homePages[category] = homePageData
                 completion()
             }catch let err as NSError{
                 print(err)
             }
-            
-
         }.resume()
     }
 

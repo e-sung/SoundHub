@@ -18,7 +18,6 @@ class SideMenuViewController: UIViewController {
         self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
-    
     @IBAction func nickNameButtonHandler(_ sender: UIButton) { showProfile() }
     
     @IBAction func profileImageButtonHandler(_ sender: UIButton) { showProfile() }

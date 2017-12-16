@@ -74,7 +74,6 @@ class ProfileViewController: UIViewController{
             }else{
                 self.alert(msg: "요청이 실패했습니다. 어떻게 된걸까요?")
             }
-
         })
         headerCell!.isSettingPhase = false
     }
