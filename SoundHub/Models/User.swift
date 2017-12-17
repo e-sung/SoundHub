@@ -12,6 +12,8 @@ struct User:Codable{
     let id:Int
     let email:String
     let nickname:String
+    let profile_img:String?
+    let profile_bg:String?
     let genre:String?
     let instrument:String?
     let total_liked:Int?
@@ -32,6 +34,18 @@ struct User:Codable{
                 
             }else if let likedPosts = self.liked_posts{ return likedPosts }
             else{ return [] }
+        }
+    }
+    var profileImageURL:URL?{
+        get{
+            guard let profileImgAddr = profile_img else { return nil }
+            return URL(string: "\(profileImgAddr)", relativeTo: NetworkController.main.baseMediaURL)!
+        }
+    }
+    var headerImageURL:URL?{
+        get{
+            guard let headerImgAddr = profile_bg else { return nil }
+            return URL(string: "\(headerImgAddr)", relativeTo: NetworkController.main.baseMediaURL)!
         }
     }
 }
