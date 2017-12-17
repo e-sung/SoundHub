@@ -135,7 +135,15 @@ extension DetailViewController:MixedTracksContainerCellDelegate{
             animated: true)
     }
     @objc private func merge(){
-        alert(msg: "Merge!")
+        guard let selectedComments = selectedComments else { return }
+        var comments:[Int] = []
+        for comment in selectedComments{ comments.append(comment.id) }
+        NetworkController.main.merge(comments: comments, on: post.id, completion: {
+            NetworkController.main.fetchPost(id: self.post.id, completion: { (post) in
+                self.post = post
+                DispatchQueue.main.async { self.mainTV.reloadData() }
+            })
+        })
     }
 }
 
