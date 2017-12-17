@@ -30,7 +30,7 @@ struct Post:Codable{
     }
     var masterTrackRemoteURL:URL?{
         get{
-            guard let masterTrack = self.master_track else { return nil }
+            guard let masterTrack = self.master_track else { return authorTrackRemoteURL }
             return URL(string: masterTrack.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)!
         }
     }

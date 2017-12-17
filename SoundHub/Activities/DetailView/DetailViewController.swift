@@ -163,7 +163,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             return cell
         }else if indexPath.section == 0 && indexPath.item == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "masterWaveCell", for: indexPath)
-            masterWaveCell = cell.becomeMasterWaveCell(with: post.authorTrackRemoteURL, completion: { (localURL) in
+            masterWaveCell = cell.becomeMasterWaveCell(with: post.masterTrackRemoteURL, completion: { (localURL) in
                 self.masterAudioPlayer = AVPlayer(url: localURL)
             })
             return masterWaveCell!
