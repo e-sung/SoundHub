@@ -19,7 +19,7 @@ class NetworkController{
     private let loginURL:URL
     private let postURL:URL
     internal let baseStorageURL:URL
-    internal let baseAudioURL:URL
+    internal let baseMediaURL:URL
     internal let generalHomeURL:URL
     
     private var authToken:String{
@@ -41,7 +41,7 @@ class NetworkController{
     init(){
         baseURL = URL(string: "https://soundhub.che1.co.kr/")!
         baseStorageURL = URL(string: "https://s3.ap-northeast-2.amazonaws.com/che1-soundhub/")!
-        baseAudioURL = URL(string: "media/", relativeTo: baseStorageURL)!
+        baseMediaURL = URL(string: "media/", relativeTo: baseStorageURL)!
         signUpURL = URL(string: "user/signup/", relativeTo: baseURL)!
         loginURL = URL(string: "user/login/", relativeTo: baseURL)!
         postURL = URL(string: "post/", relativeTo: baseURL)!
@@ -73,21 +73,22 @@ class NetworkController{
         guard let imageData = profileImageData else { print("invalid image"); return }
         Alamofire.upload(
             multipartFormData: { multipartFormData in
-                multipartFormData.append(imageData, withName: "profile_img",
-                                         fileName: "profile.png", mimeType: "image/png")
-            },
-            to: imagePatchURL, method: .patch,
-            headers: multipartFormDataHeader, encodingCompletion: { encodingResult
+                multipartFormData.append(imageData, withName: "profile_img",fileName: "profile_\(Date()).png", mimeType: "image/png")
+        },
+            to: imagePatchURL, method: .patch, headers: multipartFormDataHeader,
+            encodingCompletion: { encodingResult in
                 switch encodingResult {
                 case .success(let upload, _, _):
                     upload.responseJSON { response in
                         debugPrint(response)
+                        completion(true)
                     }
                 case .failure(let encodingError):
                     print(encodingError)
+                    completion(false)
                 }
-        })
-
+        }
+        )
     }
     
     func fetchUser(id:Int, completion:@escaping(User)->Void){

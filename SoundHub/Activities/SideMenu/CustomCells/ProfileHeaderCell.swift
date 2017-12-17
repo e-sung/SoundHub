@@ -56,7 +56,7 @@ class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate, UITex
     func refresh(with userInfo:User?){
         guard let userInfo = userInfo else { return }
         if let profileImageURL = userInfo.profileImageURL {
-            profileImageButton.af_setImage(for: .normal, url: profileImageURL )
+            profileImageButton.af_setImage(for: .normal, url: profileImageURL, placeholderImage: #imageLiteral(resourceName: "default-profile"), filter: nil, progress: nil, progressQueue: DispatchQueue.main, completion: nil)
         }
         nickName = userInfo.nickname
         numFollowingLB.text = "\(userInfo.num_followings ?? 0)"

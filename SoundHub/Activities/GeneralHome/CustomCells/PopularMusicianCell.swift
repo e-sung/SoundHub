@@ -18,7 +18,8 @@ class PopularMusicianCell: UICollectionViewCell {
             guard let info = userInfo else { return }
             artistNameLabel.text = info.nickname
             guard let profileImageURL = info.profileImageURL else { return }
-            artistImage.af_setImage(withURL: profileImageURL)
+            artistImage.af_setImage(withURL: profileImageURL, placeholderImage: #imageLiteral(resourceName: "default-profile"), filter: nil, progress: nil, progressQueue: DispatchQueue.main, imageTransition: .crossDissolve(1), runImageTransitionIfCached: false) { (img) in
+            }
         }
     }
 }

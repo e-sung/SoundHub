@@ -18,7 +18,7 @@ struct Comment:Codable{
     var commentTrackURL:URL?{
         get{
             guard let commentTrack = self.comment_track else { return nil }
-            return URL(string: commentTrack.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseAudioURL)!
+            return URL(string: commentTrack.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)!
         }
     }
 }

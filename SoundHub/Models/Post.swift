@@ -25,13 +25,13 @@ struct Post:Codable{
     var authorTrackRemoteURL:URL?{
         get{
             guard let authorTrack = self.author_track else { return nil }
-            return URL(string: authorTrack.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseAudioURL)!
+            return URL(string: authorTrack.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)!
         }
     }
     var masterTrackRemoteURL:URL?{
         get{
             guard let masterTrack = self.master_track else { return nil }
-            return URL(string: masterTrack.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseAudioURL)!
+            return URL(string: masterTrack.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)!
         }
     }
 }
