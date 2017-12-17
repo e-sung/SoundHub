@@ -22,6 +22,9 @@ class ProfileViewController: UIViewController{
      UIImagePickerControllerDelegate Method 참고
     */
     private var buttonToChange:UIButton?
+    private var changedProfileImage:UIImage?
+    private var changedHeaderImage:UIImage?
+    
     /**
      User객체의 주요 정보가 표시되는 셀
      
@@ -59,22 +62,27 @@ class ProfileViewController: UIViewController{
         /// - ToDo
         /// 프로필 이미지, 헤더이미지 저장 필요
         UserDefaults.standard.set(headerCell!.nickName, forKey: nickname)
+        NetworkController.main.patchImage(with: changedProfileImage) { (success) in
+            print("==============")
+            print(success)
+        }
+//
         
         /// 변경내용을 서버에 반영
-        NetworkController.main.patchUser(nickname: headerCell!.nickName, completion: { requestSucceded in
-            if requestSucceded == true {
-                /// 네트워크 세션이 끝난 지금까지도 각종 UI에 변경되기 전 User데이터가 표시되고 있음.
-                /// 또 DataCenter.main 에도 아직 새 User객체가 반영되지 않았음.
-                /// 따라서
-                DataCenter.main = DataCenter() /// 1. DataCenter.main 초기화
-                self.navigationController?.popViewController(animated: true) /// 2. ChartVC로 복귀
-                /// 3. ChartVC에서는 DataCenter.main을 참조하려고 할 것이고, 그것이 비어있기 때문에
-                /// 4. 새 http 요청으로 DataCenter.main을 채워넣음.
-                /// 5. 그 과정에서 새롭게 변경된 User객체가 모든 UI에 반영됨
-            }else{
-                self.alert(msg: "요청이 실패했습니다. 어떻게 된걸까요?")
-            }
-        })
+//        NetworkController.main.patchUser(nickname: headerCell!.nickName, profileImage: nil, headerImage: nil, completion: { requestSucceded in
+//            if requestSucceded == true {
+//                /// 네트워크 세션이 끝난 지금까지도 각종 UI에 변경되기 전 User데이터가 표시되고 있음.
+//                /// 또 DataCenter.main 에도 아직 새 User객체가 반영되지 않았음.
+//                /// 따라서
+//                DataCenter.main = DataCenter() /// 1. DataCenter.main 초기화
+//                self.navigationController?.popViewController(animated: true) /// 2. ChartVC로 복귀
+//                /// 3. ChartVC에서는 DataCenter.main을 참조하려고 할 것이고, 그것이 비어있기 때문에
+//                /// 4. 새 http 요청으로 DataCenter.main을 채워넣음.
+//                /// 5. 그 과정에서 새롭게 변경된 User객체가 모든 UI에 반영됨
+//            }else{
+//                self.alert(msg: "요청이 실패했습니다. 어떻게 된걸까요?")
+//            }
+//        })
         headerCell!.isSettingPhase = false
     }
     
@@ -125,6 +133,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate,UINavigationCon
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             buttonToChange?.setImage(pickedImage, for: .normal)
             buttonToChange?.imageView?.contentMode = .scaleAspectFill
+            changedProfileImage = pickedImage
         }
         dismiss(animated: true, completion: nil)
     }

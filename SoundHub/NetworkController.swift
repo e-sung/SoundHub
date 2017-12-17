@@ -32,34 +32,62 @@ class NetworkController{
     private var multipartFormDataHeader:HTTPHeaders{
         get{
             return [
-                 "Authorization": "Token \(authToken)",
+                 "Authorization": "\(authToken)",
                 "Content-type": "multipart/form-data"
             ]
         }
     }
 
     init(){
-        baseURL = URL(string: "https://soundhub.che1.co.kr")!
+        baseURL = URL(string: "https://soundhub.che1.co.kr/")!
         baseStorageURL = URL(string: "https://s3.ap-northeast-2.amazonaws.com/che1-soundhub/")!
         baseAudioURL = URL(string: "media/", relativeTo: baseStorageURL)!
-        signUpURL = URL(string: "/user/signup/", relativeTo: baseURL)!
-        loginURL = URL(string: "/user/login/", relativeTo: baseURL)!
-        postURL = URL(string: "/post/", relativeTo: baseURL)!
-        generalHomeURL = URL(string: "/home/", relativeTo: baseURL)!
+        signUpURL = URL(string: "user/signup/", relativeTo: baseURL)!
+        loginURL = URL(string: "user/login/", relativeTo: baseURL)!
+        postURL = URL(string: "post/", relativeTo: baseURL)!
+        generalHomeURL = URL(string: "home/", relativeTo: baseURL)!
     }
     
-    func patchUser(nickname:String, completion:@escaping(_ hasSuccess:Bool)->Void){
+    func patchUser(nickname:String, profileImage:UIImage?, headerImage:UIImage?, completion:@escaping(_ hasSuccess:Bool)->Void){
         guard let userId = UserDefaults.standard.string(forKey: id) else {
             completion(false)
             return
         }
-        let url = URL(string: "/user/\(userId)/", relativeTo: baseURL)!
+        let nickNamePatchURL = URL(string: "/user/\(userId)/", relativeTo: baseURL)!
         let headers: HTTPHeaders = ["Authorization": authToken]
         let parameters: Parameters = ["nickname":nickname]
-        Alamofire.request(url, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers:headers).response { (response) in
+        Alamofire.request(nickNamePatchURL, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers:headers).response { (response) in
             if response.response?.statusCode == 200 { completion(true) }
             else{ completion(false) }
         }
+    }
+    
+    func patchImage(with profileImage:UIImage?, completion:@escaping(_ result:Bool)->Void){
+        guard let userId = UserDefaults.standard.string(forKey: id) else {
+            completion(false)
+            return
+        }
+        let imagePatchURL = URL(string: "/user/\(userId)/profile-img/", relativeTo: baseURL)!
+        guard let imageToSend = profileImage else { completion(false); return }
+        let profileImageData = UIImagePNGRepresentation(imageToSend)
+        guard let imageData = profileImageData else { print("invalid image"); return }
+        Alamofire.upload(
+            multipartFormData: { multipartFormData in
+                multipartFormData.append(imageData, withName: "profile_img",
+                                         fileName: "profile.png", mimeType: "image/png")
+            },
+            to: imagePatchURL, method: .patch,
+            headers: multipartFormDataHeader, encodingCompletion: { encodingResult
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    upload.responseJSON { response in
+                        debugPrint(response)
+                    }
+                case .failure(let encodingError):
+                    print(encodingError)
+                }
+        })
+
     }
     
     func fetchUser(id:Int, completion:@escaping(User)->Void){
@@ -161,6 +189,7 @@ class NetworkController{
         },
             to: postURL, headers:multipartFormDataHeader,
             encodingCompletion: { encodingResult in
+                
                 switch encodingResult {
                 case .success(let upload, _, _):
                     upload.responseJSON { response in
@@ -171,7 +200,7 @@ class NetworkController{
                     print(encodingError)
                     completion()
                 }
-            }
+        }
         )
     }
     
