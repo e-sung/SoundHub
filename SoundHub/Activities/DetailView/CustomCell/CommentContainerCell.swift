@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class MixedTracksContainerCell: UITableViewCell{
+class CommentContainerCell: UITableViewCell{
     
     var allComments:[String:[Comment]]?{ didSet(oldval){ commentTV.reloadData() }}
     var aPlayer:AVPlayer?
@@ -35,7 +35,7 @@ class MixedTracksContainerCell: UITableViewCell{
 
 }
 
-extension MixedTracksContainerCell: Playable{
+extension CommentContainerCell: Playable{
     // MARK: Play and Pause Functions
     func setInteractionability(to bool:Bool){
         for cell in allCells{ cell.isInterActive = bool }
@@ -66,7 +66,7 @@ extension MixedTracksContainerCell: Playable{
     }
 }
 
-extension MixedTracksContainerCell:UITableViewDataSource, UITableViewDelegate{
+extension CommentContainerCell:UITableViewDataSource, UITableViewDelegate{
     func numberOfSections(in tableView: UITableView) -> Int {
         return Instrument.cases.count
     }

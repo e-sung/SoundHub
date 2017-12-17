@@ -34,5 +34,31 @@ struct Post:Codable{
             return URL(string: masterTrack.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)!
         }
     }
+    var numOfMixedTracks:Int{
+        get{
+            guard let mixed_tracks = mixed_tracks else { return 0 }
+            var accum = 0
+            for i in 0..<Instrument.cases.count{
+                let inst = Instrument.cases[i]
+                if mixed_tracks.keys.contains(inst){
+                    accum += 1
+                }
+            }
+            return accum
+        }
+    }
+    var numOfCommentTracks:Int{
+        get{
+            guard let comment_tracks = comment_tracks else { return 0 }
+            var accum = 0
+            for i in 0..<Instrument.cases.count{
+                let inst = Instrument.cases[i]
+                if comment_tracks.keys.contains(inst){
+                    accum += 1
+                }
+            }
+            return accum
+        }
+    }
 }
 

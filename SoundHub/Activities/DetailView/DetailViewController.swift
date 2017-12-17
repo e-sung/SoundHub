@@ -39,7 +39,7 @@ class DetailViewController: UIViewController{
      mixedTrack들을 담고있는 셀. Playable 프로토콜을 상속받았다.
      따라서 **mixedTrackContainer.play()** 같은 것들이 가능하다.
     */
-    private var mixedTrackContainer:MixedTracksContainerCell?
+    private var mixedTrackContainer:CommentContainerCell?
     private var allAudioPlayers:[Playable?]{
         return [ masterAudioPlayer, mixedTrackContainer ]
     }
@@ -151,7 +151,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        print(indexPath.section)
         if indexPath.section == 0 && indexPath.item == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "detailHeaderCell", for: indexPath) as! DetailHeaderCell
             cell.postInfo = self.post
@@ -167,31 +167,46 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             let cell = tableView.dequeueReusableCell(withIdentifier: "MixedCommentHeaderCell", for: indexPath) as! ModeToggleCell
             cell.delegate = self
             return cell
-        }
-        else if Section(rawValue: indexPath.section) == .MixedTracks {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MixedTracksContainer", for: indexPath) as! MixedTracksContainerCell
-            cell.allComments = post.comment_tracks
+        }else if Section(rawValue: indexPath.section) == .MixedTrackToggler {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTracksHeaderCell", for: indexPath) as! ModeToggleCell
             cell.delegate = self
-            if DataCenter.main.userNickName == post.author {
-                cell.commentTV.allowsMultipleSelection = true
-            }
+            return cell
+        }else if Section(rawValue: indexPath.section) == .MixedTracks {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MixedTracksContainer", for: indexPath) as! CommentContainerCell
+            cell.allComments = post.mixed_tracks
+            cell.delegate = self
             mixedTrackContainer = cell
             return cell
-        }else {
+        }else if Section(rawValue: indexPath.section) == .CommentTrackToggler{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTracksHeaderCell", for: indexPath) as! ModeToggleCell
+            cell.delegate = self
+            return cell
+        }else if Section(rawValue: indexPath.section) == .CommentTracks {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTracksContainer", for: indexPath) as! CommentContainerCell
+            cell.allComments = post.comment_tracks
+            if DataCenter.main.userNickName == post.author{
+                cell.commentTV.allowsMultipleSelection = true
+            }
+            return cell
+        }
+        else if Section(rawValue: indexPath.section) == .RecordCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: "recorderCell", for: indexPath) as! RecorderCell
             cell.delegate = self
             recorderCell = cell
             return cell
+        }else{
+           return UITableViewCell()
         }
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if Section(rawValue:indexPath.section) == .MainHeader { return 200 }
         else if Section(rawValue:indexPath.section) == .MixedTrackToggler { return 60 }
+        else if Section(rawValue:indexPath.section) == .CommentTrackToggler { return 60 }
         else if Section(rawValue:indexPath.section) == .MixedTracks {
-            if let numberOfComments = post.num_comments{
-                return CGFloat(numberOfComments * 100)
-            }else { return 0 }
+            return CGFloat(post.numOfMixedTracks * 100)
+        }else if Section(rawValue:indexPath.section) == .CommentTracks{
+            return CGFloat(post.numOfCommentTracks * 100)
         }
         return 100
     }
@@ -237,11 +252,8 @@ extension DetailViewController{
             get{
                 switch self {
                 case .MainHeader: return 2
-                case .MixedTrackToggler: return 1
-                case .MixedTracks: return 1
-                case .RecordCell: return 1
                 default:
-                    return 0
+                    return 1
                 }
             }
         }

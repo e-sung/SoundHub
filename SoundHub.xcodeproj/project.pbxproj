@@ -49,7 +49,7 @@
 		FF9A84E01FC961AF00AC4780 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9A84DF1FC961AF00AC4780 /* MainTabBarController.swift */; };
 		FF9A84E31FC962C300AC4780 /* GeneralRanking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF9A84E21FC962C300AC4780 /* GeneralRanking.storyboard */; };
 		FF9A84EC1FC9AE6500AC4780 /* PopularMusicianCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9A84EB1FC9AE6500AC4780 /* PopularMusicianCell.swift */; };
-		FF9D18541FDA6012008D5FD1 /* MixedTracksContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9D18531FDA6012008D5FD1 /* MixedTracksContainerCell.swift */; };
+		FF9D18541FDA6012008D5FD1 /* CommentContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9D18531FDA6012008D5FD1 /* CommentContainerCell.swift */; };
 		FF9D18561FDA79E8008D5FD1 /* Generics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9D18551FDA79E8008D5FD1 /* Generics.swift */; };
 		FF9D18581FDBBF11008D5FD1 /* LoadingIndicatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9D18571FDBBF11008D5FD1 /* LoadingIndicatorViewController.swift */; };
 		FFA5A39F1FCCFD97001EA36F /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA5A39E1FCCFD97001EA36F /* NetworkController.swift */; };
@@ -139,7 +139,7 @@
 		FF9A84DF1FC961AF00AC4780 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		FF9A84E21FC962C300AC4780 /* GeneralRanking.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GeneralRanking.storyboard; sourceTree = "<group>"; };
 		FF9A84EB1FC9AE6500AC4780 /* PopularMusicianCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMusicianCell.swift; sourceTree = "<group>"; };
-		FF9D18531FDA6012008D5FD1 /* MixedTracksContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixedTracksContainerCell.swift; sourceTree = "<group>"; };
+		FF9D18531FDA6012008D5FD1 /* CommentContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentContainerCell.swift; sourceTree = "<group>"; };
 		FF9D18551FDA79E8008D5FD1 /* Generics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generics.swift; sourceTree = "<group>"; };
 		FF9D18571FDBBF11008D5FD1 /* LoadingIndicatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorViewController.swift; sourceTree = "<group>"; };
 		FFA5A39E1FCCFD97001EA36F /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
@@ -356,7 +356,7 @@
 				FFC32AE51FCF9F0C00651A31 /* AudioCommentCell.swift */,
 				FF02805D1FD805F500C0013A /* ModeToggleCell.swift */,
 				FFC32AE71FCFBFDB00651A31 /* MasterWaveFormViewCell.swift */,
-				FF9D18531FDA6012008D5FD1 /* MixedTracksContainerCell.swift */,
+				FF9D18531FDA6012008D5FD1 /* CommentContainerCell.swift */,
 				FF64BA0D1FDD36F4000A846B /* RecorderCell.swift */,
 			);
 			path = CustomCell;
@@ -765,7 +765,7 @@
 				FFD500AC1FDE509F008464A8 /* PlayBarController.swift in Sources */,
 				FF0280621FD8ECD300C0013A /* UIView.swift in Sources */,
 				FF000D991FD11F7F00678999 /* DataCenter.swift in Sources */,
-				FF9D18541FDA6012008D5FD1 /* MixedTracksContainerCell.swift in Sources */,
+				FF9D18541FDA6012008D5FD1 /* CommentContainerCell.swift in Sources */,
 				FF3B20B31FCAA2700019F87A /* InspectableView.swift in Sources */,
 				FF0280561FD776CF00C0013A /* UserDefaultKey.swift in Sources */,
 				FFC32AED1FCFD96500651A31 /* LoginResponse.swift in Sources */,
