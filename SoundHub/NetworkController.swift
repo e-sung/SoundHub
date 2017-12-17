@@ -63,13 +63,10 @@ class NetworkController{
         }
     }
     
-    func patchImage(with profileImage:UIImage?, completion:@escaping(_ result:Bool)->Void){
-        guard let userId = UserDefaults.standard.string(forKey: id) else {
-            completion(false)
-            return
-        }
+    func patchImage(with profileImage:UIImage?){
+        guard let userId = UserDefaults.standard.string(forKey: id) else { return }
         let imagePatchURL = URL(string: "/user/\(userId)/profile-img/", relativeTo: baseURL)!
-        guard let imageToSend = profileImage else { completion(false); return }
+        guard let imageToSend = profileImage else { return }
         let profileImageData = UIImagePNGRepresentation(imageToSend)
         guard let imageData = profileImageData else { print("invalid image"); return }
         Alamofire.upload(
@@ -81,15 +78,28 @@ class NetworkController{
                 switch encodingResult {
                 case .success(let upload, _, _):
                     upload.responseJSON { response in
+                        self.removeUserProfileImageCache()
                         debugPrint(response)
-                        completion(true)
                     }
                 case .failure(let encodingError):
                     print(encodingError)
-                    completion(false)
                 }
-        }
+            }
         )
+    }
+    
+    func removeUserProfileImageCache(){
+//        guard let userId = UserDefaults.standard.string(forKey: id) else { return }
+//        let userProfileURL = URL(string: "user_\(userId)/profile_img/profile_img_200.png", relativeTo: baseMediaURL)!
+//        let userProfileRequest = URLRequest(url: userProfileURL)
+        let imageDownloader = UIImageView.af_sharedImageDownloader
+        let buttonDownloader = UIButton.af_sharedImageDownloader
+        imageDownloader.imageCache?.removeAllImages()
+        buttonDownloader.imageCache?.removeAllImages()
+        imageDownloader.sessionManager.session.configuration.urlCache?.removeAllCachedResponses()
+//        imageDownloader.imageCache?.removeImage(for: userProfileRequest, withIdentifier: nil)
+//        buttonDownloader.imageCache?.removeImage(for: userProfileRequest, withIdentifier: nil)
+//        imageDownloader.sessionManager.session.configuration.urlCache?.removeCachedResponse(for: userProfileRequest)
     }
     
     func fetchUser(id:Int, completion:@escaping(User)->Void){

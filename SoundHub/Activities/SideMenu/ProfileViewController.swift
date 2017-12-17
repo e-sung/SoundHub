@@ -62,10 +62,7 @@ class ProfileViewController: UIViewController{
         /// - ToDo
         /// 프로필 이미지, 헤더이미지 저장 필요
         UserDefaults.standard.set(headerCell!.nickName, forKey: nickname)
-        NetworkController.main.patchImage(with: changedProfileImage) { (success) in
-            print("==============")
-            print(success)
-        }
+        NetworkController.main.patchImage(with: changedProfileImage)
 //
         
         /// 변경내용을 서버에 반영
