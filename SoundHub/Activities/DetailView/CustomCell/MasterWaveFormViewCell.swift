@@ -17,24 +17,30 @@ class MasterWaveFormViewCell: UITableViewCell, NCSoundHistogramDelegate {
     }
     
     func didFinishRendering() {
-        activityIndicator.stopAnimating()
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+        }
     }
 
     @IBOutlet weak private var activityIndicator: NVActivityIndicatorView!
     private var plot:NCSoundHistogram?
     var masterAudioURL:URL?{
         didSet(oldVal){
-            plot = NCSoundHistogram(frame: contentView.frame)
-            plot!.delegate = self
-            plot!.waveColor = .orange
-            plot!.progressColor = .green
-            plot!.drawSpaces = true
-            plot!.barLineWidth = 2.5
-            contentView.addSubview(plot!)
+            DispatchQueue.main.async {
+                self.plot = NCSoundHistogram(frame: self.contentView.frame)
+                self.plot!.delegate = self
+                self.plot!.waveColor = .orange
+                self.plot!.progressColor = .green
+                self.plot!.drawSpaces = true
+                self.plot!.barLineWidth = 2.5
+                self.contentView.addSubview(self.plot!)
+            }
         }
     }
     func renderWave(){
-        plot?.soundURL = masterAudioURL
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.plot?.soundURL = self.masterAudioURL
+        }
     }
 
     override func awakeFromNib() {

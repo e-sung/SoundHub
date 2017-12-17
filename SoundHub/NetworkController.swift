@@ -257,6 +257,17 @@ class NetworkController{
         }).resume()
     }
     
+    func merge(comments:[Int], on post:Int, completion:@escaping ()->Void){
+        let url = URL(string: "\(post)/mix/", relativeTo: postURL)!
+        var tracksToMix = ""
+        for comment in comments{ tracksToMix += "\(comment) ," }
+        let parameter:Parameters = ["mix_tracks": tracksToMix]
+        let headers: HTTPHeaders = ["Authorization": authToken]
+        Alamofire.request(url, method: .patch, parameters: parameter, encoding: JSONEncoding.default, headers:headers).response { (response) in
+                completion()
+            }
+    }
+    
     func sendLikeRequest(on postId:Int, completion:@escaping (_ num_liked:Int)->Void){
         let url = URL(string: "\(postId)/like/", relativeTo: postURL)!
         var request = generatePostRequest(with: url, and: nil)
