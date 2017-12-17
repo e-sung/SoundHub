@@ -12,15 +12,10 @@ class ModeToggleCell: UITableViewCell {
 
     @IBOutlet weak var modeStateLB: UILabel!
     @IBAction func switchToggleHandler(_ sender: UISwitch) {
-        delegate?.didModeToggled(to: sender.isOn)
-        if sender.isOn{
-            modeStateLB.text = "트랙별로 듣기"
-        }else{
-            modeStateLB.text = "마스터 트랙 듣기"
-        }
+        delegate?.didModeToggled(to: sender.isOn, by: sender.tag)
     }
     var delegate:ModeToggleCellDelegate?
 }
 protocol ModeToggleCellDelegate{
-    func didModeToggled(to mode:Bool)
+    func didModeToggled(to mode:Bool, by toggler:Int)
 }

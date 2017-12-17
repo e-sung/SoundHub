@@ -41,7 +41,9 @@ struct Post:Codable{
             for i in 0..<Instrument.cases.count{
                 let inst = Instrument.cases[i]
                 if mixed_tracks.keys.contains(inst){
-                    accum += 1
+                    for _ in 0..<mixed_tracks[inst]!.count{
+                        accum += 1
+                    }
                 }
             }
             return accum
@@ -54,7 +56,9 @@ struct Post:Codable{
             for i in 0..<Instrument.cases.count{
                 let inst = Instrument.cases[i]
                 if comment_tracks.keys.contains(inst){
-                    accum += 1
+                    for _ in 0..<comment_tracks[inst]!.count{
+                        accum += 1
+                    }
                 }
             }
             return accum

@@ -40,17 +40,15 @@ class DetailViewController: UIViewController{
      따라서 **mixedTrackContainer.play()** 같은 것들이 가능하다.
     */
     private var mixedTrackContainer:CommentContainerCell?
+    /**
+     commentTrack들을 담고있는 셀. Playable 프로토콜을 상속받았다.
+     따라서 **commentTrackContainer.play()** 같은 것들이 가능하다.
+     */
+    private var commentTrackContainer:CommentContainerCell?
     private var allAudioPlayers:[Playable?]{
-        return [ masterAudioPlayer, mixedTrackContainer ]
+        return [ masterAudioPlayer, mixedTrackContainer]
     }
-    /// 마스터, 혹은 mixedTrackContainer 등이 번갈아가면서 mainAudioPlayer가 된다.
-    /// 이전의 mainAUdioPlayer는 뮤트된다.
-    private var mainAudioPlayer:Playable?{
-        didSet(oldVal){
-            oldVal?.setMute(to: true)
-            mainAudioPlayer?.setMute(to: false)
-        }
-    }
+    
     /// 원저작자에게만 보이는, "머지"하기 위해 multiselection을 통해 고른 셀들에 담겨있는 Comment 정보
     private var selectedComments:[Comment]?
 
@@ -67,7 +65,6 @@ class DetailViewController: UIViewController{
             masterAudioPlayer = AVPlayer(url: materRemoteURL)
             PlayBarController.main.view.isHidden = false
         }
-        mainAudioPlayer = masterAudioPlayer
     }
     override func viewWillAppear(_ animated: Bool) {
         PlayBarController.main.currentPostView = self
@@ -82,16 +79,15 @@ class DetailViewController: UIViewController{
 
 // MARK: 모드가 변경되었을 때 처리
 extension DetailViewController:ModeToggleCellDelegate{
-    func didModeToggled(to mode: Bool) {
-        if mode == true {
-            mainAudioPlayer = mixedTrackContainer
-            masterAudioPlayer?.setMute(to: true)
+    func didModeToggled(to mode: Bool, by toggler: Int) {
+        if toggler == 0 {
+            mixedTrackContainer?.setMute(to: !mode)
+            mixedTrackContainer?.setInteractionability(to: mode)
         }
-        else {
-            mainAudioPlayer = masterAudioPlayer
-            mixedTrackContainer?.setMute(to: true)
+        if toggler == 1 {
+            commentTrackContainer?.setMute(to: !mode)
+            commentTrackContainer?.setInteractionability(to: mode)
         }
-        mixedTrackContainer?.setInteractionability(to: mode)
     }
 }
 
@@ -107,7 +103,11 @@ extension DetailViewController:Playable{
     
     func play(){
         currentPhase = .Playing
-        for player in allAudioPlayers { player?.play() }
+        for player in allAudioPlayers {
+            
+            player?.play()
+            
+        }
     }
     
     func pause(){
@@ -184,9 +184,11 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         }else if Section(rawValue: indexPath.section) == .CommentTracks {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTracksContainer", for: indexPath) as! CommentContainerCell
             cell.allComments = post.comment_tracks
+            cell.delegate = self
             if DataCenter.main.userNickName == post.author{
                 cell.commentTV.allowsMultipleSelection = true
             }
+            commentTrackContainer = cell
             return cell
         }
         else if Section(rawValue: indexPath.section) == .RecordCell {
