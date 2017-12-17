@@ -15,8 +15,7 @@ class PopularMusicianCell: UICollectionViewCell {
         didSet(oldVal){
             guard let info = userInfo else { return }
             artistNameLabel.text = info.nickname
-            guard let imageURL = info.profileImageURL else { return }
-            artistImage.replaceImage(from: imageURL)
+            artistImage.replaceImage(from: info.profileImageURL)
         }
     }
 }

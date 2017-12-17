@@ -25,12 +25,15 @@ extension UIView{
 }
 
 extension UIButton{
-    func replaceBackGroundImage(from url:URL){
+    func replaceBackGroundImage(from url:URL?){
+        guard let url = url else { return }
         NetworkController.main.fetchImage(from: url) { (image) in
+            
             DispatchQueue.main.async { self.setBackgroundImage(image, for: .normal) }
         }
     }
-    func replaceImage(from url:URL){
+    func replaceImage(from url:URL?){
+        guard let url = url else { return }
         NetworkController.main.fetchImage(from: url) { (image) in
             DispatchQueue.main.async { self.setImage(image, for: .normal) }
         }
@@ -38,7 +41,8 @@ extension UIButton{
 }
 
 extension UIImageView{
-    func replaceImage(from url:URL){
+    func replaceImage(from url:URL?){
+        guard let url = url else { return }
         NetworkController.main.fetchImage(from: url) { (image) in
             DispatchQueue.main.async { self.image = image }
         }

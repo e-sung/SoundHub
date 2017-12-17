@@ -53,6 +53,7 @@ class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate, UITex
 
     func refresh(with userInfo:User?){
         guard let userInfo = userInfo else { return }
+        profileImageButton.replaceImage(from: userInfo.profileImageURL)
         nickName = userInfo.nickname
         numFollowingLB.text = "\(userInfo.num_followings ?? 0)"
         numFollowerLB.text = "\(userInfo.num_followers ?? 0)"
@@ -62,7 +63,6 @@ class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate, UITex
         if userInfo.id == uid {
             settingButton.isHidden = false
         }
-        
     }
 }
 
