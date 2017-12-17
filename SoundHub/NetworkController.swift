@@ -49,7 +49,7 @@ class NetworkController{
         generalHomeURL = URL(string: "home/", relativeTo: baseURL)!
     }
     
-    func patchUser(nickname:String, profileImage:UIImage?, headerImage:UIImage?, completion:@escaping(_ hasSuccess:Bool)->Void){
+    func patchUser(nickname:String, completion:@escaping(_ hasSuccess:Bool)->Void){
         guard let userId = UserDefaults.standard.string(forKey: id) else {
             completion(false)
             return
@@ -63,7 +63,7 @@ class NetworkController{
         }
     }
     
-    func patchImage(with profileImage:UIImage?){
+    func patchProfileImage(with profileImage:UIImage?){
         guard let userId = UserDefaults.standard.string(forKey: id) else { return }
         let imagePatchURL = URL(string: "/user/\(userId)/profile-img/", relativeTo: baseURL)!
         guard let imageToSend = profileImage else { return }
@@ -85,6 +85,31 @@ class NetworkController{
                     print(encodingError)
                 }
             }
+        )
+    }
+    
+    func patchHeaderImage(with headerImage:UIImage?){
+        guard let userId = UserDefaults.standard.string(forKey: id) else { return }
+        let imagePatchURL = URL(string: "/user/\(userId)/profile-img/", relativeTo: baseURL)!
+        guard let imageToSend = headerImage else { return }
+        let headerImageData = UIImagePNGRepresentation(imageToSend)
+        guard let imageData = headerImageData else { print("invalid image"); return }
+        Alamofire.upload(
+            multipartFormData: { multipartFormData in
+                multipartFormData.append(imageData, withName: "profile_bg",fileName: "header_\(Date()).png", mimeType: "image/png")
+        },
+            to: imagePatchURL, method: .patch, headers: multipartFormDataHeader,
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    upload.responseJSON { response in
+                        self.removeUserProfileImageCache()
+                        debugPrint(response)
+                    }
+                case .failure(let encodingError):
+                    print(encodingError)
+                }
+        }
         )
     }
     

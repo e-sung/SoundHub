@@ -62,8 +62,9 @@ class ProfileViewController: UIViewController{
         /// - ToDo
         /// 프로필 이미지, 헤더이미지 저장 필요
         UserDefaults.standard.set(headerCell!.nickName, forKey: nickname)
-        NetworkController.main.patchImage(with: changedProfileImage)
-//
+        NetworkController.main.patchProfileImage(with: changedProfileImage)
+        NetworkController.main.patchHeaderImage(with: changedHeaderImage)
+        
         
         /// 변경내용을 서버에 반영
 //        NetworkController.main.patchUser(nickname: headerCell!.nickName, profileImage: nil, headerImage: nil, completion: { requestSucceded in
@@ -130,7 +131,12 @@ extension ProfileViewController: UIImagePickerControllerDelegate,UINavigationCon
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             buttonToChange?.setImage(pickedImage, for: .normal)
             buttonToChange?.imageView?.contentMode = .scaleAspectFill
-            changedProfileImage = pickedImage
+            if buttonToChange?.tag == 0 {
+                changedProfileImage = pickedImage
+            }else{
+                changedHeaderImage = pickedImage
+            }
+            
         }
         dismiss(animated: true, completion: nil)
     }

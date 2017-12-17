@@ -39,8 +39,13 @@ struct User:Codable{
     var profileImageURL:URL?{
         get{
             guard let profileImgAddr = profile_img else { return nil }
-            let url = URL(string: "\(profileImgAddr)", relativeTo: NetworkController.main.baseMediaURL)!
-            return url
+            return URL(string: "\(profileImgAddr)", relativeTo: NetworkController.main.baseMediaURL)!
+        }
+    }
+    var headerImageURL:URL?{
+        get{
+            guard let headerImgAddr = profile_bg else { return nil }
+            return URL(string: "\(headerImgAddr)", relativeTo: NetworkController.main.baseMediaURL)!
         }
     }
 }
