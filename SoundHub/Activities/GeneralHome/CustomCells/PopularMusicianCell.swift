@@ -18,6 +18,9 @@ class PopularMusicianCell: UICollectionViewCell {
             guard let info = userInfo else { return }
             artistNameLabel.text = info.nickname
             guard let profileImageURL = info.profileImageURL else { return }
+            let imageDownloader = UIImageView.af_sharedImageDownloader
+            imageDownloader.imageCache?.removeAllImages()
+            imageDownloader.sessionManager.session.configuration.urlCache?.removeAllCachedResponses()
             artistImage.af_setImage(withURL: profileImageURL, placeholderImage: #imageLiteral(resourceName: "default-profile"), filter: nil, progress: nil, progressQueue: DispatchQueue.main, imageTransition: .crossDissolve(1), runImageTransitionIfCached: false) { (img) in
             }
         }
