@@ -283,12 +283,15 @@
                                                         <action selector="changeProfileButtnHandler:" destination="Qam-ff-f9z" eventType="touchUpInside" id="zeR-c5-k8U"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e4K-aU-IoP">
+                                                <button opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e4K-aU-IoP">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="e4K-aU-IoP" secondAttribute="height" multiplier="16:9" id="4TF-TO-RZD"/>
                                                     </constraints>
-                                                    <state key="normal" image="guitar_main"/>
+                                                    <state key="normal">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
                                                     <connections>
                                                         <action selector="headerImageChangeHandler:" destination="wBt-Lf-jqh" eventType="touchUpInside" id="xhY-0n-85l"/>
                                                     </connections>
@@ -769,7 +772,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="guitar_main" width="960" height="562"/>
         <image name="home page" width="100" height="100"/>
         <image name="ic_settings" width="24" height="24"/>
         <image name="iu_profile" width="128" height="128"/>

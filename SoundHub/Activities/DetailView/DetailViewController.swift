@@ -39,18 +39,16 @@ class DetailViewController: UIViewController{
      mixedTrack들을 담고있는 셀. Playable 프로토콜을 상속받았다.
      따라서 **mixedTrackContainer.play()** 같은 것들이 가능하다.
     */
-    private var mixedTrackContainer:MixedTracksContainerCell?
+    private var mixedTrackContainer:CommentContainerCell?
+    /**
+     commentTrack들을 담고있는 셀. Playable 프로토콜을 상속받았다.
+     따라서 **commentTrackContainer.play()** 같은 것들이 가능하다.
+     */
+    private var commentTrackContainer:CommentContainerCell?
     private var allAudioPlayers:[Playable?]{
-        return [ masterAudioPlayer, mixedTrackContainer ]
+        return [ masterAudioPlayer, mixedTrackContainer, commentTrackContainer]
     }
-    /// 마스터, 혹은 mixedTrackContainer 등이 번갈아가면서 mainAudioPlayer가 된다.
-    /// 이전의 mainAUdioPlayer는 뮤트된다.
-    private var mainAudioPlayer:Playable?{
-        didSet(oldVal){
-            oldVal?.setMute(to: true)
-            mainAudioPlayer?.setMute(to: false)
-        }
-    }
+    
     /// 원저작자에게만 보이는, "머지"하기 위해 multiselection을 통해 고른 셀들에 담겨있는 Comment 정보
     private var selectedComments:[Comment]?
 
@@ -67,7 +65,6 @@ class DetailViewController: UIViewController{
             masterAudioPlayer = AVPlayer(url: materRemoteURL)
             PlayBarController.main.view.isHidden = false
         }
-        mainAudioPlayer = masterAudioPlayer
     }
     override func viewWillAppear(_ animated: Bool) {
         PlayBarController.main.currentPostView = self
@@ -82,16 +79,15 @@ class DetailViewController: UIViewController{
 
 // MARK: 모드가 변경되었을 때 처리
 extension DetailViewController:ModeToggleCellDelegate{
-    func didModeToggled(to mode: Bool) {
-        if mode == true {
-            mainAudioPlayer = mixedTrackContainer
-            masterAudioPlayer?.setMute(to: true)
+    func didModeToggled(to mode: Bool, by toggler: Int) {
+        if toggler == 0 {
+            mixedTrackContainer?.setMute(to: !mode)
+            mixedTrackContainer?.setInteractionability(to: mode)
         }
-        else {
-            mainAudioPlayer = masterAudioPlayer
-            mixedTrackContainer?.setMute(to: true)
+        if toggler == 1 {
+            commentTrackContainer?.setMute(to: !mode)
+            commentTrackContainer?.setInteractionability(to: mode)
         }
-        mixedTrackContainer?.setInteractionability(to: mode)
     }
 }
 
@@ -119,6 +115,7 @@ extension DetailViewController:Playable{
         for player in allAudioPlayers { player?.seek(to: point) }
         reflect(progress: point)
     }
+    
     func setVolume(to value: Float) {
         for player in allAudioPlayers { player?.setVolume(to: value) }
     }
@@ -138,7 +135,15 @@ extension DetailViewController:MixedTracksContainerCellDelegate{
             animated: true)
     }
     @objc private func merge(){
-        alert(msg: "Merge!")
+        guard let selectedComments = selectedComments else { return }
+        var comments:[Int] = []
+        for comment in selectedComments{ comments.append(comment.id) }
+        NetworkController.main.merge(comments: comments, on: post.id, completion: {
+            NetworkController.main.fetchPost(id: self.post.id, completion: { (post) in
+                self.post = post
+                DispatchQueue.main.async { self.mainTV.reloadData() }
+            })
+        })
     }
 }
 
@@ -151,14 +156,14 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        print(indexPath.section)
         if indexPath.section == 0 && indexPath.item == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "detailHeaderCell", for: indexPath) as! DetailHeaderCell
             cell.postInfo = self.post
             return cell
         }else if indexPath.section == 0 && indexPath.item == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "masterWaveCell", for: indexPath)
-            masterWaveCell = cell.becomeMasterWaveCell(with: post.authorTrackRemoteURL, completion: { (localURL) in
+            masterWaveCell = cell.becomeMasterWaveCell(with: post.masterTrackRemoteURL, completion: { (localURL) in
                 self.masterAudioPlayer = AVPlayer(url: localURL)
             })
             return masterWaveCell!
@@ -167,31 +172,48 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             let cell = tableView.dequeueReusableCell(withIdentifier: "MixedCommentHeaderCell", for: indexPath) as! ModeToggleCell
             cell.delegate = self
             return cell
-        }
-        else if Section(rawValue: indexPath.section) == .MixedTracks {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MixedTracksContainer", for: indexPath) as! MixedTracksContainerCell
-            cell.allComments = post.comment_tracks
+        }else if Section(rawValue: indexPath.section) == .MixedTrackToggler {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTracksHeaderCell", for: indexPath) as! ModeToggleCell
             cell.delegate = self
-            if DataCenter.main.userNickName == post.author {
-                cell.commentTV.allowsMultipleSelection = true
-            }
+            return cell
+        }else if Section(rawValue: indexPath.section) == .MixedTracks {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MixedTracksContainer", for: indexPath) as! CommentContainerCell
+            cell.allComments = post.mixed_tracks
+            cell.delegate = self
             mixedTrackContainer = cell
             return cell
-        }else {
+        }else if Section(rawValue: indexPath.section) == .CommentTrackToggler{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTracksHeaderCell", for: indexPath) as! ModeToggleCell
+            cell.delegate = self
+            return cell
+        }else if Section(rawValue: indexPath.section) == .CommentTracks {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTracksContainer", for: indexPath) as! CommentContainerCell
+            cell.allComments = post.comment_tracks
+            cell.delegate = self
+            if DataCenter.main.userNickName == post.author{
+                cell.commentTV.allowsMultipleSelection = true
+            }
+            commentTrackContainer = cell
+            return cell
+        }
+        else if Section(rawValue: indexPath.section) == .RecordCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: "recorderCell", for: indexPath) as! RecorderCell
             cell.delegate = self
             recorderCell = cell
             return cell
+        }else{
+           return UITableViewCell()
         }
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if Section(rawValue:indexPath.section) == .MainHeader { return 200 }
         else if Section(rawValue:indexPath.section) == .MixedTrackToggler { return 60 }
+        else if Section(rawValue:indexPath.section) == .CommentTrackToggler { return 60 }
         else if Section(rawValue:indexPath.section) == .MixedTracks {
-            if let numberOfComments = post.num_comments{
-                return CGFloat(numberOfComments * 100)
-            }else { return 0 }
+            return CGFloat(post.numOfMixedTracks * 100)
+        }else if Section(rawValue:indexPath.section) == .CommentTracks{
+            return CGFloat(post.numOfCommentTracks * 100)
         }
         return 100
     }
@@ -237,11 +259,8 @@ extension DetailViewController{
             get{
                 switch self {
                 case .MainHeader: return 2
-                case .MixedTrackToggler: return 1
-                case .MixedTracks: return 1
-                case .RecordCell: return 1
                 default:
-                    return 0
+                    return 1
                 }
             }
         }

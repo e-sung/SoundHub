@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import AlamofireImage
 import UIKit
 
 class NetworkController{
@@ -18,6 +19,7 @@ class NetworkController{
     private let signUpURL:URL
     private let loginURL:URL
     private let postURL:URL
+    internal let baseStorageURL:URL
     internal let baseMediaURL:URL
     internal let generalHomeURL:URL
     
@@ -31,19 +33,20 @@ class NetworkController{
     private var multipartFormDataHeader:HTTPHeaders{
         get{
             return [
-                 "Authorization": "Token \(authToken)",
+                 "Authorization": "\(authToken)",
                 "Content-type": "multipart/form-data"
             ]
         }
     }
 
     init(){
-        baseURL = URL(string: "https://soundhub.che1.co.kr")!
-        baseMediaURL = URL(string: "https://s3.ap-northeast-2.amazonaws.com/che1-soundhub/media/")!
-        signUpURL = URL(string: "/user/signup/", relativeTo: baseURL)!
-        loginURL = URL(string: "/user/login/", relativeTo: baseURL)!
-        postURL = URL(string: "/post/", relativeTo: baseURL)!
-        generalHomeURL = URL(string: "/home/", relativeTo: baseURL)!
+        baseURL = URL(string: "https://soundhub.che1.co.kr/")!
+        baseStorageURL = URL(string: "https://s3.ap-northeast-2.amazonaws.com/che1-soundhub/")!
+        baseMediaURL = URL(string: "media/", relativeTo: baseStorageURL)!
+        signUpURL = URL(string: "user/signup/", relativeTo: baseURL)!
+        loginURL = URL(string: "user/login/", relativeTo: baseURL)!
+        postURL = URL(string: "post/", relativeTo: baseURL)!
+        generalHomeURL = URL(string: "home/", relativeTo: baseURL)!
     }
     
     func patchUser(nickname:String, completion:@escaping(_ hasSuccess:Bool)->Void){
@@ -51,13 +54,77 @@ class NetworkController{
             completion(false)
             return
         }
-        let url = URL(string: "/user/\(userId)/", relativeTo: baseURL)!
+        let nickNamePatchURL = URL(string: "/user/\(userId)/", relativeTo: baseURL)!
         let headers: HTTPHeaders = ["Authorization": authToken]
         let parameters: Parameters = ["nickname":nickname]
-        Alamofire.request(url, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers:headers).response { (response) in
+        Alamofire.request(nickNamePatchURL, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers:headers).response { (response) in
             if response.response?.statusCode == 200 { completion(true) }
             else{ completion(false) }
         }
+    }
+    
+    func patchProfileImage(with profileImage:UIImage?){
+        guard let userId = UserDefaults.standard.string(forKey: id) else { return }
+        let imagePatchURL = URL(string: "/user/\(userId)/profile-img/", relativeTo: baseURL)!
+        guard let imageToSend = profileImage else { return }
+        let profileImageData = UIImagePNGRepresentation(imageToSend)
+        guard let imageData = profileImageData else { print("invalid image"); return }
+        Alamofire.upload(
+            multipartFormData: { multipartFormData in
+                multipartFormData.append(imageData, withName: "profile_img",fileName: "profile_\(Date()).png", mimeType: "image/png")
+        },
+            to: imagePatchURL, method: .patch, headers: multipartFormDataHeader,
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    upload.responseJSON { response in
+                        self.removeUserProfileImageCache()
+                        debugPrint(response)
+                    }
+                case .failure(let encodingError):
+                    print(encodingError)
+                }
+            }
+        )
+    }
+    
+    func patchHeaderImage(with headerImage:UIImage?){
+        guard let userId = UserDefaults.standard.string(forKey: id) else { return }
+        let imagePatchURL = URL(string: "/user/\(userId)/profile-img/", relativeTo: baseURL)!
+        guard let imageToSend = headerImage else { return }
+        let headerImageData = UIImagePNGRepresentation(imageToSend)
+        guard let imageData = headerImageData else { print("invalid image"); return }
+        Alamofire.upload(
+            multipartFormData: { multipartFormData in
+                multipartFormData.append(imageData, withName: "profile_bg",fileName: "header_\(Date()).png", mimeType: "image/png")
+        },
+            to: imagePatchURL, method: .patch, headers: multipartFormDataHeader,
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    upload.responseJSON { response in
+                        self.removeUserProfileImageCache()
+                        debugPrint(response)
+                    }
+                case .failure(let encodingError):
+                    print(encodingError)
+                }
+        }
+        )
+    }
+    
+    func removeUserProfileImageCache(){
+//        guard let userId = UserDefaults.standard.string(forKey: id) else { return }
+//        let userProfileURL = URL(string: "user_\(userId)/profile_img/profile_img_200.png", relativeTo: baseMediaURL)!
+//        let userProfileRequest = URLRequest(url: userProfileURL)
+        let imageDownloader = UIImageView.af_sharedImageDownloader
+        let buttonDownloader = UIButton.af_sharedImageDownloader
+        imageDownloader.imageCache?.removeAllImages()
+        buttonDownloader.imageCache?.removeAllImages()
+        imageDownloader.sessionManager.session.configuration.urlCache?.removeAllCachedResponses()
+//        imageDownloader.imageCache?.removeImage(for: userProfileRequest, withIdentifier: nil)
+//        buttonDownloader.imageCache?.removeImage(for: userProfileRequest, withIdentifier: nil)
+//        imageDownloader.sessionManager.session.configuration.urlCache?.removeCachedResponse(for: userProfileRequest)
     }
     
     func fetchUser(id:Int, completion:@escaping(User)->Void){
@@ -159,6 +226,7 @@ class NetworkController{
         },
             to: postURL, headers:multipartFormDataHeader,
             encodingCompletion: { encodingResult in
+                
                 switch encodingResult {
                 case .success(let upload, _, _):
                     upload.responseJSON { response in
@@ -169,7 +237,7 @@ class NetworkController{
                     print(encodingError)
                     completion()
                 }
-            }
+        }
         )
     }
     
@@ -187,6 +255,17 @@ class NetworkController{
                 done(destinationUrl)
             } catch let error as NSError { print(error) }
         }).resume()
+    }
+    
+    func merge(comments:[Int], on post:Int, completion:@escaping ()->Void){
+        let url = URL(string: "\(post)/mix/", relativeTo: postURL)!
+        var tracksToMix = ""
+        for comment in comments{ tracksToMix += "\(comment) ," }
+        let parameter:Parameters = ["mix_tracks": tracksToMix]
+        let headers: HTTPHeaders = ["Authorization": authToken]
+        Alamofire.request(url, method: .patch, parameters: parameter, encoding: JSONEncoding.default, headers:headers).response { (response) in
+                completion()
+            }
     }
     
     func sendLikeRequest(on postId:Int, completion:@escaping (_ num_liked:Int)->Void){
