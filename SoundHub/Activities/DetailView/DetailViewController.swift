@@ -35,6 +35,7 @@ class DetailViewController: UIViewController{
             })
         }
     }
+    private var authorTrackPlayer:AVPlayer?
     /**
      mixedTrack들을 담고있는 셀. Playable 프로토콜을 상속받았다.
      따라서 **mixedTrackContainer.play()** 같은 것들이 가능하다.
@@ -61,9 +62,15 @@ class DetailViewController: UIViewController{
         super.viewDidLoad()
         mainTV.delegate = self
         mainTV.dataSource = self
-        if let materRemoteURL = post.authorTrackRemoteURL{
+        if let materRemoteURL = post.masterTrackRemoteURL{
             masterAudioPlayer = AVPlayer(url: materRemoteURL)
             PlayBarController.main.view.isHidden = false
+        }
+        if let authorTrackURL = post.authorTrackRemoteURL{
+            authorTrackPlayer = AVPlayer(url:authorTrackURL)
+            NetworkController.main.downloadAudio(from: authorTrackURL, done: { (localURL) in
+                self.authorTrackPlayer = AVPlayer(url:localURL)
+            })
         }
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -87,6 +94,14 @@ extension DetailViewController:ModeToggleCellDelegate{
         if toggler == 1 {
             commentTrackContainer?.setMute(to: !mode)
             commentTrackContainer?.setInteractionability(to: mode)
+        }
+        guard let mixed = mixedTrackContainer, let comment = commentTrackContainer else { return }
+        if mixed.isMuted && comment.isMuted{
+            authorTrackPlayer?.isMuted = true
+            masterAudioPlayer?.isMuted = false
+        }else{
+            authorTrackPlayer?.isMuted = false
+            masterAudioPlayer?.isMuted = true
         }
     }
 }

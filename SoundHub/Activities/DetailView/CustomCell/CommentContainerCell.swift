@@ -64,6 +64,12 @@ extension CommentContainerCell: Playable{
     func setMute(to value: Bool) {
         for cell in allCells { if cell.isActive { cell.setMute(to: value) } }
     }
+    var isMuted:Bool{
+        get{
+            guard let aPlayer = aPlayer else { return true}
+            return aPlayer.isMuted
+        }
+    }
 }
 
 extension CommentContainerCell:UITableViewDataSource, UITableViewDelegate{
