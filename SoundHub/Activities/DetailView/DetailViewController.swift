@@ -46,7 +46,7 @@ class DetailViewController: UIViewController{
      */
     private var commentTrackContainer:CommentContainerCell?
     private var allAudioPlayers:[Playable?]{
-        return [ masterAudioPlayer, mixedTrackContainer]
+        return [ masterAudioPlayer, mixedTrackContainer, commentTrackContainer]
     }
     
     /// 원저작자에게만 보이는, "머지"하기 위해 multiselection을 통해 고른 셀들에 담겨있는 Comment 정보
@@ -103,11 +103,7 @@ extension DetailViewController:Playable{
     
     func play(){
         currentPhase = .Playing
-        for player in allAudioPlayers {
-            
-            player?.play()
-            
-        }
+        for player in allAudioPlayers { player?.play() }
     }
     
     func pause(){
@@ -119,6 +115,7 @@ extension DetailViewController:Playable{
         for player in allAudioPlayers { player?.seek(to: point) }
         reflect(progress: point)
     }
+    
     func setVolume(to value: Float) {
         for player in allAudioPlayers { player?.setVolume(to: value) }
     }
