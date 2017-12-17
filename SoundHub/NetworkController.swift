@@ -20,7 +20,6 @@ class NetworkController{
     private let postURL:URL
     internal let baseStorageURL:URL
     internal let baseAudioURL:URL
-    internal let baseImageURL:URL
     internal let generalHomeURL:URL
     
     private var authToken:String{
@@ -43,7 +42,6 @@ class NetworkController{
         baseURL = URL(string: "https://soundhub.che1.co.kr")!
         baseStorageURL = URL(string: "https://s3.ap-northeast-2.amazonaws.com/che1-soundhub")!
         baseAudioURL = URL(string: "/media/", relativeTo: baseStorageURL)!
-        baseImageURL = URL(string: "/static/", relativeTo: baseStorageURL)!
         signUpURL = URL(string: "/user/signup/", relativeTo: baseURL)!
         loginURL = URL(string: "/user/login/", relativeTo: baseURL)!
         postURL = URL(string: "/post/", relativeTo: baseURL)!
@@ -100,6 +98,21 @@ class NetworkController{
             }catch let err as NSError{
                 print(err)
             }
+        }.resume()
+    }
+    func fetchImage(from url:URL, completion:@escaping(UIImage)->Void){
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            let defaultImage = UIImage(imageLiteralResourceName: "default-profile")
+            guard let data = data else {
+                completion(defaultImage)
+                return
+            }
+            let fetchedImage = UIImage(data: data)
+            guard let profileImage = fetchedImage else {
+                completion(defaultImage)
+                return
+            }
+            completion(profileImage)
         }.resume()
     }
 

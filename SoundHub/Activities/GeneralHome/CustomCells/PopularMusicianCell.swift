@@ -9,6 +9,14 @@
 import UIKit
 
 class PopularMusicianCell: UICollectionViewCell {
-    @IBOutlet weak var artistImage: UIImageView!
-    @IBOutlet weak var artistNameLabel: UILabel!
+    @IBOutlet weak private var artistImage: UIImageView!
+    @IBOutlet weak private var artistNameLabel: UILabel!
+    var userInfo:User?{
+        didSet(oldVal){
+            guard let info = userInfo else { return }
+            artistNameLabel.text = info.nickname
+            guard let imageURL = info.profileImageURL else { return }
+            artistImage.replaceImage(from: imageURL)
+        }
+    }
 }
