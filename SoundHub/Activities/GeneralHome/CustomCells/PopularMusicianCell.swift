@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 class PopularMusicianCell: UICollectionViewCell {
     @IBOutlet weak private var artistImage: UIImageView!
@@ -15,7 +17,8 @@ class PopularMusicianCell: UICollectionViewCell {
         didSet(oldVal){
             guard let info = userInfo else { return }
             artistNameLabel.text = info.nickname
-            artistImage.replaceImage(from: info.profileImageURL)
+            guard let profileImageURL = info.profileImageURL else { return }
+            artistImage.af_setImage(withURL: profileImageURL)
         }
     }
 }

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate, UITextFieldDelegate{
 
@@ -53,7 +55,9 @@ class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate, UITex
 
     func refresh(with userInfo:User?){
         guard let userInfo = userInfo else { return }
-        profileImageButton.replaceImage(from: userInfo.profileImageURL)
+        if let profileImageURL = userInfo.profileImageURL {
+            profileImageButton.af_setImage(for: .normal, url: profileImageURL )
+        }
         nickName = userInfo.nickname
         numFollowingLB.text = "\(userInfo.num_followings ?? 0)"
         numFollowerLB.text = "\(userInfo.num_followers ?? 0)"

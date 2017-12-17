@@ -23,28 +23,3 @@ extension UIView{
         self.frame = CGRect(x: self.frame.minX, y: self.frame.minY, width: self.frame.width, height: height)
     }
 }
-
-extension UIButton{
-    func replaceBackGroundImage(from url:URL?){
-        guard let url = url else { return }
-        NetworkController.main.fetchImage(from: url) { (image) in
-            
-            DispatchQueue.main.async { self.setBackgroundImage(image, for: .normal) }
-        }
-    }
-    func replaceImage(from url:URL?){
-        guard let url = url else { return }
-        NetworkController.main.fetchImage(from: url) { (image) in
-            DispatchQueue.main.async { self.setImage(image, for: .normal) }
-        }
-    }
-}
-
-extension UIImageView{
-    func replaceImage(from url:URL?){
-        guard let url = url else { return }
-        NetworkController.main.fetchImage(from: url) { (image) in
-            DispatchQueue.main.async { self.image = image }
-        }
-    }
-}
