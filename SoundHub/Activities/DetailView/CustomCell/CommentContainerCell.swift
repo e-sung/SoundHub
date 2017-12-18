@@ -11,7 +11,13 @@ import AVFoundation
 
 class CommentContainerCell: UITableViewCell{
     
-    var allComments:[String:[Comment]]?{ didSet(oldval){ commentTV.reloadData() }}
+    var allComments:[String:[Comment]]?{
+        didSet(oldval){
+            if oldval == nil {
+                commentTV.reloadData()
+            }
+        }
+    }
     var aPlayer:AVPlayer?
     var delegate:MixedTracksContainerCellDelegate?
     private var allCells:[AudioCommentCell]{
