@@ -12,6 +12,7 @@ class FlowContainerCell: UITableViewCell{
     
     @IBOutlet weak var flowContainer: UICollectionView!
     var delegate:FlowContainerCellDelegate?
+    var parent:ProfileViewController!
     var userInfo:User?
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -50,6 +51,7 @@ extension FlowContainerCell:UICollectionViewDelegate, UICollectionViewDataSource
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! PostContainerCell
         cell.posts = posts
         cell.delegate = self
+        cell.parent = self
         return cell
     }
     

@@ -102,7 +102,7 @@ class ProfileViewController: UIViewController{
             - postedPostTableView
             - likedPostTableView
     */
-    @IBOutlet weak private var mainTV: UITableView!
+    @IBOutlet weak var mainTV: UITableView!
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -164,6 +164,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: "flowContainerCell", for: indexPath) as! FlowContainerCell
             cell.userInfo = userInfo
             cell.delegate = self
+            cell.parent = self
             flowCell = cell
             return cell
         }
@@ -175,7 +176,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
         }else{
             guard let userInfo = userInfo else { return 0 }
             guard let posts = userInfo.post_set else { return 0 }
-            return PostListCell.defaultHeight*CGFloat(3)
+            return self.view.frame.height
         }
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -187,8 +188,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath == IndexPath(item: 0, section: 0){
-//            mainTV.isScrollEnabled = false
-//            flowCell?.isScrollEnabled = true
+            mainTV.isScrollEnabled = false
+            flowCell?.isScrollEnabled = true
         }
     }
     
@@ -202,9 +203,14 @@ extension ProfileViewController:FlowContainerCellDelegate{
     func didScrolledTo(page: Int) {
         mainTV.headerView(forSection: page)?.textLabel?.text = tableViewHeaderTitles[page]
         mainTV.scrollToRow(at: IndexPath(item: 0, section: 0)  , at: .top, animated: false)
-        guard let userInfo = userInfo else { return }
-        guard let posts = userInfo.post_set else { return }
-        guard let liked = userInfo.liked_posts else { return }
+    }
+    
+    var isScrollEnabled:Bool{
+        get{
+            return mainTV.isScrollEnabled
+        }set(newVal){
+            mainTV.isScrollEnabled = newVal
+        }
     }
 }
 
