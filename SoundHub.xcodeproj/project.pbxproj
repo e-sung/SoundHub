@@ -209,7 +209,6 @@
 		967939E6E3BED4CA83F262A3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				FFA8A8461FE74EF6008443B4 /* NCSoundHistogram */,
 				CCF9A4D681C26D32FDD78A4F /* Pods-SoundHub.debug.xcconfig */,
 				AE770600F915C8F1A790C952 /* Pods-SoundHub.release.xcconfig */,
 				D05EBE5F32CFEB3E6E483A33 /* Pods-SoundHubTests.debug.xcconfig */,
@@ -427,6 +426,7 @@
 		FFCF82BD1FC95D66003B7861 /* SoundHub */ = {
 			isa = PBXGroup;
 			children = (
+				FFA8A8461FE74EF6008443B4 /* NCSoundHistogram */,
 				FF5C01411FDA188D00F37CC9 /* GoogleService-Info.plist */,
 				FFCF82BE1FC95D66003B7861 /* AppDelegate.swift */,
 				FFA5A39E1FCCFD97001EA36F /* NetworkController.swift */,
@@ -743,7 +743,6 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/LPSnackbar/LPSnackbar.framework",
-				"${BUILT_PRODUCTS_DIR}/NCSoundHistogram/NCSoundHistogram.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
 			);
@@ -758,7 +757,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LPSnackbar.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NCSoundHistogram.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
 			);
@@ -948,6 +946,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -997,6 +996,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
