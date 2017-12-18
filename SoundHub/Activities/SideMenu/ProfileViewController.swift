@@ -35,6 +35,7 @@ class ProfileViewController: UIViewController{
          4. 팔로잉/팔로워
     */
     private var headerCell:ProfileHeaderCell?
+    private var flowCell:FlowContainerCell?
     /**
      사진첩, 혹은 카메라에 접근할 수 있는 객체
      - ToDo: 사진첩/카메라에 접근권한을 갖지 못했을 때에 대한 처리를 해야 함
@@ -163,6 +164,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: "flowContainerCell", for: indexPath) as! FlowContainerCell
             cell.userInfo = userInfo
             cell.delegate = self
+            flowCell = cell
             return cell
         }
     }
@@ -191,6 +193,17 @@ extension ProfileViewController:FlowContainerCellDelegate{
     
     func didScrolledTo(page: Int) {
         mainTV.headerView(forSection: page)?.textLabel?.text = tableViewHeaderTitles[page]
+        mainTV.scrollToRow(at: IndexPath(item: 0, section: 0)  , at: .top, animated: false)
+        guard let userInfo = userInfo else { return }
+        guard let posts = userInfo.post_set else { return }
+        guard let liked = userInfo.liked_posts else { return }
+        PostListCell.defaultHeight*CGFloat(posts.count)
+        if page == 0 {
+            flowCell?.setHeight(with: PostListCell.defaultHeight*CGFloat(posts.count))
+        }else{
+            flowCell?.setHeight(with: PostListCell.defaultHeight*CGFloat(liked.count))
+        }
+        
     }
 }
 
