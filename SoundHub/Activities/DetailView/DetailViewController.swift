@@ -47,7 +47,7 @@ class DetailViewController: UIViewController{
      */
     private var commentTrackContainer:CommentContainerCell?
     private var allAudioPlayers:[Playable?]{
-        return [ masterAudioPlayer, mixedTrackContainer, commentTrackContainer]
+        return [ masterAudioPlayer, authorTrackPlayer, mixedTrackContainer, commentTrackContainer]
     }
     
     /// 원저작자에게만 보이는, "머지"하기 위해 multiselection을 통해 고른 셀들에 담겨있는 Comment 정보
@@ -96,7 +96,7 @@ extension DetailViewController:ModeToggleCellDelegate{
             commentTrackContainer?.setInteractionability(to: mode)
         }
         guard let mixed = mixedTrackContainer, let comment = commentTrackContainer else { return }
-        if mixed.isMuted && comment.isMuted{
+        if mixed.isMuted == true && comment.isMuted == true{
             authorTrackPlayer?.isMuted = true
             masterAudioPlayer?.isMuted = false
         }else{
@@ -113,21 +113,43 @@ extension DetailViewController:Playable{
     
     func stop(){
         currentPhase = .Ready
-        for player in allAudioPlayers { player?.stop() }
+        for player in allAudioPlayers {
+            player?.stop()
+
+//            DispatchQueue.global(qos: .userInteractive).async {
+//                player?.stop()
+//            }
+        }
     }
     
     func play(){
         currentPhase = .Playing
-        for player in allAudioPlayers { player?.play() }
+        for player in allAudioPlayers {
+            player?.play()
+
+//            DispatchQueue.global(qos: .userInteractive).async {
+//                player?.play()
+//            }
+        }
     }
     
     func pause(){
         currentPhase = .Ready
-        for player in allAudioPlayers { player?.pause() }
+        for player in allAudioPlayers {
+            player?.pause()
+//            DispatchQueue.global(qos: .userInteractive).async {
+//                player?.pause()
+//            }
+        }
     }
     
     func seek(to point:Float){
-        for player in allAudioPlayers { player?.seek(to: point) }
+        for player in allAudioPlayers {
+            player?.seek(to: point)
+//            DispatchQueue.global(qos: .userInteractive).async {
+//                player?.seek(to: point)
+//            }
+        }
         reflect(progress: point)
     }
     
@@ -136,7 +158,12 @@ extension DetailViewController:Playable{
     }
     
     func setMute(to value: Bool) {
-        for player in allAudioPlayers { player?.setMute(to: value) }
+        for player in allAudioPlayers {
+            player?.setMute(to: value)
+//            DispatchQueue.global(qos: .userInteractive).async {
+//                player?.setMute(to: value)
+//            }
+        }
     }
 }
 
