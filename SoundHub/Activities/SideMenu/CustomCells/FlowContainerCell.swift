@@ -12,13 +12,7 @@ class FlowContainerCell: UITableViewCell{
     
     @IBOutlet weak var flowContainer: UICollectionView!
     var delegate:FlowContainerCellDelegate?
-    var userInfo:User?{
-        didSet(oldVal){
-            guard let userInfo = userInfo else { return }
-            flowContainer.setHeight(with: CGFloat(userInfo.largerPosts.count)*PostListCell.defaultHeight)
-        }
-    }
-
+    var userInfo:User?
     override func awakeFromNib() {
         super.awakeFromNib()
         flowContainer.delegate = self
@@ -27,6 +21,18 @@ class FlowContainerCell: UITableViewCell{
 }
 
 extension FlowContainerCell:UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    
+    var isScrollEnabled:Bool{
+        get{
+            return (flowContainer.allCells[0] as! PostContainerCell).isScrollEnabled
+        }set(newVal){
+            for cell in flowContainer.allCells{
+                let cell = cell as! PostContainerCell
+                cell.postTB.isScrollEnabled = newVal
+            }
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 2
     }
@@ -48,7 +54,7 @@ extension FlowContainerCell:UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.frame.width, height: CGFloat(userInfo!.largerPosts.count)*PostListCell.defaultHeight)
+        return self.frame.size
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

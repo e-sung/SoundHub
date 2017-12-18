@@ -42,6 +42,16 @@ extension PostContainerCell: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+extension PostContainerCell{
+    var isScrollEnabled:Bool{
+        get{
+            return postTB.isScrollEnabled
+        }set(newVal){
+            return postTB.isScrollEnabled = newVal
+        }
+    }
+}
+
 protocol PostContainerCellDelegate {
     func shouldGoTo(post:Post) -> Void
 }

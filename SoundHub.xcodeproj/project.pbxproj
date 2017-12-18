@@ -65,6 +65,7 @@
 		FFC32AE61FCF9F0C00651A31 /* AudioCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC32AE51FCF9F0C00651A31 /* AudioCommentCell.swift */; };
 		FFC32AE81FCFBFDB00651A31 /* MasterWaveFormViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC32AE71FCFBFDB00651A31 /* MasterWaveFormViewCell.swift */; };
 		FFC32AED1FCFD96500651A31 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC32AEC1FCFD96500651A31 /* LoginResponse.swift */; };
+		FFCDE7DA1FE7FB5C0008CCB9 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCDE7D91FE7FB5C0008CCB9 /* UITableView.swift */; };
 		FFCF82BF1FC95D66003B7861 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCF82BE1FC95D66003B7861 /* AppDelegate.swift */; };
 		FFCF82C41FC95D66003B7861 /* Entry.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFCF82C21FC95D66003B7861 /* Entry.storyboard */; };
 		FFCF82C61FC95D66003B7861 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFCF82C51FC95D66003B7861 /* Assets.xcassets */; };
@@ -161,6 +162,7 @@
 		FFC32AE51FCF9F0C00651A31 /* AudioCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCommentCell.swift; sourceTree = "<group>"; };
 		FFC32AE71FCFBFDB00651A31 /* MasterWaveFormViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterWaveFormViewCell.swift; sourceTree = "<group>"; };
 		FFC32AEC1FCFD96500651A31 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
+		FFCDE7D91FE7FB5C0008CCB9 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		FFCF82BB1FC95D66003B7861 /* SoundHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoundHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFCF82BE1FC95D66003B7861 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFCF82C31FC95D66003B7861 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Entry.storyboard; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 				FF02805F1FD8E64900C0013A /* UITableViewCell.swift */,
 				FF9D18551FDA79E8008D5FD1 /* Generics.swift */,
 				FF7D6E0B1FDD630700754A7C /* AVPlayer.swift */,
+				FFCDE7D91FE7FB5C0008CCB9 /* UITableView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -836,6 +839,7 @@
 				FF688F781FCE58B700F0A41F /* SideMenuViewController.swift in Sources */,
 				FF3B20BF1FCC2B0E0019F87A /* LoginViewController.swift in Sources */,
 				FF9D18561FDA79E8008D5FD1 /* Generics.swift in Sources */,
+				FFCDE7DA1FE7FB5C0008CCB9 /* UITableView.swift in Sources */,
 				FFB85FD21FCE79A3000E47C8 /* User.swift in Sources */,
 				FF0280661FD901AB00C0013A /* Genre.swift in Sources */,
 			);

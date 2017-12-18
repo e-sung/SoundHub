@@ -175,7 +175,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
         }else{
             guard let userInfo = userInfo else { return 0 }
             guard let posts = userInfo.post_set else { return 0 }
-            return PostListCell.defaultHeight*CGFloat(posts.count)
+            return PostListCell.defaultHeight*CGFloat(3)
         }
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -184,6 +184,14 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return section == 0 ? 0 : 60
     }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath == IndexPath(item: 0, section: 0){
+//            mainTV.isScrollEnabled = false
+//            flowCell?.isScrollEnabled = true
+        }
+    }
+    
 }
 
 extension ProfileViewController:FlowContainerCellDelegate{
@@ -197,13 +205,6 @@ extension ProfileViewController:FlowContainerCellDelegate{
         guard let userInfo = userInfo else { return }
         guard let posts = userInfo.post_set else { return }
         guard let liked = userInfo.liked_posts else { return }
-        PostListCell.defaultHeight*CGFloat(posts.count)
-        if page == 0 {
-            flowCell?.setHeight(with: PostListCell.defaultHeight*CGFloat(posts.count))
-        }else{
-            flowCell?.setHeight(with: PostListCell.defaultHeight*CGFloat(liked.count))
-        }
-        
     }
 }
 
