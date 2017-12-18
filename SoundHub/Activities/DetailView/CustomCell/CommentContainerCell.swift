@@ -11,7 +11,13 @@ import AVFoundation
 
 class CommentContainerCell: UITableViewCell{
     
-    var allComments:[String:[Comment]]?{ didSet(oldval){ commentTV.reloadData() }}
+    var allComments:[String:[Comment]]?{
+        didSet(oldval){
+            if oldval == nil {
+                commentTV.reloadData()
+            }
+        }
+    }
     var aPlayer:AVPlayer?
     var delegate:MixedTracksContainerCellDelegate?
     private var allCells:[AudioCommentCell]{
@@ -63,6 +69,12 @@ extension CommentContainerCell: Playable{
     
     func setMute(to value: Bool) {
         for cell in allCells { if cell.isActive { cell.setMute(to: value) } }
+    }
+    var isMuted:Bool{
+        get{
+            guard let aPlayer = aPlayer else { return true}
+            return aPlayer.isMuted
+        }
     }
 }
 

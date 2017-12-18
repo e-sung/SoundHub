@@ -35,6 +35,7 @@ class DetailViewController: UIViewController{
             })
         }
     }
+    private var authorTrackPlayer:AVPlayer?
     /**
      mixedTrack들을 담고있는 셀. Playable 프로토콜을 상속받았다.
      따라서 **mixedTrackContainer.play()** 같은 것들이 가능하다.
@@ -46,7 +47,7 @@ class DetailViewController: UIViewController{
      */
     private var commentTrackContainer:CommentContainerCell?
     private var allAudioPlayers:[Playable?]{
-        return [ masterAudioPlayer, mixedTrackContainer, commentTrackContainer]
+        return [ masterAudioPlayer, authorTrackPlayer, mixedTrackContainer, commentTrackContainer]
     }
     
     /// 원저작자에게만 보이는, "머지"하기 위해 multiselection을 통해 고른 셀들에 담겨있는 Comment 정보
@@ -61,9 +62,15 @@ class DetailViewController: UIViewController{
         super.viewDidLoad()
         mainTV.delegate = self
         mainTV.dataSource = self
-        if let materRemoteURL = post.authorTrackRemoteURL{
+        if let materRemoteURL = post.masterTrackRemoteURL{
             masterAudioPlayer = AVPlayer(url: materRemoteURL)
             PlayBarController.main.view.isHidden = false
+        }
+        if let authorTrackURL = post.authorTrackRemoteURL{
+            authorTrackPlayer = AVPlayer(url:authorTrackURL)
+            NetworkController.main.downloadAudio(from: authorTrackURL, done: { (localURL) in
+                self.authorTrackPlayer = AVPlayer(url:localURL)
+            })
         }
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -88,6 +95,14 @@ extension DetailViewController:ModeToggleCellDelegate{
             commentTrackContainer?.setMute(to: !mode)
             commentTrackContainer?.setInteractionability(to: mode)
         }
+        guard let mixed = mixedTrackContainer, let comment = commentTrackContainer else { return }
+        if mixed.isMuted == true && comment.isMuted == true{
+            authorTrackPlayer?.isMuted = true
+            masterAudioPlayer?.isMuted = false
+        }else{
+            authorTrackPlayer?.isMuted = false
+            masterAudioPlayer?.isMuted = true
+        }
     }
 }
 
@@ -98,21 +113,43 @@ extension DetailViewController:Playable{
     
     func stop(){
         currentPhase = .Ready
-        for player in allAudioPlayers { player?.stop() }
+        for player in allAudioPlayers {
+            player?.stop()
+
+//            DispatchQueue.global(qos: .userInteractive).async {
+//                player?.stop()
+//            }
+        }
     }
     
     func play(){
         currentPhase = .Playing
-        for player in allAudioPlayers { player?.play() }
+        for player in allAudioPlayers {
+            player?.play()
+
+//            DispatchQueue.global(qos: .userInteractive).async {
+//                player?.play()
+//            }
+        }
     }
     
     func pause(){
         currentPhase = .Ready
-        for player in allAudioPlayers { player?.pause() }
+        for player in allAudioPlayers {
+            player?.pause()
+//            DispatchQueue.global(qos: .userInteractive).async {
+//                player?.pause()
+//            }
+        }
     }
     
     func seek(to point:Float){
-        for player in allAudioPlayers { player?.seek(to: point) }
+        for player in allAudioPlayers {
+            player?.seek(to: point)
+//            DispatchQueue.global(qos: .userInteractive).async {
+//                player?.seek(to: point)
+//            }
+        }
         reflect(progress: point)
     }
     
@@ -121,7 +158,12 @@ extension DetailViewController:Playable{
     }
     
     func setMute(to value: Bool) {
-        for player in allAudioPlayers { player?.setMute(to: value) }
+        for player in allAudioPlayers {
+            player?.setMute(to: value)
+//            DispatchQueue.global(qos: .userInteractive).async {
+//                player?.setMute(to: value)
+//            }
+        }
     }
 }
 
@@ -164,7 +206,9 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         }else if indexPath.section == 0 && indexPath.item == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "masterWaveCell", for: indexPath)
             masterWaveCell = cell.becomeMasterWaveCell(with: post.masterTrackRemoteURL, completion: { (localURL) in
-                self.masterAudioPlayer = AVPlayer(url: localURL)
+                if self.masterAudioPlayer == nil {
+                    self.masterAudioPlayer = AVPlayer(url: localURL)
+                }
             })
             return masterWaveCell!
         }
@@ -228,14 +272,14 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         if post.title == PlayBarController.main.currentPostView?.post.title {
             /// 그 포스트객체는 PlayBarController.main에 저장되어 있으니, 그걸 보여주면 됨.
             vc.navigationController?.show(PlayBarController.main.currentPostView!, sender: nil)
-        }
-        
-        /// 그게 아니라면, 프로필 페이지에 있는 Post객체는 제한된 정보만 가지고 있기 때문에,
-        /// 온전한 Post객체를 다시 서버에서 받아와야 함.
-        NetworkController.main.fetchPost(id: post.id) { (fetchedPost) in
-            let nextVC = UIStoryboard(name: "Detail", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-            nextVC.post = fetchedPost
-            DispatchQueue.main.async { vc.navigationController?.show(nextVC, sender: nil) }
+        }else{
+            /// 그게 아니라면, 프로필 페이지에 있는 Post객체는 제한된 정보만 가지고 있기 때문에,
+            /// 온전한 Post객체를 다시 서버에서 받아와야 함.
+            NetworkController.main.fetchPost(id: post.id) { (fetchedPost) in
+                let nextVC = UIStoryboard(name: "Detail", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+                nextVC.post = fetchedPost
+                DispatchQueue.main.async { vc.navigationController?.show(nextVC, sender: nil) }
+            }
         }
     }
 }
