@@ -268,17 +268,14 @@ class NetworkController{
     
     func sendLikeRequest(on postId:Int, completion:@escaping (_ num_liked:Int)->Void){
         let url = URL(string: "\(postId)/like/", relativeTo: postURL)!
-        var request = generatePostRequest(with: url, and: nil)
-        
-        request.addValue("Token \(UserDefaults.standard.string(forKey: token)!)", forHTTPHeaderField: "Authorization")
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            guard let data = data else { print("data is corrupted") ; return }
-            do{
-                let post = try JSONDecoder().decode([String:Post].self, from: data)
-                if let numLiked = post["post"]!.num_liked{ completion(numLiked) }
-                else{ completion(0) }
-            }catch let err as NSError { print(err) }
-        }.resume()
+        let headers: HTTPHeaders = ["Authorization": authToken]
+        Alamofire.request(url, method: .post, parameters: nil, headers: headers).responseJSON { (response) in
+            if let json = response.result.value {
+                let post = json as! NSDictionary
+                let numLiked = post["num_liked"] as! Int
+                completion(numLiked)
+            }
+        }
     }
     
 
