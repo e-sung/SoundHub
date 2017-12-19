@@ -49,12 +49,11 @@ class NetworkController{
         generalHomeURL = URL(string: "home/", relativeTo: baseURL)!
     }
     
-    func patchUser(nickname:String?, completion:@escaping(_ hasSuccess:Bool)->Void){
+    func patchUser(nickname:String, instrument:String, completion:@escaping(_ hasSuccess:Bool)->Void){
         guard let userId = UserDefaults.standard.string(forKey: id) else { completion(false); return}
-        guard let nickname = nickname else { completion(false); return}
         let nickNamePatchURL = URL(string: "/user/\(userId)/", relativeTo: baseURL)!
         let headers: HTTPHeaders = ["Authorization": authToken]
-        let parameters: Parameters = ["nickname":nickname]
+        let parameters: Parameters = ["nickname":nickname, "instrument":instrument]
         Alamofire.request(nickNamePatchURL, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers:headers).response { (response) in
             if response.response?.statusCode == 200 { completion(true) }
             else{ completion(false) }
