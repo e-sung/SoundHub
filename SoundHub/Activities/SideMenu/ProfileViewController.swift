@@ -62,8 +62,7 @@ class ProfileViewController: UIViewController{
         UserDefaults.standard.set(headerCell!.nickName, forKey: nickname)
         
         /// 변경내용을 서버에 반영
-        NetworkController.main.patchProfileImage(with: changedProfileImage)
-        NetworkController.main.patchHeaderImage(with: changedHeaderImage)
+        NetworkController.main.patchImages(images: [ changedProfileImage, changedHeaderImage ])
         guard let headerCell = headerCell else { return }
         NetworkController.main.patchUser(nickname: headerCell.nickName, instrument: headerCell.instrument) { (requestSucceded) in
             if requestSucceded == true {

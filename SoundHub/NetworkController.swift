@@ -49,81 +49,6 @@ class NetworkController{
         generalHomeURL = URL(string: "home/", relativeTo: baseURL)!
     }
     
-    func patchUser(nickname:String, instrument:String, completion:@escaping(_ hasSuccess:Bool)->Void){
-        guard let userId = UserDefaults.standard.string(forKey: id) else { completion(false); return}
-        let nickNamePatchURL = URL(string: "/user/\(userId)/", relativeTo: baseURL)!
-        let headers: HTTPHeaders = ["Authorization": authToken]
-        let parameters: Parameters = ["nickname":nickname, "instrument":instrument]
-        Alamofire.request(nickNamePatchURL, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers:headers).response { (response) in
-            if response.response?.statusCode == 200 { completion(true) }
-            else{ completion(false) }
-        }
-    }
-    
-    func patchProfileImage(with profileImage:UIImage?){
-        guard let userId = UserDefaults.standard.string(forKey: id) else { return }
-        let imagePatchURL = URL(string: "/user/\(userId)/profile-img/", relativeTo: baseURL)!
-        guard let imageToSend = profileImage else { return }
-        let profileImageData = UIImagePNGRepresentation(imageToSend)
-        guard let imageData = profileImageData else { print("invalid image"); return }
-        Alamofire.upload(
-            multipartFormData: { multipartFormData in
-                multipartFormData.append(imageData, withName: "profile_img",fileName: "profile_\(Date()).png", mimeType: "image/png")
-        },
-            to: imagePatchURL, method: .patch, headers: multipartFormDataHeader,
-            encodingCompletion: { encodingResult in
-                switch encodingResult {
-                case .success(let upload, _, _):
-                    upload.responseJSON { response in
-                        self.removeUserProfileImageCache()
-                        debugPrint(response)
-                    }
-                case .failure(let encodingError):
-                    print(encodingError)
-                }
-            }
-        )
-    }
-    
-    func patchHeaderImage(with headerImage:UIImage?){
-        guard let userId = UserDefaults.standard.string(forKey: id) else { return }
-        let imagePatchURL = URL(string: "/user/\(userId)/profile-img/", relativeTo: baseURL)!
-        guard let imageToSend = headerImage else { return }
-        let headerImageData = UIImagePNGRepresentation(imageToSend)
-        guard let imageData = headerImageData else { print("invalid image"); return }
-        Alamofire.upload(
-            multipartFormData: { multipartFormData in
-                multipartFormData.append(imageData, withName: "profile_bg",fileName: "header_\(Date()).png", mimeType: "image/png")
-        },
-            to: imagePatchURL, method: .patch, headers: multipartFormDataHeader,
-            encodingCompletion: { encodingResult in
-                switch encodingResult {
-                case .success(let upload, _, _):
-                    upload.responseJSON { response in
-                        self.removeUserProfileImageCache()
-                        debugPrint(response)
-                    }
-                case .failure(let encodingError):
-                    print(encodingError)
-                }
-        }
-        )
-    }
-    
-    func removeUserProfileImageCache(){
-//        guard let userId = UserDefaults.standard.string(forKey: id) else { return }
-//        let userProfileURL = URL(string: "user_\(userId)/profile_img/profile_img_200.png", relativeTo: baseMediaURL)!
-//        let userProfileRequest = URLRequest(url: userProfileURL)
-        let imageDownloader = UIImageView.af_sharedImageDownloader
-        let buttonDownloader = UIButton.af_sharedImageDownloader
-        imageDownloader.imageCache?.removeAllImages()
-        buttonDownloader.imageCache?.removeAllImages()
-        imageDownloader.sessionManager.session.configuration.urlCache?.removeAllCachedResponses()
-//        imageDownloader.imageCache?.removeImage(for: userProfileRequest, withIdentifier: nil)
-//        buttonDownloader.imageCache?.removeImage(for: userProfileRequest, withIdentifier: nil)
-//        imageDownloader.sessionManager.session.configuration.urlCache?.removeCachedResponse(for: userProfileRequest)
-    }
-    
     func fetchUser(id:Int, completion:@escaping(User)->Void){
         let url = URL(string: "/user/\(id)/", relativeTo: baseURL)!
         URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -286,5 +211,60 @@ class NetworkController{
             request.httpBody = body
         }
         return request
+    }
+}
+
+extension NetworkController{
+    
+    func patchUser(nickname:String, instrument:String, completion:@escaping(_ hasSuccess:Bool)->Void){
+        guard let userId = UserDefaults.standard.string(forKey: id) else { completion(false); return}
+        let nickNamePatchURL = URL(string: "/user/\(userId)/", relativeTo: baseURL)!
+        let headers: HTTPHeaders = ["Authorization": authToken]
+        let parameters: Parameters = ["nickname":nickname, "instrument":instrument]
+        Alamofire.request(nickNamePatchURL, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers:headers).response { (response) in
+            if response.response?.statusCode == 200 { completion(true) }
+            else{ completion(false) }
+        }
+    }
+    
+    func patchImages(images:[UIImage?]){
+        guard let userId = UserDefaults.standard.string(forKey: id) else { return }
+        let imagePatchURL = URL(string: "/user/\(userId)/profile-img/", relativeTo: baseURL)!
+        let profileImage = images[0]; let headerImage = images[1]
+        
+        Alamofire.upload(
+            multipartFormData: { multipartFormData in
+                if let profileImage = profileImage{
+                    if let imageData = UIImagePNGRepresentation(profileImage){
+                        multipartFormData.append(imageData, withName: "profile_img",fileName: "profile_\(Date()).png", mimeType: "image/png")
+                    }
+                }
+                if let headerImage = headerImage{
+                    if let imageData = UIImagePNGRepresentation(headerImage){
+                        multipartFormData.append(imageData, withName: "profile_bg",fileName: "header_\(Date()).png", mimeType: "image/png")
+                    }
+                }
+        },
+            to: imagePatchURL, method: .patch, headers: multipartFormDataHeader,
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    upload.responseJSON { response in
+                        self.removeUserProfileImageCache()
+                        debugPrint(response)
+                    }
+                case .failure(let encodingError):
+                    print(encodingError)
+                }
+        }
+        )
+    }
+    
+    func removeUserProfileImageCache(){
+        let imageDownloader = UIImageView.af_sharedImageDownloader
+        let buttonDownloader = UIButton.af_sharedImageDownloader
+        imageDownloader.imageCache?.removeAllImages()
+        buttonDownloader.imageCache?.removeAllImages()
+        imageDownloader.sessionManager.session.configuration.urlCache?.removeAllCachedResponses()
     }
 }
