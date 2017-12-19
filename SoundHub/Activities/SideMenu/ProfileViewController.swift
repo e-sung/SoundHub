@@ -52,7 +52,6 @@ class ProfileViewController: UIViewController{
     // MARK: Objc Functions
     /**
      유저가 수정한 유저정보를 UserDefault에 저장하고, 같은 정보를 서버에 보냄
-     - ToDo : 프로필 이미지, 헤더이미지도 변경해야 함
     */
     @objc private func doneButtonHandler(){
         /// 수정이 끝났다는 것을 보여주기 위하여, doneButton을 숨김
@@ -122,7 +121,8 @@ class ProfileViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         if PlayBarController.main.isHidden == false {
-            mainTV.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60).isActive = true
+            mainTV.bottomAnchor.constraint(equalTo: view.bottomAnchor,
+                                           constant: PlayBarController.main.view.frame.height).isActive = true
         }
     }
 }
@@ -188,22 +188,15 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
 }
-
+// MARK: FlowContainerCellDelegate
 extension ProfileViewController:FlowContainerCellDelegate{
     func shouldGoTo(post: Post) {
         DetailViewController.goToDetailPage(of: post, from: self)
     }
-    
-    func didScrolledTo(page: Int) {
-        mainTV.headerView(forSection: page)?.textLabel?.text = tableViewHeaderTitles[page]
-    }
-    
+
     var isScrollEnabled:Bool{
-        get{
-            return mainTV.isScrollEnabled
-        }set(newVal){
-            mainTV.isScrollEnabled = newVal
-        }
+        get{ return mainTV.isScrollEnabled
+        }set(newVal){ mainTV.isScrollEnabled = newVal }
     }
 }
 

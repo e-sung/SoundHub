@@ -12,22 +12,16 @@ import UIKit
 class DataCenter{
     static var main = DataCenter()
     static let documentsDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-    
-    var recentPosts:[Post] = []
-    
+        
     var homePages:[Categori:HomePage] = [
         .general:HomePage(pop_users: [], pop_posts: [], recent_posts: []),
         .genre:HomePage(pop_users: [], pop_posts: [], recent_posts: []),
         .instrument:HomePage(pop_users: [], pop_posts: [], recent_posts: [])
     ]
-    
-    var userProfileImage:UIImage?
-    var userHeaderImage:UIImage?
+
     var userId:Int{
         get{
-            if _userId == nil {
-                _userId = UserDefaults.standard.integer(forKey: id)
-            }
+            if _userId == nil { _userId = UserDefaults.standard.integer(forKey: id) }
             return _userId!
         }
     }
@@ -50,6 +44,7 @@ class DataCenter{
         imageDownloader.sessionManager.session.configuration.urlCache?.removeAllCachedResponses()
     }
 }
+
 struct HomePage:Codable{
     var pop_users:[User]
     var pop_posts:[Post]

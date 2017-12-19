@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// [Post 객체 API](https://nachwon.gitbooks.io/soundhub/content/post/post-detail.html) 참조
 struct Post:Codable{
     let id:Int?
     let title:String?
@@ -28,6 +29,7 @@ struct Post:Codable{
             return URL(string: authorTrack.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)!
         }
     }
+    /// 만약 nil 이면, authorTrackRemoteURL을 반환함
     var masterTrackRemoteURL:URL?{
         get{
             guard let masterTrack = self.master_track else { return authorTrackRemoteURL }

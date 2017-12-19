@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// [User 객체 API](https://nachwon.gitbooks.io/soundhub/content/user/user-retrieve.html) 참고
 struct User:Codable{
     let id:Int?
     let email:String?
@@ -24,18 +25,6 @@ struct User:Codable{
     let liked_posts:[Post]?
     let num_followings:Int?
     let num_followers:Int?
-    var largerPosts:[Post]{
-        get{
-            if let postedPosts = self.post_set{
-                if let likedPosts = self.liked_posts{
-                    if postedPosts.count > likedPosts.count { return postedPosts }
-                    else { return likedPosts }
-                }else{ return postedPosts }
-                
-            }else if let likedPosts = self.liked_posts{ return likedPosts }
-            else{ return [] }
-        }
-    }
     var profileImageURL:URL?{
         get{
             guard let profileImgAddr = profile_img else { return nil }

@@ -40,15 +40,12 @@ class LoginViewController: UIViewController, UITextViewDelegate,GIDSignInUIDeleg
     
     @IBAction func viewTouchHandler(_ sender: UITapGestureRecognizer) {
         if isKeyboardUp { self.view.endEditing(true) }
-//        else { self.dismiss(animated: true, completion: nil) }
     }
     
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         GIDSignIn.sharedInstance().uiDelegate = self
-        //GIDSignIn.sharedInstance().signInSilently()
-       
 
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: "ToggleAuthUINotification"), object: nil, queue: nil) { (noti) in
             self.alert(msg: "\(noti.userInfo)")
@@ -66,12 +63,14 @@ class LoginViewController: UIViewController, UITextViewDelegate,GIDSignInUIDeleg
 
 extension LoginViewController{
     private func save(loginResponse:LoginResponse, on userDefault:UserDefaults, completion:@escaping ()->Void){
-        guard let userInfo = loginResponse.user, let authToken = loginResponse.token else {
-            alert(msg: "통신이 제대로 이루어지지 않았습니다!"); return
-        }
-        guard let nickName = userInfo.nickname, let mainInstrument = userInfo.instrument, let userId = userInfo.id else {
-            alert(msg: "통신이 제대로 이루어지지 않았습니다!"); return
-        }
+        guard let userInfo = loginResponse.user,
+            let authToken = loginResponse.token
+        else { alert(msg: "통신이 제대로 이루어지지 않았습니다!"); return }
+        
+        guard let nickName = userInfo.nickname,
+            let mainInstrument = userInfo.instrument,
+            let userId = userInfo.id
+        else { alert(msg: "통신이 제대로 이루어지지 않았습니다!"); return }
         userDefault.set(authToken, forKey: token)
         userDefault.set(nickName, forKey: nickname)
         userDefault.set(mainInstrument, forKey: instrument)

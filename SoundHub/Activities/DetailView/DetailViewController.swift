@@ -113,6 +113,7 @@ extension DetailViewController:ModeToggleCellDelegate{
     }
 }
 
+// MARK: Playable 프로토콜 구현
 extension DetailViewController:Playable{
     func reflect(progress:Float){
         self.masterWaveCell?.reflect(progress: progress)
@@ -147,7 +148,7 @@ extension DetailViewController:Playable{
     }
 }
 
-
+// MARK: MixedTracksContainerCellDelegate
 extension DetailViewController:MixedTracksContainerCellDelegate{
     func didSelectionOccured(on comments: [Comment]) {
         if comments.count == 0 { navigationItem.setRightBarButton(nil, animated: true); return }
@@ -183,6 +184,7 @@ extension DetailViewController:MixedTracksContainerCellDelegate{
     }
 }
 
+// MARK:RecorderCellDelegate
 extension DetailViewController:RecorderCellDelegate{
     func uploadDidFinished(with post: Post?) {
         guard let post = post else { return }
@@ -212,7 +214,6 @@ extension DetailViewController:RecorderCellDelegate{
                 self.mainTV.reloadSections(ids, with: .automatic)
             })
         }, cancel: { (picker) in
-            
         }, origin: self.view)
     }
 }
@@ -260,8 +261,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             return cell
         }else if Section(rawValue: indexPath.section) == .CommentTracks {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTracksContainer", for: indexPath) as! CommentContainerCell
-            cell.allComments = post.comment_tracks
-            cell.delegate = self
+            cell.allComments = post.comment_tracks; cell.delegate = self
             if DataCenter.main.userNickName == post.author{
                 cell.commentTV.allowsMultipleSelection = true
             }

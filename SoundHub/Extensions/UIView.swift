@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 extension UIView{
+    /**
+     테이블뷰 등의 헤더에 쓰일 뷰를 생성하는 함수. width는 메인스크린과 같은 크기이며, height의 기본값은 100이다.
+    */
     static func generateHeaderView(with title:String, and height:Int = 100)->UIView{
         let header = UIView(frame: CGRect(x: 0, y: 0, width: Int(UIScreen.main.bounds.width), height: height))
         header.backgroundColor = .white

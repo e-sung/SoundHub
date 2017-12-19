@@ -10,9 +10,7 @@ import Foundation
 
 extension String{
     var url:URL{
-        get{
-            return URL(string: self.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)!
-        }
+        get{ return URL(string: self.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)! }
     }
     
     var isValidEmail:Bool {
@@ -24,8 +22,6 @@ extension String{
     }
     
     var isValidPassword:Bool{
-        get{
-            return self.count > 10
-        }
+        get{ return self.count > 10 }
     }
 }

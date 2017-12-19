@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// [Comment 객체 API](https://nachwon.gitbooks.io/soundhub/content/comment/comment-ac1d-ccb4-c870-d68c.html) 참고
 struct Comment:Codable{
     let id:Int?
     let author:String?
