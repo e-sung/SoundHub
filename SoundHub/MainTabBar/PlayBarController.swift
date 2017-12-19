@@ -26,6 +26,13 @@ class PlayBarController{
             }
         }
     }
+    var isHidden:Bool{
+        get{
+            return view.isHidden
+        }set(newVal){
+            view.isHidden = newVal
+        }
+    }
     var masterAudioPlayer:AVPlayer?
 }
 

@@ -15,6 +15,7 @@ class PostContainerCell: UICollectionViewCell{
     var lastOffset:CGFloat = 0
     var parent:FlowContainerCell!
     var headerTitle:String!
+    static var headerHeight:CGFloat = 50
     var isScrolling = false
     @IBOutlet weak var postTB: UITableView!
     
@@ -46,17 +47,18 @@ extension PostContainerCell: UITableViewDelegate, UITableViewDataSource, UIScrol
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let posts = posts else { return }
+        delegate?.shouldGoTo(post: posts[indexPath.item])
         if isScrolling == false {
-            delegate?.shouldGoTo(post: posts[indexPath.item])
+            
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return UIView.generateHeaderView(with: headerTitle, and: 50)
+        return UIView.generateHeaderView(with: headerTitle, and: Int(PostContainerCell.headerHeight))
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 60
+        return PostContainerCell.headerHeight
     }
         
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -69,7 +71,7 @@ extension PostContainerCell: UITableViewDelegate, UITableViewDataSource, UIScrol
         }
     }
     
-    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView) {
         isScrolling = false
     }
 

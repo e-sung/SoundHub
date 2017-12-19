@@ -123,6 +123,12 @@ class ProfileViewController: UIViewController{
         imagePicker.allowsEditing = false
         imagePicker.delegate = self
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if PlayBarController.main.isHidden == false {
+            mainTV.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60).isActive = true
+        }
+    }
 }
 
 // MARK: ProfileHeaderCell Delegate

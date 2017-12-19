@@ -54,6 +54,7 @@ extension FlowContainerCell:UICollectionViewDelegate, UICollectionViewDataSource
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! PostContainerCell
         cell.posts = posts
         cell.headerTitle = headerTitle
+//        cell.postTB.setHeight(with: self.frame.height - PlayBarController.main.view.frame.height)
         cell.delegate = self
         cell.parent = self
         return cell
