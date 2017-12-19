@@ -21,6 +21,7 @@
 		FF0280601FD8E64A00C0013A /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF02805F1FD8E64900C0013A /* UITableViewCell.swift */; };
 		FF0280621FD8ECD300C0013A /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0280611FD8ECD300C0013A /* UIView.swift */; };
 		FF0280661FD901AB00C0013A /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0280651FD901AB00C0013A /* Genre.swift */; };
+		FF0B73261FE94C270055DFD8 /* AudioUnitSelectingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0B73251FE94C270055DFD8 /* AudioUnitSelectingCell.swift */; };
 		FF1054321FD518BA00A46443 /* AudioRecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1054311FD518BA00A46443 /* AudioRecorderViewController.swift */; };
 		FF3995D81FE3878F004B1F86 /* FlowContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3995D71FE3878F004B1F86 /* FlowContainerCell.swift */; };
 		FF3995DA1FE38C4A004B1F86 /* PostedPostContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3995D91FE38C4A004B1F86 /* PostedPostContainerCell.swift */; };
@@ -57,7 +58,6 @@
 		FFA8A8501FE74EF7008443B4 /* UIView+Geometry.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA8A84A1FE74EF6008443B4 /* UIView+Geometry.m */; };
 		FFA8A8511FE74EF7008443B4 /* NCSoundHistogram.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA8A84B1FE74EF6008443B4 /* NCSoundHistogram.m */; };
 		FFA8A8521FE74EF7008443B4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FFA8A84E1FE74EF6008443B4 /* README.md */; };
-		FFA91E591FE90109000E5C68 /* SelectInstrmuentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA91E581FE90109000E5C68 /* SelectInstrmuentViewController.swift */; };
 		FFB85FCC1FCE652A000E47C8 /* ProfileHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB85FCB1FCE652A000E47C8 /* ProfileHeaderCell.swift */; };
 		FFB85FCE1FCE657F000E47C8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB85FCD1FCE657F000E47C8 /* ProfileViewController.swift */; };
 		FFB85FD01FCE78B3000E47C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB85FCF1FCE78B3000E47C8 /* Post.swift */; };
@@ -117,6 +117,7 @@
 		FF0280611FD8ECD300C0013A /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		FF0280651FD901AB00C0013A /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		FF038E411FE17B1400AED2B5 /* SoundHub-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoundHub-Bridging-Header.h"; sourceTree = "<group>"; };
+		FF0B73251FE94C270055DFD8 /* AudioUnitSelectingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioUnitSelectingCell.swift; sourceTree = "<group>"; };
 		FF1054311FD518BA00A46443 /* AudioRecorderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderViewController.swift; sourceTree = "<group>"; };
 		FF3995D71FE3878F004B1F86 /* FlowContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowContainerCell.swift; sourceTree = "<group>"; };
 		FF3995D91FE38C4A004B1F86 /* PostedPostContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostedPostContainerCell.swift; sourceTree = "<group>"; };
@@ -155,7 +156,6 @@
 		FFA8A84C1FE74EF6008443B4 /* UIView+Geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Geometry.h"; sourceTree = "<group>"; };
 		FFA8A84D1FE74EF6008443B4 /* NCSoundHistogram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCSoundHistogram.h; sourceTree = "<group>"; };
 		FFA8A84E1FE74EF6008443B4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		FFA91E581FE90109000E5C68 /* SelectInstrmuentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectInstrmuentViewController.swift; sourceTree = "<group>"; };
 		FFB85FCB1FCE652A000E47C8 /* ProfileHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCell.swift; sourceTree = "<group>"; };
 		FFB85FCD1FCE657F000E47C8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		FFB85FCF1FCE78B3000E47C8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -269,7 +269,6 @@
 			children = (
 				FFC32AE91FCFBFEA00651A31 /* CustomCell */,
 				FF3B20B71FCAC92D0019F87A /* Detail.storyboard */,
-				FFA91E581FE90109000E5C68 /* SelectInstrmuentViewController.swift */,
 				FF3B20B91FCACD4A0019F87A /* DetailViewController.swift */,
 			);
 			path = DetailView;
@@ -403,6 +402,7 @@
 				FFC32AE71FCFBFDB00651A31 /* MasterWaveFormViewCell.swift */,
 				FF9D18531FDA6012008D5FD1 /* CommentContainerCell.swift */,
 				FF64BA0D1FDD36F4000A846B /* RecorderCell.swift */,
+				FF0B73251FE94C270055DFD8 /* AudioUnitSelectingCell.swift */,
 			);
 			path = CustomCell;
 			sourceTree = "<group>";
@@ -844,9 +844,9 @@
 				FF688F781FCE58B700F0A41F /* SideMenuViewController.swift in Sources */,
 				FF3B20BF1FCC2B0E0019F87A /* LoginViewController.swift in Sources */,
 				FF9D18561FDA79E8008D5FD1 /* Generics.swift in Sources */,
+				FF0B73261FE94C270055DFD8 /* AudioUnitSelectingCell.swift in Sources */,
 				FFCDE7DA1FE7FB5C0008CCB9 /* UITableView.swift in Sources */,
 				FFB85FD21FCE79A3000E47C8 /* User.swift in Sources */,
-				FFA91E591FE90109000E5C68 /* SelectInstrmuentViewController.swift in Sources */,
 				FF0280661FD901AB00C0013A /* Genre.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

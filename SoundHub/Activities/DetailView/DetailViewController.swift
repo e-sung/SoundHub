@@ -264,8 +264,11 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             cell.delegate = self
             recorderCell = cell
             return cell
+        }else if Section(rawValue: indexPath.section ) == .AudioUnitSelecter {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"AudioUnitSelectingCell", for: indexPath) as! AudioUnitSelectingCell
+            return cell
         }else{
-           return UITableViewCell()
+            return UITableViewCell()
         }
     }
 
@@ -312,12 +315,13 @@ extension DetailViewController{
         case CommentTrackToggler = 3
         case CommentTracks = 4
         case RecordCell = 5
+        case AudioUnitSelecter = 6
         /**
          모든 Section의 경우의 수
          
-         MainHeader/ MasterWave / MixedHeader/ Mixed / CommentHeader / Comment
+         MainHeader/ MasterWave / MixedHeader/ Mixed / CommentHeader / Comment / Recorder / AU
         */
-        static var cases:Int{get{return 6}}
+        static var cases:Int{get{return 7}}
         var rows:Int{
             get{
                 switch self {
