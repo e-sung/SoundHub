@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 class SideMenuViewController: UIViewController {
     
@@ -41,5 +43,8 @@ class SideMenuViewController: UIViewController {
 
     override func viewDidLoad(){
         nickNameButton.setTitle(UserDefaults.standard.string(forKey: nickname) , for: .normal)
+        guard let userId = UserDefaults.standard.string(forKey: id) else { return }
+        let imageURL = URL(string: "user_\(userId)/profile_img/profile_img_200.png", relativeTo: NetworkController.main.baseMediaURL)!
+        profileImageButton.af_setBackgroundImage(for: .normal, url: imageURL)
     }
 }

@@ -136,7 +136,6 @@
                                             <constraint firstAttribute="width" constant="100" id="De5-ne-gMe"/>
                                             <constraint firstAttribute="height" constant="100" id="mmJ-Qu-bnp"/>
                                         </constraints>
-                                        <state key="normal" image="iu_profile"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="6"/>
