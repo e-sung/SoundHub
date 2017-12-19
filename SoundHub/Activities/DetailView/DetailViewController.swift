@@ -78,6 +78,9 @@ class DetailViewController: UIViewController{
     }
     override func viewDidAppear(_ animated: Bool) {
         masterWaveCell?.renderWave()
+        if post.author == UserDefaults.standard.string(forKey: nickname){
+            commentTrackContainer?.allowsMultiSelection = true
+        }
     }
     override func viewWillDisappear(_ animated: Bool) {
         recorderCell?.deinitialize()
@@ -183,7 +186,12 @@ extension DetailViewController:MixedTracksContainerCellDelegate{
         NetworkController.main.merge(comments: comments, on: post.id, completion: {
             NetworkController.main.fetchPost(id: self.post.id, completion: { (post) in
                 self.post = post
-                DispatchQueue.main.async { self.mainTV.reloadData() }
+                DispatchQueue.main.async {
+                    self.mixedTrackContainer?.isNewTrackBeingAdded = true
+                    self.mainTV.reloadData()
+                    self.mixedTrackContainer?.allowsMultiSelection = false
+                    self.navigationItem.setRightBarButton(nil, animated: true)
+                }
             })
         })
     }

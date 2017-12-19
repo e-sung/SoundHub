@@ -32,6 +32,13 @@ class CommentContainerCell: UITableViewCell{
         }
         return cells
     }
+    var allowsMultiSelection:Bool{
+        get{
+            return commentTV.allowsMultipleSelection
+        }set (newVal){
+            commentTV.allowsMultipleSelection = newVal
+        }
+    }
 
     @IBOutlet weak var commentTV: UITableView!
     
