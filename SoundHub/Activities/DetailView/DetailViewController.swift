@@ -9,6 +9,7 @@
 import UIKit
 import AudioKit
 import AVFoundation
+import ActionSheetPicker_3_0
 
 class DetailViewController: UIViewController{
     
@@ -210,16 +211,25 @@ extension DetailViewController:RecorderCellDelegate{
     func shouldShowAlert() {
         let alert = UIAlertController(title: "녹음 업로드", message: "녹음을 업로드 하시겠습니까?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .cancel , handler: { (action) in
-            self.performSegue(withIdentifier: "detailToIntrumentSelector", sender: nil)
+            self.showInstrumentPicker()
         }))
         alert.addAction(UIAlertAction(title: "취소", style: .destructive, handler: { (action) in
         }))
         present(alert, animated: true, completion: nil)
     }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let nextVC = segue.destination as? SelectInstrmuentViewController{
-            nextVC.postId = self.post.id
-        }
+    
+    func showInstrumentPicker(){
+        ActionSheetStringPicker.show(withTitle: "어떤 악기였나요?", rows: Instrument.cases, initialSelection: 0, doneBlock: { (picker, row, result) in
+                let selectedInstrument = Instrument.cases[row]
+            RecordConductor.main.confirmComment(on: self.post.id, of: selectedInstrument, completion: { (postResult) in
+                guard let postResult = postResult else { return }
+                self.post = postResult
+                self.commentTrackContainer?.isNewTrackBeingAdded = true
+                self.mainTV.reloadData()
+            })
+        }, cancel: { (picker) in
+            
+        }, origin: self.view)
     }
 }
 

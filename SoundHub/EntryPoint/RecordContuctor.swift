@@ -63,6 +63,18 @@ class RecordConductor{
         }
     }
     
+    func confirmComment(on postId:Int, of Instrument:String, completion:@escaping (Post?)->Void){
+        if self.player.duration == 0 { completion(nil) }
+        let asset = RecordConductor.main.player.audioFile.avAsset
+        self.exportComment(asset: asset, completion: { (outputURL) in
+            NetworkController.main.uploadAudioComment(In: outputURL, to: postId, instrument: Instrument, completion: {
+                NetworkController.main.fetchPost(id: postId, completion: { (postResult) in
+                    DispatchQueue.main.async { completion(postResult) }
+                })
+            })
+        })
+    }
+    
 
     private func setUpSession(){
         // Clean tempFiles !

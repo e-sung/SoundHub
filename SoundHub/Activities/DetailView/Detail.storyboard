@@ -462,50 +462,11 @@
                     <size key="freeformSize" width="375" height="1200"/>
                     <connections>
                         <outlet property="mainTV" destination="sPC-mL-dPH" id="WcF-kh-Tnc"/>
-                        <segue destination="g3e-45-QMb" kind="presentation" identifier="detailToIntrumentSelector" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="VOO-99-Fpr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Asy-Nl-xOg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="248.80000000000001" y="98.050974512743636"/>
-        </scene>
-        <!--Select Instrmuent View Controller-->
-        <scene sceneID="Hyj-2n-OEO">
-            <objects>
-                <viewController id="g3e-45-QMb" customClass="SelectInstrmuentViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="VLg-OU-P8h">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0DD-5q-orK">
-                                <rect key="frame" x="0.0" y="236" width="375" height="216"/>
-                            </pickerView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eaV-qH-X3G">
-                                <rect key="frame" x="164" y="505" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="confirmButtonHandler:" destination="g3e-45-QMb" eventType="touchUpInside" id="LCE-bf-AiN"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="0.086274509799999996" green="0.086274509799999996" blue="0.086274509799999996" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="0DD-5q-orK" firstAttribute="centerY" secondItem="2q1-MZ-IAz" secondAttribute="centerY" id="7eh-3B-hKY"/>
-                            <constraint firstItem="0DD-5q-orK" firstAttribute="centerX" secondItem="2q1-MZ-IAz" secondAttribute="centerX" id="JBJ-c7-8OO"/>
-                            <constraint firstItem="0DD-5q-orK" firstAttribute="width" secondItem="VLg-OU-P8h" secondAttribute="width" id="pr9-Yk-8Q8"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="2q1-MZ-IAz"/>
-                    </view>
-                    <connections>
-                        <outlet property="instrumentSelector" destination="0DD-5q-orK" id="Gbj-G3-ahH"/>
-                        <segue destination="jrA-6Q-7Wu" kind="unwind" identifier="unwindToDetail" unwindAction="unwindToDetailViewWithSegue:" id="VgB-3q-ZrM"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mcO-fD-ULg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="jrA-6Q-7Wu" userLabel="Exit" sceneMemberID="exit"/>
-            </objects>
-            <point key="canvasLocation" x="1054" y="-142"/>
         </scene>
     </scenes>
     <resources>
