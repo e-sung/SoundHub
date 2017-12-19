@@ -120,43 +120,21 @@ extension DetailViewController:Playable{
     
     func stop(){
         currentPhase = .Ready
-        for player in allAudioPlayers {
-            player?.stop()
-
-//            DispatchQueue.global(qos: .userInteractive).async {
-//                player?.stop()
-//            }
-        }
+        for player in allAudioPlayers { player?.stop() }
     }
     
     func play(){
         currentPhase = .Playing
-        for player in allAudioPlayers {
-            player?.play()
-
-//            DispatchQueue.global(qos: .userInteractive).async {
-//                player?.play()
-//            }
-        }
+        for player in allAudioPlayers { player?.play() }
     }
     
     func pause(){
         currentPhase = .Ready
-        for player in allAudioPlayers {
-            player?.pause()
-//            DispatchQueue.global(qos: .userInteractive).async {
-//                player?.pause()
-//            }
-        }
+        for player in allAudioPlayers { player?.pause() }
     }
     
     func seek(to point:Float){
-        for player in allAudioPlayers {
-            player?.seek(to: point)
-//            DispatchQueue.global(qos: .userInteractive).async {
-//                player?.seek(to: point)
-//            }
-        }
+        for player in allAudioPlayers { player?.seek(to: point) }
         reflect(progress: point)
     }
     
@@ -165,12 +143,7 @@ extension DetailViewController:Playable{
     }
     
     func setMute(to value: Bool) {
-        for player in allAudioPlayers {
-            player?.setMute(to: value)
-//            DispatchQueue.global(qos: .userInteractive).async {
-//                player?.setMute(to: value)
-//            }
-        }
+        for player in allAudioPlayers { player?.setMute(to: value) }
     }
 }
 
@@ -192,7 +165,8 @@ extension DetailViewController:MixedTracksContainerCellDelegate{
                 self.post = post
                 DispatchQueue.main.async {
                     self.mixedTrackContainer?.isNewTrackBeingAdded = true
-                    self.mainTV.reloadData()
+                    let ids = IndexSet(integersIn: Section.MixedTracks.rawValue ... Section.MixedTracks.rawValue)
+                    self.mainTV.reloadSections(ids, with: .automatic)
                     self.mixedTrackContainer?.allowsMultiSelection = false
                     self.navigationItem.setRightBarButton(nil, animated: true)
                 }
