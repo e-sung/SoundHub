@@ -41,6 +41,14 @@ class DataCenter{
         }
     }
     private var _userNickName:String?
+    
+    func removeUserProfileImageCache(){
+        let imageDownloader = UIImageView.af_sharedImageDownloader
+        let buttonDownloader = UIButton.af_sharedImageDownloader
+        imageDownloader.imageCache?.removeAllImages()
+        buttonDownloader.imageCache?.removeAllImages()
+        imageDownloader.sessionManager.session.configuration.urlCache?.removeAllCachedResponses()
+    }
 }
 struct HomePage:Codable{
     var pop_users:[User]

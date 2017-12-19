@@ -234,15 +234,11 @@ extension NetworkController{
         
         Alamofire.upload(
             multipartFormData: { multipartFormData in
-                if let profileImage = profileImage{
-                    if let imageData = UIImagePNGRepresentation(profileImage){
-                        multipartFormData.append(imageData, withName: "profile_img",fileName: "profile_\(Date()).png", mimeType: "image/png")
-                    }
+                if let imageData = self.dataRepresentationOf(image: profileImage){
+                    multipartFormData.append(imageData, withName: "profile_img",fileName: "profile_\(Date()).png", mimeType: "image/png")
                 }
-                if let headerImage = headerImage{
-                    if let imageData = UIImagePNGRepresentation(headerImage){
-                        multipartFormData.append(imageData, withName: "profile_bg",fileName: "header_\(Date()).png", mimeType: "image/png")
-                    }
+                if let imageData = self.dataRepresentationOf(image: headerImage){
+                    multipartFormData.append(imageData, withName: "profile_bg",fileName: "header_\(Date()).png", mimeType: "image/png")
                 }
         },
             to: imagePatchURL, method: .patch, headers: multipartFormDataHeader,
@@ -250,7 +246,7 @@ extension NetworkController{
                 switch encodingResult {
                 case .success(let upload, _, _):
                     upload.responseJSON { response in
-                        self.removeUserProfileImageCache()
+                        DataCenter.main.removeUserProfileImageCache()
                         debugPrint(response)
                     }
                 case .failure(let encodingError):
@@ -260,11 +256,12 @@ extension NetworkController{
         )
     }
     
-    func removeUserProfileImageCache(){
-        let imageDownloader = UIImageView.af_sharedImageDownloader
-        let buttonDownloader = UIButton.af_sharedImageDownloader
-        imageDownloader.imageCache?.removeAllImages()
-        buttonDownloader.imageCache?.removeAllImages()
-        imageDownloader.sessionManager.session.configuration.urlCache?.removeAllCachedResponses()
+    private func dataRepresentationOf(image:UIImage?)->Data?{
+        if let image = image {
+            if let data = UIImagePNGRepresentation(image){
+                return data
+            }
+        }
+        return nil
     }
 }
