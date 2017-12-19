@@ -13,6 +13,7 @@ target 'SoundHub' do
   pod 'AudioKit'
   pod 'GoogleSignIn'
   pod 'LPSnackbar'
+  pod 'ActionSheetPicker-3.0'
   # Pods for SoundHub
 
   target 'SoundHubTests' do
