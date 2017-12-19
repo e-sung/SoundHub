@@ -189,6 +189,35 @@ extension DetailViewController:MixedTracksContainerCellDelegate{
     }
 }
 
+extension DetailViewController:RecorderCellDelegate{
+    func uploadDidFinished(with post: Post?) {
+        guard let post = post else { return }
+        self.post = post
+        mainTV.reloadData()
+    }
+    
+    func shouldShowAlert() {
+        let alert = UIAlertController(title: "녹음 업로드", message: "녹음을 업로드 하시겠습니까?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .cancel , handler: { (action) in
+            let asset = RecordConductor.main.player.audioFile.avAsset
+            RecordConductor.main.exportComment(asset: asset, completion: { (outputURL) in
+                NetworkController.main.uploadAudioComment(In: outputURL, to: self.post.id, instrument: "Guitar", completion: {
+                    NetworkController.main.fetchPost(id: self.post.id, completion: { (post) in
+                        self.post = post
+                        DispatchQueue.main.async {
+                            self.mainTV.reloadData()
+                            self.commentTrackContainer?.isNewTrackBeingAdded = true
+                        }
+                    })
+                })
+            })
+        }))
+        alert.addAction(UIAlertAction(title: "취소", style: .destructive, handler: { (action) in
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+}
+
 // MARK: TableView Delegate
 extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
     func numberOfSections(in tableView: UITableView) -> Int { return Section.cases }

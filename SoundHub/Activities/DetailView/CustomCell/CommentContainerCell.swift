@@ -13,13 +13,15 @@ class CommentContainerCell: UITableViewCell{
     
     var allComments:[String:[Comment]]?{
         didSet(oldval){
-            if oldval == nil {
+            if oldval == nil || isNewTrackBeingAdded {
                 commentTV.reloadData()
+                isNewTrackBeingAdded = false
             }
         }
     }
     var aPlayer:AVPlayer?
     var delegate:MixedTracksContainerCellDelegate?
+    var isNewTrackBeingAdded = false
     private var allCells:[AudioCommentCell]{
         var cells:[AudioCommentCell] = []
         for i in 0..<commentTV.numberOfSections{
