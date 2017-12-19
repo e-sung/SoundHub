@@ -57,6 +57,7 @@
 		FFA8A8501FE74EF7008443B4 /* UIView+Geometry.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA8A84A1FE74EF6008443B4 /* UIView+Geometry.m */; };
 		FFA8A8511FE74EF7008443B4 /* NCSoundHistogram.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA8A84B1FE74EF6008443B4 /* NCSoundHistogram.m */; };
 		FFA8A8521FE74EF7008443B4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FFA8A84E1FE74EF6008443B4 /* README.md */; };
+		FFA91E591FE90109000E5C68 /* SelectInstrmuentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA91E581FE90109000E5C68 /* SelectInstrmuentViewController.swift */; };
 		FFB85FCC1FCE652A000E47C8 /* ProfileHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB85FCB1FCE652A000E47C8 /* ProfileHeaderCell.swift */; };
 		FFB85FCE1FCE657F000E47C8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB85FCD1FCE657F000E47C8 /* ProfileViewController.swift */; };
 		FFB85FD01FCE78B3000E47C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB85FCF1FCE78B3000E47C8 /* Post.swift */; };
@@ -154,6 +155,7 @@
 		FFA8A84C1FE74EF6008443B4 /* UIView+Geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Geometry.h"; sourceTree = "<group>"; };
 		FFA8A84D1FE74EF6008443B4 /* NCSoundHistogram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCSoundHistogram.h; sourceTree = "<group>"; };
 		FFA8A84E1FE74EF6008443B4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		FFA91E581FE90109000E5C68 /* SelectInstrmuentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectInstrmuentViewController.swift; sourceTree = "<group>"; };
 		FFB85FCB1FCE652A000E47C8 /* ProfileHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCell.swift; sourceTree = "<group>"; };
 		FFB85FCD1FCE657F000E47C8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		FFB85FCF1FCE78B3000E47C8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 			children = (
 				FFC32AE91FCFBFEA00651A31 /* CustomCell */,
 				FF3B20B71FCAC92D0019F87A /* Detail.storyboard */,
+				FFA91E581FE90109000E5C68 /* SelectInstrmuentViewController.swift */,
 				FF3B20B91FCACD4A0019F87A /* DetailViewController.swift */,
 			);
 			path = DetailView;
@@ -737,6 +740,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SoundHub/Pods-SoundHub-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${PODS_ROOT}/AudioKit/iOS/AudioKit.framework",
@@ -751,6 +755,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionSheetPicker_3_0.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AudioKit.framework",
@@ -841,6 +846,7 @@
 				FF9D18561FDA79E8008D5FD1 /* Generics.swift in Sources */,
 				FFCDE7DA1FE7FB5C0008CCB9 /* UITableView.swift in Sources */,
 				FFB85FD21FCE79A3000E47C8 /* User.swift in Sources */,
+				FFA91E591FE90109000E5C68 /* SelectInstrmuentViewController.swift in Sources */,
 				FF0280661FD901AB00C0013A /* Genre.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
