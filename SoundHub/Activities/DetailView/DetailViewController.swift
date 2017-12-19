@@ -159,7 +159,14 @@ extension DetailViewController:MixedTracksContainerCellDelegate{
     @objc private func merge(){
         guard let selectedComments = selectedComments else { return }
         var comments:[Int] = []
-        for comment in selectedComments{ comments.append(comment.id) }
+        for comment in selectedComments{
+            guard let commentId = comment.id else {
+                self.mixedTrackContainer?.allowsMultiSelection = false
+                self.navigationItem.setRightBarButton(nil, animated: true)
+                return
+            }
+            comments.append(commentId)
+        }
         guard let postId = post.id else { return }
         NetworkController.main.merge(comments: comments, on: postId, completion: {
             NetworkController.main.fetchPost(id: postId, completion: { (post) in

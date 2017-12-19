@@ -67,7 +67,8 @@ class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate, UITex
         if let headerImageURL = userInfo.headerImageURL{
             headerImageButton.af_setBackgroundImage(for: .normal, url: headerImageURL)
         }
-        nickName = userInfo.nickname
+        guard let userName = userInfo.nickname else { return }
+        nickName = userName
         numFollowingLB.text = "\(userInfo.num_followings ?? 0)"
         numFollowerLB.text = "\(userInfo.num_followers ?? 0)"
         instrumentTF.text = userInfo.instrument

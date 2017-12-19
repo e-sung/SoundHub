@@ -9,7 +9,7 @@
 import Foundation
 
 struct Comment:Codable{
-    let id:Int
+    let id:Int?
     let author:String?
     let post:String?
     let is_mixed:Bool?

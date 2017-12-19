@@ -9,9 +9,9 @@
 import Foundation
 
 struct User:Codable{
-    let id:Int
-    let email:String
-    let nickname:String
+    let id:Int?
+    let email:String?
+    let nickname:String?
     let profile_img:String?
     let profile_bg:String?
     let genre:String?
