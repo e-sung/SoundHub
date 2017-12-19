@@ -49,11 +49,9 @@ class NetworkController{
         generalHomeURL = URL(string: "home/", relativeTo: baseURL)!
     }
     
-    func patchUser(nickname:String, completion:@escaping(_ hasSuccess:Bool)->Void){
-        guard let userId = UserDefaults.standard.string(forKey: id) else {
-            completion(false)
-            return
-        }
+    func patchUser(nickname:String?, completion:@escaping(_ hasSuccess:Bool)->Void){
+        guard let userId = UserDefaults.standard.string(forKey: id) else { completion(false); return}
+        guard let nickname = nickname else { completion(false); return}
         let nickNamePatchURL = URL(string: "/user/\(userId)/", relativeTo: baseURL)!
         let headers: HTTPHeaders = ["Authorization": authToken]
         let parameters: Parameters = ["nickname":nickname]
