@@ -53,6 +53,10 @@
 		FF9D18561FDA79E8008D5FD1 /* Generics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9D18551FDA79E8008D5FD1 /* Generics.swift */; };
 		FF9D18581FDBBF11008D5FD1 /* LoadingIndicatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9D18571FDBBF11008D5FD1 /* LoadingIndicatorViewController.swift */; };
 		FFA5A39F1FCCFD97001EA36F /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA5A39E1FCCFD97001EA36F /* NetworkController.swift */; };
+		FFA8A84F1FE74EF7008443B4 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = FFA8A8471FE74EF6008443B4 /* LICENSE */; };
+		FFA8A8501FE74EF7008443B4 /* UIView+Geometry.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA8A84A1FE74EF6008443B4 /* UIView+Geometry.m */; };
+		FFA8A8511FE74EF7008443B4 /* NCSoundHistogram.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA8A84B1FE74EF6008443B4 /* NCSoundHistogram.m */; };
+		FFA8A8521FE74EF7008443B4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FFA8A84E1FE74EF6008443B4 /* README.md */; };
 		FFB85FCC1FCE652A000E47C8 /* ProfileHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB85FCB1FCE652A000E47C8 /* ProfileHeaderCell.swift */; };
 		FFB85FCE1FCE657F000E47C8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB85FCD1FCE657F000E47C8 /* ProfileViewController.swift */; };
 		FFB85FD01FCE78B3000E47C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB85FCF1FCE78B3000E47C8 /* Post.swift */; };
@@ -61,6 +65,7 @@
 		FFC32AE61FCF9F0C00651A31 /* AudioCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC32AE51FCF9F0C00651A31 /* AudioCommentCell.swift */; };
 		FFC32AE81FCFBFDB00651A31 /* MasterWaveFormViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC32AE71FCFBFDB00651A31 /* MasterWaveFormViewCell.swift */; };
 		FFC32AED1FCFD96500651A31 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC32AEC1FCFD96500651A31 /* LoginResponse.swift */; };
+		FFCDE7DA1FE7FB5C0008CCB9 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCDE7D91FE7FB5C0008CCB9 /* UITableView.swift */; };
 		FFCF82BF1FC95D66003B7861 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCF82BE1FC95D66003B7861 /* AppDelegate.swift */; };
 		FFCF82C41FC95D66003B7861 /* Entry.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFCF82C21FC95D66003B7861 /* Entry.storyboard */; };
 		FFCF82C61FC95D66003B7861 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFCF82C51FC95D66003B7861 /* Assets.xcassets */; };
@@ -143,6 +148,12 @@
 		FF9D18551FDA79E8008D5FD1 /* Generics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generics.swift; sourceTree = "<group>"; };
 		FF9D18571FDBBF11008D5FD1 /* LoadingIndicatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorViewController.swift; sourceTree = "<group>"; };
 		FFA5A39E1FCCFD97001EA36F /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
+		FFA8A8471FE74EF6008443B4 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		FFA8A84A1FE74EF6008443B4 /* UIView+Geometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Geometry.m"; sourceTree = "<group>"; };
+		FFA8A84B1FE74EF6008443B4 /* NCSoundHistogram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCSoundHistogram.m; sourceTree = "<group>"; };
+		FFA8A84C1FE74EF6008443B4 /* UIView+Geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Geometry.h"; sourceTree = "<group>"; };
+		FFA8A84D1FE74EF6008443B4 /* NCSoundHistogram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCSoundHistogram.h; sourceTree = "<group>"; };
+		FFA8A84E1FE74EF6008443B4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FFB85FCB1FCE652A000E47C8 /* ProfileHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCell.swift; sourceTree = "<group>"; };
 		FFB85FCD1FCE657F000E47C8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		FFB85FCF1FCE78B3000E47C8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -151,6 +162,7 @@
 		FFC32AE51FCF9F0C00651A31 /* AudioCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCommentCell.swift; sourceTree = "<group>"; };
 		FFC32AE71FCFBFDB00651A31 /* MasterWaveFormViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterWaveFormViewCell.swift; sourceTree = "<group>"; };
 		FFC32AEC1FCFD96500651A31 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
+		FFCDE7D91FE7FB5C0008CCB9 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		FFCF82BB1FC95D66003B7861 /* SoundHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoundHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFCF82BE1FC95D66003B7861 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFCF82C31FC95D66003B7861 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Entry.storyboard; sourceTree = "<group>"; };
@@ -296,6 +308,7 @@
 				FF02805F1FD8E64900C0013A /* UITableViewCell.swift */,
 				FF9D18551FDA79E8008D5FD1 /* Generics.swift */,
 				FF7D6E0B1FDD630700754A7C /* AVPlayer.swift */,
+				FFCDE7D91FE7FB5C0008CCB9 /* UITableView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -349,6 +362,35 @@
 			path = GeneralHome;
 			sourceTree = "<group>";
 		};
+		FFA8A8461FE74EF6008443B4 /* NCSoundHistogram */ = {
+			isa = PBXGroup;
+			children = (
+				FFA8A8471FE74EF6008443B4 /* LICENSE */,
+				FFA8A8481FE74EF6008443B4 /* NCSoundHistogram */,
+				FFA8A84E1FE74EF6008443B4 /* README.md */,
+			);
+			path = NCSoundHistogram;
+			sourceTree = "<group>";
+		};
+		FFA8A8481FE74EF6008443B4 /* NCSoundHistogram */ = {
+			isa = PBXGroup;
+			children = (
+				FFA8A8491FE74EF6008443B4 /* Classes */,
+			);
+			path = NCSoundHistogram;
+			sourceTree = "<group>";
+		};
+		FFA8A8491FE74EF6008443B4 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				FFA8A84A1FE74EF6008443B4 /* UIView+Geometry.m */,
+				FFA8A84B1FE74EF6008443B4 /* NCSoundHistogram.m */,
+				FFA8A84C1FE74EF6008443B4 /* UIView+Geometry.h */,
+				FFA8A84D1FE74EF6008443B4 /* NCSoundHistogram.h */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
 		FFC32AE91FCFBFEA00651A31 /* CustomCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -387,6 +429,7 @@
 		FFCF82BD1FC95D66003B7861 /* SoundHub */ = {
 			isa = PBXGroup;
 			children = (
+				FFA8A8461FE74EF6008443B4 /* NCSoundHistogram */,
 				FF5C01411FDA188D00F37CC9 /* GoogleService-Info.plist */,
 				FFCF82BE1FC95D66003B7861 /* AppDelegate.swift */,
 				FFA5A39E1FCCFD97001EA36F /* NetworkController.swift */,
@@ -543,10 +586,12 @@
 				FF9A84DD1FC9612200AC4780 /* MainTabBar.storyboard in Resources */,
 				FF688F7A1FCE58D600F0A41F /* SideMenu.storyboard in Resources */,
 				FF3B20B81FCAC92D0019F87A /* Detail.storyboard in Resources */,
+				FFA8A84F1FE74EF7008443B4 /* LICENSE in Resources */,
 				FFCF82C91FC95D66003B7861 /* LaunchScreen.storyboard in Resources */,
 				FFCF82C61FC95D66003B7861 /* Assets.xcassets in Resources */,
 				FF5C01421FDA188D00F37CC9 /* GoogleService-Info.plist in Resources */,
 				FF9A84E31FC962C300AC4780 /* GeneralRanking.storyboard in Resources */,
+				FFA8A8521FE74EF7008443B4 /* README.md in Resources */,
 				FFCF82C41FC95D66003B7861 /* Entry.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -701,7 +746,6 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/LPSnackbar/LPSnackbar.framework",
-				"${BUILT_PRODUCTS_DIR}/NCSoundHistogram/NCSoundHistogram.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
 			);
@@ -716,7 +760,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LPSnackbar.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NCSoundHistogram.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
 			);
@@ -747,6 +790,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFA8A8511FE74EF7008443B4 /* NCSoundHistogram.m in Sources */,
 				FF5C01401FD96D0500F37CC9 /* InstrumentPickerViewController.swift in Sources */,
 				FF3B20BA1FCACD4A0019F87A /* DetailViewController.swift in Sources */,
 				FFB85FD01FCE78B3000E47C8 /* Post.swift in Sources */,
@@ -777,6 +821,7 @@
 				FF9A84E01FC961AF00AC4780 /* MainTabBarController.swift in Sources */,
 				FF9A84EC1FC9AE6500AC4780 /* PopularMusicianCell.swift in Sources */,
 				FFC32AE61FCF9F0C00651A31 /* AudioCommentCell.swift in Sources */,
+				FFA8A8501FE74EF7008443B4 /* UIView+Geometry.m in Sources */,
 				FF3B20B51FCAADD80019F87A /* PostListCell.swift in Sources */,
 				FF3B20BC1FCACE8D0019F87A /* DetailHeaderCell.swift in Sources */,
 				FF64BA0E1FDD36F4000A846B /* RecorderCell.swift in Sources */,
@@ -794,6 +839,7 @@
 				FF688F781FCE58B700F0A41F /* SideMenuViewController.swift in Sources */,
 				FF3B20BF1FCC2B0E0019F87A /* LoginViewController.swift in Sources */,
 				FF9D18561FDA79E8008D5FD1 /* Generics.swift in Sources */,
+				FFCDE7DA1FE7FB5C0008CCB9 /* UITableView.swift in Sources */,
 				FFB85FD21FCE79A3000E47C8 /* User.swift in Sources */,
 				FF0280661FD901AB00C0013A /* Genre.swift in Sources */,
 			);
@@ -904,6 +950,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -953,6 +1000,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

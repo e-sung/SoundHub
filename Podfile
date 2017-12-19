@@ -13,7 +13,6 @@ target 'SoundHub' do
   pod 'AudioKit'
   pod 'GoogleSignIn'
   pod 'LPSnackbar'
-  pod "NCSoundHistogram"
   # Pods for SoundHub
 
   target 'SoundHubTests' do

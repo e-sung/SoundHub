@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import NCSoundHistogram
 import NVActivityIndicatorView
 
 class MasterWaveFormViewCell: UITableViewCell, NCSoundHistogramDelegate {

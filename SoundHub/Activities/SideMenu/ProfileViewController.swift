@@ -35,6 +35,7 @@ class ProfileViewController: UIViewController{
          4. 팔로잉/팔로워
     */
     private var headerCell:ProfileHeaderCell?
+    private var flowCell:FlowContainerCell?
     /**
      사진첩, 혹은 카메라에 접근할 수 있는 객체
      - ToDo: 사진첩/카메라에 접근권한을 갖지 못했을 때에 대한 처리를 해야 함
@@ -58,29 +59,25 @@ class ProfileViewController: UIViewController{
         doneButton.title = ""
         doneButton.isEnabled = false
         
-        /// 수정된 내용을 UserDefaults에 저장
-        /// - ToDo
-        /// 프로필 이미지, 헤더이미지 저장 필요
         UserDefaults.standard.set(headerCell!.nickName, forKey: nickname)
-        NetworkController.main.patchProfileImage(with: changedProfileImage)
-        NetworkController.main.patchHeaderImage(with: changedHeaderImage)
-        
         
         /// 변경내용을 서버에 반영
-//        NetworkController.main.patchUser(nickname: headerCell!.nickName, profileImage: nil, headerImage: nil, completion: { requestSucceded in
-//            if requestSucceded == true {
-//                /// 네트워크 세션이 끝난 지금까지도 각종 UI에 변경되기 전 User데이터가 표시되고 있음.
-//                /// 또 DataCenter.main 에도 아직 새 User객체가 반영되지 않았음.
-//                /// 따라서
-//                DataCenter.main = DataCenter() /// 1. DataCenter.main 초기화
-//                self.navigationController?.popViewController(animated: true) /// 2. ChartVC로 복귀
-//                /// 3. ChartVC에서는 DataCenter.main을 참조하려고 할 것이고, 그것이 비어있기 때문에
-//                /// 4. 새 http 요청으로 DataCenter.main을 채워넣음.
-//                /// 5. 그 과정에서 새롭게 변경된 User객체가 모든 UI에 반영됨
-//            }else{
-//                self.alert(msg: "요청이 실패했습니다. 어떻게 된걸까요?")
-//            }
-//        })
+        NetworkController.main.patchProfileImage(with: changedProfileImage)
+        NetworkController.main.patchHeaderImage(with: changedHeaderImage)
+        NetworkController.main.patchUser(nickname: headerCell?.nickName) { (requestSucceded) in
+            if requestSucceded == true {
+                /// 네트워크 세션이 끝난 지금까지도 각종 UI에 변경되기 전 User데이터가 표시되고 있음.
+                /// 또 DataCenter.main 에도 아직 새 User객체가 반영되지 않았음.
+                /// 따라서
+                DataCenter.main = DataCenter() /// 1. DataCenter.main 초기화
+                self.navigationController?.popViewController(animated: true) /// 2. ChartVC로 복귀
+                /// 3. ChartVC에서는 DataCenter.main을 참조하려고 할 것이고, 그것이 비어있기 때문에
+                /// 4. 새 http 요청으로 DataCenter.main을 채워넣음.
+                /// 5. 그 과정에서 새롭게 변경된 User객체가 모든 UI에 반영됨
+            }else{
+                self.alert(msg: "요청이 실패했습니다. 어떻게 된걸까요?")
+            }
+        }
         headerCell!.isSettingPhase = false
     }
     
@@ -92,6 +89,13 @@ class ProfileViewController: UIViewController{
         headerCell!.isSettingPhase = true
     }
     
+    @IBAction func swipeDidHappend(_ sender: UISwipeGestureRecognizer) {
+        if sender.direction == .up {
+            mainTV.scrollToRow(at: IndexPath(item: 0, section: 1) , at: .top, animated: true)
+            flowCell?.isScrollEnabled = true
+        }
+    }
+    
     // MARK: IBOutlets
     /**
      최상단의 TableView
@@ -101,7 +105,7 @@ class ProfileViewController: UIViewController{
             - postedPostTableView
             - likedPostTableView
     */
-    @IBOutlet weak private var mainTV: UITableView!
+    @IBOutlet weak var mainTV: UITableView!
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,6 +118,12 @@ class ProfileViewController: UIViewController{
 
         imagePicker.allowsEditing = false
         imagePicker.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if PlayBarController.main.isHidden == false {
+            mainTV.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60).isActive = true
+        }
     }
 }
 
@@ -163,6 +173,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: "flowContainerCell", for: indexPath) as! FlowContainerCell
             cell.userInfo = userInfo
             cell.delegate = self
+            cell.parent = self
+            flowCell = cell
             return cell
         }
     }
@@ -171,17 +183,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
         if indexPath.section == 0 {
             return ProfileHeaderCell.defaultHeight
         }else{
-            guard let userInfo = userInfo else { return 0 }
-            guard let posts = userInfo.post_set else { return 0 }
-            return PostListCell.defaultHeight*CGFloat(posts.count)
+            return self.view.frame.height
         }
     }
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? nil : tableViewHeaderTitles[0]
-    }
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 0 ? 0 : 60
-    }
+    
 }
 
 extension ProfileViewController:FlowContainerCellDelegate{
@@ -191,6 +196,14 @@ extension ProfileViewController:FlowContainerCellDelegate{
     
     func didScrolledTo(page: Int) {
         mainTV.headerView(forSection: page)?.textLabel?.text = tableViewHeaderTitles[page]
+    }
+    
+    var isScrollEnabled:Bool{
+        get{
+            return mainTV.isScrollEnabled
+        }set(newVal){
+            mainTV.isScrollEnabled = newVal
+        }
     }
 }
 

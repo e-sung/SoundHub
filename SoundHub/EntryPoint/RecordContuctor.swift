@@ -48,6 +48,21 @@ class RecordConductor{
         do { try self.player.reloadFile() } catch { print("Errored reloading.") }
     }
     
+    func exportComment(asset:AVAsset, completion:@escaping(_ output:URL)->Void){
+        let outputURL = URL(string: "comment.m4a".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)! , relativeTo: DataCenter.documentsDirectoryURL)!
+        if let session = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetAppleM4A){
+            session.outputFileType = AVFileType.m4a
+            session.outputURL = outputURL
+            session.exportAsynchronously {
+                DispatchQueue.main.async(execute: {
+                    completion(outputURL)
+                })
+            }
+        }else {
+            print("AVAssetExportSession wasn't generated")
+        }
+    }
+    
 
     private func setUpSession(){
         // Clean tempFiles !
