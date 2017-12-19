@@ -160,8 +160,9 @@ extension DetailViewController:MixedTracksContainerCellDelegate{
         guard let selectedComments = selectedComments else { return }
         var comments:[Int] = []
         for comment in selectedComments{ comments.append(comment.id) }
-        NetworkController.main.merge(comments: comments, on: post.id, completion: {
-            NetworkController.main.fetchPost(id: self.post.id, completion: { (post) in
+        guard let postId = post.id else { return }
+        NetworkController.main.merge(comments: comments, on: postId, completion: {
+            NetworkController.main.fetchPost(id: postId, completion: { (post) in
                 self.post = post
                 DispatchQueue.main.async {
                     self.mixedTrackContainer?.isNewTrackBeingAdded = true
@@ -195,7 +196,8 @@ extension DetailViewController:RecorderCellDelegate{
     func showInstrumentPicker(){
         ActionSheetStringPicker.show(withTitle: "어떤 악기였나요?", rows: Instrument.cases, initialSelection: 0, doneBlock: { (picker, row, result) in
                 let selectedInstrument = Instrument.cases[row]
-            RecordConductor.main.confirmComment(on: self.post.id, of: selectedInstrument, completion: { (postResult) in
+            guard let postId = self.post.id else { return }
+            RecordConductor.main.confirmComment(on: postId, of: selectedInstrument, completion: { (postResult) in
                 guard let postResult = postResult else { return }
                 self.post = postResult
                 self.commentTrackContainer?.isNewTrackBeingAdded = true
@@ -294,7 +296,8 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         }else{
             /// 그게 아니라면, 프로필 페이지에 있는 Post객체는 제한된 정보만 가지고 있기 때문에,
             /// 온전한 Post객체를 다시 서버에서 받아와야 함.
-            NetworkController.main.fetchPost(id: post.id) { (fetchedPost) in
+            guard let postId = post.id else { return }
+            NetworkController.main.fetchPost(id: postId) { (fetchedPost) in
                 let nextVC = UIStoryboard(name: "Detail", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
                 nextVC.post = fetchedPost
                 DispatchQueue.main.async { vc.navigationController?.show(nextVC, sender: nil) }
