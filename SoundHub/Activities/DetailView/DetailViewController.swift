@@ -225,7 +225,8 @@ extension DetailViewController:RecorderCellDelegate{
                 guard let postResult = postResult else { return }
                 self.post = postResult
                 self.commentTrackContainer?.isNewTrackBeingAdded = true
-                self.mainTV.reloadData()
+                let ids = IndexSet(integersIn: Section.CommentTracks.rawValue ... Section.CommentTracks.rawValue)
+                self.mainTV.reloadSections(ids, with: .automatic)
             })
         }, cancel: { (picker) in
             
