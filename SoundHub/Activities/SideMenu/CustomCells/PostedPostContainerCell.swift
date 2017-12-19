@@ -47,22 +47,7 @@ extension PostContainerCell: UITableViewDelegate, UITableViewDataSource, UIScrol
         guard let posts = posts else { return }
         delegate?.shouldGoTo(post: posts[indexPath.item])
     }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath == IndexPath(item: 0, section: 0) && hasFirstRowDisappeared{
-            postTB.isScrollEnabled = false
-            postTB.scrollToRow(at: IndexPath(item:0,section:0), at: .top, animated: true)
-            parent.parent.mainTV.scrollToRow(at: IndexPath(item:0,section:0), at: .top, animated: true)
-            hasFirstRowDisappeared = false
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath == IndexPath(item: 0, section: 0){
-            hasFirstRowDisappeared = true
-        }
-    }
-    
+        
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if lastOffset > scrollView.contentOffset.y {
             if postTB.visibleCells.contains(firstCell){
@@ -81,6 +66,9 @@ extension PostContainerCell{
         }set(newVal){
             return postTB.isScrollEnabled = newVal
         }
+    }
+    func scrollToTopWith(animation:Bool){
+        postTB.scrollToRow(at: IndexPath(item:0,section:0), at: .top, animated: animation)
     }
 }
 

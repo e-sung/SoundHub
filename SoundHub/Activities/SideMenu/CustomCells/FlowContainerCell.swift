@@ -59,7 +59,14 @@ extension FlowContainerCell:UICollectionViewDelegate, UICollectionViewDataSource
         return CGSize(width: self.frame.width, height: self.frame.height)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let cell = cell as? PostContainerCell
+        cell?.scrollToTopWith(animation: false)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let cell = cell as? PostContainerCell
+        cell?.scrollToTopWith(animation: false)
         delegate?.didScrolledTo(page: indexPath.item)
     }
 }

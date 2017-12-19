@@ -770,7 +770,6 @@
                             <outletCollection property="gestureRecognizers" destination="wKn-3W-k5b" appends="YES" id="tXD-My-49q"/>
                         </connections>
                     </view>
-                    <size key="freeformSize" width="375" height="1300"/>
                     <connections>
                         <outlet property="mainTV" destination="86P-hi-uWu" id="p9x-4L-LaJ"/>
                     </connections>

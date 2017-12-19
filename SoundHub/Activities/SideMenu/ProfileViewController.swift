@@ -94,7 +94,6 @@ class ProfileViewController: UIViewController{
     }
     
     @IBAction func swipeDidHappend(_ sender: UISwipeGestureRecognizer) {
-        
         if sender.direction == .up {
             mainTV.scrollToRow(at: IndexPath(item: 0, section: 1) , at: .top, animated: true)
             flowCell?.isScrollEnabled = true
@@ -191,14 +190,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return section == 0 ? 0 : 60
     }
-
-    
-//    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        if indexPath == IndexPath(item: 0, section: 0){
-//            mainTV.isScrollEnabled = false
-//            flowCell?.isScrollEnabled = true
-//        }
-//    }
     
 }
 
@@ -209,7 +200,6 @@ extension ProfileViewController:FlowContainerCellDelegate{
     
     func didScrolledTo(page: Int) {
         mainTV.headerView(forSection: page)?.textLabel?.text = tableViewHeaderTitles[page]
-        mainTV.scrollToRow(at: IndexPath(item: 0, section: 0)  , at: .top, animated: false)
     }
     
     var isScrollEnabled:Bool{
