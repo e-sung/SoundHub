@@ -313,25 +313,25 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Following" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RSY-co-KOk">
-                                                    <rect key="frame" x="0.0" y="429.5" width="349.5" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="450" width="349.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Follower" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dM5-Ad-Y4N">
-                                                    <rect key="frame" x="449.5" y="429" width="350.5" height="20.5"/>
+                                                    <rect key="frame" x="449.5" y="450" width="350.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsI-S4-61M">
-                                                    <rect key="frame" x="153.5" y="458" width="42" height="20.5"/>
+                                                    <rect key="frame" x="153.5" y="478.5" width="42" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUM-IY-v58">
-                                                    <rect key="frame" x="604" y="457.5" width="42" height="20.5"/>
+                                                    <rect key="frame" x="604" y="478" width="42" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -353,9 +353,9 @@
                                                 <constraint firstItem="cdx-mN-D95" firstAttribute="top" secondItem="e4K-aU-IoP" secondAttribute="bottom" constant="-50" id="dEK-xQ-vZK"/>
                                                 <constraint firstItem="iKK-W8-jrT" firstAttribute="top" secondItem="tM6-Ze-Yg3" secondAttribute="bottom" id="dEl-SY-gU8"/>
                                                 <constraint firstItem="RSY-co-KOk" firstAttribute="leading" secondItem="e4K-aU-IoP" secondAttribute="leading" id="fgM-T5-16p"/>
-                                                <constraint firstItem="RSY-co-KOk" firstAttribute="bottom" secondItem="e4K-aU-IoP" secondAttribute="bottom" id="ga9-I0-Alx"/>
+                                                <constraint firstItem="RSY-co-KOk" firstAttribute="top" secondItem="e4K-aU-IoP" secondAttribute="bottom" id="ga9-I0-Alx"/>
                                                 <constraint firstItem="vUM-IY-v58" firstAttribute="centerX" secondItem="dM5-Ad-Y4N" secondAttribute="centerX" id="h3a-On-A0Q"/>
-                                                <constraint firstItem="dM5-Ad-Y4N" firstAttribute="bottom" secondItem="e4K-aU-IoP" secondAttribute="bottom" id="pS3-DD-o2f"/>
+                                                <constraint firstItem="dM5-Ad-Y4N" firstAttribute="top" secondItem="e4K-aU-IoP" secondAttribute="bottom" id="pS3-DD-o2f"/>
                                                 <constraint firstItem="dM5-Ad-Y4N" firstAttribute="trailing" secondItem="e4K-aU-IoP" secondAttribute="trailing" id="s5R-Zl-00C"/>
                                                 <constraint firstItem="e4K-aU-IoP" firstAttribute="leading" secondItem="EEV-Bm-TBg" secondAttribute="leading" id="uLy-X2-DNn"/>
                                                 <constraint firstItem="tM6-Ze-Yg3" firstAttribute="centerX" secondItem="cdx-mN-D95" secondAttribute="centerX" id="z5u-Nc-UI2"/>
