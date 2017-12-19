@@ -56,7 +56,10 @@ class DetailViewController: UIViewController{
     // MARK: IBOutlets
     /// 이 VC의 최상단 테이블뷰
     @IBOutlet weak private var mainTV: UITableView!
-
+    @IBAction func unwindToDetailView(segue:UIStoryboardSegue) {
+        self.commentTrackContainer?.isNewTrackBeingAdded = true
+        self.mainTV.reloadData()
+    }
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -207,22 +210,16 @@ extension DetailViewController:RecorderCellDelegate{
     func shouldShowAlert() {
         let alert = UIAlertController(title: "녹음 업로드", message: "녹음을 업로드 하시겠습니까?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .cancel , handler: { (action) in
-            let asset = RecordConductor.main.player.audioFile.avAsset
-            RecordConductor.main.exportComment(asset: asset, completion: { (outputURL) in
-                NetworkController.main.uploadAudioComment(In: outputURL, to: self.post.id, instrument: "Guitar", completion: {
-                    NetworkController.main.fetchPost(id: self.post.id, completion: { (post) in
-                        self.post = post
-                        DispatchQueue.main.async {
-                            self.mainTV.reloadData()
-                            self.commentTrackContainer?.isNewTrackBeingAdded = true
-                        }
-                    })
-                })
-            })
+            self.performSegue(withIdentifier: "detailToIntrumentSelector", sender: nil)
         }))
         alert.addAction(UIAlertAction(title: "취소", style: .destructive, handler: { (action) in
         }))
         present(alert, animated: true, completion: nil)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let nextVC = segue.destination as? SelectInstrmuentViewController{
+            nextVC.postId = self.post.id
+        }
     }
 }
 
