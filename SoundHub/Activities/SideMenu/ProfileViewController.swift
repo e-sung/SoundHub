@@ -184,12 +184,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
             return self.view.frame.height
         }
     }
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? nil : tableViewHeaderTitles[0]
-    }
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 0 ? 0 : 60
-    }
     
 }
 

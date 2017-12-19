@@ -40,16 +40,20 @@ extension FlowContainerCell:UICollectionViewDelegate, UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var identifier = ""
+        var headerTitle = ""
         var posts:[Post]? = nil
         if indexPath.item == 0 {
             identifier = "postedPostContainer"
+            headerTitle = "작성한 포스트"
             posts = userInfo?.post_set
         }else{
             identifier = "likedPostContainer"
+            headerTitle = "좋아한 포스트"
             posts = userInfo?.liked_posts
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! PostContainerCell
         cell.posts = posts
+        cell.headerTitle = headerTitle
         cell.delegate = self
         cell.parent = self
         return cell

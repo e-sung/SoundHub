@@ -12,9 +12,10 @@ class PostContainerCell: UICollectionViewCell{
     var posts:[Post]?
     var delegate:PostContainerCellDelegate?
     var firstCell:PostListCell!
-    var hasFirstRowDisappeared = false
     var lastOffset:CGFloat = 0
     var parent:FlowContainerCell!
+    var headerTitle:String!
+    var isScrolling = false
     @IBOutlet weak var postTB: UITableView!
     
     override func awakeFromNib() {
@@ -45,16 +46,31 @@ extension PostContainerCell: UITableViewDelegate, UITableViewDataSource, UIScrol
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let posts = posts else { return }
-        delegate?.shouldGoTo(post: posts[indexPath.item])
+        if isScrolling == false {
+            delegate?.shouldGoTo(post: posts[indexPath.item])
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView.generateHeaderView(with: headerTitle, and: 50)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 60
     }
         
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        isScrolling = true
         if lastOffset > scrollView.contentOffset.y {
             if postTB.visibleCells.contains(firstCell){
                 postTB.isScrollEnabled = false
                 parent.parent.mainTV.scrollToRow(at: IndexPath(item:0,section:0), at: .top, animated: true)
             }
         }
+    }
+    
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        isScrolling = false
     }
 
 }
