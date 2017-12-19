@@ -72,7 +72,7 @@ class DetailViewController: UIViewController{
         }
         if let authorTrackURL = post.authorTrackRemoteURL{
             authorTrackPlayer = AVPlayer(url:authorTrackURL)
-            NetworkController.main.downloadAudio(from: authorTrackURL, done: { (localURL) in
+            NetworkController.main.downloadAudio(from: authorTrackURL, completion: { (localURL) in
                 self.authorTrackPlayer = AVPlayer(url:localURL)
             })
         }
@@ -153,10 +153,10 @@ extension DetailViewController:MixedTracksContainerCellDelegate{
         if comments.count == 0 { navigationItem.setRightBarButton(nil, animated: true); return }
         selectedComments = comments
         navigationItem.setRightBarButton(
-            UIBarButtonItem(title: "Merge", style: .plain, target: self, action: #selector(merge)),
+            UIBarButtonItem(title: "Merge", style: .plain, target: self, action: #selector(mix)),
             animated: true)
     }
-    @objc private func merge(){
+    @objc private func mix(){
         guard let selectedComments = selectedComments else { return }
         var comments:[Int] = []
         for comment in selectedComments{
@@ -168,7 +168,7 @@ extension DetailViewController:MixedTracksContainerCellDelegate{
             comments.append(commentId)
         }
         guard let postId = post.id else { return }
-        NetworkController.main.merge(comments: comments, on: postId, completion: {
+        NetworkController.main.mix(comments: comments, on: postId, completion: {
             NetworkController.main.fetchPost(id: postId, completion: { (post) in
                 self.post = post
                 DispatchQueue.main.async {
