@@ -40,15 +40,12 @@ class LoginViewController: UIViewController, UITextViewDelegate,GIDSignInUIDeleg
     
     @IBAction func viewTouchHandler(_ sender: UITapGestureRecognizer) {
         if isKeyboardUp { self.view.endEditing(true) }
-//        else { self.dismiss(animated: true, completion: nil) }
     }
     
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         GIDSignIn.sharedInstance().uiDelegate = self
-        //GIDSignIn.sharedInstance().signInSilently()
-       
 
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: "ToggleAuthUINotification"), object: nil, queue: nil) { (noti) in
             self.alert(msg: "\(noti.userInfo)")
@@ -65,11 +62,20 @@ class LoginViewController: UIViewController, UITextViewDelegate,GIDSignInUIDeleg
 }
 
 extension LoginViewController{
-    private func save(loginResponse:LoginResponse, on userDefault:UserDefaults){
-        userDefault.set(loginResponse.token, forKey: token)
-        userDefault.set(loginResponse.user.nickname, forKey: nickname)
-        userDefault.set(loginResponse.user.instrument, forKey: instrument)
-        userDefault.set(loginResponse.user.id, forKey: id)
+    private func save(loginResponse:LoginResponse, on userDefault:UserDefaults, completion:@escaping ()->Void){
+        guard let userInfo = loginResponse.user,
+            let authToken = loginResponse.token
+        else { alert(msg: "통신이 제대로 이루어지지 않았습니다!"); return }
+        
+        guard let nickName = userInfo.nickname,
+            let mainInstrument = userInfo.instrument,
+            let userId = userInfo.id
+        else { alert(msg: "통신이 제대로 이루어지지 않았습니다!"); return }
+        userDefault.set(authToken, forKey: token)
+        userDefault.set(nickName, forKey: nickname)
+        userDefault.set(mainInstrument, forKey: instrument)
+        userDefault.set(userId, forKey: id)
+        completion()
     }
     
     private func tryLogin(){
@@ -77,8 +83,9 @@ extension LoginViewController{
         guard let password = passwordTextField.text else {alert(msg: "password is Invalid");return}
         
         NetworkController.main.login(with: email, and: password) {result in
-            self.save(loginResponse: result, on: UserDefaults.standard)
-            DispatchQueue.main.async(execute: {self.performSegue(withIdentifier: "loginSuccessSegue", sender: nil)})
+            self.save(loginResponse: result, on: UserDefaults.standard, completion: {
+                DispatchQueue.main.async(execute: {self.performSegue(withIdentifier: "loginSuccessSegue", sender: nil)})
+            })
         }
     }
 }

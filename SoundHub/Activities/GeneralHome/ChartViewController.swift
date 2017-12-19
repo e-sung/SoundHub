@@ -58,9 +58,12 @@ extension ChartViewController:UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if Section(rawValue: section) == .RankingChart{ return tapOnMoreRanking * 3 }
-        else if Section(rawValue: section) == .RecentUpload{
-            if tapOnMoreRecent * 3 > DataCenter.main.recentPosts.count{
+        if Section(rawValue: section) == .RankingChart{
+            if tapOnMoreRanking * 3 > DataCenter.main.homePages[category]!.pop_posts.count{
+                return DataCenter.main.homePages[category]!.pop_posts.count
+            } else {return tapOnMoreRanking * 3 }
+        }else if Section(rawValue: section) == .RecentUpload{
+            if tapOnMoreRecent * 3 > DataCenter.main.homePages[category]!.recent_posts.count{
                 return DataCenter.main.homePages[category]!.recent_posts.count
             }else{ return tapOnMoreRecent * 3 }
         }else{ return 1 }

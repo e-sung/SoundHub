@@ -71,7 +71,6 @@ extension FlowContainerCell:UICollectionViewDelegate, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let cell = cell as? PostContainerCell
         cell?.scrollToTopWith(animation: false)
-        delegate?.didScrolledTo(page: indexPath.item)
     }
 }
 
@@ -82,6 +81,5 @@ extension FlowContainerCell:PostContainerCellDelegate{
 }
 
 protocol FlowContainerCellDelegate {
-    func didScrolledTo(page:Int)->Void
     func shouldGoTo(post:Post)->Void
 }

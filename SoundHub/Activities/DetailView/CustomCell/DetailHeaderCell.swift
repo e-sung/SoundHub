@@ -17,7 +17,8 @@ class DetailHeaderCell: UITableViewCell {
     @IBOutlet weak private var numberOfLikesLB: UILabel!
     @IBOutlet weak private var numberOfComments: UILabel!
     @IBAction func likeButtonHandler(_ sender: UIButton) {
-        NetworkController.main.sendLikeRequest(on: _postInfo.id) { (newLikeCount) in
+        guard let postId = _postInfo.id else { return }
+        NetworkController.main.sendLikeRequest(on: postId) { (newLikeCount) in
             DispatchQueue.main.async { self.numberOfLikesLB.text = "\(newLikeCount)" }
         }
     }

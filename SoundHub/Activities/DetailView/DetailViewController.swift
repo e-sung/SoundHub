@@ -72,7 +72,7 @@ class DetailViewController: UIViewController{
         }
         if let authorTrackURL = post.authorTrackRemoteURL{
             authorTrackPlayer = AVPlayer(url:authorTrackURL)
-            NetworkController.main.downloadAudio(from: authorTrackURL, done: { (localURL) in
+            NetworkController.main.downloadAudio(from: authorTrackURL, completion: { (localURL) in
                 self.authorTrackPlayer = AVPlayer(url:localURL)
             })
         }
@@ -113,6 +113,7 @@ extension DetailViewController:ModeToggleCellDelegate{
     }
 }
 
+// MARK: Playable 프로토콜 구현
 extension DetailViewController:Playable{
     func reflect(progress:Float){
         self.masterWaveCell?.reflect(progress: progress)
@@ -147,21 +148,29 @@ extension DetailViewController:Playable{
     }
 }
 
-
+// MARK: MixedTracksContainerCellDelegate
 extension DetailViewController:MixedTracksContainerCellDelegate{
     func didSelectionOccured(on comments: [Comment]) {
         if comments.count == 0 { navigationItem.setRightBarButton(nil, animated: true); return }
         selectedComments = comments
         navigationItem.setRightBarButton(
-            UIBarButtonItem(title: "Merge", style: .plain, target: self, action: #selector(merge)),
+            UIBarButtonItem(title: "Merge", style: .plain, target: self, action: #selector(mix)),
             animated: true)
     }
-    @objc private func merge(){
+    @objc private func mix(){
         guard let selectedComments = selectedComments else { return }
         var comments:[Int] = []
-        for comment in selectedComments{ comments.append(comment.id) }
-        NetworkController.main.merge(comments: comments, on: post.id, completion: {
-            NetworkController.main.fetchPost(id: self.post.id, completion: { (post) in
+        for comment in selectedComments{
+            guard let commentId = comment.id else {
+                self.mixedTrackContainer?.allowsMultiSelection = false
+                self.navigationItem.setRightBarButton(nil, animated: true)
+                return
+            }
+            comments.append(commentId)
+        }
+        guard let postId = post.id else { return }
+        NetworkController.main.mix(comments: comments, on: postId, completion: {
+            NetworkController.main.fetchPost(id: postId, completion: { (post) in
                 self.post = post
                 DispatchQueue.main.async {
                     self.mixedTrackContainer?.isNewTrackBeingAdded = true
@@ -175,6 +184,7 @@ extension DetailViewController:MixedTracksContainerCellDelegate{
     }
 }
 
+// MARK:RecorderCellDelegate
 extension DetailViewController:RecorderCellDelegate{
     func uploadDidFinished(with post: Post?) {
         guard let post = post else { return }
@@ -195,7 +205,8 @@ extension DetailViewController:RecorderCellDelegate{
     func showInstrumentPicker(){
         ActionSheetStringPicker.show(withTitle: "어떤 악기였나요?", rows: Instrument.cases, initialSelection: 0, doneBlock: { (picker, row, result) in
                 let selectedInstrument = Instrument.cases[row]
-            RecordConductor.main.confirmComment(on: self.post.id, of: selectedInstrument, completion: { (postResult) in
+            guard let postId = self.post.id else { return }
+            RecordConductor.main.confirmComment(on: postId, of: selectedInstrument, completion: { (postResult) in
                 guard let postResult = postResult else { return }
                 self.post = postResult
                 self.commentTrackContainer?.isNewTrackBeingAdded = true
@@ -203,7 +214,6 @@ extension DetailViewController:RecorderCellDelegate{
                 self.mainTV.reloadSections(ids, with: .automatic)
             })
         }, cancel: { (picker) in
-            
         }, origin: self.view)
     }
 }
@@ -251,8 +261,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             return cell
         }else if Section(rawValue: indexPath.section) == .CommentTracks {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTracksContainer", for: indexPath) as! CommentContainerCell
-            cell.allComments = post.comment_tracks
-            cell.delegate = self
+            cell.allComments = post.comment_tracks; cell.delegate = self
             if DataCenter.main.userNickName == post.author{
                 cell.commentTV.allowsMultipleSelection = true
             }
@@ -297,7 +306,8 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         }else{
             /// 그게 아니라면, 프로필 페이지에 있는 Post객체는 제한된 정보만 가지고 있기 때문에,
             /// 온전한 Post객체를 다시 서버에서 받아와야 함.
-            NetworkController.main.fetchPost(id: post.id) { (fetchedPost) in
+            guard let postId = post.id else { return }
+            NetworkController.main.fetchPost(id: postId) { (fetchedPost) in
                 let nextVC = UIStoryboard(name: "Detail", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
                 nextVC.post = fetchedPost
                 DispatchQueue.main.async { vc.navigationController?.show(nextVC, sender: nil) }
