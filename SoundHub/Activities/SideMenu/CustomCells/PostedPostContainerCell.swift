@@ -11,7 +11,9 @@ import UIKit
 class PostContainerCell: UICollectionViewCell{
     var posts:[Post]?
     var delegate:PostContainerCellDelegate?
-    var isFirstRowReAppearing = false
+    var firstCell:PostListCell!
+    var hasFirstRowDisappeared = false
+    var lastOffset:CGFloat = 0
     var parent:FlowContainerCell!
     @IBOutlet weak var postTB: UITableView!
     
@@ -31,6 +33,9 @@ extension PostContainerCell: UITableViewDelegate, UITableViewDataSource, UIScrol
         let cell = tableView.dequeueReusableCell(withIdentifier: "postedPostCell", for: indexPath) as! PostListCell
         guard let posts = posts else { return cell }
         cell.postInfo = posts[indexPath.item]
+        if indexPath == IndexPath(item: 0, section: 0){
+            firstCell = cell
+        }
         return cell
     }
     
@@ -43,13 +48,30 @@ extension PostContainerCell: UITableViewDelegate, UITableViewDataSource, UIScrol
         delegate?.shouldGoTo(post: posts[indexPath.item])
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(scrollView.contentOffset.y)
-        if (scrollView.contentOffset.y <= 0){
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath == IndexPath(item: 0, section: 0) && hasFirstRowDisappeared{
             postTB.isScrollEnabled = false
-            parent.parent.isScrollEnabled = true
+            postTB.scrollToRow(at: IndexPath(item:0,section:0), at: .top, animated: true)
+            parent.parent.mainTV.scrollToRow(at: IndexPath(item:0,section:0), at: .top, animated: true)
+            hasFirstRowDisappeared = false
         }
     }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath == IndexPath(item: 0, section: 0){
+            hasFirstRowDisappeared = true
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if lastOffset > scrollView.contentOffset.y {
+            if postTB.visibleCells.contains(firstCell){
+                postTB.isScrollEnabled = false
+                parent.parent.mainTV.scrollToRow(at: IndexPath(item:0,section:0), at: .top, animated: true)
+            }
+        }
+    }
+
 }
 
 extension PostContainerCell{

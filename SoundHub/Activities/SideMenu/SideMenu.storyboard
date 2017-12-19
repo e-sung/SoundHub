@@ -219,7 +219,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" sectionIndexMinimumDisplayRowCount="3" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="86P-hi-uWu">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" sectionIndexMinimumDisplayRowCount="3" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="86P-hi-uWu">
                                 <rect key="frame" x="0.0" y="20" width="375" height="1280"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
@@ -758,6 +758,7 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="86P-hi-uWu" firstAttribute="bottom" secondItem="24D-am-hlx" secondAttribute="bottom" id="9ww-nc-WZQ"/>
                             <constraint firstItem="86P-hi-uWu" firstAttribute="leading" secondItem="24D-am-hlx" secondAttribute="leading" id="Sbg-Rx-RHO"/>
@@ -765,6 +766,9 @@
                             <constraint firstItem="24D-am-hlx" firstAttribute="trailing" secondItem="86P-hi-uWu" secondAttribute="trailing" id="fdc-jp-gB9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="24D-am-hlx"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="wKn-3W-k5b" appends="YES" id="tXD-My-49q"/>
+                        </connections>
                     </view>
                     <size key="freeformSize" width="375" height="1300"/>
                     <connections>
@@ -772,6 +776,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b8F-Tx-6Ua" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="up" id="wKn-3W-k5b">
+                    <connections>
+                        <action selector="swipeDidHappend:" destination="Qam-ff-f9z" id="heZ-2S-M6e"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2573.5999999999999" y="-948.12593703148434"/>
         </scene>

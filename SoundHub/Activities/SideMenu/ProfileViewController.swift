@@ -93,6 +93,14 @@ class ProfileViewController: UIViewController{
         headerCell!.isSettingPhase = true
     }
     
+    @IBAction func swipeDidHappend(_ sender: UISwipeGestureRecognizer) {
+        
+        if sender.direction == .up {
+            mainTV.scrollToRow(at: IndexPath(item: 0, section: 1) , at: .top, animated: true)
+            flowCell?.isScrollEnabled = true
+        }
+    }
+    
     // MARK: IBOutlets
     /**
      최상단의 TableView
@@ -174,8 +182,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
         if indexPath.section == 0 {
             return ProfileHeaderCell.defaultHeight
         }else{
-            guard let userInfo = userInfo else { return 0 }
-            guard let posts = userInfo.post_set else { return 0 }
             return self.view.frame.height
         }
     }
@@ -185,13 +191,14 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return section == 0 ? 0 : 60
     }
+
     
-    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath == IndexPath(item: 0, section: 0){
-            mainTV.isScrollEnabled = false
-            flowCell?.isScrollEnabled = true
-        }
-    }
+//    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        if indexPath == IndexPath(item: 0, section: 0){
+//            mainTV.isScrollEnabled = false
+//            flowCell?.isScrollEnabled = true
+//        }
+//    }
     
 }
 
