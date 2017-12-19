@@ -52,21 +52,15 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-
     @IBAction func onTouchHandler(_ sender: UITapGestureRecognizer) {
-        if isKeyboardUp {
-            self.view.endEditing(true)
-        }else{
-            self.dismiss(animated: true, completion: nil)
-        }
+        if isKeyboardUp { self.view.endEditing(true) }
+        else{ self.dismiss(animated: true, completion: nil) }
     }
     
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        for tf in textFields{
-            tf.delegate = self
-        }
+        for tf in textFields{ tf.delegate = self }
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardDidShow, object: nil, queue: nil) { (noti) in
             self.isKeyboardUp = true
         }

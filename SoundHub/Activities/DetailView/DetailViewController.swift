@@ -9,6 +9,7 @@
 import UIKit
 import AudioKit
 import AVFoundation
+import ActionSheetPicker_3_0
 
 class DetailViewController: UIViewController{
     
@@ -56,7 +57,10 @@ class DetailViewController: UIViewController{
     // MARK: IBOutlets
     /// 이 VC의 최상단 테이블뷰
     @IBOutlet weak private var mainTV: UITableView!
-
+    @IBAction func unwindToDetailView(segue:UIStoryboardSegue) {
+        self.commentTrackContainer?.isNewTrackBeingAdded = true
+        self.mainTV.reloadData()
+    }
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,7 +72,7 @@ class DetailViewController: UIViewController{
         }
         if let authorTrackURL = post.authorTrackRemoteURL{
             authorTrackPlayer = AVPlayer(url:authorTrackURL)
-            NetworkController.main.downloadAudio(from: authorTrackURL, done: { (localURL) in
+            NetworkController.main.downloadAudio(from: authorTrackURL, completion: { (localURL) in
                 self.authorTrackPlayer = AVPlayer(url:localURL)
             })
         }
@@ -109,6 +113,7 @@ extension DetailViewController:ModeToggleCellDelegate{
     }
 }
 
+// MARK: Playable 프로토콜 구현
 extension DetailViewController:Playable{
     func reflect(progress:Float){
         self.masterWaveCell?.reflect(progress: progress)
@@ -116,43 +121,21 @@ extension DetailViewController:Playable{
     
     func stop(){
         currentPhase = .Ready
-        for player in allAudioPlayers {
-            player?.stop()
-
-//            DispatchQueue.global(qos: .userInteractive).async {
-//                player?.stop()
-//            }
-        }
+        for player in allAudioPlayers { player?.stop() }
     }
     
     func play(){
         currentPhase = .Playing
-        for player in allAudioPlayers {
-            player?.play()
-
-//            DispatchQueue.global(qos: .userInteractive).async {
-//                player?.play()
-//            }
-        }
+        for player in allAudioPlayers { player?.play() }
     }
     
     func pause(){
         currentPhase = .Ready
-        for player in allAudioPlayers {
-            player?.pause()
-//            DispatchQueue.global(qos: .userInteractive).async {
-//                player?.pause()
-//            }
-        }
+        for player in allAudioPlayers { player?.pause() }
     }
     
     func seek(to point:Float){
-        for player in allAudioPlayers {
-            player?.seek(to: point)
-//            DispatchQueue.global(qos: .userInteractive).async {
-//                player?.seek(to: point)
-//            }
-        }
+        for player in allAudioPlayers { player?.seek(to: point) }
         reflect(progress: point)
     }
     
@@ -161,34 +144,38 @@ extension DetailViewController:Playable{
     }
     
     func setMute(to value: Bool) {
-        for player in allAudioPlayers {
-            player?.setMute(to: value)
-//            DispatchQueue.global(qos: .userInteractive).async {
-//                player?.setMute(to: value)
-//            }
-        }
+        for player in allAudioPlayers { player?.setMute(to: value) }
     }
 }
 
-
+// MARK: MixedTracksContainerCellDelegate
 extension DetailViewController:MixedTracksContainerCellDelegate{
     func didSelectionOccured(on comments: [Comment]) {
         if comments.count == 0 { navigationItem.setRightBarButton(nil, animated: true); return }
         selectedComments = comments
         navigationItem.setRightBarButton(
-            UIBarButtonItem(title: "Merge", style: .plain, target: self, action: #selector(merge)),
+            UIBarButtonItem(title: "Merge", style: .plain, target: self, action: #selector(mix)),
             animated: true)
     }
-    @objc private func merge(){
+    @objc private func mix(){
         guard let selectedComments = selectedComments else { return }
         var comments:[Int] = []
-        for comment in selectedComments{ comments.append(comment.id) }
-        NetworkController.main.merge(comments: comments, on: post.id, completion: {
-            NetworkController.main.fetchPost(id: self.post.id, completion: { (post) in
+        for comment in selectedComments{
+            guard let commentId = comment.id else {
+                self.mixedTrackContainer?.allowsMultiSelection = false
+                self.navigationItem.setRightBarButton(nil, animated: true)
+                return
+            }
+            comments.append(commentId)
+        }
+        guard let postId = post.id else { return }
+        NetworkController.main.mix(comments: comments, on: postId, completion: {
+            NetworkController.main.fetchPost(id: postId, completion: { (post) in
                 self.post = post
                 DispatchQueue.main.async {
                     self.mixedTrackContainer?.isNewTrackBeingAdded = true
-                    self.mainTV.reloadData()
+                    let ids = IndexSet(integersIn: Section.MixedTracks.rawValue ... Section.MixedTracks.rawValue)
+                    self.mainTV.reloadSections(ids, with: .automatic)
                     self.mixedTrackContainer?.allowsMultiSelection = false
                     self.navigationItem.setRightBarButton(nil, animated: true)
                 }
@@ -197,6 +184,7 @@ extension DetailViewController:MixedTracksContainerCellDelegate{
     }
 }
 
+// MARK:RecorderCellDelegate
 extension DetailViewController:RecorderCellDelegate{
     func uploadDidFinished(with post: Post?) {
         guard let post = post else { return }
@@ -207,22 +195,26 @@ extension DetailViewController:RecorderCellDelegate{
     func shouldShowAlert() {
         let alert = UIAlertController(title: "녹음 업로드", message: "녹음을 업로드 하시겠습니까?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .cancel , handler: { (action) in
-            let asset = RecordConductor.main.player.audioFile.avAsset
-            RecordConductor.main.exportComment(asset: asset, completion: { (outputURL) in
-                NetworkController.main.uploadAudioComment(In: outputURL, to: self.post.id, instrument: "Guitar", completion: {
-                    NetworkController.main.fetchPost(id: self.post.id, completion: { (post) in
-                        self.post = post
-                        DispatchQueue.main.async {
-                            self.mainTV.reloadData()
-                            self.commentTrackContainer?.isNewTrackBeingAdded = true
-                        }
-                    })
-                })
-            })
+            self.showInstrumentPicker()
         }))
         alert.addAction(UIAlertAction(title: "취소", style: .destructive, handler: { (action) in
         }))
         present(alert, animated: true, completion: nil)
+    }
+    
+    func showInstrumentPicker(){
+        ActionSheetStringPicker.show(withTitle: "어떤 악기였나요?", rows: Instrument.cases, initialSelection: 0, doneBlock: { (picker, row, result) in
+                let selectedInstrument = Instrument.cases[row]
+            guard let postId = self.post.id else { return }
+            RecordConductor.main.confirmComment(on: postId, of: selectedInstrument, completion: { (postResult) in
+                guard let postResult = postResult else { return }
+                self.post = postResult
+                self.commentTrackContainer?.isNewTrackBeingAdded = true
+                let ids = IndexSet(integersIn: Section.CommentTracks.rawValue ... Section.CommentTracks.rawValue)
+                self.mainTV.reloadSections(ids, with: .automatic)
+            })
+        }, cancel: { (picker) in
+        }, origin: self.view)
     }
 }
 
@@ -269,8 +261,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             return cell
         }else if Section(rawValue: indexPath.section) == .CommentTracks {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTracksContainer", for: indexPath) as! CommentContainerCell
-            cell.allComments = post.comment_tracks
-            cell.delegate = self
+            cell.allComments = post.comment_tracks; cell.delegate = self
             if DataCenter.main.userNickName == post.author{
                 cell.commentTV.allowsMultipleSelection = true
             }
@@ -312,7 +303,8 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         }else{
             /// 그게 아니라면, 프로필 페이지에 있는 Post객체는 제한된 정보만 가지고 있기 때문에,
             /// 온전한 Post객체를 다시 서버에서 받아와야 함.
-            NetworkController.main.fetchPost(id: post.id) { (fetchedPost) in
+            guard let postId = post.id else { return }
+            NetworkController.main.fetchPost(id: postId) { (fetchedPost) in
                 let nextVC = UIStoryboard(name: "Detail", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
                 nextVC.post = fetchedPost
                 DispatchQueue.main.async { vc.navigationController?.show(nextVC, sender: nil) }
