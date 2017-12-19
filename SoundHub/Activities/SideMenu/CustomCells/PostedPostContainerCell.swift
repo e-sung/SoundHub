@@ -11,7 +11,7 @@ import UIKit
 class PostContainerCell: UICollectionViewCell{
     var posts:[Post]?
     var delegate:PostContainerCellDelegate?
-    var firstCell:PostListCell!
+    var firstCell:UITableViewCell!
     var lastOffset:CGFloat = 0
     var parent:FlowContainerCell!
     var headerTitle:String!
@@ -33,18 +33,27 @@ extension PostContainerCell: UITableViewDelegate, UITableViewDataSource, UIScrol
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "postedPostCell", for: indexPath) as! PostListCell
-        guard let posts = posts else { return cell }
+        guard let posts = posts else {
+            let cell = UITableViewCell(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 60))
+            if indexPath == IndexPath(item: 0, section: 0){ firstCell = cell }
+            return cell
+        }
         if posts.count > 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "postedPostCell", for: indexPath) as! PostListCell
             cell.postInfo = posts[indexPath.item]
+            if indexPath == IndexPath(item: 0, section: 0){ firstCell = cell }
+            return cell
+        }else{
+            let cell = UITableViewCell(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 60))
+            let content = UIView.generateHeaderView(with: "비어있네요!", and: 60)
+            cell.addSubview(content)
+            if indexPath == IndexPath(item: 0, section: 0){ firstCell = cell }
+            return cell
         }
-        if indexPath == IndexPath(item: 0, section: 0){
-            firstCell = cell
-        }
-        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if posts?.count == 0 { return 50 }
         return PostListCell.defaultHeight
     }
     
