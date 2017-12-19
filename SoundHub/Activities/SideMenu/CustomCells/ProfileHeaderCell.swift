@@ -24,6 +24,7 @@ class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate, UITex
     @IBOutlet weak private var nickNameTF: UITextField!
     @IBOutlet weak var numFollowingLB: UILabel!
     @IBOutlet weak var numFollowerLB: UILabel!
+    @IBOutlet weak var instrumentTF: UITextField!
     
     // MARK: IBActions
     @IBAction private func headerImageChangeHandler(_ sender: UIButton) {
@@ -43,6 +44,7 @@ class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate, UITex
             _isSettingPhase = newVal
             profileImageButton.isUserInteractionEnabled = newVal
             headerImageButton.isUserInteractionEnabled = newVal
+            instrumentTF.isEnabled = newVal
             nickNameTF.isEnabled = newVal
             nickNameTF.becomeFirstResponder()
         }
@@ -51,6 +53,10 @@ class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate, UITex
     var nickName:String{
         get { return nickNameTF.text! }
         set(newVal){ nickNameTF.text = newVal }
+    }
+    var instrument:String{
+        get { return instrumentTF.text! }
+        set(newVal){ instrumentTF.text = newVal }
     }
 
     func refresh(with userInfo:User?){
@@ -64,6 +70,7 @@ class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate, UITex
         nickName = userInfo.nickname
         numFollowingLB.text = "\(userInfo.num_followings ?? 0)"
         numFollowerLB.text = "\(userInfo.num_followers ?? 0)"
+        instrumentTF.text = userInfo.instrument
         settingButton.isHidden = true
         guard let userId = UserDefaults.standard.string(forKey: id) else { return }
         guard let uid = Int(userId) else { return }

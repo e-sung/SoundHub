@@ -64,7 +64,8 @@ class ProfileViewController: UIViewController{
         /// 변경내용을 서버에 반영
         NetworkController.main.patchProfileImage(with: changedProfileImage)
         NetworkController.main.patchHeaderImage(with: changedHeaderImage)
-        NetworkController.main.patchUser(nickname: headerCell?.nickName) { (requestSucceded) in
+        guard let headerCell = headerCell else { return }
+        NetworkController.main.patchUser(nickname: headerCell.nickName, instrument: headerCell.instrument) { (requestSucceded) in
             if requestSucceded == true {
                 /// 네트워크 세션이 끝난 지금까지도 각종 UI에 변경되기 전 User데이터가 표시되고 있음.
                 /// 또 DataCenter.main 에도 아직 새 User객체가 반영되지 않았음.
@@ -78,7 +79,7 @@ class ProfileViewController: UIViewController{
                 self.alert(msg: "요청이 실패했습니다. 어떻게 된걸까요?")
             }
         }
-        headerCell!.isSettingPhase = false
+        headerCell.isSettingPhase = false
     }
     
     // MARK: IBActions
