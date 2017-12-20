@@ -23,6 +23,9 @@ class DetailViewController: UIViewController{
     private var masterWaveCell:MasterWaveFormViewCell?
     /// 녹음하는 셀
     private var recorderCell: RecorderCell?
+    /// AudioUnit들을 보여주는 셀
+    private var audioUnitCell: AudioUnitCell?
+    private var heightOfAudioUnitCell:CGFloat = 0
     /// Master Track을 재생하는 플레이어
     private var masterAudioPlayer:AVPlayer?{
         didSet(oldVal){
@@ -57,10 +60,7 @@ class DetailViewController: UIViewController{
     // MARK: IBOutlets
     /// 이 VC의 최상단 테이블뷰
     @IBOutlet weak private var mainTV: UITableView!
-    @IBAction func unwindToDetailView(segue:UIStoryboardSegue) {
-        self.commentTrackContainer?.isNewTrackBeingAdded = true
-        self.mainTV.reloadData()
-    }
+
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -186,6 +186,17 @@ extension DetailViewController:MixedTracksContainerCellDelegate{
 
 // MARK:RecorderCellDelegate
 extension DetailViewController:RecorderCellDelegate{
+    func didButtonClicked() {
+        heightOfAudioUnitCell = CGFloat(UIScreen.main.bounds.height - 100 - PlayBarController.main.view.frame.height - (navigationController?.navigationBar.frame.height ?? 0) )
+        CATransaction.begin()
+        CATransaction.setCompletionBlock {
+            self.mainTV.scrollToRow(at: IndexPath(item: 0, section: Section.RecordCell.rawValue), at: .bottom, animated: true)
+        }
+        mainTV.beginUpdates()
+        mainTV.endUpdates()
+        CATransaction.commit()
+    }
+    
     func uploadDidFinished(with post: Post?) {
         guard let post = post else { return }
         self.post = post
@@ -267,14 +278,14 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             }
             commentTrackContainer = cell
             return cell
-        }
-        else if Section(rawValue: indexPath.section) == .RecordCell {
+        }else if Section(rawValue: indexPath.section) == .RecordCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: "recorderCell", for: indexPath) as! RecorderCell
             cell.delegate = self
             recorderCell = cell
             return cell
-        }else if Section(rawValue: indexPath.section ) == .AudioUnitSelecter {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"AudioUnitSelectingCell", for: indexPath) as! AudioUnitSelectingCell
+        }else if Section(rawValue: indexPath.section) == .AudioUnitCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "AudioUnitCell", for: indexPath) as! AudioUnitCell
+            audioUnitCell = cell
             return cell
         }else{
             return UITableViewCell()
@@ -289,9 +300,13 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             return CGFloat(post.numOfMixedTracks * 100)
         }else if Section(rawValue:indexPath.section) == .CommentTracks{
             return CGFloat(post.numOfCommentTracks * 100)
+        }else if Section(rawValue: indexPath.section) == .AudioUnitCell{
+            return heightOfAudioUnitCell
         }
         return 100
     }
+    
+    
     
     /**
      특정 post를 보여주는 DetailViewController로 이동하는 함수
@@ -324,8 +339,8 @@ extension DetailViewController{
         case MixedTracks = 2
         case CommentTrackToggler = 3
         case CommentTracks = 4
-        case RecordCell = 5
-        case AudioUnitSelecter = 6
+        case AudioUnitCell = 5
+        case RecordCell = 6
         /**
          모든 Section의 경우의 수
          

@@ -8,10 +8,9 @@
 
 import UIKit
 
-class AudioUnitSelectingCell: UITableViewCell {
+class AudioUnitCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 }
