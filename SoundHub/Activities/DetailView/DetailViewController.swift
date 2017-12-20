@@ -23,8 +23,6 @@ class DetailViewController: UIViewController{
     private var masterWaveCell:MasterWaveFormViewCell?
     /// 녹음하는 셀
     private var recorderCell: RecorderCell?
-    /// AudioUnit들을 보여주는 셀
-    private var audioUnitContainer: AudioUnitContainer?
     private var heightOfRecordingCell:CGFloat = 100
     /// Master Track을 재생하는 플레이어
     private var masterAudioPlayer:AVPlayer?{

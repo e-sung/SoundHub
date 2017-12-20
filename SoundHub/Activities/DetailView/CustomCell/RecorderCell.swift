@@ -12,20 +12,43 @@ import AudioKitUI
 class RecorderCell: UITableViewCell {
 
     var delegate:RecorderCellDelegate?
+    var auManager: AKAudioUnitManager!
+    private var availableEffects:[String] = []
     var postId:Int!
     var isActive = false
+    
+    @IBOutlet weak var audioUnitContainerFlowLayout: UICollectionView!
     @IBOutlet private weak var recordButton: UIButton!
     @IBOutlet private weak var inputPlot: AKNodeOutputPlot!
     override func awakeFromNib() {
         super.awakeFromNib()
-        state = .readyToRecord
+        audioUnitContainerFlowLayout.delegate = self
+        audioUnitContainerFlowLayout.dataSource = self
+        audioUnitContainerFlowLayout.isHidden = true
+        
         inputPlot.node = RecordConductor.main.mic
+        
+        auManager = AKAudioUnitManager()
+        auManager.delegate = self
+        auManager.requestEffects { (audioComponents) in
+            for component in audioComponents{
+                if component.name != ""{
+                    self.availableEffects.append(component.name)
+                }
+            }
+            self.audioUnitContainerFlowLayout.reloadData()
+        }
+        auManager.input = RecordConductor.main.player
+        auManager.output = RecordConductor.main.mainMixer
+        
+        state = .readyToRecord
     }
     
     func activate(){
         self.isActive = true
         state = .readyToRecord
         inputPlot.node = RecordConductor.main.mic
+        audioUnitContainerFlowLayout.isHidden = false
     }
     
     @IBAction private func recordButtonHandler(_ sender: UIButton) {
@@ -87,6 +110,40 @@ class RecorderCell: UITableViewCell {
         RecordConductor.main.stopRecording()
     }
     
+}
+
+extension RecorderCell:UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return availableEffects.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AUCell", for: indexPath) as! AUCell
+        cell.titleLB.text = availableEffects[indexPath.item]
+        return cell
+    }
+    
+}
+
+extension RecorderCell:UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 100, height: 100)
+    }
+}
+
+extension RecorderCell:AKAudioUnitManagerDelegate{
+    func handleAudioUnitNotification(type: AKAudioUnitManager.Notification, object: Any?) {
+        
+    }
+    
+    func handleEffectAdded(at auIndex: Int) {
+        
+    }
+    
+    func handleEffectRemoved(at auIndex: Int) {
+        
+    }
+ 
 }
 
 protocol RecorderCellDelegate {

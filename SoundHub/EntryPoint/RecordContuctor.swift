@@ -15,12 +15,13 @@ class RecordConductor{
     
     private var micMixer:AKMixer!
     private var moogLadder: AKMoogLadder!
-    private var mainMixer: AKMixer!
     
     var mic: AKMicrophone!
     var micBooster: AKBooster!
     var recorder:AKNodeRecorder!
     var player:AKAudioPlayer!
+    var mainMixer: AKMixer!
+
     
     init(){
         setUpSession()

@@ -21,7 +21,6 @@
 		FF0280601FD8E64A00C0013A /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF02805F1FD8E64900C0013A /* UITableViewCell.swift */; };
 		FF0280621FD8ECD300C0013A /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0280611FD8ECD300C0013A /* UIView.swift */; };
 		FF0280661FD901AB00C0013A /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0280651FD901AB00C0013A /* Genre.swift */; };
-		FF0B73261FE94C270055DFD8 /* AudioUnitContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0B73251FE94C270055DFD8 /* AudioUnitContainer.swift */; };
 		FF1054321FD518BA00A46443 /* AudioRecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1054311FD518BA00A46443 /* AudioRecorderViewController.swift */; };
 		FF3995D81FE3878F004B1F86 /* FlowContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3995D71FE3878F004B1F86 /* FlowContainerCell.swift */; };
 		FF3995DA1FE38C4A004B1F86 /* PostedPostContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3995D91FE38C4A004B1F86 /* PostedPostContainerCell.swift */; };
@@ -76,6 +75,7 @@
 		FFCF82ED1FC95E07003B7861 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCF82EC1FC95E07003B7861 /* EntryViewController.swift */; };
 		FFCF82EF1FC95E6D003B7861 /* LogIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFCF82EE1FC95E6D003B7861 /* LogIn.storyboard */; };
 		FFD500AC1FDE509F008464A8 /* PlayBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD500AB1FDE509F008464A8 /* PlayBarController.swift */; };
+		FFEAE1A91FEA52B700FD7D7F /* AUCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEAE1A81FEA52B700FD7D7F /* AUCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,7 +117,6 @@
 		FF0280611FD8ECD300C0013A /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		FF0280651FD901AB00C0013A /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		FF038E411FE17B1400AED2B5 /* SoundHub-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoundHub-Bridging-Header.h"; sourceTree = "<group>"; };
-		FF0B73251FE94C270055DFD8 /* AudioUnitContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioUnitContainer.swift; sourceTree = "<group>"; };
 		FF1054311FD518BA00A46443 /* AudioRecorderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderViewController.swift; sourceTree = "<group>"; };
 		FF3995D71FE3878F004B1F86 /* FlowContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowContainerCell.swift; sourceTree = "<group>"; };
 		FF3995D91FE38C4A004B1F86 /* PostedPostContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostedPostContainerCell.swift; sourceTree = "<group>"; };
@@ -180,6 +179,7 @@
 		FFCF82EC1FC95E07003B7861 /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
 		FFCF82EE1FC95E6D003B7861 /* LogIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LogIn.storyboard; sourceTree = "<group>"; };
 		FFD500AB1FDE509F008464A8 /* PlayBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayBarController.swift; sourceTree = "<group>"; };
+		FFEAE1A81FEA52B700FD7D7F /* AUCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AUCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -401,8 +401,8 @@
 				FF02805D1FD805F500C0013A /* ModeToggleCell.swift */,
 				FFC32AE71FCFBFDB00651A31 /* MasterWaveFormViewCell.swift */,
 				FF9D18531FDA6012008D5FD1 /* CommentContainerCell.swift */,
+				FFEAE1A81FEA52B700FD7D7F /* AUCell.swift */,
 				FF64BA0D1FDD36F4000A846B /* RecorderCell.swift */,
-				FF0B73251FE94C270055DFD8 /* AudioUnitContainer.swift */,
 			);
 			path = CustomCell;
 			sourceTree = "<group>";
@@ -838,13 +838,13 @@
 				FF3995DA1FE38C4A004B1F86 /* PostedPostContainerCell.swift in Sources */,
 				FF000D9B1FD135D400678999 /* DocumentBrowserViewController.swift in Sources */,
 				FFC32AE41FCF8E1500651A31 /* Comment.swift in Sources */,
+				FFEAE1A91FEA52B700FD7D7F /* AUCell.swift in Sources */,
 				FF02805C1FD7B9A400C0013A /* String.swift in Sources */,
 				FFC32AE81FCFBFDB00651A31 /* MasterWaveFormViewCell.swift in Sources */,
 				FFB85FCE1FCE657F000E47C8 /* ProfileViewController.swift in Sources */,
 				FF688F781FCE58B700F0A41F /* SideMenuViewController.swift in Sources */,
 				FF3B20BF1FCC2B0E0019F87A /* LoginViewController.swift in Sources */,
 				FF9D18561FDA79E8008D5FD1 /* Generics.swift in Sources */,
-				FF0B73261FE94C270055DFD8 /* AudioUnitContainer.swift in Sources */,
 				FFCDE7DA1FE7FB5C0008CCB9 /* UITableView.swift in Sources */,
 				FFB85FD21FCE79A3000E47C8 /* User.swift in Sources */,
 				FF0280661FD901AB00C0013A /* Genre.swift in Sources */,
