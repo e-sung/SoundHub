@@ -12,7 +12,7 @@ import Foundation
 struct Post:Codable{
     let id:Int?
     let title:String?
-    let author:String?
+    let author:Int?
     let instrument:String?
     let genre:String?
     let liked:[Int]?
