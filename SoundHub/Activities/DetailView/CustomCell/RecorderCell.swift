@@ -52,6 +52,11 @@ class RecorderCell: UITableViewCell {
         self.contentView.backgroundColor = .white
     }
     
+    func deActivate(){
+        self.isActive = false
+        audioUnitContainerFlowLayout.isHidden = true
+    }
+    
     @IBAction private func recordButtonHandler(_ sender: UIButton) {
         if self.isActive == false{
             self.deinitialize()

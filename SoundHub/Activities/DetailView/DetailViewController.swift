@@ -215,14 +215,25 @@ extension DetailViewController:RecorderCellDelegate{
     
     func showInstrumentPicker(){
         ActionSheetStringPicker.show(withTitle: "어떤 악기였나요?", rows: Instrument.cases, initialSelection: 0, doneBlock: { (picker, row, result) in
-                let selectedInstrument = Instrument.cases[row]
+            
+            let selectedInstrument = Instrument.cases[row]
             guard let postId = self.post.id else { return }
             RecordConductor.main.confirmComment(on: postId, of: selectedInstrument, completion: { (postResult) in
                 guard let postResult = postResult else { return }
                 self.post = postResult
                 self.commentTrackContainer?.isNewTrackBeingAdded = true
-                let ids = IndexSet(integersIn: Section.CommentTracks.rawValue ... Section.CommentTracks.rawValue)
-                self.mainTV.reloadSections(ids, with: .automatic)
+                
+                self.heightOfRecordingCell = 100
+                self.recorderCell?.deActivate()
+                CATransaction.begin()
+                CATransaction.setCompletionBlock {
+                    self.mainTV.scrollToRow(at: IndexPath(item: 0, section: Section.RecordCell.rawValue), at: .bottom, animated: true)
+//                    let ids = IndexSet(integersIn: Section.CommentTracks.rawValue ... Section.CommentTracks.rawValue)
+//                    self.mainTV.reloadSections(ids, with: .automatic)
+                }
+                self.mainTV.beginUpdates()
+                self.mainTV.endUpdates()
+                CATransaction.commit()
             })
         }, cancel: { (picker) in
         }, origin: self.view)
