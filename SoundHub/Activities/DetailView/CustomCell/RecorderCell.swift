@@ -22,13 +22,16 @@ class RecorderCell: UITableViewCell {
         inputPlot.node = RecordConductor.main.mic
     }
     
+    func activate(){
+        self.isActive = true
+        state = .readyToRecord
+        inputPlot.node = RecordConductor.main.mic
+    }
+    
     @IBAction private func recordButtonHandler(_ sender: UIButton) {
         if self.isActive == false{
             self.deinitialize()
             delegate?.shouldBecomeActive()
-            self.isActive = true
-            state = .readyToRecord
-            inputPlot.node = RecordConductor.main.mic
         }else {
             switch state! {
             case .readyToRecord :

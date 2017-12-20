@@ -188,9 +188,15 @@ extension DetailViewController:MixedTracksContainerCellDelegate{
 // MARK:RecorderCellDelegate
 extension DetailViewController:RecorderCellDelegate{
     func shouldBecomeActive() {
-        heightOfRecordingCell = CGFloat(UIScreen.main.bounds.height - 100 - PlayBarController.main.view.frame.height - (navigationController?.navigationBar.frame.height ?? 0) )
+        heightOfRecordingCell = CGFloat(UIScreen.main.bounds.height - PlayBarController.main.view.frame.height - (navigationController?.navigationBar.frame.height ?? 0) )
+        CATransaction.begin()
+        CATransaction.setCompletionBlock {
+            self.mainTV.scrollToRow(at: IndexPath(item: 0, section: Section.RecordCell.rawValue), at: .bottom, animated: true)
+            self.recorderCell?.activate()
+        }
         mainTV.beginUpdates()
         mainTV.endUpdates()
+        CATransaction.commit()
     }
     
     func uploadDidFinished(with post: Post?) {
