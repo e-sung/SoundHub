@@ -186,7 +186,7 @@ extension DetailViewController:MixedTracksContainerCellDelegate{
 
 // MARK:RecorderCellDelegate
 extension DetailViewController:RecorderCellDelegate{
-    func didButtonClicked() {
+    func shouldBecomeActive() {
         heightOfAudioUnitCell = CGFloat(UIScreen.main.bounds.height - 100 - PlayBarController.main.view.frame.height - (navigationController?.navigationBar.frame.height ?? 0) )
         CATransaction.begin()
         CATransaction.setCompletionBlock {

@@ -13,37 +13,45 @@ class RecorderCell: UITableViewCell {
 
     var delegate:RecorderCellDelegate?
     var postId:Int!
+    var isActive = false
     @IBOutlet private weak var recordButton: UIButton!
     @IBOutlet private weak var inputPlot: AKNodeOutputPlot!
     override func awakeFromNib() {
         super.awakeFromNib()
-//        state = .readyToRecord
-//        inputPlot.node = RecordConductor.main.mic
+        state = .readyToRecord
+        inputPlot.node = RecordConductor.main.mic
     }
     
     @IBAction private func recordButtonHandler(_ sender: UIButton) {
-        delegate?.didButtonClicked()
-//        switch state! {
-//        case .readyToRecord :
-//            makeRecordingState()
-//        case .recording :
-//            makeReadyToPlayState()
-//        case .readyToPlay :
-//            RecordConductor.main.player.play()
-//            inputPlot.color = .orange
-//            inputPlot.node = RecordConductor.main.player
-//            recordButton.setTitle("확인", for: .normal)
-//            state = .playing
-//        case .playing :
-//            RecordConductor.main.player.stop()
-//            state = .readyToRecord
-//            recordButton.setTitle("녹음", for: .normal)
-//            let recordedDuration = RecordConductor.main.player != nil ? RecordConductor.main.player.audioFile.duration  : 0
-//            if recordedDuration > 0.0 {
-//                delegate?.shouldShowAlert()
-//                RecordConductor.main.recorder.stop()
-//            }
-//        }
+        if self.isActive == false{
+            self.deinitialize()
+            delegate?.shouldBecomeActive()
+            self.isActive = true
+            state = .readyToRecord
+            inputPlot.node = RecordConductor.main.mic
+        }else {
+            switch state! {
+            case .readyToRecord :
+                makeRecordingState()
+            case .recording :
+                makeReadyToPlayState()
+            case .readyToPlay :
+                RecordConductor.main.player.play()
+                inputPlot.color = .orange
+                inputPlot.node = RecordConductor.main.player
+                recordButton.setTitle("확인", for: .normal)
+                state = .playing
+            case .playing :
+                RecordConductor.main.player.stop()
+                state = .readyToRecord
+                recordButton.setTitle("녹음", for: .normal)
+                let recordedDuration = RecordConductor.main.player != nil ? RecordConductor.main.player.audioFile.duration  : 0
+                if recordedDuration > 0.0 {
+                    delegate?.shouldShowAlert()
+                    RecordConductor.main.recorder.stop()
+                }
+            }
+        }
     }
     
     // MARK: Private Enum
@@ -81,5 +89,5 @@ class RecorderCell: UITableViewCell {
 protocol RecorderCellDelegate {
     func uploadDidFinished(with post:Post?)->Void
     func shouldShowAlert()->Void
-    func didButtonClicked()->Void
+    func shouldBecomeActive()->Void
 }
