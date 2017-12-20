@@ -38,7 +38,7 @@ class DetailHeaderCell: UITableViewCell {
             guard let userId = newVal.author else { return }
             NetworkController.main.fetchUser(id: userId) { (userInfo) in
                 guard let userInfo = userInfo else { return }
-                self.authorNameLB.text = userInfo.nickname ?? ""
+                DispatchQueue.main.async { self.authorNameLB.text = userInfo.nickname ?? "" }
             }
         }
     }
