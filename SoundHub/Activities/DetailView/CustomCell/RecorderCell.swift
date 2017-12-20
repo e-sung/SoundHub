@@ -95,6 +95,9 @@ class RecorderCell: UITableViewCell {
     }
 
     private func makeRecordingState(){
+        if auManager.input != RecordConductor.main.player {
+            auManager.connectEffects(firstNode: RecordConductor.main.player, lastNode: RecordConductor.main.mainMixer)
+        }
         recordButton.setTitle("중지", for: .normal)
         inputPlot.color = .red
         state = .recording
@@ -129,6 +132,10 @@ extension RecorderCell:UICollectionViewDelegate, UICollectionViewDelegateFlowLay
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 100, height: 100)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        auManager.insertAudioUnit(name: availableEffects[indexPath.item], at: 0)
+    }
 }
 
 extension RecorderCell:AKAudioUnitManagerDelegate{
@@ -137,7 +144,10 @@ extension RecorderCell:AKAudioUnitManagerDelegate{
     }
     
     func handleEffectAdded(at auIndex: Int) {
-        
+        if RecordConductor.main.player.isStarted {
+            RecordConductor.main.player.stop()
+            RecordConductor.main.player.start()
+        }
     }
     
     func handleEffectRemoved(at auIndex: Int) {
