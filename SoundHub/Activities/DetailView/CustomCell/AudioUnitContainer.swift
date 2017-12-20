@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AudioUnitCell: UITableViewCell {
+class AudioUnitContainer: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()

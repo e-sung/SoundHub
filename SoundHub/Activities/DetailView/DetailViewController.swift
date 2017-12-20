@@ -24,7 +24,7 @@ class DetailViewController: UIViewController{
     /// 녹음하는 셀
     private var recorderCell: RecorderCell?
     /// AudioUnit들을 보여주는 셀
-    private var audioUnitCell: AudioUnitCell?
+    private var audioUnitContainer: AudioUnitContainer?
     private var heightOfAudioUnitCell:CGFloat = 0
     /// Master Track을 재생하는 플레이어
     private var masterAudioPlayer:AVPlayer?{
@@ -284,8 +284,8 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             recorderCell = cell
             return cell
         }else if Section(rawValue: indexPath.section) == .AudioUnitCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "AudioUnitCell", for: indexPath) as! AudioUnitCell
-            audioUnitCell = cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "AudioUnitContainerCell", for: indexPath) as! AudioUnitContainer
+            audioUnitContainer = cell
             return cell
         }else{
             return UITableViewCell()
