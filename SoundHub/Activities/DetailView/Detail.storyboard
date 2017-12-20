@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="modernTImes" translatesAutoresizingMaskIntoConstraints="NO" id="63U-n4-OqK">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_cover" translatesAutoresizingMaskIntoConstraints="NO" id="63U-n4-OqK">
                                 <rect key="frame" x="0.0" y="20" width="375" height="1180"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AM7-pL-X1c">
@@ -97,7 +97,7 @@
                                                                 <constraint firstAttribute="height" constant="100" id="Der-j9-sqy"/>
                                                                 <constraint firstAttribute="width" constant="100" id="VjM-in-jQ5"/>
                                                             </constraints>
-                                                            <state key="normal" backgroundImage="iu_profile"/>
+                                                            <state key="normal" backgroundImage="default-profile"/>
                                                             <connections>
                                                                 <action selector="authorProfileImageButtonHandler:" destination="P9h-w3-Lc5" eventType="touchUpInside" id="SN0-7C-leq"/>
                                                             </connections>
@@ -214,7 +214,7 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
-                                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iu_profile" translatesAutoresizingMaskIntoConstraints="NO" id="tsO-om-n59">
+                                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile" translatesAutoresizingMaskIntoConstraints="NO" id="tsO-om-n59">
                                                                                 <rect key="frame" x="10" y="5" width="70" height="70"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" secondItem="tsO-om-n59" secondAttribute="height" multiplier="1:1" id="cBs-JI-Jfl"/>
@@ -330,7 +330,7 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
-                                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iu_profile" translatesAutoresizingMaskIntoConstraints="NO" id="CAj-PR-muT">
+                                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile" translatesAutoresizingMaskIntoConstraints="NO" id="CAj-PR-muT">
                                                                                 <rect key="frame" x="10" y="5" width="70" height="70"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" constant="70" id="ZTh-X0-2ap"/>
@@ -470,7 +470,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="iu_profile" width="128" height="128"/>
-        <image name="modernTImes" width="316" height="316"/>
+        <image name="default-profile" width="376" height="376"/>
+        <image name="no_cover" width="270" height="270"/>
     </resources>
 </document>
