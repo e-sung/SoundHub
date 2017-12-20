@@ -49,6 +49,7 @@ class RecorderCell: UITableViewCell {
         state = .readyToRecord
         inputPlot.node = RecordConductor.main.mic
         audioUnitContainerFlowLayout.isHidden = false
+        self.contentView.backgroundColor = .white
     }
     
     @IBAction private func recordButtonHandler(_ sender: UIButton) {

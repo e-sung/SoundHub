@@ -473,6 +473,7 @@
                                                         <constraint firstAttribute="trailing" secondItem="F2b-XT-SDC" secondAttribute="trailing" constant="7" id="ypJ-Dc-BTd"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
+                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <connections>
                                                     <outlet property="audioUnitContainerFlowLayout" destination="LWf-A0-AYP" id="V83-eP-uei"/>
                                                     <outlet property="inputPlot" destination="F2b-XT-SDC" id="uoa-rF-Zea"/>
