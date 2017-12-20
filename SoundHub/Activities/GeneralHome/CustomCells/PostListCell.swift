@@ -26,13 +26,18 @@ class PostListCell: UITableViewCell {
         set(newVal){
             _postInfo = newVal
             postTitleLB.text = newVal.title
-            authorNameLB.text = newVal.author
+            
             if let numLiked = newVal.num_liked { totalLikesLB.text = "\(numLiked)" }
             else { totalLikesLB.text = "0" }
             if let numComments = newVal.num_comments { totalComments.text = "\(numComments)" }
             else { totalComments.text = "0" }
-
             
+            guard let userId = newVal.author else { return }
+            NetworkController.main.fetchUser(id: userId) { (userInfo) in
+                guard let userInfo = userInfo else { return }
+                self.authorNameLB.text = userInfo.nickname ?? ""
+            }
+
         }
     }
     private var _postInfo:Post!
