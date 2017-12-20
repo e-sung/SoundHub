@@ -415,16 +415,15 @@
                                                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             </collectionViewFlowLayout>
                                                             <cells>
-                                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="AUCell" id="IpA-Bg-jFe" customClass="AUCell" customModule="SoundHub" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AUCell" id="IpA-Bg-jFe" customClass="AUCell" customModule="SoundHub" customModuleProvider="target">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rGf-3u-HCI">
                                                                                 <rect key="frame" x="4" y="14" width="42" height="21"/>
-                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
@@ -432,6 +431,12 @@
                                                                         </subviews>
                                                                     </view>
                                                                     <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="0.7557523544520548" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="trailing" secondItem="rGf-3u-HCI" secondAttribute="trailing" id="NLA-j2-TN5"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="rGf-3u-HCI" secondAttribute="bottom" id="fHq-nn-hIK"/>
+                                                                        <constraint firstItem="rGf-3u-HCI" firstAttribute="top" secondItem="IpA-Bg-jFe" secondAttribute="top" id="one-Vn-cr5"/>
+                                                                        <constraint firstItem="rGf-3u-HCI" firstAttribute="leading" secondItem="IpA-Bg-jFe" secondAttribute="leading" id="rIF-EN-HxP"/>
+                                                                    </constraints>
                                                                     <size key="customSize" width="100" height="100"/>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -467,7 +472,7 @@
                                                         <constraint firstAttribute="trailing" secondItem="LWf-A0-AYP" secondAttribute="trailing" id="M3C-aO-5Y8"/>
                                                         <constraint firstItem="F2b-XT-SDC" firstAttribute="leading" secondItem="xgG-St-MdE" secondAttribute="trailing" constant="6" id="Rqe-2F-ugU"/>
                                                         <constraint firstAttribute="bottom" secondItem="F2b-XT-SDC" secondAttribute="bottom" id="ayu-tz-nRS"/>
-                                                        <constraint firstItem="LWf-A0-AYP" firstAttribute="leading" secondItem="xgG-St-MdE" secondAttribute="trailing" id="jVO-aJ-NbN"/>
+                                                        <constraint firstItem="LWf-A0-AYP" firstAttribute="leading" secondItem="2ln-Zt-P5E" secondAttribute="leading" id="jVO-aJ-NbN"/>
                                                         <constraint firstItem="xgG-St-MdE" firstAttribute="centerY" secondItem="F2b-XT-SDC" secondAttribute="centerY" id="wiq-XD-H3R"/>
                                                         <constraint firstItem="LWf-A0-AYP" firstAttribute="top" secondItem="2ln-Zt-P5E" secondAttribute="top" constant="10" id="y97-ae-U2c"/>
                                                         <constraint firstAttribute="trailing" secondItem="F2b-XT-SDC" secondAttribute="trailing" constant="7" id="ypJ-Dc-BTd"/>

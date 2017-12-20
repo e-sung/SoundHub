@@ -23,7 +23,7 @@ class DetailViewController: UIViewController{
     private var masterWaveCell:MasterWaveFormViewCell?
     /// 녹음하는 셀
     private var recorderCell: RecorderCell?
-    private var heightOfRecordingCell:CGFloat = 100
+    private var heightOfRecordingCell:CGFloat = 50
     /// Master Track을 재생하는 플레이어
     private var masterAudioPlayer:AVPlayer?{
         didSet(oldVal){
@@ -223,7 +223,7 @@ extension DetailViewController:RecorderCellDelegate{
                 self.post = postResult
                 self.commentTrackContainer?.isNewTrackBeingAdded = true
                 
-                self.heightOfRecordingCell = 100
+                self.heightOfRecordingCell = 50
                 self.recorderCell?.deActivate()
                 CATransaction.begin()
                 CATransaction.setCompletionBlock {
