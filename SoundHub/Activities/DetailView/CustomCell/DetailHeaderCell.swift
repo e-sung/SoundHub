@@ -33,9 +33,13 @@ class DetailHeaderCell: UITableViewCell {
         set(newVal){
             _postInfo = newVal
             postTitleLB.text = newVal.title
-            authorNameLB.text = newVal.author
             numberOfLikesLB.text = "\(newVal.num_liked ?? 0)"
             numberOfComments.text = "\(newVal.num_comments ?? 0)"
+            guard let userId = newVal.author else { return }
+            NetworkController.main.fetchUser(id: userId) { (userInfo) in
+                guard let userInfo = userInfo else { return }
+                self.authorNameLB.text = userInfo.nickname ?? ""
+            }
         }
     }
     private var _postInfo:Post!
