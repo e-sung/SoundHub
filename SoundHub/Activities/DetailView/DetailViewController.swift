@@ -25,7 +25,7 @@ class DetailViewController: UIViewController{
     private var recorderCell: RecorderCell?
     /// AudioUnit들을 보여주는 셀
     private var audioUnitContainer: AudioUnitContainer?
-    private var heightOfAudioUnitCell:CGFloat = 0
+    private var heightOfRecordingCell:CGFloat = 100
     /// Master Track을 재생하는 플레이어
     private var masterAudioPlayer:AVPlayer?{
         didSet(oldVal){
@@ -187,14 +187,9 @@ extension DetailViewController:MixedTracksContainerCellDelegate{
 // MARK:RecorderCellDelegate
 extension DetailViewController:RecorderCellDelegate{
     func shouldBecomeActive() {
-        heightOfAudioUnitCell = CGFloat(UIScreen.main.bounds.height - 100 - PlayBarController.main.view.frame.height - (navigationController?.navigationBar.frame.height ?? 0) )
-        CATransaction.begin()
-        CATransaction.setCompletionBlock {
-            self.mainTV.scrollToRow(at: IndexPath(item: 0, section: Section.RecordCell.rawValue), at: .bottom, animated: true)
-        }
+        heightOfRecordingCell = CGFloat(UIScreen.main.bounds.height - 100 - PlayBarController.main.view.frame.height - (navigationController?.navigationBar.frame.height ?? 0) )
         mainTV.beginUpdates()
         mainTV.endUpdates()
-        CATransaction.commit()
     }
     
     func uploadDidFinished(with post: Post?) {
@@ -283,10 +278,6 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             cell.delegate = self
             recorderCell = cell
             return cell
-        }else if Section(rawValue: indexPath.section) == .AudioUnitCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "AudioUnitContainerCell", for: indexPath) as! AudioUnitContainer
-            audioUnitContainer = cell
-            return cell
         }else{
             return UITableViewCell()
         }
@@ -300,10 +291,8 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             return CGFloat(post.numOfMixedTracks * 100)
         }else if Section(rawValue:indexPath.section) == .CommentTracks{
             return CGFloat(post.numOfCommentTracks * 100)
-        }else if Section(rawValue: indexPath.section) == .AudioUnitCell{
-            return heightOfAudioUnitCell
         }
-        return 100
+        return heightOfRecordingCell
     }
     
     
@@ -339,14 +328,13 @@ extension DetailViewController{
         case MixedTracks = 2
         case CommentTrackToggler = 3
         case CommentTracks = 4
-        case AudioUnitCell = 5
-        case RecordCell = 6
+        case RecordCell = 5
         /**
          모든 Section의 경우의 수
          
-         MainHeader/ MasterWave / MixedHeader/ Mixed / CommentHeader / Comment / Recorder / AU
+         MainHeader / MixedHeader/ Mixed / CommentHeader / Comment / Recorder
         */
-        static var cases:Int{get{return 7}}
+        static var cases:Int{get{return 6}}
         var rows:Int{
             get{
                 switch self {
