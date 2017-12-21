@@ -146,6 +146,9 @@
                                         <real key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onAlbumArtClickHandler:" destination="n6j-j7-fFT" eventType="touchUpInside" id="Ta8-vW-kf6"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="무제" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cGz-Yb-x78">
                                 <rect key="frame" x="94" y="361.5" width="187.5" height="24"/>
