@@ -15,11 +15,11 @@ class MainTabBarController: UITabBarController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBar.isHidden = true
-        setUploadButton()
-        self.view.addSubview(uploadMusicButton)
         playBarController = PlayBarController.main
         self.view.addSubview(playBarController.view)
         playBarController.setUpView(In: self.view)
+        setUploadButton()
+        self.view.addSubview(uploadMusicButton)
 
     }
 
@@ -47,7 +47,8 @@ class MainTabBarController: UITabBarController{
 
 extension MainTabBarController{
     private func setUploadButton(){
-        uploadMusicButton.frame = CGRect(x: self.view.frame.width - 70, y: self.view.frame.height - 80, width: 60, height: 60)
+        let upLoadButtonWidth:CGFloat = 70
+        uploadMusicButton.frame = CGRect(x: self.view.frame.width - upLoadButtonWidth, y: self.view.frame.height - upLoadButtonWidth, width: upLoadButtonWidth, height:upLoadButtonWidth)
         uploadMusicButton.setTitle("+", for: .normal)
         uploadMusicButton.setTitleColor(.green, for: .normal)
         uploadMusicButton.titleLabel?.font = uploadMusicButton.titleLabel?.font.withSize(40)
