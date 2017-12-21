@@ -425,25 +425,14 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NZ4-Z1-oHx">
                                                     <rect key="frame" x="20" y="11" width="335" height="60"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iu_profile" translatesAutoresizingMaskIntoConstraints="NO" id="BJM-2I-X5v">
-                                                            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" secondItem="BJM-2I-X5v" secondAttribute="height" multiplier="1:1" id="chs-CY-blq"/>
-                                                            </constraints>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                    <real key="value" value="6"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
-                                                        </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="npg-Di-h6B">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="npg-Di-h6B">
                                                             <rect key="frame" x="70" y="0.0" width="167.5" height="36"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아이유" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ujy-pv-A2u">
-                                                            <rect key="frame" x="70" y="39.5" width="44.5" height="20.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ujy-pv-A2u">
+                                                            <rect key="frame" x="70" y="39.5" width="8" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -454,23 +443,30 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MuN-55-IIv">
+                                                            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="MuN-55-IIv" secondAttribute="height" multiplier="1:1" id="zq8-ag-5bq"/>
+                                                            </constraints>
+                                                            <state key="normal" image="default-profile"/>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="07l-SS-S3w"/>
-                                                        <constraint firstItem="npg-Di-h6B" firstAttribute="leading" secondItem="BJM-2I-X5v" secondAttribute="trailing" constant="10" id="4Fb-vq-fKQ"/>
-                                                        <constraint firstItem="BJM-2I-X5v" firstAttribute="height" secondItem="NZ4-Z1-oHx" secondAttribute="height" id="70l-KO-ANT"/>
                                                         <constraint firstAttribute="trailing" secondItem="KPy-IC-NUa" secondAttribute="trailing" id="Hcj-e4-dS0"/>
+                                                        <constraint firstItem="MuN-55-IIv" firstAttribute="top" secondItem="NZ4-Z1-oHx" secondAttribute="top" id="Hff-lZ-8qW"/>
                                                         <constraint firstAttribute="bottom" secondItem="KPy-IC-NUa" secondAttribute="bottom" id="JQz-uG-gbw"/>
                                                         <constraint firstAttribute="bottom" secondItem="ujy-pv-A2u" secondAttribute="bottom" id="RJg-PZ-dKf"/>
                                                         <constraint firstItem="ujy-pv-A2u" firstAttribute="leading" secondItem="npg-Di-h6B" secondAttribute="leading" id="Viz-Jh-HS0"/>
                                                         <constraint firstItem="npg-Di-h6B" firstAttribute="width" secondItem="NZ4-Z1-oHx" secondAttribute="width" multiplier="0.5" id="Yvj-RB-6Pw"/>
-                                                        <constraint firstItem="BJM-2I-X5v" firstAttribute="top" secondItem="NZ4-Z1-oHx" secondAttribute="top" id="fTs-vY-7Hd"/>
-                                                        <constraint firstItem="BJM-2I-X5v" firstAttribute="leading" secondItem="NZ4-Z1-oHx" secondAttribute="leading" id="fmQ-1d-Rh6"/>
+                                                        <constraint firstItem="MuN-55-IIv" firstAttribute="leading" secondItem="NZ4-Z1-oHx" secondAttribute="leading" id="gh7-nE-RRH"/>
+                                                        <constraint firstItem="npg-Di-h6B" firstAttribute="leading" secondItem="MuN-55-IIv" secondAttribute="trailing" constant="10" id="hk7-al-cvt"/>
+                                                        <constraint firstItem="MuN-55-IIv" firstAttribute="height" secondItem="NZ4-Z1-oHx" secondAttribute="height" id="kaU-eW-siJ"/>
                                                         <constraint firstItem="npg-Di-h6B" firstAttribute="top" secondItem="NZ4-Z1-oHx" secondAttribute="top" id="pKD-I1-p1o"/>
                                                     </constraints>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="modernTImes" translatesAutoresizingMaskIntoConstraints="NO" id="e0f-HC-XuQ">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_cover" translatesAutoresizingMaskIntoConstraints="NO" id="e0f-HC-XuQ">
                                                     <rect key="frame" x="20" y="79" width="335" height="335"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="e0f-HC-XuQ" secondAttribute="height" multiplier="1:1" id="9vz-pr-RYM"/>
@@ -559,7 +555,7 @@
                                         <connections>
                                             <outlet property="albumCoverImageView" destination="e0f-HC-XuQ" id="WvK-y8-swf"/>
                                             <outlet property="authorNameLB" destination="ujy-pv-A2u" id="fDJ-x0-0dA"/>
-                                            <outlet property="authorProfileImageView" destination="BJM-2I-X5v" id="Zdc-KI-xpD"/>
+                                            <outlet property="authorProfileImageBt" destination="MuN-55-IIv" id="0DH-4R-NOT"/>
                                             <outlet property="playTimeLB" destination="KPy-IC-NUa" id="MVK-aP-1lf"/>
                                             <outlet property="postTitleLB" destination="npg-Di-h6B" id="ylr-KJ-EKV"/>
                                             <outlet property="totalComments" destination="Au9-vT-CaZ" id="uYf-6s-T45"/>
@@ -576,25 +572,14 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vkb-fG-3EF">
                                                     <rect key="frame" x="20" y="11" width="335" height="60"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iu_profile" translatesAutoresizingMaskIntoConstraints="NO" id="pTd-Ju-idG">
-                                                            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" secondItem="pTd-Ju-idG" secondAttribute="height" multiplier="1:1" id="wTZ-z9-Wsq"/>
-                                                            </constraints>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                    <real key="value" value="6"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
-                                                        </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Wt-sW-uW8">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Wt-sW-uW8">
                                                             <rect key="frame" x="70" y="0.0" width="167.5" height="36"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아이유" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyE-lA-fgp">
-                                                            <rect key="frame" x="70" y="39.5" width="44.5" height="20.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyE-lA-fgp">
+                                                            <rect key="frame" x="70" y="39.5" width="8" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -605,23 +590,30 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fOH-83-dja">
+                                                            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="fOH-83-dja" secondAttribute="height" multiplier="1:1" id="Rjz-6H-N7f"/>
+                                                            </constraints>
+                                                            <state key="normal" image="default-profile"/>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstItem="pTd-Ju-idG" firstAttribute="top" secondItem="vkb-fG-3EF" secondAttribute="top" id="6n4-7M-sL0"/>
                                                         <constraint firstItem="5Wt-sW-uW8" firstAttribute="width" secondItem="vkb-fG-3EF" secondAttribute="width" multiplier="0.5" id="8sM-Fa-EES"/>
                                                         <constraint firstAttribute="bottom" secondItem="0Lb-BJ-PsF" secondAttribute="bottom" id="Bmh-rA-Z7u"/>
-                                                        <constraint firstItem="pTd-Ju-idG" firstAttribute="leading" secondItem="vkb-fG-3EF" secondAttribute="leading" id="EbF-g9-guu"/>
                                                         <constraint firstAttribute="height" constant="60" id="Ed4-3T-wXl"/>
                                                         <constraint firstAttribute="trailing" secondItem="0Lb-BJ-PsF" secondAttribute="trailing" id="G2s-Jg-VGG"/>
+                                                        <constraint firstItem="fOH-83-dja" firstAttribute="height" secondItem="vkb-fG-3EF" secondAttribute="height" id="GvE-DZ-geY"/>
+                                                        <constraint firstItem="5Wt-sW-uW8" firstAttribute="leading" secondItem="fOH-83-dja" secondAttribute="trailing" constant="10" id="IEr-s5-Iu6"/>
                                                         <constraint firstItem="fyE-lA-fgp" firstAttribute="leading" secondItem="5Wt-sW-uW8" secondAttribute="leading" id="WCN-V7-P5f"/>
                                                         <constraint firstItem="5Wt-sW-uW8" firstAttribute="top" secondItem="vkb-fG-3EF" secondAttribute="top" id="ZM2-26-hty"/>
-                                                        <constraint firstItem="pTd-Ju-idG" firstAttribute="height" secondItem="vkb-fG-3EF" secondAttribute="height" id="ZgY-uM-aOA"/>
-                                                        <constraint firstItem="5Wt-sW-uW8" firstAttribute="leading" secondItem="pTd-Ju-idG" secondAttribute="trailing" constant="10" id="mjR-9G-Fhd"/>
+                                                        <constraint firstItem="fOH-83-dja" firstAttribute="top" secondItem="vkb-fG-3EF" secondAttribute="top" id="cqC-nf-q0N"/>
                                                         <constraint firstAttribute="bottom" secondItem="fyE-lA-fgp" secondAttribute="bottom" id="vYo-rM-VMf"/>
+                                                        <constraint firstItem="fOH-83-dja" firstAttribute="leading" secondItem="vkb-fG-3EF" secondAttribute="leading" id="xSl-yj-JSy"/>
                                                     </constraints>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="modernTImes" translatesAutoresizingMaskIntoConstraints="NO" id="Cgu-va-ehk">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_cover" translatesAutoresizingMaskIntoConstraints="NO" id="Cgu-va-ehk">
                                                     <rect key="frame" x="20" y="79" width="335" height="335"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Cgu-va-ehk" secondAttribute="height" multiplier="1:1" id="ZhQ-Pr-6ar"/>
@@ -710,7 +702,7 @@
                                         <connections>
                                             <outlet property="albumCoverImageView" destination="Cgu-va-ehk" id="4fy-eo-udT"/>
                                             <outlet property="authorNameLB" destination="fyE-lA-fgp" id="jJk-7w-hZd"/>
-                                            <outlet property="authorProfileImageView" destination="pTd-Ju-idG" id="PWC-Z8-H7N"/>
+                                            <outlet property="authorProfileImageBt" destination="fOH-83-dja" id="1HW-fb-OMk"/>
                                             <outlet property="playTimeLB" destination="0Lb-BJ-PsF" id="3TH-y9-aw7"/>
                                             <outlet property="postTitleLB" destination="5Wt-sW-uW8" id="fHM-8v-RrL"/>
                                             <outlet property="totalComments" destination="wKh-2K-Wma" id="IIK-H1-1KE"/>
@@ -759,6 +751,7 @@
     </scenes>
     <resources>
         <image name="Hamburger_icon" width="32" height="32"/>
+        <image name="default-profile" width="376" height="376"/>
         <image name="iu1" width="215" height="234"/>
         <image name="iu2" width="199" height="253"/>
         <image name="iu3" width="225" height="225"/>
@@ -766,6 +759,6 @@
         <image name="iu5" width="226" height="223"/>
         <image name="iu6" width="225" height="225"/>
         <image name="iu_profile" width="128" height="128"/>
-        <image name="modernTImes" width="316" height="316"/>
+        <image name="no_cover" width="270" height="270"/>
     </resources>
 </document>

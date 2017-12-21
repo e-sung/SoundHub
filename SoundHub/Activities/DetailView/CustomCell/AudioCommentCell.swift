@@ -13,7 +13,7 @@ class AudioCommentCell: UITableViewCell {
     
     var player:AVPlayer?
     
-    @IBOutlet weak private var profileImageView: UIImageView!
+    @IBOutlet weak var profileImageButton: UIButton!
     @IBOutlet weak private var InstrumentLB: UILabel!
     @IBOutlet weak private var nickNameLB: UILabel!
     @IBOutlet weak private var toggleSwitch: UISwitch!
