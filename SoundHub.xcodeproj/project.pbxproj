@@ -342,13 +342,6 @@
 			path = EntryPoint;
 			sourceTree = "<group>";
 		};
-		FF9A84E11FC961B800AC4780 /* MainTabBar */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = MainTabBar;
-			sourceTree = "<group>";
-		};
 		FF9A84E81FC9A4CE00AC4780 /* MainHome */ = {
 			isa = PBXGroup;
 			children = (
@@ -449,7 +442,6 @@
 				FF4A7F9C1FCCEE180002E27A /* Extensions */,
 				FF000D971FD0FB8900678999 /* Activities */,
 				FF9A84DE1FC9616A00AC4780 /* EntryPoint */,
-				FF9A84E11FC961B800AC4780 /* MainTabBar */,
 				FFCF82C51FC95D66003B7861 /* Assets.xcassets */,
 				FFCF82C71FC95D66003B7861 /* LaunchScreen.storyboard */,
 				FFCF82CA1FC95D66003B7861 /* Info.plist */,

@@ -123,6 +123,7 @@ extension ChartViewController:UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("==============================")
         let destinationPost:Post? = getDestinationPost(from: indexPath)
         if destinationPost?.author_track != PlayBarController.main.currentPostView?.post.author_track{
             performSegue(withIdentifier: "generalChartToDetail", sender: indexPath)
