@@ -35,10 +35,15 @@ class DetailHeaderCell: UITableViewCell {
             postTitleLB.text = newVal.title
             numberOfLikesLB.text = "\(newVal.num_liked ?? 0)"
             numberOfComments.text = "\(newVal.num_comments ?? 0)"
-            guard let userId = newVal.author else { return }
-            NetworkController.main.fetchUser(id: userId) { (userInfo) in
-                guard let userInfo = userInfo else { return }
-                DispatchQueue.main.async { self.authorNameLB.text = userInfo.nickname ?? "" }
+            guard let authorId = newVal.author else { return }
+            NetworkController.main.fetchUser(id: authorId) { (authorInfo) in
+                guard let authorInfo = authorInfo else { return }
+                DispatchQueue.main.async {
+                    self.authorNameLB.text = authorInfo.nickname ?? ""
+                    if let profileImageURL = authorInfo.profileImageURL{
+                        self.authorProfileImageButton.af_setImage(for: .normal, url: profileImageURL)
+                    }
+                }
             }
         }
     }

@@ -375,25 +375,14 @@
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1AI-XH-J41">
                                                                                             <rect key="frame" x="20" y="11" width="335" height="60"/>
                                                                                             <subviews>
-                                                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iu_profile" translatesAutoresizingMaskIntoConstraints="NO" id="7gv-PD-LEP">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
-                                                                                                    <constraints>
-                                                                                                        <constraint firstAttribute="width" secondItem="7gv-PD-LEP" secondAttribute="height" multiplier="1:1" id="Tqe-Vh-Ngb"/>
-                                                                                                    </constraints>
-                                                                                                    <userDefinedRuntimeAttributes>
-                                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                                                            <real key="value" value="6"/>
-                                                                                                        </userDefinedRuntimeAttribute>
-                                                                                                    </userDefinedRuntimeAttributes>
-                                                                                                </imageView>
-                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9z5-bK-HC9">
+                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9z5-bK-HC9">
                                                                                                     <rect key="frame" x="70" y="0.0" width="167.5" height="36"/>
                                                                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                                                                                                     <nil key="textColor"/>
                                                                                                     <nil key="highlightedColor"/>
                                                                                                 </label>
-                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아이유" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DOK-p7-aXS">
-                                                                                                    <rect key="frame" x="70" y="39.5" width="44.5" height="20.5"/>
+                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DOK-p7-aXS">
+                                                                                                    <rect key="frame" x="70" y="39.5" width="8" height="21"/>
                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                     <color key="textColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                                     <nil key="highlightedColor"/>
@@ -404,23 +393,30 @@
                                                                                                     <nil key="textColor"/>
                                                                                                     <nil key="highlightedColor"/>
                                                                                                 </label>
+                                                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIX-uE-JQN">
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                                                                    <constraints>
+                                                                                                        <constraint firstAttribute="width" secondItem="gIX-uE-JQN" secondAttribute="height" multiplier="1:1" id="WtH-8y-Qsm"/>
+                                                                                                    </constraints>
+                                                                                                    <state key="normal" image="default-profile"/>
+                                                                                                </button>
                                                                                             </subviews>
                                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                             <constraints>
+                                                                                                <constraint firstItem="gIX-uE-JQN" firstAttribute="height" secondItem="1AI-XH-J41" secondAttribute="height" id="2Ik-yA-ByM"/>
                                                                                                 <constraint firstAttribute="trailing" secondItem="c0P-lE-Aek" secondAttribute="trailing" id="5ir-sJ-yKS"/>
+                                                                                                <constraint firstItem="gIX-uE-JQN" firstAttribute="top" secondItem="1AI-XH-J41" secondAttribute="top" id="62q-Qw-9CH"/>
                                                                                                 <constraint firstItem="9z5-bK-HC9" firstAttribute="top" secondItem="1AI-XH-J41" secondAttribute="top" id="BhR-U9-02E"/>
+                                                                                                <constraint firstItem="gIX-uE-JQN" firstAttribute="leading" secondItem="1AI-XH-J41" secondAttribute="leading" id="KG2-b9-A9P"/>
                                                                                                 <constraint firstItem="DOK-p7-aXS" firstAttribute="leading" secondItem="9z5-bK-HC9" secondAttribute="leading" id="ORj-Na-4pm"/>
                                                                                                 <constraint firstAttribute="height" constant="60" id="WVZ-iH-HfR"/>
                                                                                                 <constraint firstAttribute="bottom" secondItem="DOK-p7-aXS" secondAttribute="bottom" id="bKn-rz-ZUJ"/>
-                                                                                                <constraint firstItem="7gv-PD-LEP" firstAttribute="top" secondItem="1AI-XH-J41" secondAttribute="top" id="e2Y-1D-E9h"/>
-                                                                                                <constraint firstItem="9z5-bK-HC9" firstAttribute="leading" secondItem="7gv-PD-LEP" secondAttribute="trailing" constant="10" id="gNI-I1-ZzN"/>
-                                                                                                <constraint firstItem="7gv-PD-LEP" firstAttribute="leading" secondItem="1AI-XH-J41" secondAttribute="leading" id="iKH-im-AnB"/>
                                                                                                 <constraint firstItem="9z5-bK-HC9" firstAttribute="width" secondItem="1AI-XH-J41" secondAttribute="width" multiplier="0.5" id="imR-RS-gjb"/>
                                                                                                 <constraint firstAttribute="bottom" secondItem="c0P-lE-Aek" secondAttribute="bottom" id="lQO-BJ-CwT"/>
-                                                                                                <constraint firstItem="7gv-PD-LEP" firstAttribute="height" secondItem="1AI-XH-J41" secondAttribute="height" id="vge-Lp-Y0d"/>
+                                                                                                <constraint firstItem="9z5-bK-HC9" firstAttribute="leading" secondItem="gIX-uE-JQN" secondAttribute="trailing" constant="10" id="xEF-Md-uv9"/>
                                                                                             </constraints>
                                                                                         </view>
-                                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="modernTImes" translatesAutoresizingMaskIntoConstraints="NO" id="snp-sK-F8V">
+                                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_cover" translatesAutoresizingMaskIntoConstraints="NO" id="snp-sK-F8V">
                                                                                             <rect key="frame" x="20" y="79" width="335" height="335"/>
                                                                                             <constraints>
                                                                                                 <constraint firstAttribute="width" secondItem="snp-sK-F8V" secondAttribute="height" multiplier="1:1" id="fqP-RS-sEc"/>
@@ -509,7 +505,7 @@
                                                                                 <connections>
                                                                                     <outlet property="albumCoverImageView" destination="snp-sK-F8V" id="M8S-0s-2HG"/>
                                                                                     <outlet property="authorNameLB" destination="DOK-p7-aXS" id="yXp-Gh-0VR"/>
-                                                                                    <outlet property="authorProfileImageView" destination="7gv-PD-LEP" id="dDg-hw-Xd8"/>
+                                                                                    <outlet property="authorProfileImageBt" destination="gIX-uE-JQN" id="qdT-9l-cl1"/>
                                                                                     <outlet property="playTimeLB" destination="c0P-lE-Aek" id="Tpp-xo-PKC"/>
                                                                                     <outlet property="postTitleLB" destination="9z5-bK-HC9" id="GvC-og-ncM"/>
                                                                                     <outlet property="totalComments" destination="rUy-Jw-I8v" id="yv6-cw-DdU"/>
@@ -564,25 +560,14 @@
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dl6-w2-Mb5">
                                                                                             <rect key="frame" x="20" y="11" width="335" height="60"/>
                                                                                             <subviews>
-                                                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iu_profile" translatesAutoresizingMaskIntoConstraints="NO" id="P6j-6z-feu">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
-                                                                                                    <constraints>
-                                                                                                        <constraint firstAttribute="width" secondItem="P6j-6z-feu" secondAttribute="height" multiplier="1:1" id="joI-Bk-f04"/>
-                                                                                                    </constraints>
-                                                                                                    <userDefinedRuntimeAttributes>
-                                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                                                            <real key="value" value="6"/>
-                                                                                                        </userDefinedRuntimeAttribute>
-                                                                                                    </userDefinedRuntimeAttributes>
-                                                                                                </imageView>
-                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="00w-go-yRd">
+                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="00w-go-yRd">
                                                                                                     <rect key="frame" x="70" y="0.0" width="167.5" height="36"/>
                                                                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                                                                                                     <nil key="textColor"/>
                                                                                                     <nil key="highlightedColor"/>
                                                                                                 </label>
-                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아이유" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ye-fO-3Ez">
-                                                                                                    <rect key="frame" x="70" y="39.5" width="44.5" height="20.5"/>
+                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ye-fO-3Ez">
+                                                                                                    <rect key="frame" x="70" y="39.5" width="8" height="21"/>
                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                     <color key="textColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                                     <nil key="highlightedColor"/>
@@ -593,23 +578,30 @@
                                                                                                     <nil key="textColor"/>
                                                                                                     <nil key="highlightedColor"/>
                                                                                                 </label>
+                                                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Bf-Oo-RDd">
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                                                                    <constraints>
+                                                                                                        <constraint firstAttribute="width" secondItem="3Bf-Oo-RDd" secondAttribute="height" multiplier="1:1" id="lef-es-Cg1"/>
+                                                                                                    </constraints>
+                                                                                                    <state key="normal" image="default-profile"/>
+                                                                                                </button>
                                                                                             </subviews>
                                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                             <constraints>
+                                                                                                <constraint firstItem="3Bf-Oo-RDd" firstAttribute="leading" secondItem="dl6-w2-Mb5" secondAttribute="leading" id="DYu-P0-YJD"/>
                                                                                                 <constraint firstItem="00w-go-yRd" firstAttribute="width" secondItem="dl6-w2-Mb5" secondAttribute="width" multiplier="0.5" id="DfN-q5-pB7"/>
                                                                                                 <constraint firstAttribute="bottom" secondItem="8ye-fO-3Ez" secondAttribute="bottom" id="J6t-jn-yyn"/>
                                                                                                 <constraint firstItem="00w-go-yRd" firstAttribute="top" secondItem="dl6-w2-Mb5" secondAttribute="top" id="Ky2-EK-fEd"/>
+                                                                                                <constraint firstItem="3Bf-Oo-RDd" firstAttribute="top" secondItem="dl6-w2-Mb5" secondAttribute="top" id="Mbk-NP-sbD"/>
+                                                                                                <constraint firstItem="3Bf-Oo-RDd" firstAttribute="height" secondItem="dl6-w2-Mb5" secondAttribute="height" id="T5e-0C-GeO"/>
                                                                                                 <constraint firstAttribute="trailing" secondItem="pIH-5k-e3k" secondAttribute="trailing" id="VYe-uu-vzE"/>
-                                                                                                <constraint firstItem="P6j-6z-feu" firstAttribute="top" secondItem="dl6-w2-Mb5" secondAttribute="top" id="dUM-Fm-jb8"/>
+                                                                                                <constraint firstItem="00w-go-yRd" firstAttribute="leading" secondItem="3Bf-Oo-RDd" secondAttribute="trailing" constant="10" id="WRQ-si-gZ5"/>
                                                                                                 <constraint firstAttribute="bottom" secondItem="pIH-5k-e3k" secondAttribute="bottom" id="gnd-7t-dC9"/>
                                                                                                 <constraint firstAttribute="height" constant="60" id="lp6-Wb-gyy"/>
                                                                                                 <constraint firstItem="8ye-fO-3Ez" firstAttribute="leading" secondItem="00w-go-yRd" secondAttribute="leading" id="nxh-3p-CNc"/>
-                                                                                                <constraint firstItem="P6j-6z-feu" firstAttribute="height" secondItem="dl6-w2-Mb5" secondAttribute="height" id="pEM-de-dcr"/>
-                                                                                                <constraint firstItem="P6j-6z-feu" firstAttribute="leading" secondItem="dl6-w2-Mb5" secondAttribute="leading" id="t6O-AJ-l2p"/>
-                                                                                                <constraint firstItem="00w-go-yRd" firstAttribute="leading" secondItem="P6j-6z-feu" secondAttribute="trailing" constant="10" id="tME-m4-Q0a"/>
                                                                                             </constraints>
                                                                                         </view>
-                                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="modernTImes" translatesAutoresizingMaskIntoConstraints="NO" id="Tqd-Re-ptk">
+                                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_cover" translatesAutoresizingMaskIntoConstraints="NO" id="Tqd-Re-ptk">
                                                                                             <rect key="frame" x="20" y="79" width="335" height="335"/>
                                                                                             <constraints>
                                                                                                 <constraint firstAttribute="width" secondItem="Tqd-Re-ptk" secondAttribute="height" multiplier="1:1" id="7tb-z9-7ua"/>
@@ -698,7 +690,7 @@
                                                                                 <connections>
                                                                                     <outlet property="albumCoverImageView" destination="Tqd-Re-ptk" id="4Pm-rO-MHw"/>
                                                                                     <outlet property="authorNameLB" destination="8ye-fO-3Ez" id="Tuk-3X-dp4"/>
-                                                                                    <outlet property="authorProfileImageView" destination="P6j-6z-feu" id="AsM-o5-6uu"/>
+                                                                                    <outlet property="authorProfileImageBt" destination="3Bf-Oo-RDd" id="NwC-YB-wr6"/>
                                                                                     <outlet property="playTimeLB" destination="pIH-5k-e3k" id="q1Z-Uk-cTw"/>
                                                                                     <outlet property="postTitleLB" destination="00w-go-yRd" id="yZm-5f-3To"/>
                                                                                     <outlet property="totalComments" destination="Hww-xw-ln6" id="eP4-PM-5IU"/>
@@ -772,11 +764,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="default-profile" width="376" height="376"/>
         <image name="home page" width="100" height="100"/>
         <image name="ic_settings" width="24" height="24"/>
         <image name="iu_profile" width="128" height="128"/>
         <image name="mail" width="100" height="100"/>
-        <image name="modernTImes" width="316" height="316"/>
+        <image name="no_cover" width="270" height="270"/>
         <image name="profile" width="100" height="100"/>
     </resources>
 </document>

@@ -17,7 +17,7 @@ class PostListCell: UITableViewCell {
     @IBOutlet weak var totalComments: UILabel!
     
     static let defaultHeight:CGFloat = 500
-    @IBOutlet weak private var authorProfileImageView: UIImageView!
+    @IBOutlet weak var authorProfileImageBt: UIButton!
     @IBOutlet weak private var albumCoverImageView: UIImageView!
     var postInfo:Post{
         get{
@@ -35,7 +35,12 @@ class PostListCell: UITableViewCell {
             guard let userId = newVal.author else { return }
             NetworkController.main.fetchUser(id: userId) { (userInfo) in
                 guard let userInfo = userInfo else { return }
-                DispatchQueue.main.async { self.authorNameLB.text = userInfo.nickname ?? "" }
+                DispatchQueue.main.async {
+                    self.authorNameLB.text = userInfo.nickname ?? ""
+                    if let profileImageURL = userInfo.profileImageURL{
+                        self.authorProfileImageBt.af_setImage(for: .normal, url: profileImageURL)
+                    }
+                }
             }
 
         }
