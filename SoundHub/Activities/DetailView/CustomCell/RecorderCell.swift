@@ -59,6 +59,10 @@ class RecorderCell: UITableViewCell {
     }
     
     @IBAction private func recordButtonHandler(_ sender: UIButton) {
+        if User.isLoggedIn == false{
+            delegate?.shouldRequireLogin()
+            return
+        }
         if self.isActive == false{
             self.deinitialize()
             delegate?.shouldBecomeActive()
@@ -175,4 +179,5 @@ protocol RecorderCellDelegate {
     func uploadDidFinished(with post:Post?)->Void
     func shouldShowAlert()->Void
     func shouldBecomeActive()->Void
+    func shouldRequireLogin()->Void
 }

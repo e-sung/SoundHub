@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_cover" translatesAutoresizingMaskIntoConstraints="NO" id="63U-n4-OqK">
-                                <rect key="frame" x="0.0" y="20" width="375" height="1180"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="1780"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AM7-pL-X1c">
                                 <rect key="frame" x="0.0" y="20" width="375" height="1780"/>
@@ -220,13 +220,13 @@
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vocal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wyv-H1-dTo">
-                                                                                <rect key="frame" x="81.5" y="11" width="71" height="36"/>
+                                                                                <rect key="frame" x="89.5" y="11" width="71" height="36"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                                 <color key="textColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dAi-Dw-Ayw">
-                                                                                <rect key="frame" x="81.5" y="48" width="51.5" height="21"/>
+                                                                                <rect key="frame" x="89.5" y="48" width="51.5" height="21"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                 <color key="textColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <nil key="highlightedColor"/>
@@ -332,13 +332,13 @@
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vocal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTZ-zT-gtA">
-                                                                                <rect key="frame" x="96.5" y="11" width="71" height="36"/>
+                                                                                <rect key="frame" x="89.5" y="11" width="71" height="36"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                                 <color key="textColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m9F-vE-861">
-                                                                                <rect key="frame" x="96.5" y="48" width="51.5" height="21"/>
+                                                                                <rect key="frame" x="89.5" y="48" width="51.5" height="21"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                 <color key="textColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <nil key="highlightedColor"/>
@@ -351,7 +351,7 @@
                                                                                 </connections>
                                                                             </switch>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BPG-uM-0XZ">
-                                                                                <rect key="frame" x="15" y="4" width="71.5" height="71.5"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="79.5" height="79.5"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" secondItem="BPG-uM-0XZ" secondAttribute="height" multiplier="1:1" id="ii4-1W-9qR"/>
                                                                                 </constraints>
@@ -456,7 +456,7 @@
                                                                 <action selector="recordButtonHandler:" destination="Lia-eD-eD2" eventType="touchUpInside" id="655-qp-laJ"/>
                                                             </connections>
                                                         </button>
-                                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F2b-XT-SDC" customClass="AKNodeOutputPlot" customModule="AudioKitUI">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F2b-XT-SDC" customClass="AKNodeOutputPlot" customModule="AudioKitUI">
                                                             <rect key="frame" x="51" y="-7" width="317" height="700"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>

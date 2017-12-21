@@ -37,5 +37,11 @@ struct User:Codable{
             return URL(string: "\(headerImgAddr)", relativeTo: NetworkController.main.baseMediaURL)!
         }
     }
+    static var isLoggedIn:Bool{
+        get{
+            if let _ = UserDefaults.standard.string(forKey: "id"){ return true }
+            return false
+        }
+    }
 }
 

@@ -40,6 +40,7 @@ class LoginViewController: UIViewController, UITextViewDelegate,GIDSignInUIDeleg
     
     @IBAction func viewTouchHandler(_ sender: UITapGestureRecognizer) {
         if isKeyboardUp { self.view.endEditing(true) }
+        else{ self.dismiss(animated: true, completion: nil) }
     }
     
     // MARK: LifeCycle
