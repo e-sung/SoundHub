@@ -48,6 +48,7 @@ class RecorderCell: UITableViewCell {
         self.isActive = true
         state = .readyToRecord
         inputPlot.node = RecordConductor.main.mic
+        inputPlot.color = .orange
         audioUnitContainerFlowLayout.isHidden = false
         self.contentView.backgroundColor = .white
     }
@@ -140,7 +141,15 @@ extension RecorderCell:UICollectionViewDelegate, UICollectionViewDelegateFlowLay
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        auManager.removeEffect(at: 0)
         auManager.insertAudioUnit(name: availableEffects[indexPath.item], at: 0)
+        let cell = collectionView.cellForItem(at: indexPath)
+        cell?.contentView.backgroundColor = .green
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        cell?.contentView.backgroundColor = .orange
     }
 }
 
@@ -157,7 +166,7 @@ extension RecorderCell:AKAudioUnitManagerDelegate{
     }
     
     func handleEffectRemoved(at auIndex: Int) {
-        
+        print("Effect removed")
     }
  
 }
