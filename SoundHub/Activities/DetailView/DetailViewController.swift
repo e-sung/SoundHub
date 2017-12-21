@@ -185,6 +185,10 @@ extension DetailViewController:MixedTracksContainerCellDelegate{
 
 // MARK:RecorderCellDelegate
 extension DetailViewController:RecorderCellDelegate{
+    func shouldRequireLogin() {
+        alert(msg: "로그인이 필요한 기능입니다")
+    }
+    
     func shouldBecomeActive() {
         heightOfRecordingCell = CGFloat(UIScreen.main.bounds.height - PlayBarController.main.view.frame.height - (navigationController?.navigationBar.frame.height ?? 0) )
         CATransaction.begin()
