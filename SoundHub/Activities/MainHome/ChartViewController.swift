@@ -24,7 +24,6 @@ class ChartViewController: UIViewController{
     private let sectionTitleList = ["CategoryTab", "Popular Musicians", "Ranking Chart", "Recent Upload"]
     var category:Categori = .general
     var option:String = ""
-    var playBarController:PlayBarController?
     let condoctor = RecordConductor.main
     
     // MARK: LifeCycle
@@ -42,8 +41,7 @@ class ChartViewController: UIViewController{
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        playBarController = PlayBarController.main
-        playBarController?.delegate = self
+
         if DataCenter.main.homePages[category]?.recent_posts.count == 0{
             performSegue(withIdentifier: "showLoadingIndicatingView", sender:self)
         }
@@ -127,10 +125,10 @@ extension ChartViewController:UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let destinationPost:Post? = getDestinationPost(from: indexPath)
-        if destinationPost?.author_track != playBarController?.currentPostView?.post.author_track{
+        if destinationPost?.author_track != PlayBarController.main.currentPostView?.post.author_track{
             performSegue(withIdentifier: "generalChartToDetail", sender: indexPath)
         }else{
-            navigationController?.show((playBarController?.currentPostView)!, sender: nil)
+            navigationController?.show((PlayBarController.main.currentPostView)!, sender: nil)
         }
     }
     
@@ -155,14 +153,6 @@ extension ChartViewController{
             }else{
                 nextVC.post = DataCenter.main.homePages[category]!.recent_posts[indexPath.item]
             }
-        }
-    }
-}
-
-extension ChartViewController:PlayBarControllerDelegate{
-    func playBarDidTapped() {
-        if navigationController?.topViewController !== playBarController?.currentPostView{
-            navigationController?.show((playBarController?.currentPostView)!, sender: nil)
         }
     }
 }

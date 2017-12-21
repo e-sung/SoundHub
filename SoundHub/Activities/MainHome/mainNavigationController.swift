@@ -1,30 +1,36 @@
 //
-//  MainTabBarController.swift
-//  LoginPractice
+//  mainNavigationController.swift
+//  SoundHub
 //
-//  Created by 류성두 on 2017. 11. 24..
+//  Created by 류성두 on 2017. 12. 21..
 //  Copyright © 2017년 류성두. All rights reserved.
 //
 
 import UIKit
 
-class MainTabBarController: UITabBarController{
+class mainNavigationController: UINavigationController {
     var playBarController:PlayBarController!
     let uploadMusicButton = UIButton()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tabBar.isHidden = true
         playBarController = PlayBarController.main
         self.view.addSubview(playBarController.view)
         playBarController.setUpView(In: self.view)
+        playBarController?.delegate = self
         setUploadButton()
         self.view.addSubview(uploadMusicButton)
 
+        // Do any additional setup after loading the view.
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    private func setUploadButton(){
+        let upLoadButtonWidth:CGFloat = 70
+        uploadMusicButton.frame = CGRect(x: self.view.frame.width - upLoadButtonWidth, y: self.view.frame.height - upLoadButtonWidth, width: upLoadButtonWidth, height:upLoadButtonWidth)
+        uploadMusicButton.setTitle("+", for: .normal)
+        uploadMusicButton.setTitleColor(.green, for: .normal)
+        uploadMusicButton.titleLabel?.font = uploadMusicButton.titleLabel?.font.withSize(40)
+        uploadMusicButton.addTarget(self, action: #selector(uploadButtonHandler), for: .touchUpInside)
     }
     
     @objc func uploadButtonHandler(sender:UIButton){
@@ -44,16 +50,10 @@ class MainTabBarController: UITabBarController{
         self.present(alert, animated: true, completion: nil)
     }
 }
-
-extension MainTabBarController{
-    private func setUploadButton(){
-        let upLoadButtonWidth:CGFloat = 70
-        uploadMusicButton.frame = CGRect(x: self.view.frame.width - upLoadButtonWidth, y: self.view.frame.height - upLoadButtonWidth, width: upLoadButtonWidth, height:upLoadButtonWidth)
-        uploadMusicButton.setTitle("+", for: .normal)
-        uploadMusicButton.setTitleColor(.green, for: .normal)
-        uploadMusicButton.titleLabel?.font = uploadMusicButton.titleLabel?.font.withSize(40)
-        uploadMusicButton.addTarget(self, action: #selector(uploadButtonHandler), for: .touchUpInside)
+extension mainNavigationController:PlayBarControllerDelegate{
+    func playBarDidTapped() {
+        if self.topViewController !== playBarController?.currentPostView{
+            self.show((playBarController?.currentPostView)!, sender: nil)
+        }
     }
 }
-
-

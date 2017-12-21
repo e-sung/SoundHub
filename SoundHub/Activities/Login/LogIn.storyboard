@@ -567,10 +567,10 @@
             </objects>
             <point key="canvasLocation" x="-244" y="133"/>
         </scene>
-        <!--MainTabBar-->
+        <!--GeneralRanking-->
         <scene sceneID="6tv-bi-xHt">
             <objects>
-                <viewControllerPlaceholder storyboardName="MainTabBar" id="Ikz-va-hjQ" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="GeneralRanking" id="Ikz-va-hjQ" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uP6-RU-Oja" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="524" y="193"/>

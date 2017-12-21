@@ -12,10 +12,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--Main Navigation Controller-->
         <scene sceneID="F60-2m-qRs">
             <objects>
-                <navigationController restorationIdentifier="mainNavVC" storyboardIdentifier="mainNavVC" id="oj7-aC-ly5" sceneMemberID="viewController">
+                <navigationController restorationIdentifier="mainNavVC" storyboardIdentifier="mainNavVC" id="oj7-aC-ly5" customClass="mainNavigationController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="6lA-JV-DZs">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
