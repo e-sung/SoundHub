@@ -1,3 +1,4 @@
+
 //
 //  AudioUploadViewController.swift
 //  SoundHub
@@ -13,8 +14,8 @@ import UIKit
 class AudioUploadViewController: UIViewController {
     
     var audioURL:URL!
-    var genre:String!
-    var instrument:String!
+    var genre:String = "Pop"
+    var instrument:String = "Vocal"
     @IBOutlet weak private var albumArt: UIImageView!
     @IBOutlet weak private var audioTitleLB: UILabel!
     @IBOutlet weak private var authorNameLB: UILabel!
@@ -29,7 +30,6 @@ class AudioUploadViewController: UIViewController {
     }
 
     private func setUpUI(with audio:AVPlayerItem){
-        
         for item in audio.asset.metadata{
             if let key = item.commonKey, let value = item.value {
                 if key == .commonKeyArtwork, let data = value as? Data{
@@ -48,6 +48,8 @@ class AudioUploadViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let playerItem = AVPlayerItem(url: audioURL)
+        audioTitleLB.text = "Untitled"
+        authorNameLB.text = UserDefaults.standard.string(forKey: nickname)
         setUpUI(with: playerItem)
     }
 }

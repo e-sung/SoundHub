@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import ActionSheetPicker_3_0
 
 class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocumentBrowserViewControllerDelegate {
     
@@ -67,12 +68,21 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
     // MARK: Document Presentation
     
     func presentDocument(at documentURL: URL) {
-        
         print(documentURL)
         let storyBoard = UIStoryboard(name: "Entry", bundle: nil)
         let audioUploadVC = storyBoard.instantiateViewController(withIdentifier: "DocumentViewController") as! AudioUploadViewController
         audioUploadVC.audioURL = documentURL
-        present(audioUploadVC, animated: true, completion: nil)
+
+        
+        ActionSheetStringPicker.show(withTitle: "어떤 악기인가요?", rows: Instrument.cases, initialSelection: 0, doneBlock: { (picker, row, result) in
+            audioUploadVC.instrument = Instrument.cases[row]
+            ActionSheetStringPicker.show(withTitle: "어떤 장르인가요?", rows: Genre.cases, initialSelection: 0, doneBlock: { (picker, row, result) in
+                audioUploadVC.genre = Genre.cases[row]
+                self.present(audioUploadVC, animated: true, completion: nil)
+            }, cancel: { (picker) in
+            }, origin: self.view)
+        }, cancel: { (picker) in
+        }, origin: self.view)
     }
 }
 
