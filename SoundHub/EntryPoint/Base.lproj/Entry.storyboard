@@ -162,6 +162,7 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.090183012187480927" green="0.090205498039722443" blue="0.090178228914737701" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="cGz-Yb-x78" firstAttribute="width" secondItem="CFO-tZ-grv" secondAttribute="width" id="1er-zG-LrL"/>
                             <constraint firstItem="vdy-Pa-aep" firstAttribute="width" secondItem="Heb-Ng-si6" secondAttribute="width" id="1vk-Wg-kZV"/>
@@ -180,6 +181,9 @@
                             <constraint firstItem="CFO-tZ-grv" firstAttribute="centerX" secondItem="Wdl-lY-jFm" secondAttribute="centerX" id="xK6-Fq-dYg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Wdl-lY-jFm"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="4qt-Rb-eot" appends="YES" id="4ez-Z8-sxu"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="albumArt" destination="CFO-tZ-grv" id="lLf-MT-3e5"/>
@@ -188,6 +192,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dqr-w4-kwi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="4qt-Rb-eot">
+                    <connections>
+                        <action selector="onViewTouchHandler:" destination="n6j-j7-fFT" id="gTi-Vg-g6K"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-605.60000000000002" y="894.60269865067471"/>
         </scene>

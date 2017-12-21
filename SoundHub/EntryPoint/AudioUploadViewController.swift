@@ -24,6 +24,10 @@ class AudioUploadViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func onViewTouchHandler(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
     @IBAction private func uploadHandler(_ sender: UIButton) {
         
         if let audioURL = audioURL{
@@ -74,6 +78,7 @@ class AudioUploadViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         authorNameLB.text = UserDefaults.standard.string(forKey: nickname)
+        audioTitleTF.becomeFirstResponder()
         guard let audioURL = audioURL else { return }
         let playerItem = AVPlayerItem(url: audioURL)
         setUpUI(with: playerItem)
