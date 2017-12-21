@@ -31,6 +31,7 @@ class PlayBarController{
             return view.isHidden
         }set(newVal){
             view.isHidden = newVal
+            delegate?.didAppeared()
         }
     }
     var masterAudioPlayer:AVPlayer?
@@ -151,4 +152,5 @@ extension PlayBarController{
 
 protocol PlayBarControllerDelegate{
     func playBarDidTapped()->Void
+    func didAppeared()->Void
 }

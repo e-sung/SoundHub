@@ -18,8 +18,9 @@ class mainNavigationController: UINavigationController {
         self.view.addSubview(playBarController.view)
         playBarController.setUpView(In: self.view)
         playBarController?.delegate = self
-        setUploadButton()
         self.view.addSubview(uploadMusicButton)
+        setUploadButton()
+
     }
 
     private func setUploadButton(){
@@ -29,6 +30,13 @@ class mainNavigationController: UINavigationController {
         uploadMusicButton.setTitleColor(.green, for: .normal)
         uploadMusicButton.titleLabel?.font = uploadMusicButton.titleLabel?.font.withSize(40)
         uploadMusicButton.addTarget(self, action: #selector(uploadButtonHandler), for: .touchUpInside)
+    }
+    
+    private func setUploadButtonAutoLayout(){
+        uploadMusicButton.centerYAnchor.constraint(equalTo: playBarController.view.centerYAnchor).isActive = true
+        uploadMusicButton.trailingAnchor.constraint(equalTo: playBarController.view.trailingAnchor, constant: -10).isActive = true
+        uploadMusicButton.heightAnchor.constraint(equalToConstant: 70)
+        uploadMusicButton.widthAnchor.constraint(equalToConstant: 70)
     }
     
     @objc func uploadButtonHandler(sender:UIButton){
@@ -57,5 +65,8 @@ extension mainNavigationController:PlayBarControllerDelegate{
         if self.topViewController !== playBarController?.currentPostView{
             self.show((playBarController?.currentPostView)!, sender: nil)
         }
+    }
+    func didAppeared() {
+        setUploadButtonAutoLayout()
     }
 }
