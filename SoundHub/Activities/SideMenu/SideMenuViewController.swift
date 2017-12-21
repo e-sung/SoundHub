@@ -14,7 +14,7 @@ class SideMenuViewController: UIViewController {
     
     @IBOutlet weak var nickNameButton:UIButton!
     @IBOutlet weak var profileImageButton:UIButton!
-    
+    @IBOutlet weak var logoutButton: UIButton!
     @IBAction func logoutButtonHandler(_ sender: UIButton) {
         UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
         self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
@@ -40,8 +40,12 @@ class SideMenuViewController: UIViewController {
     }
 
     override func viewDidLoad(){
+        guard let userId = UserDefaults.standard.string(forKey: id) else {
+            profileImageButton.setTitle("로그인 필요", for: .normal)
+            logoutButton.setTitle("로그인", for: .normal)
+            return
+        }
         nickNameButton.setTitle(UserDefaults.standard.string(forKey: nickname) , for: .normal)
-        guard let userId = UserDefaults.standard.string(forKey: id) else { return }
         let imageURL = URL(string: "user_\(userId)/profile_img/profile_img_200.png", relativeTo: NetworkController.main.baseMediaURL)!
         profileImageButton.af_setBackgroundImage(for: .normal, url: imageURL)
     }
