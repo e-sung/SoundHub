@@ -146,9 +146,9 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h9I-fv-WSY">
-                                        <rect key="frame" x="110" y="29" width="105" height="42"/>
+                                        <rect key="frame" x="110" y="29" width="30" height="42"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                        <state key="normal" title="nickname">
+                                        <state key="normal">
                                             <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
@@ -201,6 +201,7 @@
                     <navigationItem key="navigationItem" id="gZP-RS-5t1"/>
                     <size key="freeformSize" width="300" height="667"/>
                     <connections>
+                        <outlet property="logoutButton" destination="kF9-uD-Atn" id="3Qt-qQ-v1o"/>
                         <outlet property="nickNameButton" destination="h9I-fv-WSY" id="GH8-6i-AGI"/>
                         <outlet property="profileImageButton" destination="1VT-dC-BDL" id="OCJ-xI-qil"/>
                         <segue destination="Qam-ff-f9z" kind="show" identifier="sideMenuToProfileVC" id="9Tp-PR-Sqd"/>

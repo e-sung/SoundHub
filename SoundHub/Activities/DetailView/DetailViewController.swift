@@ -27,6 +27,7 @@ class DetailViewController: UIViewController{
     /// Master Track을 재생하는 플레이어
     private var masterAudioPlayer:AVPlayer?{
         didSet(oldVal){
+            PlayBarController.main.view.isHidden = false
             if let timeObserver = AVPlayerTimeObserver { oldVal?.removeTimeObserver(timeObserver) }
             guard let masterAudioPlayer = masterAudioPlayer else { return }
             let cmt = CMTime(value: 1, timescale: 10)
@@ -64,9 +65,14 @@ class DetailViewController: UIViewController{
         super.viewDidLoad()
         mainTV.delegate = self
         mainTV.dataSource = self
+    }
+    override func viewWillAppear(_ animated: Bool) {
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        PlayBarController.main.currentPostView = self
         if let materRemoteURL = post.masterTrackRemoteURL{
             masterAudioPlayer = AVPlayer(url: materRemoteURL)
-            PlayBarController.main.view.isHidden = false
+            masterWaveCell?.renderWave()
         }
         if let authorTrackURL = post.authorTrackRemoteURL{
             authorTrackPlayer = AVPlayer(url:authorTrackURL)
@@ -74,12 +80,6 @@ class DetailViewController: UIViewController{
                 self.authorTrackPlayer = AVPlayer(url:localURL)
             })
         }
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        PlayBarController.main.currentPostView = self
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        masterWaveCell?.renderWave()
         guard let userId = UserDefaults.standard.string(forKey: id) else { return }
         if post.author == Int(userId){
             commentTrackContainer?.allowsMultiSelection = true
@@ -185,6 +185,10 @@ extension DetailViewController:MixedTracksContainerCellDelegate{
 
 // MARK:RecorderCellDelegate
 extension DetailViewController:RecorderCellDelegate{
+    func shouldRequireLogin() {
+        alert(msg: "로그인이 필요한 기능입니다")
+    }
+    
     func shouldBecomeActive() {
         heightOfRecordingCell = CGFloat(UIScreen.main.bounds.height - PlayBarController.main.view.frame.height - (navigationController?.navigationBar.frame.height ?? 0) )
         CATransaction.begin()
