@@ -16,4 +16,6 @@ enum Genre:String{
     case Electronic = "Electronic"
     case Classic = "Classic"
     case Others = "Others"
+    
+    static let cases = ["Pop", "Rock", "Jazz", "HipHop", "Electronic", "Classic", "Others"]
 }
