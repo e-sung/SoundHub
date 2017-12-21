@@ -57,7 +57,6 @@
 		FFA8A8501FE74EF7008443B4 /* UIView+Geometry.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA8A84A1FE74EF6008443B4 /* UIView+Geometry.m */; };
 		FFA8A8511FE74EF7008443B4 /* NCSoundHistogram.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA8A84B1FE74EF6008443B4 /* NCSoundHistogram.m */; };
 		FFA8A8521FE74EF7008443B4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FFA8A84E1FE74EF6008443B4 /* README.md */; };
-		FFA91E591FE90109000E5C68 /* SelectInstrmuentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA91E581FE90109000E5C68 /* SelectInstrmuentViewController.swift */; };
 		FFB85FCC1FCE652A000E47C8 /* ProfileHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB85FCB1FCE652A000E47C8 /* ProfileHeaderCell.swift */; };
 		FFB85FCE1FCE657F000E47C8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB85FCD1FCE657F000E47C8 /* ProfileViewController.swift */; };
 		FFB85FD01FCE78B3000E47C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB85FCF1FCE78B3000E47C8 /* Post.swift */; };
@@ -76,6 +75,7 @@
 		FFCF82ED1FC95E07003B7861 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCF82EC1FC95E07003B7861 /* EntryViewController.swift */; };
 		FFCF82EF1FC95E6D003B7861 /* LogIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFCF82EE1FC95E6D003B7861 /* LogIn.storyboard */; };
 		FFD500AC1FDE509F008464A8 /* PlayBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD500AB1FDE509F008464A8 /* PlayBarController.swift */; };
+		FFEAE1A91FEA52B700FD7D7F /* AUCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEAE1A81FEA52B700FD7D7F /* AUCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -155,7 +155,6 @@
 		FFA8A84C1FE74EF6008443B4 /* UIView+Geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Geometry.h"; sourceTree = "<group>"; };
 		FFA8A84D1FE74EF6008443B4 /* NCSoundHistogram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCSoundHistogram.h; sourceTree = "<group>"; };
 		FFA8A84E1FE74EF6008443B4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		FFA91E581FE90109000E5C68 /* SelectInstrmuentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectInstrmuentViewController.swift; sourceTree = "<group>"; };
 		FFB85FCB1FCE652A000E47C8 /* ProfileHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCell.swift; sourceTree = "<group>"; };
 		FFB85FCD1FCE657F000E47C8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		FFB85FCF1FCE78B3000E47C8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -180,6 +179,7 @@
 		FFCF82EC1FC95E07003B7861 /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
 		FFCF82EE1FC95E6D003B7861 /* LogIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LogIn.storyboard; sourceTree = "<group>"; };
 		FFD500AB1FDE509F008464A8 /* PlayBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayBarController.swift; sourceTree = "<group>"; };
+		FFEAE1A81FEA52B700FD7D7F /* AUCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AUCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,7 +269,6 @@
 			children = (
 				FFC32AE91FCFBFEA00651A31 /* CustomCell */,
 				FF3B20B71FCAC92D0019F87A /* Detail.storyboard */,
-				FFA91E581FE90109000E5C68 /* SelectInstrmuentViewController.swift */,
 				FF3B20B91FCACD4A0019F87A /* DetailViewController.swift */,
 			);
 			path = DetailView;
@@ -402,6 +401,7 @@
 				FF02805D1FD805F500C0013A /* ModeToggleCell.swift */,
 				FFC32AE71FCFBFDB00651A31 /* MasterWaveFormViewCell.swift */,
 				FF9D18531FDA6012008D5FD1 /* CommentContainerCell.swift */,
+				FFEAE1A81FEA52B700FD7D7F /* AUCell.swift */,
 				FF64BA0D1FDD36F4000A846B /* RecorderCell.swift */,
 			);
 			path = CustomCell;
@@ -838,6 +838,7 @@
 				FF3995DA1FE38C4A004B1F86 /* PostContainerCell.swift in Sources */,
 				FF000D9B1FD135D400678999 /* DocumentBrowserViewController.swift in Sources */,
 				FFC32AE41FCF8E1500651A31 /* Comment.swift in Sources */,
+				FFEAE1A91FEA52B700FD7D7F /* AUCell.swift in Sources */,
 				FF02805C1FD7B9A400C0013A /* String.swift in Sources */,
 				FFC32AE81FCFBFDB00651A31 /* MasterWaveFormViewCell.swift in Sources */,
 				FFB85FCE1FCE657F000E47C8 /* ProfileViewController.swift in Sources */,
@@ -846,7 +847,6 @@
 				FF9D18561FDA79E8008D5FD1 /* Generics.swift in Sources */,
 				FFCDE7DA1FE7FB5C0008CCB9 /* UITableView.swift in Sources */,
 				FFB85FD21FCE79A3000E47C8 /* User.swift in Sources */,
-				FFA91E591FE90109000E5C68 /* SelectInstrmuentViewController.swift in Sources */,
 				FF0280661FD901AB00C0013A /* Genre.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
