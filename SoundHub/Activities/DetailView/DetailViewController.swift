@@ -23,6 +23,7 @@ class DetailViewController: UIViewController{
     private var masterWaveCell:MasterWaveFormViewCell?
     /// 녹음하는 셀
     private var recorderCell: RecorderCell?
+    private var heightOfRecordingCell:CGFloat = 50
     /// Master Track을 재생하는 플레이어
     private var masterAudioPlayer:AVPlayer?{
         didSet(oldVal){
@@ -57,10 +58,7 @@ class DetailViewController: UIViewController{
     // MARK: IBOutlets
     /// 이 VC의 최상단 테이블뷰
     @IBOutlet weak private var mainTV: UITableView!
-    @IBAction func unwindToDetailView(segue:UIStoryboardSegue) {
-        self.commentTrackContainer?.isNewTrackBeingAdded = true
-        self.mainTV.reloadData()
-    }
+
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -187,6 +185,18 @@ extension DetailViewController:MixedTracksContainerCellDelegate{
 
 // MARK:RecorderCellDelegate
 extension DetailViewController:RecorderCellDelegate{
+    func shouldBecomeActive() {
+        heightOfRecordingCell = CGFloat(UIScreen.main.bounds.height - PlayBarController.main.view.frame.height - (navigationController?.navigationBar.frame.height ?? 0) )
+        CATransaction.begin()
+        CATransaction.setCompletionBlock {
+            self.mainTV.scrollToRow(at: IndexPath(item: 0, section: Section.RecordCell.rawValue), at: .bottom, animated: true)
+            self.recorderCell?.activate()
+        }
+        mainTV.beginUpdates()
+        mainTV.endUpdates()
+        CATransaction.commit()
+    }
+    
     func uploadDidFinished(with post: Post?) {
         guard let post = post else { return }
         self.post = post
@@ -205,14 +215,25 @@ extension DetailViewController:RecorderCellDelegate{
     
     func showInstrumentPicker(){
         ActionSheetStringPicker.show(withTitle: "어떤 악기였나요?", rows: Instrument.cases, initialSelection: 0, doneBlock: { (picker, row, result) in
-                let selectedInstrument = Instrument.cases[row]
+            
+            let selectedInstrument = Instrument.cases[row]
             guard let postId = self.post.id else { return }
             RecordConductor.main.confirmComment(on: postId, of: selectedInstrument, completion: { (postResult) in
                 guard let postResult = postResult else { return }
                 self.post = postResult
                 self.commentTrackContainer?.isNewTrackBeingAdded = true
-                let ids = IndexSet(integersIn: Section.CommentTracks.rawValue ... Section.CommentTracks.rawValue)
-                self.mainTV.reloadSections(ids, with: .automatic)
+                
+                self.heightOfRecordingCell = 50
+                self.recorderCell?.deActivate()
+                CATransaction.begin()
+                CATransaction.setCompletionBlock {
+                    self.mainTV.scrollToRow(at: IndexPath(item: 0, section: Section.RecordCell.rawValue), at: .bottom, animated: true)
+//                    let ids = IndexSet(integersIn: Section.CommentTracks.rawValue ... Section.CommentTracks.rawValue)
+//                    self.mainTV.reloadSections(ids, with: .automatic)
+                }
+                self.mainTV.beginUpdates()
+                self.mainTV.endUpdates()
+                CATransaction.commit()
             })
         }, cancel: { (picker) in
         }, origin: self.view)
@@ -268,14 +289,13 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             }
             commentTrackContainer = cell
             return cell
-        }
-        else if Section(rawValue: indexPath.section) == .RecordCell {
+        }else if Section(rawValue: indexPath.section) == .RecordCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: "recorderCell", for: indexPath) as! RecorderCell
             cell.delegate = self
             recorderCell = cell
             return cell
         }else{
-           return UITableViewCell()
+            return UITableViewCell()
         }
     }
 
@@ -288,8 +308,10 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         }else if Section(rawValue:indexPath.section) == .CommentTracks{
             return CGFloat(post.numOfCommentTracks * 100)
         }
-        return 100
+        return heightOfRecordingCell
     }
+    
+    
     
     /**
      특정 post를 보여주는 DetailViewController로 이동하는 함수
@@ -326,7 +348,7 @@ extension DetailViewController{
         /**
          모든 Section의 경우의 수
          
-         MainHeader/ MasterWave / MixedHeader/ Mixed / CommentHeader / Comment
+         MainHeader / MixedHeader/ Mixed / CommentHeader / Comment / Recorder
         */
         static var cases:Int{get{return 6}}
         var rows:Int{
