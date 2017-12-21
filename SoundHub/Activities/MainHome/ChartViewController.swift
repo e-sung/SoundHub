@@ -24,7 +24,6 @@ class ChartViewController: UIViewController{
     private let sectionTitleList = ["CategoryTab", "Popular Musicians", "Ranking Chart", "Recent Upload"]
     var category:Categori = .general
     var option:String = ""
-    let condoctor = RecordConductor.main
     
     // MARK: LifeCycle
     override func viewDidLoad() {
