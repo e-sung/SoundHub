@@ -163,6 +163,18 @@
                                 </constraints>
                                 <state key="normal" image="camera_icon"/>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="120" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qRy-iQ-esf">
+                                <rect key="frame" x="188" y="425" width="93.5" height="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BPM : " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ma-d8-bpm">
+                                <rect key="frame" x="89.5" y="424" width="93.5" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.090183012187480927" green="0.090205498039722443" blue="0.090178228914737701" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
@@ -172,7 +184,12 @@
                             <constraint firstItem="CFO-tZ-grv" firstAttribute="centerY" secondItem="Wdl-lY-jFm" secondAttribute="centerY" constant="-100" id="1zZ-Ha-NKJ"/>
                             <constraint firstItem="vdy-Pa-aep" firstAttribute="top" secondItem="cGz-Yb-x78" secondAttribute="bottom" constant="8" id="BiH-5J-6h7"/>
                             <constraint firstItem="cGz-Yb-x78" firstAttribute="top" secondItem="CFO-tZ-grv" secondAttribute="bottom" constant="23.5" id="KJD-TQ-1S3"/>
+                            <constraint firstItem="1Ma-d8-bpm" firstAttribute="width" secondItem="qRy-iQ-esf" secondAttribute="width" id="NdL-J4-RZc"/>
                             <constraint firstItem="2cT-uG-9Wb" firstAttribute="trailing" secondItem="CFO-tZ-grv" secondAttribute="trailing" id="O3m-oL-NaJ"/>
+                            <constraint firstItem="qRy-iQ-esf" firstAttribute="width" secondItem="CFO-tZ-grv" secondAttribute="width" multiplier="0.5" id="RuL-DG-h5X"/>
+                            <constraint firstItem="qRy-iQ-esf" firstAttribute="top" secondItem="vdy-Pa-aep" secondAttribute="bottom" constant="7.5" id="Uq1-bv-XGu"/>
+                            <constraint firstItem="qRy-iQ-esf" firstAttribute="trailing" secondItem="CFO-tZ-grv" secondAttribute="trailing" id="W0t-6s-SCv"/>
+                            <constraint firstItem="1Ma-d8-bpm" firstAttribute="centerY" secondItem="qRy-iQ-esf" secondAttribute="centerY" id="Z8r-DT-qV5"/>
                             <constraint firstItem="vdy-Pa-aep" firstAttribute="centerX" secondItem="Wdl-lY-jFm" secondAttribute="centerX" id="d5j-tc-xBw"/>
                             <constraint firstItem="cGz-Yb-x78" firstAttribute="centerX" secondItem="Wdl-lY-jFm" secondAttribute="centerX" id="f3t-Y5-Oex"/>
                             <constraint firstItem="2cT-uG-9Wb" firstAttribute="bottom" secondItem="CFO-tZ-grv" secondAttribute="bottom" id="ite-wL-U2f"/>
@@ -182,6 +199,7 @@
                             <constraint firstItem="b2b-HW-kay" firstAttribute="bottom" secondItem="Wdl-lY-jFm" secondAttribute="bottom" id="ufl-Cc-3qU"/>
                             <constraint firstItem="2cT-uG-9Wb" firstAttribute="width" secondItem="CFO-tZ-grv" secondAttribute="width" multiplier="0.3" id="x8B-Wf-LVR"/>
                             <constraint firstItem="CFO-tZ-grv" firstAttribute="centerX" secondItem="Wdl-lY-jFm" secondAttribute="centerX" id="xK6-Fq-dYg"/>
+                            <constraint firstItem="qRy-iQ-esf" firstAttribute="leading" secondItem="1Ma-d8-bpm" secondAttribute="trailing" constant="5" id="ywg-Vb-HhG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Wdl-lY-jFm"/>
                         <connections>
@@ -192,6 +210,8 @@
                         <outlet property="albumArt" destination="CFO-tZ-grv" id="lLf-MT-3e5"/>
                         <outlet property="audioTitleTF" destination="cGz-Yb-x78" id="hoB-fW-iqZ"/>
                         <outlet property="authorNameLB" destination="vdy-Pa-aep" id="mMl-LH-7Vc"/>
+                        <outlet property="bpmTF" destination="qRy-iQ-esf" id="yjg-Yu-IyZ"/>
+                        <outlet property="cameraButton" destination="2cT-uG-9Wb" id="3ZW-dl-I6i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dqr-w4-kwi" userLabel="First Responder" sceneMemberID="firstResponder"/>

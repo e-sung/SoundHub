@@ -19,7 +19,10 @@ class AudioUploadViewController: UIViewController {
     var instrument:String!
     private let imagePicker = UIImagePickerController()
     @IBOutlet weak private var audioTitleTF:UITextField!
+    
+    @IBOutlet weak var bpmTF: UITextField!
     @IBOutlet weak private var albumArt: UIButton!
+    @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak private var authorNameLB: UILabel!
     @IBAction private func cancelHandler(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
@@ -46,6 +49,7 @@ class AudioUploadViewController: UIViewController {
                                                           and: .commonIdentifierTitle)
             let artistMetadata = String.generateAvMetaData(with: authorNameLB.text!,
                                                            and: .commonIdentifierArtist)
+            
             let exportURL = URL(string: "\(audioTitle).m4a".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)! , relativeTo: DataCenter.documentsDirectoryURL)!
             self.dismissWith(depth: 2, from: self, completion: {
                 LPSnackbar.showSnack(title: "Exporting...")
@@ -61,7 +65,18 @@ class AudioUploadViewController: UIViewController {
     }
 
     private func setUpUI(with audio:AVPlayerItem){
+        cameraButton.isHidden = true
         for item in audio.asset.metadata{
+            if let identifier = item.identifier{
+                if identifier == .iTunesMetadataBeatsPerMin{
+                    bpmTF.text = "\(item.value as! Int)"
+                    bpmTF.isUserInteractionEnabled = false
+                }else if identifier == .id3MetadataBeatsPerMinute{
+                    bpmTF.text = "\(item.value as! Int)"
+                    bpmTF.isUserInteractionEnabled = false
+                }
+            }
+            
             if let key = item.commonKey, let value = item.value {
                 if key == .commonKeyArtwork, let data = value as? Data{
                     albumArt.setImage(UIImage(data: data), for: .normal)
@@ -73,6 +88,14 @@ class AudioUploadViewController: UIViewController {
                 }
                 else if key == .commonKeyArtist {
                     authorNameLB.text = value as? String
+                }
+                else if key == .id3MetadataKeyBeatsPerMinute{
+                    bpmTF.text = value as? String
+                    bpmTF.isUserInteractionEnabled = false
+                }
+                else if key == .iTunesMetadataKeyBeatsPerMin{
+                    bpmTF.text = value as? String
+                    bpmTF.isUserInteractionEnabled = false
                 }
             }
         }

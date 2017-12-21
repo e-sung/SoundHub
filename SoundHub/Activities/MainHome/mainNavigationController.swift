@@ -45,22 +45,23 @@ class mainNavigationController: UINavigationController {
     }
     
     @objc func uploadButtonHandler(sender:UIButton){
-        if User.isLoggedIn{
-            let alert = UIAlertController(title: "어떻게 올리시겠습니까?", message: "", preferredStyle: .actionSheet)
-            alert.addAction(UIAlertAction(title: "원래 있던 파일 올리기", style: .default , handler: { (action) in
-                self.present(self.documentPicker, animated: true, completion: nil)
-            }))
-            alert.addAction(UIAlertAction(title: "새로 녹음하기", style: .default , handler: { (action) in
-                let storyboard = UIStoryboard(name: "Entry", bundle: nil)
-                let audioRecorderVC = storyboard.instantiateViewController(withIdentifier: "AudioRecorderViewController") as! AudioRecorderViewController
-                self.present(audioRecorderVC, animated: true, completion: nil)
-            }))
-            alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: { (action) in
-            }))
-            self.present(alert, animated: true, completion: nil)
-        }else{
-            alert(msg: "로그인이 필요한 기능입니다.")
-        }
+        let alert = UIAlertController(title: "어떻게 올리시겠습니까?", message: "", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "원래 있던 파일 올리기", style: .default , handler: { (action) in
+            self.present(self.documentPicker, animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "새로 녹음하기", style: .default , handler: { (action) in
+            let storyboard = UIStoryboard(name: "Entry", bundle: nil)
+            let audioRecorderVC = storyboard.instantiateViewController(withIdentifier: "AudioRecorderViewController") as! AudioRecorderViewController
+            self.present(audioRecorderVC, animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: { (action) in
+        }))
+        self.present(alert, animated: true, completion: nil)
+//        if User.isLoggedIn{
+//
+//        }else{
+//            alert(msg: "로그인이 필요한 기능입니다.")
+//        }
     }
 }
 extension mainNavigationController:PlayBarControllerDelegate{
