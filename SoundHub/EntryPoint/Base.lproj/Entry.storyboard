@@ -72,23 +72,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9Bc-vx-KhW">
-                                <rect key="frame" x="93.5" y="150" width="187.5" height="187.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="9Bc-vx-KhW" secondAttribute="height" multiplier="1:1" id="0yn-cJ-Rtd"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7yn-QS-m1a">
-                                <rect key="frame" x="-0.5" y="363" width="375" height="36"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="36" id="DDd-gR-xDH"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vdy-Pa-aep">
-                                <rect key="frame" x="0.5" y="399" width="375" height="24"/>
+                                <rect key="frame" x="0.5" y="393.5" width="375" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -150,27 +135,55 @@
                                     <constraint firstAttribute="height" constant="60" id="jKu-df-P5r"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CFO-tZ-grv">
+                                <rect key="frame" x="94" y="150.5" width="187.5" height="187.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="CFO-tZ-grv" secondAttribute="height" multiplier="1:1" id="P7n-5q-FJ0"/>
+                                </constraints>
+                                <state key="normal" image="no_cover"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="무제" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cGz-Yb-x78">
+                                <rect key="frame" x="94" y="361.5" width="187.5" height="24"/>
+                                <color key="textColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2cT-uG-9Wb">
+                                <rect key="frame" x="225.5" y="282" width="56" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="2cT-uG-9Wb" secondAttribute="height" multiplier="1:1" id="EwJ-5B-QDK"/>
+                                </constraints>
+                                <state key="normal" image="camera_icon"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.090183012187480927" green="0.090205498039722443" blue="0.090178228914737701" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="cGz-Yb-x78" firstAttribute="width" secondItem="CFO-tZ-grv" secondAttribute="width" id="1er-zG-LrL"/>
                             <constraint firstItem="vdy-Pa-aep" firstAttribute="width" secondItem="Heb-Ng-si6" secondAttribute="width" id="1vk-Wg-kZV"/>
-                            <constraint firstItem="9Bc-vx-KhW" firstAttribute="centerX" secondItem="Wdl-lY-jFm" secondAttribute="centerX" id="9qm-3k-ww3"/>
-                            <constraint firstItem="7yn-QS-m1a" firstAttribute="width" secondItem="Heb-Ng-si6" secondAttribute="width" id="ETN-Kf-ucc"/>
-                            <constraint firstItem="9Bc-vx-KhW" firstAttribute="centerY" secondItem="Wdl-lY-jFm" secondAttribute="centerY" constant="-100" id="Fvm-Bb-Ilv"/>
-                            <constraint firstItem="7yn-QS-m1a" firstAttribute="top" secondItem="9Bc-vx-KhW" secondAttribute="bottom" constant="25.5" id="ODw-Y6-6y0"/>
-                            <constraint firstItem="7yn-QS-m1a" firstAttribute="centerX" secondItem="Wdl-lY-jFm" secondAttribute="centerX" id="Ubt-EW-WHc"/>
+                            <constraint firstItem="CFO-tZ-grv" firstAttribute="centerY" secondItem="Wdl-lY-jFm" secondAttribute="centerY" constant="-100" id="1zZ-Ha-NKJ"/>
+                            <constraint firstItem="vdy-Pa-aep" firstAttribute="top" secondItem="cGz-Yb-x78" secondAttribute="bottom" constant="8" id="BiH-5J-6h7"/>
+                            <constraint firstItem="cGz-Yb-x78" firstAttribute="top" secondItem="CFO-tZ-grv" secondAttribute="bottom" constant="23.5" id="KJD-TQ-1S3"/>
+                            <constraint firstItem="2cT-uG-9Wb" firstAttribute="trailing" secondItem="CFO-tZ-grv" secondAttribute="trailing" id="O3m-oL-NaJ"/>
                             <constraint firstItem="vdy-Pa-aep" firstAttribute="centerX" secondItem="Wdl-lY-jFm" secondAttribute="centerX" id="d5j-tc-xBw"/>
+                            <constraint firstItem="cGz-Yb-x78" firstAttribute="centerX" secondItem="Wdl-lY-jFm" secondAttribute="centerX" id="f3t-Y5-Oex"/>
+                            <constraint firstItem="2cT-uG-9Wb" firstAttribute="bottom" secondItem="CFO-tZ-grv" secondAttribute="bottom" id="ite-wL-U2f"/>
                             <constraint firstItem="b2b-HW-kay" firstAttribute="width" secondItem="Heb-Ng-si6" secondAttribute="width" id="luc-Ty-fcy"/>
-                            <constraint firstItem="9Bc-vx-KhW" firstAttribute="width" secondItem="Heb-Ng-si6" secondAttribute="width" multiplier="0.5" id="nUV-sC-S8E"/>
                             <constraint firstItem="b2b-HW-kay" firstAttribute="centerX" secondItem="Wdl-lY-jFm" secondAttribute="centerX" id="pvN-gc-JfE"/>
+                            <constraint firstItem="CFO-tZ-grv" firstAttribute="width" secondItem="Heb-Ng-si6" secondAttribute="width" multiplier="0.5" id="sup-RV-BZm"/>
                             <constraint firstItem="b2b-HW-kay" firstAttribute="bottom" secondItem="Wdl-lY-jFm" secondAttribute="bottom" id="ufl-Cc-3qU"/>
-                            <constraint firstItem="vdy-Pa-aep" firstAttribute="top" secondItem="7yn-QS-m1a" secondAttribute="bottom" id="xvx-vU-bQO"/>
+                            <constraint firstItem="2cT-uG-9Wb" firstAttribute="width" secondItem="CFO-tZ-grv" secondAttribute="width" multiplier="0.3" id="x8B-Wf-LVR"/>
+                            <constraint firstItem="CFO-tZ-grv" firstAttribute="centerX" secondItem="Wdl-lY-jFm" secondAttribute="centerX" id="xK6-Fq-dYg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Wdl-lY-jFm"/>
                     </view>
                     <connections>
-                        <outlet property="albumArt" destination="9Bc-vx-KhW" id="IZQ-IJ-qgW"/>
-                        <outlet property="audioTitleLB" destination="7yn-QS-m1a" id="sJi-7f-wJ7"/>
+                        <outlet property="albumArt" destination="CFO-tZ-grv" id="lLf-MT-3e5"/>
+                        <outlet property="audioTitleTF" destination="cGz-Yb-x78" id="hoB-fW-iqZ"/>
                         <outlet property="authorNameLB" destination="vdy-Pa-aep" id="mMl-LH-7Vc"/>
                     </connections>
                 </viewController>
@@ -326,4 +339,8 @@
             <point key="canvasLocation" x="793" y="895"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="camera_icon" width="256" height="256"/>
+        <image name="no_cover" width="270" height="270"/>
+    </resources>
 </document>

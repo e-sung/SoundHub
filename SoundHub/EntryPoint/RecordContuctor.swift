@@ -75,6 +75,19 @@ class RecordConductor{
             })
         })
     }
+    func exportRecordedAudio(to url:URL, with metadatas:[AVMetadataItem], completion:@escaping ()->Void){
+        if let session = AVAssetExportSession(asset: self.player.audioFile.avAsset,
+                                              presetName: AVAssetExportPresetAppleM4A){
+            session.metadata = metadatas
+            session.outputFileType = AVFileType.m4a
+            session.outputURL = url
+            session.exportAsynchronously {
+                completion()
+            }
+        }else {
+            print("AVAssetExportSession wasn't generated")
+        }
+    }
     
 
     private func setUpSession(){

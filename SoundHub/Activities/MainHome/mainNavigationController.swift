@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import ActionSheetPicker_3_0
 
 class mainNavigationController: UINavigationController {
     var playBarController:PlayBarController!
+    var documentPicker:UIDocumentPickerViewController!
     let uploadMusicButton = UIButton()
     
     override func viewDidLoad() {
@@ -20,6 +22,9 @@ class mainNavigationController: UINavigationController {
         playBarController?.delegate = self
         self.view.addSubview(uploadMusicButton)
         setUploadButton()
+        
+        documentPicker = UIDocumentPickerViewController(documentTypes: ["public.audio"], in: UIDocumentPickerMode.import )
+        documentPicker.delegate = self
 
     }
 
@@ -40,24 +45,27 @@ class mainNavigationController: UINavigationController {
     }
     
     @objc func uploadButtonHandler(sender:UIButton){
-        if User.isLoggedIn{
-            let alert = UIAlertController(title: "어떻게 올리시겠습니까?", message: "", preferredStyle: .actionSheet)
-            alert.addAction(UIAlertAction(title: "원래 있던 파일 올리기", style: .default , handler: { (action) in
-                let storyboard = UIStoryboard(name: "Entry", bundle: nil)
-                let documentBrowserVC = storyboard.instantiateViewController(withIdentifier: "DocumentBrowserController") as! DocumentBrowserViewController
-                self.present(documentBrowserVC, animated: true, completion: nil)
-            }))
-            alert.addAction(UIAlertAction(title: "새로 녹음하기", style: .default , handler: { (action) in
-                let storyboard = UIStoryboard(name: "Entry", bundle: nil)
-                let audioRecorderVC = storyboard.instantiateViewController(withIdentifier: "AudioRecorderViewController") as! AudioRecorderViewController
-                self.present(audioRecorderVC, animated: true, completion: nil)
-            }))
-            alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: { (action) in
-            }))
-            self.present(alert, animated: true, completion: nil)
-        }else{
-            alert(msg: "로그인이 필요한 기능입니다.")
-        }
+        let alert = UIAlertController(title: "어떻게 올리시겠습니까?", message: "", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "원래 있던 파일 올리기", style: .default , handler: { (action) in
+            self.present(self.documentPicker, animated: true, completion: nil)
+//            let storyboard = UIStoryboard(name: "Entry", bundle: nil)
+//            let documentBrowserVC = storyboard.instantiateViewController(withIdentifier: "DocumentBrowserController") as! DocumentBrowserViewController
+//            self.present(documentBrowserVC, animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "새로 녹음하기", style: .default , handler: { (action) in
+            let storyboard = UIStoryboard(name: "Entry", bundle: nil)
+            let audioRecorderVC = storyboard.instantiateViewController(withIdentifier: "AudioRecorderViewController") as! AudioRecorderViewController
+            self.present(audioRecorderVC, animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: { (action) in
+        }))
+        self.present(alert, animated: true, completion: nil)
+        
+//        if User.isLoggedIn{
+//
+//        }else{
+//            alert(msg: "로그인이 필요한 기능입니다.")
+//        }
     }
 }
 extension mainNavigationController:PlayBarControllerDelegate{
@@ -68,5 +76,12 @@ extension mainNavigationController:PlayBarControllerDelegate{
     }
     func didAppeared() {
         setUploadButtonAutoLayout()
+    }
+}
+
+extension mainNavigationController:UIDocumentPickerDelegate{
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        print(urls[0])
+        ActionSheetStringPicker.ask(instrument: Instrument.cases, and: Genre.cases, of: urls[0], from: self)
     }
 }

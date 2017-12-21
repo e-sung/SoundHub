@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AVFoundation
 
 extension String{
     var url:URL{
@@ -24,4 +25,12 @@ extension String{
     var isValidPassword:Bool{
         get{ return self.count > 10 }
     }
+    
+    static func generateAvMetaData(with value:String, and type:AVMetadataIdentifier)->AVMutableMetadataItem{
+        let item = AVMutableMetadataItem()
+        item.identifier = type
+        item.value = value as (NSCopying & NSObjectProtocol)?
+        return item
+    }
 }
+
