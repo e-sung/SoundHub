@@ -33,6 +33,14 @@ class ChartViewController: UIViewController{
         mainTV.delegate = self
         mainTV.dataSource = self
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if PlayBarController.main.isHidden == false {
+            mainTV.bottomAnchor.constraint(equalTo: self.view.bottomAnchor,
+                                           constant: -(PlayBarController.main.view.frame.height)).isActive = true
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         playBarController = PlayBarController.main
         playBarController?.delegate = self
