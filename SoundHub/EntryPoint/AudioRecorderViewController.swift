@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 import AudioKit
 import AudioKitUI
+import ActionSheetPicker_3_0
 
 class AudioRecorderViewController: UIViewController {
 
@@ -47,7 +48,8 @@ class AudioRecorderViewController: UIViewController {
             let recordedDuration = RecordConductor.main.player != nil ? RecordConductor.main.player.audioFile.duration  : 0
             if recordedDuration > 0.0 {
                 RecordConductor.main.recorder.stop()
-                showMetaInfoSetUpVC()
+//                ActionSheetStringPicker.ask(instrument: Instrument.cases, and: Genre.cases, of: url, from: self)
+                setUpMetaInfo()
             }
         }
     }
@@ -74,12 +76,22 @@ class AudioRecorderViewController: UIViewController {
 // MARK: Helper Functions
 extension AudioRecorderViewController{
 
-    private func showMetaInfoSetUpVC(){
+    private func setUpMetaInfo(){
         let storyBoard = UIStoryboard(name: "Entry", bundle: nil)
-        let metaInfoSetUpVC = storyBoard.instantiateViewController(withIdentifier: "SetUpMetaInfoViewController") as! SetUpMetaInfoViewController
-        metaInfoSetUpVC.player = RecordConductor.main.player
-        present(metaInfoSetUpVC, animated: true, completion: nil)
+        let audioUploadVC = storyBoard.instantiateViewController(withIdentifier: "DocumentViewController") as! AudioUploadViewController
+        
+        ActionSheetStringPicker.show(withTitle: "어떤 악기인가요?", rows: Instrument.cases, initialSelection: 0, doneBlock: { (picker, row, result) in
+            
+            audioUploadVC.instrument = Instrument.cases[row]
+            ActionSheetStringPicker.show(withTitle: "어떤 장르인가요?", rows: Genre.cases, initialSelection: 0, doneBlock: { (picker, row, result) in
+                audioUploadVC.genre = Genre.cases[row]
+                self.present(audioUploadVC, animated: true, completion: nil)
+            }, cancel: { (picker) in
+            }, origin: self.view)
+        }, cancel: { (picker) in
+        }, origin: self.view)
     }
+
     
     private func makeRecordingState(){
         recordButton.setTitle("그만 녹음하기", for: .normal)
