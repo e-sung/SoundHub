@@ -92,7 +92,21 @@ class DetailViewController: UIViewController{
 
 // MARK: 모드가 변경되었을 때 처리
 extension DetailViewController:ModeToggleCellDelegate{
+    
+    func fillContainers(){
+        NetworkController.main.fetchPost(id: (post?.id ?? -1)) { (postResult) in
+            DispatchQueue.main.async {
+                self.post = postResult
+                let ids = IndexSet(integersIn: Section.MixedTracks.rawValue ... Section.CommentTracks.rawValue)
+                self.mainTV.reloadSections(ids, with: .automatic)
+            }
+        }
+    }
+    
     func didModeToggled(to mode: Bool, by toggler: Int) {
+        if commentTrackContainer?.commentTV.allCells.count == 0 {
+            fillContainers()
+        }
         if toggler == 0 {
             mixedTrackContainer?.setMute(to: !mode)
             mixedTrackContainer?.setInteractionability(to: mode)
