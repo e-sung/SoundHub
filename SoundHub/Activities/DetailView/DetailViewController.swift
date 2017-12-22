@@ -337,7 +337,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
     */
     static func goToDetailPage(of post:Post, from vc:UIViewController){
         /// 보려는 포스트가, 현재 플레이바에서 재생중인 포스트라면
-        if post.title == PlayBarController.main.currentPostView?.post.title {
+        if post.id == PlayBarController.main.currentPostView?.post.id {
             /// 그 포스트객체는 PlayBarController.main에 저장되어 있으니, 그걸 보여주면 됨.
             vc.navigationController?.show(PlayBarController.main.currentPostView!, sender: nil)
         }else{

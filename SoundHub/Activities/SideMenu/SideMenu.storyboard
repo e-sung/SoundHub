@@ -400,6 +400,11 @@
                                                                                                         <constraint firstAttribute="width" secondItem="gIX-uE-JQN" secondAttribute="height" multiplier="1:1" id="WtH-8y-Qsm"/>
                                                                                                     </constraints>
                                                                                                     <state key="normal" image="default-profile"/>
+                                                                                                    <userDefinedRuntimeAttributes>
+                                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                                            <real key="value" value="3"/>
+                                                                                                        </userDefinedRuntimeAttribute>
+                                                                                                    </userDefinedRuntimeAttributes>
                                                                                                 </button>
                                                                                             </subviews>
                                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -585,6 +590,11 @@
                                                                                                         <constraint firstAttribute="width" secondItem="3Bf-Oo-RDd" secondAttribute="height" multiplier="1:1" id="lef-es-Cg1"/>
                                                                                                     </constraints>
                                                                                                     <state key="normal" image="default-profile"/>
+                                                                                                    <userDefinedRuntimeAttributes>
+                                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                                            <real key="value" value="3"/>
+                                                                                                        </userDefinedRuntimeAttribute>
+                                                                                                    </userDefinedRuntimeAttributes>
                                                                                                 </button>
                                                                                             </subviews>
                                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
