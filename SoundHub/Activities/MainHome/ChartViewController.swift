@@ -118,6 +118,12 @@ extension ChartViewController:UITableViewDelegate{
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let cell = cell as? PostListCell{
+            cell.authorProfileImageBt.setImage(#imageLiteral(resourceName: "default-profile"), for: .normal)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return Section(rawValue: indexPath.section)!.rowHeight
     }

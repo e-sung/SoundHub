@@ -37,8 +37,9 @@ class MasterWaveFormViewCell: UITableViewCell, NCSoundHistogramDelegate {
         }
     }
     func renderWave(){
+        self.plot?.soundURL = self.masterAudioURL
         DispatchQueue.global(qos: .userInteractive).async {
-            self.plot?.soundURL = self.masterAudioURL
+            
         }
     }
 

@@ -40,8 +40,6 @@ class mainNavigationController: UINavigationController {
     private func setUploadButtonAutoLayout(){
         uploadMusicButton.centerYAnchor.constraint(equalTo: playBarController.view.centerYAnchor).isActive = true
         uploadMusicButton.trailingAnchor.constraint(equalTo: playBarController.view.trailingAnchor, constant: -10).isActive = true
-        uploadMusicButton.heightAnchor.constraint(equalToConstant: 70)
-        uploadMusicButton.widthAnchor.constraint(equalToConstant: 70)
     }
     
     @objc func uploadButtonHandler(sender:UIButton){

@@ -144,7 +144,7 @@ extension PlayBarController{
 
     private func setAutoLayoutOfProgressBar(){
         progressBar.translatesAutoresizingMaskIntoConstraints = false
-        progressBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        progressBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         progressBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         progressBar.centerYAnchor.constraint(equalTo: view.topAnchor).isActive = true
     }
