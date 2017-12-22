@@ -402,7 +402,7 @@
                                                                                                     <state key="normal" image="default-profile"/>
                                                                                                     <userDefinedRuntimeAttributes>
                                                                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                                                            <real key="value" value="3"/>
+                                                                                                            <real key="value" value="5"/>
                                                                                                         </userDefinedRuntimeAttribute>
                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                 </button>
@@ -592,7 +592,7 @@
                                                                                                     <state key="normal" image="default-profile"/>
                                                                                                     <userDefinedRuntimeAttributes>
                                                                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                                                            <real key="value" value="3"/>
+                                                                                                            <real key="value" value="5"/>
                                                                                                         </userDefinedRuntimeAttribute>
                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                 </button>

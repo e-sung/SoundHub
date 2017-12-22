@@ -15,6 +15,7 @@ class DetailHeaderCell: UITableViewCell {
     @IBOutlet weak private var postTitleLB: UILabel!
     @IBOutlet weak private var authorNameLB: UILabel!
     @IBOutlet weak private var numberOfLikesLB: UILabel!
+    @IBOutlet weak private var bpmLB: UILabel!
     @IBOutlet weak private var numberOfComments: UILabel!
     @IBAction func likeButtonHandler(_ sender: UIButton) {
         guard let postId = _postInfo.id else { return }
@@ -35,6 +36,7 @@ class DetailHeaderCell: UITableViewCell {
             postTitleLB.text = newVal.title
             numberOfLikesLB.text = "\(newVal.num_liked ?? 0)"
             numberOfComments.text = "\(newVal.num_comments ?? 0)"
+            bpmLB.text =  (newVal.bpm == nil || newVal.bpm == 0 ) ? "110" : "\(newVal.bpm!)"
             guard let authorId = newVal.author?.id else { return }
             NetworkController.main.fetchUser(id: authorId) { (authorInfo) in
                 guard let authorInfo = authorInfo else { return }

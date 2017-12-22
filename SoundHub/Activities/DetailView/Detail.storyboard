@@ -137,6 +137,7 @@
                                                 <connections>
                                                     <outlet property="authorNameLB" destination="zdB-bg-Zt4" id="c7d-Yi-1Hq"/>
                                                     <outlet property="authorProfileImageButton" destination="V24-W6-Deb" id="g4q-cw-eU1"/>
+                                                    <outlet property="bpmLB" destination="3Nu-Ao-Ctb" id="9Jy-k4-pFP"/>
                                                     <outlet property="numberOfComments" destination="290-JV-UpL" id="1wI-JB-iOd"/>
                                                     <outlet property="numberOfLikesLB" destination="mrv-l7-mvY" id="3pq-fX-mNG"/>
                                                     <outlet property="postTitleLB" destination="jX0-hu-hPz" id="6HT-Uf-UPz"/>
@@ -457,7 +458,7 @@
                                                             </connections>
                                                         </button>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F2b-XT-SDC" customClass="AKNodeOutputPlot" customModule="AudioKitUI">
-                                                            <rect key="frame" x="51" y="-7" width="317" height="700"/>
+                                                            <rect key="frame" x="51" y="-6.5" width="317" height="50"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="50" id="exj-fG-c7N"/>

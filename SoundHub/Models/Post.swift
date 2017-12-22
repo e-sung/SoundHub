@@ -15,6 +15,7 @@ struct Post:Codable{
     var author:User?
     let instrument:String?
     let genre:String?
+    let bpm:Int?
     let liked:[Int]?
     let num_liked:Int?
     let num_comments:Int?
