@@ -35,7 +35,7 @@ class DetailHeaderCell: UITableViewCell {
             postTitleLB.text = newVal.title
             numberOfLikesLB.text = "\(newVal.num_liked ?? 0)"
             numberOfComments.text = "\(newVal.num_comments ?? 0)"
-            guard let authorId = newVal.author else { return }
+            guard let authorId = newVal.author?.id else { return }
             NetworkController.main.fetchUser(id: authorId) { (authorInfo) in
                 guard let authorInfo = authorInfo else { return }
                 DispatchQueue.main.async {

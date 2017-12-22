@@ -81,7 +81,7 @@ class DetailViewController: UIViewController{
             })
         }
         guard let userId = UserDefaults.standard.string(forKey: id) else { return }
-        if post.author == Int(userId){
+        if (post.author?.id ?? -1) == Int(userId){
             commentTrackContainer?.allowsMultiSelection = true
         }
     }
@@ -287,7 +287,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         }else if Section(rawValue: indexPath.section) == .CommentTracks {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTracksContainer", for: indexPath) as! CommentContainerCell
             cell.allComments = post.comment_tracks; cell.delegate = self
-            if DataCenter.main.userId == post.author{
+            if DataCenter.main.userId == post.author?.id{
                 cell.commentTV.allowsMultipleSelection = true
             }
             commentTrackContainer = cell
