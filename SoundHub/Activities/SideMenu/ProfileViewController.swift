@@ -117,6 +117,18 @@ class ProfileViewController: UIViewController{
 
         imagePicker.allowsEditing = false
         imagePicker.delegate = self
+        
+        if userInfo?.post_set == nil {
+            guard let userId = userInfo?.id else { return }
+            NetworkController.main.fetchUser(id: userId, completion: { (userResult) in
+                guard let userResult = userResult else { return }
+                DispatchQueue.main.async {
+                    self.userInfo = userResult
+                    let ids = IndexSet.init(integersIn: 1...1)
+                    self.mainTV.reloadSections(ids, with: .automatic)
+                }
+            })
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
