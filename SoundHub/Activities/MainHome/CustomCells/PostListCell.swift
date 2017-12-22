@@ -32,7 +32,7 @@ class PostListCell: UITableViewCell {
             if let numComments = newVal.num_comments { totalComments.text = "\(numComments)" }
             else { totalComments.text = "0" }
             
-            guard let userId = newVal.author else { return }
+            guard let userId = newVal.author?.id else { return }
             NetworkController.main.fetchUser(id: userId) { (userInfo) in
                 guard let userInfo = userInfo else { return }
                 DispatchQueue.main.async {

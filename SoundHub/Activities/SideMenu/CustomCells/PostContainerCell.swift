@@ -45,8 +45,6 @@ extension PostContainerCell: UITableViewDelegate, UITableViewDataSource, UIScrol
             return cell
         }else{
             let cell = UITableViewCell(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 60))
-            let content = UIView.generateHeaderView(with: "비어있네요!", and: 60)
-            cell.addSubview(content)
             if indexPath == IndexPath(item: 0, section: 0){ firstCell = cell }
             return cell
         }

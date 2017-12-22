@@ -47,7 +47,7 @@ class AudioCommentCell: UITableViewCell {
         set(newVal){
            _commentInfo = newVal
             InstrumentLB.text = newVal.instrument
-            nickNameLB.text = newVal.author
+            nickNameLB.text = newVal.author?.nickname
             guard let audioURL = newVal.commentTrackURL else { return }
             NetworkController.main.downloadAudio(from: audioURL) { (localURL) in
                 self.player = AVPlayer(url: localURL)
