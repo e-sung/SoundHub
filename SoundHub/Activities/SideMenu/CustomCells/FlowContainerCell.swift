@@ -45,7 +45,7 @@ extension FlowContainerCell:UICollectionViewDelegate, UICollectionViewDataSource
         if indexPath.item == 0 {
             identifier = "postedPostContainer"
             headerTitle = "작성한 포스트"
-            posts = userInfo?.post_set
+            posts = userInfo?.postedPost
         }else{
             identifier = "likedPostContainer"
             headerTitle = "좋아한 포스트"

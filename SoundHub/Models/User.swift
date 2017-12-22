@@ -21,7 +21,19 @@ struct User:Codable{
     let is_staff:Bool?
     let is_active:Bool?
     let last_login:String?
-    let post_set:[Post]?
+    var post_set:[Post]?
+    var postedPost:[Post]{
+        get{
+            var postsToReturn:[Post] = []
+            guard let posts = post_set else { return postsToReturn }
+            for post in posts{
+                var post = post
+                post.author = self
+                postsToReturn.append(post)
+            }
+            return postsToReturn
+        }
+    }
     let liked_posts:[Post]?
     let num_followings:Int?
     let num_followers:Int?
