@@ -55,6 +55,7 @@
 		FFA8A8501FE74EF7008443B4 /* UIView+Geometry.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA8A84A1FE74EF6008443B4 /* UIView+Geometry.m */; };
 		FFA8A8511FE74EF7008443B4 /* NCSoundHistogram.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA8A84B1FE74EF6008443B4 /* NCSoundHistogram.m */; };
 		FFA8A8521FE74EF7008443B4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FFA8A84E1FE74EF6008443B4 /* README.md */; };
+		FFB2F8F81FEBDE67009E59B5 /* ActionSheetStringPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB2F8F71FEBDE67009E59B5 /* ActionSheetStringPicker.swift */; };
 		FFB85FCC1FCE652A000E47C8 /* ProfileHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB85FCB1FCE652A000E47C8 /* ProfileHeaderCell.swift */; };
 		FFB85FCE1FCE657F000E47C8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB85FCD1FCE657F000E47C8 /* ProfileViewController.swift */; };
 		FFB85FD01FCE78B3000E47C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB85FCF1FCE78B3000E47C8 /* Post.swift */; };
@@ -141,6 +142,7 @@
 		FF688F771FCE58B700F0A41F /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		FF688F791FCE58D600F0A41F /* SideMenu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SideMenu.storyboard; sourceTree = "<group>"; };
 		FF7D6E0B1FDD630700754A7C /* AVPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayer.swift; sourceTree = "<group>"; };
+		FF7DAF2A1FEBD41100AAEA83 /* SoundHub.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SoundHub.entitlements; sourceTree = "<group>"; };
 		FF9A84E21FC962C300AC4780 /* GeneralRanking.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GeneralRanking.storyboard; sourceTree = "<group>"; };
 		FF9A84EB1FC9AE6500AC4780 /* PopularMusicianCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMusicianCell.swift; sourceTree = "<group>"; };
 		FF9D18531FDA6012008D5FD1 /* CommentContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentContainerCell.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 		FFA8A84C1FE74EF6008443B4 /* UIView+Geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Geometry.h"; sourceTree = "<group>"; };
 		FFA8A84D1FE74EF6008443B4 /* NCSoundHistogram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCSoundHistogram.h; sourceTree = "<group>"; };
 		FFA8A84E1FE74EF6008443B4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		FFB2F8F71FEBDE67009E59B5 /* ActionSheetStringPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheetStringPicker.swift; sourceTree = "<group>"; };
 		FFB85FCB1FCE652A000E47C8 /* ProfileHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCell.swift; sourceTree = "<group>"; };
 		FFB85FCD1FCE657F000E47C8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		FFB85FCF1FCE78B3000E47C8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -312,6 +315,7 @@
 				FF9D18551FDA79E8008D5FD1 /* Generics.swift */,
 				FF7D6E0B1FDD630700754A7C /* AVPlayer.swift */,
 				FFCDE7D91FE7FB5C0008CCB9 /* UITableView.swift */,
+				FFB2F8F71FEBDE67009E59B5 /* ActionSheetStringPicker.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -434,6 +438,7 @@
 		FFCF82BD1FC95D66003B7861 /* SoundHub */ = {
 			isa = PBXGroup;
 			children = (
+				FF7DAF2A1FEBD41100AAEA83 /* SoundHub.entitlements */,
 				FFA8A8461FE74EF6008443B4 /* NCSoundHistogram */,
 				FF5C01411FDA188D00F37CC9 /* GoogleService-Info.plist */,
 				FFCF82BE1FC95D66003B7861 /* AppDelegate.swift */,
@@ -547,6 +552,14 @@
 						CreatedOnToolsVersion = 9.1;
 						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					FFCF82CE1FC95D66003B7861 = {
 						CreatedOnToolsVersion = 9.1;
@@ -811,6 +824,7 @@
 				FF3B20C61FCC3B930019F87A /* Instrument.swift in Sources */,
 				FF3B20B11FCA98C50019F87A /* ChartViewController.swift in Sources */,
 				FF1054321FD518BA00A46443 /* AudioRecorderViewController.swift in Sources */,
+				FFB2F8F81FEBDE67009E59B5 /* ActionSheetStringPicker.swift in Sources */,
 				FF3B20C91FCC434B0019F87A /* ProfileSetUpViewController.swift in Sources */,
 				FFD500AC1FDE509F008464A8 /* PlayBarController.swift in Sources */,
 				FF0280621FD8ECD300C0013A /* UIView.swift in Sources */,
@@ -1017,6 +1031,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = SoundHub/SoundHub.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G4MM77V7NH;
 				INFOPLIST_FILE = SoundHub/Info.plist;
@@ -1037,6 +1052,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = SoundHub/SoundHub.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G4MM77V7NH;
 				INFOPLIST_FILE = SoundHub/Info.plist;

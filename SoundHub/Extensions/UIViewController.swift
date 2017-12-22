@@ -26,9 +26,18 @@ extension UIViewController{
      - parameter currentVC : 현시점 스택의 최상단 ViewController
      */
     func dismissWith(depth:Int, from currentVC:UIViewController){
-        if depth == 0 {
-            return
+        if depth == 0 { return }
+        
+        if let pvc = currentVC.presentingViewController {
+            currentVC.dismiss(animated: true, completion: {
+                self.dismissWith(depth: depth - 1, from: pvc)
+            })
+        }else{
+            currentVC.dismiss(animated: true, completion: nil)
         }
+    }
+    func dismissWith(depth:Int, from currentVC:UIViewController, completion:@escaping()->Void){
+        if depth == 0 { completion(); return }
         
         if let pvc = currentVC.presentingViewController {
             currentVC.dismiss(animated: true, completion: {
