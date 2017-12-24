@@ -454,6 +454,9 @@
                                                                     <real key="value" value="5"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
+                                                            <connections>
+                                                                <action selector="onProfileButtonClickHandler:" destination="Kjj-4X-NYH" eventType="touchUpInside" id="vNb-Fd-1kr"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -606,6 +609,9 @@
                                                                     <real key="value" value="5"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
+                                                            <connections>
+                                                                <action selector="onProfileButtonClickHandler:" destination="OG8-gg-dIU" eventType="touchUpInside" id="KtW-tF-y16"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

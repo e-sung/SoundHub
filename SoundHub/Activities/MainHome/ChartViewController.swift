@@ -110,14 +110,20 @@ extension ChartViewController:UITableViewDelegate{
             cell.delegate = self
             return cell
         }else if Section(rawValue: indexPath.section) == .RankingChart{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "rankingCell", for: indexPath) as! PostListCell
             posts = DataCenter.main.homePages[category]!.pop_posts
+            cell.delegate = self
+            if posts.count > indexPath.item { cell.postInfo = posts[indexPath.item] }
+            return cell
         }else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "recentUploadCell", for: indexPath) as! PostListCell
             posts = DataCenter.main.homePages[category]!.recent_posts
+            cell.delegate = self
+            if posts.count > indexPath.item { cell.postInfo = posts[indexPath.item] }
+            return cell
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "recentUploadCell", for: indexPath) as! PostListCell
-        if posts.count > indexPath.item { cell.postInfo = posts[indexPath.item] }
-        return cell
     }
+    
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell = cell as? PostListCell else { return }
@@ -165,6 +171,15 @@ extension ChartViewController{
                 nextVC.post = DataCenter.main.homePages[category]!.recent_posts[indexPath.item]
             }
         }
+    }
+}
+
+extension ChartViewController:PostListCellDelegate{
+    func shouldShowProfile(of user: User?) {
+        let profileVC = UIStoryboard(name: "SideMenu", bundle: nil)
+            .instantiateViewController(withIdentifier: "profileViewController") as! ProfileViewController
+        profileVC.userInfo = user
+        navigationController?.pushViewController(profileVC, animated: true)
     }
 }
 
