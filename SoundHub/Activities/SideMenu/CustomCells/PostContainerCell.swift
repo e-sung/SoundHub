@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class PostContainerCell: UICollectionViewCell{
     var posts:[Post]?
@@ -49,6 +50,18 @@ extension PostContainerCell: UITableViewDelegate, UITableViewDataSource, UIScrol
             if indexPath == IndexPath(item: 0, section: 0){ firstCell = cell }
             return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let cell = cell as? PostListCell{
+            cell.authorProfileImageBt.setImage(#imageLiteral(resourceName: "default-profile"), for: .normal)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell = cell as? PostListCell else { return }
+        guard let url = posts?[indexPath.item].author?.profileImageURL else { return }
+        cell.authorProfileImageBt.af_setImage(for: .normal, url: url)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

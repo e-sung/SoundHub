@@ -124,6 +124,11 @@ extension ChartViewController:UITableViewDelegate{
         }
     }
     
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let cell = cell as? PostListCell{
+            cell.authorProfileImageBt.setImage(#imageLiteral(resourceName: "default-profile"), for: .normal)
+        }
+    }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell = cell as? PostListCell else { return }
