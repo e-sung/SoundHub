@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 import AVFoundation
 
 class AudioCommentCell: UITableViewCell {
@@ -48,10 +49,14 @@ class AudioCommentCell: UITableViewCell {
            _commentInfo = newVal
             InstrumentLB.text = newVal.instrument
             nickNameLB.text = newVal.author?.nickname
-            guard let audioURL = newVal.commentTrackURL else { return }
-            NetworkController.main.downloadAudio(from: audioURL) { (localURL) in
-                self.player = AVPlayer(url: localURL)
-                self.player?.isMuted = true
+            if let audioURL = newVal.commentTrackURL {
+                NetworkController.main.downloadAudio(from: audioURL) { (localURL) in
+                    self.player = AVPlayer(url: localURL)
+                    self.player?.isMuted = true
+                }
+            }
+            if let profileImageURL = newVal.author?.profileImageURL{
+                profileImageButton.af_setImage(for: .normal, url: profileImageURL)
             }
         }
     }

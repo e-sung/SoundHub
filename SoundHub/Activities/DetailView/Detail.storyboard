@@ -245,6 +245,11 @@
                                                                                     <constraint firstAttribute="width" secondItem="sl8-Wv-tjh" secondAttribute="height" multiplier="1:1" id="3Uh-FN-RKu"/>
                                                                                 </constraints>
                                                                                 <state key="normal" image="default-profile"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                        <real key="value" value="5"/>
+                                                                                    </userDefinedRuntimeAttribute>
+                                                                                </userDefinedRuntimeAttributes>
                                                                             </button>
                                                                         </subviews>
                                                                         <constraints>
@@ -357,6 +362,11 @@
                                                                                     <constraint firstAttribute="width" secondItem="BPG-uM-0XZ" secondAttribute="height" multiplier="1:1" id="ii4-1W-9qR"/>
                                                                                 </constraints>
                                                                                 <state key="normal" image="default-profile"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                        <real key="value" value="5"/>
+                                                                                    </userDefinedRuntimeAttribute>
+                                                                                </userDefinedRuntimeAttributes>
                                                                             </button>
                                                                         </subviews>
                                                                         <constraints>
