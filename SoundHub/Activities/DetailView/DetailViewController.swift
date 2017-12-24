@@ -28,10 +28,14 @@ class DetailViewController: UIViewController{
     private var masterAudioPlayer:AVPlayer?{
         didSet(oldVal){
             PlayBarController.main.view.isHidden = false
-            if let timeObserver = AVPlayerTimeObserver { oldVal?.removeTimeObserver(timeObserver) }
+            if let timeObserver = AVPlayerTimeObserver {
+                if timeObserver.observer === masterAudioPlayer { oldVal?.removeTimeObserver(timeObserver.observee!) }
+            }
             guard let masterAudioPlayer = masterAudioPlayer else { return }
             let cmt = CMTime(value: 1, timescale: 10)
-            AVPlayerTimeObserver = masterAudioPlayer.addPeriodicTimeObserver(forInterval: cmt, queue: DispatchQueue.main, using: { (cmt) in
+            AVPlayerTimeObserver = PlayerTimeObserver()
+            AVPlayerTimeObserver?.observer = masterAudioPlayer
+            AVPlayerTimeObserver?.observee = masterAudioPlayer.addPeriodicTimeObserver(forInterval: cmt, queue: DispatchQueue.main, using: { (cmt) in
                 if masterAudioPlayer.isPlaying {
                     PlayBarController.main.reflect(progress: masterAudioPlayer.progress)
                 }
