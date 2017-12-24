@@ -70,16 +70,22 @@ extension FlowContainerCell:UICollectionViewDelegate, UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let cell = cell as? PostContainerCell
+        cell?.delegate = self
         cell?.scrollToTopWith(animation: false)
     }
 }
 
 extension FlowContainerCell:PostContainerCellDelegate{
+    func shouldShowProfile(of user: User?) {
+        delegate?.shouldShowProfile(of: user)
+    }
+
     func shouldGoTo(post: Post) {
         delegate?.shouldGoTo(post: post)
     }
 }
 
 protocol FlowContainerCellDelegate {
-    func shouldGoTo(post:Post)->Void
+    func shouldGoTo(post:Post)
+    func shouldShowProfile(of user:User?)
 }

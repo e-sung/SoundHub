@@ -42,6 +42,7 @@ extension PostContainerCell: UITableViewDelegate, UITableViewDataSource, UIScrol
             let cell = tableView.dequeueReusableCell(withIdentifier: "postedPostCell", for: indexPath) as! PostListCell
             cell.postInfo = posts[indexPath.item]
             if indexPath == IndexPath(item: 0, section: 0){ firstCell = cell }
+            cell.delegate = self
             return cell
         }else{
             let cell = UITableViewCell(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 60))
@@ -98,7 +99,14 @@ extension PostContainerCell{
     }
 }
 
+extension PostContainerCell:PostListCellDelegate{
+    func shouldShowProfile(of user: User?) {
+        self.delegate?.shouldShowProfile(of: user)
+    }
+}
+
 protocol PostContainerCellDelegate {
     func shouldGoTo(post:Post) -> Void
+    func shouldShowProfile(of user:User?)->Void
     var isScrollEnabled:Bool{ get set }
 }

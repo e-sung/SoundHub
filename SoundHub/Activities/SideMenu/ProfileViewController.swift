@@ -202,6 +202,13 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
 }
 // MARK: FlowContainerCellDelegate
 extension ProfileViewController:FlowContainerCellDelegate{
+    func shouldShowProfile(of user: User?) {
+        if user?.id == userInfo?.id { return }
+        let profileVC = UIStoryboard(name: "SideMenu", bundle: nil).instantiateViewController(withIdentifier: "profileViewController") as! ProfileViewController
+        profileVC.userInfo = user
+        navigationController?.pushViewController(profileVC, animated: true)
+    }
+    
     func shouldGoTo(post: Post) {
         DetailViewController.goToDetailPage(of: post, from: self)
     }
