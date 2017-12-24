@@ -19,6 +19,9 @@ class AudioCommentCell: UITableViewCell {
     @IBOutlet weak private var nickNameLB: UILabel!
     @IBOutlet weak private var toggleSwitch: UISwitch!
     
+    @IBAction func onProfileButtonClicked(_ sender: UIButton) {
+        delegate?.shouldShowProfileOf(user: comment.author)
+    }
     @IBAction private func switchToggleHandler(_ sender: UISwitch) {
         if sender.isOn { player?.isMuted = false }
         else { player?.isMuted = true }
@@ -93,5 +96,5 @@ extension AudioCommentCell:Playable{
 }
 
 protocol AudioCommentCellDelegate {
-    func didSwitchToggled(to state:Bool, by tag:Int, of instrument:String)
+    func shouldShowProfileOf(user:User?)
 }

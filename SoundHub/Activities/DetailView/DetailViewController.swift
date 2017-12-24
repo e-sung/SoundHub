@@ -162,7 +162,14 @@ extension DetailViewController:Playable{
 }
 
 // MARK: MixedTracksContainerCellDelegate
-extension DetailViewController:MixedTracksContainerCellDelegate{
+extension DetailViewController:CommentContainerCellDelegate{
+    func shouldShowProfileOf(user: User?) {
+        let profileVC = UIStoryboard(name: "SideMenu", bundle: nil)
+            .instantiateViewController(withIdentifier: "profileViewController") as! ProfileViewController
+        profileVC.userInfo = user
+        navigationController?.pushViewController(profileVC, animated: true)
+    }
+    
     func didSelectionOccured(on comments: [Comment]) {
         if comments.count == 0 { navigationItem.setRightBarButton(nil, animated: true); return }
         selectedComments = comments

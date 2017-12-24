@@ -250,6 +250,9 @@
                                                                                         <real key="value" value="5"/>
                                                                                     </userDefinedRuntimeAttribute>
                                                                                 </userDefinedRuntimeAttributes>
+                                                                                <connections>
+                                                                                    <action selector="onProfileButtonClicked:" destination="c46-0l-h6X" eventType="touchUpInside" id="lon-XR-Oeq"/>
+                                                                                </connections>
                                                                             </button>
                                                                         </subviews>
                                                                         <constraints>
@@ -367,6 +370,9 @@
                                                                                         <real key="value" value="5"/>
                                                                                     </userDefinedRuntimeAttribute>
                                                                                 </userDefinedRuntimeAttributes>
+                                                                                <connections>
+                                                                                    <action selector="onProfileButtonClicked:" destination="37X-jq-fyN" eventType="touchUpInside" id="zB4-x5-kPW"/>
+                                                                                </connections>
                                                                             </button>
                                                                         </subviews>
                                                                         <constraints>
