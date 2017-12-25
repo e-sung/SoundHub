@@ -9,7 +9,6 @@
 import UIKit
 
 class MainEnteryViewController: UIViewController {
-    let recorder = RecordConductor.main
     @IBAction func onProgressWithoutLoginButtonHandler(_ sender: UIButton) {
         performSegue(withIdentifier: "progressWithoutLogin", sender: nil)
     }

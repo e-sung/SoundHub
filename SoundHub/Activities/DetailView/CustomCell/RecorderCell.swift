@@ -49,6 +49,7 @@ class RecorderCell: UITableViewCell {
         self.isActive = true
         state = .readyToRecord
         inputPlot.color = .orange
+        inputPlot.node = RecordConductor.main.mic
         audioUnitContainerFlowLayout.isHidden = false
         self.contentView.backgroundColor = .white
     }

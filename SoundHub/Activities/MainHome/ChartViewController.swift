@@ -11,7 +11,7 @@ import AlamofireImage
 
 
 class ChartViewController: UIViewController{
-    
+    let recorder = RecordConductor.main
     // MARK: IBOutlets
     @IBOutlet weak private var mainTV: UITableView!
     
@@ -31,6 +31,7 @@ class ChartViewController: UIViewController{
         super.viewDidLoad()
         mainTV.delegate = self
         mainTV.dataSource = self
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
