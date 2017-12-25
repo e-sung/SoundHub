@@ -37,7 +37,6 @@ class PlayBarController{
             return view.isHidden
         }set(newVal){
             view.isHidden = newVal
-            delegate?.didAppeared()
         }
     }
     var isEnabled:Bool{
@@ -52,7 +51,6 @@ class PlayBarController{
             return progressBar.value
         }
     }
-    var masterAudioPlayer:AVPlayer?
 }
 
 extension PlayBarController{
@@ -181,5 +179,4 @@ extension PlayBarController{
 
 protocol PlayBarControllerDelegate{
     func playBarDidTapped()->Void
-    func didAppeared()->Void
 }

@@ -33,13 +33,6 @@ class ChartViewController: UIViewController{
         mainTV.dataSource = self
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        if PlayBarController.main.isHidden == false {
-            mainTV.bottomAnchor.constraint(equalTo: self.view.bottomAnchor,
-                                           constant: -(PlayBarController.main.view.frame.height)).isActive = true
-        }
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
 
         if DataCenter.main.homePages[category]?.recent_posts.count == 0{
