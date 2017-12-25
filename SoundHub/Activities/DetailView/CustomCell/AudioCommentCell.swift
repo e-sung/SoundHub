@@ -19,8 +19,9 @@ class AudioCommentCell: UITableViewCell {
     @IBOutlet weak private var toggleSwitch: UISwitch!
     
     @IBAction private func switchToggleHandler(_ sender: UISwitch) {
-        if sender.isOn { player?.isMuted = false }
+        if sender.isOn {player?.isMuted = false}
         else { player?.isMuted = true }
+        delegate?.didSwitchToggled()
     }
     func toggleSwitch(to value:Bool){
         toggleSwitch.isOn = value
@@ -49,10 +50,12 @@ class AudioCommentCell: UITableViewCell {
             InstrumentLB.text = newVal.instrument
             nickNameLB.text = newVal.author?.nickname
             guard let audioURL = newVal.commentTrackURL else { return }
-            NetworkController.main.downloadAudio(from: audioURL) { (localURL) in
-                self.player = AVPlayer(url: localURL)
-                self.player?.isMuted = true
-            }
+            player = AVPlayer(url:audioURL)
+            player?.isMuted = true
+//            NetworkController.main.downloadAudio(from: audioURL) { (localURL) in
+//                self.player = AVPlayer(url: localURL)
+//                self.player?.isMuted = true
+//            }
         }
     }
     
@@ -88,5 +91,5 @@ extension AudioCommentCell:Playable{
 }
 
 protocol AudioCommentCellDelegate {
-    func didSwitchToggled(to state:Bool, by tag:Int, of instrument:String)
+    func didSwitchToggled()
 }
