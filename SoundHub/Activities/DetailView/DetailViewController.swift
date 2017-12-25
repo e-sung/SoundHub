@@ -21,8 +21,6 @@ class DetailViewController: UIViewController{
             setUpAuthorTrackPlayer()
         }
     }
-    /// 현재 뭐하는 중인지 (대기중/재생중/녹음중)
-    var currentPhase:PlayPhase = .Ready
     // MARK: Private Stored Properties
     /// 음악 파형이 표시되는 셀
     private var masterWaveCell:MasterWaveFormViewCell?
@@ -33,7 +31,9 @@ class DetailViewController: UIViewController{
     private var masterTrackPlayer:AVPlayer?{
         didSet(oldVal){
             PlayBarController.main.isEnabled = true
-            if let timeObserver = AVPlayerTimeObserver { oldVal?.removeTimeObserver(timeObserver) }
+            if AVPlayerTimeObserver != nil && oldVal === AVPlayerTimeObserver?.observer {
+                oldVal?.removeTimeObserver(AVPlayerTimeObserver!.observee!)
+            }
             guard let masterAudioPlayer = masterTrackPlayer else { return }
             let cmt = CMTime(value: 1, timescale: 10)
             AVPlayerTimeObserver = PlayerTimeObserver()
@@ -199,17 +199,14 @@ extension DetailViewController:Playable{
     }
     
     func stop(){
-        currentPhase = .Ready
         for player in allAudioPlayers { player?.stop() }
     }
     
     func play(){
-        currentPhase = .Playing
         for player in allAudioPlayers { player?.play() }
     }
     
     func pause(){
-        currentPhase = .Ready
         for player in allAudioPlayers { player?.pause() }
     }
     

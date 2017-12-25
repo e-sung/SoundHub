@@ -152,10 +152,6 @@ extension CommentContainerCell:AudioCommentCellDelegate{
     func didSwitchToggled() {
         self.delegate?.didSwitchToggled()
     }
-}
-
-protocol CommentContainerCellDelegate{
-extension CommentContainerCell:AudioCommentCellDelegate{
     func shouldShowProfileOf(user: User?) {
         self.delegate?.shouldShowProfileOf(user: user)
     }
