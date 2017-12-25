@@ -28,6 +28,11 @@ class RecorderCell: UITableViewCell {
         
         inputPlot.node = RecordConductor.main.mic
         
+        state = .readyToRecord
+    }
+    
+    func activate(){
+        
         auManager = AKAudioUnitManager()
         auManager.delegate = self
         auManager.requestEffects { (audioComponents) in
@@ -41,13 +46,8 @@ class RecorderCell: UITableViewCell {
         auManager.input = RecordConductor.main.player
         auManager.output = RecordConductor.main.mainMixer
         
-        state = .readyToRecord
-    }
-    
-    func activate(){
         self.isActive = true
         state = .readyToRecord
-        inputPlot.node = RecordConductor.main.mic
         inputPlot.color = .orange
         audioUnitContainerFlowLayout.isHidden = false
         self.contentView.backgroundColor = .white
@@ -112,7 +112,6 @@ class RecorderCell: UITableViewCell {
         recordButton.setTitle("중지", for: .normal)
         inputPlot.color = .red
         state = .recording
-//        playBarVC.playMusic()
         RecordConductor.main.startRecording()
     }
     
@@ -120,7 +119,6 @@ class RecorderCell: UITableViewCell {
         recordButton.setTitle("듣기", for: .normal)
         state = .readyToPlay
         inputPlot.color = .orange
-//        playBarVC.pauseMusic()
         RecordConductor.main.stopRecording()
     }
     
