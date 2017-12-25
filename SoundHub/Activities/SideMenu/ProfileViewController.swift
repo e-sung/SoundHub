@@ -130,13 +130,6 @@ class ProfileViewController: UIViewController{
             })
         }
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        if PlayBarController.main.isHidden == false {
-            mainTV.bottomAnchor.constraint(equalTo: view.bottomAnchor,
-                                           constant: PlayBarController.main.view.frame.height).isActive = true
-        }
-    }
 }
 
 // MARK: ProfileHeaderCell Delegate
