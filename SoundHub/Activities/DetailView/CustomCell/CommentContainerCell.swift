@@ -149,6 +149,13 @@ extension CommentContainerCell:UITableViewDataSource, UITableViewDelegate{
 }
 
 extension CommentContainerCell:AudioCommentCellDelegate{
+    func didSwitchToggled() {
+        self.delegate?.didSwitchToggled()
+    }
+}
+
+protocol CommentContainerCellDelegate{
+extension CommentContainerCell:AudioCommentCellDelegate{
     func shouldShowProfileOf(user: User?) {
         self.delegate?.shouldShowProfileOf(user: user)
     }
@@ -157,4 +164,5 @@ extension CommentContainerCell:AudioCommentCellDelegate{
 protocol CommentContainerCellDelegate{
     func didSelectionOccured(on comments:[Comment])->Void
     func shouldShowProfileOf(user:User?)
+    func didSwitchToggled()
 }

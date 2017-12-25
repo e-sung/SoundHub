@@ -23,8 +23,9 @@ class AudioCommentCell: UITableViewCell {
         delegate?.shouldShowProfileOf(user: comment.author)
     }
     @IBAction private func switchToggleHandler(_ sender: UISwitch) {
-        if sender.isOn { player?.isMuted = false }
+        if sender.isOn {player?.isMuted = false}
         else { player?.isMuted = true }
+        delegate?.didSwitchToggled()
     }
     func toggleSwitch(to value:Bool){
         toggleSwitch.isOn = value
@@ -52,12 +53,13 @@ class AudioCommentCell: UITableViewCell {
            _commentInfo = newVal
             InstrumentLB.text = newVal.instrument
             nickNameLB.text = newVal.author?.nickname
-            if let audioURL = newVal.commentTrackURL {
-                NetworkController.main.downloadAudio(from: audioURL) { (localURL) in
-                    self.player = AVPlayer(url: localURL)
-                    self.player?.isMuted = true
-                }
-            }
+            guard let audioURL = newVal.commentTrackURL else { return }
+            player = AVPlayer(url:audioURL)
+            player?.isMuted = true
+//            NetworkController.main.downloadAudio(from: audioURL) { (localURL) in
+//                self.player = AVPlayer(url: localURL)
+//                self.player?.isMuted = true
+//            }
             if let profileImageURL = newVal.author?.profileImageURL{
                 profileImageButton.af_setImage(for: .normal, url: profileImageURL)
             }
@@ -96,5 +98,6 @@ extension AudioCommentCell:Playable{
 }
 
 protocol AudioCommentCellDelegate {
+    func didSwitchToggled()
     func shouldShowProfileOf(user:User?)
 }
