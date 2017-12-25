@@ -68,9 +68,6 @@ extension mainNavigationController:PlayBarControllerDelegate{
             self.show((playBarController?.currentPostView)!, sender: nil)
         }
     }
-    func didAppeared() {
-        setUploadButtonAutoLayout()
-    }
 }
 
 extension mainNavigationController:UIDocumentPickerDelegate{
