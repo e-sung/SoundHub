@@ -86,6 +86,9 @@ class DetailViewController: UIViewController{
     override func viewWillDisappear(_ animated: Bool) {
         recorderCell?.deinitialize()
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        closeRecordingCell()
+    }
 }
 
 // MARK: TableView Delegate
@@ -159,7 +162,6 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
 
 // MARK: 모드가 변경되었을 때 처리
 extension DetailViewController:ModeToggleCellDelegate{
-    
     func fillContainers(){
         NetworkController.main.fetchPost(id: (post?.id ?? -1)) { (postResult) in
             DispatchQueue.main.async {
@@ -315,21 +317,21 @@ extension DetailViewController:RecorderCellDelegate{
                 guard let postResult = postResult else { return }
                 self.post = postResult
                 self.commentTrackContainer?.isNewTrackBeingAdded = true
-                
-                self.heightOfRecordingCell = 50
-                self.recorderCell?.deActivate()
-                CATransaction.begin()
-                CATransaction.setCompletionBlock {
-                    self.mainTV.scrollToRow(at: IndexPath(item: 0, section: Section.RecordCell.rawValue), at: .bottom, animated: true)
-//                    let ids = IndexSet(integersIn: Section.CommentTracks.rawValue ... Section.CommentTracks.rawValue)
-//                    self.mainTV.reloadSections(ids, with: .automatic)
-                }
-                self.mainTV.beginUpdates()
-                self.mainTV.endUpdates()
-                CATransaction.commit()
+                self.closeRecordingCell()
             })
         }, cancel: { (picker) in
         }, origin: self.view)
+    }
+    func closeRecordingCell(){
+        self.heightOfRecordingCell = 50
+        self.recorderCell?.deActivate()
+        CATransaction.begin()
+        CATransaction.setCompletionBlock {
+            self.mainTV.scrollToRow(at: IndexPath(item: 0, section: Section.RecordCell.rawValue), at: .bottom, animated: true)
+        }
+        self.mainTV.beginUpdates()
+        self.mainTV.endUpdates()
+        CATransaction.commit()
     }
 }
 
