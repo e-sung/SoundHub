@@ -141,7 +141,7 @@ extension ChartViewController:UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let destinationPost:Post? = getDestinationPost(from: indexPath)
-        if destinationPost?.author_track != PlayBarController.main.currentPostView?.post.author_track{
+        if destinationPost?.id != PlayBarController.main.currentPostView?.post.id {
             performSegue(withIdentifier: "generalChartToDetail", sender: indexPath)
         }else{
             navigationController?.show((PlayBarController.main.currentPostView)!, sender: nil)
