@@ -151,34 +151,20 @@ extension NetworkController{
      - parameter remoteURL : 오디오가 저장되어 있는 서버측 URL
     */
     func downloadAudio(from remoteURL:URL, completion:@escaping (_ localURL:URL)->Void){
-        
-        let destination: DownloadRequest.DownloadFileDestination = { _, _ in
-            var documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            documentsURL.appendPathComponent(self.parseLocalURL(from: remoteURL))
-            return (documentsURL, [.removePreviousFile])
+        let documentsDirectoryURL = DataCenter.documentsDirectoryURL
+        let destinationUrl = documentsDirectoryURL.appendingPathComponent(parseLocalURL(from: remoteURL))
+
+        if FileManager.default.fileExists(atPath: destinationUrl.path) {
+            completion(destinationUrl)
+            return
         }
-//
-        Alamofire.download(remoteURL, to: destination).response { response in
-            if response.destinationURL != nil {
-                DispatchQueue.main.async { completion(response.destinationURL!) }
-            }
-        }
-        
-//
-//        let documentsDirectoryURL = DataCenter.documentsDirectoryURL
-//        let destinationUrl = documentsDirectoryURL.appendingPathComponent(parseLocalURL(from: remoteURL))
-//
-//        if FileManager.default.fileExists(atPath: destinationUrl.path) {
-//            completion(destinationUrl)
-//            return
-//        }
-//        URLSession.shared.downloadTask(with: remoteURL, completionHandler: { (location, response, error) -> Void in
-//            guard let location = location, error == nil else { return }
-//            do {
-//                try FileManager.default.moveItem(at: location, to: destinationUrl)
-//                DispatchQueue.main.async { completion(destinationUrl) }
-//            } catch let error as NSError { print(error) }
-//        }).resume()
+        URLSession.shared.downloadTask(with: remoteURL, completionHandler: { (location, response, error) -> Void in
+            guard let location = location, error == nil else { return }
+            do {
+                try FileManager.default.moveItem(at: location, to: destinationUrl)
+                DispatchQueue.main.async { completion(destinationUrl) }
+            } catch let error as NSError { print(error) }
+        }).resume()
     }
     /**
      [Mix-Tracks API](https://nachwon.gitbooks.io/soundhub/content/post/mix-tracks.html) 참고

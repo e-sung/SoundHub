@@ -17,16 +17,18 @@ class MasterWaveFormViewCell: UITableViewCell, NCSoundHistogramDelegate {
     
     func didFinishRendering() {
         DispatchQueue.main.async {
+            self.activityLB.isHidden = true
             self.activityIndicator.stopAnimating()
         }
     }
 
+    @IBOutlet weak var activityLB: UILabel!
     @IBOutlet weak private var activityIndicator: NVActivityIndicatorView!
     private var plot:NCSoundHistogram?
     var masterAudioURL:URL?{
         didSet(oldVal){
             DispatchQueue.main.async {
-                self.plot = nil
+                self.activityLB.text = "그리는 중"
                 self.plot = NCSoundHistogram(frame: self.contentView.frame)
                 self.plot!.delegate = self
                 self.plot!.waveColor = .orange
