@@ -159,7 +159,7 @@
                                                         </view>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="kO8-44-d6T" firstAttribute="height" secondItem="pf2-LJ-aOb" secondAttribute="height" multiplier="0.4" id="CFW-5e-Q3R"/>
+                                                        <constraint firstItem="kO8-44-d6T" firstAttribute="height" secondItem="pf2-LJ-aOb" secondAttribute="height" multiplier="0.2" id="CFW-5e-Q3R"/>
                                                         <constraint firstItem="kO8-44-d6T" firstAttribute="centerX" secondItem="pf2-LJ-aOb" secondAttribute="centerX" id="POO-ej-50Q"/>
                                                         <constraint firstItem="kO8-44-d6T" firstAttribute="centerY" secondItem="pf2-LJ-aOb" secondAttribute="centerY" id="qyJ-bu-zbL"/>
                                                     </constraints>

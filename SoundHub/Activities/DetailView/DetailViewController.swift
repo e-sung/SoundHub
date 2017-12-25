@@ -82,6 +82,7 @@ class DetailViewController: UIViewController{
             commentTrackContainer?.allowsMultiSelection = true
         }
     }
+
     override func viewWillDisappear(_ animated: Bool) {
         recorderCell?.deinitialize()
     }
@@ -103,7 +104,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         }else if indexPath.section == 0 && indexPath.item == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "masterWaveCell", for: indexPath)
             masterWaveCell = cell.becomeMasterWaveCell(with: post.masterTrackRemoteURL, completion: { (localURL) in
-                self.masterWaveCell?.renderWave()
+                self.masterWaveCell?.masterAudioURL = localURL
             })
             return masterWaveCell!
         }
