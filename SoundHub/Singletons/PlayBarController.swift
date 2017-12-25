@@ -34,6 +34,13 @@ class PlayBarController{
             delegate?.didAppeared()
         }
     }
+    var isEnabled:Bool{
+        get{
+            return playButton.isEnabled
+        }set(newVal){
+            playButton.isEnabled = newVal
+        }
+    }
     var masterAudioPlayer:AVPlayer?
 }
 

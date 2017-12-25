@@ -12,40 +12,40 @@ import NVActivityIndicatorView
 class MasterWaveFormViewCell: UITableViewCell, NCSoundHistogramDelegate {
     
     func reflect(progress:Float){
-        plot?.progress = progress
+//        plot?.progress = progress
     }
     
     func didFinishRendering() {
-        DispatchQueue.main.async {
-            self.activityIndicator.stopAnimating()
-        }
+//        DispatchQueue.main.async {
+//            self.activityIndicator.stopAnimating()
+//        }
     }
 
     @IBOutlet weak private var activityIndicator: NVActivityIndicatorView!
     private var plot:NCSoundHistogram?
     var masterAudioURL:URL?{
         didSet(oldVal){
-            DispatchQueue.main.async {
-                self.plot = NCSoundHistogram(frame: self.contentView.frame)
-                self.plot!.delegate = self
-                self.plot!.waveColor = .orange
-                self.plot!.progressColor = .green
-                self.plot!.drawSpaces = true
-                self.plot!.barLineWidth = 2.5
-                self.contentView.addSubview(self.plot!)
-            }
+//            DispatchQueue.main.async {
+//                self.plot = NCSoundHistogram(frame: self.contentView.frame)
+//                self.plot!.delegate = self
+//                self.plot!.waveColor = .orange
+//                self.plot!.progressColor = .green
+//                self.plot!.drawSpaces = true
+//                self.plot!.barLineWidth = 2.5
+//                self.contentView.addSubview(self.plot!)
+//            }
         }
     }
     func renderWave(){
-        DispatchQueue.global(qos: .userInteractive).async {
-            self.plot?.soundURL = self.masterAudioURL
-        }
+//        DispatchQueue.global(qos: .userInteractive).async {
+//            self.plot?.soundURL = self.masterAudioURL
+//        }
     }
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        activityIndicator.color = .orange
-        activityIndicator.type = .audioEqualizer
-        activityIndicator.startAnimating()
+//        activityIndicator.color = .orange
+//        activityIndicator.type = .audioEqualizer
+//        activityIndicator.startAnimating()
     }
 }

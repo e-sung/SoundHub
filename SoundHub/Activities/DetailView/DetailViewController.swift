@@ -27,7 +27,10 @@ class DetailViewController: UIViewController{
     /// Master Track을 재생하는 플레이어
     private var masterAudioPlayer:AVPlayer?{
         didSet(oldVal){
-            PlayBarController.main.view.isHidden = false
+            print("====================")
+            print("play Button Enabled: \(masterAudioPlayer?.currentItem?.asset.duration.seconds)")
+            print("====================")
+            PlayBarController.main.isEnabled = true
             if let timeObserver = AVPlayerTimeObserver { oldVal?.removeTimeObserver(timeObserver) }
             guard let masterAudioPlayer = masterAudioPlayer else { return }
             let cmt = CMTime(value: 1, timescale: 10)
@@ -65,25 +68,30 @@ class DetailViewController: UIViewController{
         super.viewDidLoad()
         mainTV.delegate = self
         mainTV.dataSource = self
+        PlayBarController.main.isHidden = false
+        print("====================")
+        print("play Button Disabled")
+        print("====================")
+        PlayBarController.main.isEnabled = false
     }
     override func viewWillAppear(_ animated: Bool) {
-    }
-    override func viewDidAppear(_ animated: Bool) {
         PlayBarController.main.currentPostView = self
+        
         if let materRemoteURL = post.masterTrackRemoteURL{
             masterAudioPlayer = AVPlayer(url: materRemoteURL)
-            masterWaveCell?.renderWave()
         }
-        if let authorTrackURL = post.authorTrackRemoteURL{
-            authorTrackPlayer = AVPlayer(url:authorTrackURL)
-            NetworkController.main.downloadAudio(from: authorTrackURL, completion: { (localURL) in
-                self.authorTrackPlayer = AVPlayer(url:localURL)
-            })
+        
+        if let authorRemoteURL = post.authorTrackRemoteURL{
+            authorTrackPlayer = AVPlayer(url: authorRemoteURL)
+            authorTrackPlayer?.isMuted = true
         }
+        
         guard let userId = UserDefaults.standard.string(forKey: id) else { return }
         if (post.author?.id ?? -1) == Int(userId){
             commentTrackContainer?.allowsMultiSelection = true
         }
+    }
+    override func viewDidAppear(_ animated: Bool) {
     }
     override func viewWillDisappear(_ animated: Bool) {
         recorderCell?.deinitialize()
@@ -274,9 +282,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         }else if indexPath.section == 0 && indexPath.item == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "masterWaveCell", for: indexPath)
             masterWaveCell = cell.becomeMasterWaveCell(with: post.masterTrackRemoteURL, completion: { (localURL) in
-                if self.masterAudioPlayer == nil {
-                    self.masterAudioPlayer = AVPlayer(url: localURL)
-                }
+                self.masterWaveCell?.renderWave()
             })
             return masterWaveCell!
         }
