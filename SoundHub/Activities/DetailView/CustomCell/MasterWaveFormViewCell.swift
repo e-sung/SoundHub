@@ -17,15 +17,18 @@ class MasterWaveFormViewCell: UITableViewCell, NCSoundHistogramDelegate {
     
     func didFinishRendering() {
         DispatchQueue.main.async {
+            self.activityLB.isHidden = true
             self.activityIndicator.stopAnimating()
         }
     }
 
+    @IBOutlet weak var activityLB: UILabel!
     @IBOutlet weak private var activityIndicator: NVActivityIndicatorView!
     private var plot:NCSoundHistogram?
     var masterAudioURL:URL?{
         didSet(oldVal){
             DispatchQueue.main.async {
+                self.activityLB.text = "그리는 중"
                 self.plot = NCSoundHistogram(frame: self.contentView.frame)
                 self.plot!.delegate = self
                 self.plot!.waveColor = .orange
@@ -33,15 +36,12 @@ class MasterWaveFormViewCell: UITableViewCell, NCSoundHistogramDelegate {
                 self.plot!.drawSpaces = true
                 self.plot!.barLineWidth = 2.5
                 self.contentView.addSubview(self.plot!)
+                DispatchQueue.global(qos: .userInteractive).async {
+                    self.plot?.soundURL = self.masterAudioURL
+                }
             }
         }
     }
-    func renderWave(){
-        DispatchQueue.global(qos: .userInteractive).async {
-            self.plot?.soundURL = self.masterAudioURL
-        }
-    }
-
     override func awakeFromNib() {
         super.awakeFromNib()
         activityIndicator.color = .orange

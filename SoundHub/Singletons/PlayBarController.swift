@@ -15,9 +15,15 @@ class PlayBarController{
     let view = UIView()
 
     private var playButton: UIButton!
-    var progressBar: UISlider!
-    var progressBarBeingTouched = false
-    var phaseBeforeProgressBarDrag:DetailViewController.PlayPhase = .Ready
+    private var progressBar: UISlider!
+    private var progressBarBeingTouched = false
+    private var lastPhase:PlayPhase = .Ready
+    private var currentPhase:PlayPhase = .Ready
+    private enum PlayPhase{
+        case Ready
+        case Playing
+        case Recording
+    }
     var delegate:PlayBarControllerDelegate?
     var currentPostView:DetailViewController?{
         willSet(newVal){
@@ -34,33 +40,47 @@ class PlayBarController{
             delegate?.didAppeared()
         }
     }
+    var isEnabled:Bool{
+        get{
+            return playButton.isEnabled
+        }set(newVal){
+            DispatchQueue.main.async { self.playButton.isEnabled = newVal }
+        }
+    }
+    var progress:Float{
+        get{
+            return progressBar.value
+        }
+    }
     var masterAudioPlayer:AVPlayer?
 }
 
 extension PlayBarController{
     @objc func playButtonHandler(_ sender: UIButton) {
         progressBarBeingTouched = false
-        if currentPostView?.currentPhase == .Ready {
-            playMusic()
-        }else if currentPostView?.currentPhase == .Playing{
-            pauseMusic()
+        if currentPhase == .Ready {
+            play()
+            currentPhase = .Playing
+        }else if currentPhase == .Playing{
+            pause()
+            currentPhase = .Ready
         }
     }
-    @objc func progressBarDragingDidEnded(_ sender:UISlider){
-        progressBarBeingTouched = false
-        if phaseBeforeProgressBarDrag == .Playing {
-            playMusic()
-        }
-    }
+    
     @objc func progressBarHandler(_ sender:UISlider){
         if progressBarBeingTouched == false {
-            phaseBeforeProgressBarDrag = (currentPostView?.currentPhase)!
+            lastPhase = currentPhase
         }
         progressBarBeingTouched = true
-        pauseMusic()
+        pause()
         currentPostView?.seek(to: sender.value)
     }
     
+    @objc func progressBarDragingDidEnded(_ sender:UISlider){
+        progressBarBeingTouched = false
+        if lastPhase == .Playing { play() }
+    }
+
     @objc func stopMusic(){
         currentPostView?.stop()
         playButton?.setBackgroundImage(#imageLiteral(resourceName: "play"), for: .normal)
@@ -73,19 +93,28 @@ extension PlayBarController{
 }
 
 extension PlayBarController{
-    func playMusic(){
+    func play(){
         playButton?.setBackgroundImage(#imageLiteral(resourceName: "pause"), for: .normal)
         currentPostView?.play()
     }
-    func pauseMusic(){
+    func pause(){
         playButton?.setBackgroundImage(#imageLiteral(resourceName: "play"), for: .normal)
         currentPostView?.pause()
+    }
+    func seek(to value:Float){
+        currentPostView?.seek(to: value)
     }
     func reflect(progress:Float){
         if progressBarBeingTouched == false{
             progressBar.setValue(progress, animated: true)
             currentPostView?.reflect(progress:progress)
         }
+    }
+    func handleCommentToggle(){
+        lastPhase = currentPhase
+        pause()
+        seek(to: progress)
+        if lastPhase == .Playing{ play() }
     }
 }
 

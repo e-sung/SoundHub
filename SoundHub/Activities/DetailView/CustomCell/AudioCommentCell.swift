@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 import AVFoundation
 
 class AudioCommentCell: UITableViewCell {
@@ -18,9 +19,13 @@ class AudioCommentCell: UITableViewCell {
     @IBOutlet weak private var nickNameLB: UILabel!
     @IBOutlet weak private var toggleSwitch: UISwitch!
     
+    @IBAction func onProfileButtonClicked(_ sender: UIButton) {
+        delegate?.shouldShowProfileOf(user: comment.author)
+    }
     @IBAction private func switchToggleHandler(_ sender: UISwitch) {
-        if sender.isOn { player?.isMuted = false }
+        if sender.isOn {player?.isMuted = false}
         else { player?.isMuted = true }
+        delegate?.didSwitchToggled()
     }
     func toggleSwitch(to value:Bool){
         toggleSwitch.isOn = value
@@ -48,11 +53,12 @@ class AudioCommentCell: UITableViewCell {
            _commentInfo = newVal
             InstrumentLB.text = newVal.instrument
             nickNameLB.text = newVal.author?.nickname
-            guard let audioURL = newVal.commentTrackURL else { return }
-            NetworkController.main.downloadAudio(from: audioURL) { (localURL) in
-                self.player = AVPlayer(url: localURL)
-                self.player?.isMuted = true
+            if let profileImageURL = newVal.author?.profileImageURL{
+                profileImageButton.af_setImage(for: .normal, url: profileImageURL)
             }
+            guard let audioURL = newVal.commentTrackURL else { return }
+            player = AVPlayer(url:audioURL)
+            player?.isMuted = true
         }
     }
     
@@ -88,5 +94,6 @@ extension AudioCommentCell:Playable{
 }
 
 protocol AudioCommentCellDelegate {
-    func didSwitchToggled(to state:Bool, by tag:Int, of instrument:String)
+    func didSwitchToggled()
+    func shouldShowProfileOf(user:User?)
 }

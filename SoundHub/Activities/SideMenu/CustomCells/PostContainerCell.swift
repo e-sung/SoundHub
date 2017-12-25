@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class PostContainerCell: UICollectionViewCell{
     var posts:[Post]?
@@ -42,12 +43,25 @@ extension PostContainerCell: UITableViewDelegate, UITableViewDataSource, UIScrol
             let cell = tableView.dequeueReusableCell(withIdentifier: "postedPostCell", for: indexPath) as! PostListCell
             cell.postInfo = posts[indexPath.item]
             if indexPath == IndexPath(item: 0, section: 0){ firstCell = cell }
+            cell.delegate = self
             return cell
         }else{
             let cell = UITableViewCell(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 60))
             if indexPath == IndexPath(item: 0, section: 0){ firstCell = cell }
             return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let cell = cell as? PostListCell{
+            cell.authorProfileImageBt.setImage(#imageLiteral(resourceName: "default-profile"), for: .normal)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell = cell as? PostListCell else { return }
+        guard let url = posts?[indexPath.item].author?.profileImageURL else { return }
+        cell.authorProfileImageBt.af_setImage(for: .normal, url: url)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -98,7 +112,14 @@ extension PostContainerCell{
     }
 }
 
+extension PostContainerCell:PostListCellDelegate{
+    func shouldShowProfile(of user: User?) {
+        self.delegate?.shouldShowProfile(of: user)
+    }
+}
+
 protocol PostContainerCellDelegate {
     func shouldGoTo(post:Post) -> Void
+    func shouldShowProfile(of user:User?)->Void
     var isScrollEnabled:Bool{ get set }
 }

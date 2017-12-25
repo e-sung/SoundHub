@@ -152,14 +152,17 @@ extension NetworkController{
     */
     func downloadAudio(from remoteURL:URL, completion:@escaping (_ localURL:URL)->Void){
         let documentsDirectoryURL = DataCenter.documentsDirectoryURL
-        let destinationUrl = documentsDirectoryURL.appendingPathComponent(remoteURL.lastPathComponent)
-        
-        if FileManager.default.fileExists(atPath: destinationUrl.path) { completion(destinationUrl); return }
+        let destinationUrl = documentsDirectoryURL.appendingPathComponent(parseLocalURL(from: remoteURL))
+
+        if FileManager.default.fileExists(atPath: destinationUrl.path) {
+            completion(destinationUrl)
+            return
+        }
         URLSession.shared.downloadTask(with: remoteURL, completionHandler: { (location, response, error) -> Void in
             guard let location = location, error == nil else { return }
             do {
                 try FileManager.default.moveItem(at: location, to: destinationUrl)
-                completion(destinationUrl)
+                DispatchQueue.main.async { completion(destinationUrl) }
             } catch let error as NSError { print(error) }
         }).resume()
     }
@@ -288,5 +291,11 @@ extension NetworkController{
     private func dataRepresentationOf(image:UIImage?)->Data?{
         if let image = image { if let data = UIImagePNGRepresentation(image){ return data } }
         return nil
+    }
+    
+    private func parseLocalURL(from remoteURL:URL)->String{
+        let user = remoteURL.absoluteString.split(separator: "/")[4]
+        let postId = remoteURL.absoluteString.split(separator: "/")[5]
+        return user + postId + remoteURL.lastPathComponent
     }
 }

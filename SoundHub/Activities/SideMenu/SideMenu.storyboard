@@ -595,6 +595,9 @@
                                                                                                             <real key="value" value="5"/>
                                                                                                         </userDefinedRuntimeAttribute>
                                                                                                     </userDefinedRuntimeAttributes>
+                                                                                                    <connections>
+                                                                                                        <action selector="onProfileButtonClickHandler:" destination="LjA-PY-hlG" eventType="touchUpInside" id="97J-Pr-kBO"/>
+                                                                                                    </connections>
                                                                                                 </button>
                                                                                             </subviews>
                                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

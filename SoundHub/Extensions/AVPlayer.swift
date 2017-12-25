@@ -9,7 +9,12 @@
 import Foundation
 import AVFoundation
 
-var AVPlayerTimeObserver:Any?
+var AVPlayerTimeObserver:PlayerTimeObserver?
+
+struct PlayerTimeObserver{
+    var observer:AVPlayer?
+    var observee:Any?
+}
 
 extension AVPlayer:Playable{
     func setVolume(to value: Float) {

@@ -20,7 +20,7 @@ class CommentContainerCell: UITableViewCell{
         }
     }
     var aPlayer:AVPlayer?
-    var delegate:MixedTracksContainerCellDelegate?
+    var delegate:CommentContainerCellDelegate?
     var isNewTrackBeingAdded = false
     private var allCells:[AudioCommentCell]{
         var cells:[AudioCommentCell] = []
@@ -109,6 +109,7 @@ extension CommentContainerCell:UITableViewDataSource, UITableViewDelegate{
         }
         if indexPath == IndexPath(item: 0, section: 1){ aPlayer = cell.player }
         if tableView.allowsMultipleSelection == true { cell.borderWidth = 2; cell.borderColor = .orange }
+        cell.delegate = self
         return cell
     }
     
@@ -147,6 +148,17 @@ extension CommentContainerCell:UITableViewDataSource, UITableViewDelegate{
     }
 }
 
-protocol MixedTracksContainerCellDelegate{
+extension CommentContainerCell:AudioCommentCellDelegate{
+    func didSwitchToggled() {
+        self.delegate?.didSwitchToggled()
+    }
+    func shouldShowProfileOf(user: User?) {
+        self.delegate?.shouldShowProfileOf(user: user)
+    }
+}
+
+protocol CommentContainerCellDelegate{
     func didSelectionOccured(on comments:[Comment])->Void
+    func shouldShowProfileOf(user:User?)
+    func didSwitchToggled()
 }

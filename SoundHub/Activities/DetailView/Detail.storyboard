@@ -151,22 +151,32 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kO8-44-d6T" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
-                                                            <rect key="frame" x="147" y="59" width="80" height="80"/>
+                                                            <rect key="frame" x="167" y="79" width="40" height="40"/>
                                                             <color key="backgroundColor" red="0.2364057004" green="0.4013232887" blue="0.76923906799999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="kO8-44-d6T" secondAttribute="height" multiplier="1:1" id="REm-Ox-lxf"/>
                                                             </constraints>
                                                         </view>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="다운로드중" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nlP-kh-8cO">
+                                                            <rect key="frame" x="165" y="42" width="42" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="kO8-44-d6T" firstAttribute="height" secondItem="pf2-LJ-aOb" secondAttribute="height" multiplier="0.4" id="CFW-5e-Q3R"/>
+                                                        <constraint firstItem="kO8-44-d6T" firstAttribute="height" secondItem="pf2-LJ-aOb" secondAttribute="height" multiplier="0.2" id="CFW-5e-Q3R"/>
                                                         <constraint firstItem="kO8-44-d6T" firstAttribute="centerX" secondItem="pf2-LJ-aOb" secondAttribute="centerX" id="POO-ej-50Q"/>
+                                                        <constraint firstItem="nlP-kh-8cO" firstAttribute="centerX" secondItem="pf2-LJ-aOb" secondAttribute="centerX" id="cdb-vV-wOG"/>
+                                                        <constraint firstItem="nlP-kh-8cO" firstAttribute="width" secondItem="pf2-LJ-aOb" secondAttribute="width" id="lgV-zC-bBZ"/>
                                                         <constraint firstItem="kO8-44-d6T" firstAttribute="centerY" secondItem="pf2-LJ-aOb" secondAttribute="centerY" id="qyJ-bu-zbL"/>
+                                                        <constraint firstItem="kO8-44-d6T" firstAttribute="top" secondItem="nlP-kh-8cO" secondAttribute="bottom" constant="16" id="w7E-Un-p5N"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <connections>
                                                     <outlet property="activityIndicator" destination="kO8-44-d6T" id="Pgk-wE-Era"/>
+                                                    <outlet property="activityLB" destination="nlP-kh-8cO" id="clL-Rx-nZL"/>
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MixedCommentHeaderCell" id="Obr-AQ-mQb" customClass="ModeToggleCell" customModule="SoundHub" customModuleProvider="target">
@@ -232,7 +242,7 @@
                                                                                 <color key="textColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sZ7-gb-zpL">
+                                                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="sZ7-gb-zpL">
                                                                                 <rect key="frame" x="311" y="25" width="49" height="31"/>
                                                                                 <color key="onTintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <connections>
@@ -245,6 +255,14 @@
                                                                                     <constraint firstAttribute="width" secondItem="sl8-Wv-tjh" secondAttribute="height" multiplier="1:1" id="3Uh-FN-RKu"/>
                                                                                 </constraints>
                                                                                 <state key="normal" image="default-profile"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                        <real key="value" value="5"/>
+                                                                                    </userDefinedRuntimeAttribute>
+                                                                                </userDefinedRuntimeAttributes>
+                                                                                <connections>
+                                                                                    <action selector="onProfileButtonClicked:" destination="c46-0l-h6X" eventType="touchUpInside" id="lon-XR-Oeq"/>
+                                                                                </connections>
                                                                             </button>
                                                                         </subviews>
                                                                         <constraints>
@@ -344,7 +362,7 @@
                                                                                 <color key="textColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yk2-Hg-1RY">
+                                                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yk2-Hg-1RY">
                                                                                 <rect key="frame" x="311" y="25" width="49" height="31"/>
                                                                                 <color key="onTintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <connections>
@@ -357,6 +375,14 @@
                                                                                     <constraint firstAttribute="width" secondItem="BPG-uM-0XZ" secondAttribute="height" multiplier="1:1" id="ii4-1W-9qR"/>
                                                                                 </constraints>
                                                                                 <state key="normal" image="default-profile"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                        <real key="value" value="5"/>
+                                                                                    </userDefinedRuntimeAttribute>
+                                                                                </userDefinedRuntimeAttributes>
+                                                                                <connections>
+                                                                                    <action selector="onProfileButtonClicked:" destination="37X-jq-fyN" eventType="touchUpInside" id="zB4-x5-kPW"/>
+                                                                                </connections>
                                                                             </button>
                                                                         </subviews>
                                                                         <constraints>
