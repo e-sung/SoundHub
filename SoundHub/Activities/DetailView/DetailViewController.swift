@@ -280,12 +280,21 @@ extension DetailViewController:CommentContainerCellDelegate{
 
 // MARK:RecorderCellDelegate
 extension DetailViewController:RecorderCellDelegate{
+
     func didStartRecording() {
-        play()
+        PlayBarController.main.currentPhase = .Recording
     }
     
     func didStopRecording() {
-        stop()
+        PlayBarController.main.currentPhase = .Stopped
+    }
+    
+    func didStartPlayingRecordedAudio() {
+        PlayBarController.main.currentPhase = .PlayingRecord
+    }
+    
+    func didStoppedPlayingRecorededAudio() {
+        PlayBarController.main.currentPhase = .Stopped
     }
     
     func shouldRequireLogin() {
@@ -375,12 +384,6 @@ extension DetailViewController{
                 }
             }
         }
-    }
-
-    enum PlayPhase{
-        case Ready
-        case Playing
-        case Recording
     }
 }
 
