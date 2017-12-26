@@ -72,6 +72,7 @@ class RecorderCell: UITableViewCell {
     
     func deActivate(){
         self.isActive = false
+        auManager.removeEffect(at: 0)
         audioUnitContainerFlowLayout.isHidden = true
     }
     

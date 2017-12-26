@@ -342,7 +342,7 @@ extension DetailViewController:RecorderCellDelegate{
                 guard let postResult = postResult else { return }
                 self.post = postResult
                 self.commentTrackContainer?.isNewTrackBeingAdded = true
-//                self.closeRecordingCell()
+                self.closeRecordingCell()
             })
         }, cancel: { (picker) in
         }, origin: self.view)
