@@ -13,17 +13,17 @@ class PostListCell: UITableViewCell {
     @IBOutlet weak private var postTitleLB: UILabel!
     @IBOutlet weak private var authorNameLB: UILabel!
     @IBOutlet weak private var playTimeLB: UILabel!
-    @IBOutlet weak var totalLikesLB: UILabel!
-    @IBOutlet weak var totalComments: UILabel!
-    
-    static let defaultHeight:CGFloat = 500
-    @IBOutlet weak var authorProfileImageBt: UIButton!
+    @IBOutlet weak private var totalLikesLB: UILabel!
+    @IBOutlet weak private var totalComments: UILabel!
+    @IBOutlet weak private var authorProfileImageBt: UIButton!
     @IBOutlet weak private var albumCoverImageView: UIImageView!
     
+
     @IBAction func onProfileButtonClickHandler(_ sender: UIButton) {
         delegate?.shouldShowProfile(of: postInfo.author)
     }
     
+    static let defaultHeight:CGFloat = 500
     var delegate:PostListCellDelegate?
     var postInfo:Post{
         get{
@@ -37,18 +37,27 @@ class PostListCell: UITableViewCell {
             else { totalLikesLB.text = "0" }
             if let numComments = newVal.num_comments { totalComments.text = "\(numComments)" }
             else { totalComments.text = "0" }
-            
-            guard let userId = newVal.author?.id else { return }
-            NetworkController.main.fetchUser(id: userId) { (userInfo) in
-                guard let userInfo = userInfo else { return }
-                DispatchQueue.main.async {
-                    self.authorNameLB.text = userInfo.nickname ?? ""
-                    if let profileImageURL = userInfo.profileImageURL{
-                        self.authorProfileImageBt.af_setImage(for: .normal, url: profileImageURL)
-                    }
-                }
+            if let authorName = newVal.author?.nickname { authorNameLB.text = authorName }
+            if let albumCoverURL = newVal.albumCoverImageURL{
+                albumCoverImageView.af_setImage(withURL: albumCoverURL)
             }
-
+            if let profileImageURL = newVal.author?.profileImageURL{
+                self.authorProfileImageBt.af_setImage(for: .normal, url: profileImageURL)
+            }
+        }
+    }
+    var profileImage:UIImage{
+        get{
+            return (authorProfileImageBt.image(for: .normal) ?? #imageLiteral(resourceName: "default-profile"))
+        }set(newVal){
+            authorProfileImageBt.setImage(newVal, for: .normal)
+        }
+    }
+    var albumCoverImage:UIImage{
+        get{
+            return (albumCoverImageView.image ?? #imageLiteral(resourceName: "no_cover"))
+        }set(newVal){
+            albumCoverImageView.image = newVal
         }
     }
     private var _postInfo:Post!
