@@ -14,6 +14,7 @@ class ChartViewController: UIViewController{
     let recorder = RecordConductor.main
     // MARK: IBOutlets
     @IBOutlet weak private var mainTV: UITableView!
+    @IBOutlet weak var mainTVBottomConstraint: NSLayoutConstraint!
     
     // MARK: IBAction
     @IBAction func unwindToChart(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
@@ -31,10 +32,13 @@ class ChartViewController: UIViewController{
         super.viewDidLoad()
         mainTV.delegate = self
         mainTV.dataSource = self
-        
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
+        if PlayBarController.main.isHidden == false {
+            mainTVBottomConstraint.isActive = false
+            mainTV.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -(PlayBarController.main.view.frame.height)).isActive = true
+        }
 
         if DataCenter.main.homePages[category]?.recent_posts.count == 0{
             performSegue(withIdentifier: "showLoadingIndicatingView", sender:self)

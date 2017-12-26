@@ -748,6 +748,7 @@
                     <size key="freeformSize" width="375" height="1500"/>
                     <connections>
                         <outlet property="mainTV" destination="Jw9-zx-7Mw" id="hRs-Nu-Oe3"/>
+                        <outlet property="mainTVBottomConstraint" destination="7L5-qd-MSq" id="Bze-Fb-aoX"/>
                         <segue destination="eLA-kX-c1g" kind="show" identifier="generalChartToDetail" id="JMR-OB-ypT"/>
                         <segue destination="jke-u9-fyi" kind="presentation" identifier="showLoadingIndicatingView" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="0BG-xn-Bgl"/>
                     </connections>
