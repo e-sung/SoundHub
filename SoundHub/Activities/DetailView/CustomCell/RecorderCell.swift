@@ -147,9 +147,9 @@ extension RecorderCell:UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AUCell", for: indexPath) as! AUCell
-        let effectTitle = availableEffects[indexPath.item].dropFirst(2)
+        let effectTitle = String(availableEffects[indexPath.item].dropFirst(2)).breakAtCapital
         cell.backgroundColor = .orange
-        cell.titleLB.text = String(effectTitle)
+        cell.titleLB.text = effectTitle
         return cell
     }
     

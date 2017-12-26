@@ -446,7 +446,7 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rGf-3u-HCI">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rGf-3u-HCI">
                                                                                 <rect key="frame" x="4" y="14" width="42" height="21"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                                 <nil key="textColor"/>
@@ -457,9 +457,13 @@
                                                                     <color key="backgroundColor" name="systemOrangeColor" catalog="System" colorSpace="catalog"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="trailing" secondItem="rGf-3u-HCI" secondAttribute="trailing" id="NLA-j2-TN5"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="rGf-3u-HCI" secondAttribute="trailing" id="RYs-Is-WQN"/>
+                                                                        <constraint firstItem="rGf-3u-HCI" firstAttribute="leading" secondItem="IpA-Bg-jFe" secondAttribute="leading" id="SYx-1l-qqN"/>
+                                                                        <constraint firstItem="rGf-3u-HCI" firstAttribute="top" secondItem="IpA-Bg-jFe" secondAttribute="top" id="byi-Uf-Auz"/>
                                                                         <constraint firstAttribute="bottom" secondItem="rGf-3u-HCI" secondAttribute="bottom" id="fHq-nn-hIK"/>
                                                                         <constraint firstItem="rGf-3u-HCI" firstAttribute="top" secondItem="IpA-Bg-jFe" secondAttribute="top" id="one-Vn-cr5"/>
                                                                         <constraint firstItem="rGf-3u-HCI" firstAttribute="leading" secondItem="IpA-Bg-jFe" secondAttribute="leading" id="rIF-EN-HxP"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="rGf-3u-HCI" secondAttribute="bottom" id="wXU-Xt-DFw"/>
                                                                     </constraints>
                                                                     <size key="customSize" width="100" height="100"/>
                                                                     <userDefinedRuntimeAttributes>

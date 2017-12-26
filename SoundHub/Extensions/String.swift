@@ -32,5 +32,27 @@ extension String{
         item.value = value as (NSCopying & NSObjectProtocol)?
         return item
     }
+    
+    var breakAtCapital:String{
+        get{
+            let startingIndex = self.startIndex
+            var result = String(self[self.startIndex])
+            var lastString = String(self[self.startIndex])
+            for i in 1..<self.count{
+                let index = self.index(startingIndex, offsetBy: String.IndexDistance(i))
+                let ch = String(self[index])
+                
+                if ch.lowercased() != ch
+                   && lastString.lowercased() == lastString
+                   && !(lastString == "i" && ch == "P")
+                {
+                    result.append("\n")
+                }
+                result.append(ch)
+                lastString = ch
+            }
+            return result
+        }
+    }
 }
 
