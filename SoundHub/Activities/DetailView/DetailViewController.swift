@@ -280,6 +280,14 @@ extension DetailViewController:CommentContainerCellDelegate{
 
 // MARK:RecorderCellDelegate
 extension DetailViewController:RecorderCellDelegate{
+    func didStartRecording() {
+        play()
+    }
+    
+    func didStopRecording() {
+        stop()
+    }
+    
     func shouldRequireLogin() {
         alert(msg: "로그인이 필요한 기능입니다")
     }

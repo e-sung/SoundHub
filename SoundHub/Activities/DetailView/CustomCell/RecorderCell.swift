@@ -87,8 +87,10 @@ class RecorderCell: UITableViewCell {
             switch state! {
             case .readyToRecord :
                 makeRecordingState()
+                delegate?.didStartRecording()
             case .recording :
                 makeReadyToPlayState()
+                delegate?.didStopRecording()
             case .readyToPlay :
                 RecordConductor.main.player.play()
                 inputPlot.color = .orange
@@ -218,8 +220,10 @@ extension RecorderCell:AKAudioUnitManagerDelegate{
 }
 
 protocol RecorderCellDelegate {
-    func uploadDidFinished(with post:Post?)->Void
-    func shouldShowAlert()->Void
-    func shouldBecomeActive()->Void
-    func shouldRequireLogin()->Void
+    func uploadDidFinished(with post:Post?)
+    func shouldShowAlert()
+    func shouldBecomeActive()
+    func shouldRequireLogin()
+    func didStartRecording()
+    func didStopRecording()
 }
