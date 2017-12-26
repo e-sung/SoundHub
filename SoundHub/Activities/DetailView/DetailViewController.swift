@@ -328,6 +328,7 @@ extension DetailViewController:RecorderCellDelegate{
             self.showInstrumentPicker()
         }))
         alert.addAction(UIAlertAction(title: "취소", style: .destructive, handler: { (action) in
+            RecordConductor.main.resetRecordedAudio()
         }))
         present(alert, animated: true, completion: nil)
     }
@@ -341,7 +342,7 @@ extension DetailViewController:RecorderCellDelegate{
                 guard let postResult = postResult else { return }
                 self.post = postResult
                 self.commentTrackContainer?.isNewTrackBeingAdded = true
-                self.closeRecordingCell()
+//                self.closeRecordingCell()
             })
         }, cancel: { (picker) in
         }, origin: self.view)

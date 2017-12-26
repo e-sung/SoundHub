@@ -49,6 +49,10 @@ class RecordConductor{
         do { try self.player.reloadFile() } catch { print("Errored reloading.") }
     }
     
+    func resetRecordedAudio(){
+        do{ try recorder.reset() } catch { print("couldn't reset recorded audio") }
+    }
+    
     func exportComment(asset:AVAsset, completion:@escaping(_ output:URL)->Void){
         let outputURL = URL(string: "comment.m4a".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)! , relativeTo: DataCenter.documentsDirectoryURL)!
         if let session = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetAppleM4A){
@@ -71,6 +75,7 @@ class RecordConductor{
             NetworkController.main.uploadAudioComment(In: outputURL, to: postId, instrument: Instrument, completion: {
                 NetworkController.main.fetchPost(id: postId, completion: { (postResult) in
                     DispatchQueue.main.async { completion(postResult) }
+                    self.resetRecordedAudio()
                 })
             })
         })
