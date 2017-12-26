@@ -12,12 +12,15 @@ import AudioKitUI
 class RecorderCell: UITableViewCell {
 
     var delegate:RecorderCellDelegate?
-    var auManager: AKAudioUnitManager!
+    private var auManager: AKAudioUnitManager!
     private var availableEffects:[String] = []
     var postId:Int!
     var isActive = false
-    
+    var currentAU: AudioUnitGenericView?
+    var currentAUindex:Int?
+
     @IBOutlet weak var audioUnitContainerFlowLayout: UICollectionView!
+    @IBOutlet weak var auGenericViewContainer: UIScrollView!
     @IBOutlet private weak var recordButton: UIButton!
     @IBOutlet private weak var inputPlot: AKNodeOutputPlot!
     override func awakeFromNib() {
@@ -25,10 +28,22 @@ class RecorderCell: UITableViewCell {
         audioUnitContainerFlowLayout.delegate = self
         audioUnitContainerFlowLayout.dataSource = self
         audioUnitContainerFlowLayout.isHidden = true
-        
+        auGenericViewContainer.isHidden = true
         inputPlot.node = RecordConductor.main.mic
         
         state = .readyToRecord
+    }
+    
+    private func showAudioUnit(_ audioUnit: AVAudioUnit) {
+        
+        if currentAU != nil {
+            currentAU?.removeFromSuperview()
+        }
+        
+        currentAU = AudioUnitGenericView(au: audioUnit)
+        auGenericViewContainer.addSubview(currentAU!)
+        auGenericViewContainer.contentSize = currentAU!.frame.size
+        
     }
     
     func activate(){
@@ -51,7 +66,8 @@ class RecorderCell: UITableViewCell {
         inputPlot.color = .orange
         inputPlot.node = RecordConductor.main.mic
         audioUnitContainerFlowLayout.isHidden = false
-        self.contentView.backgroundColor = .white
+        auGenericViewContainer.isHidden = false
+        self.contentView.backgroundColor = .black
     }
     
     func deActivate(){
@@ -132,7 +148,10 @@ extension RecorderCell:UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AUCell", for: indexPath) as! AUCell
-        cell.titleLB.text = availableEffects[indexPath.item]
+        let effectTitle = String(availableEffects[indexPath.item].dropFirst(2)).breakAtCapital
+        cell.backgroundColor = AUCell.defaultBackgroundColor
+        cell.titleLB.textColor = AUCell.defaultTextColor
+        cell.titleLB.text = effectTitle
         return cell
     }
     
@@ -146,13 +165,34 @@ extension RecorderCell:UICollectionViewDelegate, UICollectionViewDelegateFlowLay
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         auManager.removeEffect(at: 0)
         auManager.insertAudioUnit(name: availableEffects[indexPath.item], at: 0)
-        let cell = collectionView.cellForItem(at: indexPath)
-        cell?.contentView.backgroundColor = .green
+        currentAUindex = indexPath.item
+        let cell = collectionView.cellForItem(at: indexPath) as! AUCell
+        cell.backgroundColor = AUCell.selectedBackgroundColor
+        cell.titleLB.textColor = AUCell.selectedTextColor
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
-        cell?.contentView.backgroundColor = .orange
+        if let cell = collectionView.cellForItem(at: indexPath) as? AUCell{
+            cell.backgroundColor = AUCell.defaultBackgroundColor
+            cell.titleLB.textColor = AUCell.defaultTextColor
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let cell = cell as? AUCell{
+            cell.backgroundColor = AUCell.defaultBackgroundColor
+            cell.titleLB.textColor = AUCell.defaultTextColor
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let currentAuIndex = currentAUindex else { return }
+        if let cell = cell as? AUCell{
+            if currentAuIndex == indexPath.item{
+                cell.backgroundColor = AUCell.selectedBackgroundColor
+                cell.titleLB.textColor = AUCell.selectedTextColor
+            }
+        }
     }
 }
 
@@ -165,6 +205,9 @@ extension RecorderCell:AKAudioUnitManagerDelegate{
         if RecordConductor.main.player.isStarted {
             RecordConductor.main.player.stop()
             RecordConductor.main.player.start()
+        }
+        if let au = auManager!.effectsChain[auIndex] {
+            showAudioUnit(au)
         }
     }
     
