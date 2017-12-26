@@ -28,7 +28,7 @@ class RecorderCell: UITableViewCell {
         audioUnitContainerFlowLayout.delegate = self
         audioUnitContainerFlowLayout.dataSource = self
         audioUnitContainerFlowLayout.isHidden = true
-        
+        auGenericViewContainer.isHidden = true
         inputPlot.node = RecordConductor.main.mic
         
         state = .readyToRecord
@@ -66,6 +66,7 @@ class RecorderCell: UITableViewCell {
         inputPlot.color = .orange
         inputPlot.node = RecordConductor.main.mic
         audioUnitContainerFlowLayout.isHidden = false
+        auGenericViewContainer.isHidden = false
         self.contentView.backgroundColor = .black
     }
     

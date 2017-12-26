@@ -36,7 +36,8 @@ class ChartViewController: UIViewController{
 
     override func viewDidAppear(_ animated: Bool) {
         if PlayBarController.main.isHidden == false {
-            mainTVBottomConstraint.isActive = false
+            guard let bottomConstraint = mainTVBottomConstraint else { return }
+            bottomConstraint.isActive = false
             mainTV.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -(PlayBarController.main.view.frame.height)).isActive = true
         }
 
