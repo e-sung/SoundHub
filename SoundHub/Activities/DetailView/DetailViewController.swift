@@ -280,6 +280,23 @@ extension DetailViewController:CommentContainerCellDelegate{
 
 // MARK:RecorderCellDelegate
 extension DetailViewController:RecorderCellDelegate{
+
+    func didStartRecording() {
+        PlayBarController.main.currentPhase = .Recording
+    }
+    
+    func didStopRecording() {
+        PlayBarController.main.currentPhase = .Stopped
+    }
+    
+    func didStartPlayingRecordedAudio() {
+        PlayBarController.main.currentPhase = .PlayingRecord
+    }
+    
+    func didStoppedPlayingRecorededAudio() {
+        PlayBarController.main.currentPhase = .Stopped
+    }
+    
     func shouldRequireLogin() {
         alert(msg: "로그인이 필요한 기능입니다")
     }
@@ -311,6 +328,7 @@ extension DetailViewController:RecorderCellDelegate{
             self.showInstrumentPicker()
         }))
         alert.addAction(UIAlertAction(title: "취소", style: .destructive, handler: { (action) in
+            RecordConductor.main.resetRecordedAudio()
         }))
         present(alert, animated: true, completion: nil)
     }
@@ -367,12 +385,6 @@ extension DetailViewController{
                 }
             }
         }
-    }
-
-    enum PlayPhase{
-        case Ready
-        case Playing
-        case Recording
     }
 }
 

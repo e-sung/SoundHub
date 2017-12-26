@@ -72,6 +72,7 @@ class RecorderCell: UITableViewCell {
     
     func deActivate(){
         self.isActive = false
+        auManager.removeEffect(at: 0)
         audioUnitContainerFlowLayout.isHidden = true
     }
     
@@ -87,22 +88,27 @@ class RecorderCell: UITableViewCell {
             switch state! {
             case .readyToRecord :
                 makeRecordingState()
+                delegate?.didStartRecording()
             case .recording :
                 makeReadyToPlayState()
+                delegate?.didStopRecording()
             case .readyToPlay :
                 RecordConductor.main.player.play()
+                delegate?.didStartPlayingRecordedAudio()
                 inputPlot.color = .orange
                 inputPlot.node = RecordConductor.main.player
                 recordButton.setTitle("확인", for: .normal)
                 state = .playing
             case .playing :
                 RecordConductor.main.player.stop()
+                delegate?.didStoppedPlayingRecorededAudio()
                 state = .readyToRecord
                 recordButton.setTitle("녹음", for: .normal)
                 let recordedDuration = RecordConductor.main.player != nil ? RecordConductor.main.player.audioFile.duration  : 0
                 if recordedDuration > 0.0 {
                     delegate?.shouldShowAlert()
                     RecordConductor.main.recorder.stop()
+                    inputPlot.node = RecordConductor.main.mic
                 }
             }
         }
@@ -218,8 +224,12 @@ extension RecorderCell:AKAudioUnitManagerDelegate{
 }
 
 protocol RecorderCellDelegate {
-    func uploadDidFinished(with post:Post?)->Void
-    func shouldShowAlert()->Void
-    func shouldBecomeActive()->Void
-    func shouldRequireLogin()->Void
+    func uploadDidFinished(with post:Post?)
+    func shouldShowAlert()
+    func shouldBecomeActive()
+    func shouldRequireLogin()
+    func didStartRecording()
+    func didStopRecording()
+    func didStartPlayingRecordedAudio()
+    func didStoppedPlayingRecorededAudio()
 }
