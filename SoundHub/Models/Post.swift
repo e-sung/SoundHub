@@ -16,6 +16,7 @@ struct Post:Codable{
     let instrument:String?
     let genre:String?
     let bpm:Int?
+    let post_img:String?
     let liked:[Int]?
     let num_liked:Int?
     let num_comments:Int?
@@ -35,6 +36,12 @@ struct Post:Codable{
         get{
             guard let masterTrack = self.master_track else { return authorTrackRemoteURL }
             return URL(string: masterTrack.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: NetworkController.main.baseMediaURL)!
+        }
+    }
+    var albumCoverImageURL:URL?{
+        get{
+            guard let postImageURL = self.post_img else { return nil }
+            return URL(string: postImageURL, relativeTo: NetworkController.main.baseMediaURL)
         }
     }
     var numOfMixedTracks:Int{

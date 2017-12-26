@@ -54,14 +54,15 @@ extension PostContainerCell: UITableViewDelegate, UITableViewDataSource, UIScrol
     
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if let cell = cell as? PostListCell{
-            cell.authorProfileImageBt.setImage(#imageLiteral(resourceName: "default-profile"), for: .normal)
+            cell.albumCoverImage = #imageLiteral(resourceName: "no_cover")
+            cell.profileImage = #imageLiteral(resourceName: "default-profile")
         }
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell = cell as? PostListCell else { return }
-        guard let url = posts?[indexPath.item].author?.profileImageURL else { return }
-        cell.authorProfileImageBt.af_setImage(for: .normal, url: url)
+        guard let post = posts?[indexPath.item] else { return }
+        cell.postInfo = post
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
