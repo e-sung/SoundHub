@@ -419,16 +419,16 @@
                                                     <outlet property="commentTV" destination="jwS-1S-2Ef" id="eqf-b8-ise"/>
                                                 </connections>
                                             </tableViewCell>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recorderCell" id="Lia-eD-eD2" customClass="RecorderCell" customModule="SoundHub" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="836" width="375" height="44"/>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recorderCell" rowHeight="500" id="Lia-eD-eD2" customClass="RecorderCell" customModule="SoundHub" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="836" width="375" height="500"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Lia-eD-eD2" id="2ln-Zt-P5E">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="499.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LWf-A0-AYP">
                                                             <rect key="frame" x="0.0" y="10" width="375" height="100"/>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="100" id="SGw-oe-tQ4"/>
                                                             </constraints>
@@ -446,7 +446,7 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rGf-3u-HCI">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rGf-3u-HCI">
                                                                                 <rect key="frame" x="4" y="14" width="42" height="21"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                                 <nil key="textColor"/>
@@ -454,17 +454,27 @@
                                                                             </label>
                                                                         </subviews>
                                                                     </view>
-                                                                    <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <color key="backgroundColor" name="systemOrangeColor" catalog="System" colorSpace="catalog"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="trailing" secondItem="rGf-3u-HCI" secondAttribute="trailing" id="NLA-j2-TN5"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="rGf-3u-HCI" secondAttribute="trailing" id="RYs-Is-WQN"/>
+                                                                        <constraint firstItem="rGf-3u-HCI" firstAttribute="leading" secondItem="IpA-Bg-jFe" secondAttribute="leading" id="SYx-1l-qqN"/>
+                                                                        <constraint firstItem="rGf-3u-HCI" firstAttribute="top" secondItem="IpA-Bg-jFe" secondAttribute="top" id="byi-Uf-Auz"/>
                                                                         <constraint firstAttribute="bottom" secondItem="rGf-3u-HCI" secondAttribute="bottom" id="fHq-nn-hIK"/>
                                                                         <constraint firstItem="rGf-3u-HCI" firstAttribute="top" secondItem="IpA-Bg-jFe" secondAttribute="top" id="one-Vn-cr5"/>
                                                                         <constraint firstItem="rGf-3u-HCI" firstAttribute="leading" secondItem="IpA-Bg-jFe" secondAttribute="leading" id="rIF-EN-HxP"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="rGf-3u-HCI" secondAttribute="bottom" id="wXU-Xt-DFw"/>
                                                                     </constraints>
                                                                     <size key="customSize" width="100" height="100"/>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                             <real key="value" value="5"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                            <real key="value" value="3"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                     <connections>
@@ -474,7 +484,7 @@
                                                             </cells>
                                                         </collectionView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgG-St-MdE">
-                                                            <rect key="frame" x="15" y="3.5" width="30" height="30"/>
+                                                            <rect key="frame" x="15" y="459.5" width="30" height="30"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                             <state key="normal" title="녹음">
                                                                 <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -484,7 +494,7 @@
                                                             </connections>
                                                         </button>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F2b-XT-SDC" customClass="AKNodeOutputPlot" customModule="AudioKitUI">
-                                                            <rect key="frame" x="51" y="-6.5" width="317" height="50"/>
+                                                            <rect key="frame" x="51" y="449.5" width="317" height="50"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="50" id="exj-fG-c7N"/>
@@ -495,12 +505,19 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
+                                                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="MTZ-PH-oTy">
+                                                            <rect key="frame" x="0.0" y="118" width="375" height="324"/>
+                                                        </scrollView>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="xgG-St-MdE" firstAttribute="leading" secondItem="2ln-Zt-P5E" secondAttribute="leading" constant="15" id="9Wf-HE-OWK"/>
+                                                        <constraint firstItem="MTZ-PH-oTy" firstAttribute="top" secondItem="LWf-A0-AYP" secondAttribute="bottom" id="GQc-MR-Iea"/>
+                                                        <constraint firstItem="F2b-XT-SDC" firstAttribute="top" secondItem="MTZ-PH-oTy" secondAttribute="bottom" id="Jc9-Oh-vWO"/>
                                                         <constraint firstAttribute="trailing" secondItem="LWf-A0-AYP" secondAttribute="trailing" id="M3C-aO-5Y8"/>
                                                         <constraint firstItem="F2b-XT-SDC" firstAttribute="leading" secondItem="xgG-St-MdE" secondAttribute="trailing" constant="6" id="Rqe-2F-ugU"/>
+                                                        <constraint firstAttribute="trailing" secondItem="MTZ-PH-oTy" secondAttribute="trailing" id="Z2i-Z6-WRb"/>
                                                         <constraint firstAttribute="bottom" secondItem="F2b-XT-SDC" secondAttribute="bottom" id="ayu-tz-nRS"/>
+                                                        <constraint firstItem="MTZ-PH-oTy" firstAttribute="leading" secondItem="2ln-Zt-P5E" secondAttribute="leading" id="bld-6o-5ma"/>
                                                         <constraint firstItem="LWf-A0-AYP" firstAttribute="leading" secondItem="2ln-Zt-P5E" secondAttribute="leading" id="jVO-aJ-NbN"/>
                                                         <constraint firstItem="xgG-St-MdE" firstAttribute="centerY" secondItem="F2b-XT-SDC" secondAttribute="centerY" id="wiq-XD-H3R"/>
                                                         <constraint firstItem="LWf-A0-AYP" firstAttribute="top" secondItem="2ln-Zt-P5E" secondAttribute="top" constant="10" id="y97-ae-U2c"/>
@@ -509,6 +526,7 @@
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <connections>
+                                                    <outlet property="auGenericViewContainer" destination="MTZ-PH-oTy" id="9A7-7L-OLf"/>
                                                     <outlet property="audioUnitContainerFlowLayout" destination="LWf-A0-AYP" id="V83-eP-uei"/>
                                                     <outlet property="inputPlot" destination="F2b-XT-SDC" id="uoa-rF-Zea"/>
                                                     <outlet property="recordButton" destination="xgG-St-MdE" id="hqQ-7a-VMN"/>

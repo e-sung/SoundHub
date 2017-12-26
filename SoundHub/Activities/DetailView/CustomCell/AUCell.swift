@@ -11,4 +11,8 @@ import UIKit
 class AUCell: UICollectionViewCell {
     @IBOutlet weak var titleLB: UILabel!
     
+    static let defaultBackgroundColor = UIColor.black
+    static let defaultTextColor = UIColor.white
+    static let selectedBackgroundColor = UIColor.white
+    static let selectedTextColor = UIColor.black
 }
