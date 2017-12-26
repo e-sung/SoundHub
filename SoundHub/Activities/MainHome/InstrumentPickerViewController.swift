@@ -10,6 +10,9 @@ import UIKit
 
 class InstrumentPickerViewController: UIViewController {
 
+    @IBAction func cancelButtonHandler(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
+    }
     @IBOutlet var buttons: [UIButton]!
     override func viewDidLoad() {
         super.viewDidLoad()
