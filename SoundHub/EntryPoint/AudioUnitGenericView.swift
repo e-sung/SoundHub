@@ -25,7 +25,7 @@ class AudioUnitGenericView: UIView {
                                   value: Double(param.value),
                                   range: Double(param.minValue) ... Double(param.maxValue),
                                   format: "%0.1f",
-                                  color: UIColor.darkGray,
+                                  color: UIColor.orange,
                                   frame: CGRect(x: 20, y: y, width: Int(UIScreen.main.bounds.width*0.8), height: 50),
                                   callback: { (value) -> Void in
 
@@ -37,7 +37,7 @@ class AudioUnitGenericView: UIView {
 
             })
 
-            slider.textColor = UIColor.white
+            slider.textColor = UIColor.orange
             slider.fontSize = 10
             slider.sliderBorderColor = UIColor.white
 

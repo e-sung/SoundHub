@@ -505,7 +505,7 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
-                                                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MTZ-PH-oTy">
+                                                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="MTZ-PH-oTy">
                                                             <rect key="frame" x="0.0" y="118" width="375" height="324"/>
                                                         </scrollView>
                                                     </subviews>
