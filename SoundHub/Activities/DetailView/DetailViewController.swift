@@ -285,7 +285,9 @@ extension DetailViewController:RecorderCellDelegate{
     }
     
     func shouldBecomeActive() {
-        recorderCell?.contentView.backgroundColor = .black
+        UIView.animate(withDuration: 0.5) {
+            self.recorderCell?.backgroundColor = .black
+        }
         heightOfRecordingCell = CGFloat(UIScreen.main.bounds.height - PlayBarController.main.view.frame.height - (navigationController?.navigationBar.frame.height ?? 0) - 20)
         CATransaction.begin()
         CATransaction.setCompletionBlock {
