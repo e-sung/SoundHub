@@ -18,6 +18,7 @@ class ChartViewController: UIViewController{
     
     // MARK: IBAction
     @IBAction func unwindToChart(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
+        self.refreshData()
     }
     
     // MARK: Stored Properties
@@ -26,12 +27,20 @@ class ChartViewController: UIViewController{
     private let sectionTitleList = ["CategoryTab", "Popular Musicians", "Ranking Chart", "Recent Upload"]
     var category:Categori = .general
     var option:String = ""
+    var shouldScrollToTop = false
     
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         mainTV.delegate = self
         mainTV.dataSource = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if shouldScrollToTop{
+            mainTV.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+            shouldScrollToTop = false
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {

@@ -93,6 +93,9 @@
                                                                 <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="homeButtonClickHandler:" destination="dVf-D0-RBE" eventType="touchUpInside" id="Rfh-0o-o3s"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
@@ -205,9 +208,11 @@
                         <outlet property="nickNameButton" destination="h9I-fv-WSY" id="GH8-6i-AGI"/>
                         <outlet property="profileImageButton" destination="1VT-dC-BDL" id="OCJ-xI-qil"/>
                         <segue destination="Qam-ff-f9z" kind="show" identifier="sideMenuToProfileVC" id="9Tp-PR-Sqd"/>
+                        <segue destination="AA8-m0-gT3" kind="unwind" identifier="undwindToGeneralHome" unwindAction="unwindToChartFor:towardsViewController:" id="dJq-WT-g4F"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JJZ-1o-Ru6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="AA8-m0-gT3" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1320" y="-931.48425787106453"/>
         </scene>

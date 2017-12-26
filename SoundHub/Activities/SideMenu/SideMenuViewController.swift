@@ -26,6 +26,10 @@ class SideMenuViewController: UIViewController {
     
     @IBAction func profileButtonHandler(_ sender: UIButton) { showProfile() }
     
+    @IBAction func homeButtonClickHandler(_ sender: UIButton) {
+        performSegue(withIdentifier: "undwindToGeneralHome", sender: nil)
+    }
+    
     func showProfile(){
         guard let userId = UserDefaults.standard.string(forKey: id) else { return }
         guard let userID = Int(userId) else { return }
@@ -36,6 +40,10 @@ class SideMenuViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let nextVC = segue.destination as? ProfileViewController {
             nextVC.userInfo = sender as? User
+        }
+        if let nextVC = segue.destination as? ChartViewController{
+            nextVC.category = .general
+            nextVC.shouldScrollToTop = true
         }
     }
 

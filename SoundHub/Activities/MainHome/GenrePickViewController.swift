@@ -12,6 +12,9 @@ class GenrePickViewController: UIViewController {
 
     @IBOutlet var buttons: [UIButton]!
     
+    @IBAction func cancelButtonHandler(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         for button in buttons{
