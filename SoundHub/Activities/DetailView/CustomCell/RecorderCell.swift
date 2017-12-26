@@ -148,7 +148,8 @@ extension RecorderCell:UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AUCell", for: indexPath) as! AUCell
         let effectTitle = String(availableEffects[indexPath.item].dropFirst(2)).breakAtCapital
-        cell.backgroundColor = .orange
+        cell.backgroundColor = AUCell.defaultBackgroundColor
+        cell.titleLB.textColor = AUCell.defaultTextColor
         cell.titleLB.text = effectTitle
         return cell
     }
@@ -164,24 +165,32 @@ extension RecorderCell:UICollectionViewDelegate, UICollectionViewDelegateFlowLay
         auManager.removeEffect(at: 0)
         auManager.insertAudioUnit(name: availableEffects[indexPath.item], at: 0)
         currentAUindex = indexPath.item
-        let cell = collectionView.cellForItem(at: indexPath)
-        cell?.backgroundColor = .green
+        let cell = collectionView.cellForItem(at: indexPath) as! AUCell
+        cell.backgroundColor = AUCell.selectedBackgroundColor
+        cell.titleLB.textColor = AUCell.selectedTextColor
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
-        cell?.backgroundColor = .orange
+        if let cell = collectionView.cellForItem(at: indexPath) as? AUCell{
+            cell.backgroundColor = AUCell.defaultBackgroundColor
+            cell.titleLB.textColor = AUCell.defaultTextColor
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        cell.backgroundColor = .orange
+        if let cell = cell as? AUCell{
+            cell.backgroundColor = AUCell.defaultBackgroundColor
+            cell.titleLB.textColor = AUCell.defaultTextColor
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let currentAuIndex = currentAUindex else { return }
-        print(currentAuIndex, indexPath.item)
-        if currentAuIndex == indexPath.item{
-            cell.backgroundColor = .green
+        if let cell = cell as? AUCell{
+            if currentAuIndex == indexPath.item{
+                cell.backgroundColor = AUCell.selectedBackgroundColor
+                cell.titleLB.textColor = AUCell.selectedTextColor
+            }
         }
     }
 }
