@@ -10,6 +10,7 @@ import UIKit
 import AudioKit
 import AVFoundation
 import ActionSheetPicker_3_0
+import AlamofireImage
 
 class DetailViewController: UIViewController{
     
@@ -62,7 +63,8 @@ class DetailViewController: UIViewController{
     
     /// 원저작자에게만 보이는, "머지"하기 위해 multiselection을 통해 고른 셀들에 담겨있는 Comment 정보
     private var selectedComments:[Comment]?
-
+    @IBOutlet weak private var albumCoverImageView: UIImageView!
+    
     // MARK: IBOutlets
     /// 이 VC의 최상단 테이블뷰
     @IBOutlet weak private var mainTV: UITableView!
@@ -73,6 +75,8 @@ class DetailViewController: UIViewController{
         mainTV.delegate = self
         mainTV.dataSource = self
         PlayBarController.main.isHidden = false
+        guard let postImageURL = post.albumCoverImageURL else { return }
+        albumCoverImageView.af_setImage(withURL: postImageURL)
     }
     override func viewWillAppear(_ animated: Bool) {
         PlayBarController.main.currentPostView = self

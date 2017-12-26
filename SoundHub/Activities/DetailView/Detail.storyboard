@@ -544,6 +544,7 @@
                     </navigationItem>
                     <size key="freeformSize" width="375" height="1800"/>
                     <connections>
+                        <outlet property="albumCoverImageView" destination="63U-n4-OqK" id="EhU-wj-240"/>
                         <outlet property="mainTV" destination="sPC-mL-dPH" id="WcF-kh-Tnc"/>
                     </connections>
                 </viewController>

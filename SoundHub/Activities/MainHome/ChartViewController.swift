@@ -124,18 +124,19 @@ extension ChartViewController:UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if let cell = cell as? PostListCell{
-            cell.authorProfileImageBt.setImage(#imageLiteral(resourceName: "default-profile"), for: .normal)
+            cell.albumCoverImage = #imageLiteral(resourceName: "no_cover")
+            cell.profileImage = #imageLiteral(resourceName: "default-profile")
         }
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell = cell as? PostListCell else { return }
         if Section(rawValue: indexPath.section) == .RankingChart{
-            guard let url = DataCenter.main.homePages[category]?.pop_posts[indexPath.item].author?.profileImageURL else { return }
-            cell.authorProfileImageBt.af_setImage(for: .normal, url:url)
+            guard let post = DataCenter.main.homePages[category]?.pop_posts[indexPath.item] else { return }
+            cell.postInfo = post
         }else if Section(rawValue: indexPath.section) == .RecentUpload{
-            guard let url = DataCenter.main.homePages[category]?.recent_posts[indexPath.item].author?.profileImageURL else { return }
-            cell.authorProfileImageBt.af_setImage(for: .normal, url:url)
+            guard let post = DataCenter.main.homePages[category]?.recent_posts[indexPath.item] else { return }
+            cell.postInfo = post
         }
     }
     
