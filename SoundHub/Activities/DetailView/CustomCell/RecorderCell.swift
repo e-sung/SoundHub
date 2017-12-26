@@ -105,6 +105,7 @@ class RecorderCell: UITableViewCell {
                 if recordedDuration > 0.0 {
                     delegate?.shouldShowAlert()
                     RecordConductor.main.recorder.stop()
+                    inputPlot.node = RecordConductor.main.mic
                 }
             }
         }
