@@ -16,20 +16,48 @@ class PlayBarController{
 
     private var playButton: UIButton!
     private var progressBar: UISlider!
+    private var statusLable: UILabel!
     private var progressBarBeingTouched = false
-    private var lastPhase:PlayPhase = .Ready
-    private var currentPhase:PlayPhase = .Ready
-    private enum PlayPhase{
-        case Ready
+    private var lastPhase:PlayPhase = .Stopped
+    var currentPhase:PlayPhase = .Stopped {
+        didSet(oldVal){
+            switch currentPhase {
+            case .Playing:
+                statusLable.isHidden = true
+                play()
+                playButton?.setBackgroundImage(#imageLiteral(resourceName: "pause"), for: .normal)
+            case .Stopped:
+                statusLable.isHidden = true
+                stop()
+                playButton?.setBackgroundImage(#imageLiteral(resourceName: "play"), for: .normal)
+            case .Paused:
+                statusLable.isHidden = true
+                pause()
+                playButton?.setBackgroundImage(#imageLiteral(resourceName: "play"), for: .normal)
+            case .Recording:
+                stop()
+                playButton.setBackgroundImage(nil, for: .normal)
+                statusLable.isHidden = false; statusLable.text = "녹음중"
+                play()
+            case .PlayingRecord:
+                stop()
+                statusLable.isHidden = true
+                play()
+                playButton?.setBackgroundImage(#imageLiteral(resourceName: "pause"), for: .normal)
+            }
+        }
+    }
+    enum PlayPhase{
+        case Stopped
+        case Paused
         case Playing
         case Recording
+        case PlayingRecord
     }
     var delegate:PlayBarControllerDelegate?
     var currentPostView:DetailViewController?{
         willSet(newVal){
-            if currentPostView !== newVal {
-                stopMusic()
-            }
+            if currentPostView !== newVal { currentPhase = .Stopped }
         }
     }
     var isHidden:Bool{
@@ -56,35 +84,22 @@ class PlayBarController{
 extension PlayBarController{
     @objc func playButtonHandler(_ sender: UIButton) {
         progressBarBeingTouched = false
-        if currentPhase == .Ready {
-            play()
-            currentPhase = .Playing
-        }else if currentPhase == .Playing{
-            pause()
-            currentPhase = .Ready
-        }
+        if currentPhase == .Paused || currentPhase == .Stopped { currentPhase = .Playing }
+        else if currentPhase == .Playing{ currentPhase = .Paused }
     }
     
     @objc func progressBarHandler(_ sender:UISlider){
-        if progressBarBeingTouched == false {
-            lastPhase = currentPhase
-        }
+        if progressBarBeingTouched == false { lastPhase = currentPhase }
         progressBarBeingTouched = true
-        pause()
+        currentPhase = .Paused
         currentPostView?.seek(to: sender.value)
     }
     
     @objc func progressBarDragingDidEnded(_ sender:UISlider){
         progressBarBeingTouched = false
-        if lastPhase == .Playing { play() }
+        if lastPhase == .Playing { currentPhase = .Playing }
     }
 
-    @objc func stopMusic(){
-        currentPostView?.stop()
-        playButton?.setBackgroundImage(#imageLiteral(resourceName: "play"), for: .normal)
-        reflect(progress: 0)
-    }
-    
     @objc func showCurrentMusicContainer(){
         delegate?.playBarDidTapped()
     }
@@ -92,12 +107,14 @@ extension PlayBarController{
 
 extension PlayBarController{
     func play(){
-        playButton?.setBackgroundImage(#imageLiteral(resourceName: "pause"), for: .normal)
         currentPostView?.play()
     }
     func pause(){
-        playButton?.setBackgroundImage(#imageLiteral(resourceName: "play"), for: .normal)
         currentPostView?.pause()
+    }
+    func stop(){
+        currentPostView?.stop()
+        reflect(progress: 0)
     }
     func seek(to value:Float){
         currentPostView?.seek(to: value)
@@ -122,6 +139,7 @@ extension PlayBarController{
         setUpPlayButton()
         setUpProgressBar()
         setUpGestureRecognizer()
+        setUpStatusLable()
     }
     
     private func setUpMainView(In containerView:UIView){
@@ -152,6 +170,20 @@ extension PlayBarController{
         view.addGestureRecognizer(tapRecognizer)
     }
     
+    private func setUpStatusLable(){
+        statusLable = UILabel()
+        view.addSubview(statusLable)
+        statusLable.textAlignment = .center
+        statusLable.textColor = .orange
+        let margins = view.layoutMarginsGuide
+        statusLable.translatesAutoresizingMaskIntoConstraints = false
+        statusLable.centerXAnchor.constraint(equalTo: margins.centerXAnchor).isActive = true
+        statusLable.centerYAnchor.constraint(equalTo: margins.centerYAnchor).isActive = true
+        statusLable.heightAnchor.constraint(equalTo: margins.heightAnchor, multiplier: 0.9).isActive = true
+        statusLable.widthAnchor.constraint(equalTo: margins.widthAnchor, multiplier: 1.0).isActive = true
+        statusLable.isHidden = true
+    }
+    
     private func setUpAutoLayoutOfView(In containerView:UIView){
         view.translatesAutoresizingMaskIntoConstraints = false
         view.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
@@ -171,10 +203,12 @@ extension PlayBarController{
 
     private func setAutoLayoutOfProgressBar(){
         progressBar.translatesAutoresizingMaskIntoConstraints = false
-        progressBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        progressBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         progressBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         progressBar.centerYAnchor.constraint(equalTo: view.topAnchor).isActive = true
     }
+    
+
 }
 
 protocol PlayBarControllerDelegate{

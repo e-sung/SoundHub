@@ -72,6 +72,7 @@ class RecorderCell: UITableViewCell {
     
     func deActivate(){
         self.isActive = false
+        auManager.removeEffect(at: 0)
         audioUnitContainerFlowLayout.isHidden = true
     }
     
@@ -93,12 +94,14 @@ class RecorderCell: UITableViewCell {
                 delegate?.didStopRecording()
             case .readyToPlay :
                 RecordConductor.main.player.play()
+                delegate?.didStartPlayingRecordedAudio()
                 inputPlot.color = .orange
                 inputPlot.node = RecordConductor.main.player
                 recordButton.setTitle("확인", for: .normal)
                 state = .playing
             case .playing :
                 RecordConductor.main.player.stop()
+                delegate?.didStoppedPlayingRecorededAudio()
                 state = .readyToRecord
                 recordButton.setTitle("녹음", for: .normal)
                 let recordedDuration = RecordConductor.main.player != nil ? RecordConductor.main.player.audioFile.duration  : 0
@@ -227,4 +230,6 @@ protocol RecorderCellDelegate {
     func shouldRequireLogin()
     func didStartRecording()
     func didStopRecording()
+    func didStartPlayingRecordedAudio()
+    func didStoppedPlayingRecorededAudio()
 }
