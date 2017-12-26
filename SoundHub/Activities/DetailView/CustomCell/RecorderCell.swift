@@ -17,7 +17,8 @@ class RecorderCell: UITableViewCell {
     var postId:Int!
     var isActive = false
     var currentAU: AudioUnitGenericView?
-    
+    var currentAUindex:Int?
+
     @IBOutlet weak var audioUnitContainerFlowLayout: UICollectionView!
     @IBOutlet weak var auGenericViewContainer: UIScrollView!
     @IBOutlet private weak var recordButton: UIButton!
@@ -146,7 +147,9 @@ extension RecorderCell:UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AUCell", for: indexPath) as! AUCell
-        cell.titleLB.text = availableEffects[indexPath.item]
+        let effectTitle = availableEffects[indexPath.item].dropFirst(2)
+        cell.backgroundColor = .orange
+        cell.titleLB.text = String(effectTitle)
         return cell
     }
     
@@ -160,13 +163,26 @@ extension RecorderCell:UICollectionViewDelegate, UICollectionViewDelegateFlowLay
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         auManager.removeEffect(at: 0)
         auManager.insertAudioUnit(name: availableEffects[indexPath.item], at: 0)
+        currentAUindex = indexPath.item
         let cell = collectionView.cellForItem(at: indexPath)
-        cell?.contentView.backgroundColor = .green
+        cell?.backgroundColor = .green
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
-        cell?.contentView.backgroundColor = .orange
+        cell?.backgroundColor = .orange
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        cell.backgroundColor = .orange
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let currentAuIndex = currentAUindex else { return }
+        print(currentAuIndex, indexPath.item)
+        if currentAuIndex == indexPath.item{
+            cell.backgroundColor = .green
+        }
     }
 }
 

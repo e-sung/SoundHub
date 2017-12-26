@@ -454,7 +454,7 @@
                                                                             </label>
                                                                         </subviews>
                                                                     </view>
-                                                                    <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <color key="backgroundColor" name="systemOrangeColor" catalog="System" colorSpace="catalog"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="trailing" secondItem="rGf-3u-HCI" secondAttribute="trailing" id="NLA-j2-TN5"/>
                                                                         <constraint firstAttribute="bottom" secondItem="rGf-3u-HCI" secondAttribute="bottom" id="fHq-nn-hIK"/>
