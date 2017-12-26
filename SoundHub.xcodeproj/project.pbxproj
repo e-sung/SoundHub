@@ -10,6 +10,8 @@
 		3C7582719DEC0BCF97AC9658 /* Pods_SoundHubTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97CA82572278A09E19CB69B /* Pods_SoundHubTests.framework */; };
 		514AE9D3C68525A59E406194 /* Pods_SoundHubUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFEF70D3C538FB607DF5384A /* Pods_SoundHubUITests.framework */; };
 		8C64A22E72B4C054AEC0195F /* Pods_SoundHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F94B1440EDA863E444AD34F /* Pods_SoundHub.framework */; };
+		F0F1E0051FF20EB3007D1AE6 /* AudioUnitGenericView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F1E0041FF20EB2007D1AE6 /* AudioUnitGenericView.swift */; };
+		F0F1E0071FF210CA007D1AE6 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F1E0061FF210CA007D1AE6 /* UIColor.swift */; };
 		FF000D991FD11F7F00678999 /* DataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF000D981FD11F7F00678999 /* DataCenter.swift */; };
 		FF000D9B1FD135D400678999 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF000D9A1FD135D400678999 /* DocumentBrowserViewController.swift */; };
 		FF000D9D1FD1368000678999 /* AudioUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF000D9C1FD1368000678999 /* AudioUploadViewController.swift */; };
@@ -106,6 +108,8 @@
 		D05EBE5F32CFEB3E6E483A33 /* Pods-SoundHubTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoundHubTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SoundHubTests/Pods-SoundHubTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D97CA82572278A09E19CB69B /* Pods_SoundHubTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoundHubTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFEF70D3C538FB607DF5384A /* Pods_SoundHubUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoundHubUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0F1E0041FF20EB2007D1AE6 /* AudioUnitGenericView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioUnitGenericView.swift; sourceTree = "<group>"; };
+		F0F1E0061FF210CA007D1AE6 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		FF000D981FD11F7F00678999 /* DataCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCenter.swift; sourceTree = "<group>"; };
 		FF000D9A1FD135D400678999 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
 		FF000D9C1FD1368000678999 /* AudioUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioUploadViewController.swift; sourceTree = "<group>"; };
@@ -316,6 +320,7 @@
 				FF7D6E0B1FDD630700754A7C /* AVPlayer.swift */,
 				FFCDE7D91FE7FB5C0008CCB9 /* UITableView.swift */,
 				FFB2F8F71FEBDE67009E59B5 /* ActionSheetStringPicker.swift */,
+				F0F1E0061FF210CA007D1AE6 /* UIColor.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -341,6 +346,7 @@
 				FFCF82EC1FC95E07003B7861 /* EntryViewController.swift */,
 				FF000D9A1FD135D400678999 /* DocumentBrowserViewController.swift */,
 				FF000D9E1FD136BA00678999 /* Document.swift */,
+				F0F1E0041FF20EB2007D1AE6 /* AudioUnitGenericView.swift */,
 				FF000D9C1FD1368000678999 /* AudioUploadViewController.swift */,
 			);
 			path = EntryPoint;
@@ -853,7 +859,9 @@
 				FF000D9B1FD135D400678999 /* DocumentBrowserViewController.swift in Sources */,
 				FFC32AE41FCF8E1500651A31 /* Comment.swift in Sources */,
 				FFEAE1A91FEA52B700FD7D7F /* AUCell.swift in Sources */,
+				F0F1E0071FF210CA007D1AE6 /* UIColor.swift in Sources */,
 				FF02805C1FD7B9A400C0013A /* String.swift in Sources */,
+				F0F1E0051FF20EB3007D1AE6 /* AudioUnitGenericView.swift in Sources */,
 				FFC32AE81FCFBFDB00651A31 /* MasterWaveFormViewCell.swift in Sources */,
 				FFB85FCE1FCE657F000E47C8 /* ProfileViewController.swift in Sources */,
 				FF688F781FCE58B700F0A41F /* SideMenuViewController.swift in Sources */,

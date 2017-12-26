@@ -12,12 +12,14 @@ import AudioKitUI
 class RecorderCell: UITableViewCell {
 
     var delegate:RecorderCellDelegate?
-    var auManager: AKAudioUnitManager!
+    private var auManager: AKAudioUnitManager!
     private var availableEffects:[String] = []
     var postId:Int!
     var isActive = false
+    var currentAU: AudioUnitGenericView?
     
     @IBOutlet weak var audioUnitContainerFlowLayout: UICollectionView!
+    @IBOutlet weak var auGenericViewContainer: UIScrollView!
     @IBOutlet private weak var recordButton: UIButton!
     @IBOutlet private weak var inputPlot: AKNodeOutputPlot!
     override func awakeFromNib() {
@@ -29,6 +31,18 @@ class RecorderCell: UITableViewCell {
         inputPlot.node = RecordConductor.main.mic
         
         state = .readyToRecord
+    }
+    
+    private func showAudioUnit(_ audioUnit: AVAudioUnit) {
+        
+        if currentAU != nil {
+            currentAU?.removeFromSuperview()
+        }
+        
+        currentAU = AudioUnitGenericView(au: audioUnit)
+        auGenericViewContainer.addSubview(currentAU!)
+        auGenericViewContainer.contentSize = currentAU!.frame.size
+        
     }
     
     func activate(){
@@ -165,6 +179,9 @@ extension RecorderCell:AKAudioUnitManagerDelegate{
         if RecordConductor.main.player.isStarted {
             RecordConductor.main.player.stop()
             RecordConductor.main.player.start()
+        }
+        if let au = auManager!.effectsChain[auIndex] {
+            showAudioUnit(au)
         }
     }
     
