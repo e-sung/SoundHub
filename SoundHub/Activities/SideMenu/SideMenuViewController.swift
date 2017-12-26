@@ -43,6 +43,7 @@ class SideMenuViewController: UIViewController {
         }
         if let nextVC = segue.destination as? ChartViewController{
             nextVC.category = .general
+            nextVC.shouldScrollToTop = true
         }
     }
 
