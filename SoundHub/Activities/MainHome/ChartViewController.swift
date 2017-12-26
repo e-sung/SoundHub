@@ -18,6 +18,8 @@ class ChartViewController: UIViewController{
     
     // MARK: IBAction
     @IBAction func unwindToChart(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
+        
+        self.refreshData()
     }
     
     // MARK: Stored Properties
