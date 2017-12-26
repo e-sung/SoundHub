@@ -65,7 +65,7 @@ class RecorderCell: UITableViewCell {
         inputPlot.color = .orange
         inputPlot.node = RecordConductor.main.mic
         audioUnitContainerFlowLayout.isHidden = false
-        self.contentView.backgroundColor = .white
+        self.contentView.backgroundColor = .black
     }
     
     func deActivate(){

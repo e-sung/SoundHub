@@ -26,7 +26,7 @@ class AudioUnitGenericView: UIView {
                                   range: Double(param.minValue) ... Double(param.maxValue),
                                   format: "%0.1f",
                                   color: UIColor.darkGray,
-                                  frame: CGRect(x: 20, y: y, width: 250, height: 50),
+                                  frame: CGRect(x: 20, y: y, width: Int(UIScreen.main.bounds.width*0.8), height: 50),
                                   callback: { (value) -> Void in
 
                 // AUParameter references aren't persistent, so we need to refetch them
@@ -37,9 +37,9 @@ class AudioUnitGenericView: UIView {
 
             })
 
-            slider.textColor = UIColor.black
+            slider.textColor = UIColor.white
             slider.fontSize = 10
-            slider.sliderBorderColor = UIColor.random()
+            slider.sliderBorderColor = UIColor.white
 
             addSubview(slider)
 
