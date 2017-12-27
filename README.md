@@ -18,18 +18,23 @@
   * 앨범표지, bpm, 저자 등의 정보를 메타정보에서 추출하고
   * 메타정보에 해당내용이 없으면, 사용자에게 입력을 요구합니다.
   * 입력받은 메타정보를 파일에 덮어쓰고 서버에 업로드합니다.
+  
+  ![uploadMusic](https://github.com/e-sung/SoundHub/blob/master/previews/upload1.gif) ![uploadMusic](https://github.com/e-sung/SoundHub/blob/master/previews/upload2.gif)
 
 * 음악 녹음
   * 여러 AudioUnit들을 활용하여 각종 효과를 입혀서 녹음할 수 있습니다.
   * "댓글"용 음악을 녹음 할 때는, 원본음악을 들으면서 녹음할 수 있습니다. 
+  * <img src="https://raw.githubusercontent.com/e-sung/SoundHub/master/previews/record.png" alt="record Music" width="270">
 
 * 음악 청취
   * 여러 트랙을 동시에 들을 수 있습니다.
   * 재생 중 선택적으로 트랙들을 껏다 켤 수 있습니다
+  * <img src="https://github.com/e-sung/SoundHub/blob/master/previews/play.png" alt="Play Music" width="270">
 
 * 음악 합치기
   * 원저작자는, 자신의 음악에 달린 댓글들 중 마음에 드는 것들을, 마스터트랙에 합칠 수 있습니다.
   * 합쳐진 댓글들은, Mixed-Comments로 별도로 관리됩니다. 
+  * <img src="https://github.com/e-sung/SoundHub/blob/master/previews/merge.gif" alt="Play Music" width="270">
 
 * 음악 찾기
   * 장르별, 악기별로 음악과 뮤지션을 탐색할 수 있습니다.
