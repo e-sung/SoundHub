@@ -12,7 +12,7 @@ import AudioKitUI
 class RecorderCell: UITableViewCell {
 
     var delegate:RecorderCellDelegate?
-    private var auManager: AKAudioUnitManager!
+    private var auManager: AKAudioUnitManager?
     private var availableEffects:[String] = []
     var postId:Int!
     var isActive = false
@@ -49,8 +49,8 @@ class RecorderCell: UITableViewCell {
     func activate(){
         
         auManager = AKAudioUnitManager()
-        auManager.delegate = self
-        auManager.requestEffects { (audioComponents) in
+        auManager?.delegate = self
+        auManager?.requestEffects { (audioComponents) in
             for component in audioComponents{
                 if component.name != ""{
                     self.availableEffects.append(component.name)
@@ -58,8 +58,8 @@ class RecorderCell: UITableViewCell {
             }
             self.audioUnitContainerFlowLayout.reloadData()
         }
-        auManager.input = RecordConductor.main.player
-        auManager.output = RecordConductor.main.mainMixer
+        auManager?.input = RecordConductor.main.player
+        auManager?.output = RecordConductor.main.mainMixer
         
         self.isActive = true
         state = .readyToRecord
@@ -72,7 +72,11 @@ class RecorderCell: UITableViewCell {
     
     func deActivate(){
         self.isActive = false
-        auManager.removeEffect(at: 0)
+        if let auManager = auManager{
+            if auManager.availableEffects.count > 0 {
+                auManager.removeEffect(at: 0)
+            }
+        }
         audioUnitContainerFlowLayout.isHidden = true
     }
     
@@ -129,8 +133,8 @@ class RecorderCell: UITableViewCell {
     }
 
     private func makeRecordingState(){
-        if auManager.input != RecordConductor.main.player {
-            auManager.connectEffects(firstNode: RecordConductor.main.player, lastNode: RecordConductor.main.mainMixer)
+        if auManager?.input != RecordConductor.main.player {
+            auManager?.connectEffects(firstNode: RecordConductor.main.player, lastNode: RecordConductor.main.mainMixer)
         }
         recordButton.setTitle("중지", for: .normal)
         inputPlot.color = .red
@@ -169,8 +173,8 @@ extension RecorderCell:UICollectionViewDelegate, UICollectionViewDelegateFlowLay
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        auManager.removeEffect(at: 0)
-        auManager.insertAudioUnit(name: availableEffects[indexPath.item], at: 0)
+        auManager?.removeEffect(at: 0)
+        auManager?.insertAudioUnit(name: availableEffects[indexPath.item], at: 0)
         currentAUindex = indexPath.item
         let cell = collectionView.cellForItem(at: indexPath) as! AUCell
         cell.backgroundColor = AUCell.selectedBackgroundColor
