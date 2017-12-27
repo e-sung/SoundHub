@@ -22,7 +22,7 @@ class AudioUploadViewController: UIViewController {
     
     @IBOutlet weak var bpmTF: UITextField!
     @IBOutlet weak private var albumArt: UIButton!
-    @IBOutlet weak var cameraButton: UIButton!
+    @IBOutlet weak private var cameraButton: UIButton!
     @IBOutlet weak private var authorNameLB: UILabel!
     @IBAction private func cancelHandler(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
@@ -69,7 +69,6 @@ class AudioUploadViewController: UIViewController {
     }
 
     private func setUpUI(with audio:AVPlayerItem){
-        cameraButton.isHidden = true
         for item in audio.asset.metadata{
             if let identifier = item.identifier{
                 if identifier == .iTunesMetadataBeatsPerMin{
@@ -85,6 +84,7 @@ class AudioUploadViewController: UIViewController {
                 if key == .commonKeyArtwork, let data = value as? Data{
                     albumArt.setImage(UIImage(data: data), for: .normal)
                     albumArt.isUserInteractionEnabled = false
+                    cameraButton.isHidden = true
                 }
                 else if key == .commonKeyTitle {
                     audioTitleTF.text = value as? String
