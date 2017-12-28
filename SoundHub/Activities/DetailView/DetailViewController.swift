@@ -24,7 +24,18 @@ class DetailViewController: UIViewController{
     }
     // MARK: Private Stored Properties
     /// 음악 파형이 표시되는 셀
-    private var masterWaveCell:MasterWaveFormViewCell?
+    private var masterWaveCell:MasterWaveFormViewCell?{
+        didSet(oldVal){
+            if let masterPlayer = self.masterTrackPlayer{
+                masterWaveCell?.masterAudioURL = (masterTrackPlayer?.currentItem?.asset as? AVURLAsset)?.url
+            }else{
+                guard let remoteURL = post.masterTrackRemoteURL else { return }
+                NetworkController.main.downloadAudio(from: remoteURL, completion: { (localURL) in
+                    self.masterWaveCell?.masterAudioURL = localURL
+                })
+            }
+        }
+    }
     /// 녹음하는 셀
     private var recorderCell: RecorderCell?
     private var heightOfRecordingCell:CGFloat = 50
@@ -438,7 +449,6 @@ extension DetailViewController{
                 DispatchQueue.main.async {
                     self.masterTrackPlayer = AVPlayer(url: localURL)
                     PlayBarController.main.isEnabled = true
-                    self.masterWaveCell?.masterAudioURL = localURL
                 }
             })
         }
