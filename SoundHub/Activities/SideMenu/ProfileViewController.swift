@@ -54,10 +54,8 @@ class ProfileViewController: UIViewController{
      유저가 수정한 유저정보를 UserDefault에 저장하고, 같은 정보를 서버에 보냄
     */
     @objc private func doneButtonHandler(){
-        /// 수정이 끝났다는 것을 보여주기 위하여, doneButton을 숨김
-        doneButton.title = ""
-        doneButton.isEnabled = false
-        
+        navigationItem.rightBarButtonItems?.popLast()
+
         UserDefaults.standard.set(headerCell!.nickName, forKey: nickname)
         
         /// 변경내용을 서버에 반영
@@ -83,8 +81,10 @@ class ProfileViewController: UIViewController{
     // MARK: IBActions
     /// 톱니바퀴 버튼을 눌렀을 때 해야 할 일
     @IBAction private func changeProfileButtnHandler(_ sender: UIButton) {
+        doneButton = UIBarButtonItem(title: "", style: .done, target: self, action: #selector(doneButtonHandler))
+        navigationItem.rightBarButtonItems?.append(doneButton)
+
         doneButton.title = "확인"
-        doneButton.isEnabled = true
         headerCell!.isSettingPhase = true
     }
     
@@ -110,10 +110,6 @@ class ProfileViewController: UIViewController{
         super.viewDidLoad()
         mainTV.delegate = self
         mainTV.dataSource = self
-        
-        doneButton = UIBarButtonItem(title: "", style: .done, target: self, action: #selector(doneButtonHandler))
-        navigationItem.setRightBarButton(doneButton, animated: false)
-        doneButton.isEnabled = false
 
         imagePicker.allowsEditing = false
         imagePicker.delegate = self
