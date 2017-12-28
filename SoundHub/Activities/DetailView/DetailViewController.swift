@@ -81,7 +81,6 @@ class DetailViewController: UIViewController{
     }
     override func viewWillAppear(_ animated: Bool) {
         PlayBarController.main.currentPostView = self
-
         guard let userId = UserDefaults.standard.string(forKey: id) else { return }
         if (post.author?.id ?? -1) == Int(userId){
             commentTrackContainer?.allowsMultiSelection = true
@@ -167,7 +166,8 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
 
 extension DetailViewController:UIGestureRecognizerDelegate{
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        return touch.location(in: PlayBarController.main.view).y < 0
+        let heightOfPushBackGestureDisableZone:CGFloat = 30
+        return touch.location(in: PlayBarController.main.view).y < -heightOfPushBackGestureDisableZone
     }
 }
 
