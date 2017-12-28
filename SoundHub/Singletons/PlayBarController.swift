@@ -18,7 +18,7 @@ class PlayBarController{
     private var progressBar: UISlider!
     private var statusLable: UILabel!
     private var progressBarBeingTouched = false
-    private var lastPhase:PlayPhase = .Stopped
+    var lastPhase:PlayPhase = .Stopped
     var currentPhase:PlayPhase = .Stopped {
         didSet(oldVal){
             switch currentPhase {
@@ -128,7 +128,7 @@ extension PlayBarController{
     func handleCommentToggle(){
         lastPhase = currentPhase
         pause()
-        seek(to: progress)
+//        seek(to: progress)
         if lastPhase == .Playing{ play() }
     }
 }

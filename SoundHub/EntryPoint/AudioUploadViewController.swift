@@ -38,10 +38,10 @@ class AudioUploadViewController: UIViewController {
     @IBAction private func uploadHandler(_ sender: UIButton) {
         let bpm = Int(bpmTF.text ?? "110") ?? 110
         if let audioURL = audioURL{
-            self.dismiss(animated: true, completion: nil)
             NetworkController.main.uploadAudio(In: audioURL, genre: self.genre, instrument: self.instrument, bpm: bpm, albumCover: (self.albumArt.image(for: .normal) ?? UIImage()), completion: {
-                RecordConductor.main.resetRecordedAudio()
-                DispatchQueue.main.async { self.dismiss(animated: true, completion: nil) }
+                DataCenter.main.resetHomePages()
+                self.dismiss(animated: true, completion: nil)
+                DispatchQueue.global(qos: .userInitiated).async { RecordConductor.main.resetRecordedAudio() }
             })
             
         }else{
@@ -58,12 +58,13 @@ class AudioUploadViewController: UIViewController {
             
             RecordConductor.main.exportRecordedAudio(to: exportURL,
                                                      with: [titleMetadata, artistMetadata], completion: {
-                DispatchQueue.main.async {
-                    NetworkController.main.uploadAudio(In: exportURL, genre: self.genre, instrument: self.instrument, bpm: bpm, albumCover: (self.albumArt.image(for: .normal) ?? UIImage()), completion: {
-                        RecordConductor.main.resetRecordedAudio()
-                        DispatchQueue.main.async { self.dismissWith(depth: 2, from: self) }
-                    })
-                }
+                NetworkController.main.uploadAudio(In: exportURL, genre: self.genre, instrument: self.instrument, bpm: bpm, albumCover: (self.albumArt.image(for: .normal) ?? UIImage()), completion: {
+                    RecordConductor.main.resetRecordedAudio()
+                    DispatchQueue.main.async {
+                        DataCenter.main.resetHomePages()
+                        self.dismissWith(depth: 2, from: self)
+                    }
+                })
             })
         }
     }

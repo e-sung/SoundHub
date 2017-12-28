@@ -24,28 +24,31 @@ class DetailViewController: UIViewController{
     }
     // MARK: Private Stored Properties
     /// 음악 파형이 표시되는 셀
-    private var masterWaveCell:MasterWaveFormViewCell?
+    private var masterWaveCell:MasterWaveFormViewCell?{
+        didSet(oldVal){
+            guard let masterWaveCell = masterWaveCell else { return }
+            self.render(masterWaveCell)
+        }
+    }
+    
+    private var mixedTrackToggler:ModeToggleCell?
+    private var commentTrackToggler:ModeToggleCell?
+    
     /// 녹음하는 셀
     private var recorderCell: RecorderCell?
     private var heightOfRecordingCell:CGFloat = 50
+    
     /// Master Track을 재생하는 플레이어
     private var masterTrackPlayer:AVPlayer?{
         didSet(oldVal){
             PlayBarController.main.isEnabled = true
-            if AVPlayerTimeObserver != nil && oldVal === AVPlayerTimeObserver?.observer {
-                oldVal?.removeTimeObserver(AVPlayerTimeObserver!.observee!)
-            }
+            if let lastPlayer = oldVal { removeGlobalTimeObserver(from: lastPlayer) }
             guard let masterAudioPlayer = masterTrackPlayer else { return }
-            let cmt = CMTime(value: 1, timescale: 10)
-            AVPlayerTimeObserver = PlayerTimeObserver()
-            AVPlayerTimeObserver?.observer = masterAudioPlayer
-            AVPlayerTimeObserver?.observee = masterAudioPlayer.addPeriodicTimeObserver(forInterval: cmt, queue: DispatchQueue.main, using: { (cmt) in
-                if masterAudioPlayer.isPlaying {
-                    PlayBarController.main.reflect(progress: masterAudioPlayer.progress)
-                }
-            })
+            addGlobalTimeObserver(on: masterAudioPlayer)
+            NotificationCenter.default.post(name: NSNotification.Name.init("MasterTrackDownloaded"), object: nil)
         }
     }
+
     private var authorTrackPlayer:AVPlayer?
     /**
      mixedTrack들을 담고있는 셀. Playable 프로토콜을 상속받았다.
@@ -76,18 +79,26 @@ class DetailViewController: UIViewController{
         mainTV.delegate = self
         mainTV.dataSource = self
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
-        self.navigationController?.interactivePopGestureRecognizer?.addTarget(self, action: #selector(onPopBack))
+        self.navigationController?.interactivePopGestureRecognizer?.addTarget(self, action: #selector(onPopBackHandler))
         PlayBarController.main.isHidden = false
         guard let postImageURL = post.albumCoverImageURL else { return }
         albumCoverImageView.af_setImage(withURL: postImageURL)
     }
     override func viewWillAppear(_ animated: Bool) {
+        if post.mixed_tracks == nil{
+            fillContainers()
+        }
         PlayBarController.main.currentPostView = self
         albumCoverImageView.alpha = 1
         guard let userId = UserDefaults.standard.string(forKey: id) else { return }
         if (post.author?.id ?? -1) == Int(userId){
             commentTrackContainer?.allowsMultiSelection = true
         }
+    }
+    
+    override func willMove(toParentViewController parent: UIViewController?)
+    {
+        if parent == nil { albumCoverImageView.alpha = 0 }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -103,7 +114,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
     func numberOfSections(in tableView: UITableView) -> Int { return Section.cases }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Section(rawValue:section)!.rows
+        return section == 0 ? 2 : 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -113,45 +124,40 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             return cell
         }else if indexPath.section == 0 && indexPath.item == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "masterWaveCell", for: indexPath)
-            masterWaveCell = cell.becomeMasterWaveCell(with: post.masterTrackRemoteURL, completion: { (localURL) in
-                self.masterWaveCell?.masterAudioURL = localURL
-            })
+            masterWaveCell = cell as? MasterWaveFormViewCell
             return masterWaveCell!
         }
         else if Section(rawValue: indexPath.section) == .MixedTrackToggler {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MixedCommentHeaderCell", for: indexPath) as! ModeToggleCell
             cell.delegate = self
+            mixedTrackToggler = cell
             return cell
-        }else if Section(rawValue: indexPath.section) == .MixedTrackToggler {
+        }else if Section(rawValue: indexPath.section) == .CommentTrackToggler {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTracksHeaderCell", for: indexPath) as! ModeToggleCell
             cell.delegate = self
+            commentTrackToggler = cell
             return cell
         }else if Section(rawValue: indexPath.section) == .MixedTracks {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MixedTracksContainer", for: indexPath) as! CommentContainerCell
             cell.allComments = post.mixed_tracks
             cell.delegate = self
             mixedTrackContainer = cell
-            return cell
-        }else if Section(rawValue: indexPath.section) == .CommentTrackToggler{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTracksHeaderCell", for: indexPath) as! ModeToggleCell
-            cell.delegate = self
+            mixedTrackToggler?.containerToToggle = cell
             return cell
         }else if Section(rawValue: indexPath.section) == .CommentTracks {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTracksContainer", for: indexPath) as! CommentContainerCell
             cell.allComments = post.comment_tracks; cell.delegate = self
-            if DataCenter.main.userId == post.author?.id{
-                cell.commentTV.allowsMultipleSelection = true
-            }
+            if DataCenter.main.userId == post.author?.id { cell.commentTV.allowsMultipleSelection = true }
             commentTrackContainer = cell
+            commentTrackToggler?.containerToToggle = cell
             return cell
         }else if Section(rawValue: indexPath.section) == .RecordCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: "recorderCell", for: indexPath) as! RecorderCell
             cell.delegate = self
             recorderCell = cell
             return cell
-        }else{
-            return UITableViewCell()
         }
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -167,61 +173,17 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
     }
 }
 
-extension DetailViewController:UIGestureRecognizerDelegate{
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        let heightOfPopBackGestureDisableZone:CGFloat = 30
-        return touch.location(in: PlayBarController.main.view).y < -heightOfPopBackGestureDisableZone
-    }
-    
-    @objc private func onPopBack(sender: UIGestureRecognizer) {
-        switch sender.state {
-        case .began, .changed:
-            if let ct = navigationController?.transitionCoordinator {
-                currentTransitionCoordinator = ct
-            }
-        case .cancelled, .ended:
-            currentTransitionCoordinator = nil
-        case .possible, .failed:
-            break
-        }
-        
-        if let currentTransitionCoordinator = currentTransitionCoordinator {
-            albumCoverImageView.alpha = 1 - currentTransitionCoordinator.percentComplete
-        }
-    }
-}
 
 // MARK: 모드가 변경되었을 때 처리
 extension DetailViewController:ModeToggleCellDelegate{
-    func fillContainers(){
-        NetworkController.main.fetchPost(id: (post?.id ?? -1)) { (postResult) in
-            DispatchQueue.main.async {
-                self.post = postResult
-                let ids = IndexSet(integersIn: Section.MixedTracks.rawValue ... Section.CommentTracks.rawValue)
-                self.mainTV.reloadSections(ids, with: .automatic)
-            }
-        }
-    }
-    
-    func didModeToggled(to mode: Bool, by toggler: Int) {
-        if commentTrackContainer?.commentTV.allCells.count == 0 {
-            fillContainers()
-        }
-        if toggler == 0 {
-            mixedTrackContainer?.setMute(to: !mode)
-            mixedTrackContainer?.setInteractionability(to: mode)
-        }
-        if toggler == 1 {
-            commentTrackContainer?.setMute(to: !mode)
-            commentTrackContainer?.setInteractionability(to: mode)
-        }
+    func didModeToggled(to mode: Bool, by toggler: CommentContainerCell?) {
+        toggler?.setMute(to: !mode)
+        toggler?.setInteractionability(to: mode)
         guard let mixed = mixedTrackContainer, let comment = commentTrackContainer else { return }
         if mixed.isMuted == true && comment.isMuted == true{
-            authorTrackPlayer?.isMuted = true
-            masterTrackPlayer?.isMuted = false
+            authorTrackPlayer?.isMuted = true; masterTrackPlayer?.isMuted = false
         }else{
-            authorTrackPlayer?.isMuted = false
-            masterTrackPlayer?.isMuted = true
+            authorTrackPlayer?.isMuted = false; masterTrackPlayer?.isMuted = true
         }
     }
 }
@@ -260,22 +222,31 @@ extension DetailViewController:Playable{
 
 // MARK: CommentContainerCellDelegate
 extension DetailViewController:CommentContainerCellDelegate{
-    func didSwitchToggled() {
-        PlayBarController.main.handleCommentToggle()
+    func didStartDownloading() {
+        PlayBarController.main.lastPhase = PlayBarController.main.currentPhase
+        PlayBarController.main.pause()
+        PlayBarController.main.isEnabled = false
     }
     
+    func didFinishedDownloading() {
+        PlayBarController.main.isEnabled = true
+        PlayBarController.main.seek(to: PlayBarController.main.progress)
+        if PlayBarController.main.lastPhase == .Playing{
+            PlayBarController.main.play()
+        }
+    }
+
     func shouldShowProfileOf(user: User?) {
         let profileVC = UIStoryboard(name: "SideMenu", bundle: nil)
             .instantiateViewController(withIdentifier: "profileViewController") as! ProfileViewController
         profileVC.userInfo = user
         navigationController?.pushViewController(profileVC, animated: true)
     }
+    
     func didSelectionOccured(on comments: [Comment]) {
         if comments.count == 0 { navigationItem.setRightBarButton(nil, animated: true); return }
         selectedComments = comments
-        navigationItem.setRightBarButton(
-            UIBarButtonItem(title: "Merge", style: .plain, target: self, action: #selector(mix)),
-            animated: true)
+        navigationItem.rightBarButtonItems?.append(UIBarButtonItem(title: "Merge", style: .plain, target: self, action: #selector(mix)))
     }
     
     @objc private func mix(){
@@ -284,7 +255,7 @@ extension DetailViewController:CommentContainerCellDelegate{
         for comment in selectedComments{
             guard let commentId = comment.id else {
                 self.mixedTrackContainer?.allowsMultiSelection = false
-                self.navigationItem.setRightBarButton(nil, animated: true)
+                self.navigationItem.rightBarButtonItems?.popLast()
                 return
             }
             comments.append(commentId)
@@ -293,13 +264,11 @@ extension DetailViewController:CommentContainerCellDelegate{
         NetworkController.main.mix(comments: comments, on: postId, completion: {
             NetworkController.main.fetchPost(id: postId, completion: { (post) in
                 self.post = post
-                DispatchQueue.main.async {
-                    self.mixedTrackContainer?.isNewTrackBeingAdded = true
-                    let ids = IndexSet(integersIn: Section.MixedTracks.rawValue ... Section.MixedTracks.rawValue)
-                    self.mainTV.reloadSections(ids, with: .automatic)
-                    self.mixedTrackContainer?.allowsMultiSelection = false
-                    self.navigationItem.setRightBarButton(nil, animated: true)
-                }
+                self.mixedTrackContainer?.isNewTrackBeingAdded = true
+                let ids = IndexSet(integersIn: Section.MixedTracks.rawValue ... Section.MixedTracks.rawValue)
+                self.mainTV.reloadSections(ids, with: .automatic)
+                self.mixedTrackContainer?.allowsMultiSelection = false
+                self.navigationItem.rightBarButtonItems?.popLast()
             })
         })
     }
@@ -374,7 +343,7 @@ extension DetailViewController:RecorderCellDelegate{
         }, cancel: { (picker) in
         }, origin: self.view)
     }
-    func closeRecordingCell(){
+    private func closeRecordingCell(){
         self.heightOfRecordingCell = 50
         self.recorderCell?.deActivate()
         CATransaction.begin()
@@ -387,6 +356,28 @@ extension DetailViewController:RecorderCellDelegate{
     }
 }
 
+extension DetailViewController:UIGestureRecognizerDelegate{
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        let heightOfPopBackGestureDisableZone:CGFloat = 30
+        return touch.location(in: PlayBarController.main.view).y < -heightOfPopBackGestureDisableZone
+    }
+    
+    @objc private func onPopBackHandler(sender: UIGestureRecognizer) {
+        switch sender.state {
+        case .began, .changed:
+            if let coord = navigationController?.transitionCoordinator {
+                currentTransitionCoordinator = coord
+            }
+        case .cancelled, .ended:
+            currentTransitionCoordinator = nil
+        case .possible, .failed:
+            break
+        }
+        if let currentTransitionCoordinator = currentTransitionCoordinator {
+            albumCoverImageView.alpha = 1 - currentTransitionCoordinator.percentComplete
+        }
+    }
+}
 
 // MARK: Helper Enums
 extension DetailViewController{
@@ -403,15 +394,6 @@ extension DetailViewController{
          MainHeader / MixedHeader/ Mixed / CommentHeader / Comment / Recorder
         */
         static var cases:Int{get{return 6}}
-        var rows:Int{
-            get{
-                switch self {
-                case .MainHeader: return 2
-                default:
-                    return 1
-                }
-            }
-        }
     }
 }
 
@@ -425,9 +407,32 @@ protocol Playable {
 }
 
 extension DetailViewController{
+    private func render(_ masterWaveCell:MasterWaveFormViewCell){
+        if let masterPlayer = self.masterTrackPlayer{
+            masterWaveCell.masterAudioURL = (masterPlayer.currentItem?.asset as? AVURLAsset)?.url
+        }else{
+            NotificationCenter.default.addObserver(forName: NSNotification.Name("MasterTrackDownloaded"), object: nil, queue: nil, using: { (noti) in
+                self.masterWaveCell?.masterAudioURL = (self.masterTrackPlayer?.currentItem?.asset as? AVURLAsset)?.url
+            })
+        }
+    }
+    
+    private func setUp(_ player: AVPlayer?, with url:URL?){
+        PlayBarController.main.isEnabled = false
+        guard let url = url else { return }
+        NetworkController.main.downloadAudio(from: url) { (localURL) in
+            player?.replaceCurrentItem(with: AVPlayerItem(url: localURL))
+            PlayBarController.main.isEnabled = true
+        }
+    }
+    
     private func setUpMasterPlayer(){
+        PlayBarController.main.isEnabled = false
         if let materRemoteURL = self.post.masterTrackRemoteURL{
-            self.masterTrackPlayer = AVPlayer(url: materRemoteURL)
+            NetworkController.main.downloadAudio(from: materRemoteURL, completion: { (localURL) in
+                self.masterTrackPlayer = AVPlayer(url: localURL)
+                PlayBarController.main.isEnabled = true
+            })
         }
     }
     
@@ -435,6 +440,29 @@ extension DetailViewController{
         if let authorRemoteURL = self.post.authorTrackRemoteURL{
             self.authorTrackPlayer = AVPlayer(url: authorRemoteURL)
             self.authorTrackPlayer?.isMuted = true
+        }
+    }
+    
+    private func removeGlobalTimeObserver(from player:AVPlayer){
+        if AVPlayerTimeObserver != nil && player === AVPlayerTimeObserver?.observer {
+            player.removeTimeObserver(AVPlayerTimeObserver!.observee!)
+        }
+    }
+    
+    private func addGlobalTimeObserver(on player:AVPlayer){
+        let cmt = CMTime(value: 1, timescale: 10)
+        AVPlayerTimeObserver = PlayerTimeObserver()
+        AVPlayerTimeObserver?.observer = player
+        AVPlayerTimeObserver?.observee = player.addPeriodicTimeObserver(forInterval: cmt, queue: DispatchQueue.main, using: { (cmt) in
+            if player.isPlaying { PlayBarController.main.reflect(progress: player.progress) }
+        })
+    }
+    
+    private func fillContainers(){
+        NetworkController.main.fetchPost(id: (post?.id ?? -1)) { (postResult) in
+            self.post = postResult
+            let ids = IndexSet(integersIn: Section.MixedTracks.rawValue ... Section.CommentTracks.rawValue)
+            self.mainTV.reloadSections(ids, with: .automatic)
         }
     }
     
@@ -455,7 +483,7 @@ extension DetailViewController{
             NetworkController.main.fetchPost(id: postId) { (fetchedPost) in
                 let nextVC = UIStoryboard(name: "Detail", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
                 nextVC.post = fetchedPost
-                DispatchQueue.main.async { vc.navigationController?.show(nextVC, sender: nil) }
+                vc.navigationController?.show(nextVC, sender: nil)
             }
         }
     }

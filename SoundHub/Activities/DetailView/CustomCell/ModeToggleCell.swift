@@ -9,13 +9,13 @@
 import UIKit
 
 class ModeToggleCell: UITableViewCell {
-
+    var containerToToggle:CommentContainerCell?
     @IBOutlet weak var modeStateLB: UILabel!
     @IBAction func switchToggleHandler(_ sender: UISwitch) {
-        delegate?.didModeToggled(to: sender.isOn, by: sender.tag)
+        delegate?.didModeToggled(to: sender.isOn, by: containerToToggle)
     }
     var delegate:ModeToggleCellDelegate?
 }
 protocol ModeToggleCellDelegate{
-    func didModeToggled(to mode:Bool, by toggler:Int)
+    func didModeToggled(to mode:Bool, by toggler:CommentContainerCell?)
 }

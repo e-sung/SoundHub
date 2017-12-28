@@ -20,6 +20,7 @@ class CommentContainerCell: UITableViewCell{
         }
     }
     var aPlayer:AVPlayer?
+    var numberOfPlayersBeingDownloaded = 0
     var delegate:CommentContainerCellDelegate?
     var isNewTrackBeingAdded = false
     private var allCells:[AudioCommentCell]{
@@ -149,9 +150,18 @@ extension CommentContainerCell:UITableViewDataSource, UITableViewDelegate{
 }
 
 extension CommentContainerCell:AudioCommentCellDelegate{
-    func didSwitchToggled() {
-        self.delegate?.didSwitchToggled()
+    func didStartDownloading() {
+        numberOfPlayersBeingDownloaded += 1
+        delegate?.didStartDownloading()
     }
+    
+    func didFinishedDownloading() {
+        numberOfPlayersBeingDownloaded -= 1
+        if numberOfPlayersBeingDownloaded == 0{
+            delegate?.didFinishedDownloading()
+        }
+    }
+
     func shouldShowProfileOf(user: User?) {
         self.delegate?.shouldShowProfileOf(user: user)
     }
@@ -160,5 +170,6 @@ extension CommentContainerCell:AudioCommentCellDelegate{
 protocol CommentContainerCellDelegate{
     func didSelectionOccured(on comments:[Comment])->Void
     func shouldShowProfileOf(user:User?)
-    func didSwitchToggled()
+    func didStartDownloading()
+    func didFinishedDownloading()
 }

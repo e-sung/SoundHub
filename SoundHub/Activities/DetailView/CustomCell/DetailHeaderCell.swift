@@ -20,7 +20,7 @@ class DetailHeaderCell: UITableViewCell {
     @IBAction func likeButtonHandler(_ sender: UIButton) {
         guard let postId = _postInfo.id else { return }
         NetworkController.main.sendLikeRequest(on: postId) { (newLikeCount) in
-            DispatchQueue.main.async { self.numberOfLikesLB.text = "\(newLikeCount)" }
+            self.numberOfLikesLB.text = "\(newLikeCount)"
         }
     }
     
@@ -40,11 +40,9 @@ class DetailHeaderCell: UITableViewCell {
             guard let authorId = newVal.author?.id else { return }
             NetworkController.main.fetchUser(id: authorId) { (authorInfo) in
                 guard let authorInfo = authorInfo else { return }
-                DispatchQueue.main.async {
-                    self.authorNameLB.text = authorInfo.nickname ?? ""
-                    if let profileImageURL = authorInfo.profileImageURL{
-                        self.authorProfileImageButton.af_setImage(for: .normal, url: profileImageURL)
-                    }
+                self.authorNameLB.text = authorInfo.nickname ?? ""
+                if let profileImageURL = authorInfo.profileImageURL{
+                    self.authorProfileImageButton.af_setImage(for: .normal, url: profileImageURL)
                 }
             }
         }

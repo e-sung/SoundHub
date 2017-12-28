@@ -74,8 +74,8 @@ class RecordConductor{
         self.exportComment(asset: asset, completion: { (outputURL) in
             NetworkController.main.uploadAudioComment(In: outputURL, to: postId, instrument: Instrument, completion: {
                 NetworkController.main.fetchPost(id: postId, completion: { (postResult) in
-                    DispatchQueue.main.async { completion(postResult) }
-                    self.resetRecordedAudio()
+                    completion(postResult)
+                    DispatchQueue.global(qos: .userInitiated).async { self.resetRecordedAudio() }
                 })
             })
         })
@@ -87,7 +87,7 @@ class RecordConductor{
             session.outputFileType = AVFileType.m4a
             session.outputURL = url
             session.exportAsynchronously {
-                completion()
+                DispatchQueue.main.async { completion() }
             }
         }else {
             print("AVAssetExportSession wasn't generated")
