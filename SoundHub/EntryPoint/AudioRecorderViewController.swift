@@ -30,6 +30,7 @@ class AudioRecorderViewController: UIViewController {
     }
     
     @IBAction func onCancelHandler(_ sender: UIButton) {
+        RecordConductor.main.resetRecordedAudio()
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -84,6 +85,14 @@ class AudioRecorderViewController: UIViewController {
         super.viewWillAppear(animated)
         state = .readyToRecord
         inputPlot.node = RecordConductor.main.mic
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        inputPlot.node?.avAudioNode.removeTap(onBus: 0)
+        if let auManager = auManager{
+            if auManager.availableEffects.count > 0 {
+                auManager.removeEffect(at: 0)
+            }
+        }
     }
     
     func activateAUManager(){
