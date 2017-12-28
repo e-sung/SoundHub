@@ -30,10 +30,8 @@ class AudioCommentCell: UITableViewCell {
             guard let audioURL = comment.commentTrackURL else { return }
             delegate?.didStartDownloading()
             NetworkController.main.downloadAudio(from: audioURL, completion: { (localURL) in
-                DispatchQueue.main.async {
-                    self.player = AVPlayer(url: localURL)
-                    self.player?.currentItem?.addObserver(self, forKeyPath: "status", options: NSKeyValueObservingOptions(), context: nil)
-                }
+                self.player = AVPlayer(url: localURL)
+                self.player?.currentItem?.addObserver(self, forKeyPath: "status", options: NSKeyValueObservingOptions(), context: nil)
             })
         }
     }

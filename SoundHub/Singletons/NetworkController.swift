@@ -51,7 +51,7 @@ extension NetworkController{
             guard let userInfo = try? JSONDecoder().decode(User.self, from: data) else {
                 print("User Info Decoding failed"); completion(nil); return
             }
-            completion(userInfo)
+            DispatchQueue.main.async { completion(userInfo) }
         }.resume()
     }
     /**
@@ -62,7 +62,7 @@ extension NetworkController{
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data else {print ("data is corrupted") ; return}
             guard let post = try? JSONDecoder().decode(Post.self, from: data) else { return }
-            completion(post)
+            DispatchQueue.main.async { completion(post) }
             }.resume()
     }
     /**
@@ -85,7 +85,7 @@ extension NetworkController{
             do{
                 let homePageData = try JSONDecoder().decode(HomePage.self, from: data)
                 DataCenter.main.homePages[category] = homePageData
-                completion()
+                DispatchQueue.main.async { completion() }
             }catch let err as NSError{
                 print(err)
             }
@@ -155,7 +155,7 @@ extension NetworkController{
         let destinationUrl = documentsDirectoryURL.appendingPathComponent(parseLocalURL(from: remoteURL))
 
         if FileManager.default.fileExists(atPath: destinationUrl.path) {
-            completion(destinationUrl)
+            DispatchQueue.main.async { completion(destinationUrl) }
             return
         }
         URLSession.shared.downloadTask(with: remoteURL, completionHandler: { (location, response, error) -> Void in
@@ -178,7 +178,7 @@ extension NetworkController{
         let parameter:Parameters = ["mix_tracks": tracksToMix]
         let headers: HTTPHeaders = ["Authorization": authToken]
         Alamofire.request(url, method: .patch, parameters: parameter, encoding: JSONEncoding.default, headers:headers).response { (response) in
-            completion()
+            DispatchQueue.main.async { completion() }
         }
     }
 }

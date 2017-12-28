@@ -201,11 +201,9 @@ extension DetailViewController:UIGestureRecognizerDelegate{
 extension DetailViewController:ModeToggleCellDelegate{
     func fillContainers(){
         NetworkController.main.fetchPost(id: (post?.id ?? -1)) { (postResult) in
-            DispatchQueue.main.async {
-                self.post = postResult
-                let ids = IndexSet(integersIn: Section.MixedTracks.rawValue ... Section.CommentTracks.rawValue)
-                self.mainTV.reloadSections(ids, with: .automatic)
-            }
+            self.post = postResult
+            let ids = IndexSet(integersIn: Section.MixedTracks.rawValue ... Section.CommentTracks.rawValue)
+            self.mainTV.reloadSections(ids, with: .automatic)
         }
     }
     
@@ -306,13 +304,11 @@ extension DetailViewController:CommentContainerCellDelegate{
         NetworkController.main.mix(comments: comments, on: postId, completion: {
             NetworkController.main.fetchPost(id: postId, completion: { (post) in
                 self.post = post
-                DispatchQueue.main.async {
-                    self.mixedTrackContainer?.isNewTrackBeingAdded = true
-                    let ids = IndexSet(integersIn: Section.MixedTracks.rawValue ... Section.MixedTracks.rawValue)
-                    self.mainTV.reloadSections(ids, with: .automatic)
-                    self.mixedTrackContainer?.allowsMultiSelection = false
-                    self.navigationItem.setRightBarButton(nil, animated: true)
-                }
+                self.mixedTrackContainer?.isNewTrackBeingAdded = true
+                let ids = IndexSet(integersIn: Section.MixedTracks.rawValue ... Section.MixedTracks.rawValue)
+                self.mainTV.reloadSections(ids, with: .automatic)
+                self.mixedTrackContainer?.allowsMultiSelection = false
+                self.navigationItem.setRightBarButton(nil, animated: true)
             })
         })
     }
@@ -444,7 +440,7 @@ extension DetailViewController{
         }else{
             guard let remoteURL = post.masterTrackRemoteURL else { return }
             NetworkController.main.downloadAudio(from: remoteURL, completion: { (localURL) in
-                DispatchQueue.main.async { self.masterWaveCell?.masterAudioURL = localURL }
+                self.masterWaveCell?.masterAudioURL = localURL
             })
         }
     }
@@ -453,10 +449,8 @@ extension DetailViewController{
         PlayBarController.main.isEnabled = false
         if let materRemoteURL = self.post.masterTrackRemoteURL{
             NetworkController.main.downloadAudio(from: materRemoteURL, completion: { (localURL) in
-                DispatchQueue.main.async {
-                    self.masterTrackPlayer = AVPlayer(url: localURL)
-                    PlayBarController.main.isEnabled = true
-                }
+                self.masterTrackPlayer = AVPlayer(url: localURL)
+                PlayBarController.main.isEnabled = true
             })
         }
     }
@@ -485,7 +479,7 @@ extension DetailViewController{
             NetworkController.main.fetchPost(id: postId) { (fetchedPost) in
                 let nextVC = UIStoryboard(name: "Detail", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
                 nextVC.post = fetchedPost
-                DispatchQueue.main.async { vc.navigationController?.show(nextVC, sender: nil) }
+                vc.navigationController?.show(nextVC, sender: nil)
             }
         }
     }

@@ -34,7 +34,7 @@ class SideMenuViewController: UIViewController {
         guard let userId = UserDefaults.standard.string(forKey: id) else { return }
         guard let userID = Int(userId) else { return }
         NetworkController.main.fetchUser(id: userID) { (userInfo) in
-            DispatchQueue.main.async {self.performSegue(withIdentifier: "sideMenuToProfileVC", sender: userInfo)}
+            self.performSegue(withIdentifier: "sideMenuToProfileVC", sender: userInfo)
         }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
