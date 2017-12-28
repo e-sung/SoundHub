@@ -31,7 +31,6 @@ class DetailViewController: UIViewController{
         }
     }
     
-
     /// 녹음하는 셀
     private var recorderCell: RecorderCell?
     private var heightOfRecordingCell:CGFloat = 50
@@ -39,21 +38,12 @@ class DetailViewController: UIViewController{
     private var masterTrackPlayer:AVPlayer?{
         didSet(oldVal){
             PlayBarController.main.isEnabled = true
-            if AVPlayerTimeObserver != nil && oldVal === AVPlayerTimeObserver?.observer {
-                oldVal?.removeTimeObserver(AVPlayerTimeObserver!.observee!)
-            }
+            if let lastPlayer = oldVal { removeGlobalTimeObserver(from: lastPlayer) }
             guard let masterAudioPlayer = masterTrackPlayer else { return }
-            let cmt = CMTime(value: 1, timescale: 10)
-            AVPlayerTimeObserver = PlayerTimeObserver()
-            AVPlayerTimeObserver?.observer = masterAudioPlayer
-            AVPlayerTimeObserver?.observee = masterAudioPlayer.addPeriodicTimeObserver(forInterval: cmt, queue: DispatchQueue.main, using: { (cmt) in
-                if masterAudioPlayer.isPlaying {
-                    PlayBarController.main.reflect(progress: masterAudioPlayer.progress)
-                }
-            })
+            addGlobalTimeObserver(on: masterAudioPlayer)
         }
     }
-    
+
     private var authorTrackPlayer:AVPlayer?
     /**
      mixedTrack들을 담고있는 셀. Playable 프로토콜을 상속받았다.
@@ -84,7 +74,7 @@ class DetailViewController: UIViewController{
         mainTV.delegate = self
         mainTV.dataSource = self
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
-        self.navigationController?.interactivePopGestureRecognizer?.addTarget(self, action: #selector(onPopBack))
+        self.navigationController?.interactivePopGestureRecognizer?.addTarget(self, action: #selector(onPopBackHandler))
         PlayBarController.main.isHidden = false
         guard let postImageURL = post.albumCoverImageURL else { return }
         albumCoverImageView.af_setImage(withURL: postImageURL)
@@ -121,7 +111,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             return cell
         }else if indexPath.section == 0 && indexPath.item == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "masterWaveCell", for: indexPath)
-            masterWaveCell = cell as! MasterWaveFormViewCell
+            masterWaveCell = cell as? MasterWaveFormViewCell
             return masterWaveCell!
         }
         else if Section(rawValue: indexPath.section) == .MixedTrackToggler {
@@ -145,9 +135,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         }else if Section(rawValue: indexPath.section) == .CommentTracks {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTracksContainer", for: indexPath) as! CommentContainerCell
             cell.allComments = post.comment_tracks; cell.delegate = self
-            if DataCenter.main.userId == post.author?.id{
-                cell.commentTV.allowsMultipleSelection = true
-            }
+            if DataCenter.main.userId == post.author?.id { cell.commentTV.allowsMultipleSelection = true }
             commentTrackContainer = cell
             return cell
         }else if Section(rawValue: indexPath.section) == .RecordCell {
@@ -155,9 +143,8 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             cell.delegate = self
             recorderCell = cell
             return cell
-        }else{
-            return UITableViewCell()
         }
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -173,40 +160,9 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
     }
 }
 
-extension DetailViewController:UIGestureRecognizerDelegate{
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        let heightOfPopBackGestureDisableZone:CGFloat = 30
-        return touch.location(in: PlayBarController.main.view).y < -heightOfPopBackGestureDisableZone
-    }
-    
-    @objc private func onPopBack(sender: UIGestureRecognizer) {
-        switch sender.state {
-        case .began, .changed:
-            if let ct = navigationController?.transitionCoordinator {
-                currentTransitionCoordinator = ct
-            }
-        case .cancelled, .ended:
-            currentTransitionCoordinator = nil
-        case .possible, .failed:
-            break
-        }
-        
-        if let currentTransitionCoordinator = currentTransitionCoordinator {
-            albumCoverImageView.alpha = 1 - currentTransitionCoordinator.percentComplete
-        }
-    }
-}
 
 // MARK: 모드가 변경되었을 때 처리
 extension DetailViewController:ModeToggleCellDelegate{
-    func fillContainers(){
-        NetworkController.main.fetchPost(id: (post?.id ?? -1)) { (postResult) in
-            self.post = postResult
-            let ids = IndexSet(integersIn: Section.MixedTracks.rawValue ... Section.CommentTracks.rawValue)
-            self.mainTV.reloadSections(ids, with: .automatic)
-        }
-    }
-    
     func didModeToggled(to mode: Bool, by toggler: Int) {
         if commentTrackContainer?.commentTV.allCells.count == 0 {
             fillContainers()
@@ -226,6 +182,14 @@ extension DetailViewController:ModeToggleCellDelegate{
         }else{
             authorTrackPlayer?.isMuted = false
             masterTrackPlayer?.isMuted = true
+        }
+    }
+    
+    private func fillContainers(){
+        NetworkController.main.fetchPost(id: (post?.id ?? -1)) { (postResult) in
+            self.post = postResult
+            let ids = IndexSet(integersIn: Section.MixedTracks.rawValue ... Section.CommentTracks.rawValue)
+            self.mainTV.reloadSections(ids, with: .automatic)
         }
     }
 }
@@ -396,6 +360,28 @@ extension DetailViewController:RecorderCellDelegate{
     }
 }
 
+extension DetailViewController:UIGestureRecognizerDelegate{
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        let heightOfPopBackGestureDisableZone:CGFloat = 30
+        return touch.location(in: PlayBarController.main.view).y < -heightOfPopBackGestureDisableZone
+    }
+    
+    @objc private func onPopBackHandler(sender: UIGestureRecognizer) {
+        switch sender.state {
+        case .began, .changed:
+            if let coord = navigationController?.transitionCoordinator {
+                currentTransitionCoordinator = coord
+            }
+        case .cancelled, .ended:
+            currentTransitionCoordinator = nil
+        case .possible, .failed:
+            break
+        }
+        if let currentTransitionCoordinator = currentTransitionCoordinator {
+            albumCoverImageView.alpha = 1 - currentTransitionCoordinator.percentComplete
+        }
+    }
+}
 
 // MARK: Helper Enums
 extension DetailViewController{
@@ -460,6 +446,21 @@ extension DetailViewController{
             self.authorTrackPlayer = AVPlayer(url: authorRemoteURL)
             self.authorTrackPlayer?.isMuted = true
         }
+    }
+    
+    private func removeGlobalTimeObserver(from player:AVPlayer){
+        if AVPlayerTimeObserver != nil && player === AVPlayerTimeObserver?.observer {
+            player.removeTimeObserver(AVPlayerTimeObserver!.observee!)
+        }
+    }
+    
+    private func addGlobalTimeObserver(on player:AVPlayer){
+        let cmt = CMTime(value: 1, timescale: 10)
+        AVPlayerTimeObserver = PlayerTimeObserver()
+        AVPlayerTimeObserver?.observer = player
+        AVPlayerTimeObserver?.observee = player.addPeriodicTimeObserver(forInterval: cmt, queue: DispatchQueue.main, using: { (cmt) in
+            if player.isPlaying { PlayBarController.main.reflect(progress: player.progress) }
+        })
     }
     
     /**
