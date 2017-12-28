@@ -38,7 +38,6 @@ class DetailViewController: UIViewController{
     private var recorderCell: RecorderCell?
     private var heightOfRecordingCell:CGFloat = 50
     
-    
     /// Master Track을 재생하는 플레이어
     private var masterTrackPlayer:AVPlayer?{
         didSet(oldVal){
@@ -95,6 +94,11 @@ class DetailViewController: UIViewController{
         if (post.author?.id ?? -1) == Int(userId){
             commentTrackContainer?.allowsMultiSelection = true
         }
+    }
+    
+    override func willMove(toParentViewController parent: UIViewController?)
+    {
+        if parent == nil { albumCoverImageView.alpha = 0 }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
