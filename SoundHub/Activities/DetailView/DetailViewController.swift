@@ -113,9 +113,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             return cell
         }else if indexPath.section == 0 && indexPath.item == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "masterWaveCell", for: indexPath)
-            masterWaveCell = cell.becomeMasterWaveCell(with: post.masterTrackRemoteURL, completion: { (localURL) in
-                self.masterWaveCell?.masterAudioURL = localURL
-            })
+            masterWaveCell = cell as! MasterWaveFormViewCell
             return masterWaveCell!
         }
         else if Section(rawValue: indexPath.section) == .MixedTrackToggler {
@@ -426,8 +424,15 @@ protocol Playable {
 
 extension DetailViewController{
     private func setUpMasterPlayer(){
+        PlayBarController.main.isEnabled = false
         if let materRemoteURL = self.post.masterTrackRemoteURL{
-            self.masterTrackPlayer = AVPlayer(url: materRemoteURL)
+            NetworkController.main.downloadAudio(from: materRemoteURL, completion: { (localURL) in
+                DispatchQueue.main.async {
+                    self.masterTrackPlayer = AVPlayer(url: localURL)
+                    PlayBarController.main.isEnabled = true
+                    self.masterWaveCell?.masterAudioURL = localURL
+                }
+            })
         }
     }
     
