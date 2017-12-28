@@ -46,6 +46,7 @@ class DetailViewController: UIViewController{
             })
         }
     }
+    
     private var authorTrackPlayer:AVPlayer?
     /**
      mixedTrack들을 담고있는 셀. Playable 프로토콜을 상속받았다.
@@ -258,8 +259,19 @@ extension DetailViewController:Playable{
 
 // MARK: CommentContainerCellDelegate
 extension DetailViewController:CommentContainerCellDelegate{
+    func didStartDownloading() {
+        PlayBarController.main.pause()
+        PlayBarController.main.isEnabled = false
+    }
+    
+    func didFinishedDownloading() {
+        PlayBarController.main.isEnabled = true
+        PlayBarController.main.seek(to: PlayBarController.main.progress)
+        PlayBarController.main.play()
+    }
+    
     func didSwitchToggled() {
-        PlayBarController.main.handleCommentToggle()
+//        PlayBarController.main.handleCommentToggle()
     }
     
     func shouldShowProfileOf(user: User?) {
