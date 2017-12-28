@@ -46,6 +46,7 @@ class DetailViewController: UIViewController{
             if let lastPlayer = oldVal { removeGlobalTimeObserver(from: lastPlayer) }
             guard let masterAudioPlayer = masterTrackPlayer else { return }
             addGlobalTimeObserver(on: masterAudioPlayer)
+            NotificationCenter.default.post(name: NSNotification.Name.init("MasterTrackDownloaded"), object: nil)
         }
     }
 
@@ -406,9 +407,8 @@ extension DetailViewController{
         if let masterPlayer = self.masterTrackPlayer{
             masterWaveCell.masterAudioURL = (masterPlayer.currentItem?.asset as? AVURLAsset)?.url
         }else{
-            guard let remoteURL = post.masterTrackRemoteURL else { return }
-            NetworkController.main.downloadAudio(from: remoteURL, completion: { (localURL) in
-                self.masterWaveCell?.masterAudioURL = localURL
+            NotificationCenter.default.addObserver(forName: NSNotification.Name("MasterTrackDownloaded"), object: nil, queue: nil, using: { (noti) in
+                self.masterWaveCell?.masterAudioURL = (self.masterTrackPlayer?.currentItem?.asset as? AVURLAsset)?.url
             })
         }
     }
