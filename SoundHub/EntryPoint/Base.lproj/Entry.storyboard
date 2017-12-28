@@ -255,7 +255,7 @@
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="szu-qj-QGa">
                                 <rect key="frame" x="141" y="520" width="93" height="58"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="58" id="kkL-Hy-p1R"/>
+                                    <constraint firstAttribute="height" constant="50" id="kkL-Hy-p1R"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="녹음">
@@ -322,39 +322,51 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Icd-9W-Pbn">
+                                <rect key="frame" x="0.0" y="166" width="240" height="128"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.090183012187480927" green="0.090205498039722443" blue="0.090178228914737701" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="szu-qj-QGa" firstAttribute="centerX" secondItem="ggD-u2-ujS" secondAttribute="centerX" id="1D8-Zk-Tce"/>
+                            <constraint firstItem="Msl-eF-bha" firstAttribute="top" secondItem="Icd-9W-Pbn" secondAttribute="bottom" id="3Ob-wu-6dx"/>
                             <constraint firstItem="Msl-eF-bha" firstAttribute="centerX" secondItem="ggD-u2-ujS" secondAttribute="centerX" id="5FE-Rl-D5i"/>
                             <constraint firstItem="i9Q-Vm-3DU" firstAttribute="leading" secondItem="ggD-u2-ujS" secondAttribute="leading" id="5rM-ma-oLf"/>
                             <constraint firstItem="ggD-u2-ujS" firstAttribute="trailing" secondItem="kDc-6x-3mZ" secondAttribute="trailing" id="CG8-fJ-Rc7"/>
+                            <constraint firstItem="Icd-9W-Pbn" firstAttribute="top" secondItem="i9Q-Vm-3DU" secondAttribute="bottom" constant="5" id="KK0-UL-quf"/>
                             <constraint firstItem="kDc-6x-3mZ" firstAttribute="top" secondItem="ggD-u2-ujS" secondAttribute="top" id="aog-tw-2bM"/>
                             <constraint firstItem="i9Q-Vm-3DU" firstAttribute="top" secondItem="kDc-6x-3mZ" secondAttribute="bottom" constant="10" id="f9L-Ij-Vzy"/>
                             <constraint firstItem="Msl-eF-bha" firstAttribute="width" secondItem="us7-hg-3vy" secondAttribute="width" id="im6-yw-2JG"/>
-                            <constraint firstItem="szu-qj-QGa" firstAttribute="top" secondItem="Msl-eF-bha" secondAttribute="bottom" constant="30" id="irW-BX-5Xu"/>
+                            <constraint firstItem="szu-qj-QGa" firstAttribute="top" secondItem="Msl-eF-bha" secondAttribute="bottom" constant="10" id="irW-BX-5Xu"/>
+                            <constraint firstItem="Icd-9W-Pbn" firstAttribute="centerX" secondItem="ggD-u2-ujS" secondAttribute="centerX" id="lnm-pR-u98"/>
                             <constraint firstItem="szu-qj-QGa" firstAttribute="width" secondItem="us7-hg-3vy" secondAttribute="width" multiplier="0.5" id="qeC-59-OjO"/>
-                            <constraint firstItem="ggD-u2-ujS" firstAttribute="bottom" secondItem="szu-qj-QGa" secondAttribute="bottom" constant="20" id="wZq-TQ-Hbq"/>
+                            <constraint firstItem="Icd-9W-Pbn" firstAttribute="width" secondItem="us7-hg-3vy" secondAttribute="width" id="rrf-wr-waJ"/>
+                            <constraint firstItem="ggD-u2-ujS" firstAttribute="bottom" secondItem="szu-qj-QGa" secondAttribute="bottom" constant="10" id="wZq-TQ-Hbq"/>
                             <constraint firstItem="i9Q-Vm-3DU" firstAttribute="trailing" secondItem="ggD-u2-ujS" secondAttribute="trailing" id="yYt-ra-rzt"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ggD-u2-ujS"/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="Sgo-Ea-RoN" appends="YES" id="Dwz-iw-pOc"/>
-                        </connections>
                     </view>
                     <connections>
-                        <outlet property="auContainerFlowLayout" destination="i9Q-Vm-3DU" id="qj4-bl-pGc"/>
+                        <outlet property="auGenericViewContainer" destination="Icd-9W-Pbn" id="ah9-IN-nPm"/>
+                        <outlet property="audioUnitContainerFlowLayout" destination="i9Q-Vm-3DU" id="qj4-bl-pGc"/>
                         <outlet property="inputPlot" destination="Msl-eF-bha" id="SAy-fN-LHr"/>
                         <outlet property="recordButton" destination="szu-qj-QGa" id="Xuj-W8-lSM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8vx-5U-7YG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="Sgo-Ea-RoN">
-                    <connections>
-                        <action selector="onScreenTouchHandler:" destination="czj-tZ-uY8" id="tQs-ih-kVD"/>
-                    </connections>
-                </tapGestureRecognizer>
+                <tapGestureRecognizer id="Sgo-Ea-RoN"/>
             </objects>
             <point key="canvasLocation" x="120.8" y="894.60269865067471"/>
         </scene>

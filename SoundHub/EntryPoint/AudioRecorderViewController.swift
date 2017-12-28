@@ -18,7 +18,11 @@ class AudioRecorderViewController: UIViewController {
     // MARK: IBoutlets
     @IBOutlet weak private var recordButton: UIButton!
     @IBOutlet weak private var inputPlot: AKNodeOutputPlot!
-    @IBOutlet weak private var auContainerFlowLayout: UICollectionView!
+    @IBOutlet weak private var audioUnitContainerFlowLayout: UICollectionView!
+    @IBOutlet weak var auGenericViewContainer: UIScrollView!
+    var currentAU: AudioUnitGenericView?
+    var currentAUindex:Int?
+
     
     // MARK: IBActions
     @IBAction private func onScreenTouchHandler(_ sender: UITapGestureRecognizer) {
@@ -71,8 +75,8 @@ class AudioRecorderViewController: UIViewController {
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        auContainerFlowLayout.delegate = self
-        auContainerFlowLayout.dataSource = self
+        audioUnitContainerFlowLayout.delegate = self
+        audioUnitContainerFlowLayout.dataSource = self
         activateAUManager()
         
     }
@@ -91,13 +95,21 @@ class AudioRecorderViewController: UIViewController {
                     self.availableEffects.append(component.name)
                 }
             }
-            self.auContainerFlowLayout.reloadData()
+            self.audioUnitContainerFlowLayout.reloadData()
         }
         auManager?.input = RecordConductor.main.player
         auManager?.output = RecordConductor.main.mainMixer
     }
     
-    func showAudioUnit(){
+    private func showAudioUnit(_ audioUnit: AVAudioUnit) {
+        
+        if currentAU != nil {
+            currentAU?.removeFromSuperview()
+        }
+        
+        currentAU = AudioUnitGenericView(au: audioUnit)
+        auGenericViewContainer.addSubview(currentAU!)
+        auGenericViewContainer.contentSize = currentAU!.frame.size
         
     }
 
@@ -125,12 +137,12 @@ extension AudioRecorderViewController:UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        auManager?.removeEffect(at: 0)
-//        auManager?.insertAudioUnit(name: availableEffects[indexPath.item], at: 0)
-//        currentAUindex = indexPath.item
-//        let cell = collectionView.cellForItem(at: indexPath) as! AUCell
-//        cell.backgroundColor = AUCell.selectedBackgroundColor
-//        cell.titleLB.textColor = AUCell.selectedTextColor
+        auManager?.removeEffect(at: 0)
+        auManager?.insertAudioUnit(name: availableEffects[indexPath.item], at: 0)
+        currentAUindex = indexPath.item
+        let cell = collectionView.cellForItem(at: indexPath) as! AUCell
+        cell.backgroundColor = AUCell.selectedBackgroundColor
+        cell.titleLB.textColor = AUCell.selectedTextColor
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -148,13 +160,13 @@ extension AudioRecorderViewController:UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        guard let currentAuIndex = currentAUindex else { return }
-//        if let cell = cell as? AUCell{
-//            if currentAuIndex == indexPath.item{
-//                cell.backgroundColor = AUCell.selectedBackgroundColor
-//                cell.titleLB.textColor = AUCell.selectedTextColor
-//            }
-//        }
+        guard let currentAuIndex = currentAUindex else { return }
+        if let cell = cell as? AUCell{
+            if currentAuIndex == indexPath.item{
+                cell.backgroundColor = AUCell.selectedBackgroundColor
+                cell.titleLB.textColor = AUCell.selectedTextColor
+            }
+        }
     }
 }
 
@@ -164,13 +176,13 @@ extension AudioRecorderViewController:AKAudioUnitManagerDelegate{
     }
     
     func handleEffectAdded(at auIndex: Int) {
-//        if RecordConductor.main.player.isStarted {
-//            RecordConductor.main.player.stop()
-//            RecordConductor.main.player.start()
-//        }
-//        if let au = auManager!.effectsChain[auIndex] {
-//            showAudioUnit(au)
-//        }
+        if RecordConductor.main.player.isStarted {
+            RecordConductor.main.player.stop()
+            RecordConductor.main.player.start()
+        }
+        if let au = auManager!.effectsChain[auIndex] {
+            showAudioUnit(au)
+        }
     }
     
     func handleEffectRemoved(at auIndex: Int) {
@@ -200,6 +212,9 @@ extension AudioRecorderViewController{
 
     
     private func makeRecordingState(){
+        if auManager?.input != RecordConductor.main.player {
+            auManager?.connectEffects(firstNode: RecordConductor.main.player, lastNode: RecordConductor.main.mainMixer)
+        }
         recordButton.setTitle("그만 녹음하기", for: .normal)
         inputPlot.color = .red
         state = .recording
