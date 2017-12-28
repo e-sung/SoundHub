@@ -23,12 +23,6 @@ class AudioRecorderViewController: UIViewController {
     var currentAU: AudioUnitGenericView?
     var currentAUindex:Int?
 
-    
-    // MARK: IBActions
-    @IBAction private func onScreenTouchHandler(_ sender: UITapGestureRecognizer) {
-        self.view.endEditing(true)
-    }
-    
     @IBAction func onCancelHandler(_ sender: UIButton) {
         RecordConductor.main.resetRecordedAudio()
         self.dismiss(animated: true, completion: nil)
@@ -54,7 +48,6 @@ class AudioRecorderViewController: UIViewController {
             let recordedDuration = RecordConductor.main.player != nil ? RecordConductor.main.player.audioFile.duration  : 0
             if recordedDuration > 0.0 {
                 RecordConductor.main.recorder.stop()
-//                ActionSheetStringPicker.ask(instrument: Instrument.cases, and: Genre.cases, of: url, from: self)
                 setUpMetaInfo()
             }
         }
