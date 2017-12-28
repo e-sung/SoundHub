@@ -109,7 +109,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
     func numberOfSections(in tableView: UITableView) -> Int { return Section.cases }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Section(rawValue:section)!.rows
+        return section == 0 ? 2 : 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -338,7 +338,7 @@ extension DetailViewController:RecorderCellDelegate{
         }, cancel: { (picker) in
         }, origin: self.view)
     }
-    func closeRecordingCell(){
+    private func closeRecordingCell(){
         self.heightOfRecordingCell = 50
         self.recorderCell?.deActivate()
         CATransaction.begin()
@@ -389,15 +389,6 @@ extension DetailViewController{
          MainHeader / MixedHeader/ Mixed / CommentHeader / Comment / Recorder
         */
         static var cases:Int{get{return 6}}
-        var rows:Int{
-            get{
-                switch self {
-                case .MainHeader: return 2
-                default:
-                    return 1
-                }
-            }
-        }
     }
 }
 
@@ -419,6 +410,15 @@ extension DetailViewController{
             NetworkController.main.downloadAudio(from: remoteURL, completion: { (localURL) in
                 self.masterWaveCell?.masterAudioURL = localURL
             })
+        }
+    }
+    
+    private func setUp(_ player: AVPlayer?, with url:URL?){
+        PlayBarController.main.isEnabled = false
+        guard let url = url else { return }
+        NetworkController.main.downloadAudio(from: url) { (localURL) in
+            player?.replaceCurrentItem(with: AVPlayerItem(url: localURL))
+            PlayBarController.main.isEnabled = true
         }
     }
     
