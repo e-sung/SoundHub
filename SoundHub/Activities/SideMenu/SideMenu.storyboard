@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="leftSide" value="YES"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="leftSide" value="NO"/>
                         <userDefinedRuntimeAttribute type="number" keyPath="menuWidth">
                             <real key="value" value="300"/>
                         </userDefinedRuntimeAttribute>

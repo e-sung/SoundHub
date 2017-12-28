@@ -34,6 +34,7 @@ class ChartViewController: UIViewController{
         super.viewDidLoad()
         mainTV.delegate = self
         mainTV.dataSource = self
+        navigationController?.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -172,6 +173,16 @@ extension ChartViewController:UITableViewDelegate{
         guard let popularMusiciansContainer = mainTV.cellForRow(at: IndexPath(item: 0, section: Section.PopularMusicians.rawValue)) as? PopularMusicianContainerCell else { return }
         popularMusiciansContainer.category = category
         popularMusiciansContainer.popularMusicianFlowLayout.reloadData()
+    }
+}
+
+extension ChartViewController:UINavigationControllerDelegate{
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        let sideMenuButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "Hamburger_icon"), style: .plain, target: self, action: #selector(showSideMenu))
+        viewController.navigationItem.rightBarButtonItem = sideMenuButton
+    }
+    @objc func showSideMenu(){
+        performSegue(withIdentifier: "showSideMenu", sender: nil)
     }
 }
 

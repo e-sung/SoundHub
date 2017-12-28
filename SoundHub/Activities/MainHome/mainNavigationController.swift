@@ -61,7 +61,10 @@ class mainNavigationController: UINavigationController {
 //            alert(msg: "로그인이 필요한 기능입니다.")
 //        }
     }
+    
 }
+
+
 extension mainNavigationController:PlayBarControllerDelegate{
     func playBarDidTapped() {
         if self.topViewController !== playBarController?.currentPostView{

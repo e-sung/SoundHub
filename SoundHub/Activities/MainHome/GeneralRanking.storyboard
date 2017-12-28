@@ -880,20 +880,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3MF-bu-PI5"/>
                     </view>
-                    <navigationItem key="navigationItem" title="SoundHub" id="lhf-ib-QSo">
-                        <barButtonItem key="leftBarButtonItem" image="Hamburger_icon" id="0V8-5d-6Ic">
-                            <color key="tintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <segue destination="E49-sP-aj0" kind="presentation" id="8Gd-5u-Ag5"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="SoundHub" id="lhf-ib-QSo"/>
                     <size key="freeformSize" width="375" height="1500"/>
                     <connections>
                         <outlet property="mainTV" destination="Jw9-zx-7Mw" id="hRs-Nu-Oe3"/>
                         <outlet property="mainTVBottomConstraint" destination="7L5-qd-MSq" id="Bze-Fb-aoX"/>
                         <segue destination="eLA-kX-c1g" kind="show" identifier="generalChartToDetail" id="JMR-OB-ypT"/>
                         <segue destination="jke-u9-fyi" kind="presentation" identifier="showLoadingIndicatingView" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="0BG-xn-Bgl"/>
+                        <segue destination="E49-sP-aj0" kind="presentation" identifier="showSideMenu" id="LuQ-2L-uQW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7FQ-6n-cka" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -911,7 +905,6 @@
     </scenes>
     <resources>
         <image name="Classic" width="1695" height="1127"/>
-        <image name="Hamburger_icon" width="32" height="32"/>
         <image name="HipHop" width="1703" height="1127"/>
         <image name="Jazz" width="1406" height="1127"/>
         <image name="Pop" width="1802" height="1127"/>
