@@ -231,11 +231,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Msl-eF-bha" customClass="AKNodeOutputPlot" customModule="AudioKitUI">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Msl-eF-bha" customClass="AKNodeOutputPlot" customModule="AudioKitUI">
                                 <rect key="frame" x="0.0" y="279.5" width="375" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="f4i-Ps-TNl"/>
+                                    <constraint firstAttribute="height" constant="50" id="LMp-HH-KvW"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="color">
@@ -243,8 +243,20 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="szu-qj-QGa">
-                                <rect key="frame" x="141" y="389" width="93" height="58"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kDc-6x-3mZ">
+                                <rect key="frame" x="313" y="20" width="46" height="30"/>
+                                <state key="normal" title="취소">
+                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onCancelHandler:" destination="czj-tZ-uY8" eventType="touchUpInside" id="FQo-7c-ehd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="szu-qj-QGa">
+                                <rect key="frame" x="141" y="520" width="93" height="58"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="58" id="kkL-Hy-p1R"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="녹음">
                                     <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -253,25 +265,78 @@
                                     <action selector="recordButtonHandler:" destination="czj-tZ-uY8" eventType="touchUpInside" id="zFn-k2-BtQ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kDc-6x-3mZ">
-                                <rect key="frame" x="313" y="20" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="취소">
-                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="onCancelHandler:" destination="czj-tZ-uY8" eventType="touchUpInside" id="FQo-7c-ehd"/>
-                                </connections>
-                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="i9Q-Vm-3DU">
+                                <rect key="frame" x="0.0" y="58" width="375" height="100"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="jPs-N5-vsq"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0Fu-uZ-Onh">
+                                    <size key="itemSize" width="148" height="143"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AUCell" id="n1M-Ot-B1u" customClass="AUCell" customModule="SoundHub" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jrf-a7-FA0">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" name="systemOrangeColor" catalog="System" colorSpace="catalog"/>
+                                        <constraints>
+                                            <constraint firstItem="Jrf-a7-FA0" firstAttribute="top" secondItem="n1M-Ot-B1u" secondAttribute="top" id="4iR-gZ-eFO"/>
+                                            <constraint firstItem="Jrf-a7-FA0" firstAttribute="top" secondItem="n1M-Ot-B1u" secondAttribute="top" id="PUA-Gt-zAe"/>
+                                            <constraint firstAttribute="bottom" secondItem="Jrf-a7-FA0" secondAttribute="bottom" id="Wg6-gx-9Y9"/>
+                                            <constraint firstAttribute="trailing" secondItem="Jrf-a7-FA0" secondAttribute="trailing" id="iKL-cf-AHz"/>
+                                            <constraint firstAttribute="bottom" secondItem="Jrf-a7-FA0" secondAttribute="bottom" id="iKz-DD-Tvl"/>
+                                            <constraint firstAttribute="trailing" secondItem="Jrf-a7-FA0" secondAttribute="trailing" id="lWi-0m-IGb"/>
+                                            <constraint firstItem="Jrf-a7-FA0" firstAttribute="leading" secondItem="n1M-Ot-B1u" secondAttribute="leading" id="o8U-f1-eDn"/>
+                                            <constraint firstItem="Jrf-a7-FA0" firstAttribute="leading" secondItem="n1M-Ot-B1u" secondAttribute="leading" id="wHI-Ds-Eqt"/>
+                                        </constraints>
+                                        <size key="customSize" width="100" height="100"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="3"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="titleLB" destination="Jrf-a7-FA0" id="tTn-Gh-cxx"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="0.090183012187480927" green="0.090205498039722443" blue="0.090178228914737701" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="szu-qj-QGa" firstAttribute="top" secondItem="Msl-eF-bha" secondAttribute="bottom" constant="100" id="9E1-td-28C"/>
-                            <constraint firstItem="Msl-eF-bha" firstAttribute="centerX" secondItem="ggD-u2-ujS" secondAttribute="centerX" id="NqQ-01-tyL"/>
-                            <constraint firstItem="Msl-eF-bha" firstAttribute="width" secondItem="us7-hg-3vy" secondAttribute="width" id="Vv0-8e-V23"/>
-                            <constraint firstItem="Msl-eF-bha" firstAttribute="centerY" secondItem="ggD-u2-ujS" secondAttribute="centerY" id="YiY-kj-Igp"/>
-                            <constraint firstItem="szu-qj-QGa" firstAttribute="centerX" secondItem="Msl-eF-bha" secondAttribute="centerX" id="vDE-Ib-lw2"/>
+                            <constraint firstItem="szu-qj-QGa" firstAttribute="centerX" secondItem="ggD-u2-ujS" secondAttribute="centerX" id="1D8-Zk-Tce"/>
+                            <constraint firstItem="Msl-eF-bha" firstAttribute="centerX" secondItem="ggD-u2-ujS" secondAttribute="centerX" id="5FE-Rl-D5i"/>
+                            <constraint firstItem="i9Q-Vm-3DU" firstAttribute="leading" secondItem="ggD-u2-ujS" secondAttribute="leading" id="5rM-ma-oLf"/>
+                            <constraint firstItem="ggD-u2-ujS" firstAttribute="trailing" secondItem="kDc-6x-3mZ" secondAttribute="trailing" id="CG8-fJ-Rc7"/>
+                            <constraint firstItem="kDc-6x-3mZ" firstAttribute="top" secondItem="ggD-u2-ujS" secondAttribute="top" id="aog-tw-2bM"/>
+                            <constraint firstItem="i9Q-Vm-3DU" firstAttribute="top" secondItem="kDc-6x-3mZ" secondAttribute="bottom" constant="10" id="f9L-Ij-Vzy"/>
+                            <constraint firstItem="Msl-eF-bha" firstAttribute="width" secondItem="us7-hg-3vy" secondAttribute="width" id="im6-yw-2JG"/>
+                            <constraint firstItem="szu-qj-QGa" firstAttribute="top" secondItem="Msl-eF-bha" secondAttribute="bottom" constant="30" id="irW-BX-5Xu"/>
+                            <constraint firstItem="szu-qj-QGa" firstAttribute="width" secondItem="us7-hg-3vy" secondAttribute="width" multiplier="0.5" id="qeC-59-OjO"/>
+                            <constraint firstItem="ggD-u2-ujS" firstAttribute="bottom" secondItem="szu-qj-QGa" secondAttribute="bottom" constant="20" id="wZq-TQ-Hbq"/>
+                            <constraint firstItem="i9Q-Vm-3DU" firstAttribute="trailing" secondItem="ggD-u2-ujS" secondAttribute="trailing" id="yYt-ra-rzt"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ggD-u2-ujS"/>
                         <connections>
@@ -279,6 +344,7 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="auContainerFlowLayout" destination="i9Q-Vm-3DU" id="qj4-bl-pGc"/>
                         <outlet property="inputPlot" destination="Msl-eF-bha" id="SAy-fN-LHr"/>
                         <outlet property="recordButton" destination="szu-qj-QGa" id="Xuj-W8-lSM"/>
                     </connections>
@@ -291,84 +357,6 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="120.8" y="894.60269865067471"/>
-        </scene>
-        <!--Set Up Meta Info View Controller-->
-        <scene sceneID="LEY-B2-XL1">
-            <objects>
-                <viewController storyboardIdentifier="SetUpMetaInfoViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zpa-2U-Kho" customClass="SetUpMetaInfoViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="6hu-U4-dWL">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ByC-vg-uUx">
-                                <rect key="frame" x="0.0" y="178" width="375" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aHx-Qz-k4z">
-                                <rect key="frame" x="0.0" y="263" width="375" height="162"/>
-                                <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="aHx-Qz-k4z" secondAttribute="height" multiplier="125:54" id="hlS-eo-cFM"/>
-                                </constraints>
-                            </pickerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C4e-3j-fqG">
-                                <rect key="frame" x="137" y="507" width="100" height="56.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="C4e-3j-fqG" secondAttribute="height" multiplier="16:9" id="gQW-ge-jHB"/>
-                                    <constraint firstAttribute="width" constant="100" id="yWx-hE-Ifh"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="확인">
-                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="confirmButtonHandler:" destination="zpa-2U-Kho" eventType="touchUpInside" id="rch-Gi-aDD"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xys-9x-Qrb">
-                                <rect key="frame" x="329" y="20" width="30" height="30"/>
-                                <state key="normal" title="취소">
-                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="oncancelHandler:" destination="zpa-2U-Kho" eventType="touchUpInside" id="01N-H3-qm7"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="0.090183012189999995" green="0.090205498039999998" blue="0.090178228910000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <gestureRecognizers/>
-                        <constraints>
-                            <constraint firstItem="szJ-AR-zrr" firstAttribute="trailing" secondItem="xys-9x-Qrb" secondAttribute="trailing" constant="16" id="6wO-9r-0hq"/>
-                            <constraint firstItem="C4e-3j-fqG" firstAttribute="top" secondItem="aHx-Qz-k4z" secondAttribute="bottom" constant="82" id="E8A-zC-EE5"/>
-                            <constraint firstItem="aHx-Qz-k4z" firstAttribute="centerX" secondItem="szJ-AR-zrr" secondAttribute="centerX" id="JJC-b5-C39"/>
-                            <constraint firstItem="C4e-3j-fqG" firstAttribute="centerX" secondItem="aHx-Qz-k4z" secondAttribute="centerX" id="PTl-WM-v62"/>
-                            <constraint firstItem="aHx-Qz-k4z" firstAttribute="width" secondItem="6hu-U4-dWL" secondAttribute="width" id="TVW-uS-DLz"/>
-                            <constraint firstItem="xys-9x-Qrb" firstAttribute="top" secondItem="szJ-AR-zrr" secondAttribute="top" id="UJa-Of-Ybv"/>
-                            <constraint firstItem="ByC-vg-uUx" firstAttribute="width" secondItem="6hu-U4-dWL" secondAttribute="width" id="XFu-el-8KA"/>
-                            <constraint firstItem="aHx-Qz-k4z" firstAttribute="centerY" secondItem="szJ-AR-zrr" secondAttribute="centerY" id="i2r-OQ-DSe"/>
-                            <constraint firstItem="ByC-vg-uUx" firstAttribute="centerX" secondItem="aHx-Qz-k4z" secondAttribute="centerX" id="nEt-oj-SWb"/>
-                            <constraint firstItem="aHx-Qz-k4z" firstAttribute="top" secondItem="ByC-vg-uUx" secondAttribute="bottom" constant="54.5" id="oj3-C7-wHQ"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="szJ-AR-zrr"/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="ZWF-x8-xCt" appends="YES" id="kjS-xt-PQM"/>
-                        </connections>
-                    </view>
-                    <connections>
-                        <outlet property="instrumentPicker" destination="aHx-Qz-k4z" id="OeJ-Yo-fBZ"/>
-                        <outlet property="titleTF" destination="ByC-vg-uUx" id="nbG-qn-YAc"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Mjz-fS-XbZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="ZWF-x8-xCt">
-                    <connections>
-                        <action selector="onTouchHandler:" destination="zpa-2U-Kho" id="u2e-1m-hTT"/>
-                    </connections>
-                </tapGestureRecognizer>
-            </objects>
-            <point key="canvasLocation" x="793" y="895"/>
         </scene>
     </scenes>
     <resources>
