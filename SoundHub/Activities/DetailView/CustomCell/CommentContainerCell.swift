@@ -161,10 +161,7 @@ extension CommentContainerCell:AudioCommentCellDelegate{
             delegate?.didFinishedDownloading()
         }
     }
-    
-    func didSwitchToggled() {
-        self.delegate?.didSwitchToggled()
-    }
+
     func shouldShowProfileOf(user: User?) {
         self.delegate?.shouldShowProfileOf(user: user)
     }
@@ -173,7 +170,6 @@ extension CommentContainerCell:AudioCommentCellDelegate{
 protocol CommentContainerCellDelegate{
     func didSelectionOccured(on comments:[Comment])->Void
     func shouldShowProfileOf(user:User?)
-    func didSwitchToggled()
     func didStartDownloading()
     func didFinishedDownloading()
 }

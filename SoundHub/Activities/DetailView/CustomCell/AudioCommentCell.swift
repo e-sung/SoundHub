@@ -26,7 +26,6 @@ class AudioCommentCell: UITableViewCell {
         if let player = self.player{
             if sender.isOn {player.isMuted = false}
             else { player.isMuted = true }
-            delegate?.didSwitchToggled()
         }else{
             guard let audioURL = comment.commentTrackURL else { return }
             delegate?.didStartDownloading()
@@ -108,7 +107,6 @@ extension AudioCommentCell:Playable{
 }
 
 protocol AudioCommentCellDelegate {
-    func didSwitchToggled()
     func didStartDownloading()
     func didFinishedDownloading()
     func shouldShowProfileOf(user:User?)

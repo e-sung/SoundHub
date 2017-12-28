@@ -269,11 +269,7 @@ extension DetailViewController:CommentContainerCellDelegate{
         PlayBarController.main.seek(to: PlayBarController.main.progress)
         PlayBarController.main.play()
     }
-    
-    func didSwitchToggled() {
-//        PlayBarController.main.handleCommentToggle()
-    }
-    
+
     func shouldShowProfileOf(user: User?) {
         let profileVC = UIStoryboard(name: "SideMenu", bundle: nil)
             .instantiateViewController(withIdentifier: "profileViewController") as! ProfileViewController
