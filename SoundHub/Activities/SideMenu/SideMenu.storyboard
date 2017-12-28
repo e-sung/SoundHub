@@ -274,7 +274,7 @@
                                                         <constraint firstAttribute="width" constant="100" id="FZE-zd-d9Z"/>
                                                         <constraint firstAttribute="height" constant="100" id="dnz-Km-FVa"/>
                                                     </constraints>
-                                                    <state key="normal" image="iu_profile"/>
+                                                    <state key="normal" image="default-profile"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                             <real key="value" value="6"/>
@@ -786,7 +786,6 @@
         <image name="default-profile" width="376" height="376"/>
         <image name="home page" width="100" height="100"/>
         <image name="ic_settings" width="24" height="24"/>
-        <image name="iu_profile" width="128" height="128"/>
         <image name="mail" width="100" height="100"/>
         <image name="no_cover" width="270" height="270"/>
         <image name="profile" width="100" height="100"/>

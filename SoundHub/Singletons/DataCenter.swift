@@ -43,6 +43,14 @@ class DataCenter{
         buttonDownloader.imageCache?.removeAllImages()
         imageDownloader.sessionManager.session.configuration.urlCache?.removeAllCachedResponses()
     }
+    
+    func resetHomePages(){
+        self.homePages = [
+            .general:HomePage(pop_users: [], pop_posts: [], recent_posts: []),
+            .genre:HomePage(pop_users: [], pop_posts: [], recent_posts: []),
+            .instrument:HomePage(pop_users: [], pop_posts: [], recent_posts: [])
+        ]
+    }
 }
 
 struct HomePage:Codable{

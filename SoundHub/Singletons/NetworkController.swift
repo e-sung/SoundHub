@@ -248,7 +248,7 @@ extension NetworkController{
             if let error = error { print(error) }
             guard let data = data else {return}
             guard let result = try? JSONDecoder().decode(LoginResponse.self, from: data) else{return}
-            done(result)
+            DispatchQueue.main.async { done(result) }
             }.resume()
     }
     
