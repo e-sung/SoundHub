@@ -23,10 +23,27 @@ class AudioCommentCell: UITableViewCell {
         delegate?.shouldShowProfileOf(user: comment.author)
     }
     @IBAction private func switchToggleHandler(_ sender: UISwitch) {
-        if sender.isOn {player?.isMuted = false}
-        else { player?.isMuted = true }
-        delegate?.didSwitchToggled()
+        if let player = self.player{
+            if sender.isOn {player.isMuted = false}
+            else { player.isMuted = true }
+        }else{
+            guard let audioURL = comment.commentTrackURL else { return }
+            delegate?.didStartDownloading()
+            NetworkController.main.downloadAudio(from: audioURL, completion: { (localURL) in
+                DispatchQueue.main.async {
+                    self.player = AVPlayer(url: localURL)
+                    self.player?.currentItem?.addObserver(self, forKeyPath: "status", options: NSKeyValueObservingOptions(), context: nil)
+                }
+            })
+        }
     }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if player?.currentItem?.status == AVPlayerItemStatus.readyToPlay {
+            self.delegate?.didFinishedDownloading()
+        }
+    }
+    
     func toggleSwitch(to value:Bool){
         toggleSwitch.isOn = value
         player?.isMuted = !value
@@ -56,13 +73,8 @@ class AudioCommentCell: UITableViewCell {
             if let profileImageURL = newVal.author?.profileImageURL{
                 profileImageButton.af_setImage(for: .normal, url: profileImageURL)
             }
-            guard let audioURL = newVal.commentTrackURL else { return }
-            player = AVPlayer(url:audioURL)
-            player?.isMuted = true
         }
     }
-    
-    
     
     private var _commentInfo:Comment!
     override func awakeFromNib() {
@@ -84,6 +96,7 @@ extension AudioCommentCell:Playable{
     }
     func seek(to proportion:Float){
         player?.seek(to: proportion)
+        
     }
     func setVolume(to value: Float) {
         player?.volume = value
@@ -94,6 +107,7 @@ extension AudioCommentCell:Playable{
 }
 
 protocol AudioCommentCellDelegate {
-    func didSwitchToggled()
+    func didStartDownloading()
+    func didFinishedDownloading()
     func shouldShowProfileOf(user:User?)
 }

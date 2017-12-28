@@ -24,7 +24,18 @@ class DetailViewController: UIViewController{
     }
     // MARK: Private Stored Properties
     /// 음악 파형이 표시되는 셀
-    private var masterWaveCell:MasterWaveFormViewCell?
+    private var masterWaveCell:MasterWaveFormViewCell?{
+        didSet(oldVal){
+            if let masterPlayer = self.masterTrackPlayer{
+                masterWaveCell?.masterAudioURL = (masterTrackPlayer?.currentItem?.asset as? AVURLAsset)?.url
+            }else{
+                guard let remoteURL = post.masterTrackRemoteURL else { return }
+                NetworkController.main.downloadAudio(from: remoteURL, completion: { (localURL) in
+                    self.masterWaveCell?.masterAudioURL = localURL
+                })
+            }
+        }
+    }
     /// 녹음하는 셀
     private var recorderCell: RecorderCell?
     private var heightOfRecordingCell:CGFloat = 50
@@ -46,6 +57,7 @@ class DetailViewController: UIViewController{
             })
         }
     }
+    
     private var authorTrackPlayer:AVPlayer?
     /**
      mixedTrack들을 담고있는 셀. Playable 프로토콜을 상속받았다.
@@ -113,9 +125,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             return cell
         }else if indexPath.section == 0 && indexPath.item == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "masterWaveCell", for: indexPath)
-            masterWaveCell = cell.becomeMasterWaveCell(with: post.masterTrackRemoteURL, completion: { (localURL) in
-                self.masterWaveCell?.masterAudioURL = localURL
-            })
+            masterWaveCell = cell as! MasterWaveFormViewCell
             return masterWaveCell!
         }
         else if Section(rawValue: indexPath.section) == .MixedTrackToggler {
@@ -260,10 +270,17 @@ extension DetailViewController:Playable{
 
 // MARK: CommentContainerCellDelegate
 extension DetailViewController:CommentContainerCellDelegate{
-    func didSwitchToggled() {
-        PlayBarController.main.handleCommentToggle()
+    func didStartDownloading() {
+        PlayBarController.main.pause()
+        PlayBarController.main.isEnabled = false
     }
     
+    func didFinishedDownloading() {
+        PlayBarController.main.isEnabled = true
+        PlayBarController.main.seek(to: PlayBarController.main.progress)
+        PlayBarController.main.play()
+    }
+
     func shouldShowProfileOf(user: User?) {
         let profileVC = UIStoryboard(name: "SideMenu", bundle: nil)
             .instantiateViewController(withIdentifier: "profileViewController") as! ProfileViewController
@@ -426,8 +443,14 @@ protocol Playable {
 
 extension DetailViewController{
     private func setUpMasterPlayer(){
+        PlayBarController.main.isEnabled = false
         if let materRemoteURL = self.post.masterTrackRemoteURL{
-            self.masterTrackPlayer = AVPlayer(url: materRemoteURL)
+            NetworkController.main.downloadAudio(from: materRemoteURL, completion: { (localURL) in
+                DispatchQueue.main.async {
+                    self.masterTrackPlayer = AVPlayer(url: localURL)
+                    PlayBarController.main.isEnabled = true
+                }
+            })
         }
     }
     

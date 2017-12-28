@@ -128,7 +128,7 @@ extension PlayBarController{
     func handleCommentToggle(){
         lastPhase = currentPhase
         pause()
-        seek(to: progress)
+//        seek(to: progress)
         if lastPhase == .Playing{ play() }
     }
 }
