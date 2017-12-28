@@ -74,6 +74,7 @@ class DetailViewController: UIViewController{
         super.viewDidLoad()
         mainTV.delegate = self
         mainTV.dataSource = self
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         PlayBarController.main.isHidden = false
         guard let postImageURL = post.albumCoverImageURL else { return }
         albumCoverImageView.af_setImage(withURL: postImageURL)
@@ -161,6 +162,12 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
             return CGFloat(post.numOfCommentTracks * 100)
         }
         return heightOfRecordingCell
+    }
+}
+
+extension DetailViewController:UIGestureRecognizerDelegate{
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        return touch.location(in: PlayBarController.main.view).y < 0
     }
 }
 
