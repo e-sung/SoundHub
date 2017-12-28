@@ -63,6 +63,7 @@ class DetailViewController: UIViewController{
     
     /// 원저작자에게만 보이는, "머지"하기 위해 multiselection을 통해 고른 셀들에 담겨있는 Comment 정보
     private var selectedComments:[Comment]?
+    private var currentTransitionCoordinator: UIViewControllerTransitionCoordinator?
     @IBOutlet weak private var albumCoverImageView: UIImageView!
     
     // MARK: IBOutlets
@@ -75,12 +76,14 @@ class DetailViewController: UIViewController{
         mainTV.delegate = self
         mainTV.dataSource = self
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        self.navigationController?.interactivePopGestureRecognizer?.addTarget(self, action: #selector(onPopBack))
         PlayBarController.main.isHidden = false
         guard let postImageURL = post.albumCoverImageURL else { return }
         albumCoverImageView.af_setImage(withURL: postImageURL)
     }
     override func viewWillAppear(_ animated: Bool) {
         PlayBarController.main.currentPostView = self
+        albumCoverImageView.alpha = 1
         guard let userId = UserDefaults.standard.string(forKey: id) else { return }
         if (post.author?.id ?? -1) == Int(userId){
             commentTrackContainer?.allowsMultiSelection = true
@@ -166,8 +169,25 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
 
 extension DetailViewController:UIGestureRecognizerDelegate{
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        let heightOfPushBackGestureDisableZone:CGFloat = 30
-        return touch.location(in: PlayBarController.main.view).y < -heightOfPushBackGestureDisableZone
+        let heightOfPopBackGestureDisableZone:CGFloat = 30
+        return touch.location(in: PlayBarController.main.view).y < -heightOfPopBackGestureDisableZone
+    }
+    
+    @objc private func onPopBack(sender: UIGestureRecognizer) {
+        switch sender.state {
+        case .began, .changed:
+            if let ct = navigationController?.transitionCoordinator {
+                currentTransitionCoordinator = ct
+            }
+        case .cancelled, .ended:
+            currentTransitionCoordinator = nil
+        case .possible, .failed:
+            break
+        }
+        
+        if let currentTransitionCoordinator = currentTransitionCoordinator {
+            albumCoverImageView.alpha = 1 - currentTransitionCoordinator.percentComplete
+        }
     }
 }
 

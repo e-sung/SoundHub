@@ -40,7 +40,8 @@ class AudioUploadViewController: UIViewController {
         if let audioURL = audioURL{
             self.dismiss(animated: true, completion: nil)
             NetworkController.main.uploadAudio(In: audioURL, genre: self.genre, instrument: self.instrument, bpm: bpm, albumCover: (self.albumArt.image(for: .normal) ?? UIImage()), completion: {
-                self.dismiss(animated: true, completion: nil)
+                RecordConductor.main.resetRecordedAudio()
+                DispatchQueue.main.async { self.dismiss(animated: true, completion: nil) }
             })
             
         }else{
@@ -59,9 +60,8 @@ class AudioUploadViewController: UIViewController {
                                                      with: [titleMetadata, artistMetadata], completion: {
                 DispatchQueue.main.async {
                     NetworkController.main.uploadAudio(In: exportURL, genre: self.genre, instrument: self.instrument, bpm: bpm, albumCover: (self.albumArt.image(for: .normal) ?? UIImage()), completion: {
-                        DispatchQueue.main.async {
-                            self.dismissWith(depth: 2, from: self)
-                        }
+                        RecordConductor.main.resetRecordedAudio()
+                        DispatchQueue.main.async { self.dismissWith(depth: 2, from: self) }
                     })
                 }
             })
