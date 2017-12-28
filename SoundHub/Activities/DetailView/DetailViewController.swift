@@ -26,16 +26,12 @@ class DetailViewController: UIViewController{
     /// 음악 파형이 표시되는 셀
     private var masterWaveCell:MasterWaveFormViewCell?{
         didSet(oldVal){
-            if let masterPlayer = self.masterTrackPlayer{
-                masterWaveCell?.masterAudioURL = (masterTrackPlayer?.currentItem?.asset as? AVURLAsset)?.url
-            }else{
-                guard let remoteURL = post.masterTrackRemoteURL else { return }
-                NetworkController.main.downloadAudio(from: remoteURL, completion: { (localURL) in
-                    self.masterWaveCell?.masterAudioURL = localURL
-                })
-            }
+            guard let masterWaveCell = masterWaveCell else { return }
+            self.render(masterWaveCell)
         }
     }
+    
+
     /// 녹음하는 셀
     private var recorderCell: RecorderCell?
     private var heightOfRecordingCell:CGFloat = 50
@@ -442,6 +438,17 @@ protocol Playable {
 }
 
 extension DetailViewController{
+    private func render(_ masterWaveCell:MasterWaveFormViewCell){
+        if let masterPlayer = self.masterTrackPlayer{
+            masterWaveCell.masterAudioURL = (masterPlayer.currentItem?.asset as? AVURLAsset)?.url
+        }else{
+            guard let remoteURL = post.masterTrackRemoteURL else { return }
+            NetworkController.main.downloadAudio(from: remoteURL, completion: { (localURL) in
+                DispatchQueue.main.async { self.masterWaveCell?.masterAudioURL = localURL }
+            })
+        }
+    }
+    
     private func setUpMasterPlayer(){
         PlayBarController.main.isEnabled = false
         if let materRemoteURL = self.post.masterTrackRemoteURL{
