@@ -58,7 +58,7 @@ class SideMenuViewController: UIViewController {
             profileImageButton.af_setBackgroundImage(for: .normal, url: socialProfileImageURL)
         }else{
             let imageURL = URL(string: "user_\(userId)/profile_img/profile_img_200.png", relativeTo: NetworkController.main.baseMediaURL)!
-            profileImageButton.af_setBackgroundImage(for: .normal, url: imageURL)
+            profileImageButton.af_setImage(for: .normal, url: imageURL, placeholderImage: #imageLiteral(resourceName: "default-profile"), filter: nil, progress: nil, progressQueue: DispatchQueue.main, completion: nil)
         }
     }
 }
