@@ -250,6 +250,30 @@ extension NetworkController{
         }
     }
     
+    func signIn(with socialToken:String, completion: @escaping (_ result:NSDictionary?, _ errorMessage:String?)->Void){
+        
+        let unknownErrorMesage = "알 수 없는 오류가 발생했습니다"
+        guard let clientId = GIDSignIn.sharedInstance().clientID else { completion(nil, unknownErrorMesage); return }
+        let url = URL(string: "user/google_login/", relativeTo: hostURL)!
+        let signInInfo = ["token":socialToken, "client_id":clientId]
+        Alamofire.request(url, method: .post, parameters: signInInfo, headers: nil).responseJSON { (response) in
+            if response.response?.statusCode == 500 {
+                DispatchQueue.main.async { completion(nil, "서버측에 문제가 발생했습니다") }
+                return
+            }
+            if let json = response.result.value {
+                if let userInfo = json as? NSDictionary{
+                    DispatchQueue.main.async { completion(userInfo, nil) }; return
+                }
+                if let err = json as? NSDictionary{
+                    DispatchQueue.main.async { completion(err, err["detail"] as? String ) }; return
+                }
+            }
+            DispatchQueue.main.async { completion(nil, unknownErrorMesage)}
+            return
+        }
+    }
+    
     func signUp(with socialToken:String, nickname:String, instruments:String, completion: @escaping (_ result: NSDictionary?, _ errorMesge:String?)->Void){
         
         let unknownErrorMesage = "알 수 없는 오류가 발생했습니다"

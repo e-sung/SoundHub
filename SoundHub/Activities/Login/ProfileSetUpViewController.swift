@@ -45,13 +45,8 @@ class ProfileSetUpViewController: UIViewController {
                 }
                 else {
                     print("Successs!!!!!")
-                    guard let newToken = dic?["token"] as? String else { return }
-                    guard let userInfo = dic?["user"] as? NSDictionary else { return }
-                    guard let userId = userInfo["id"] as? Int else { return }
-                    UserDefaults.standard.set(newToken, forKey: keyForToken)
-                    UserDefaults.standard.set(self.nickName, forKey: keyForNickName)
-                    UserDefaults.standard.set(self.selectedInstruments, forKey: keyForInstruments)
-                    UserDefaults.standard.set(userId, forKey: keyForUserId)
+                    guard let socialLoginInfo = dic else { return }
+                    UserDefaults.standard.save(with: socialLoginInfo)
                     self.performSegue(withIdentifier: "showMainChart", sender: nil)
                 }
             })

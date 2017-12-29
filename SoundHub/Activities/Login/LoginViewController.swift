@@ -51,7 +51,16 @@ class LoginViewController: UIViewController, UITextViewDelegate,GIDSignInUIDeleg
         GIDSignIn.sharedInstance().uiDelegate = self
         tapGestureRecognizer.delegate = self
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: "ToggleAuthUINotification"), object: nil, queue: nil) { (noti) in
-            self.alert(msg: "\(noti.userInfo)")
+            if let dic = noti.userInfo as NSDictionary?{
+                guard let token = dic["token"] as? String else { return }
+                NetworkController.main.signIn(with: token, completion: { (result, error) in
+                    if let err = error { self.alert(msg: err)}
+                    guard let userInfo = result else { return }
+                    UserDefaults.standard.save(with: userInfo)
+                    self.performSegue(withIdentifier: "loginSuccessSegue", sender: nil)
+                })
+            }
+
         }
 
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardDidShow, object: nil, queue: nil) { (noti) in
