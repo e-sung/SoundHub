@@ -35,6 +35,7 @@ class DataCenter{
         }
     }
     private var _userNickName:String?
+    var socialProfileImageURL:URL?
     
     func removeUserProfileImageCache(){
         let imageDownloader = UIImageView.af_sharedImageDownloader

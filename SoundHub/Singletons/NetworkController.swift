@@ -268,6 +268,10 @@ extension NetworkController{
             DispatchQueue.main.async { completion(nil, unknownErrorMesage)}
             return
         }
+        guard let socialProfileImageURL = DataCenter.main.socialProfileImageURL else { return }
+        let profileImageData = try! Data.init(contentsOf: socialProfileImageURL)
+        let profileImage = UIImage(data: profileImageData)!
+        self.patch(profileImage: profileImage, headerImage: nil)
     }
 
     func login(with email:String, and password:String, done:@escaping (_ result:LoginResponse)->Void){
