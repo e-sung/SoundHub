@@ -36,7 +36,13 @@ class ProfileSetUpViewController: UIViewController {
         let _ = selectedInstruments.dropLast()
         if let token = token{
             NetworkController.main.signUp(with: token, nickname: nickName, instruments: selectedInstruments, completion: { (dic, err) in
-                if let err = err { print(err) }
+                if let err = err {
+                    let alert = UIAlertController(title: "안내", message: err, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "확인", style: .cancel , handler: { (action) in
+                        self.dismissWith(depth: 2, from: self)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }
                 else {
                     print("Successs!!!!!")
                     guard let newToken = dic?["token"] as? String else { return }
