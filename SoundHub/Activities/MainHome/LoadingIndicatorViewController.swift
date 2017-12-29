@@ -12,6 +12,7 @@ import NVActivityIndicatorView
 class LoadingIndicatorViewController: UIViewController {
     @IBOutlet weak var activityIndicator: NVActivityIndicatorView!
     override func viewWillAppear(_ animated: Bool) {
+        activityIndicator.type = .ballScaleRipple
         activityIndicator.startAnimating()
     }
 }

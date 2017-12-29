@@ -100,10 +100,14 @@ extension LoginViewController{
     private func tryLogin(){
         guard let email = emailTextField.text else {alert(msg: "Email");return}
         guard let password = passwordTextField.text else {alert(msg: "password is Invalid");return}
-        
+        self.showLoadingIndicator()
         NetworkController.main.login(with: email, and: password) {result in
             self.save(loginResponse: result, on: UserDefaults.standard, completion: {
-                DispatchQueue.main.async(execute: {self.performSegue(withIdentifier: "loginSuccessSegue", sender: nil)})
+                DispatchQueue.main.async(execute: {
+                    self.presentedViewController?.dismiss(animated: true, completion: {
+                        self.performSegue(withIdentifier: "loginSuccessSegue", sender: nil)
+                    })
+                })
             })
         }
     }

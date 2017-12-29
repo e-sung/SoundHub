@@ -383,7 +383,7 @@
         <!--Loading Indicator View Controller-->
         <scene sceneID="BC5-Jy-9y5">
             <objects>
-                <viewController id="jke-u9-fyi" customClass="LoadingIndicatorViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoadingIndicatorViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jke-u9-fyi" customClass="LoadingIndicatorViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PhC-ly-j26">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
