@@ -25,6 +25,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
     @IBOutlet weak var passwordTF: UITextField!
     @IBOutlet weak var passwordConfirmTF: UITextField!
     @IBOutlet var textFields: [UITextField]!
+    @IBOutlet weak var emailSignUpStackView: UIStackView!
+    @IBOutlet weak var socialSignUpStackView: UIStackView!
+    
+    
+    @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
     
     // MARK: IBActions
     
@@ -65,7 +70,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
     }
     
     
-    
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,6 +88,14 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
                 self.performSegue(withIdentifier: "signUpToProfileSetUp", sender: self)
             }
         }
+        tapGestureRecognizer.delegate = self
+    }
+}
+
+extension SignUpViewController:UIGestureRecognizerDelegate{
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        let y = touch.location(in: view).y
+        return y < emailSignUpStackView.frame.minY || y > socialSignUpStackView.frame.maxY
     }
 }
 

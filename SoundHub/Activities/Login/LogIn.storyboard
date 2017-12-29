@@ -267,13 +267,19 @@
                             <constraint firstItem="PKB-4n-QUM" firstAttribute="centerX" secondItem="o80-Wi-AmO" secondAttribute="centerX" id="iuY-c1-Wbn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nOk-16-R4d"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Xxd-Mb-VSR" appends="YES" id="D9F-g0-Eu2"/>
+                        </connections>
                     </view>
                     <connections>
+                        <outlet property="emailSignUpStackView" destination="o80-Wi-AmO" id="X9P-2R-9HO"/>
                         <outlet property="emailTF" destination="jzZ-4N-eda" id="L8G-eW-COa"/>
                         <outlet property="errorMsgLB" destination="oBV-Lo-IKu" id="Tu0-Pl-Itr"/>
                         <outlet property="nickNameTF" destination="W95-be-h4a" id="FQU-IC-ecw"/>
                         <outlet property="passwordConfirmTF" destination="svt-Fd-H32" id="gm0-Kw-c0Y"/>
                         <outlet property="passwordTF" destination="TeM-oW-WWD" id="VYn-rd-RnN"/>
+                        <outlet property="socialSignUpStackView" destination="PKB-4n-QUM" id="nAr-3r-Vkp"/>
+                        <outlet property="tapGestureRecognizer" destination="Xxd-Mb-VSR" id="v4d-W7-gc1"/>
                         <outletCollection property="textFields" destination="jzZ-4N-eda" collectionClass="NSMutableArray" id="CNR-9W-bKe"/>
                         <outletCollection property="textFields" destination="W95-be-h4a" collectionClass="NSMutableArray" id="VsP-Xa-2Zv"/>
                         <outletCollection property="textFields" destination="TeM-oW-WWD" collectionClass="NSMutableArray" id="SEI-eN-osM"/>
@@ -282,6 +288,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UKa-9n-brg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Xxd-Mb-VSR">
+                    <connections>
+                        <action selector="onTouchHandler:" destination="y5Y-p4-nBj" id="8FN-iC-w3w"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-980" y="867.61619190404804"/>
         </scene>
@@ -483,15 +494,26 @@
                             <constraint firstItem="sNd-e9-KQ8" firstAttribute="centerX" secondItem="dvs-E5-kHh" secondAttribute="centerX" id="p7G-yr-QYl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7S3-fE-DfC"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="9qK-Xe-VPL" appends="YES" id="UnU-rb-k2O"/>
+                        </connections>
                     </view>
                     <connections>
+                        <outlet property="emailLoginStackView" destination="dvs-E5-kHh" id="u5c-TC-OQ0"/>
                         <outlet property="emailTextField" destination="Fin-d5-EYt" id="AoT-F6-OSS"/>
                         <outlet property="passwordTextField" destination="Hi4-Ur-RHJ" id="Q4H-M8-pdK"/>
                         <outlet property="signInButton" destination="IEX-OO-YFx" id="yg5-Xd-dS0"/>
+                        <outlet property="socialLoginStackView" destination="sNd-e9-KQ8" id="fKI-BG-c9a"/>
+                        <outlet property="tapGestureRecognizer" destination="9qK-Xe-VPL" id="sYK-ZT-eFf"/>
                         <segue destination="Ikz-va-hjQ" kind="presentation" identifier="loginSuccessSegue" modalTransitionStyle="crossDissolve" id="X5d-yV-mOA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a3y-ry-yLu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="9qK-Xe-VPL">
+                    <connections>
+                        <action selector="viewTouchHandler:" destination="wSx-Gg-sUf" id="fXJ-PA-Mjj"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-244" y="133"/>
         </scene>
@@ -509,6 +531,6 @@
         <image name="soundHubLogo" width="943" height="248"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="n4l-pH-58o"/>
+        <segue reference="X5d-yV-mOA"/>
     </inferredMetricsTieBreakers>
 </document>

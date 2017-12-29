@@ -18,6 +18,9 @@ class LoginViewController: UIViewController, UITextViewDelegate,GIDSignInUIDeleg
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signInButton: GIDSignInButton!
+    @IBOutlet weak var emailLoginStackView: UIStackView!
+    @IBOutlet weak var socialLoginStackView: UIStackView!
+    @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
     
     // MARK: IBActions
     @IBAction func emailPrimaryActionHandler(_ sender: UITextField) {
@@ -46,7 +49,7 @@ class LoginViewController: UIViewController, UITextViewDelegate,GIDSignInUIDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         GIDSignIn.sharedInstance().uiDelegate = self
-
+        tapGestureRecognizer.delegate = self
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: "ToggleAuthUINotification"), object: nil, queue: nil) { (noti) in
             self.alert(msg: "\(noti.userInfo)")
         }
@@ -58,7 +61,13 @@ class LoginViewController: UIViewController, UITextViewDelegate,GIDSignInUIDeleg
             self.isKeyboardUp = false
         }
     }
+}
 
+extension LoginViewController:UIGestureRecognizerDelegate{
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        let y = touch.location(in: view).y
+        return y < emailLoginStackView.frame.minY || y > socialLoginStackView.frame.maxY
+    }
 }
 
 extension LoginViewController{
