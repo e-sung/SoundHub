@@ -54,11 +54,12 @@ class ProfileViewController: UIViewController{
      유저가 수정한 유저정보를 UserDefault에 저장하고, 같은 정보를 서버에 보냄
     */
     @objc private func doneButtonHandler(){
-        navigationItem.rightBarButtonItems?.popLast()
+        let _ = navigationItem.rightBarButtonItems?.popLast()
 
         UserDefaults.standard.set(headerCell!.nickName, forKey: keyForNickName)
         
         /// 변경내용을 서버에 반영
+        self.present(UIViewController.loadingIndicator, animated: true, completion: nil)
         NetworkController.main.patch(profileImage: changedProfileImage, headerImage: changedHeaderImage)
         guard let headerCell = headerCell else { return }
         NetworkController.main.patchUser(nickname: headerCell.nickName, instrument: headerCell.instrument) { (requestSucceded) in
@@ -67,10 +68,12 @@ class ProfileViewController: UIViewController{
                 /// 또 DataCenter.main 에도 아직 새 User객체가 반영되지 않았음.
                 /// 따라서
                 DataCenter.main = DataCenter() /// 1. DataCenter.main 초기화
-                self.navigationController?.popViewController(animated: true) /// 2. ChartVC로 복귀
-                /// 3. ChartVC에서는 DataCenter.main을 참조하려고 할 것이고, 그것이 비어있기 때문에
-                /// 4. 새 http 요청으로 DataCenter.main을 채워넣음.
-                /// 5. 그 과정에서 새롭게 변경된 User객체가 모든 UI에 반영됨
+                self.presentedViewController?.dismiss(animated: true, completion: {
+                    self.navigationController?.popViewController(animated: true) /// 2. ChartVC로 복귀
+                    /// 3. ChartVC에서는 DataCenter.main을 참조하려고 할 것이고, 그것이 비어있기 때문에
+                    /// 4. 새 http 요청으로 DataCenter.main을 채워넣음.
+                    /// 5. 그 과정에서 새롭게 변경된 User객체가 모든 UI에 반영됨
+                })
             }else{
                 self.alert(msg: "요청이 실패했습니다. 어떻게 된걸까요?")
             }
