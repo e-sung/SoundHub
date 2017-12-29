@@ -11,6 +11,7 @@ import UIKit
 class ProfileSetUpViewController: UIViewController {
 
     // MARK: Stored Properties
+    var token:String?
     var selectedInstruments = ""
     var nickName:String!
     var email:String!
@@ -32,27 +33,50 @@ class ProfileSetUpViewController: UIViewController {
                 selectedInstruments += (Instrument.cases[i] + ",")
             }
         }
-        selectedInstruments.dropLast()
-        
-        NetworkController.main.signUp(with: email, nickname: nickName, instruments: selectedInstruments, password1: password, password2: passwordConfirm) { (userId, errorMessage) in
-            var alertMessage = ""
-            if let errorMessage = errorMessage { alertMessage = errorMessage }
-            else { alertMessage = "인증 메일을 보냈습니다! \n 확인해 보세요!  \n\n 참! 스팸으로 분류되었을 수도 있어요!" }
+        let _ = selectedInstruments.dropLast()
+        if let token = token{
+            NetworkController.main.signUp(with: token, nickname: nickName, instruments: selectedInstruments, completion: { (dic, err) in
+                if let err = err { print(err) }
+                else {
+                    print("Successs!!!!!")
+                    guard let newToken = dic?["token"] as? String else { return }
+                    guard let userInfo = dic?["user"] as? NSDictionary else { return }
+                    guard let userId = userInfo["id"] as? Int else { return }
+                    UserDefaults.standard.set(newToken, forKey: keyForToken)
+                    UserDefaults.standard.set(self.nickName, forKey: keyForNickName)
+                    UserDefaults.standard.set(self.selectedInstruments, forKey: keyForInstruments)
+                    UserDefaults.standard.set(userId, forKey: keyForUserId)
+                    self.performSegue(withIdentifier: "showMainChart", sender: nil)
+                }
+            })
             
-            let alert = UIAlertController(title: "안내", message: alertMessage, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "확인", style: .cancel , handler: { (action) in
-                if let _ = errorMessage { self.dismiss(animated: true, completion: nil) }
-                else { self.dismissWith(depth: 2, from: self) }
-            }))
-            self.present(alert, animated: true, completion: nil)
+        }else{
+            NetworkController.main.signUp(with: email, nickname: nickName, instruments: selectedInstruments, password1: password, password2: passwordConfirm) { (userId, errorMessage) in
+                
+                let alertMessage = self.generateAlertMessage(given: errorMessage)
+                let alert = UIAlertController(title: "안내", message: alertMessage, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .cancel , handler: { (action) in
+                    if let _ = errorMessage { self.dismiss(animated: true, completion: nil) }
+                    else { self.dismissWith(depth: 2, from: self) }
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
         }
     }
+    
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mainFlowLayout.dataSource = self
         mainFlowLayout.delegate = self
         mainFlowLayout.allowsMultipleSelection = true
         defaultCellSize = CGSize(width: self.view.frame.width/3, height: self.view.frame.width/3)
+    }
+    
+    private func generateAlertMessage(given errorMessage:String?)->String{
+        if let error = errorMessage{ return error }
+        else{ return "인증 메일을 보냈습니다! \n 확인해 보세요!  \n\n 참! 스팸으로 분류되었을 수도 있어요!" }
     }
 
 }

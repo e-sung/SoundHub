@@ -21,7 +21,7 @@ class DataCenter{
 
     var userId:Int{
         get{
-            if _userId == nil { _userId = UserDefaults.standard.integer(forKey: id) }
+            if _userId == nil { _userId = UserDefaults.standard.integer(forKey: keyForUserId) }
             return _userId!
         }
     }
@@ -29,7 +29,7 @@ class DataCenter{
     var userNickName:String{
         get{
             if _userNickName == nil{
-                _userNickName = UserDefaults.standard.string(forKey: nickname)
+                _userNickName = UserDefaults.standard.string(forKey: keyForNickName)
             }
             return _userNickName!
         }

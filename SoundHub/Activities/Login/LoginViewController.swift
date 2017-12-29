@@ -33,8 +33,7 @@ class LoginViewController: UIViewController, UITextViewDelegate,GIDSignInUIDeleg
         tryLogin()
     }
    
-    @IBAction func googleSIgnInHandler(_ sender: GIDSignInButton) {
-        
+    @IBAction func googleSignInHandler(_ sender: GIDSignInButton) {
         GIDSignIn.sharedInstance().signIn()
     }
     
@@ -72,10 +71,10 @@ extension LoginViewController{
             let mainInstrument = userInfo.instrument,
             let userId = userInfo.id
         else { alert(msg: "통신이 제대로 이루어지지 않았습니다!"); return }
-        userDefault.set(authToken, forKey: token)
-        userDefault.set(nickName, forKey: nickname)
-        userDefault.set(mainInstrument, forKey: instrument)
-        userDefault.set(userId, forKey: id)
+        userDefault.set(authToken, forKey: keyForToken)
+        userDefault.set(nickName, forKey: keyForNickName)
+        userDefault.set(mainInstrument, forKey: keyForInstruments)
+        userDefault.set(userId, forKey: keyForUserId)
         completion()
     }
     

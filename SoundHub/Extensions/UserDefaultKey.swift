@@ -9,10 +9,10 @@
 import Foundation
 
 /// UserDefault Key For Token
-let token = "token"
+let keyForToken = "token"
 /// UserDefault Key For nickname
-let nickname = "nickname"
+let keyForNickName = "nickname"
 /// UserDefault Key for user's main Instrumet
-let instrument = "instrument"
+let keyForInstruments = "instrument"
 /// UserDefault Key for user's ID
-let id = "id"
+let keyForUserId = "id"

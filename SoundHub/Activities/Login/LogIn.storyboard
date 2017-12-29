@@ -219,23 +219,17 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="PKB-4n-QUM">
-                                <rect key="frame" x="37.5" y="393.5" width="300" height="77"/>
+                                <rect key="frame" x="37.5" y="393.5" width="300" height="90"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uQt-cA-PAs">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="36"/>
-                                        <color key="backgroundColor" red="0.81079471110000001" green="0.2628927231" blue="0.19538792969999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="구글로 회원가입">
-                                            <color key="titleColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3MX-UI-eKd" customClass="GIDSignInButton">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="42.5"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <action selector="googleSignUpHandler:" destination="y5Y-p4-nBj" eventType="valueChanged" id="loP-vc-uHh"/>
+                                        </connections>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TY5-cv-b9H">
-                                        <rect key="frame" x="0.0" y="41" width="300" height="36"/>
+                                        <rect key="frame" x="0.0" y="47.5" width="300" height="42.5"/>
                                         <color key="backgroundColor" red="0.2364057004" green="0.4013232887" blue="0.76923906799999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="페북으로 회원가입">
@@ -248,6 +242,9 @@
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="150-rH-hm6"/>
+                                </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oBV-Lo-IKu">
                                 <rect key="frame" x="37.5" y="158.5" width="300" height="0.0"/>
@@ -270,9 +267,6 @@
                             <constraint firstItem="PKB-4n-QUM" firstAttribute="centerX" secondItem="o80-Wi-AmO" secondAttribute="centerX" id="iuY-c1-Wbn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nOk-16-R4d"/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="kye-VD-Sgn" appends="YES" id="dnX-7J-oUa"/>
-                        </connections>
                     </view>
                     <connections>
                         <outlet property="emailTF" destination="jzZ-4N-eda" id="L8G-eW-COa"/>
@@ -288,11 +282,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UKa-9n-brg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="kye-VD-Sgn">
-                    <connections>
-                        <action selector="onTouchHandler:" destination="y5Y-p4-nBj" id="V3M-Hg-As5"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-980" y="867.61619190404804"/>
         </scene>
@@ -386,6 +375,7 @@
                     <connections>
                         <outlet property="mainFlowLayout" destination="NIc-M9-cNb" id="wZ9-Rg-iX3"/>
                         <segue destination="m6W-z3-GzF" kind="unwind" identifier="undwindToMainEntry" unwindAction="unwindToMainEntryFor:towardsViewController:" id="Am0-Yr-qBQ"/>
+                        <segue destination="Ikz-va-hjQ" kind="presentation" identifier="showMainChart" modalTransitionStyle="flipHorizontal" id="n4l-pH-58o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pd8-1D-wiP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -463,7 +453,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
                                         <color key="backgroundColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
-                                            <action selector="googleSIgnInHandler:" destination="wSx-Gg-sUf" eventType="touchUpInside" id="ST7-Vm-lm4"/>
+                                            <action selector="googleSignInHandler:" destination="wSx-Gg-sUf" eventType="touchUpInside" id="ZVi-6c-xgt"/>
                                         </connections>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FWU-wo-uO5">
@@ -493,9 +483,6 @@
                             <constraint firstItem="sNd-e9-KQ8" firstAttribute="centerX" secondItem="dvs-E5-kHh" secondAttribute="centerX" id="p7G-yr-QYl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7S3-fE-DfC"/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="qVe-DL-NTY" appends="YES" id="IMM-LD-5BS"/>
-                        </connections>
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="Fin-d5-EYt" id="AoT-F6-OSS"/>
@@ -505,11 +492,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a3y-ry-yLu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="qVe-DL-NTY">
-                    <connections>
-                        <action selector="viewTouchHandler:" destination="wSx-Gg-sUf" id="VCJ-j5-Zdh"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-244" y="133"/>
         </scene>
@@ -527,6 +509,6 @@
         <image name="soundHubLogo" width="943" height="248"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="X5d-yV-mOA"/>
+        <segue reference="n4l-pH-58o"/>
     </inferredMetricsTieBreakers>
 </document>

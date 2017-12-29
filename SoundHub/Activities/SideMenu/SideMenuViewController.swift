@@ -31,7 +31,7 @@ class SideMenuViewController: UIViewController {
     }
     
     func showProfile(){
-        guard let userId = UserDefaults.standard.string(forKey: id) else { return }
+        guard let userId = UserDefaults.standard.string(forKey: keyForUserId) else { return }
         guard let userID = Int(userId) else { return }
         NetworkController.main.fetchUser(id: userID) { (userInfo) in
             self.performSegue(withIdentifier: "sideMenuToProfileVC", sender: userInfo)
@@ -48,12 +48,12 @@ class SideMenuViewController: UIViewController {
     }
 
     override func viewDidLoad(){
-        guard let userId = UserDefaults.standard.string(forKey: id) else {
+        guard let userId = UserDefaults.standard.string(forKey: keyForUserId) else {
             profileImageButton.setTitle("로그인 필요", for: .normal)
             logoutButton.setTitle("로그인", for: .normal)
             return
         }
-        nickNameButton.setTitle(UserDefaults.standard.string(forKey: nickname) , for: .normal)
+        nickNameButton.setTitle(UserDefaults.standard.string(forKey: keyForNickName) , for: .normal)
         let imageURL = URL(string: "user_\(userId)/profile_img/profile_img_200.png", relativeTo: NetworkController.main.baseMediaURL)!
         profileImageButton.af_setBackgroundImage(for: .normal, url: imageURL)
     }

@@ -114,7 +114,7 @@ class AudioUploadViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        authorNameLB.text = UserDefaults.standard.string(forKey: nickname)
+        authorNameLB.text = UserDefaults.standard.string(forKey: keyForNickName)
         audioTitleTF.becomeFirstResponder()
         guard let audioURL = audioURL else { return }
         let playerItem = AVPlayerItem(url: audioURL)

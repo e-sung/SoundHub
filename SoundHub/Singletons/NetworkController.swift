@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import AlamofireImage
+import GoogleSignIn
 import UIKit
 
 class NetworkController{
@@ -186,7 +187,7 @@ extension NetworkController{
 // MARK: Patching Functions
 extension NetworkController{
     func patchUser(nickname:String, instrument:String, completion:@escaping(_ hasSuccess:Bool)->Void){
-        guard let userId = UserDefaults.standard.string(forKey: id) else { completion(false); return}
+        guard let userId = UserDefaults.standard.string(forKey: keyForUserId) else { completion(false); return}
         let nickNamePatchURL = URL(string: "/user/\(userId)/", relativeTo: hostURL)!
         let headers: HTTPHeaders = ["Authorization": authToken]
         let parameters: Parameters = ["nickname":nickname, "instrument":instrument]
@@ -197,7 +198,7 @@ extension NetworkController{
     }
     
     func patch(profileImage:UIImage?, headerImage:UIImage?){
-        guard let userId = UserDefaults.standard.string(forKey: id) else { return }
+        guard let userId = UserDefaults.standard.string(forKey: keyForUserId) else { return }
         let imagePatchURL = URL(string: "/user/\(userId)/profile-img/", relativeTo: hostURL)!        
         Alamofire.upload(
             multipartFormData: { multipartFormData in
@@ -232,24 +233,39 @@ extension NetworkController{
         
         let signUpInfo = [ "email":email, "nickname":nickname, "instrument":instruments, "password1":password1, "password2":password2 ]
         Alamofire.request(signUpURL, method: .post, parameters: signUpInfo, headers: nil).responseJSON { (response) in
-            print(response.request)
-            print("====================")
-            print(response.result)
             if let json = response.result.value {
                 if let userInfo = json as? NSDictionary{
                     if let userId = userInfo["id"] as? Int{
-                        DispatchQueue.main.async { completion(userId, nil) }
-                        return
+                        DispatchQueue.main.async { completion(userId, nil) }; return
                     }
                 }
                 if let err = json as? NSDictionary{
                     if let errorMessage =  err["detail"] as? String{
-                        DispatchQueue.main.async { completion(-1, errorMessage) }
-                        return
+                        DispatchQueue.main.async { completion(-1, errorMessage) }; return
                     }
                 }
             }
             DispatchQueue.main.async { completion(-1, "알 수 없는 오류가 발생했습니다")}
+            return
+        }
+    }
+    
+    func signUp(with socialToken:String, nickname:String, instruments:String, completion: @escaping (_ result: NSDictionary?, _ errorMesge:String?)->Void){
+        
+        let unknownErrorMesage = "알 수 없는 오류가 발생했습니다"
+        guard let clientId = GIDSignIn.sharedInstance().clientID else { completion(nil, unknownErrorMesage); return }
+        let url = URL(string: "user/google_login/", relativeTo: hostURL)!
+        let signUpInfo = ["token":socialToken, "client_id":clientId, "nickname":nickname, "instrument":instruments]
+        Alamofire.request(url, method: .post, parameters: signUpInfo, headers: nil).responseJSON { (response) in
+            if let json = response.result.value {
+                if let userInfo = json as? NSDictionary{
+                    DispatchQueue.main.async { completion(userInfo, nil) }; return
+                }
+                if let err = json as? NSDictionary{
+                    DispatchQueue.main.async { completion(err, err["detail"] as? String ) }; return
+                }
+            }
+            DispatchQueue.main.async { completion(nil, unknownErrorMesage)}
             return
         }
     }
@@ -286,7 +302,7 @@ extension NetworkController{
     /// UserDefault에 저장된 값이 없을 때는, "Invalid Token"이라는 문자열을 토큰 대신 반환함.
     private var authToken:String{
         get{
-            guard let tkn = UserDefaults.standard.string(forKey: token) else { return "invalid Token" }
+            guard let tkn = UserDefaults.standard.string(forKey: keyForToken) else { return "invalid Token" }
             return "Token \(tkn)"
         }
     }
