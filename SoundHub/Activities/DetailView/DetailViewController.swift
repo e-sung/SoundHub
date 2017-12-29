@@ -90,7 +90,7 @@ class DetailViewController: UIViewController{
         }
         PlayBarController.main.currentPostView = self
         albumCoverImageView.alpha = 1
-        guard let userId = UserDefaults.standard.string(forKey: id) else { return }
+        guard let userId = UserDefaults.standard.string(forKey: keyForUserId) else { return }
         if (post.author?.id ?? -1) == Int(userId){
             commentTrackContainer?.allowsMultiSelection = true
         }

@@ -73,7 +73,7 @@ class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate, UITex
         numFollowerLB.text = "\(userInfo.num_followers ?? 0)"
         instrumentTF.text = userInfo.instrument
         settingButton.isHidden = true
-        guard let userId = UserDefaults.standard.string(forKey: id) else { return }
+        guard let userId = UserDefaults.standard.string(forKey: keyForUserId) else { return }
         guard let uid = Int(userId) else { return }
         if userInfo.id == uid {
             settingButton.isHidden = false

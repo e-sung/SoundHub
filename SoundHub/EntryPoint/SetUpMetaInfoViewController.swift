@@ -58,7 +58,7 @@ extension SetUpMetaInfoViewController{
         get{
             let artistItem = AVMutableMetadataItem()
             artistItem.identifier = AVMetadataIdentifier.commonIdentifierArtist
-            artistItem.value = UserDefaults.standard.string(forKey: nickname)! as (NSCopying & NSObjectProtocol)?
+            artistItem.value = UserDefaults.standard.string(forKey: keyForNickName)! as (NSCopying & NSObjectProtocol)?
             return artistItem
         }
     }

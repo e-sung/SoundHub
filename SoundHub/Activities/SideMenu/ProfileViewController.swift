@@ -56,7 +56,7 @@ class ProfileViewController: UIViewController{
     @objc private func doneButtonHandler(){
         navigationItem.rightBarButtonItems?.popLast()
 
-        UserDefaults.standard.set(headerCell!.nickName, forKey: nickname)
+        UserDefaults.standard.set(headerCell!.nickName, forKey: keyForNickName)
         
         /// 변경내용을 서버에 반영
         NetworkController.main.patch(profileImage: changedProfileImage, headerImage: changedHeaderImage)

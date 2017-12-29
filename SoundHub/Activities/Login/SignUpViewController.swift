@@ -8,12 +8,15 @@
 
 import UIKit
 import LPSnackbar
+import GoogleSignIn
 
 /// - ToDo : Input 값의 Validity확인
-class SignUpViewController: UIViewController, UITextFieldDelegate {
+class SignUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate {
 
     // MARK: Stored Properties
     var isKeyboardUp = false
+    var token:String?
+    var socialNickname:String?
     
     // MARK: IBOutlets
     @IBOutlet weak var errorMsgLB: UILabel!
@@ -22,6 +25,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordTF: UITextField!
     @IBOutlet weak var passwordConfirmTF: UITextField!
     @IBOutlet var textFields: [UITextField]!
+    @IBOutlet weak var emailSignUpStackView: UIStackView!
+    @IBOutlet weak var googleSignInButton: GIDSignInButton!
+    
+    @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
     
     // MARK: IBActions
     
@@ -57,6 +64,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         else{ self.dismiss(animated: true, completion: nil) }
     }
     
+    @IBAction func googleSignUpHandler(_ sender: GIDSignInButton) {
+        GIDSignIn.sharedInstance().signIn()
+    }
+    
+    
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +79,24 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardDidHide, object: nil, queue: nil) { (noti) in
             self.isKeyboardUp = false
         }
+        GIDSignIn.sharedInstance().uiDelegate = self
+        googleSignInButton.colorScheme = .dark
+        googleSignInButton.style = .wide
+        NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: "ToggleAuthUINotification"), object: nil, queue: nil) { (noti) in
+            if let dic = noti.userInfo as NSDictionary?{
+                self.token = dic["token"] as? String
+                self.socialNickname = dic["nickname"] as? String
+                self.performSegue(withIdentifier: "signUpToProfileSetUp", sender: self)
+            }
+        }
+        tapGestureRecognizer.delegate = self
+    }
+}
+
+extension SignUpViewController:UIGestureRecognizerDelegate{
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        let y = touch.location(in: view).y
+        return y < emailSignUpStackView.frame.minY || y > googleSignInButton.frame.maxY
     }
 }
 
@@ -74,10 +104,15 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 extension SignUpViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let nextVC = segue.destination as! ProfileSetUpViewController
-        nextVC.email = emailTF.text!
-        nextVC.nickName = nickNameTF.text!
-        nextVC.password = passwordTF.text!
-        nextVC.passwordConfirm = passwordConfirmTF.text!
+        if let token = self.token{
+            nextVC.token = token
+            nextVC.nickName = socialNickname!
+        }else{
+            nextVC.email = emailTF.text!
+            nextVC.nickName = nickNameTF.text!
+            nextVC.password = passwordTF.text!
+            nextVC.passwordConfirm = passwordConfirmTF.text!
+        }
     }
 }
 

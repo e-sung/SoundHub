@@ -17,7 +17,9 @@ class LoginViewController: UIViewController, UITextViewDelegate,GIDSignInUIDeleg
     // MARK: IBOutlests
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var signInButton: GIDSignInButton!
+    @IBOutlet weak var googleSignInButton: GIDSignInButton!
+    @IBOutlet weak var emailLoginStackView: UIStackView!
+    @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
     
     // MARK: IBActions
     @IBAction func emailPrimaryActionHandler(_ sender: UITextField) {
@@ -33,8 +35,7 @@ class LoginViewController: UIViewController, UITextViewDelegate,GIDSignInUIDeleg
         tryLogin()
     }
    
-    @IBAction func googleSIgnInHandler(_ sender: GIDSignInButton) {
-        
+    @IBAction func googleSignInHandler(_ sender: GIDSignInButton) {
         GIDSignIn.sharedInstance().signIn()
     }
     
@@ -47,9 +48,20 @@ class LoginViewController: UIViewController, UITextViewDelegate,GIDSignInUIDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         GIDSignIn.sharedInstance().uiDelegate = self
-
+        googleSignInButton.colorScheme = .dark
+        googleSignInButton.style = .wide
+        tapGestureRecognizer.delegate = self
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: "ToggleAuthUINotification"), object: nil, queue: nil) { (noti) in
-            self.alert(msg: "\(noti.userInfo)")
+            if let dic = noti.userInfo as NSDictionary?{
+                guard let token = dic["token"] as? String else { return }
+                NetworkController.main.signIn(with: token, completion: { (result, error) in
+                    if let err = error { self.alert(msg: err)}
+                    guard let userInfo = result else { return }
+                    UserDefaults.standard.save(with: userInfo)
+                    self.performSegue(withIdentifier: "loginSuccessSegue", sender: nil)
+                })
+            }
+
         }
 
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardDidShow, object: nil, queue: nil) { (noti) in
@@ -59,7 +71,13 @@ class LoginViewController: UIViewController, UITextViewDelegate,GIDSignInUIDeleg
             self.isKeyboardUp = false
         }
     }
+}
 
+extension LoginViewController:UIGestureRecognizerDelegate{
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        let y = touch.location(in: view).y
+        return y < emailLoginStackView.frame.minY || y > googleSignInButton.frame.maxY
+    }
 }
 
 extension LoginViewController{
@@ -72,10 +90,10 @@ extension LoginViewController{
             let mainInstrument = userInfo.instrument,
             let userId = userInfo.id
         else { alert(msg: "통신이 제대로 이루어지지 않았습니다!"); return }
-        userDefault.set(authToken, forKey: token)
-        userDefault.set(nickName, forKey: nickname)
-        userDefault.set(mainInstrument, forKey: instrument)
-        userDefault.set(userId, forKey: id)
+        userDefault.set(authToken, forKey: keyForToken)
+        userDefault.set(nickName, forKey: keyForNickName)
+        userDefault.set(mainInstrument, forKey: keyForInstruments)
+        userDefault.set(userId, forKey: keyForUserId)
         completion()
     }
     
