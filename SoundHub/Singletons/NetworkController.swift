@@ -257,8 +257,16 @@ extension NetworkController{
         let url = URL(string: "user/google_login/", relativeTo: hostURL)!
         let signUpInfo = ["token":socialToken, "client_id":clientId, "nickname":nickname, "instrument":instruments]
         Alamofire.request(url, method: .post, parameters: signUpInfo, headers: nil).responseJSON { (response) in
+            if response.response?.statusCode == 500 {
+                DispatchQueue.main.async { completion(nil, "서버측에 문제가 발생했습니다") }
+                return
+            }
             if let json = response.result.value {
                 if let userInfo = json as? NSDictionary{
+                    guard let socialProfileImageURL = DataCenter.main.socialProfileImageURL else { return }
+                    let profileImageData = try! Data.init(contentsOf: socialProfileImageURL)
+                    let profileImage = UIImage(data: profileImageData)!
+                    self.patch(profileImage: profileImage, headerImage: nil)
                     DispatchQueue.main.async { completion(userInfo, nil) }; return
                 }
                 if let err = json as? NSDictionary{
@@ -268,10 +276,7 @@ extension NetworkController{
             DispatchQueue.main.async { completion(nil, unknownErrorMesage)}
             return
         }
-        guard let socialProfileImageURL = DataCenter.main.socialProfileImageURL else { return }
-        let profileImageData = try! Data.init(contentsOf: socialProfileImageURL)
-        let profileImage = UIImage(data: profileImageData)!
-        self.patch(profileImage: profileImage, headerImage: nil)
+
     }
 
     func login(with email:String, and password:String, done:@escaping (_ result:LoginResponse)->Void){
