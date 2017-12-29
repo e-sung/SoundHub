@@ -19,8 +19,7 @@ class AudioUploadViewController: UIViewController {
     var instrument:String!
     private let imagePicker = UIImagePickerController()
     @IBOutlet weak private var audioTitleTF:UITextField!
-    
-    @IBOutlet weak var bpmTF: UITextField!
+    @IBOutlet weak private var bpmTF: UITextField!
     @IBOutlet weak private var albumArt: UIButton!
     @IBOutlet weak private var cameraButton: UIButton!
     @IBOutlet weak private var authorNameLB: UILabel!
@@ -28,81 +27,19 @@ class AudioUploadViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func onAlbumArtClickHandler(_ sender: UIButton) {
+    @IBAction private func onAlbumArtClickHandler(_ sender: UIButton) {
         present(photoSourceChooingAlert, animated: true, completion: nil)
     }
-    @IBAction func onViewTouchHandler(_ sender: UITapGestureRecognizer) {
+    @IBAction private func onViewTouchHandler(_ sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
     }
     
     @IBAction private func uploadHandler(_ sender: UIButton) {
         let bpm = Int(bpmTF.text ?? "110") ?? 110
         if let audioURL = audioURL{
-            NetworkController.main.uploadAudio(In: audioURL, genre: self.genre, instrument: self.instrument, bpm: bpm, albumCover: (self.albumArt.image(for: .normal) ?? UIImage()), completion: {
-                DataCenter.main.resetHomePages()
-                self.dismiss(animated: true, completion: nil)
-                DispatchQueue.global(qos: .userInitiated).async { RecordConductor.main.resetRecordedAudio() }
-            })
-            
+            uploadExisting(music: audioURL, with: bpm)
         }else{
-            let audioTitle = audioTitleTF.text ?? "Untitled"
-            let titleMetadata = String.generateAvMetaData(with: audioTitle,
-                                                          and: .commonIdentifierTitle)
-            let artistMetadata = String.generateAvMetaData(with: authorNameLB.text!,
-                                                           and: .commonIdentifierArtist)
-            
-            let exportURL = URL(string: "\(audioTitle).m4a".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)! , relativeTo: DataCenter.documentsDirectoryURL)!
-            self.dismissWith(depth: 2, from: self, completion: {
-                LPSnackbar.showSnack(title: "Exporting...")
-            })
-            
-            RecordConductor.main.exportRecordedAudio(to: exportURL,
-                                                     with: [titleMetadata, artistMetadata], completion: {
-                NetworkController.main.uploadAudio(In: exportURL, genre: self.genre, instrument: self.instrument, bpm: bpm, albumCover: (self.albumArt.image(for: .normal) ?? UIImage()), completion: {
-                    RecordConductor.main.resetRecordedAudio()
-                    DispatchQueue.main.async {
-                        DataCenter.main.resetHomePages()
-                        self.dismissWith(depth: 2, from: self)
-                    }
-                })
-            })
-        }
-    }
-
-    private func setUpUI(with audio:AVPlayerItem){
-        for item in audio.asset.metadata{
-            if let identifier = item.identifier{
-                if identifier == .iTunesMetadataBeatsPerMin{
-                    bpmTF.text = "\(item.value as! Int)"
-                    bpmTF.isUserInteractionEnabled = false
-                }else if identifier == .id3MetadataBeatsPerMinute{
-                    bpmTF.text = "\(item.value as! Int)"
-                    bpmTF.isUserInteractionEnabled = false
-                }
-            }
-            
-            if let key = item.commonKey, let value = item.value {
-                if key == .commonKeyArtwork, let data = value as? Data{
-                    albumArt.setImage(UIImage(data: data), for: .normal)
-                    albumArt.isUserInteractionEnabled = false
-                    cameraButton.isHidden = true
-                }
-                else if key == .commonKeyTitle {
-                    audioTitleTF.text = value as? String
-                    audioTitleTF.isUserInteractionEnabled = false
-                }
-                else if key == .commonKeyArtist {
-                    authorNameLB.text = value as? String
-                }
-                else if key == .id3MetadataKeyBeatsPerMinute{
-                    bpmTF.text = value as? String
-                    bpmTF.isUserInteractionEnabled = false
-                }
-                else if key == .iTunesMetadataKeyBeatsPerMin{
-                    bpmTF.text = value as? String
-                    bpmTF.isUserInteractionEnabled = false
-                }
-            }
+            exportAndUpload(with: bpm)
         }
     }
     
@@ -114,11 +51,113 @@ class AudioUploadViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        authorNameLB.text = UserDefaults.standard.string(forKey: nickname)
+        authorNameLB.text = UserDefaults.standard.string(forKey: keyForNickName)
         audioTitleTF.becomeFirstResponder()
         guard let audioURL = audioURL else { return }
         let playerItem = AVPlayerItem(url: audioURL)
         setUpUI(with: playerItem)
+    }
+}
+
+extension AudioUploadViewController{
+    private func setUpUI(with audio:AVPlayerItem){
+        for item in audio.asset.metadata{
+            setUp(bpmTF, with: item)
+            if let key = item.commonKey, let value = item.value {
+                setUp(authorNameLB, with: key, and: value)
+                setUp(audioTitleTF, with: key, and: value)
+                setUp(albumArt, with: key, and: value)
+            }
+        }
+    }
+    
+    private func setUp(_ label:UILabel, with key:AVMetadataKey, and value:NSCopying&NSObjectProtocol){
+        if key == .commonKeyArtist {
+            label.text = value as? String
+        }
+    }
+
+    private func setUp(_ textField:UITextField, with key:AVMetadataKey, and value:NSCopying&NSObjectProtocol){
+        if key == .commonKeyTitle {
+            textField.text = value as? String
+            textField.isUserInteractionEnabled = false
+        }
+    }
+    
+    private func setUp(_ albumButton:UIButton, with key:AVMetadataKey, and value:NSCopying&NSObjectProtocol){
+        if key == .commonKeyArtwork, let data = value as? Data{
+            albumButton.setImage(UIImage(data: data), for: .normal)
+            albumButton.isUserInteractionEnabled = false
+            cameraButton.isHidden = true
+        }
+    }
+    
+    private func setUp(_ textField:UITextField, with metadata:AVMetadataItem){
+        if let identifier = metadata.identifier{
+            if identifier == .iTunesMetadataBeatsPerMin || identifier == .id3MetadataBeatsPerMinute{
+                textField.text = "\(metadata.value as! Int)"
+                textField.isUserInteractionEnabled = false
+            }
+        }else if let key = metadata.commonKey, let value = metadata.value {
+            if key == .id3MetadataKeyBeatsPerMinute || key == .iTunesMetadataKeyBeatsPerMin{
+                textField.text = value as? String
+                textField.isUserInteractionEnabled = false
+            }
+        }
+    }
+}
+
+extension AudioUploadViewController{
+    private func exportAndUpload(with bpm:Int){
+        self.present(UIViewController.loadingIndicator, animated: true, completion: nil)
+        RecordConductor.main.exportRecordedAudio(to: self.exportURL,
+                                                 with: [self.titleMetaData, self.artistMetaData], completion: {
+            NetworkController.main.uploadAudio(In: self.exportURL, genre: self.genre, instrument: self.instrument, bpm: bpm, albumCover: (self.albumArt.image(for: .normal) ?? UIImage()), completion: {
+                self.resetThingsToReset()
+                DispatchQueue.main.async {
+                    self.presentedViewController?.dismiss(animated: true, completion: { self.dismissWith(depth: 2, from: self) })
+                }
+            })
+        })
+    }
+    
+    private func uploadExisting(music audioURL:URL, with bpm:Int){
+        showLoadingIndicator()
+        NetworkController.main.uploadAudio(In: audioURL, genre: self.genre, instrument: self.instrument, bpm: bpm, albumCover: (self.albumArt.image(for: .normal) ?? UIImage()), completion: {
+            DataCenter.main.resetHomePages()
+            self.presentedViewController?.dismiss(animated: true, completion: {
+                self.dismiss(animated: true, completion: nil)
+            })
+            DispatchQueue.global(qos: .userInitiated).async { RecordConductor.main.resetRecordedAudio() }
+        })
+    }
+    
+    private func resetThingsToReset(){
+        RecordConductor.main.resetRecordedAudio()
+        DataCenter.main.resetHomePages()
+    }
+}
+
+extension AudioUploadViewController{
+    private var exportURL:URL{
+        get{
+            let title = audioTitleTF.text ?? "Untitled"
+            return URL(string: "\(title).m4a".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)! , relativeTo: DataCenter.documentsDirectoryURL)!
+        }
+    }
+    
+    private var titleMetaData:AVMutableMetadataItem{
+        get{
+            let title = audioTitleTF.text ?? "Untitled"
+            return String.generateAvMetaData(with: title, and: .commonIdentifierTitle)
+        }
+    }
+    
+    private var artistMetaData:AVMutableMetadataItem{
+        get{
+            let artistName = authorNameLB.text!
+            return String.generateAvMetaData(with: artistName, and: .commonIdentifierArtist)
+        }
     }
     
     private var defaultUIAlertActions:[UIAlertAction]{

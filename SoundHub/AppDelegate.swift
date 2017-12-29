@@ -51,17 +51,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate {
             // [END_EXCLUDE]
         } else {
             // Perform any operations on signed in user here.
-            let userId = user.userID                  // For client-side use only!
-            let idToken = user.authentication.idToken // Safe to send to the server
-            let fullName = user.profile.name
-            let givenName = user.profile.givenName
-            let familyName = user.profile.familyName
-            let email = user.profile.email
+            let _ = user.userID                  // For client-side use only!
+            let idToken = user.authentication.idToken ?? "unexpected error on token" // Safe to send to the server
+            let fullName = user.profile.name ?? "unexpected profile name"
+//            let profileImage = user.profile.imageURL(withDimension: 200)
             // [START_EXCLUDE]
             NotificationCenter.default.post(
                 name: Notification.Name(rawValue: "ToggleAuthUINotification"),
                 object: nil,
-                userInfo: ["statusText": "Signed in user:\n\(fullName)"])
+                userInfo: ["token":idToken, "nickname":fullName])
             // [END_EXCLUDE]
         }
     }

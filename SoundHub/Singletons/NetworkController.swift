@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import AlamofireImage
+import GoogleSignIn
 import UIKit
 
 class NetworkController{
@@ -186,7 +187,7 @@ extension NetworkController{
 // MARK: Patching Functions
 extension NetworkController{
     func patchUser(nickname:String, instrument:String, completion:@escaping(_ hasSuccess:Bool)->Void){
-        guard let userId = UserDefaults.standard.string(forKey: id) else { completion(false); return}
+        guard let userId = UserDefaults.standard.string(forKey: keyForUserId) else { completion(false); return}
         let nickNamePatchURL = URL(string: "/user/\(userId)/", relativeTo: hostURL)!
         let headers: HTTPHeaders = ["Authorization": authToken]
         let parameters: Parameters = ["nickname":nickname, "instrument":instrument]
@@ -197,7 +198,7 @@ extension NetworkController{
     }
     
     func patch(profileImage:UIImage?, headerImage:UIImage?){
-        guard let userId = UserDefaults.standard.string(forKey: id) else { return }
+        guard let userId = UserDefaults.standard.string(forKey: keyForUserId) else { return }
         let imagePatchURL = URL(string: "/user/\(userId)/profile-img/", relativeTo: hostURL)!        
         Alamofire.upload(
             multipartFormData: { multipartFormData in
@@ -226,30 +227,116 @@ extension NetworkController{
 }
 
 extension NetworkController{
-    func sendRequest(with signUpContent:signUpRequest, from VC:UIViewController){
-        guard let signUpData = try? JSONEncoder().encode(signUpContent) else {return}
-        let request = generatePostRequest(with: self.signUpURL, and: signUpData)
+    
+    func signUp(with email:String, nickname:String, instruments:String, password1:String, password2:String,
+                completion: @escaping (_ userId: Int, _ errorMesge:String?)->Void){
         
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if let response = response as? HTTPURLResponse {
-                if response.statusCode == 201 {
-                    DispatchQueue.main.async {VC.performSegue(withIdentifier: "profileSetUpToMain", sender: nil)}
-                }else{ DispatchQueue.main.async {VC.alert(msg: "\(response.statusCode)")} }
+        let signUpInfo = [ "email":email, "nickname":nickname, "instrument":instruments, "password1":password1, "password2":password2 ]
+        Alamofire.request(signUpURL, method: .post, parameters: signUpInfo, headers: nil).responseJSON { (response) in
+            if let json = response.result.value {
+                if let userInfo = json as? NSDictionary{
+                    if let userId = userInfo["id"] as? Int{
+                        DispatchQueue.main.async { completion(userId, nil) }; return
+                    }
+                }
+                if let err = json as? NSDictionary{
+                    if let errorMessage =  err["detail"] as? String{
+                        DispatchQueue.main.async { completion(-1, errorMessage) }; return
+                    }
+                }
             }
-            }.resume()
+            DispatchQueue.main.async { completion(-1, "알 수 없는 오류가 발생했습니다")}
+            return
+        }
     }
     
-    func login(with email:String, and password:String, done:@escaping (_ result:LoginResponse)->Void){
-        let loginInfo = ["email":email,"password":password]
-        guard let loginData = try? JSONEncoder().encode(loginInfo) else {print("Encoding failed");return}
+    func signIn(with socialToken:String, completion: @escaping (_ result:NSDictionary?, _ errorMessage:String?)->Void){
         
-        let request = generatePostRequest(with: loginURL, and: loginData)
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if let error = error { print(error) }
-            guard let data = data else {return}
-            guard let result = try? JSONDecoder().decode(LoginResponse.self, from: data) else{return}
-            DispatchQueue.main.async { done(result) }
-            }.resume()
+        let unknownErrorMesage = "알 수 없는 오류가 발생했습니다"
+        guard let clientId = GIDSignIn.sharedInstance().clientID else { completion(nil, unknownErrorMesage); return }
+        let url = URL(string: "user/google_login/", relativeTo: hostURL)!
+        let signInInfo = ["token":socialToken, "client_id":clientId]
+        Alamofire.request(url, method: .post, parameters: signInInfo, headers: nil).responseJSON { (response) in
+            if response.response?.statusCode == 500 {
+                DispatchQueue.main.async { completion(nil, "서버측에 문제가 발생했습니다") }
+                return
+            }
+            if let json = response.result.value {
+                if let userInfo = json as? NSDictionary{
+                    DispatchQueue.main.async { completion(userInfo, nil) }; return
+                }
+                if let err = json as? NSDictionary{
+                    DispatchQueue.main.async { completion(err, err["detail"] as? String ) }; return
+                }
+            }
+            DispatchQueue.main.async { completion(nil, unknownErrorMesage)}
+            return
+        }
+    }
+    
+    func signUp(with socialToken:String, nickname:String, instruments:String, completion: @escaping (_ result: NSDictionary?, _ errorMesge:String?)->Void){
+        
+        let unknownErrorMesage = "알 수 없는 오류가 발생했습니다"
+        guard let clientId = GIDSignIn.sharedInstance().clientID else { completion(nil, unknownErrorMesage); return }
+        let url = URL(string: "user/google_login/", relativeTo: hostURL)!
+        let signUpInfo = ["token":socialToken, "client_id":clientId, "nickname":nickname, "instrument":instruments]
+        Alamofire.request(url, method: .post, parameters: signUpInfo, headers: nil).responseJSON { (response) in
+            if response.response?.statusCode == 500 {
+                DispatchQueue.main.async { completion(nil, "서버측에 문제가 발생했습니다") }
+                return
+            }
+            if let json = response.result.value {
+                if let userInfo = json as? NSDictionary{
+                    guard let socialProfileImageURL = DataCenter.main.socialProfileImageURL else { return }
+                    let profileImageData = try! Data.init(contentsOf: socialProfileImageURL)
+                    let profileImage = UIImage(data: profileImageData)!
+                    self.patch(profileImage: profileImage, headerImage: nil)
+                    DispatchQueue.main.async { completion(userInfo, nil) }; return
+                }
+                if let err = json as? NSDictionary{
+                    DispatchQueue.main.async { completion(err, err["detail"] as? String ) }; return
+                }
+            }
+            DispatchQueue.main.async { completion(nil, unknownErrorMesage)}
+            return
+        }
+
+    }
+
+    func login(with email:String, and password:String, completion:@escaping (_ response:NSDictionary?, _ error:String?)->Void){
+        
+        let unknownErrorMesage = "알 수 없는 오류가 발생했습니다"
+        let signInInfo = ["email":email, "password":password]
+        Alamofire.request(loginURL, method: .post, parameters: signInInfo, headers: nil).responseJSON { (response) in
+            if response.response?.statusCode == 500 {
+                DispatchQueue.main.async { completion(nil, "서버측에 문제가 발생했습니다") }
+                return
+            }
+            if let json = response.result.value {
+                if let dic = json as? NSDictionary{
+                    if let userInfo = dic["token"] as? String {
+                        DispatchQueue.main.async { completion(dic, nil) }; return
+                    }else{
+                        DispatchQueue.main.async { completion(nil, "잘못된 이메일, 혹은 비밀번호입니다") };return
+                    }
+                }
+            }
+            DispatchQueue.main.async { completion(nil, unknownErrorMesage)}
+            return
+        }
+        
+        
+//
+//        let loginInfo = ["email":email,"password":password]
+//        guard let loginData = try? JSONEncoder().encode(loginInfo) else {print("Encoding failed");return}
+//
+//        let request = generatePostRequest(with: loginURL, and: loginData)
+//        URLSession.shared.dataTask(with: request) { (data, response, error) in
+//            if let error = error { print(error) }
+//            guard let data = data else {return}
+//            guard let result = try? JSONDecoder().decode(LoginResponse.self, from: data) else{return}
+//            DispatchQueue.main.async { done(result) }
+//            }.resume()
     }
     
     func sendLikeRequest(on postId:Int, completion:@escaping (_ num_liked:Int)->Void){
@@ -271,7 +358,7 @@ extension NetworkController{
     /// UserDefault에 저장된 값이 없을 때는, "Invalid Token"이라는 문자열을 토큰 대신 반환함.
     private var authToken:String{
         get{
-            guard let tkn = UserDefaults.standard.string(forKey: token) else { return "invalid Token" }
+            guard let tkn = UserDefaults.standard.string(forKey: keyForToken) else { return "invalid Token" }
             return "Token \(tkn)"
         }
     }

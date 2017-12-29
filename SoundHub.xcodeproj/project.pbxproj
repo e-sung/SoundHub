@@ -35,7 +35,6 @@
 		FF3B20BC1FCACE8D0019F87A /* DetailHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20BB1FCACE8D0019F87A /* DetailHeaderCell.swift */; };
 		FF3B20BF1FCC2B0E0019F87A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20BE1FCC2B0E0019F87A /* LoginViewController.swift */; };
 		FF3B20C21FCC31930019F87A /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20C11FCC31930019F87A /* SignUpViewController.swift */; };
-		FF3B20C41FCC3B4C0019F87A /* SignUpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20C31FCC3B4C0019F87A /* SignUpRequest.swift */; };
 		FF3B20C61FCC3B930019F87A /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20C51FCC3B930019F87A /* Instrument.swift */; };
 		FF3B20C91FCC434B0019F87A /* ProfileSetUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20C81FCC434B0019F87A /* ProfileSetUpViewController.swift */; };
 		FF4A5C021FD68CAD00E8189F /* SetUpMetaInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4A5C011FD68CAD00E8189F /* SetUpMetaInfoViewController.swift */; };
@@ -134,7 +133,6 @@
 		FF3B20BB1FCACE8D0019F87A /* DetailHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHeaderCell.swift; sourceTree = "<group>"; };
 		FF3B20BE1FCC2B0E0019F87A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		FF3B20C11FCC31930019F87A /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		FF3B20C31FCC3B4C0019F87A /* SignUpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRequest.swift; sourceTree = "<group>"; };
 		FF3B20C51FCC3B930019F87A /* Instrument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instrument.swift; sourceTree = "<group>"; };
 		FF3B20C81FCC434B0019F87A /* ProfileSetUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetUpViewController.swift; sourceTree = "<group>"; };
 		FF4A5C011FD68CAD00E8189F /* SetUpMetaInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUpMetaInfoViewController.swift; sourceTree = "<group>"; };
@@ -299,7 +297,6 @@
 				FFB85FCF1FCE78B3000E47C8 /* Post.swift */,
 				FFC32AE31FCF8E1500651A31 /* Comment.swift */,
 				FFB85FD11FCE79A3000E47C8 /* User.swift */,
-				FF3B20C31FCC3B4C0019F87A /* SignUpRequest.swift */,
 				FF3B20C51FCC3B930019F87A /* Instrument.swift */,
 				FFC32AEC1FCFD96500651A31 /* LoginResponse.swift */,
 				FF0280651FD901AB00C0013A /* Genre.swift */,
@@ -840,7 +837,6 @@
 				FF0280561FD776CF00C0013A /* UserDefaultKey.swift in Sources */,
 				FFC32AED1FCFD96500651A31 /* LoginResponse.swift in Sources */,
 				FF3B20C21FCC31930019F87A /* SignUpViewController.swift in Sources */,
-				FF3B20C41FCC3B4C0019F87A /* SignUpRequest.swift in Sources */,
 				FF000D9D1FD1368000678999 /* AudioUploadViewController.swift in Sources */,
 				FF7D6E0C1FDD630700754A7C /* AVPlayer.swift in Sources */,
 				FF02805A1FD7996C00C0013A /* RecordContuctor.swift in Sources */,
