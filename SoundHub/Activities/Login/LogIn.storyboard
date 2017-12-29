@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -163,7 +164,7 @@
                                             <action selector="nickNameConfirmHandler:" destination="y5Y-p4-nBj" eventType="primaryActionTriggered" id="PBJ-H6-nSO"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="asdf" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TeM-oW-WWD">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="asdfasdfasdf" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TeM-oW-WWD">
                                         <rect key="frame" x="0.0" y="82" width="300" height="36"/>
                                         <accessibility key="accessibilityConfiguration" hint="비밀번호 입력창"/>
                                         <nil key="textColor"/>
@@ -181,7 +182,7 @@
                                             <action selector="passwordConfirmHandler:" destination="y5Y-p4-nBj" eventType="primaryActionTriggered" id="kMU-RB-YDg"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="asdf" borderStyle="roundedRect" placeholder="Password Confirm" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="svt-Fd-H32">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="asdfasdfasdf" borderStyle="roundedRect" placeholder="Password Confirm" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="svt-Fd-H32">
                                         <rect key="frame" x="0.0" y="123" width="300" height="36"/>
                                         <accessibility key="accessibilityConfiguration" hint="비밀번호 확인 입력창"/>
                                         <nil key="textColor"/>
@@ -303,148 +304,92 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="gpt-j1-Xae">
-                                <rect key="frame" x="37.5" y="243.5" width="300" height="100"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AyD-0S-1sG">
-                                        <rect key="frame" x="0.0" y="0.0" width="96.5" height="100"/>
-                                        <state key="normal" backgroundImage="mic_lineart"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="micButtonHandler:" destination="9vm-a1-xVF" eventType="touchUpInside" id="ULE-pW-p8H"/>
-                                            <segue destination="Ikz-va-hjQ" kind="presentation" identifier="profileSetUpToMain" modalTransitionStyle="crossDissolve" id="uMM-1q-i4K"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2sQ-aD-TGp">
-                                        <rect key="frame" x="101.5" y="0.0" width="97" height="100"/>
-                                        <state key="normal" backgroundImage="guitar_lineart"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="guitarButtonHandler:" destination="9vm-a1-xVF" eventType="touchUpInside" id="Bar-zS-RYh"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lb0-7S-vZL">
-                                        <rect key="frame" x="203.5" y="0.0" width="96.5" height="100"/>
-                                        <state key="normal" backgroundImage="bass_lineart"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="bassButtonHandler:" destination="9vm-a1-xVF" eventType="touchUpInside" id="HQp-zd-E8M"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="EUR-lr-y0Q"/>
-                                    <constraint firstAttribute="width" constant="300" id="tcR-Ut-2fm"/>
-                                </constraints>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="8wK-a0-kxk">
-                                <rect key="frame" x="37" y="353.5" width="300" height="100"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D8J-5h-cy9">
-                                        <rect key="frame" x="0.0" y="0.0" width="96.5" height="100"/>
-                                        <state key="normal" backgroundImage="keyboard_lineart"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="keyboardButtonHandler:" destination="9vm-a1-xVF" eventType="touchUpInside" id="Uun-G5-bQF"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JGS-s1-YEP">
-                                        <rect key="frame" x="101.5" y="0.0" width="97" height="100"/>
-                                        <state key="normal" backgroundImage="drum_lineart"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="drumButtonHandler:" destination="9vm-a1-xVF" eventType="touchUpInside" id="PGF-qN-fid"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t8C-86-qL1">
-                                        <rect key="frame" x="203.5" y="0.0" width="96.5" height="100"/>
-                                        <state key="normal" backgroundImage="other_lineart"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="otherButtonHandler:" destination="9vm-a1-xVF" eventType="touchUpInside" id="5qv-Jp-Ecb"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="bff-im-cQJ"/>
-                                    <constraint firstAttribute="width" constant="300" id="eo5-F7-gHg"/>
-                                </constraints>
-                            </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="당신은 어떤 악기를 다루나요?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UZO-Ta-JuT">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="당신은 어떤 악기를 다루나요?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UZO-Ta-JuT">
                                 <rect key="frame" x="37" y="80" width="300" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="0zF-fn-jGb"/>
-                                </constraints>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="textColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Fw-cH-BTy">
+                                <rect key="frame" x="161.5" y="560" width="52" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="확인">
+                                    <color key="titleColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="confirmButtonHandler:" destination="9vm-a1-xVF" eventType="touchUpInside" id="itV-ok-mK9"/>
+                                </connections>
+                            </button>
+                            <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="rHR-7y-fzF">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="악기 선택" id="YVm-0p-mE6">
+                                        <barButtonItem key="rightBarButtonItem" title="취소" id="PtU-hQ-vGx">
+                                            <color key="tintColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <action selector="cancelButtonHandler:" destination="9vm-a1-xVF" id="DdX-7O-9VR"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NIc-M9-cNb">
+                                <rect key="frame" x="0.0" y="236" width="375" height="250"/>
+                                <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="NIc-M9-cNb" secondAttribute="height" multiplier="3:2" id="xW0-nG-rNe"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="KHh-vT-DH5">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="instrumentContainerCell" id="6Du-0b-fnA">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="3"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="gpt-j1-Xae" firstAttribute="centerX" secondItem="BH9-Jg-Djs" secondAttribute="centerX" id="1AI-Ve-mVl"/>
-                            <constraint firstItem="UZO-Ta-JuT" firstAttribute="leading" secondItem="gpt-j1-Xae" secondAttribute="leading" id="8c5-pn-cOk"/>
-                            <constraint firstItem="gpt-j1-Xae" firstAttribute="centerY" secondItem="BH9-Jg-Djs" secondAttribute="centerY" constant="-50" id="FS2-fx-Owy"/>
-                            <constraint firstItem="8wK-a0-kxk" firstAttribute="top" secondItem="gpt-j1-Xae" secondAttribute="bottom" constant="10" id="Ihq-DP-C8R"/>
-                            <constraint firstItem="8wK-a0-kxk" firstAttribute="centerX" secondItem="gpt-j1-Xae" secondAttribute="centerX" id="b8j-z9-Zv7"/>
-                            <constraint firstItem="UZO-Ta-JuT" firstAttribute="width" secondItem="8wK-a0-kxk" secondAttribute="width" id="qG3-84-fsR"/>
-                            <constraint firstItem="gpt-j1-Xae" firstAttribute="top" secondItem="UZO-Ta-JuT" secondAttribute="bottom" constant="63.5" id="rAW-UV-tZf"/>
+                            <constraint firstItem="7Fw-cH-BTy" firstAttribute="centerX" secondItem="BH9-Jg-Djs" secondAttribute="centerX" id="1ZB-ea-frZ"/>
+                            <constraint firstItem="NIc-M9-cNb" firstAttribute="width" secondItem="hr7-86-imh" secondAttribute="width" id="JQX-3i-lu0"/>
+                            <constraint firstItem="rHR-7y-fzF" firstAttribute="trailing" secondItem="BH9-Jg-Djs" secondAttribute="trailing" id="OeA-YF-8av"/>
+                            <constraint firstItem="rHR-7y-fzF" firstAttribute="top" secondItem="BH9-Jg-Djs" secondAttribute="top" id="fdp-FF-qcS"/>
+                            <constraint firstItem="rHR-7y-fzF" firstAttribute="leading" secondItem="BH9-Jg-Djs" secondAttribute="leading" id="jho-fo-GkI"/>
+                            <constraint firstItem="NIc-M9-cNb" firstAttribute="centerX" secondItem="BH9-Jg-Djs" secondAttribute="centerX" id="mXo-7s-Vbg"/>
+                            <constraint firstItem="7Fw-cH-BTy" firstAttribute="top" secondItem="NIc-M9-cNb" secondAttribute="bottom" constant="74" id="skZ-Fu-NVZ"/>
+                            <constraint firstItem="BH9-Jg-Djs" firstAttribute="bottom" secondItem="7Fw-cH-BTy" secondAttribute="bottom" constant="59" id="yh5-na-jkO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BH9-Jg-Djs"/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="7jD-cV-Lv9" appends="YES" id="dh7-au-h3c"/>
-                        </connections>
                     </view>
+                    <connections>
+                        <outlet property="mainFlowLayout" destination="NIc-M9-cNb" id="wZ9-Rg-iX3"/>
+                        <segue destination="m6W-z3-GzF" kind="unwind" identifier="undwindToMainEntry" unwindAction="unwindToMainEntryFor:towardsViewController:" id="Am0-Yr-qBQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pd8-1D-wiP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="7jD-cV-Lv9">
-                    <connections>
-                        <action selector="onTapHandler:" destination="9vm-a1-xVF" id="ehY-Yl-l50"/>
-                    </connections>
-                </tapGestureRecognizer>
+                <exit id="m6W-z3-GzF" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-244" y="867.61619190404804"/>
         </scene>
@@ -578,13 +523,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bass_lineart" width="800" height="554"/>
-        <image name="drum_lineart" width="606" height="540"/>
         <image name="guitarPlayer" width="580" height="773"/>
-        <image name="guitar_lineart" width="595" height="842"/>
-        <image name="keyboard_lineart" width="450" height="324"/>
-        <image name="mic_lineart" width="250" height="500"/>
-        <image name="other_lineart" width="430" height="400"/>
         <image name="soundHubLogo" width="943" height="248"/>
     </resources>
     <inferredMetricsTieBreakers>

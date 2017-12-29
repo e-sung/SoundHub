@@ -226,19 +226,34 @@ extension NetworkController{
 }
 
 extension NetworkController{
-    func sendRequest(with signUpContent:signUpRequest, from VC:UIViewController){
-        guard let signUpData = try? JSONEncoder().encode(signUpContent) else {return}
-        let request = generatePostRequest(with: self.signUpURL, and: signUpData)
-        
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if let response = response as? HTTPURLResponse {
-                if response.statusCode == 201 {
-                    DispatchQueue.main.async {VC.performSegue(withIdentifier: "profileSetUpToMain", sender: nil)}
-                }else{ DispatchQueue.main.async {VC.alert(msg: "\(response.statusCode)")} }
-            }
-            }.resume()
-    }
     
+    func signUp(with email:String, nickname:String, instruments:String, password1:String, password2:String,
+                completion: @escaping (_ userId: Int, _ errorMesge:String?)->Void){
+        
+        let signUpInfo = [ "email":email, "nickname":nickname, "instrument":instruments, "password1":password1, "password2":password2 ]
+        Alamofire.request(signUpURL, method: .post, parameters: signUpInfo, headers: nil).responseJSON { (response) in
+            print(response.request)
+            print("====================")
+            print(response.result)
+            if let json = response.result.value {
+                if let userInfo = json as? NSDictionary{
+                    if let userId = userInfo["id"] as? Int{
+                        DispatchQueue.main.async { completion(userId, nil) }
+                        return
+                    }
+                }
+                if let err = json as? NSDictionary{
+                    if let errorMessage =  err["detail"] as? String{
+                        DispatchQueue.main.async { completion(-1, errorMessage) }
+                        return
+                    }
+                }
+            }
+            DispatchQueue.main.async { completion(-1, "알 수 없는 오류가 발생했습니다")}
+            return
+        }
+    }
+
     func login(with email:String, and password:String, done:@escaping (_ result:LoginResponse)->Void){
         let loginInfo = ["email":email,"password":password]
         guard let loginData = try? JSONEncoder().encode(loginInfo) else {print("Encoding failed");return}
