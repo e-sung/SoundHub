@@ -401,16 +401,26 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X5r-vd-pxq">
+                                <rect key="frame" x="166" y="429" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.086274509803921567" green="0.086274509803921567" blue="0.086274509803921567" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="RK3-jr-y34" firstAttribute="centerX" secondItem="Phw-gG-MVb" secondAttribute="centerX" id="9wB-03-mM8"/>
+                            <constraint firstItem="X5r-vd-pxq" firstAttribute="width" secondItem="Phw-gG-MVb" secondAttribute="width" id="GLt-HL-wwo"/>
                             <constraint firstItem="RK3-jr-y34" firstAttribute="centerY" secondItem="Phw-gG-MVb" secondAttribute="centerY" id="Jq4-TY-cvv"/>
+                            <constraint firstItem="X5r-vd-pxq" firstAttribute="top" secondItem="RK3-jr-y34" secondAttribute="bottom" constant="40" id="g3f-Jh-if1"/>
+                            <constraint firstItem="X5r-vd-pxq" firstAttribute="centerX" secondItem="RK3-jr-y34" secondAttribute="centerX" id="xTJ-jG-Eji"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Phw-gG-MVb"/>
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="RK3-jr-y34" id="Gma-8X-dFs"/>
+                        <outlet property="statusLabel" destination="X5r-vd-pxq" id="D1Y-Qk-4h5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="efo-Eu-enl" userLabel="First Responder" sceneMemberID="firstResponder"/>
