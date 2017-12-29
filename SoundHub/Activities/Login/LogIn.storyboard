@@ -133,7 +133,7 @@
                                         <accessibility key="accessibilityConfiguration" hint="이메일 입력창"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="email"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" keyboardAppearance="alert" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="username"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                 <real key="value" value="1"/>
@@ -151,7 +151,7 @@
                                         <accessibility key="accessibilityConfiguration" hint="닉네임 입력창"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="username"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                 <real key="value" value="1"/>
@@ -169,7 +169,7 @@
                                         <accessibility key="accessibilityConfiguration" hint="비밀번호 입력창"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="next" secureTextEntry="YES" textContentType="password"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                 <real key="value" value="1"/>
@@ -187,7 +187,7 @@
                                         <accessibility key="accessibilityConfiguration" hint="비밀번호 확인 입력창"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                 <real key="value" value="1"/>
@@ -217,33 +217,8 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="PKB-4n-QUM">
-                                <rect key="frame" x="37.5" y="393.5" width="300" height="90"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3MX-UI-eKd" customClass="GIDSignInButton">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="42.5"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <connections>
-                                            <action selector="googleSignUpHandler:" destination="y5Y-p4-nBj" eventType="valueChanged" id="loP-vc-uHh"/>
-                                        </connections>
-                                    </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TY5-cv-b9H">
-                                        <rect key="frame" x="0.0" y="47.5" width="300" height="42.5"/>
-                                        <color key="backgroundColor" red="0.2364057004" green="0.4013232887" blue="0.76923906799999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="페북으로 회원가입">
-                                            <color key="titleColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="90" id="150-rH-hm6"/>
+                                    <constraint firstAttribute="width" constant="312" id="EZx-ji-gvE"/>
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oBV-Lo-IKu">
@@ -252,19 +227,25 @@
                                 <color key="textColor" red="1" green="0.27450980392156865" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3MX-UI-eKd" customClass="GIDSignInButton">
+                                <rect key="frame" x="37" y="420" width="300" height="42.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="googleSignUpHandler:" destination="y5Y-p4-nBj" eventType="valueChanged" id="loP-vc-uHh"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.086261831220000001" green="0.086283676330000003" blue="0.086257167159999995" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="o80-Wi-AmO" firstAttribute="centerY" secondItem="nOk-16-R4d" secondAttribute="centerY" constant="-80" id="4JR-1W-7RL"/>
-                            <constraint firstItem="PKB-4n-QUM" firstAttribute="width" secondItem="o80-Wi-AmO" secondAttribute="width" id="9lQ-41-6yH"/>
-                            <constraint firstItem="o80-Wi-AmO" firstAttribute="width" secondItem="5V7-fE-40j" secondAttribute="width" multiplier="0.8" id="CGp-Sd-yoe"/>
                             <constraint firstItem="jzZ-4N-eda" firstAttribute="top" secondItem="oBV-Lo-IKu" secondAttribute="bottom" constant="5" id="DZ6-qa-yTq"/>
+                            <constraint firstItem="3MX-UI-eKd" firstAttribute="width" secondItem="Y6j-my-KCM" secondAttribute="width" id="Il5-4q-drp"/>
                             <constraint firstItem="o80-Wi-AmO" firstAttribute="centerX" secondItem="nOk-16-R4d" secondAttribute="centerX" id="PuI-sE-f61"/>
-                            <constraint firstItem="PKB-4n-QUM" firstAttribute="top" secondItem="o80-Wi-AmO" secondAttribute="bottom" constant="30" id="ZeX-s1-C3D"/>
+                            <constraint firstItem="3MX-UI-eKd" firstAttribute="centerX" secondItem="Y6j-my-KCM" secondAttribute="centerX" id="V97-5R-evD"/>
                             <constraint firstItem="oBV-Lo-IKu" firstAttribute="width" secondItem="jzZ-4N-eda" secondAttribute="width" id="fH8-xN-6aJ"/>
                             <constraint firstItem="oBV-Lo-IKu" firstAttribute="leading" secondItem="jzZ-4N-eda" secondAttribute="leading" id="hAw-GZ-TRc"/>
-                            <constraint firstItem="PKB-4n-QUM" firstAttribute="centerX" secondItem="o80-Wi-AmO" secondAttribute="centerX" id="iuY-c1-Wbn"/>
+                            <constraint firstItem="3MX-UI-eKd" firstAttribute="top" secondItem="Y6j-my-KCM" secondAttribute="bottom" constant="50" id="viI-za-S47"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nOk-16-R4d"/>
                         <connections>
@@ -275,10 +256,10 @@
                         <outlet property="emailSignUpStackView" destination="o80-Wi-AmO" id="X9P-2R-9HO"/>
                         <outlet property="emailTF" destination="jzZ-4N-eda" id="L8G-eW-COa"/>
                         <outlet property="errorMsgLB" destination="oBV-Lo-IKu" id="Tu0-Pl-Itr"/>
+                        <outlet property="googleSignInButton" destination="3MX-UI-eKd" id="ion-AJ-eBT"/>
                         <outlet property="nickNameTF" destination="W95-be-h4a" id="FQU-IC-ecw"/>
                         <outlet property="passwordConfirmTF" destination="svt-Fd-H32" id="gm0-Kw-c0Y"/>
                         <outlet property="passwordTF" destination="TeM-oW-WWD" id="VYn-rd-RnN"/>
-                        <outlet property="socialSignUpStackView" destination="PKB-4n-QUM" id="nAr-3r-Vkp"/>
                         <outlet property="tapGestureRecognizer" destination="Xxd-Mb-VSR" id="v4d-W7-gc1"/>
                         <outletCollection property="textFields" destination="jzZ-4N-eda" collectionClass="NSMutableArray" id="CNR-9W-bKe"/>
                         <outletCollection property="textFields" destination="W95-be-h4a" collectionClass="NSMutableArray" id="VsP-Xa-2Zv"/>
@@ -409,7 +390,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="36"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" keyboardAppearance="alert" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="username"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                 <real key="value" value="1"/>
