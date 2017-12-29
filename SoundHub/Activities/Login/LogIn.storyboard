@@ -437,54 +437,38 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="312" id="T6I-s1-zNF"/>
+                                </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="sNd-e9-KQ8">
-                                <rect key="frame" x="37" y="382.5" width="300" height="105"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IEX-OO-YFx" customClass="GIDSignInButton">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
-                                        <color key="backgroundColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <action selector="googleSignInHandler:" destination="wSx-Gg-sUf" eventType="touchUpInside" id="ZVi-6c-xgt"/>
-                                        </connections>
-                                    </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FWU-wo-uO5">
-                                        <rect key="frame" x="0.0" y="55" width="300" height="50"/>
-                                        <color key="backgroundColor" red="0.23640570044517517" green="0.40132328867912292" blue="0.76923906803131104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="페북으로 로그인">
-                                            <color key="titleColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                </subviews>
-                            </stackView>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IEX-OO-YFx" customClass="GIDSignInButton">
+                                <rect key="frame" x="37" y="387" width="300" height="50"/>
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="googleSignInHandler:" destination="wSx-Gg-sUf" eventType="touchUpInside" id="ZVi-6c-xgt"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.086274509803921567" green="0.086274509803921567" blue="0.086274509803921567" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="dvs-E5-kHh" firstAttribute="centerY" secondItem="7S3-fE-DfC" secondAttribute="centerY" constant="-50" id="4t3-Xx-zYR"/>
-                            <constraint firstItem="sNd-e9-KQ8" firstAttribute="top" secondItem="dvs-E5-kHh" secondAttribute="bottom" constant="30" id="FYF-7k-kd8"/>
-                            <constraint firstItem="dvs-E5-kHh" firstAttribute="width" secondItem="2fs-c8-vZd" secondAttribute="width" multiplier="0.8" id="Kov-Of-N7Z"/>
-                            <constraint firstItem="sNd-e9-KQ8" firstAttribute="width" secondItem="dvs-E5-kHh" secondAttribute="width" id="i6X-Wr-NY6"/>
+                            <constraint firstItem="IEX-OO-YFx" firstAttribute="top" secondItem="dvs-E5-kHh" secondAttribute="bottom" constant="10" id="MAX-C0-cqm"/>
                             <constraint firstItem="dvs-E5-kHh" firstAttribute="centerX" secondItem="7S3-fE-DfC" secondAttribute="centerX" id="mg5-DL-ceK"/>
-                            <constraint firstItem="sNd-e9-KQ8" firstAttribute="centerX" secondItem="dvs-E5-kHh" secondAttribute="centerX" id="p7G-yr-QYl"/>
+                            <constraint firstItem="IEX-OO-YFx" firstAttribute="centerX" secondItem="dvs-E5-kHh" secondAttribute="centerX" id="ms8-mk-CPL"/>
+                            <constraint firstItem="IEX-OO-YFx" firstAttribute="width" secondItem="dvs-E5-kHh" secondAttribute="width" id="tCV-SN-hsV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7S3-fE-DfC"/>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="9qK-Xe-VPL" appends="YES" id="UnU-rb-k2O"/>
                         </connections>
                     </view>
+                    <size key="freeformSize" width="375" height="700"/>
                     <connections>
                         <outlet property="emailLoginStackView" destination="dvs-E5-kHh" id="u5c-TC-OQ0"/>
                         <outlet property="emailTextField" destination="Fin-d5-EYt" id="AoT-F6-OSS"/>
+                        <outlet property="googleSignInButton" destination="IEX-OO-YFx" id="2bb-Mp-SI6"/>
                         <outlet property="passwordTextField" destination="Hi4-Ur-RHJ" id="Q4H-M8-pdK"/>
-                        <outlet property="signInButton" destination="IEX-OO-YFx" id="yg5-Xd-dS0"/>
-                        <outlet property="socialLoginStackView" destination="sNd-e9-KQ8" id="fKI-BG-c9a"/>
                         <outlet property="tapGestureRecognizer" destination="9qK-Xe-VPL" id="sYK-ZT-eFf"/>
                         <segue destination="Ikz-va-hjQ" kind="presentation" identifier="loginSuccessSegue" modalTransitionStyle="crossDissolve" id="X5d-yV-mOA"/>
                     </connections>

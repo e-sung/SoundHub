@@ -17,9 +17,8 @@ class LoginViewController: UIViewController, UITextViewDelegate,GIDSignInUIDeleg
     // MARK: IBOutlests
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var signInButton: GIDSignInButton!
+    @IBOutlet weak var googleSignInButton: GIDSignInButton!
     @IBOutlet weak var emailLoginStackView: UIStackView!
-    @IBOutlet weak var socialLoginStackView: UIStackView!
     @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
     
     // MARK: IBActions
@@ -49,6 +48,8 @@ class LoginViewController: UIViewController, UITextViewDelegate,GIDSignInUIDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         GIDSignIn.sharedInstance().uiDelegate = self
+        googleSignInButton.colorScheme = .dark
+        googleSignInButton.style = .wide
         tapGestureRecognizer.delegate = self
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: "ToggleAuthUINotification"), object: nil, queue: nil) { (noti) in
             if let dic = noti.userInfo as NSDictionary?{
@@ -75,7 +76,7 @@ class LoginViewController: UIViewController, UITextViewDelegate,GIDSignInUIDeleg
 extension LoginViewController:UIGestureRecognizerDelegate{
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         let y = touch.location(in: view).y
-        return y < emailLoginStackView.frame.minY || y > socialLoginStackView.frame.maxY
+        return y < emailLoginStackView.frame.minY || y > googleSignInButton.frame.maxY
     }
 }
 
