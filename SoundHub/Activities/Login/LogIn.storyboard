@@ -126,10 +126,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="o80-Wi-AmO">
-                                <rect key="frame" x="37.5" y="163.5" width="300" height="200"/>
+                                <rect key="frame" x="31.5" y="163.5" width="312" height="200"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="ios00@fc.com" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jzZ-4N-eda">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="36"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="312" height="36"/>
                                         <accessibility key="accessibilityConfiguration" hint="이메일 입력창"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -147,7 +147,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="ios00" borderStyle="roundedRect" placeholder="NickName" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W95-be-h4a">
-                                        <rect key="frame" x="0.0" y="41" width="300" height="36"/>
+                                        <rect key="frame" x="0.0" y="41" width="312" height="36"/>
                                         <accessibility key="accessibilityConfiguration" hint="닉네임 입력창"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -165,7 +165,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="asdfasdfasdf" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TeM-oW-WWD">
-                                        <rect key="frame" x="0.0" y="82" width="300" height="36"/>
+                                        <rect key="frame" x="0.0" y="82" width="312" height="36"/>
                                         <accessibility key="accessibilityConfiguration" hint="비밀번호 입력창"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -183,7 +183,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="asdfasdfasdf" borderStyle="roundedRect" placeholder="Password Confirm" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="svt-Fd-H32">
-                                        <rect key="frame" x="0.0" y="123" width="300" height="36"/>
+                                        <rect key="frame" x="0.0" y="123" width="312" height="36"/>
                                         <accessibility key="accessibilityConfiguration" hint="비밀번호 확인 입력창"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -201,7 +201,7 @@
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y6j-my-KCM">
-                                        <rect key="frame" x="0.0" y="164" width="300" height="36"/>
+                                        <rect key="frame" x="0.0" y="164" width="312" height="36"/>
                                         <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Email 회원가입">
@@ -222,12 +222,12 @@
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oBV-Lo-IKu">
-                                <rect key="frame" x="37.5" y="158.5" width="300" height="0.0"/>
+                                <rect key="frame" x="31.5" y="158.5" width="312" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.27450980392156865" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3MX-UI-eKd" customClass="GIDSignInButton">
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3MX-UI-eKd" customClass="GIDSignInButton">
                                 <rect key="frame" x="37" y="420" width="300" height="42.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
@@ -380,14 +380,14 @@
             <objects>
                 <viewController id="wSx-Gg-sUf" customClass="LoginViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2fs-c8-vZd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="700"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dvs-E5-kHh">
-                                <rect key="frame" x="37.5" y="234.5" width="300" height="118"/>
+                                <rect key="frame" x="31.5" y="251" width="312" height="118"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="dev.esung@gmail.com" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fin-d5-EYt">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="36"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="312" height="36"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" keyboardAppearance="alert" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="username"/>
@@ -404,7 +404,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="asdfasdfasdf" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hi4-Ur-RHJ">
-                                        <rect key="frame" x="0.0" y="41" width="300" height="36"/>
+                                        <rect key="frame" x="0.0" y="41" width="312" height="36"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="done" secureTextEntry="YES"/>
@@ -421,7 +421,7 @@
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Is-bc-taC">
-                                        <rect key="frame" x="0.0" y="82" width="300" height="36"/>
+                                        <rect key="frame" x="0.0" y="82" width="312" height="36"/>
                                         <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Email 로그인">
@@ -441,7 +441,7 @@
                                     <constraint firstAttribute="width" constant="312" id="T6I-s1-zNF"/>
                                 </constraints>
                             </stackView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IEX-OO-YFx" customClass="GIDSignInButton">
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IEX-OO-YFx" customClass="GIDSignInButton">
                                 <rect key="frame" x="37" y="387" width="300" height="50"/>
                                 <color key="backgroundColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
@@ -470,7 +470,7 @@
                         <outlet property="googleSignInButton" destination="IEX-OO-YFx" id="2bb-Mp-SI6"/>
                         <outlet property="passwordTextField" destination="Hi4-Ur-RHJ" id="Q4H-M8-pdK"/>
                         <outlet property="tapGestureRecognizer" destination="9qK-Xe-VPL" id="sYK-ZT-eFf"/>
-                        <segue destination="Ikz-va-hjQ" kind="presentation" identifier="loginSuccessSegue" modalTransitionStyle="crossDissolve" id="X5d-yV-mOA"/>
+                        <segue destination="Ikz-va-hjQ" kind="presentation" identifier="loginSuccessSegue" modalTransitionStyle="flipHorizontal" id="X5d-yV-mOA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a3y-ry-yLu" userLabel="First Responder" sceneMemberID="firstResponder"/>

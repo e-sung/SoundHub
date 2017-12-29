@@ -34,38 +34,39 @@ class ProfileSetUpViewController: UIViewController {
             }
         }
         let _ = selectedInstruments.dropLast()
-        if let token = token{
+        if let token = token {
+            showLoadingIndicator()
             NetworkController.main.signUp(with: token, nickname: nickName, instruments: selectedInstruments, completion: { (dic, err) in
-                if let err = err {
-                    let alert = UIAlertController(title: "안내", message: err, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "확인", style: .cancel , handler: { (action) in
-                        self.dismissWith(depth: 2, from: self)
-                    }))
-                    self.present(alert, animated: true, completion: nil)
-                }
-                else {
-                    print("Successs!!!!!")
-                    guard let socialLoginInfo = dic else { return }
-                    UserDefaults.standard.save(with: socialLoginInfo)
-                    self.performSegue(withIdentifier: "showMainChart", sender: nil)
+                if let userInfo = dic{
+                    UserDefaults.standard.save(with: userInfo)
+                    self.presentedViewController?.dismiss(animated: true, completion: {
+                        self.performSegue(withIdentifier: "showMainChart", sender: nil)
+                    })
+                }else {
+                    self.presentedViewController?.dismiss(animated: true, completion: {
+                        if let err = err { self.present(self.generateAlert(given: err), animated: true, completion: nil)}
+                        else{ self.alert(msg: "이건 무슨 오류일까요?") }
+                    })
                 }
             })
             
         }else{
             NetworkController.main.signUp(with: email, nickname: nickName, instruments: selectedInstruments, password1: password, password2: passwordConfirm) { (userId, errorMessage) in
-                
-                let alertMessage = self.generateAlertMessage(given: errorMessage)
-                let alert = UIAlertController(title: "안내", message: alertMessage, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "확인", style: .cancel , handler: { (action) in
-                    if let _ = errorMessage { self.dismiss(animated: true, completion: nil) }
-                    else { self.dismissWith(depth: 2, from: self) }
-                }))
+                let alert = self.generateAlert(given: errorMessage)
                 self.present(alert, animated: true, completion: nil)
             }
         }
     }
     
-
+    private func generateAlert(given error:String?)->UIAlertController{
+        let alertMessage = self.generateAlertMessage(given: error)
+        let alert = UIAlertController(title: "안내", message: alertMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .cancel , handler: { (action) in
+            if let _ = error { self.dismiss(animated: true, completion: nil) }
+            else { self.dismissWith(depth: 2, from: self) }
+        }))
+        return alert
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
