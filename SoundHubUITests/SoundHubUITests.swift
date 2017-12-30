@@ -8,11 +8,12 @@
 
 import XCTest
 
-class soundHubPracticeUITests: XCTestCase {
+class SoundHubUITests: XCTestCase {
         
     override func setUp() {
         super.setUp()
         
+
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
         // In UI tests it is usually best to stop immediately when a failure occurs.
@@ -29,7 +30,26 @@ class soundHubPracticeUITests: XCTestCase {
     }
     
     func testLogin() {
-                
+        
+        let app = XCUIApplication()
+        app.buttons["회원가입"].tap()
+        app.textFields["Email"].tap()
+        
+        let deleteKey = app/*@START_MENU_TOKEN@*/.keys["delete"]/*[[".keyboards.keys[\"delete\"]",".keys[\"delete\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        
+        
     }
     
 }
