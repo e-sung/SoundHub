@@ -94,6 +94,7 @@ class DetailViewController: UIViewController{
         if (post.author?.id ?? -1) == Int(userId){
             commentTrackContainer?.allowsMultiSelection = true
         }
+        recorderCell?.connectInputPlotToMic()
     }
     
     override func willMove(toParentViewController parent: UIViewController?)
@@ -255,7 +256,7 @@ extension DetailViewController:CommentContainerCellDelegate{
         for comment in selectedComments{
             guard let commentId = comment.id else {
                 self.mixedTrackContainer?.allowsMultiSelection = false
-                self.navigationItem.rightBarButtonItems?.popLast()
+                let _ = self.navigationItem.rightBarButtonItems?.popLast()
                 return
             }
             comments.append(commentId)
@@ -268,7 +269,7 @@ extension DetailViewController:CommentContainerCellDelegate{
                 let ids = IndexSet(integersIn: Section.MixedTracks.rawValue ... Section.MixedTracks.rawValue)
                 self.mainTV.reloadSections(ids, with: .automatic)
                 self.mixedTrackContainer?.allowsMultiSelection = false
-                self.navigationItem.rightBarButtonItems?.popLast()
+                let _ = self.navigationItem.rightBarButtonItems?.popLast()
             })
         })
     }
