@@ -26,7 +26,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
     @IBOutlet weak var passwordConfirmTF: UITextField!
     @IBOutlet var textFields: [UITextField]!
     @IBOutlet weak var emailSignUpStackView: UIStackView!
-    @IBOutlet weak var googleSignInButton: GIDSignInButton!
+    @IBOutlet weak var googleSignInButton: UIButton!
     
     @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
     
@@ -64,10 +64,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
         else{ self.dismiss(animated: true, completion: nil) }
     }
     
-    @IBAction func googleSignUpHandler(_ sender: GIDSignInButton) {
+    @IBAction func googleSignUpHandler(_ sender: UIButton) {
         GIDSignIn.sharedInstance().signIn()
     }
-    
     
     // MARK: LifeCycle
     override func viewDidLoad() {
@@ -80,8 +79,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
             self.isKeyboardUp = false
         }
         GIDSignIn.sharedInstance().uiDelegate = self
-        googleSignInButton.colorScheme = .dark
-        googleSignInButton.style = .wide
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: "ToggleAuthUINotification"), object: nil, queue: nil) { (noti) in
             if let dic = noti.userInfo as NSDictionary?{
                 self.token = dic["token"] as? String

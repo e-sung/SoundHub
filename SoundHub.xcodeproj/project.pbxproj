@@ -72,7 +72,7 @@
 		FFCF82C61FC95D66003B7861 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFCF82C51FC95D66003B7861 /* Assets.xcassets */; };
 		FFCF82C91FC95D66003B7861 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFCF82C71FC95D66003B7861 /* LaunchScreen.storyboard */; };
 		FFCF82D41FC95D66003B7861 /* soundHubPracticeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCF82D31FC95D66003B7861 /* soundHubPracticeTests.swift */; };
-		FFCF82DF1FC95D66003B7861 /* soundHubPracticeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCF82DE1FC95D66003B7861 /* soundHubPracticeUITests.swift */; };
+		FFCF82DF1FC95D66003B7861 /* SoundHubUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCF82DE1FC95D66003B7861 /* SoundHubUITests.swift */; };
 		FFCF82ED1FC95E07003B7861 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCF82EC1FC95E07003B7861 /* EntryViewController.swift */; };
 		FFCF82EF1FC95E6D003B7861 /* SignUP_SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFCF82EE1FC95E6D003B7861 /* SignUP_SignIn.storyboard */; };
 		FFD500AC1FDE509F008464A8 /* PlayBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD500AB1FDE509F008464A8 /* PlayBarController.swift */; };
@@ -177,7 +177,7 @@
 		FFCF82D31FC95D66003B7861 /* soundHubPracticeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = soundHubPracticeTests.swift; sourceTree = "<group>"; };
 		FFCF82D51FC95D66003B7861 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFCF82DA1FC95D66003B7861 /* SoundHubUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoundHubUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FFCF82DE1FC95D66003B7861 /* soundHubPracticeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = soundHubPracticeUITests.swift; sourceTree = "<group>"; };
+		FFCF82DE1FC95D66003B7861 /* SoundHubUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundHubUITests.swift; sourceTree = "<group>"; };
 		FFCF82E01FC95D66003B7861 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFCF82EC1FC95E07003B7861 /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
 		FFCF82EE1FC95E6D003B7861 /* SignUP_SignIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignUP_SignIn.storyboard; sourceTree = "<group>"; };
@@ -475,7 +475,7 @@
 		FFCF82DD1FC95D66003B7861 /* SoundHubUITests */ = {
 			isa = PBXGroup;
 			children = (
-				FFCF82DE1FC95D66003B7861 /* soundHubPracticeUITests.swift */,
+				FFCF82DE1FC95D66003B7861 /* SoundHubUITests.swift */,
 				FFCF82E01FC95D66003B7861 /* Info.plist */,
 			);
 			path = SoundHubUITests;
@@ -679,9 +679,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SoundHubUITests/Pods-SoundHubUITests-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -767,6 +770,7 @@
 				"${PODS_ROOT}/AudioKit/iOS/AudioKit.framework",
 				"${PODS_ROOT}/AudioKit/iOS/AudioKitUI.framework",
 				"${BUILT_PRODUCTS_DIR}/FDWaveformView/FDWaveformView.framework",
+				"${BUILT_PRODUCTS_DIR}/Fingertips/Fingertips.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
@@ -782,6 +786,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AudioKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AudioKitUI.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FDWaveformView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Fingertips.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
@@ -800,9 +805,26 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SoundHubUITests/Pods-SoundHubUITests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${PODS_ROOT}/AudioKit/iOS/AudioKit.framework",
+				"${PODS_ROOT}/AudioKit/iOS/AudioKitUI.framework",
+				"${BUILT_PRODUCTS_DIR}/FDWaveformView/FDWaveformView.framework",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
+				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionSheetPicker_3_0.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AudioKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AudioKitUI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FDWaveformView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -885,7 +907,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFCF82DF1FC95D66003B7861 /* soundHubPracticeUITests.swift in Sources */,
+				FFCF82DF1FC95D66003B7861 /* SoundHubUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1117,13 +1139,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G4MM77V7NH;
-				INFOPLIST_FILE = soundHubPracticeUITests/Info.plist;
+				INFOPLIST_FILE = SoundHubUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = asdf.soundHubPracticeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = soundHubPractice;
+				TEST_TARGET_NAME = SoundHub;
 			};
 			name = Debug;
 		};
@@ -1134,13 +1157,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G4MM77V7NH;
-				INFOPLIST_FILE = soundHubPracticeUITests/Info.plist;
+				INFOPLIST_FILE = SoundHubUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = asdf.soundHubPracticeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = soundHubPractice;
+				TEST_TARGET_NAME = SoundHub;
 			};
 			name = Release;
 		};

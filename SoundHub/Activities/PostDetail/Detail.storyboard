@@ -483,8 +483,8 @@
                                                                 </collectionViewCell>
                                                             </cells>
                                                         </collectionView>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F2b-XT-SDC" customClass="AKNodeOutputPlot" customModule="AudioKitUI">
-                                                            <rect key="frame" x="51" y="449.5" width="317" height="50"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F2b-XT-SDC" customClass="AKNodeOutputPlot" customModule="AudioKitUI">
+                                                            <rect key="frame" x="46" y="459.5" width="322" height="30"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="color" keyPath="color">
@@ -495,7 +495,7 @@
                                                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="MTZ-PH-oTy">
                                                             <rect key="frame" x="0.0" y="118" width="375" height="324"/>
                                                         </scrollView>
-                                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgG-St-MdE">
+                                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgG-St-MdE">
                                                             <rect key="frame" x="15" y="459" width="30" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="S3T-5u-935"/>
@@ -518,6 +518,7 @@
                                                         <constraint firstItem="MTZ-PH-oTy" firstAttribute="leading" secondItem="2ln-Zt-P5E" secondAttribute="leading" id="bld-6o-5ma"/>
                                                         <constraint firstItem="xgG-St-MdE" firstAttribute="leading" secondItem="2ln-Zt-P5E" secondAttribute="leading" constant="10" id="g68-xY-t6w"/>
                                                         <constraint firstItem="LWf-A0-AYP" firstAttribute="leading" secondItem="2ln-Zt-P5E" secondAttribute="leading" id="jVO-aJ-NbN"/>
+                                                        <constraint firstItem="xgG-St-MdE" firstAttribute="top" secondItem="MTZ-PH-oTy" secondAttribute="bottom" constant="5" id="lE0-5O-wxv"/>
                                                         <constraint firstItem="F2b-XT-SDC" firstAttribute="leading" secondItem="xgG-St-MdE" secondAttribute="trailing" constant="6" id="mlw-2m-TbT"/>
                                                         <constraint firstAttribute="trailing" secondItem="F2b-XT-SDC" secondAttribute="trailing" constant="7" id="v7l-aI-P4P"/>
                                                         <constraint firstItem="LWf-A0-AYP" firstAttribute="top" secondItem="2ln-Zt-P5E" secondAttribute="top" constant="10" id="y97-ae-U2c"/>
