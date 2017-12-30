@@ -36,10 +36,10 @@
             </objects>
             <point key="canvasLocation" x="298" y="310"/>
         </scene>
-        <!--LogIn-->
+        <!--SignUP_SignIn-->
         <scene sceneID="5CV-t4-Gzv">
             <objects>
-                <viewControllerPlaceholder storyboardName="LogIn" id="GVL-G0-SG3" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="SignUP_SignIn" id="GVL-G0-SG3" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SMx-cX-Nnk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="298" y="110"/>

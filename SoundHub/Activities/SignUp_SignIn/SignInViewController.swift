@@ -1,6 +1,5 @@
 //
-//  LoginViewController.swift
-//  LoginPractice
+//  SignInViewController.swift
 //
 //  Created by 류성두 on 2017. 11. 24..
 //  Copyright © 2017년 류성두. All rights reserved.
@@ -9,7 +8,7 @@
 import UIKit
 import GoogleSignIn
 
-class LoginViewController: UIViewController, UITextViewDelegate,GIDSignInUIDelegate {
+class SignInViewController: UIViewController, UITextViewDelegate,GIDSignInUIDelegate {
     
     // MARK: Stored Properties
     var isKeyboardUp = false
@@ -67,14 +66,14 @@ class LoginViewController: UIViewController, UITextViewDelegate,GIDSignInUIDeleg
     }
 }
 
-extension LoginViewController:UIGestureRecognizerDelegate{
+extension SignInViewController:UIGestureRecognizerDelegate{
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         let y = touch.location(in: view).y
         return y < emailLoginStackView.frame.minY || y > googleSignInButton.frame.maxY
     }
 }
 
-extension LoginViewController{
+extension SignInViewController{
     private func tryLogin(with email:String?, and password:String?){
         guard let email = email else {alert(msg: "이메일을 입력하세요");return}
         guard let password = password else {alert(msg: "비밀번호를 입력하세요");return}

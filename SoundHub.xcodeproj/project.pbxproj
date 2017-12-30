@@ -33,7 +33,7 @@
 		FF3B20B81FCAC92D0019F87A /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF3B20B71FCAC92D0019F87A /* Detail.storyboard */; };
 		FF3B20BA1FCACD4A0019F87A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20B91FCACD4A0019F87A /* DetailViewController.swift */; };
 		FF3B20BC1FCACE8D0019F87A /* DetailHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20BB1FCACE8D0019F87A /* DetailHeaderCell.swift */; };
-		FF3B20BF1FCC2B0E0019F87A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20BE1FCC2B0E0019F87A /* LoginViewController.swift */; };
+		FF3B20BF1FCC2B0E0019F87A /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20BE1FCC2B0E0019F87A /* SignInViewController.swift */; };
 		FF3B20C21FCC31930019F87A /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20C11FCC31930019F87A /* SignUpViewController.swift */; };
 		FF3B20C61FCC3B930019F87A /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20C51FCC3B930019F87A /* Instrument.swift */; };
 		FF3B20C91FCC434B0019F87A /* ProfileSetUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20C81FCC434B0019F87A /* ProfileSetUpViewController.swift */; };
@@ -74,7 +74,7 @@
 		FFCF82D41FC95D66003B7861 /* soundHubPracticeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCF82D31FC95D66003B7861 /* soundHubPracticeTests.swift */; };
 		FFCF82DF1FC95D66003B7861 /* soundHubPracticeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCF82DE1FC95D66003B7861 /* soundHubPracticeUITests.swift */; };
 		FFCF82ED1FC95E07003B7861 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCF82EC1FC95E07003B7861 /* EntryViewController.swift */; };
-		FFCF82EF1FC95E6D003B7861 /* LogIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFCF82EE1FC95E6D003B7861 /* LogIn.storyboard */; };
+		FFCF82EF1FC95E6D003B7861 /* SignUP_SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFCF82EE1FC95E6D003B7861 /* SignUP_SignIn.storyboard */; };
 		FFD500AC1FDE509F008464A8 /* PlayBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD500AB1FDE509F008464A8 /* PlayBarController.swift */; };
 		FFEAE1A91FEA52B700FD7D7F /* AUCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEAE1A81FEA52B700FD7D7F /* AUCell.swift */; };
 /* End PBXBuildFile section */
@@ -130,7 +130,7 @@
 		FF3B20B71FCAC92D0019F87A /* Detail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
 		FF3B20B91FCACD4A0019F87A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		FF3B20BB1FCACE8D0019F87A /* DetailHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHeaderCell.swift; sourceTree = "<group>"; };
-		FF3B20BE1FCC2B0E0019F87A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		FF3B20BE1FCC2B0E0019F87A /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		FF3B20C11FCC31930019F87A /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		FF3B20C51FCC3B930019F87A /* Instrument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instrument.swift; sourceTree = "<group>"; };
 		FF3B20C81FCC434B0019F87A /* ProfileSetUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetUpViewController.swift; sourceTree = "<group>"; };
@@ -180,7 +180,7 @@
 		FFCF82DE1FC95D66003B7861 /* soundHubPracticeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = soundHubPracticeUITests.swift; sourceTree = "<group>"; };
 		FFCF82E01FC95D66003B7861 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFCF82EC1FC95E07003B7861 /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
-		FFCF82EE1FC95E6D003B7861 /* LogIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LogIn.storyboard; sourceTree = "<group>"; };
+		FFCF82EE1FC95E6D003B7861 /* SignUP_SignIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignUP_SignIn.storyboard; sourceTree = "<group>"; };
 		FFD500AB1FDE509F008464A8 /* PlayBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayBarController.swift; sourceTree = "<group>"; };
 		FFEAE1A81FEA52B700FD7D7F /* AUCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AUCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -261,7 +261,7 @@
 			children = (
 				FFCF82C21FC95D66003B7861 /* Entry.storyboard */,
 				FFCF82EC1FC95E07003B7861 /* EntryViewController.swift */,
-				FF3B20C01FCC2B170019F87A /* Login */,
+				FF3B20C01FCC2B170019F87A /* SignUp_SignIn */,
 				FF9A84E81FC9A4CE00AC4780 /* Chart */,
 				FF688F7B1FCE5C1F00F0A41F /* SideMenu */,
 				FF3B20BD1FCAD5F50019F87A /* PostDetail */,
@@ -300,16 +300,16 @@
 			path = PostDetail;
 			sourceTree = "<group>";
 		};
-		FF3B20C01FCC2B170019F87A /* Login */ = {
+		FF3B20C01FCC2B170019F87A /* SignUp_SignIn */ = {
 			isa = PBXGroup;
 			children = (
-				FFCF82EE1FC95E6D003B7861 /* LogIn.storyboard */,
+				FFCF82EE1FC95E6D003B7861 /* SignUP_SignIn.storyboard */,
 				FFC104961FEBBFDD00460FD6 /* MainEntryViewController.swift */,
 				FF3B20C81FCC434B0019F87A /* ProfileSetUpViewController.swift */,
 				FF3B20C11FCC31930019F87A /* SignUpViewController.swift */,
-				FF3B20BE1FCC2B0E0019F87A /* LoginViewController.swift */,
+				FF3B20BE1FCC2B0E0019F87A /* SignInViewController.swift */,
 			);
-			path = Login;
+			path = SignUp_SignIn;
 			sourceTree = "<group>";
 		};
 		FF3B20C71FCC3C9F0019F87A /* Models */ = {
@@ -606,7 +606,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFCF82EF1FC95E6D003B7861 /* LogIn.storyboard in Resources */,
+				FFCF82EF1FC95E6D003B7861 /* SignUP_SignIn.storyboard in Resources */,
 				FF688F7A1FCE58D600F0A41F /* SideMenu.storyboard in Resources */,
 				FF3B20B81FCAC92D0019F87A /* Detail.storyboard in Resources */,
 				FFA8A84F1FE74EF7008443B4 /* LICENSE in Resources */,
@@ -865,7 +865,7 @@
 				FFC32AE81FCFBFDB00651A31 /* MasterWaveFormViewCell.swift in Sources */,
 				FFB85FCE1FCE657F000E47C8 /* ProfileViewController.swift in Sources */,
 				FF688F781FCE58B700F0A41F /* SideMenuViewController.swift in Sources */,
-				FF3B20BF1FCC2B0E0019F87A /* LoginViewController.swift in Sources */,
+				FF3B20BF1FCC2B0E0019F87A /* SignInViewController.swift in Sources */,
 				FF9D18561FDA79E8008D5FD1 /* Generics.swift in Sources */,
 				FFCDE7DA1FE7FB5C0008CCB9 /* UITableView.swift in Sources */,
 				FFB85FD21FCE79A3000E47C8 /* User.swift in Sources */,
