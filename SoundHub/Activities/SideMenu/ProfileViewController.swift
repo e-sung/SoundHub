@@ -96,6 +96,11 @@ class ProfileViewController: UIViewController{
             mainTV.scrollToRow(at: IndexPath(item: 0, section: 1) , at: .top, animated: true)
             flowCell?.isScrollEnabled = true
         }
+        self.view.endEditing(true)
+    }
+    
+    @IBAction func tapDidHappend(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
     }
     
     // MARK: IBOutlets
