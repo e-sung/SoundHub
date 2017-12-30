@@ -42,12 +42,23 @@ class ChartViewController: UIViewController{
                 self.presentedViewController?.dismiss(animated: true, completion: nil)
             })
         }
+        if let homePageData = UserDefaults.standard.object(forKey: "InitialHomepage") as? Data{
+            if let homePageInfo = try? JSONDecoder().decode(HomePage.self, from: homePageData) {
+                DataCenter.main.homePages[.general] = homePageInfo
+                self.refreshData()
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         if shouldScrollToTop{
             mainTV.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
             shouldScrollToTop = false
+        }
+        showLoadingIndicator()
+        NetworkController.main.fetchHomePage(of: category, with: option) {
+            self.refreshData()
+            self.presentedViewController?.dismiss(animated: true, completion: nil)
         }
     }
 
@@ -56,16 +67,6 @@ class ChartViewController: UIViewController{
             guard let bottomConstraint = mainTVBottomConstraint else { return }
             bottomConstraint.isActive = false
             mainTV.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -(PlayBarController.main.view.frame.height)).isActive = true
-        }
-
-        if DataCenter.main.homePages[category]?.recent_posts.count == 0{
-            performSegue(withIdentifier: "showLoadingIndicatingView", sender:self)
-        }
-        NetworkController.main.fetchHomePage(of: category, with: option) {
-            self.refreshData()
-            if let loadIndicator = self.presentedViewController as? LoadingIndicatorViewController {
-                loadIndicator.dismiss(animated: true, completion: nil)
-            }
         }
     }
 }

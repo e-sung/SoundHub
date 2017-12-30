@@ -26,6 +26,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate {
     }
     // [END didfinishlaunching]
     
+    func applicationWillTerminate(_ application: UIApplication) {
+        guard let homePageInfo = DataCenter.main.homePages[.general] else { return }
+        let homePageData = try! JSONEncoder().encode(homePageInfo)
+        UserDefaults.standard.set(homePageData, forKey: "InitialHomepage")
+    }
+    
     // [START openurl]
     func application(_ application: UIApplication,
                      open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
