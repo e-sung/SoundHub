@@ -63,20 +63,8 @@ class ProfileViewController: UIViewController{
         NetworkController.main.patch(profileImage: changedProfileImage, headerImage: changedHeaderImage)
         guard let headerCell = headerCell else { return }
         NetworkController.main.patchUser(nickname: headerCell.nickName, instrument: headerCell.instrument) { (requestSucceded) in
-            if requestSucceded == true {
-                /// 네트워크 세션이 끝난 지금까지도 각종 UI에 변경되기 전 User데이터가 표시되고 있음.
-                /// 또 DataCenter.main 에도 아직 새 User객체가 반영되지 않았음.
-                /// 따라서
-                DataCenter.main = DataCenter() /// 1. DataCenter.main 초기화
-                self.presentedViewController?.dismiss(animated: true, completion: {
-                    self.navigationController?.popViewController(animated: true) /// 2. ChartVC로 복귀
-                    /// 3. ChartVC에서는 DataCenter.main을 참조하려고 할 것이고, 그것이 비어있기 때문에
-                    /// 4. 새 http 요청으로 DataCenter.main을 채워넣음.
-                    /// 5. 그 과정에서 새롭게 변경된 User객체가 모든 UI에 반영됨
-                })
-            }else{
-                self.alert(msg: "요청이 실패했습니다. 어떻게 된걸까요?")
-            }
+            NotificationCenter.default.post(name: NSNotification.Name.init("shouldReloadContents"), object: nil)
+            self.presentedViewController?.dismiss(animated: true, completion: nil)
         }
         headerCell.isSettingPhase = false
     }
@@ -144,6 +132,13 @@ class ProfileViewController: UIViewController{
         
         let sideMenuButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "Hamburger_icon"), style: .plain, target: self, action: #selector(showSideMenu))
         self.navigationItem.rightBarButtonItem = sideMenuButton
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.init("shouldReloadContents"), object: nil, queue: nil) { (noti) in
+            guard let userId = self.userInfo?.id else { return }
+            NetworkController.main.fetchUser(id: userId, completion: { (userInfo) in
+                self.userInfo = userInfo
+                self.mainTV.reloadData()
+            })
+        }
     }
 }
 
