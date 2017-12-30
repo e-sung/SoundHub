@@ -197,7 +197,7 @@ extension AudioRecorderViewController:AKAudioUnitManagerDelegate{
 extension AudioRecorderViewController{
 
     private func setUpMetaInfo(){
-        let storyBoard = UIStoryboard(name: "Entry", bundle: nil)
+        let storyBoard = UIStoryboard(name: "UploadAudio", bundle: nil)
         let audioUploadVC = storyBoard.instantiateViewController(withIdentifier: "DocumentViewController") as! AudioUploadViewController
         
         ActionSheetStringPicker.show(withTitle: "어떤 악기인가요?", rows: Instrument.cases, initialSelection: 0, doneBlock: { (picker, row, result) in

@@ -10,12 +10,12 @@
 		3C7582719DEC0BCF97AC9658 /* Pods_SoundHubTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97CA82572278A09E19CB69B /* Pods_SoundHubTests.framework */; };
 		514AE9D3C68525A59E406194 /* Pods_SoundHubUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFEF70D3C538FB607DF5384A /* Pods_SoundHubUITests.framework */; };
 		8C64A22E72B4C054AEC0195F /* Pods_SoundHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F94B1440EDA863E444AD34F /* Pods_SoundHub.framework */; };
+		F0058B151FF751C4004CC6D1 /* UploadAudio.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0058B141FF751C4004CC6D1 /* UploadAudio.storyboard */; };
+		F0058B191FF75B22004CC6D1 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0058B181FF75B22004CC6D1 /* LaunchScreenViewController.swift */; };
 		F0F1E0051FF20EB3007D1AE6 /* AudioUnitGenericView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F1E0041FF20EB2007D1AE6 /* AudioUnitGenericView.swift */; };
 		F0F1E0071FF210CA007D1AE6 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F1E0061FF210CA007D1AE6 /* UIColor.swift */; };
 		FF000D991FD11F7F00678999 /* DataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF000D981FD11F7F00678999 /* DataCenter.swift */; };
-		FF000D9B1FD135D400678999 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF000D9A1FD135D400678999 /* DocumentBrowserViewController.swift */; };
 		FF000D9D1FD1368000678999 /* AudioUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF000D9C1FD1368000678999 /* AudioUploadViewController.swift */; };
-		FF000D9F1FD136BA00678999 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF000D9E1FD136BA00678999 /* Document.swift */; };
 		FF0280561FD776CF00C0013A /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0280551FD776CF00C0013A /* UserDefaultKey.swift */; };
 		FF02805A1FD7996C00C0013A /* RecordContuctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0280591FD7996C00C0013A /* RecordContuctor.swift */; };
 		FF02805C1FD7B9A400C0013A /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF02805B1FD7B9A400C0013A /* String.swift */; };
@@ -37,7 +37,6 @@
 		FF3B20C21FCC31930019F87A /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20C11FCC31930019F87A /* SignUpViewController.swift */; };
 		FF3B20C61FCC3B930019F87A /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20C51FCC3B930019F87A /* Instrument.swift */; };
 		FF3B20C91FCC434B0019F87A /* ProfileSetUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B20C81FCC434B0019F87A /* ProfileSetUpViewController.swift */; };
-		FF4A5C021FD68CAD00E8189F /* SetUpMetaInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4A5C011FD68CAD00E8189F /* SetUpMetaInfoViewController.swift */; };
 		FF4A7F9B1FCCEE0A0002E27A /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4A7F9A1FCCEE090002E27A /* UIViewController.swift */; };
 		FF5C013E1FD951B200F37CC9 /* GenrePickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5C013D1FD951B200F37CC9 /* GenrePickViewController.swift */; };
 		FF5C01401FD96D0500F37CC9 /* InstrumentPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5C013F1FD96D0500F37CC9 /* InstrumentPickerViewController.swift */; };
@@ -46,7 +45,7 @@
 		FF688F781FCE58B700F0A41F /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF688F771FCE58B700F0A41F /* SideMenuViewController.swift */; };
 		FF688F7A1FCE58D600F0A41F /* SideMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF688F791FCE58D600F0A41F /* SideMenu.storyboard */; };
 		FF7D6E0C1FDD630700754A7C /* AVPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7D6E0B1FDD630700754A7C /* AVPlayer.swift */; };
-		FF9A84E31FC962C300AC4780 /* GeneralRanking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF9A84E21FC962C300AC4780 /* GeneralRanking.storyboard */; };
+		FF9A84E31FC962C300AC4780 /* Chart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF9A84E21FC962C300AC4780 /* Chart.storyboard */; };
 		FF9A84EC1FC9AE6500AC4780 /* PopularMusicianCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9A84EB1FC9AE6500AC4780 /* PopularMusicianCell.swift */; };
 		FF9D18541FDA6012008D5FD1 /* CommentContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9D18531FDA6012008D5FD1 /* CommentContainerCell.swift */; };
 		FF9D18561FDA79E8008D5FD1 /* Generics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9D18551FDA79E8008D5FD1 /* Generics.swift */; };
@@ -107,12 +106,12 @@
 		D05EBE5F32CFEB3E6E483A33 /* Pods-SoundHubTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoundHubTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SoundHubTests/Pods-SoundHubTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D97CA82572278A09E19CB69B /* Pods_SoundHubTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoundHubTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFEF70D3C538FB607DF5384A /* Pods_SoundHubUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoundHubUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0058B141FF751C4004CC6D1 /* UploadAudio.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UploadAudio.storyboard; sourceTree = "<group>"; };
+		F0058B181FF75B22004CC6D1 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		F0F1E0041FF20EB2007D1AE6 /* AudioUnitGenericView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioUnitGenericView.swift; sourceTree = "<group>"; };
 		F0F1E0061FF210CA007D1AE6 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		FF000D981FD11F7F00678999 /* DataCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCenter.swift; sourceTree = "<group>"; };
-		FF000D9A1FD135D400678999 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
 		FF000D9C1FD1368000678999 /* AudioUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioUploadViewController.swift; sourceTree = "<group>"; };
-		FF000D9E1FD136BA00678999 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		FF0280551FD776CF00C0013A /* UserDefaultKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
 		FF0280591FD7996C00C0013A /* RecordContuctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordContuctor.swift; sourceTree = "<group>"; };
 		FF02805B1FD7B9A400C0013A /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -135,7 +134,6 @@
 		FF3B20C11FCC31930019F87A /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		FF3B20C51FCC3B930019F87A /* Instrument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instrument.swift; sourceTree = "<group>"; };
 		FF3B20C81FCC434B0019F87A /* ProfileSetUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetUpViewController.swift; sourceTree = "<group>"; };
-		FF4A5C011FD68CAD00E8189F /* SetUpMetaInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUpMetaInfoViewController.swift; sourceTree = "<group>"; };
 		FF4A7F9A1FCCEE090002E27A /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		FF5C013D1FD951B200F37CC9 /* GenrePickViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenrePickViewController.swift; sourceTree = "<group>"; };
 		FF5C013F1FD96D0500F37CC9 /* InstrumentPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentPickerViewController.swift; sourceTree = "<group>"; };
@@ -145,7 +143,7 @@
 		FF688F791FCE58D600F0A41F /* SideMenu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SideMenu.storyboard; sourceTree = "<group>"; };
 		FF7D6E0B1FDD630700754A7C /* AVPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayer.swift; sourceTree = "<group>"; };
 		FF7DAF2A1FEBD41100AAEA83 /* SoundHub.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SoundHub.entitlements; sourceTree = "<group>"; };
-		FF9A84E21FC962C300AC4780 /* GeneralRanking.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GeneralRanking.storyboard; sourceTree = "<group>"; };
+		FF9A84E21FC962C300AC4780 /* Chart.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chart.storyboard; sourceTree = "<group>"; };
 		FF9A84EB1FC9AE6500AC4780 /* PopularMusicianCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMusicianCell.swift; sourceTree = "<group>"; };
 		FF9D18531FDA6012008D5FD1 /* CommentContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentContainerCell.swift; sourceTree = "<group>"; };
 		FF9D18551FDA79E8008D5FD1 /* Generics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generics.swift; sourceTree = "<group>"; };
@@ -238,13 +236,36 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F0058B161FF757F5004CC6D1 /* UploadAudio */ = {
+			isa = PBXGroup;
+			children = (
+				F0058B141FF751C4004CC6D1 /* UploadAudio.storyboard */,
+				F0058B171FF75858004CC6D1 /* CustomViews */,
+				FF1054311FD518BA00A46443 /* AudioRecorderViewController.swift */,
+				FF000D9C1FD1368000678999 /* AudioUploadViewController.swift */,
+			);
+			path = UploadAudio;
+			sourceTree = "<group>";
+		};
+		F0058B171FF75858004CC6D1 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				FFEAE1A81FEA52B700FD7D7F /* AUCell.swift */,
+				F0F1E0041FF20EB2007D1AE6 /* AudioUnitGenericView.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
 		FF000D971FD0FB8900678999 /* Activities */ = {
 			isa = PBXGroup;
 			children = (
+				FFCF82C21FC95D66003B7861 /* Entry.storyboard */,
+				FFCF82EC1FC95E07003B7861 /* EntryViewController.swift */,
 				FF3B20C01FCC2B170019F87A /* Login */,
-				FF9A84E81FC9A4CE00AC4780 /* MainHome */,
+				FF9A84E81FC9A4CE00AC4780 /* Chart */,
 				FF688F7B1FCE5C1F00F0A41F /* SideMenu */,
-				FF3B20BD1FCAD5F50019F87A /* DetailView */,
+				FF3B20BD1FCAD5F50019F87A /* PostDetail */,
+				F0058B161FF757F5004CC6D1 /* UploadAudio */,
 			);
 			path = Activities;
 			sourceTree = "<group>";
@@ -269,14 +290,14 @@
 			path = CustomCells;
 			sourceTree = "<group>";
 		};
-		FF3B20BD1FCAD5F50019F87A /* DetailView */ = {
+		FF3B20BD1FCAD5F50019F87A /* PostDetail */ = {
 			isa = PBXGroup;
 			children = (
 				FFC32AE91FCFBFEA00651A31 /* CustomCell */,
 				FF3B20B71FCAC92D0019F87A /* Detail.storyboard */,
 				FF3B20B91FCACD4A0019F87A /* DetailViewController.swift */,
 			);
-			path = DetailView;
+			path = PostDetail;
 			sourceTree = "<group>";
 		};
 		FF3B20C01FCC2B170019F87A /* Login */ = {
@@ -333,26 +354,10 @@
 			path = SideMenu;
 			sourceTree = "<group>";
 		};
-		FF9A84DE1FC9616A00AC4780 /* EntryPoint */ = {
+		FF9A84E81FC9A4CE00AC4780 /* Chart */ = {
 			isa = PBXGroup;
 			children = (
-				FFCF82C21FC95D66003B7861 /* Entry.storyboard */,
-				FF4A5C011FD68CAD00E8189F /* SetUpMetaInfoViewController.swift */,
-				FF1054311FD518BA00A46443 /* AudioRecorderViewController.swift */,
-				FF0280591FD7996C00C0013A /* RecordContuctor.swift */,
-				FFCF82EC1FC95E07003B7861 /* EntryViewController.swift */,
-				FF000D9A1FD135D400678999 /* DocumentBrowserViewController.swift */,
-				FF000D9E1FD136BA00678999 /* Document.swift */,
-				F0F1E0041FF20EB2007D1AE6 /* AudioUnitGenericView.swift */,
-				FF000D9C1FD1368000678999 /* AudioUploadViewController.swift */,
-			);
-			path = EntryPoint;
-			sourceTree = "<group>";
-		};
-		FF9A84E81FC9A4CE00AC4780 /* MainHome */ = {
-			isa = PBXGroup;
-			children = (
-				FF9A84E21FC962C300AC4780 /* GeneralRanking.storyboard */,
+				FF9A84E21FC962C300AC4780 /* Chart.storyboard */,
 				FFC104931FEBBA6700460FD6 /* mainNavigationController.swift */,
 				FF3B20B01FCA98C50019F87A /* ChartViewController.swift */,
 				FF9D18571FDBBF11008D5FD1 /* LoadingIndicatorViewController.swift */,
@@ -360,7 +365,7 @@
 				FF5C013D1FD951B200F37CC9 /* GenrePickViewController.swift */,
 				FF3B20B61FCAC7B70019F87A /* CustomCells */,
 			);
-			path = MainHome;
+			path = Chart;
 			sourceTree = "<group>";
 		};
 		FFA8A8461FE74EF6008443B4 /* NCSoundHistogram */ = {
@@ -396,6 +401,7 @@
 			isa = PBXGroup;
 			children = (
 				FFA5A39E1FCCFD97001EA36F /* NetworkController.swift */,
+				FF0280591FD7996C00C0013A /* RecordContuctor.swift */,
 				FF000D981FD11F7F00678999 /* DataCenter.swift */,
 				FFD500AB1FDE509F008464A8 /* PlayBarController.swift */,
 			);
@@ -410,7 +416,6 @@
 				FF02805D1FD805F500C0013A /* ModeToggleCell.swift */,
 				FFC32AE71FCFBFDB00651A31 /* MasterWaveFormViewCell.swift */,
 				FF9D18531FDA6012008D5FD1 /* CommentContainerCell.swift */,
-				FFEAE1A81FEA52B700FD7D7F /* AUCell.swift */,
 				FF64BA0D1FDD36F4000A846B /* RecorderCell.swift */,
 			);
 			path = CustomCell;
@@ -449,9 +454,9 @@
 				FF3B20C71FCC3C9F0019F87A /* Models */,
 				FF4A7F9C1FCCEE180002E27A /* Extensions */,
 				FF000D971FD0FB8900678999 /* Activities */,
-				FF9A84DE1FC9616A00AC4780 /* EntryPoint */,
 				FFCF82C51FC95D66003B7861 /* Assets.xcassets */,
 				FFCF82C71FC95D66003B7861 /* LaunchScreen.storyboard */,
+				F0058B181FF75B22004CC6D1 /* LaunchScreenViewController.swift */,
 				FFCF82CA1FC95D66003B7861 /* Info.plist */,
 				FF038E411FE17B1400AED2B5 /* SoundHub-Bridging-Header.h */,
 			);
@@ -608,9 +613,10 @@
 				FFCF82C91FC95D66003B7861 /* LaunchScreen.storyboard in Resources */,
 				FFCF82C61FC95D66003B7861 /* Assets.xcassets in Resources */,
 				FF5C01421FDA188D00F37CC9 /* GoogleService-Info.plist in Resources */,
-				FF9A84E31FC962C300AC4780 /* GeneralRanking.storyboard in Resources */,
+				FF9A84E31FC962C300AC4780 /* Chart.storyboard in Resources */,
 				FFA8A8521FE74EF7008443B4 /* README.md in Resources */,
 				FFCF82C41FC95D66003B7861 /* Entry.storyboard in Resources */,
+				F0058B151FF751C4004CC6D1 /* UploadAudio.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -817,7 +823,6 @@
 				FFCF82BF1FC95D66003B7861 /* AppDelegate.swift in Sources */,
 				FFC104971FEBBFDD00460FD6 /* MainEntryViewController.swift in Sources */,
 				FF5C013E1FD951B200F37CC9 /* GenrePickViewController.swift in Sources */,
-				FF4A5C021FD68CAD00E8189F /* SetUpMetaInfoViewController.swift in Sources */,
 				FF0280601FD8E64A00C0013A /* UITableViewCell.swift in Sources */,
 				FFC104941FEBBA6700460FD6 /* mainNavigationController.swift in Sources */,
 				FF3B20AF1FCA96E30019F87A /* PopularMusicianContainerCell.swift in Sources */,
@@ -845,14 +850,13 @@
 				FFA8A8501FE74EF7008443B4 /* UIView+Geometry.m in Sources */,
 				FF3B20B51FCAADD80019F87A /* PostListCell.swift in Sources */,
 				FF3B20BC1FCACE8D0019F87A /* DetailHeaderCell.swift in Sources */,
+				F0058B191FF75B22004CC6D1 /* LaunchScreenViewController.swift in Sources */,
 				FF64BA0E1FDD36F4000A846B /* RecorderCell.swift in Sources */,
 				FFB85FCC1FCE652A000E47C8 /* ProfileHeaderCell.swift in Sources */,
 				FF02805E1FD805F600C0013A /* ModeToggleCell.swift in Sources */,
 				FF4A7F9B1FCCEE0A0002E27A /* UIViewController.swift in Sources */,
-				FF000D9F1FD136BA00678999 /* Document.swift in Sources */,
 				FF3995D81FE3878F004B1F86 /* FlowContainerCell.swift in Sources */,
 				FF3995DA1FE38C4A004B1F86 /* PostContainerCell.swift in Sources */,
-				FF000D9B1FD135D400678999 /* DocumentBrowserViewController.swift in Sources */,
 				FFC32AE41FCF8E1500651A31 /* Comment.swift in Sources */,
 				FFEAE1A91FEA52B700FD7D7F /* AUCell.swift in Sources */,
 				F0F1E0071FF210CA007D1AE6 /* UIColor.swift in Sources */,
