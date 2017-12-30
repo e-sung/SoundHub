@@ -140,6 +140,13 @@ class ProfileViewController: UIViewController{
         
         let sideMenuButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "Hamburger_icon"), style: .plain, target: self, action: #selector(showSideMenu))
         self.navigationItem.rightBarButtonItem = sideMenuButton
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.init("shouldReloadContents"), object: nil, queue: nil) { (noti) in
+            guard let userId = self.userInfo?.id else { return }
+            NetworkController.main.fetchUser(id: userId, completion: { (userInfo) in
+                self.userInfo = userInfo
+                self.mainTV.reloadData()
+            })
+        }
     }
 }
 

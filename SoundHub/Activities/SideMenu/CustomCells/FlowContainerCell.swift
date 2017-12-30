@@ -13,7 +13,13 @@ class FlowContainerCell: UITableViewCell{
     @IBOutlet weak var flowContainer: UICollectionView!
     var delegate:FlowContainerCellDelegate?
     var parent:ProfileViewController!
-    var userInfo:User?
+    var userInfo:User?{
+        didSet(oldVal){
+            if let userInfo = userInfo{
+                flowContainer.reloadData()
+            }
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         flowContainer.delegate = self

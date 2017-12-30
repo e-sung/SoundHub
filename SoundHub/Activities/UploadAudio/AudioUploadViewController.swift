@@ -115,6 +115,7 @@ extension AudioUploadViewController{
             NetworkController.main.uploadAudio(In: self.exportURL, genre: self.genre, instrument: self.instrument, bpm: bpm, albumCover: (self.albumArt.image(for: .normal) ?? UIImage()), completion: {
                 self.resetThingsToReset()
                 DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: NSNotification.Name.init("shouldReloadContents"), object: nil)
                     self.presentedViewController?.dismiss(animated: true, completion: { self.dismissWith(depth: 2, from: self) })
                 }
             })
@@ -125,6 +126,7 @@ extension AudioUploadViewController{
         showLoadingIndicator()
         NetworkController.main.uploadAudio(In: audioURL, genre: self.genre, instrument: self.instrument, bpm: bpm, albumCover: (self.albumArt.image(for: .normal) ?? UIImage()), completion: {
             DataCenter.main.resetHomePages()
+            NotificationCenter.default.post(name: NSNotification.Name.init("shouldReloadContents"), object: nil)
             self.presentedViewController?.dismiss(animated: true, completion: {
                 self.dismiss(animated: true, completion: nil)
             })
