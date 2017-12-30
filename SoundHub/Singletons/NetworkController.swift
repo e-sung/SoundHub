@@ -132,8 +132,9 @@ extension NetworkController{
                 multipartFormData.append(genre.lowercased().data(using: .utf8)!, withName: "genre")
                 multipartFormData.append(instrument.lowercased().data(using: .utf8)!, withName: "instrument")
                 multipartFormData.append("\(bpm)".data(using: .utf8)!, withName: "bpm")
-                let albumData = (UIImagePNGRepresentation(albumCover) ?? Data())
-                multipartFormData.append(albumData, withName: "post_img")
+                if let imageData = self.dataRepresentationOf(image: albumCover){
+                    multipartFormData.append(imageData, withName: "post_img",fileName: "album_cover_\(Date()).png", mimeType: "image/png")
+                }
         },
             to: postURL, headers:["Authorization": "\(authToken)", "Content-type": "multipart/form-data"],
             encodingCompletion: { encodingResult in
@@ -314,7 +315,7 @@ extension NetworkController{
             }
             if let json = response.result.value {
                 if let dic = json as? NSDictionary{
-                    if let userInfo = dic["token"] as? String {
+                    if let _ = dic["token"] as? String {
                         DispatchQueue.main.async { completion(dic, nil) }; return
                     }else{
                         DispatchQueue.main.async { completion(nil, "잘못된 이메일, 혹은 비밀번호입니다") };return
@@ -324,19 +325,6 @@ extension NetworkController{
             DispatchQueue.main.async { completion(nil, unknownErrorMesage)}
             return
         }
-        
-        
-//
-//        let loginInfo = ["email":email,"password":password]
-//        guard let loginData = try? JSONEncoder().encode(loginInfo) else {print("Encoding failed");return}
-//
-//        let request = generatePostRequest(with: loginURL, and: loginData)
-//        URLSession.shared.dataTask(with: request) { (data, response, error) in
-//            if let error = error { print(error) }
-//            guard let data = data else {return}
-//            guard let result = try? JSONDecoder().decode(LoginResponse.self, from: data) else{return}
-//            DispatchQueue.main.async { done(result) }
-//            }.resume()
     }
     
     func sendLikeRequest(on postId:Int, completion:@escaping (_ num_liked:Int)->Void){
