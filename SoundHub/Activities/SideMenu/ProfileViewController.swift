@@ -103,6 +103,12 @@ class ProfileViewController: UIViewController{
         self.view.endEditing(true)
     }
     
+    @objc func showSideMenu(){
+        let sb = UIStoryboard(name: "SideMenu", bundle: nil)
+        let sideMenuVC = sb.instantiateViewController(withIdentifier: "sideMenu")
+        present(sideMenuVC, animated: true, completion: nil)
+    }
+    
     // MARK: IBOutlets
     /**
      최상단의 TableView
@@ -131,6 +137,9 @@ class ProfileViewController: UIViewController{
                 self.mainTV.reloadSections(ids, with: .automatic)
             })
         }
+        
+        let sideMenuButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "Hamburger_icon"), style: .plain, target: self, action: #selector(showSideMenu))
+        self.navigationItem.rightBarButtonItem = sideMenuButton
     }
 }
 
