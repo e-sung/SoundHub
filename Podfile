@@ -24,6 +24,16 @@ target 'SoundHub' do
   target 'SoundHubUITests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'SideMenu'
+    pod 'FDWaveformView'
+    pod 'NVActivityIndicatorView'
+    pod 'Alamofire'
+    pod 'AlamofireImage'
+    pod 'AudioKit'
+    pod 'GoogleSignIn'
+    pod 'LPSnackbar'
+    pod 'ActionSheetPicker-3.0'
+
   end
 
 end
