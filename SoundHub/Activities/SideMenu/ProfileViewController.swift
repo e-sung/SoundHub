@@ -119,11 +119,15 @@ class ProfileViewController: UIViewController{
             - likedPostTableView
     */
     @IBOutlet weak var mainTV: UITableView!
+    @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
+    
+    
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         mainTV.delegate = self
         mainTV.dataSource = self
+        tapGestureRecognizer.delegate = self
 
         imagePicker.allowsEditing = false
         imagePicker.delegate = self
@@ -140,6 +144,14 @@ class ProfileViewController: UIViewController{
         
         let sideMenuButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "Hamburger_icon"), style: .plain, target: self, action: #selector(showSideMenu))
         self.navigationItem.rightBarButtonItem = sideMenuButton
+    }
+}
+
+extension ProfileViewController:UIGestureRecognizerDelegate{
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        let y = touch.location(in: view).y
+        guard let headerCell = headerCell else { return true}
+        return y < headerCell.frame.maxX
     }
 }
 

@@ -771,6 +771,7 @@
                     <size key="freeformSize" width="800" height="667"/>
                     <connections>
                         <outlet property="mainTV" destination="86P-hi-uWu" id="p9x-4L-LaJ"/>
+                        <outlet property="tapGestureRecognizer" destination="ZXr-Lu-K3n" id="cci-NR-blr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b8F-Tx-6Ua" userLabel="First Responder" sceneMemberID="firstResponder"/>
