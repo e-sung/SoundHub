@@ -40,6 +40,12 @@ class PostListCell: UITableViewCell {
             if let authorName = newVal.author?.nickname { authorNameLB.text = authorName }
             if let albumCoverURL = newVal.albumCoverImageURL{
                 albumCoverImageView.af_setImage(withURL: albumCoverURL)
+            }else{
+                NetworkController.main.fetchPost(id: self.postInfo.id ?? 0, completion: { (post) in
+                    if let albumCoverURL = post.albumCoverImageURL {
+                        self.albumCoverImageView.af_setImage(withURL: albumCoverURL)
+                    }
+                })
             }
             if let profileImageURL = newVal.author?.profileImageURL{
                 self.authorProfileImageBt.af_setImage(for: .normal, url: profileImageURL)

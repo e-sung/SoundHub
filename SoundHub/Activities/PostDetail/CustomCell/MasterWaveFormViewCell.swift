@@ -28,16 +28,18 @@ class MasterWaveFormViewCell: UITableViewCell, NCSoundHistogramDelegate {
     var masterAudioURL:URL?{
         didSet(oldVal){
             DispatchQueue.main.async {
-                self.activityLB.text = "그리는 중"
-                self.plot = NCSoundHistogram(frame: self.contentView.frame)
-                self.plot!.delegate = self
-                self.plot!.waveColor = UIColor(red: 1.0, green: 0.5, blue: 0.0, alpha: 0.5)
-                self.plot!.progressColor = UIColor(red: 1.0, green: 0.5, blue: 0.0, alpha: 1.0)
-                self.plot!.drawSpaces = true
-                self.plot!.barLineWidth = 2.5
-                self.contentView.addSubview(self.plot!)
-                DispatchQueue.global(qos: .userInteractive).async {
-                    self.plot?.soundURL = self.masterAudioURL
+                if oldVal == nil {
+                    self.activityLB.text = "그리는 중"
+                    self.plot = NCSoundHistogram(frame: self.contentView.frame)
+                    self.plot!.delegate = self
+                    self.plot!.waveColor = UIColor(red: 1.0, green: 0.5, blue: 0.0, alpha: 0.5)
+                    self.plot!.progressColor = UIColor(red: 1.0, green: 0.5, blue: 0.0, alpha: 1.0)
+                    self.plot!.drawSpaces = true
+                    self.plot!.barLineWidth = 2.5
+                    self.contentView.addSubview(self.plot!)
+                    DispatchQueue.global(qos: .userInteractive).async {
+                        self.plot?.soundURL = self.masterAudioURL
+                    }
                 }
             }
         }

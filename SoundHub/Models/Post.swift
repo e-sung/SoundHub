@@ -44,6 +44,7 @@ struct Post:Codable{
             return URL(string: postImageURL, relativeTo: NetworkController.main.baseMediaURL)
         }
     }
+    
     var numOfMixedTracks:Int{
         get{
             guard let mixed_tracks = mixed_tracks else { return 0 }

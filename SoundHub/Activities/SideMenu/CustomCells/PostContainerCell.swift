@@ -10,7 +10,13 @@ import UIKit
 import AlamofireImage
 
 class PostContainerCell: UICollectionViewCell{
-    var posts:[Post]?
+    var posts:[Post]?{
+        didSet(oldVal){
+            if oldVal != nil {
+                postTB.reloadData()
+            }
+        }
+    }
     var delegate:PostContainerCellDelegate?
     var firstCell:UITableViewCell!
     var lastOffset:CGFloat = 0
