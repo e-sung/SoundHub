@@ -128,7 +128,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="o80-Wi-AmO">
                                 <rect key="frame" x="31.5" y="163.5" width="312" height="200"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="ios00@fc.com" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jzZ-4N-eda">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jzZ-4N-eda">
                                         <rect key="frame" x="0.0" y="0.0" width="312" height="36"/>
                                         <accessibility key="accessibilityConfiguration" hint="이메일 입력창"/>
                                         <nil key="textColor"/>
@@ -146,7 +146,7 @@
                                             <action selector="emailConfirmHandler:" destination="y5Y-p4-nBj" eventType="primaryActionTriggered" id="G74-Zr-z9R"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="ios00" borderStyle="roundedRect" placeholder="NickName" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W95-be-h4a">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="NickName" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W95-be-h4a">
                                         <rect key="frame" x="0.0" y="41" width="312" height="36"/>
                                         <accessibility key="accessibilityConfiguration" hint="닉네임 입력창"/>
                                         <nil key="textColor"/>
@@ -164,7 +164,7 @@
                                             <action selector="nickNameConfirmHandler:" destination="y5Y-p4-nBj" eventType="primaryActionTriggered" id="PBJ-H6-nSO"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="asdfasdfasdf" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TeM-oW-WWD">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TeM-oW-WWD">
                                         <rect key="frame" x="0.0" y="82" width="312" height="36"/>
                                         <accessibility key="accessibilityConfiguration" hint="비밀번호 입력창"/>
                                         <nil key="textColor"/>
@@ -182,7 +182,7 @@
                                             <action selector="passwordConfirmHandler:" destination="y5Y-p4-nBj" eventType="primaryActionTriggered" id="kMU-RB-YDg"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="asdfasdfasdf" borderStyle="roundedRect" placeholder="Password Confirm" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="svt-Fd-H32">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password Confirm" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="svt-Fd-H32">
                                         <rect key="frame" x="0.0" y="123" width="312" height="36"/>
                                         <accessibility key="accessibilityConfiguration" hint="비밀번호 확인 입력창"/>
                                         <nil key="textColor"/>
@@ -227,25 +227,35 @@
                                 <color key="textColor" red="1" green="0.27450980392156865" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3MX-UI-eKd" customClass="GIDSignInButton">
-                                <rect key="frame" x="37" y="420" width="300" height="42.5"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zlp-dm-qWw">
+                                <rect key="frame" x="31" y="413" width="312" height="36"/>
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="구글 아이디로 회원가입">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="googleSignUpHandler:" destination="y5Y-p4-nBj" eventType="valueChanged" id="loP-vc-uHh"/>
+                                    <action selector="googleSignUpHandler:" destination="y5Y-p4-nBj" eventType="touchUpInside" id="QPc-RY-zmv"/>
                                 </connections>
-                            </view>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.086261831220000001" green="0.086283676330000003" blue="0.086257167159999995" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="o80-Wi-AmO" firstAttribute="centerY" secondItem="nOk-16-R4d" secondAttribute="centerY" constant="-80" id="4JR-1W-7RL"/>
+                            <constraint firstItem="zlp-dm-qWw" firstAttribute="top" secondItem="Y6j-my-KCM" secondAttribute="bottom" constant="50" id="7At-lp-Pzv"/>
+                            <constraint firstItem="zlp-dm-qWw" firstAttribute="width" secondItem="Y6j-my-KCM" secondAttribute="width" id="Bxd-zS-DNm"/>
                             <constraint firstItem="jzZ-4N-eda" firstAttribute="top" secondItem="oBV-Lo-IKu" secondAttribute="bottom" constant="5" id="DZ6-qa-yTq"/>
-                            <constraint firstItem="3MX-UI-eKd" firstAttribute="width" secondItem="Y6j-my-KCM" secondAttribute="width" id="Il5-4q-drp"/>
                             <constraint firstItem="o80-Wi-AmO" firstAttribute="centerX" secondItem="nOk-16-R4d" secondAttribute="centerX" id="PuI-sE-f61"/>
-                            <constraint firstItem="3MX-UI-eKd" firstAttribute="centerX" secondItem="Y6j-my-KCM" secondAttribute="centerX" id="V97-5R-evD"/>
+                            <constraint firstItem="zlp-dm-qWw" firstAttribute="height" secondItem="Y6j-my-KCM" secondAttribute="height" id="RsO-KS-FEU"/>
+                            <constraint firstItem="zlp-dm-qWw" firstAttribute="centerX" secondItem="Y6j-my-KCM" secondAttribute="centerX" id="Sui-Pn-IxS"/>
                             <constraint firstItem="oBV-Lo-IKu" firstAttribute="width" secondItem="jzZ-4N-eda" secondAttribute="width" id="fH8-xN-6aJ"/>
                             <constraint firstItem="oBV-Lo-IKu" firstAttribute="leading" secondItem="jzZ-4N-eda" secondAttribute="leading" id="hAw-GZ-TRc"/>
-                            <constraint firstItem="3MX-UI-eKd" firstAttribute="top" secondItem="Y6j-my-KCM" secondAttribute="bottom" constant="50" id="viI-za-S47"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nOk-16-R4d"/>
                         <connections>
@@ -256,7 +266,7 @@
                         <outlet property="emailSignUpStackView" destination="o80-Wi-AmO" id="X9P-2R-9HO"/>
                         <outlet property="emailTF" destination="jzZ-4N-eda" id="L8G-eW-COa"/>
                         <outlet property="errorMsgLB" destination="oBV-Lo-IKu" id="Tu0-Pl-Itr"/>
-                        <outlet property="googleSignInButton" destination="3MX-UI-eKd" id="ion-AJ-eBT"/>
+                        <outlet property="googleSignInButton" destination="zlp-dm-qWw" id="eP6-Bg-yp6"/>
                         <outlet property="nickNameTF" destination="W95-be-h4a" id="FQU-IC-ecw"/>
                         <outlet property="passwordConfirmTF" destination="svt-Fd-H32" id="gm0-Kw-c0Y"/>
                         <outlet property="passwordTF" destination="TeM-oW-WWD" id="VYn-rd-RnN"/>

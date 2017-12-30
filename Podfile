@@ -30,8 +30,6 @@ target 'SoundHub' do
     pod 'Alamofire'
     pod 'AlamofireImage'
     pod 'AudioKit'
-    pod 'GoogleSignIn'
-    pod 'LPSnackbar'
     pod 'ActionSheetPicker-3.0'
 
   end

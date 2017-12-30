@@ -32,23 +32,12 @@ class SoundHubUITests: XCTestCase {
     
     func testLogin() {
         
-        let app = XCUIApplication()
-        app.buttons["회원가입"].tap()
-        app.textFields["Email"].tap()
         
-        let deleteKey = app/*@START_MENU_TOKEN@*/.keys["delete"]/*[[".keyboards.keys[\"delete\"]",".keys[\"delete\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
-        deleteKey.tap()
-        deleteKey.tap()
-        deleteKey.tap()
-        deleteKey.tap()
-        deleteKey.tap()
-        deleteKey.tap()
-        deleteKey.tap()
-        deleteKey.tap()
-        deleteKey.tap()
-        deleteKey.tap()
-        deleteKey.tap()
-        deleteKey.tap()
+        
+        //Invalid Email
+        //Valid Email
+        //Invalid password
+        //valid password and show next
         
         
     }
