@@ -69,7 +69,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
     
     func presentDocument(at documentURL: URL) {
         print(documentURL)
-        let storyBoard = UIStoryboard(name: "Entry", bundle: nil)
+        let storyBoard = UIStoryboard(name: "UploadAudio", bundle: nil)
         let audioUploadVC = storyBoard.instantiateViewController(withIdentifier: "DocumentViewController") as! AudioUploadViewController
         audioUploadVC.audioURL = documentURL
 

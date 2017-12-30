@@ -27,7 +27,7 @@ extension UIViewController{
     
     static var loadingIndicator:LoadingIndicatorViewController{
         get{
-            let sb = UIStoryboard(name: "GeneralRanking", bundle: nil)
+            let sb = UIStoryboard(name: "Chart", bundle: nil)
             let indicatorVC = sb.instantiateViewController(withIdentifier: "LoadingIndicatorViewController") as! LoadingIndicatorViewController
             indicatorVC.modalPresentationStyle = .overCurrentContext
             indicatorVC.modalTransitionStyle = .crossDissolve
