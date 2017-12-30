@@ -528,6 +528,7 @@
                                                 <connections>
                                                     <outlet property="auGenericViewContainer" destination="MTZ-PH-oTy" id="9A7-7L-OLf"/>
                                                     <outlet property="audioUnitContainerFlowLayout" destination="LWf-A0-AYP" id="V83-eP-uei"/>
+                                                    <outlet property="audioUnitContainerHeight" destination="SGw-oe-tQ4" id="UfG-o5-oa3"/>
                                                     <outlet property="inputPlot" destination="F2b-XT-SDC" id="uoa-rF-Zea"/>
                                                     <outlet property="recordButton" destination="xgG-St-MdE" id="hqQ-7a-VMN"/>
                                                 </connections>

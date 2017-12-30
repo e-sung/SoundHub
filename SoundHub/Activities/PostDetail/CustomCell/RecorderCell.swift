@@ -19,6 +19,7 @@ class RecorderCell: UITableViewCell {
     var currentAU: AudioUnitGenericView?
     var currentAUindex:Int?
 
+    @IBOutlet var audioUnitContainerHeight: NSLayoutConstraint!
     @IBOutlet weak var audioUnitContainerFlowLayout: UICollectionView!
     @IBOutlet weak var auGenericViewContainer: UIScrollView!
     @IBOutlet private weak var recordButton: UIButton!
@@ -27,6 +28,7 @@ class RecorderCell: UITableViewCell {
         super.awakeFromNib()
         audioUnitContainerFlowLayout.delegate = self
         audioUnitContainerFlowLayout.dataSource = self
+        audioUnitContainerHeight.isActive = false
         audioUnitContainerFlowLayout.isHidden = true
         auGenericViewContainer.isHidden = true
         inputPlot.node = RecordConductor.main.mic
@@ -65,6 +67,7 @@ class RecorderCell: UITableViewCell {
         state = .readyToRecord
         inputPlot.color = .orange
         inputPlot.node = RecordConductor.main.mic
+        audioUnitContainerHeight.isActive = true
         audioUnitContainerFlowLayout.isHidden = false
         auGenericViewContainer.isHidden = false
         self.contentView.backgroundColor = .black
@@ -77,7 +80,9 @@ class RecorderCell: UITableViewCell {
                 auManager.removeEffect(at: 0)
             }
         }
+        audioUnitContainerHeight.isActive = false
         audioUnitContainerFlowLayout.isHidden = true
+        auGenericViewContainer.isHidden = true
     }
     
     @IBAction private func recordButtonHandler(_ sender: UIButton) {

@@ -255,7 +255,7 @@ extension DetailViewController:CommentContainerCellDelegate{
         for comment in selectedComments{
             guard let commentId = comment.id else {
                 self.mixedTrackContainer?.allowsMultiSelection = false
-                self.navigationItem.rightBarButtonItems?.popLast()
+                let _ = self.navigationItem.rightBarButtonItems?.popLast()
                 return
             }
             comments.append(commentId)
@@ -268,7 +268,7 @@ extension DetailViewController:CommentContainerCellDelegate{
                 let ids = IndexSet(integersIn: Section.MixedTracks.rawValue ... Section.MixedTracks.rawValue)
                 self.mainTV.reloadSections(ids, with: .automatic)
                 self.mixedTrackContainer?.allowsMultiSelection = false
-                self.navigationItem.rightBarButtonItems?.popLast()
+                let _ = self.navigationItem.rightBarButtonItems?.popLast()
             })
         })
     }
