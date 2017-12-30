@@ -94,6 +94,7 @@ class DetailViewController: UIViewController{
         if (post.author?.id ?? -1) == Int(userId){
             commentTrackContainer?.allowsMultiSelection = true
         }
+        recorderCell?.connectInputPlotToMic()
     }
     
     override func willMove(toParentViewController parent: UIViewController?)
