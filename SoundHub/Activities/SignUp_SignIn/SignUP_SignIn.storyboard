@@ -375,10 +375,10 @@
             </objects>
             <point key="canvasLocation" x="-244" y="867.61619190404804"/>
         </scene>
-        <!--Login View Controller-->
+        <!--Sign In View Controller-->
         <scene sceneID="LCQ-P5-KD0">
             <objects>
-                <viewController id="wSx-Gg-sUf" customClass="LoginViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="wSx-Gg-sUf" customClass="SignInViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2fs-c8-vZd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="700"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -482,10 +482,10 @@
             </objects>
             <point key="canvasLocation" x="-244" y="133"/>
         </scene>
-        <!--GeneralRanking-->
+        <!--Chart-->
         <scene sceneID="6tv-bi-xHt">
             <objects>
-                <viewControllerPlaceholder storyboardName="GeneralRanking" id="Ikz-va-hjQ" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Chart" id="Ikz-va-hjQ" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uP6-RU-Oja" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="524" y="193"/>

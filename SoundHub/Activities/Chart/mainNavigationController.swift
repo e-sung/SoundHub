@@ -48,7 +48,7 @@ class mainNavigationController: UINavigationController {
                 self.present(self.documentPicker, animated: true, completion: nil)
             }))
             alert.addAction(UIAlertAction(title: "새로 녹음하기", style: .default , handler: { (action) in
-                let storyboard = UIStoryboard(name: "Entry", bundle: nil)
+                let storyboard = UIStoryboard(name: "UploadAudio", bundle: nil)
                 let audioRecorderVC = storyboard.instantiateViewController(withIdentifier: "AudioRecorderViewController") as! AudioRecorderViewController
                 self.present(audioRecorderVC, animated: true, completion: nil)
             }))
