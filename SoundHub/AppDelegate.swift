@@ -54,7 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate {
             let _ = user.userID                  // For client-side use only!
             let idToken = user.authentication.idToken ?? "unexpected error on token" // Safe to send to the server
             let fullName = user.profile.name ?? "unexpected profile name"
-//            let profileImage = user.profile.imageURL(withDimension: 200)
             // [START_EXCLUDE]
             NotificationCenter.default.post(
                 name: Notification.Name(rawValue: "ToggleAuthUINotification"),

@@ -95,6 +95,7 @@ class DetailViewController: UIViewController{
             commentTrackContainer?.allowsMultiSelection = true
         }
         recorderCell?.connectInputPlotToMic()
+        mainTV.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
     }
     
     override func willMove(toParentViewController parent: UIViewController?)
