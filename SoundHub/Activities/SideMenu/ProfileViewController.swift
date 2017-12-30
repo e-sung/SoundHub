@@ -96,6 +96,17 @@ class ProfileViewController: UIViewController{
             mainTV.scrollToRow(at: IndexPath(item: 0, section: 1) , at: .top, animated: true)
             flowCell?.isScrollEnabled = true
         }
+        self.view.endEditing(true)
+    }
+    
+    @IBAction func tapDidHappend(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
+    @objc func showSideMenu(){
+        let sb = UIStoryboard(name: "SideMenu", bundle: nil)
+        let sideMenuVC = sb.instantiateViewController(withIdentifier: "sideMenu")
+        present(sideMenuVC, animated: true, completion: nil)
     }
     
     // MARK: IBOutlets
@@ -126,6 +137,9 @@ class ProfileViewController: UIViewController{
                 self.mainTV.reloadSections(ids, with: .automatic)
             })
         }
+        
+        let sideMenuButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "Hamburger_icon"), style: .plain, target: self, action: #selector(showSideMenu))
+        self.navigationItem.rightBarButtonItem = sideMenuButton
     }
 }
 
