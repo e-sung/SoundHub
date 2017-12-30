@@ -8,11 +8,12 @@
 
 import UIKit
 import GoogleSignIn
+import Fingertips
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate {
     
-    var window: UIWindow?
+    var window: UIWindow? = MBFingerTipWindow(frame: UIScreen.main.bounds)
 
     // [START didfinishlaunching]
     func application(_ application: UIApplication,
