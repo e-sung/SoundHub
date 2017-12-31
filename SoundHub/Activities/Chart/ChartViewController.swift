@@ -32,6 +32,12 @@ class ChartViewController: UIViewController{
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let homePageData = UserDefaults.standard.object(forKey: "InitialHomepage") as? Data{
+            if let homePageInfo = try? JSONDecoder().decode(HomePage.self, from: homePageData) {
+                DataCenter.main.homePages[.general] = homePageInfo
+            }
+        }
+        
         mainTV.delegate = self
         mainTV.dataSource = self
         navigationController?.delegate = self
@@ -42,12 +48,7 @@ class ChartViewController: UIViewController{
                 self.presentedViewController?.dismiss(animated: true, completion: nil)
             })
         }
-        if let homePageData = UserDefaults.standard.object(forKey: "InitialHomepage") as? Data{
-            if let homePageInfo = try? JSONDecoder().decode(HomePage.self, from: homePageData) {
-                DataCenter.main.homePages[.general] = homePageInfo
-                self.refreshData()
-            }
-        }
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,14 +56,15 @@ class ChartViewController: UIViewController{
             mainTV.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
             shouldScrollToTop = false
         }
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
         showLoadingIndicator()
         NetworkController.main.fetchHomePage(of: category, with: option) {
             self.refreshData()
             self.presentedViewController?.dismiss(animated: true, completion: nil)
         }
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
+        
         if PlayBarController.main.isHidden == false {
             guard let bottomConstraint = mainTVBottomConstraint else { return }
             bottomConstraint.isActive = false
