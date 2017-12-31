@@ -20,6 +20,7 @@ class DetailHeaderCell: UITableViewCell {
     @IBAction func likeButtonHandler(_ sender: UIButton) {
         guard let postId = _postInfo.id else { return }
         NetworkController.main.sendLikeRequest(on: postId) { (newLikeCount) in
+            NotificationCenter.default.post(name: NSNotification.Name("shouldReloadContents"), object: nil)
             self.numberOfLikesLB.text = "\(newLikeCount)"
         }
     }

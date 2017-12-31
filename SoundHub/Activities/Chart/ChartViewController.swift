@@ -42,7 +42,9 @@ class ChartViewController: UIViewController{
         mainTV.dataSource = self
         navigationController?.delegate = self
         NotificationCenter.default.addObserver(forName: NSNotification.Name("shouldReloadContents"), object: nil, queue: nil) { (noti) in
-            self.showLoadingIndicator()
+            if let _ = self.navigationController?.topViewController as? ChartViewController{
+                self.showLoadingIndicator()
+            }
             NetworkController.main.fetchHomePage(of: self.category, with: self.option, completion: {
                 self.mainTV.reloadData()
                 self.presentedViewController?.dismiss(animated: true, completion: nil)
