@@ -112,7 +112,7 @@ extension AudioUploadViewController{
         self.present(UIViewController.loadingIndicator, animated: true, completion: nil)
         RecordConductor.main.exportRecordedAudio(to: self.exportURL,
                                                  with: [self.titleMetaData, self.artistMetaData], completion: {
-            NetworkController.main.uploadAudio(In: self.exportURL, genre: self.genre, instrument: self.instrument, bpm: bpm, albumCover: (self.albumArt.image(for: .normal) ?? UIImage()), completion: {
+            NetworkController.main.uploadAudio(In: self.exportURL, title:self.audioTitleTF.text ?? "무제", genre: self.genre, instrument: self.instrument, bpm: bpm, albumCover: (self.albumArt.image(for: .normal) ?? UIImage()), completion: {
                 RecordConductor.main.resetRecordedAudio()
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: NSNotification.Name("shouldReloadContents"), object: nil)
@@ -124,7 +124,7 @@ extension AudioUploadViewController{
     
     private func uploadExisting(music audioURL:URL, with bpm:Int){
         showLoadingIndicator()
-        NetworkController.main.uploadAudio(In: audioURL, genre: self.genre, instrument: self.instrument, bpm: bpm, albumCover: (self.albumArt.image(for: .normal) ?? UIImage()), completion: {
+        NetworkController.main.uploadAudio(In: audioURL, title:audioTitleTF.text ?? "무제" , genre: self.genre, instrument: self.instrument, bpm: bpm, albumCover: (self.albumArt.image(for: .normal) ?? UIImage()), completion: {
             NotificationCenter.default.post(name: NSNotification.Name("shouldReloadContents"), object: nil)
             self.presentedViewController?.dismiss(animated: true, completion: {
                 self.dismiss(animated: true, completion: nil)

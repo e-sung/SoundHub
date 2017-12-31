@@ -122,12 +122,11 @@ extension NetworkController{
      오디오 **포스트**를 업로드하는 함수
      - parameter localURL: 업로드 할 음악 파일이 저장되어있는 장소
      */
-    func uploadAudio(In localURL:URL, genre:String, instrument:String, bpm:Int, albumCover:UIImage, completion:@escaping ()->Void){
+    func uploadAudio(In localURL:URL, title:String, genre:String, instrument:String, bpm:Int, albumCover:UIImage, completion:@escaping ()->Void){
         
         Alamofire.upload(
             multipartFormData: { multipartFormData in
-                let filename = localURL.lastPathComponent.split(separator: ".")[0]
-                multipartFormData.append(filename.data(using: .utf8)!, withName: "title")
+                multipartFormData.append(title.data(using: .utf8)!, withName: "title")
                 multipartFormData.append(localURL, withName: "author_track")
                 multipartFormData.append(genre.lowercased().data(using: .utf8)!, withName: "genre")
                 multipartFormData.append(instrument.lowercased().data(using: .utf8)!, withName: "instrument")
