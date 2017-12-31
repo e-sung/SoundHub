@@ -91,10 +91,8 @@ class ProfileViewController: UIViewController{
         self.view.endEditing(true)
     }
     
-    @objc func showSideMenu(){
-        let sb = UIStoryboard(name: "SideMenu", bundle: nil)
-        let sideMenuVC = sb.instantiateViewController(withIdentifier: "sideMenu")
-        present(sideMenuVC, animated: true, completion: nil)
+    @objc func showsidemenu(){
+        self.showSideMenu()
     }
     
     // MARK: IBOutlets
@@ -130,7 +128,7 @@ class ProfileViewController: UIViewController{
             })
         }
         
-        let sideMenuButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "Hamburger_icon"), style: .plain, target: self, action: #selector(showSideMenu))
+        let sideMenuButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "Hamburger_icon"), style: .plain, target: self, action: #selector(showsidemenu))
         self.navigationItem.rightBarButtonItem = sideMenuButton
         NotificationCenter.default.addObserver(forName: NSNotification.Name.init("shouldReloadContents"), object: nil, queue: nil) { (noti) in
             guard let userId = self.userInfo?.id else { return }

@@ -15,7 +15,7 @@
         <!--Side Menu Navigation Controller-->
         <scene sceneID="FdZ-7s-0cz">
             <objects>
-                <navigationController navigationBarHidden="YES" hidesBarsOnSwipe="YES" id="W2I-aO-tq3" customClass="UISideMenuNavigationController" customModule="SideMenu" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SideMenu" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" hidesBarsOnSwipe="YES" id="W2I-aO-tq3" customClass="UISideMenuNavigationController" customModule="SideMenu" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5Mf-26-xrW">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

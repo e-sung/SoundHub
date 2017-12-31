@@ -188,10 +188,10 @@ extension ChartViewController:UITableViewDelegate{
 
 extension ChartViewController:UINavigationControllerDelegate{
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        let sideMenuButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "Hamburger_icon"), style: .plain, target: self, action: #selector(showSideMenu))
+        let sideMenuButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "Hamburger_icon"), style: .plain, target: self, action: #selector(showsidemenu))
         viewController.navigationItem.rightBarButtonItem = sideMenuButton
     }
-    @objc func showSideMenu(){
+    @objc func showsidemenu(){
         performSegue(withIdentifier: "showSideMenu", sender: nil)
     }
 }
