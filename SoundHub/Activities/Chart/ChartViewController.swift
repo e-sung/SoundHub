@@ -48,7 +48,6 @@ class ChartViewController: UIViewController{
                 self.presentedViewController?.dismiss(animated: true, completion: nil)
             })
         }
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,7 +58,9 @@ class ChartViewController: UIViewController{
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        showLoadingIndicator()
+        if DataCenter.main.homePages[category]?.recent_posts.count == 0 {
+            showLoadingIndicator()
+        }
         NetworkController.main.fetchHomePage(of: category, with: option) {
             self.refreshData()
             self.presentedViewController?.dismiss(animated: true, completion: nil)
