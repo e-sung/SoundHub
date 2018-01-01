@@ -48,14 +48,12 @@ class RecorderCell: UITableViewCell {
     }
     
     func activate(){
-        
+        RecordConductor.main.connectMic(with: inputPlot)
         auManager = AKAudioUnitManager()
         auManager?.delegate = self
         auManager?.requestEffects { (audioComponents) in
             for component in audioComponents{
-                if component.name != ""{
-                    self.availableEffects.append(component.name)
-                }
+                if component.name != ""{ self.availableEffects.append(component.name) }
             }
             self.audioUnitContainerFlowLayout.reloadData()
         }
@@ -72,22 +70,19 @@ class RecorderCell: UITableViewCell {
         self.contentView.backgroundColor = .black
     }
     
-    func connectInputPlotToMic(){
-        RecordConductor.main.connectMic(with: inputPlot)
-    }
+    func connectInputPlotToMic(){ RecordConductor.main.connectMic(with: inputPlot) }
     
     func deActivate(){
         self.isActive = false
         if let auManager = auManager{
-            if auManager.availableEffects.count > 0 {
-                auManager.removeEffect(at: 0)
-            }
+            if auManager.availableEffects.count > 0 { auManager.removeEffect(at: 0) }
         }
         audioUnitContainerHeight.isActive = false
         audioUnitContainerFlowLayout.isHidden = true
         auGenericViewContainer.isHidden = true
         self.contentView.backgroundColor = .gray
         inputPlot.color = .black
+        DispatchQueue.global(qos: .userInitiated).async { RecordConductor.main.reboot() }
     }
     
     @IBAction private func recordButtonHandler(_ sender: UIButton) {

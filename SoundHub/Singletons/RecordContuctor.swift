@@ -25,16 +25,15 @@ class RecordConductor{
     var mainMixer: AKMixer!
 
     init(){ bootUp() }
-    func bootUp(){
+    private func bootUp(){
         setUpSession()
         setUpMic()
         setUpRecorderAndPlayer()
         setUpMixer()
         startEngine()
     }
-    
-    func startEngine(){ AudioKit.start() }
-    func stopEngine(){ AudioKit.stop() }
+    private func startEngine(){ AudioKit.start() }
+    private func stopEngine(){ AudioKit.stop() }
     
 }
 
@@ -75,6 +74,10 @@ extension RecordConductor{
 
 // MARK: Internal Functions
 extension RecordConductor{
+    func reboot(){
+        stopEngine()
+        bootUp()
+    }
     
     func startRecording(){
         if AKSettings.headPhonesPlugged { self.micBooster.gain = 1 }
