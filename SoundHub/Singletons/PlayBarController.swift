@@ -11,7 +11,10 @@ import AVFoundation
 
 class PlayBarController{
     
-    static let main:PlayBarController = PlayBarController()
+    static var main:PlayBarController = PlayBarController()
+    static func reboot(){
+        self.main = PlayBarController()
+    }
     let view = UIView()
 
     private var playButton: UIButton!
