@@ -12,26 +12,26 @@ import AlamofireImage
 
 class SideMenuViewController: UIViewController {
     
-    @IBOutlet weak var nickNameButton:UIButton!
-    @IBOutlet weak var profileImageButton:UIButton!
-    @IBOutlet weak var logoutButton: UIButton!
-    @IBAction func logoutButtonHandler(_ sender: UIButton) {
+    @IBOutlet weak private var nickNameButton:UIButton!
+    @IBOutlet weak private var profileImageButton:UIButton!
+    @IBOutlet weak private var logoutButton: UIButton!
+    @IBAction private func logoutButtonHandler(_ sender: UIButton) {
         UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
         PlayBarController.main.stop()
         self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func nickNameButtonHandler(_ sender: UIButton) { showProfile() }
+    @IBAction private func nickNameButtonHandler(_ sender: UIButton) { showProfile() }
     
-    @IBAction func profileImageButtonHandler(_ sender: UIButton) { showProfile() }
+    @IBAction private func profileImageButtonHandler(_ sender: UIButton) { showProfile() }
     
-    @IBAction func profileButtonHandler(_ sender: UIButton) { showProfile() }
+    @IBAction private func profileButtonHandler(_ sender: UIButton) { showProfile() }
     
-    @IBAction func homeButtonClickHandler(_ sender: UIButton) {
+    @IBAction private func homeButtonClickHandler(_ sender: UIButton) {
         performSegue(withIdentifier: "undwindToGeneralHome", sender: nil)
     }
     
-    func showProfile(){
+    private func showProfile(){
         guard let userId = UserDefaults.standard.string(forKey: keyForUserId) else { return }
         guard let userID = Int(userId) else { return }
         NetworkController.main.fetchUser(id: userID) { (userInfo) in

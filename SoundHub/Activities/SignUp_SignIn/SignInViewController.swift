@@ -89,7 +89,7 @@ extension SignInViewController{
     
     private func handle(result:NSDictionary?, and error:String?){
         if let userInfo = result{
-            UserDefaults.standard.save(with: userInfo)
+            UserDefaults.standard.save(userInfo)
             self.presentedViewController?.dismiss(animated: true, completion: {
                 self.performSegue(withIdentifier: "loginSuccessSegue", sender: nil)
             })

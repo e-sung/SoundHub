@@ -19,7 +19,7 @@ class PostListCell: UITableViewCell {
     @IBOutlet weak private var albumCoverImageView: UIImageView!
     
 
-    @IBAction func onProfileButtonClickHandler(_ sender: UIButton) {
+    @IBAction private func onProfileButtonClickHandler(_ sender: UIButton) {
         delegate?.shouldShowProfile(of: postInfo.author)
     }
     
@@ -53,18 +53,12 @@ class PostListCell: UITableViewCell {
         }
     }
     var profileImage:UIImage{
-        get{
-            return (authorProfileImageBt.image(for: .normal) ?? #imageLiteral(resourceName: "default-profile"))
-        }set(newVal){
-            authorProfileImageBt.setImage(newVal, for: .normal)
-        }
+        get{ return (authorProfileImageBt.image(for: .normal) ?? #imageLiteral(resourceName: "default-profile")) }
+        set(newVal){ authorProfileImageBt.setImage(newVal, for: .normal) }
     }
     var albumCoverImage:UIImage{
-        get{
-            return (albumCoverImageView.image ?? #imageLiteral(resourceName: "no_cover"))
-        }set(newVal){
-            albumCoverImageView.image = newVal
-        }
+        get{ return (albumCoverImageView.image ?? #imageLiteral(resourceName: "no_cover")) }
+        set(newVal){ albumCoverImageView.image = newVal}
     }
     private var _postInfo:Post!
 }

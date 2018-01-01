@@ -33,7 +33,10 @@ extension String{
         return item
     }
     
-    var breakAtCapital:String{
+    /**
+     예) "AudioUnit"->"Audio\nUnit"
+     */
+    var brokenAtCaptial:String{
         get{
             let startingIndex = self.startIndex
             var result = String(self[self.startIndex])

@@ -50,6 +50,7 @@ class ProfileViewController: UIViewController{
     private var doneButton:UIBarButtonItem!
     
     // MARK: Objc Functions
+    @objc func showsidemenu(){ self.showSideMenu() }
     /**
      유저가 수정한 유저정보를 UserDefault에 저장하고, 같은 정보를 서버에 보냄
     */
@@ -91,10 +92,7 @@ class ProfileViewController: UIViewController{
         self.view.endEditing(true)
     }
     
-    @objc func showsidemenu(){
-        self.showSideMenu()
-    }
-    
+
     // MARK: IBOutlets
     /**
      최상단의 TableView
@@ -111,31 +109,11 @@ class ProfileViewController: UIViewController{
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        mainTV.delegate = self
-        mainTV.dataSource = self
-        tapGestureRecognizer.delegate = self
-
-        imagePicker.allowsEditing = false
-        imagePicker.delegate = self
-        
-        if userInfo?.post_set == nil {
-            guard let userId = userInfo?.id else { return }
-            NetworkController.main.fetchUser(id: userId, completion: { (userResult) in
-                guard let userResult = userResult else { return }
-                self.userInfo = userResult
-                let ids = IndexSet.init(integersIn: 1...1)
-                self.mainTV.reloadSections(ids, with: .automatic)
-            })
-        }
-        
-        let sideMenuButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "Hamburger_icon"), style: .plain, target: self, action: #selector(showsidemenu))
-        self.navigationItem.rightBarButtonItem = sideMenuButton
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.init("shouldReloadContents"), object: nil, queue: nil) { (noti) in
-            guard let userId = self.userInfo?.id else { return }
-            NetworkController.main.fetchUser(id: userId, completion: { (userInfo) in
-                self.userInfo = userInfo
-                self.mainTV.reloadData()
-            })
+        setUpDelegatesAndDataSources()
+        fillInUI(with: userInfo)
+        setUpSideMenuButton()
+        NotificationCenter.default.addObserver(forName: NSNotification.Name("shouldReloadContents"), object: nil, queue: nil) { (noti) in
+            self.fillInUI(with: self.userInfo)
         }
     }
 }
@@ -162,12 +140,8 @@ extension ProfileViewController: UIImagePickerControllerDelegate,UINavigationCon
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             buttonToChange?.setImage(pickedImage, for: .normal)
             buttonToChange?.imageView?.contentMode = .scaleAspectFill
-            if buttonToChange?.tag == 0 {
-                changedProfileImage = pickedImage
-            }else{
-                changedHeaderImage = pickedImage
-            }
-            
+            if buttonToChange?.tag == 0 { changedProfileImage = pickedImage }
+            else{ changedHeaderImage = pickedImage }
         }
         dismiss(animated: true, completion: nil)
     }
@@ -257,6 +231,35 @@ extension ProfileViewController{
                 alert.addAction(action)
             }
             return alert
+        }
+    }
+}
+
+// MARK: Helper Functions
+extension ProfileViewController{
+    
+    private func setUpSideMenuButton(){
+        let sideMenuButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "Hamburger_icon"), style: .plain, target: self, action: #selector(showsidemenu))
+        self.navigationItem.rightBarButtonItem = sideMenuButton
+    }
+    
+    private func setUpDelegatesAndDataSources(){
+        mainTV.delegate = self
+        mainTV.dataSource = self
+        tapGestureRecognizer.delegate = self
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = false
+    }
+    
+    private func fillInUI(with userInfo:User?){
+        if userInfo?.post_set == nil {
+            guard let userId = userInfo?.id else { return }
+            NetworkController.main.fetchUser(id: userId, completion: { (userResult) in
+                guard let userResult = userResult else { return }
+                self.userInfo = userResult
+                let ids = IndexSet.init(integersIn: 1...1)
+                self.mainTV.reloadSections(ids, with: .automatic)
+            })
         }
     }
 }

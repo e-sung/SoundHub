@@ -32,23 +32,13 @@ class ChartViewController: UIViewController{
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let homePageData = UserDefaults.standard.object(forKey: "InitialHomepage") as? Data{
-            if let homePageInfo = try? JSONDecoder().decode(HomePage.self, from: homePageData) {
-                DataCenter.main.homePages[.general] = homePageInfo
-            }
-        }
-        
+        fill(In: DataCenter.main, with: UserDefaults.standard)
+
         mainTV.delegate = self
         mainTV.dataSource = self
         navigationController?.delegate = self
         NotificationCenter.default.addObserver(forName: NSNotification.Name("shouldReloadContents"), object: nil, queue: nil) { (noti) in
-            if let _ = self.navigationController?.topViewController as? ChartViewController{
-                self.showLoadingIndicator()
-            }
-            NetworkController.main.fetchHomePage(of: self.category, with: self.option, completion: {
-                self.mainTV.reloadData()
-                self.presentedViewController?.dismiss(animated: true, completion: nil)
-            })
+            self.reloadContents(showingLoadingIndicator: true)
         }
     }
     
@@ -60,19 +50,9 @@ class ChartViewController: UIViewController{
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        if DataCenter.main.homePages[category]?.recent_posts.count == 0 {
-            showLoadingIndicator()
-        }
-        NetworkController.main.fetchHomePage(of: category, with: option) {
-            self.refreshData()
-            self.presentedViewController?.dismiss(animated: true, completion: nil)
-        }
-        
-        if PlayBarController.main.isHidden == false {
-            guard let bottomConstraint = mainTVBottomConstraint else { return }
-            bottomConstraint.isActive = false
-            mainTV.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -(PlayBarController.main.view.frame.height)).isActive = true
-        }
+        if DataCenter.main.homePages[category]?.recent_posts.count == 0 { reloadContents(showingLoadingIndicator: true) }
+        else { reloadContents(showingLoadingIndicator: false) }
+        setUpUI(with: PlayBarController.main)
     }
 }
 
@@ -249,6 +229,37 @@ extension ChartViewController{
         if Section(rawValue: sender.tag) == .RankingChart {tapOnMoreRanking += 1}
         else if Section(rawValue: sender.tag) == .RecentUpload {tapOnMoreRecent += 1}
         mainTV.reloadData()
+    }
+}
+
+extension ChartViewController{
+    /// 앱을 끄기 직전, dataCenter에 저장된 정보들을 userDefaults에 저장하는데,
+    /// 이 함수는 userDefaults에 저장된 정보를 다시 dataCenter으로 불러들임
+    private func fill(In dataCenter:DataCenter, with userDefaults:UserDefaults){
+        if let homePageData = userDefaults.object(forKey: "InitialHomepage") as? Data{
+            if let homePageInfo = try? JSONDecoder().decode(HomePage.self, from: homePageData) {
+                dataCenter.homePages[.general] = homePageInfo
+            }
+        }
+    }
+    
+    /// 차트를 갱신함
+    private func reloadContents(showingLoadingIndicator:Bool){
+        if let _ = self.navigationController?.topViewController as? ChartViewController{
+            if showingLoadingIndicator == true {self.showLoadingIndicator()}
+        }
+        NetworkController.main.fetchHomePage(of: self.category, with: self.option, completion: {
+            self.mainTV.reloadData()
+            self.presentedViewController?.dismiss(animated: true, completion: nil)
+        })
+    }
+    
+    private func setUpUI(with playBarController:PlayBarController){
+        if playBarController.isHidden == false {
+            guard let bottomConstraint = mainTVBottomConstraint else { return }
+            bottomConstraint.isActive = false
+            mainTV.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -(playBarController.view.frame.height)).isActive = true
+        }
     }
 }
 
