@@ -16,6 +16,7 @@ class mainNavigationController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        PlayBarController.reboot()
         playBarController = PlayBarController.main
         self.view.addSubview(playBarController.view)
         playBarController.setUpView(In: self.view)
