@@ -72,10 +72,10 @@ class ProfileViewController: UIViewController{
     // MARK: IBActions
     /// 톱니바퀴 버튼을 눌렀을 때 해야 할 일
     @IBAction private func changeProfileButtnHandler(_ sender: UIButton) {
-        doneButton = UIBarButtonItem(title: "", style: .done, target: self, action: #selector(doneButtonHandler))
-        navigationItem.rightBarButtonItems?.append(doneButton)
-
-        doneButton.title = "확인"
+        doneButton = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(doneButtonHandler))
+        if navigationItem.rightBarButtonItems?.count == 1 {
+            navigationItem.rightBarButtonItems?.append(doneButton)
+        }
         headerCell!.isSettingPhase = true
     }
     

@@ -126,20 +126,23 @@ extension NetworkController{
         
         Alamofire.upload(
             multipartFormData: { multipartFormData in
+                if let imageData = self.dataRepresentationOf(image: albumCover){
+                    multipartFormData.append(imageData, withName: "post_img",fileName: "album_\(Date()).png", mimeType: "image/png")
+                }
                 multipartFormData.append(title.data(using: .utf8)!, withName: "title")
                 multipartFormData.append(localURL, withName: "author_track")
                 multipartFormData.append(genre.lowercased().data(using: .utf8)!, withName: "genre")
                 multipartFormData.append(instrument.lowercased().data(using: .utf8)!, withName: "instrument")
                 multipartFormData.append("\(bpm)".data(using: .utf8)!, withName: "bpm")
-                if let imageData = self.dataRepresentationOf(image: albumCover){
-                    multipartFormData.append(imageData, withName: "post_img",fileName: "album_cover_\(Date()).png", mimeType: "image/png")
-                }
         },
             to: postURL, headers:["Authorization": "\(authToken)", "Content-type": "multipart/form-data"],
             encodingCompletion: { encodingResult in
                 switch encodingResult {
                 case .success(let upload, _, _):
-                    upload.responseJSON { response in debugPrint(response); completion() }
+                    upload.responseJSON { response in
+                        debugPrint(response);
+                        completion()
+                    }
                 case .failure(let encodingError):
                     print(encodingError); completion()
                 }

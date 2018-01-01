@@ -17,6 +17,10 @@ class PopularMusicianContainerCell: UITableViewCell, UICollectionViewDataSource,
         super.awakeFromNib()
         popularMusicianFlowLayout.delegate = self
         popularMusicianFlowLayout.dataSource = self
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name("shouldReloadCells"), object: nil, queue: nil) { (noti) in
+            DispatchQueue.main.async { self.popularMusicianFlowLayout.reloadData() }
+        }
     }
     
     // MARK: CollectionViewDelegates
