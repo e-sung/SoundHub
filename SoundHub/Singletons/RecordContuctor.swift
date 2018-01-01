@@ -16,7 +16,7 @@ class RecordConductor{
     private var micMixer:AKMixer!
     private var moogLadder: AKMoogLadder!
     
-    var mic: AKMicrophone!
+    private var mic: AKMicrophone!
     var micBooster: AKBooster!
     var recorder:AKNodeRecorder!
     var player:AKAudioPlayer!
@@ -29,6 +29,10 @@ class RecordConductor{
         setUpRecorderAndPlayer()
         setUpMixer()
         start()
+    }
+    
+    func connectMic(with outPutPlot:AKNodeOutputPlot){
+        outPutPlot.node = self.mic
     }
     
     func start(){

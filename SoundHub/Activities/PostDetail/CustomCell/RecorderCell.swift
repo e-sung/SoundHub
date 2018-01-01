@@ -31,7 +31,7 @@ class RecorderCell: UITableViewCell {
         audioUnitContainerHeight.isActive = false
         audioUnitContainerFlowLayout.isHidden = true
         auGenericViewContainer.isHidden = true
-        inputPlot.node = RecordConductor.main.mic
+        RecordConductor.main.connectMic(with: inputPlot)
         state = .readyToRecord
     }
     
@@ -45,10 +45,6 @@ class RecorderCell: UITableViewCell {
         auGenericViewContainer.addSubview(currentAU!)
         auGenericViewContainer.contentSize = currentAU!.frame.size
         
-    }
-    
-    func connectInputPlotToMic(){
-        inputPlot.node = RecordConductor.main.mic
     }
     
     func activate(){
@@ -69,11 +65,15 @@ class RecorderCell: UITableViewCell {
         self.isActive = true
         state = .readyToRecord
         inputPlot.color = .orange
-        inputPlot.node = RecordConductor.main.mic
+        RecordConductor.main.connectMic(with: inputPlot)
         audioUnitContainerHeight.isActive = true
         audioUnitContainerFlowLayout.isHidden = false
         auGenericViewContainer.isHidden = false
         self.contentView.backgroundColor = .black
+    }
+    
+    func connectInputPlotToMic(){
+        RecordConductor.main.connectMic(with: inputPlot)
     }
     
     func deActivate(){
@@ -122,7 +122,7 @@ class RecorderCell: UITableViewCell {
                 if recordedDuration > 0.0 {
                     delegate?.shouldShowAlert()
                     RecordConductor.main.recorder.stop()
-                    inputPlot.node = RecordConductor.main.mic
+                    RecordConductor.main.connectMic(with: inputPlot)
                 }
             }
         }

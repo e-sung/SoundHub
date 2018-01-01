@@ -77,7 +77,7 @@ class AudioRecorderViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         state = .readyToRecord
-        inputPlot.node = RecordConductor.main.mic
+        RecordConductor.main.connectMic(with: inputPlot)
     }
     override func viewWillDisappear(_ animated: Bool) {
         inputPlot.node?.avAudioNode.removeTap(onBus: 0)
