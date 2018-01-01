@@ -19,11 +19,9 @@ class AudioRecorderViewController: UIViewController {
     @IBOutlet weak private var recordButton: UIButton!
     @IBOutlet weak private var inputPlot: AKNodeOutputPlot!
     @IBOutlet weak private var audioUnitContainerFlowLayout: UICollectionView!
-    @IBOutlet weak var auGenericViewContainer: UIScrollView!
-    var currentAU: AudioUnitGenericView?
-    var currentAUindex:Int?
+    @IBOutlet weak private var auGenericViewContainer: UIScrollView!
 
-    @IBAction func cancleButtonHandler(_ sender: UIButton) {
+    @IBAction private func cancleButtonHandler(_ sender: UIButton) {
         self.dismiss(animated: true) { RecordConductor.main.resetRecorder() }
     }
     
@@ -47,7 +45,7 @@ class AudioRecorderViewController: UIViewController {
             let recordedDuration = RecordConductor.main.player != nil ? RecordConductor.main.player.audioFile.duration  : 0
             if recordedDuration > 0.0 {
                 RecordConductor.main.stopRecording()
-                setUpMetaInfo()
+                setUpMetaInfoUI()
             }
         }
     }
@@ -60,10 +58,12 @@ class AudioRecorderViewController: UIViewController {
         case playing
     }
     
+    // MARK: StoredProperties
     private var state:State!
     private var auManager: AKAudioUnitManager?
     private var availableEffects:[String] = []
-
+    private var currentAU: AudioUnitGenericView?
+    private var currentAUindex:Int?
 
     // MARK: LifeCycle
     override func viewDidLoad() {
@@ -74,9 +74,6 @@ class AudioRecorderViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         state = .readyToRecord
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
         RecordConductor.main.resetRecorder()
         RecordConductor.main.connectMic(with: inputPlot)
         RecordConductor.main.resetPlayer()
@@ -86,41 +83,12 @@ class AudioRecorderViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         inputPlot.node?.avAudioNode.removeTap(onBus: 0)
         if let auManager = auManager{
-            if auManager.availableEffects.count > 0 {
-                auManager.removeEffect(at: 0)
-            }
+            if auManager.availableEffects.count > 0 { auManager.removeEffect(at: 0) }
         }
     }
-    
-    func activateAUManager(){
-        auManager = AKAudioUnitManager()
-        auManager?.delegate = self
-        auManager?.requestEffects { (audioComponents) in
-            for component in audioComponents{
-                if component.name != ""{
-                    self.availableEffects.append(component.name)
-                }
-            }
-            self.audioUnitContainerFlowLayout.reloadData()
-        }
-        auManager?.input = RecordConductor.main.player
-        auManager?.output = RecordConductor.main.mainMixer
-    }
-    
-    private func showAudioUnit(_ audioUnit: AVAudioUnit) {
-        
-        if currentAU != nil {
-            currentAU?.removeFromSuperview()
-        }
-        
-        currentAU = AudioUnitGenericView(au: audioUnit)
-        auGenericViewContainer.addSubview(currentAU!)
-        auGenericViewContainer.contentSize = currentAU!.frame.size
-        
-    }
-
 }
 
+// MARK: UICollectionViewDataSource
 extension AudioRecorderViewController:UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return availableEffects.count
@@ -134,9 +102,9 @@ extension AudioRecorderViewController:UICollectionViewDataSource{
         cell.titleLB.text = effectTitle
         return cell
     }
-    
 }
 
+// MARK: UICollectionViewDelegate
 extension AudioRecorderViewController:UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 100, height: 100)
@@ -176,9 +144,9 @@ extension AudioRecorderViewController:UICollectionViewDelegate, UICollectionView
     }
 }
 
+// MARK: AKAudioUnitManagerDelegate
 extension AudioRecorderViewController:AKAudioUnitManagerDelegate{
     func handleAudioUnitNotification(type: AKAudioUnitManager.Notification, object: Any?) {
-        
     }
     
     func handleEffectAdded(at auIndex: Int) {
@@ -186,21 +154,17 @@ extension AudioRecorderViewController:AKAudioUnitManagerDelegate{
             RecordConductor.main.player.stop()
             RecordConductor.main.player.start()
         }
-        if let au = auManager!.effectsChain[auIndex] {
-            showAudioUnit(au)
-        }
+        if let au = auManager!.effectsChain[auIndex] { showAudioUnit(au) }
     }
     
-    func handleEffectRemoved(at auIndex: Int) {
-        print("Effect removed")
-    }
+    func handleEffectRemoved(at auIndex: Int) { print("Effect removed") }
     
 }
 
 // MARK: Helper Functions
 extension AudioRecorderViewController{
 
-    private func setUpMetaInfo(){
+    private func setUpMetaInfoUI(){
         let storyBoard = UIStoryboard(name: "UploadAudio", bundle: nil)
         let audioUploadVC = storyBoard.instantiateViewController(withIdentifier: "DocumentViewController") as! AudioUploadViewController
         
@@ -232,5 +196,27 @@ extension AudioRecorderViewController{
         state = .readyToPlay
         inputPlot.color = .orange
         RecordConductor.main.resetPlayer()
+    }
+    
+    private func activateAUManager(){
+        auManager = AKAudioUnitManager()
+        auManager?.delegate = self
+        auManager?.requestEffects { (audioComponents) in
+            for component in audioComponents{
+                if component.name != ""{ self.availableEffects.append(component.name) }
+            }
+            self.audioUnitContainerFlowLayout.reloadData()
+        }
+        auManager?.input = RecordConductor.main.player
+        auManager?.output = RecordConductor.main.mainMixer
+    }
+    
+    private func showAudioUnit(_ audioUnit: AVAudioUnit) {
+        
+        if currentAU != nil { currentAU?.removeFromSuperview() }
+        
+        currentAU = AudioUnitGenericView(au: audioUnit)
+        auGenericViewContainer.addSubview(currentAU!)
+        auGenericViewContainer.contentSize = currentAU!.frame.size
     }
 }
