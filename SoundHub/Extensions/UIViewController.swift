@@ -25,6 +25,12 @@ extension UIViewController{
         self.present(indicatorVC, animated: true, completion: nil)
     }
     
+    func showSideMenu(){
+        let sb = UIStoryboard(name: "SideMenu", bundle: nil)
+        let sideMenuVC = sb.instantiateViewController(withIdentifier: "SideMenu")
+        present(sideMenuVC, animated: true, completion: nil)
+    }
+    
     static var loadingIndicator:LoadingIndicatorViewController{
         get{
             let sb = UIStoryboard(name: "Chart", bundle: nil)

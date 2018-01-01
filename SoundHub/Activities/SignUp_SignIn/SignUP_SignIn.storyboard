@@ -396,7 +396,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dvs-E5-kHh">
                                 <rect key="frame" x="31.5" y="251" width="312" height="118"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="dev.esung@gmail.com" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fin-d5-EYt">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fin-d5-EYt">
                                         <rect key="frame" x="0.0" y="0.0" width="312" height="36"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -413,7 +413,7 @@
                                             <action selector="emailPrimaryActionHandler:" destination="wSx-Gg-sUf" eventType="primaryActionTriggered" id="ccT-ez-08g"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="asdfasdfasdf" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hi4-Ur-RHJ">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hi4-Ur-RHJ">
                                         <rect key="frame" x="0.0" y="41" width="312" height="36"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -451,22 +451,33 @@
                                     <constraint firstAttribute="width" constant="312" id="T6I-s1-zNF"/>
                                 </constraints>
                             </stackView>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IEX-OO-YFx" customClass="GIDSignInButton">
-                                <rect key="frame" x="37" y="387" width="300" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oAY-fB-I0c">
+                                <rect key="frame" x="31" y="399" width="312" height="36"/>
                                 <color key="backgroundColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="구글 아이디로 로그인">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="googleSignInHandler:" destination="wSx-Gg-sUf" eventType="touchUpInside" id="ZVi-6c-xgt"/>
+                                    <action selector="googleSignInHandler:" destination="wSx-Gg-sUf" eventType="touchUpInside" id="MO1-oU-ZNq"/>
+                                    <action selector="googleSignUpHandler:" destination="y5Y-p4-nBj" eventType="touchUpInside" id="0mE-J8-obi"/>
                                 </connections>
-                            </view>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.086274509803921567" green="0.086274509803921567" blue="0.086274509803921567" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="dvs-E5-kHh" firstAttribute="centerY" secondItem="7S3-fE-DfC" secondAttribute="centerY" constant="-50" id="4t3-Xx-zYR"/>
-                            <constraint firstItem="IEX-OO-YFx" firstAttribute="top" secondItem="dvs-E5-kHh" secondAttribute="bottom" constant="10" id="MAX-C0-cqm"/>
+                            <constraint firstItem="oAY-fB-I0c" firstAttribute="top" secondItem="7Is-bc-taC" secondAttribute="bottom" constant="30" id="8hp-Wt-LIb"/>
+                            <constraint firstItem="oAY-fB-I0c" firstAttribute="centerX" secondItem="7Is-bc-taC" secondAttribute="centerX" id="AGW-Lq-rBf"/>
                             <constraint firstItem="dvs-E5-kHh" firstAttribute="centerX" secondItem="7S3-fE-DfC" secondAttribute="centerX" id="mg5-DL-ceK"/>
-                            <constraint firstItem="IEX-OO-YFx" firstAttribute="centerX" secondItem="dvs-E5-kHh" secondAttribute="centerX" id="ms8-mk-CPL"/>
-                            <constraint firstItem="IEX-OO-YFx" firstAttribute="width" secondItem="dvs-E5-kHh" secondAttribute="width" id="tCV-SN-hsV"/>
+                            <constraint firstItem="oAY-fB-I0c" firstAttribute="height" secondItem="7Is-bc-taC" secondAttribute="height" id="ndj-Vx-9eY"/>
+                            <constraint firstItem="oAY-fB-I0c" firstAttribute="width" secondItem="7Is-bc-taC" secondAttribute="width" id="rWL-sv-hF5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7S3-fE-DfC"/>
                         <connections>
@@ -477,7 +488,7 @@
                     <connections>
                         <outlet property="emailLoginStackView" destination="dvs-E5-kHh" id="u5c-TC-OQ0"/>
                         <outlet property="emailTextField" destination="Fin-d5-EYt" id="AoT-F6-OSS"/>
-                        <outlet property="googleSignInButton" destination="IEX-OO-YFx" id="2bb-Mp-SI6"/>
+                        <outlet property="googleSignInButton" destination="oAY-fB-I0c" id="hE9-ov-0mb"/>
                         <outlet property="passwordTextField" destination="Hi4-Ur-RHJ" id="Q4H-M8-pdK"/>
                         <outlet property="tapGestureRecognizer" destination="9qK-Xe-VPL" id="sYK-ZT-eFf"/>
                         <segue destination="Ikz-va-hjQ" kind="presentation" identifier="loginSuccessSegue" modalTransitionStyle="flipHorizontal" id="X5d-yV-mOA"/>

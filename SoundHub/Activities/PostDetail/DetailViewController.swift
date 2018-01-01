@@ -45,7 +45,7 @@ class DetailViewController: UIViewController{
             if let lastPlayer = oldVal { removeGlobalTimeObserver(from: lastPlayer) }
             guard let masterAudioPlayer = masterTrackPlayer else { return }
             addGlobalTimeObserver(on: masterAudioPlayer)
-            NotificationCenter.default.post(name: NSNotification.Name.init("MasterTrackDownloaded"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name("MasterTrackDownloaded"), object: nil)
         }
     }
 
@@ -246,9 +246,18 @@ extension DetailViewController:CommentContainerCellDelegate{
     }
     
     func didSelectionOccured(on comments: [Comment]) {
-        if comments.count == 0 { navigationItem.setRightBarButton(nil, animated: true); return }
+        if navigationItem.rightBarButtonItems?.count == 1{
+            navigationItem.rightBarButtonItems?.append(UIBarButtonItem(title: "Merge", style: .plain, target: self, action: #selector(mix)))
+        }
+        if comments.count == 0 {
+            navigationItem.rightBarButtonItem = nil
+            let sideMenuButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "Hamburger_icon"), style: .plain, target: self, action: #selector(showsidemenu))
+            navigationItem.rightBarButtonItem = sideMenuButton
+        }
         selectedComments = comments
-        navigationItem.rightBarButtonItems?.append(UIBarButtonItem(title: "Merge", style: .plain, target: self, action: #selector(mix)))
+    }
+    @objc func showsidemenu(){
+        self.showSideMenu()
     }
     
     @objc private func mix(){

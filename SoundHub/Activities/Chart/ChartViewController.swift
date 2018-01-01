@@ -32,11 +32,19 @@ class ChartViewController: UIViewController{
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let homePageData = UserDefaults.standard.object(forKey: "InitialHomepage") as? Data{
+            if let homePageInfo = try? JSONDecoder().decode(HomePage.self, from: homePageData) {
+                DataCenter.main.homePages[.general] = homePageInfo
+            }
+        }
+        
         mainTV.delegate = self
         mainTV.dataSource = self
         navigationController?.delegate = self
         NotificationCenter.default.addObserver(forName: NSNotification.Name("shouldReloadContents"), object: nil, queue: nil) { (noti) in
-            self.showLoadingIndicator()
+            if let _ = self.navigationController?.topViewController as? ChartViewController{
+                self.showLoadingIndicator()
+            }
             NetworkController.main.fetchHomePage(of: self.category, with: self.option, completion: {
                 self.mainTV.reloadData()
                 self.presentedViewController?.dismiss(animated: true, completion: nil)
@@ -52,20 +60,18 @@ class ChartViewController: UIViewController{
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        if DataCenter.main.homePages[category]?.recent_posts.count == 0 {
+            showLoadingIndicator()
+        }
+        NetworkController.main.fetchHomePage(of: category, with: option) {
+            self.refreshData()
+            self.presentedViewController?.dismiss(animated: true, completion: nil)
+        }
+        
         if PlayBarController.main.isHidden == false {
             guard let bottomConstraint = mainTVBottomConstraint else { return }
             bottomConstraint.isActive = false
             mainTV.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -(PlayBarController.main.view.frame.height)).isActive = true
-        }
-
-        if DataCenter.main.homePages[category]?.recent_posts.count == 0{
-            performSegue(withIdentifier: "showLoadingIndicatingView", sender:self)
-        }
-        NetworkController.main.fetchHomePage(of: category, with: option) {
-            self.refreshData()
-            if let loadIndicator = self.presentedViewController as? LoadingIndicatorViewController {
-                loadIndicator.dismiss(animated: true, completion: nil)
-            }
         }
     }
 }
@@ -182,10 +188,10 @@ extension ChartViewController:UITableViewDelegate{
 
 extension ChartViewController:UINavigationControllerDelegate{
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        let sideMenuButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "Hamburger_icon"), style: .plain, target: self, action: #selector(showSideMenu))
+        let sideMenuButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "Hamburger_icon"), style: .plain, target: self, action: #selector(showsidemenu))
         viewController.navigationItem.rightBarButtonItem = sideMenuButton
     }
-    @objc func showSideMenu(){
+    @objc func showsidemenu(){
         performSegue(withIdentifier: "showSideMenu", sender: nil)
     }
 }

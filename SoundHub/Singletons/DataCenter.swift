@@ -17,7 +17,11 @@ class DataCenter{
         .general:HomePage(pop_users: [], pop_posts: [], recent_posts: []),
         .genre:HomePage(pop_users: [], pop_posts: [], recent_posts: []),
         .instrument:HomePage(pop_users: [], pop_posts: [], recent_posts: [])
-    ]
+        ]{
+        didSet(oldVal){
+            NotificationCenter.default.post(name: NSNotification.Name.init("shouldReloadCells"), object: nil)
+        }
+    }
 
     var userId:Int{
         get{

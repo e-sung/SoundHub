@@ -16,7 +16,7 @@ class SignInViewController: UIViewController, UITextViewDelegate,GIDSignInUIDele
     // MARK: IBOutlests
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var googleSignInButton: GIDSignInButton!
+    @IBOutlet weak var googleSignInButton: UIButton!
     @IBOutlet weak var emailLoginStackView: UIStackView!
     @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
     
@@ -34,7 +34,7 @@ class SignInViewController: UIViewController, UITextViewDelegate,GIDSignInUIDele
         tryLogin(with: emailTextField.text, and: passwordTextField.text)
     }
    
-    @IBAction func googleSignInHandler(_ sender: GIDSignInButton) {
+    @IBAction func googleSignInHandler(_ sender: UIButton) {
         GIDSignIn.sharedInstance().signIn()
     }
     
@@ -47,8 +47,6 @@ class SignInViewController: UIViewController, UITextViewDelegate,GIDSignInUIDele
     override func viewDidLoad() {
         super.viewDidLoad()
         GIDSignIn.sharedInstance().uiDelegate = self
-        googleSignInButton.colorScheme = .dark
-        googleSignInButton.style = .wide
         tapGestureRecognizer.delegate = self
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: "ToggleAuthUINotification"), object: nil, queue: nil) { (noti) in
             if let dic = noti.userInfo as NSDictionary?{

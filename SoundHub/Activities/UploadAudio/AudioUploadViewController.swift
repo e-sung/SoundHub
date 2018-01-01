@@ -18,6 +18,7 @@ class AudioUploadViewController: UIViewController {
     var genre:String!
     var instrument:String!
     private let imagePicker = UIImagePickerController()
+    private var pickedImage = #imageLiteral(resourceName: "no_cover")
     @IBOutlet weak private var audioTitleTF:UITextField!
     @IBOutlet weak private var bpmTF: UITextField!
     @IBOutlet weak private var albumArt: UIButton!
@@ -86,6 +87,7 @@ extension AudioUploadViewController{
     
     private func setUp(_ albumButton:UIButton, with key:AVMetadataKey, and value:NSCopying&NSObjectProtocol){
         if key == .commonKeyArtwork, let data = value as? Data{
+            pickedImage = UIImage(data: data)!
             albumButton.setImage(UIImage(data: data), for: .normal)
             albumButton.isUserInteractionEnabled = false
             cameraButton.isHidden = true
@@ -112,10 +114,10 @@ extension AudioUploadViewController{
         self.present(UIViewController.loadingIndicator, animated: true, completion: nil)
         RecordConductor.main.exportRecordedAudio(to: self.exportURL,
                                                  with: [self.titleMetaData, self.artistMetaData], completion: {
-            NetworkController.main.uploadAudio(In: self.exportURL, genre: self.genre, instrument: self.instrument, bpm: bpm, albumCover: (self.albumArt.image(for: .normal) ?? UIImage()), completion: {
+            NetworkController.main.uploadAudio(In: self.exportURL, title:self.audioTitleTF.text ?? "무제", genre: self.genre, instrument: self.instrument, bpm: bpm, albumCover:self.pickedImage, completion: {
                 RecordConductor.main.resetRecordedAudio()
                 DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: NSNotification.Name.init("shouldReloadContents"), object: nil)
+                    NotificationCenter.default.post(name: NSNotification.Name("shouldReloadContents"), object: nil)
                     self.presentedViewController?.dismiss(animated: true, completion: { self.dismissWith(depth: 2, from: self) })
                 }
             })
@@ -124,8 +126,8 @@ extension AudioUploadViewController{
     
     private func uploadExisting(music audioURL:URL, with bpm:Int){
         showLoadingIndicator()
-        NetworkController.main.uploadAudio(In: audioURL, genre: self.genre, instrument: self.instrument, bpm: bpm, albumCover: (self.albumArt.image(for: .normal) ?? UIImage()), completion: {
-            NotificationCenter.default.post(name: NSNotification.Name.init("shouldReloadContents"), object: nil)
+        NetworkController.main.uploadAudio(In: audioURL, title:audioTitleTF.text ?? "무제" , genre: self.genre, instrument: self.instrument, bpm: bpm, albumCover: (self.albumArt.currentImage ?? #imageLiteral(resourceName: "no_cover") ), completion: {
+            NotificationCenter.default.post(name: NSNotification.Name("shouldReloadContents"), object: nil)
             self.presentedViewController?.dismiss(animated: true, completion: {
                 self.dismiss(animated: true, completion: nil)
             })
@@ -191,6 +193,7 @@ extension AudioUploadViewController{
 extension AudioUploadViewController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            self.pickedImage = pickedImage
             albumArt.setImage(pickedImage, for: .normal)
             albumArt.imageView?.contentMode = .scaleAspectFill
         }
