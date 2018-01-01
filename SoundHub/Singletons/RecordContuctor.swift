@@ -37,47 +37,17 @@ class RecordConductor{
     
 }
 
-// MARK: Boot Up
-extension RecordConductor{
-    private func setUpSession(){
-        // Clean tempFiles !
-        AKAudioFile.cleanTempDirectory()
-        // Session settings
-        AKSettings.bufferLength = .medium
-        do { try AKSettings.setSession(category: .playAndRecord, with: .allowBluetoothA2DP) }
-        catch { AKLog("Could not set session category.") }
-        AKSettings.defaultToSpeaker = true
-    }
-    
-    private func setUpMic(){
-        // Patching
-        mic = AKMicrophone()
-        micMixer = AKMixer(mic)
-        micBooster = AKBooster(micMixer)
-        // Will set the level of microphone monitoring
-        micBooster.gain = 0
-    }
-    
-    private func setUpRecorderAndPlayer(){
-        recorder = try? AKNodeRecorder(node: micMixer)
-        if let file = recorder.audioFile {
-            player = try? AKAudioPlayer(file: file)
-        }
-    }
-    
-    private func setUpMixer(){
-        moogLadder = AKMoogLadder(player)
-        mainMixer = AKMixer(moogLadder, micBooster)
-        AudioKit.output = mainMixer
-    }
-}
-
 // MARK: Internal Functions
 extension RecordConductor{
-
+    
     func startRecording(){
         if AKSettings.headPhonesPlugged { self.micBooster.gain = 1 }
         do { try self.recorder.record() } catch { print("Errored recording.") }
+    }
+    
+    func playRecorded(looping:Bool){
+        player.looping = looping
+        self.player.play()
     }
     
     func stopRecording(){ self.recorder.stop() }
@@ -129,3 +99,40 @@ extension RecordConductor{
         outPutPlot.node = self.mic
     }
 }
+
+// MARK: Boot Up
+extension RecordConductor{
+    private func setUpSession(){
+        // Clean tempFiles !
+        AKAudioFile.cleanTempDirectory()
+        // Session settings
+        AKSettings.bufferLength = .medium
+        do { try AKSettings.setSession(category: .playAndRecord, with: .allowBluetoothA2DP) }
+        catch { AKLog("Could not set session category.") }
+        AKSettings.defaultToSpeaker = true
+    }
+    
+    private func setUpMic(){
+        // Patching
+        mic = AKMicrophone()
+        micMixer = AKMixer(mic)
+        micBooster = AKBooster(micMixer)
+        // Will set the level of microphone monitoring
+        micBooster.gain = 0
+    }
+    
+    private func setUpRecorderAndPlayer(){
+        recorder = try? AKNodeRecorder(node: micMixer)
+        if let file = recorder.audioFile {
+            player = try? AKAudioPlayer(file: file)
+        }
+    }
+    
+    private func setUpMixer(){
+        moogLadder = AKMoogLadder(player)
+        mainMixer = AKMixer(moogLadder, micBooster)
+        AudioKit.output = mainMixer
+    }
+}
+
+

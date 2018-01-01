@@ -102,7 +102,7 @@ class RecorderCell: UITableViewCell {
                 makeReadyToPlayState()
                 delegate?.didStopRecording()
             case .readyToPlay :
-                RecordConductor.main.player.play()
+                RecordConductor.main.playRecorded(looping: true)
                 delegate?.didStartPlayingRecordedAudio()
                 inputPlot.color = .orange
                 inputPlot.node = RecordConductor.main.player
