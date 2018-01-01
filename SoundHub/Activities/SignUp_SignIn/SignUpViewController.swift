@@ -10,7 +10,6 @@ import UIKit
 import LPSnackbar
 import GoogleSignIn
 
-/// - ToDo : Input 값의 Validity확인
 class SignUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate {
 
     // MARK: Stored Properties
@@ -27,11 +26,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
     @IBOutlet var textFields: [UITextField]!
     @IBOutlet weak var emailSignUpStackView: UIStackView!
     @IBOutlet weak var googleSignInButton: UIButton!
-    
     @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
     
     // MARK: IBActions
-    
     @IBAction func emailButtonHandler(_ sender: UIButton) {
         if isReadyToSignUp(){
             performSegue(withIdentifier: "signUpToProfileSetUp", sender: self)
@@ -115,7 +112,7 @@ extension SignUpViewController{
 
 extension SignUpViewController{
     
-    func isReadyToSignUp()->Bool{
+    private func isReadyToSignUp()->Bool{
         checkEmailValidity()
         if errorMsgLB.text?.isEmpty == false { return false }
         checkPasswordValidity()
@@ -125,7 +122,7 @@ extension SignUpViewController{
         return true
     }
     
-    func checkEmailValidity(){
+    private func checkEmailValidity(){
         guard let email = emailTF.text else {
             errorMsgLB.text = "Fill in Email Address!"
             nickNameTF.resignFirstResponder()
@@ -144,7 +141,7 @@ extension SignUpViewController{
         }
     }
     
-    func checkPasswordValidity(){
+    private func checkPasswordValidity(){
         guard let password = passwordTF.text else {
             errorMsgLB.text = "Fill in Password!"
             passwordConfirmTF.resignFirstResponder()
@@ -163,7 +160,7 @@ extension SignUpViewController{
         }
     }
     
-    func checkPasswordConfirmValidity(){
+    private func checkPasswordConfirmValidity(){
         guard let password = passwordConfirmTF.text else {
             errorMsgLB.text = "Fill in Password Confirm Field"
             passwordConfirmTF.becomeFirstResponder()

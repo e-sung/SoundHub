@@ -18,7 +18,7 @@ let keyForInstruments = "instrument"
 let keyForUserId = "id"
 
 extension UserDefaults{
-    func save(with socialLoginResult:NSDictionary){
+    func save(_ socialLoginResult:NSDictionary){
         guard let newToken = socialLoginResult["token"] as? String else { return }
         guard let userInfo = socialLoginResult["user"] as? NSDictionary else { return }
         guard let userId = userInfo["id"] as? Int else { return }
