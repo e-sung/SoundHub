@@ -31,7 +31,7 @@ class RecorderCell: UITableViewCell {
         audioUnitContainerHeight.isActive = false
         audioUnitContainerFlowLayout.isHidden = true
         auGenericViewContainer.isHidden = true
-        inputPlot.node = RecordConductor.main.mic
+        RecordConductor.main.connectMic(with: inputPlot)
         state = .readyToRecord
     }
     
@@ -47,19 +47,13 @@ class RecorderCell: UITableViewCell {
         
     }
     
-    func connectInputPlotToMic(){
-        inputPlot.node = RecordConductor.main.mic
-    }
-    
     func activate(){
-        
+        RecordConductor.main.connectMic(with: inputPlot)
         auManager = AKAudioUnitManager()
         auManager?.delegate = self
         auManager?.requestEffects { (audioComponents) in
             for component in audioComponents{
-                if component.name != ""{
-                    self.availableEffects.append(component.name)
-                }
+                if component.name != ""{ self.availableEffects.append(component.name) }
             }
             self.audioUnitContainerFlowLayout.reloadData()
         }
@@ -69,25 +63,26 @@ class RecorderCell: UITableViewCell {
         self.isActive = true
         state = .readyToRecord
         inputPlot.color = .orange
-        inputPlot.node = RecordConductor.main.mic
+        RecordConductor.main.connectMic(with: inputPlot)
         audioUnitContainerHeight.isActive = true
         audioUnitContainerFlowLayout.isHidden = false
         auGenericViewContainer.isHidden = false
         self.contentView.backgroundColor = .black
     }
     
+    func connectInputPlotToMic(){ RecordConductor.main.connectMic(with: inputPlot) }
+    
     func deActivate(){
         self.isActive = false
         if let auManager = auManager{
-            if auManager.availableEffects.count > 0 {
-                auManager.removeEffect(at: 0)
-            }
+            if auManager.availableEffects.count > 0 { auManager.removeEffect(at: 0) }
         }
         audioUnitContainerHeight.isActive = false
         audioUnitContainerFlowLayout.isHidden = true
         auGenericViewContainer.isHidden = true
         self.contentView.backgroundColor = .gray
         inputPlot.color = .black
+        DispatchQueue.global(qos: .userInitiated).async { RecordConductor.main.resetRecorder() }
     }
     
     @IBAction private func recordButtonHandler(_ sender: UIButton) {
@@ -107,7 +102,7 @@ class RecorderCell: UITableViewCell {
                 makeReadyToPlayState()
                 delegate?.didStopRecording()
             case .readyToPlay :
-                RecordConductor.main.player.play()
+                RecordConductor.main.playRecorded(looping: true)
                 delegate?.didStartPlayingRecordedAudio()
                 inputPlot.color = .orange
                 inputPlot.node = RecordConductor.main.player
@@ -121,8 +116,8 @@ class RecorderCell: UITableViewCell {
                 let recordedDuration = RecordConductor.main.player != nil ? RecordConductor.main.player.audioFile.duration  : 0
                 if recordedDuration > 0.0 {
                     delegate?.shouldShowAlert()
-                    RecordConductor.main.recorder.stop()
-                    inputPlot.node = RecordConductor.main.mic
+                    RecordConductor.main.stopRecording()
+                    RecordConductor.main.connectMic(with: inputPlot)
                 }
             }
         }
@@ -156,7 +151,7 @@ class RecorderCell: UITableViewCell {
         recordButton.setTitle("듣기", for: .normal)
         state = .readyToPlay
         inputPlot.color = .orange
-        RecordConductor.main.stopRecording()
+        RecordConductor.main.resetPlayer()
     }
     
 }

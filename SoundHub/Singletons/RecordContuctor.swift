@@ -11,61 +11,54 @@ import AudioKit
 import AudioKitUI
 
 class RecordConductor{
+    /// 녹음과 관련된 모든 것을 담당하는 싱글턴 객체
     public static let main = RecordConductor()
     
     private var micMixer:AKMixer!
     private var moogLadder: AKMoogLadder!
-    
-    var mic: AKMicrophone!
-    var micBooster: AKBooster!
-    var recorder:AKNodeRecorder!
+    private var mic: AKMicrophone!
+    private var micBooster: AKBooster!
+    private var recorder:AKNodeRecorder!
+    /// 녹음된 소리를 재생함
     var player:AKAudioPlayer!
+    /// AudioKit 엔진의 최종 Output Node
     var mainMixer: AKMixer!
 
-    
-    init(){
+    init(){ bootUp() }
+    private func bootUp(){
         setUpSession()
         setUpMic()
         setUpRecorderAndPlayer()
         setUpMixer()
-        start()
+        startEngine()
     }
+    private func startEngine(){ AudioKit.start() }
+    private func stopEngine(){ AudioKit.stop() }
     
-    func start(){
-        AudioKit.start()
-    }
-    
-    func stop(){
-        AudioKit.stop()
-    }
+}
+
+// MARK: Internal Functions
+extension RecordConductor{
     
     func startRecording(){
         if AKSettings.headPhonesPlugged { self.micBooster.gain = 1 }
         do { try self.recorder.record() } catch { print("Errored recording.") }
     }
     
-    func stopRecording(){
+    func playRecorded(looping:Bool){
+        player.looping = looping
+        self.player.play()
+    }
+    
+    func stopRecording(){ self.recorder.stop() }
+    
+    func resetPlayer(){
         self.micBooster.gain = 0
         do { try self.player.reloadFile() } catch { print("Errored reloading.") }
     }
     
-    func resetRecordedAudio(){
+    func resetRecorder(){
         do{ try recorder.reset() } catch { print("couldn't reset recorded audio") }
-    }
-    
-    func exportComment(asset:AVAsset, completion:@escaping(_ output:URL)->Void){
-        let outputURL = URL(string: "comment.m4a".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)! , relativeTo: DataCenter.documentsDirectoryURL)!
-        if let session = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetAppleM4A){
-            session.outputFileType = AVFileType.m4a
-            session.outputURL = outputURL
-            session.exportAsynchronously {
-                DispatchQueue.main.async(execute: {
-                    completion(outputURL)
-                })
-            }
-        }else {
-            print("AVAssetExportSession wasn't generated")
-        }
     }
     
     func confirmComment(on postId:Int, of Instrument:String, completion:@escaping (Post?)->Void){
@@ -75,7 +68,7 @@ class RecordConductor{
             NetworkController.main.uploadAudioComment(In: outputURL, to: postId, instrument: Instrument, completion: {
                 NetworkController.main.fetchPost(id: postId, completion: { (postResult) in
                     completion(postResult)
-                    DispatchQueue.global(qos: .userInitiated).async { self.resetRecordedAudio() }
+                    DispatchQueue.global(qos: .userInitiated).async { self.resetRecorder() }
                 })
             })
         })
@@ -86,15 +79,29 @@ class RecordConductor{
             session.metadata = metadatas
             session.outputFileType = AVFileType.m4a
             session.outputURL = url
-            session.exportAsynchronously {
-                DispatchQueue.main.async { completion() }
-            }
-        }else {
-            print("AVAssetExportSession wasn't generated")
-        }
+            session.exportAsynchronously { DispatchQueue.main.async { completion() } }
+        }else { print("AVAssetExportSession wasn't generated") }
     }
     
+    /// 입력으로 주어진 asset을 .m4a파일로 export 합니다
+    private func exportComment(asset:AVAsset, completion:@escaping(_ output:URL)->Void){
+        let outputURL = URL(string: "comment.m4a".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)! , relativeTo: DataCenter.documentsDirectoryURL)!
+        if let session = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetAppleM4A){
+            session.outputFileType = AVFileType.m4a
+            session.outputURL = outputURL
+            session.exportAsynchronously { DispatchQueue.main.async(execute: { completion(outputURL) }) }
+        }else { print("AVAssetExportSession wasn't generated") }
+    }
+    
+    /// RecordConductor 가 가지고 있는 mic객체와 outPutPlot의 Node를 연결시킴
+    /// - parameter outPutPlot : Mic에 들어오는 음악의 파형을 표현할 AKNodeOutputPlot 객체
+    func connectMic(with outPutPlot:AKNodeOutputPlot){
+        outPutPlot.node = self.mic
+    }
+}
 
+// MARK: Boot Up
+extension RecordConductor{
     private func setUpSession(){
         // Clean tempFiles !
         AKAudioFile.cleanTempDirectory()
@@ -127,3 +134,5 @@ class RecordConductor{
         AudioKit.output = mainMixer
     }
 }
+
+

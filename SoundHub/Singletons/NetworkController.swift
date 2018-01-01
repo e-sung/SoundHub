@@ -88,9 +88,51 @@ extension NetworkController{
                 DataCenter.main.homePages[category] = homePageData
                 DispatchQueue.main.async { completion() }
             }catch let err as NSError{
-                print(err)
+                print(err);completion()
             }
         }.resume()
+    }
+}
+
+// MARK: Patching Functions
+extension NetworkController{
+    func patchUser(nickname:String, instrument:String, completion:@escaping(_ hasSuccess:Bool)->Void){
+        guard let userId = UserDefaults.standard.string(forKey: keyForUserId) else { completion(false); return}
+        let nickNamePatchURL = URL(string: "/user/\(userId)/", relativeTo: hostURL)!
+        let headers: HTTPHeaders = ["Authorization": authToken]
+        let parameters: Parameters = ["nickname":nickname, "instrument":instrument]
+        Alamofire.request(nickNamePatchURL, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers:headers).response { (response) in
+            if response.response?.statusCode == 200 { completion(true) }
+            else{ completion(false) }
+        }
+    }
+    
+    func patch(profileImage:UIImage?, headerImage:UIImage?){
+        guard let userId = UserDefaults.standard.string(forKey: keyForUserId) else { return }
+        let imagePatchURL = URL(string: "/user/\(userId)/profile-img/", relativeTo: hostURL)!
+        Alamofire.upload(
+            multipartFormData: { multipartFormData in
+                if let imageData = self.dataRepresentationOf(image: profileImage){
+                    multipartFormData.append(imageData, withName: "profile_img",fileName: "profile_\(Date()).png", mimeType: "image/png")
+                }
+                if let imageData = self.dataRepresentationOf(image: headerImage){
+                    multipartFormData.append(imageData, withName: "profile_bg",fileName: "header_\(Date()).png", mimeType: "image/png")
+                }
+        },
+            to: imagePatchURL, method: .patch,
+            headers: ["Authorization": "\(authToken)", "Content-type": "multipart/form-data"],
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    upload.responseJSON { response in
+                        DataCenter.main.removeUserProfileImageCache()
+                        debugPrint(response)
+                    }
+                case .failure(let encodingError):
+                    print(encodingError)
+                }
+        }
+        )
     }
 }
 
@@ -140,8 +182,7 @@ extension NetworkController{
                 switch encodingResult {
                 case .success(let upload, _, _):
                     upload.responseJSON { response in
-                        debugPrint(response);
-                        completion()
+                        debugPrint(response); completion()
                     }
                 case .failure(let encodingError):
                     print(encodingError); completion()
@@ -159,8 +200,7 @@ extension NetworkController{
         let destinationUrl = documentsDirectoryURL.appendingPathComponent(parseLocalURL(from: remoteURL))
 
         if FileManager.default.fileExists(atPath: destinationUrl.path) {
-            DispatchQueue.main.async { completion(destinationUrl) }
-            return
+            DispatchQueue.main.async { completion(destinationUrl) }; return
         }
         URLSession.shared.downloadTask(with: remoteURL, completionHandler: { (location, response, error) -> Void in
             guard let location = location, error == nil else { return }
@@ -187,49 +227,37 @@ extension NetworkController{
     }
 }
 
-// MARK: Patching Functions
-extension NetworkController{
-    func patchUser(nickname:String, instrument:String, completion:@escaping(_ hasSuccess:Bool)->Void){
-        guard let userId = UserDefaults.standard.string(forKey: keyForUserId) else { completion(false); return}
-        let nickNamePatchURL = URL(string: "/user/\(userId)/", relativeTo: hostURL)!
-        let headers: HTTPHeaders = ["Authorization": authToken]
-        let parameters: Parameters = ["nickname":nickname, "instrument":instrument]
-        Alamofire.request(nickNamePatchURL, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers:headers).response { (response) in
-            if response.response?.statusCode == 200 { completion(true) }
-            else{ completion(false) }
-        }
-    }
-    
-    func patch(profileImage:UIImage?, headerImage:UIImage?){
-        guard let userId = UserDefaults.standard.string(forKey: keyForUserId) else { return }
-        let imagePatchURL = URL(string: "/user/\(userId)/profile-img/", relativeTo: hostURL)!        
-        Alamofire.upload(
-            multipartFormData: { multipartFormData in
-                if let imageData = self.dataRepresentationOf(image: profileImage){
-                    multipartFormData.append(imageData, withName: "profile_img",fileName: "profile_\(Date()).png", mimeType: "image/png")
-                }
-                if let imageData = self.dataRepresentationOf(image: headerImage){
-                    multipartFormData.append(imageData, withName: "profile_bg",fileName: "header_\(Date()).png", mimeType: "image/png")
-                }
-        },
-            to: imagePatchURL, method: .patch,
-            headers: ["Authorization": "\(authToken)", "Content-type": "multipart/form-data"],
-            encodingCompletion: { encodingResult in
-                switch encodingResult {
-                case .success(let upload, _, _):
-                    upload.responseJSON { response in
-                        DataCenter.main.removeUserProfileImageCache()
-                        debugPrint(response)
-                    }
-                case .failure(let encodingError):
-                    print(encodingError)
-                }
-        }
-        )
-    }
-}
 
 extension NetworkController{
+    
+    func signUp(with socialToken:String, nickname:String, instruments:String, completion: @escaping (_ result: NSDictionary?, _ errorMesge:String?)->Void){
+        
+        let unknownErrorMesage = "알 수 없는 오류가 발생했습니다"
+        guard let clientId = GIDSignIn.sharedInstance().clientID else { completion(nil, unknownErrorMesage); return }
+        let url = URL(string: "user/google_login/", relativeTo: hostURL)!
+        let signUpInfo = ["token":socialToken, "client_id":clientId, "nickname":nickname, "instrument":instruments]
+        Alamofire.request(url, method: .post, parameters: signUpInfo, headers: nil).responseJSON { (response) in
+            if response.response?.statusCode == 500 {
+                DispatchQueue.main.async { completion(nil, "서버측에 문제가 발생했습니다") }; return
+            }
+            if let json = response.result.value {
+                if let userInfo = json as? NSDictionary{
+                    guard let socialProfileImageURL = DataCenter.main.socialProfileImageURL else {
+                        DispatchQueue.main.async { completion(nil, unknownErrorMesage)}; return
+                    }
+                    let profileImageData = try! Data(contentsOf: socialProfileImageURL)
+                    let profileImage = UIImage(data: profileImageData)!
+                    self.patch(profileImage: profileImage, headerImage: nil)
+                    DispatchQueue.main.async { completion(userInfo, nil) }; return
+                }
+                if let err = json as? NSDictionary{
+                    DispatchQueue.main.async { completion(err, err["detail"] as? String ) }; return
+                }
+            }
+            DispatchQueue.main.async { completion(nil, unknownErrorMesage)}
+            return
+        }
+    }
     
     func signUp(with email:String, nickname:String, instruments:String, password1:String, password2:String,
                 completion: @escaping (_ userId: Int, _ errorMesge:String?)->Void){
@@ -277,57 +305,27 @@ extension NetworkController{
         }
     }
     
-    func signUp(with socialToken:String, nickname:String, instruments:String, completion: @escaping (_ result: NSDictionary?, _ errorMesge:String?)->Void){
-        
-        let unknownErrorMesage = "알 수 없는 오류가 발생했습니다"
-        guard let clientId = GIDSignIn.sharedInstance().clientID else { completion(nil, unknownErrorMesage); return }
-        let url = URL(string: "user/google_login/", relativeTo: hostURL)!
-        let signUpInfo = ["token":socialToken, "client_id":clientId, "nickname":nickname, "instrument":instruments]
-        Alamofire.request(url, method: .post, parameters: signUpInfo, headers: nil).responseJSON { (response) in
-            if response.response?.statusCode == 500 {
-                DispatchQueue.main.async { completion(nil, "서버측에 문제가 발생했습니다") }
-                return
-            }
-            if let json = response.result.value {
-                if let userInfo = json as? NSDictionary{
-                    guard let socialProfileImageURL = DataCenter.main.socialProfileImageURL else { return }
-                    let profileImageData = try! Data.init(contentsOf: socialProfileImageURL)
-                    let profileImage = UIImage(data: profileImageData)!
-                    self.patch(profileImage: profileImage, headerImage: nil)
-                    DispatchQueue.main.async { completion(userInfo, nil) }; return
-                }
-                if let err = json as? NSDictionary{
-                    DispatchQueue.main.async { completion(err, err["detail"] as? String ) }; return
-                }
-            }
-            DispatchQueue.main.async { completion(nil, unknownErrorMesage)}
-            return
-        }
-
-    }
-
-    func login(with email:String, and password:String, completion:@escaping (_ response:NSDictionary?, _ error:String?)->Void){
+    func signIn(with email:String, and password:String, completion:@escaping (_ response:NSDictionary?, _ error:String?)->Void){
         
         let unknownErrorMesage = "알 수 없는 오류가 발생했습니다"
         let signInInfo = ["email":email, "password":password]
         Alamofire.request(loginURL, method: .post, parameters: signInInfo, headers: nil).responseJSON { (response) in
             if response.response?.statusCode == 500 {
-                DispatchQueue.main.async { completion(nil, "서버측에 문제가 발생했습니다") }
-                return
+                DispatchQueue.main.async { completion(nil, "서버측에 문제가 발생했습니다") }; return
             }
             if let json = response.result.value {
                 if let dic = json as? NSDictionary{
-                    if let _ = dic["token"] as? String {
-                        DispatchQueue.main.async { completion(dic, nil) }; return
-                    }else{
-                        DispatchQueue.main.async { completion(nil, "잘못된 이메일, 혹은 비밀번호입니다") };return
-                    }
+                    if let _ = dic["token"] as? String { DispatchQueue.main.async { completion(dic, nil) }; return }
+                    else{ DispatchQueue.main.async { completion(nil, "잘못된 이메일, 혹은 비밀번호입니다") }; return }
                 }
             }
-            DispatchQueue.main.async { completion(nil, unknownErrorMesage)}
-            return
+            DispatchQueue.main.async { completion(nil, unknownErrorMesage)}; return
         }
     }
+}
+
+// MARK: Utility Functions & Computed Properties
+extension NetworkController{
     
     func sendLikeRequest(on postId:Int, completion:@escaping (_ num_liked:Int)->Void){
         let url = URL(string: "\(postId)/like/", relativeTo: postURL)!
@@ -340,10 +338,7 @@ extension NetworkController{
             }
         }
     }
-}
-
-// MARK: Utility Functions & Computed Properties
-extension NetworkController{
+    
     /// UserDefault에 저장되어있는 토큰을 꺼내어, 백앤드가 원하는 형태로 가공해 반환함.
     /// UserDefault에 저장된 값이 없을 때는, "Invalid Token"이라는 문자열을 토큰 대신 반환함.
     private var authToken:String{
@@ -351,17 +346,6 @@ extension NetworkController{
             guard let tkn = UserDefaults.standard.string(forKey: keyForToken) else { return "invalid Token" }
             return "Token \(tkn)"
         }
-    }
-    
-    /// URL 요청에 Method와 기본 헤더만 달아주는 함수
-    private func generatePostRequest(with url:URL, and body:Data?)->URLRequest{
-        var request = URLRequest(url: url)
-        request.addValue("application/json", forHTTPHeaderField: "Content-type")
-        request.httpMethod = "POST"
-        if let body = body {
-            request.httpBody = body
-        }
-        return request
     }
     
     /// UIImagePNGRpresentation Wrapper

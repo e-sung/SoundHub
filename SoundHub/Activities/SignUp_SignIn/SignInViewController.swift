@@ -76,7 +76,7 @@ extension SignInViewController{
         guard let email = email else {alert(msg: "이메일을 입력하세요");return}
         guard let password = password else {alert(msg: "비밀번호를 입력하세요");return}
         self.showLoadingIndicator()
-        NetworkController.main.login(with: email, and: password) { (result, error) in
+        NetworkController.main.signIn(with: email, and: password) { (result, error) in
             self.handle(result: result, and: error)
         }
     }

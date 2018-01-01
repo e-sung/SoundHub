@@ -335,7 +335,7 @@ extension DetailViewController:RecorderCellDelegate{
             self.showInstrumentPicker()
         }))
         alert.addAction(UIAlertAction(title: "취소", style: .destructive, handler: { (action) in
-            RecordConductor.main.resetRecordedAudio()
+            RecordConductor.main.resetRecorder()
         }))
         present(alert, animated: true, completion: nil)
     }
