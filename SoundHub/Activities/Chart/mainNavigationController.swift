@@ -27,7 +27,10 @@ class mainNavigationController: UINavigationController {
         documentPicker = UIDocumentPickerViewController(documentTypes: ["public.audio"], in: UIDocumentPickerMode.import )
         documentPicker.delegate = self
     }
+}
 
+// MARK: Initialize Upload Button
+extension mainNavigationController{
     private func setUploadButton(){
         let upLoadButtonWidth:CGFloat = 70
         uploadMusicButton.frame = CGRect(x: self.view.frame.width - upLoadButtonWidth, y: self.view.frame.height - upLoadButtonWidth, width: upLoadButtonWidth, height:upLoadButtonWidth)
@@ -60,7 +63,6 @@ class mainNavigationController: UINavigationController {
             alert(msg: "로그인이 필요한 기능입니다.")
         }
     }
-    
 }
 
 

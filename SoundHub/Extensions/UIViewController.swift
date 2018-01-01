@@ -11,7 +11,7 @@ import UIKit
 
 extension UIViewController{
     /**
-     UIAlertController 를 쉽게 쓰게 만드는 함수.
+     JavaScript Style Alert
      */
     func alert(msg:String){
         let alert = UIAlertController(title: "안내", message: msg, preferredStyle: .alert)
@@ -58,6 +58,11 @@ extension UIViewController{
             currentVC.dismiss(animated: true, completion: nil)
         }
     }
+    /**
+     최상단의 ViewController부터 depth만큼 스택에 쌓인 ViewController를 dismiss하는 함수
+     - parameter depth : 스택에서 빼내고자 하는 ViewController의 개수
+     - parameter currentVC : 현시점 스택의 최상단 ViewController
+     */
     func dismissWith(depth:Int, from currentVC:UIViewController, completion:@escaping()->Void){
         if depth == 0 { completion(); return }
         

@@ -9,17 +9,19 @@
 import UIKit
 import AVFoundation
 
-class PlayBarController{
+class PlayBarController:UIViewController{
     
+    /// 화면 하단의 플레이바를 담당하는 싱글턴 객체
     static var main:PlayBarController = PlayBarController()
     static func reboot(){ self.main = PlayBarController() }
-    let view = UIView()
 
     private var playButton: UIButton!
     private var progressBar: UISlider!
     private var statusLable: UILabel!
     private var progressBarBeingTouched = false
+    /// 비동기 작업이 시작되었을 시점에 뭘 하고 있었는지
     var lastPhase:PlayPhase = .Stopped
+    /// 지금 뭘 하고 있는지.
     var currentPhase:PlayPhase = .Stopped {
         didSet(oldVal){
             switch currentPhase {
@@ -56,70 +58,65 @@ class PlayBarController{
         case PlayingRecord
     }
     var delegate:PlayBarControllerDelegate?
+    /// 현재 플레이바가 재생하는 대상
     var currentPostView:DetailViewController?{
-        willSet(newVal){
-            if currentPostView !== newVal { currentPhase = .Stopped }
-        }
+        willSet(newVal){ if currentPostView !== newVal { currentPhase = .Stopped } }
     }
+    /// 플레이바를 보여줄지 말지
     var isHidden:Bool{
-        get{
-            return view.isHidden
-        }set(newVal){
-            view.isHidden = newVal
-        }
+        get{ return view.isHidden }
+        set(newVal){ view.isHidden = newVal }
     }
+    /// 버튼을 누르게 할 수 있게 할지 말지
     var isEnabled:Bool{
-        get{
-            return playButton.isEnabled
-        }set(newVal){
-            DispatchQueue.main.async { self.playButton.isEnabled = newVal }
-        }
+        get{ return playButton.isEnabled }
+        set(newVal){ DispatchQueue.main.async { self.playButton.isEnabled = newVal } }
     }
+    /// 음악 재생률. 0~1 사이
     var progress:Float{
-        get{
-            return progressBar.value
-        }
+        get{ return progressBar.value }
     }
 }
 
+// MARK: Objc Functions
 extension PlayBarController{
-    @objc func playButtonHandler(_ sender: UIButton) {
+    @objc private func playButtonHandler(_ sender: UIButton) {
         progressBarBeingTouched = false
         if currentPhase == .Paused || currentPhase == .Stopped { currentPhase = .Playing }
         else if currentPhase == .Playing{ currentPhase = .Paused }
     }
     
-    @objc func progressBarHandler(_ sender:UISlider){
+    @objc private func progressBarHandler(_ sender:UISlider){
         if progressBarBeingTouched == false { lastPhase = currentPhase }
         progressBarBeingTouched = true
         currentPhase = .Paused
         currentPostView?.seek(to: sender.value)
     }
     
-    @objc func progressBarDragingDidEnded(_ sender:UISlider){
+    @objc private func progressBarDragingDidEnded(_ sender:UISlider){
         progressBarBeingTouched = false
         if lastPhase == .Playing { currentPhase = .Playing }
     }
 
-    @objc func showCurrentMusicContainer(){
+    @objc private func showCurrentMusicContainer(){
+        guard let _ = currentPostView else { return }
         delegate?.playBarDidTapped()
     }
 }
 
-extension PlayBarController{
-    func play(){
-        currentPostView?.play()
-    }
-    func pause(){
-        currentPostView?.pause()
-    }
+// MARK: Playable
+extension PlayBarController:Playable{
+
+    func play(){ currentPostView?.play() }
+    func pause(){ currentPostView?.pause()}
     func stop(){
         currentPostView?.stop()
         reflect(progress: 0)
     }
-    func seek(to value:Float){
-        currentPostView?.seek(to: value)
-    }
+    func seek(to value:Float){ currentPostView?.seek(to: value) }
+    func setVolume(to value: Float) { currentPostView?.setVolume(to: value) }
+    func setMute(to value: Bool) { currentPostView?.setMute(to: value) }
+    
     func reflect(progress:Float){
         if progressBarBeingTouched == false{
             progressBar.setValue(progress, animated: true)
@@ -129,11 +126,11 @@ extension PlayBarController{
     func handleCommentToggle(){
         lastPhase = currentPhase
         pause()
-//        seek(to: progress)
         if lastPhase == .Playing{ play() }
     }
 }
 
+// MARK: UI Initialization
 extension PlayBarController{
     func setUpView(In containerView:UIView){
         setUpMainView(In: containerView)
@@ -208,8 +205,6 @@ extension PlayBarController{
         progressBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         progressBar.centerYAnchor.constraint(equalTo: view.topAnchor).isActive = true
     }
-    
-
 }
 
 protocol PlayBarControllerDelegate{

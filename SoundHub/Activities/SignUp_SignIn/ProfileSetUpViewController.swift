@@ -21,53 +21,24 @@ class ProfileSetUpViewController: UIViewController {
     
     // MARK: Computed Properties
 
-    @IBOutlet weak var mainFlowLayout: UICollectionView!
+    @IBOutlet weak private var mainFlowLayout: UICollectionView!
     // MARK: IBActions
-    @IBAction func cancelButtonHandler(_ sender: UIBarButtonItem) {
+    @IBAction private func cancelButtonHandler(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func confirmButtonHandler(_ sender: UIButton) {
+    @IBAction private func confirmButtonHandler(_ sender: UIButton) {
         for i in 0..<mainFlowLayout.allCells.count{
             if mainFlowLayout.allCells[i].isSelected{
                 selectedInstruments += (Instrument.cases[i] + ",")
             }
         }
         let _ = selectedInstruments.dropLast()
-        if let token = token {
-            showLoadingIndicator()
-            NetworkController.main.signUp(with: token, nickname: nickName, instruments: selectedInstruments, completion: { (dic, err) in
-                if let userInfo = dic{
-                    UserDefaults.standard.save(with: userInfo)
-                    self.presentedViewController?.dismiss(animated: true, completion: {
-                        self.performSegue(withIdentifier: "showMainChart", sender: nil)
-                    })
-                }else {
-                    self.presentedViewController?.dismiss(animated: true, completion: {
-                        if let err = err { self.present(self.generateAlert(given: err), animated: true, completion: nil)}
-                        else{ self.alert(msg: "이건 무슨 오류일까요?") }
-                    })
-                }
-            })
-            
-        }else{
-            NetworkController.main.signUp(with: email, nickname: nickName, instruments: selectedInstruments, password1: password, password2: passwordConfirm) { (userId, errorMessage) in
-                let alert = self.generateAlert(given: errorMessage)
-                self.present(alert, animated: true, completion: nil)
-            }
-        }
+        if let token = token { signUp(with: token) }
+        else{ signUpWithEmail() }
     }
     
-    private func generateAlert(given error:String?)->UIAlertController{
-        let alertMessage = self.generateAlertMessage(given: error)
-        let alert = UIAlertController(title: "안내", message: alertMessage, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "확인", style: .cancel , handler: { (action) in
-            if let _ = error { self.dismiss(animated: true, completion: nil) }
-            else { self.dismissWith(depth: 2, from: self) }
-        }))
-        return alert
-    }
-    
+    // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         mainFlowLayout.dataSource = self
@@ -75,12 +46,6 @@ class ProfileSetUpViewController: UIViewController {
         mainFlowLayout.allowsMultipleSelection = true
         defaultCellSize = CGSize(width: self.view.frame.width/3, height: self.view.frame.width/3)
     }
-    
-    private func generateAlertMessage(given errorMessage:String?)->String{
-        if let error = errorMessage{ return error }
-        else{ return "인증 메일을 보냈습니다! \n 확인해 보세요!  \n\n 참! 스팸으로 분류되었을 수도 있어요!" }
-    }
-
 }
 
 extension ProfileSetUpViewController:UICollectionViewDataSource{
@@ -124,4 +89,52 @@ extension ProfileSetUpViewController:UICollectionViewDelegate, UICollectionViewD
         collectionView.cellForItem(at: indexPath)?.borderColor = .orange
     }
 
+}
+
+extension ProfileSetUpViewController{
+    
+    /// 소셜 아이디로 회원가입
+    private func signUp(with token:String){
+        showLoadingIndicator()
+        NetworkController.main.signUp(with: token, nickname: nickName, instruments: selectedInstruments, completion: { (dic, errorMessage) in
+            if let userInfo = dic{ self.handleSuccessCaseOfSocialLogin(with: userInfo)
+            }else { self.handleFailureCaseOfSocialLogin(with: errorMessage) }
+        })
+    }
+    
+    /// 이메일로 회원가입
+    private func signUpWithEmail(){
+        NetworkController.main.signUp(with: email, nickname: nickName, instruments: selectedInstruments, password1: password, password2: passwordConfirm) { (userId, errorMessage) in
+            let alert = self.generateAlert(given: errorMessage)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    private func handleSuccessCaseOfSocialLogin(with userInfo:NSDictionary){
+        UserDefaults.standard.save(userInfo)
+        self.presentedViewController?.dismiss(animated: true, completion: {
+            self.performSegue(withIdentifier: "showMainChart", sender: nil)
+        })
+    }
+    private func handleFailureCaseOfSocialLogin(with errorMessage:String?){
+        self.presentedViewController?.dismiss(animated: true, completion: {
+            if let err = errorMessage { self.present(self.generateAlert(given: err), animated: true, completion: nil)}
+            else{ self.alert(msg: "이건 무슨 오류일까요?") }
+        })
+    }
+    
+    private func generateAlert(given error:String?)->UIAlertController{
+        let alertMessage = self.generateAlertMessage(given: error)
+        let alert = UIAlertController(title: "안내", message: alertMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .cancel , handler: { (action) in
+            if let _ = error { self.dismiss(animated: true, completion: nil) }
+            else { self.dismissWith(depth: 2, from: self) }
+        }))
+        return alert
+    }
+    
+    private func generateAlertMessage(given errorMessage:String?)->String{
+        if let error = errorMessage{ return error }
+        else{ return "인증 메일을 보냈습니다! \n 확인해 보세요!  \n\n 참! 스팸으로 분류되었을 수도 있어요!" }
+    }
 }

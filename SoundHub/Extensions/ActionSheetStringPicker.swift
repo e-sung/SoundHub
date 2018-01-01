@@ -25,5 +25,4 @@ extension ActionSheetStringPicker{
         }, cancel: { (picker) in
         }, origin: vc.view)
     }
-
 }

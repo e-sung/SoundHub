@@ -17,9 +17,7 @@ class GenrePickViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        for button in buttons{
-            button.addTarget(self, action: #selector(buttonTapHandler) , for: .touchUpInside)
-        }
+        for button in buttons{ button.addTarget(self, action: #selector(buttonTapHandler) , for: .touchUpInside) }
     }
     
     @objc func buttonTapHandler(sender:UIButton){

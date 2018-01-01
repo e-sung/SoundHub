@@ -14,6 +14,5 @@ class MainEnteryViewController: UIViewController {
     }
     
     @IBAction func unwindToMainEntry(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
-        
     }
 }

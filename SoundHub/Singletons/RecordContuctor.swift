@@ -70,7 +70,7 @@ extension RecordConductor{
     /// - parameter postId : 댓글이 달릴 post의 id
     /// - parameter Instrument : 어떤 악기로 녹음했는지
     /// - parameter completion : 업로드가 끝난 후 할 일
-    func confirmComment(postId:Int, of Instrument:String, completion:@escaping (Post?)->Void){
+    func confirmComment(on postId:Int, of Instrument:String, completion:@escaping (Post?)->Void){
         if self.player.duration == 0 { completion(nil) }
         let asset = RecordConductor.main.player.audioFile.avAsset
         self.exportComment(asset: asset, completion: { (outputURL) in

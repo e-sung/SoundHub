@@ -29,9 +29,7 @@ class DetailHeaderCell: UITableViewCell {
 
     }
     var postInfo:Post{
-        get{
-            return _postInfo
-        }
+        get{ return _postInfo }
         set(newVal){
             _postInfo = newVal
             postTitleLB.text = newVal.title
