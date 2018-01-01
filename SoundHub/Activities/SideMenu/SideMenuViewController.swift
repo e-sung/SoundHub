@@ -17,6 +17,7 @@ class SideMenuViewController: UIViewController {
     @IBOutlet weak var logoutButton: UIButton!
     @IBAction func logoutButtonHandler(_ sender: UIButton) {
         UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+        PlayBarController.main.stop()
         self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
