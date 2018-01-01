@@ -23,9 +23,8 @@ class AudioRecorderViewController: UIViewController {
     var currentAU: AudioUnitGenericView?
     var currentAUindex:Int?
 
-    @IBAction func onCancelHandler(_ sender: UIButton) {
-        RecordConductor.main.resetRecorder()
-        self.dismiss(animated: true, completion: nil)
+    @IBAction func cancleButtonHandler(_ sender: UIButton) {
+        self.dismiss(animated: true) { RecordConductor.main.resetRecorder() }
     }
     
     @IBAction private func recordButtonHandler(_ sender: UIButton) {
@@ -71,14 +70,19 @@ class AudioRecorderViewController: UIViewController {
         super.viewDidLoad()
         audioUnitContainerFlowLayout.delegate = self
         audioUnitContainerFlowLayout.dataSource = self
-        activateAUManager()
-        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         state = .readyToRecord
-        RecordConductor.main.connectMic(with: inputPlot)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        RecordConductor.main.resetRecorder()
+        RecordConductor.main.connectMic(with: inputPlot)
+        RecordConductor.main.resetPlayer()
+        activateAUManager()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         inputPlot.node?.avAudioNode.removeTap(onBus: 0)
         if let auManager = auManager{

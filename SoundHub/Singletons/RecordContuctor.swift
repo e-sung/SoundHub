@@ -74,11 +74,7 @@ extension RecordConductor{
 
 // MARK: Internal Functions
 extension RecordConductor{
-    func reboot(){
-        stopEngine()
-        bootUp()
-    }
-    
+
     func startRecording(){
         if AKSettings.headPhonesPlugged { self.micBooster.gain = 1 }
         do { try self.recorder.record() } catch { print("Errored recording.") }
