@@ -24,7 +24,7 @@ class AudioRecorderViewController: UIViewController {
     var currentAUindex:Int?
 
     @IBAction func onCancelHandler(_ sender: UIButton) {
-        RecordConductor.main.resetRecordedAudio()
+        RecordConductor.main.resetRecorder()
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -47,7 +47,7 @@ class AudioRecorderViewController: UIViewController {
             recordButton.setTitle("녹음하기", for: .normal)
             let recordedDuration = RecordConductor.main.player != nil ? RecordConductor.main.player.audioFile.duration  : 0
             if recordedDuration > 0.0 {
-                RecordConductor.main.recorder.stop()
+                RecordConductor.main.stopRecording()
                 setUpMetaInfo()
             }
         }
@@ -227,6 +227,6 @@ extension AudioRecorderViewController{
         recordButton.setTitle("들어보기", for: .normal)
         state = .readyToPlay
         inputPlot.color = .orange
-        RecordConductor.main.stopRecording()
+        RecordConductor.main.resetPlayer()
     }
 }

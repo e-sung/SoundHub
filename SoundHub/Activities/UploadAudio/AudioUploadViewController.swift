@@ -115,7 +115,7 @@ extension AudioUploadViewController{
         RecordConductor.main.exportRecordedAudio(to: self.exportURL,
                                                  with: [self.titleMetaData, self.artistMetaData], completion: {
             NetworkController.main.uploadAudio(In: self.exportURL, title:self.audioTitleTF.text ?? "무제", genre: self.genre, instrument: self.instrument, bpm: bpm, albumCover:self.pickedImage, completion: {
-                RecordConductor.main.resetRecordedAudio()
+                RecordConductor.main.resetRecorder()
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: NSNotification.Name("shouldReloadContents"), object: nil)
                     self.presentedViewController?.dismiss(animated: true, completion: { self.dismissWith(depth: 2, from: self) })
@@ -131,7 +131,7 @@ extension AudioUploadViewController{
             self.presentedViewController?.dismiss(animated: true, completion: {
                 self.dismiss(animated: true, completion: nil)
             })
-            DispatchQueue.global(qos: .userInitiated).async { RecordConductor.main.resetRecordedAudio() }
+            DispatchQueue.global(qos: .userInitiated).async { RecordConductor.main.resetRecorder() }
         })
     }
 }

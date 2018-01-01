@@ -121,7 +121,7 @@ class RecorderCell: UITableViewCell {
                 let recordedDuration = RecordConductor.main.player != nil ? RecordConductor.main.player.audioFile.duration  : 0
                 if recordedDuration > 0.0 {
                     delegate?.shouldShowAlert()
-                    RecordConductor.main.recorder.stop()
+                    RecordConductor.main.stopRecording()
                     RecordConductor.main.connectMic(with: inputPlot)
                 }
             }
@@ -156,7 +156,7 @@ class RecorderCell: UITableViewCell {
         recordButton.setTitle("듣기", for: .normal)
         state = .readyToPlay
         inputPlot.color = .orange
-        RecordConductor.main.stopRecording()
+        RecordConductor.main.resetPlayer()
     }
     
 }

@@ -17,8 +17,8 @@ class RecordConductor{
     private var moogLadder: AKMoogLadder!
     
     private var mic: AKMicrophone!
-    var micBooster: AKBooster!
-    var recorder:AKNodeRecorder!
+    private var micBooster: AKBooster!
+    private var recorder:AKNodeRecorder!
     var player:AKAudioPlayer!
     var mainMixer: AKMixer!
 
@@ -28,18 +28,18 @@ class RecordConductor{
         setUpMic()
         setUpRecorderAndPlayer()
         setUpMixer()
-        start()
+        startEngine()
     }
     
     func connectMic(with outPutPlot:AKNodeOutputPlot){
         outPutPlot.node = self.mic
     }
     
-    func start(){
+    func startEngine(){
         AudioKit.start()
     }
     
-    func stop(){
+    func stopEngine(){
         AudioKit.stop()
     }
     
@@ -49,11 +49,15 @@ class RecordConductor{
     }
     
     func stopRecording(){
+        self.recorder.stop()
+    }
+    
+    func resetPlayer(){
         self.micBooster.gain = 0
         do { try self.player.reloadFile() } catch { print("Errored reloading.") }
     }
     
-    func resetRecordedAudio(){
+    func resetRecorder(){
         do{ try recorder.reset() } catch { print("couldn't reset recorded audio") }
     }
     
@@ -79,7 +83,7 @@ class RecordConductor{
             NetworkController.main.uploadAudioComment(In: outputURL, to: postId, instrument: Instrument, completion: {
                 NetworkController.main.fetchPost(id: postId, completion: { (postResult) in
                     completion(postResult)
-                    DispatchQueue.global(qos: .userInitiated).async { self.resetRecordedAudio() }
+                    DispatchQueue.global(qos: .userInitiated).async { self.resetRecorder() }
                 })
             })
         })
