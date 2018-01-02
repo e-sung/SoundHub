@@ -16,10 +16,10 @@ class InstrumentPickerViewController: UIViewController {
     @IBOutlet var buttons: [UIButton]!
     override func viewDidLoad() {
         super.viewDidLoad()
-        for button in buttons{ button.addTarget(self, action: #selector(buttonTapHandler), for: .touchUpInside) }
+        for button in buttons { button.addTarget(self, action: #selector(buttonTapHandler), for: .touchUpInside) }
     }
-    
-    @objc func buttonTapHandler(sender:UIButton){
+
+    @objc func buttonTapHandler(sender:UIButton) {
         let instrument = sender.titleLabel!.text
         performSegue(withIdentifier: "unwindFromInstrToChart", sender: instrument!)
     }

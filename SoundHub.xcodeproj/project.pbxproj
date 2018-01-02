@@ -676,7 +676,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SoundHubUITests/Pods-SoundHubUITests-resources.sh\"";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SoundHubUITests/Pods-SoundHubUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7C29ADAE179A5CF98C1F3950 /* [CP] Embed Pods Frameworks */ = {
@@ -727,7 +727,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SoundHub/Pods-SoundHub-resources.sh\"\n\"${PODS_ROOT}/SwiftLint/swiftlint\"";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SoundHub/Pods-SoundHub-resources.sh\"\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
 		D2322EB168AD005ACF550774 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

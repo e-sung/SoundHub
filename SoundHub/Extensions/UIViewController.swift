@@ -21,7 +21,11 @@ extension UIViewController{
     }
     
     func showLoadingIndicator(){
-        let indicatorVC = UIViewController.loadingIndicator
+        guard let indicatorVC = UIStoryboard(name: "Chart", bundle: nil)
+                                .instantiateViewController(withIdentifier: "LoadingIndicatorViewController")
+                                as? LoadingIndicatorViewController else { return }
+        indicatorVC.modalPresentationStyle = .overCurrentContext
+        indicatorVC.modalTransitionStyle = .crossDissolve
         self.present(indicatorVC, animated: true, completion: nil)
     }
     
@@ -29,14 +33,6 @@ extension UIViewController{
         let sb = UIStoryboard(name: "SideMenu", bundle: nil)
         let sideMenuVC = sb.instantiateViewController(withIdentifier: "SideMenu")
         present(sideMenuVC, animated: true, completion: nil)
-    }
-    
-    static var loadingIndicator:LoadingIndicatorViewController{
-        let sb = UIStoryboard(name: "Chart", bundle: nil)
-        let indicatorVC = sb.instantiateViewController(withIdentifier: "LoadingIndicatorViewController") as! LoadingIndicatorViewController
-        indicatorVC.modalPresentationStyle = .overCurrentContext
-        indicatorVC.modalTransitionStyle = .crossDissolve
-        return indicatorVC
     }
     
     /**

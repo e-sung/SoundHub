@@ -11,19 +11,19 @@ import AlamofireImage
 import AVFoundation
 
 class AudioCommentCell: UITableViewCell {
-    
+
     var player:AVPlayer?
-    
+
     @IBOutlet weak var profileImageButton: UIButton!
     @IBOutlet weak private var InstrumentLB: UILabel!
     @IBOutlet weak private var nickNameLB: UILabel!
     @IBOutlet weak private var toggleSwitch: UISwitch!
-    
+
     @IBAction func onProfileButtonClicked(_ sender: UIButton) {
         delegate?.shouldShowProfileOf(user: comment.author)
     }
     @IBAction private func switchToggleHandler(_ sender: UISwitch) {
-        if let player = self.player{
+        if let player = self.player {
             if sender.isOn {player.isMuted = false}
             else { player.isMuted = true }
         }else{
@@ -35,43 +35,43 @@ class AudioCommentCell: UITableViewCell {
             })
         }
     }
-    
+
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if player?.currentItem?.status == AVPlayerItemStatus.readyToPlay {
             self.delegate?.didFinishedDownloading()
         }
     }
-    
-    func toggleSwitch(to value:Bool){
+
+    func toggleSwitch(to value:Bool) {
         toggleSwitch.isOn = value
         player?.isMuted = !value
     }
     weak var delegate:AudioCommentCellDelegate?
-    var isActive:Bool{
+    var isActive:Bool {
         return toggleSwitch.isOn
     }
-    var isInterActive:Bool{
-        get{
+    var isInterActive:Bool {
+        get {
             return toggleSwitch.isEnabled
-        }set(newVal){
+        }set(newVal) {
             toggleSwitch.isEnabled = newVal
         }
     }
 
-    var comment:Comment{
-        get{
+    var comment:Comment {
+        get {
             return _commentInfo
         }
-        set(newVal){
+        set(newVal) {
            _commentInfo = newVal
             InstrumentLB.text = newVal.instrument
             nickNameLB.text = newVal.author?.nickname
-            if let profileImageURL = newVal.author?.profileImageURL{
+            if let profileImageURL = newVal.author?.profileImageURL {
                 profileImageButton.af_setImage(for: .normal, url: profileImageURL)
             }
         }
     }
-    
+
     private var _commentInfo:Comment!
     override func awakeFromNib() {
         let bgColorView = UIView(frame: contentView.frame)
@@ -80,19 +80,19 @@ class AudioCommentCell: UITableViewCell {
     }
 }
 
-extension AudioCommentCell:Playable{
-    func play(){
+extension AudioCommentCell:Playable {
+    func play() {
         player?.play()
     }
-    func pause(){
+    func pause() {
         player?.pause()
     }
-    func stop(){
+    func stop() {
         player?.stop()
     }
-    func seek(to proportion:Float){
+    func seek(to proportion:Float) {
         player?.seek(to: proportion)
-        
+
     }
     func setVolume(to value: Float) {
         player?.volume = value
