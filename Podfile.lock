@@ -33,6 +33,7 @@ PODS:
     - NVActivityIndicatorView/Presenter (= 4.0.0)
   - NVActivityIndicatorView/Presenter (4.0.0)
   - SideMenu (3.1.4)
+  - SwiftLint (0.24.0)
 
 DEPENDENCIES:
   - ActionSheetPicker-3.0
@@ -45,6 +46,7 @@ DEPENDENCIES:
   - LPSnackbar
   - NVActivityIndicatorView
   - SideMenu
+  - SwiftLint
 
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: eef157d75e151f255c5333d26656c7fbfe905a51
@@ -60,7 +62,8 @@ SPEC CHECKSUMS:
   LPSnackbar: 67db43a51fa744f5d6978c249a39e3a5e71a3de6
   NVActivityIndicatorView: 54c9b93b6f25a4f467512680c0c90c09a1095cf2
   SideMenu: 99021e70b3f2eee65b5dd88e4274d09031b1221e
+  SwiftLint: a014c92b4664e8b13f380f8640a51bb1733778ba
 
-PODFILE CHECKSUM: e6b40f8eb8264a641ac5d60c8995c523effbea49
+PODFILE CHECKSUM: c1b991ef142bb6059e969eb062b62e7b9f7a55f3
 
 COCOAPODS: 1.3.1

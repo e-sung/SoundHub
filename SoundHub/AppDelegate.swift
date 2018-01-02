@@ -11,8 +11,8 @@ import GoogleSignIn
 import Fingertips
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate {
-    
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
+
     var window: UIWindow? = MBFingerTipWindow(frame: UIScreen.main.bounds)
 
     // [START didfinishlaunching]
@@ -21,17 +21,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate {
         // Initialize sign-in
         GIDSignIn.sharedInstance().clientID = "994723323319-i9us6kk5cod0ao23q29ccc7oif6s46li.apps.googleusercontent.com"
         GIDSignIn.sharedInstance().delegate = self
-        
+
         return true
     }
     // [END didfinishlaunching]
-    
+
     func applicationWillTerminate(_ application: UIApplication) {
         guard let homePageInfo = DataCenter.main.homePages[.general] else { return }
         let homePageData = try! JSONEncoder().encode(homePageInfo)
         UserDefaults.standard.set(homePageData, forKey: "InitialHomepage")
     }
-    
+
     // [START openurl]
     func application(_ application: UIApplication,
                      open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
@@ -41,12 +41,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate {
     }
     // [END openurl]
     @available(iOS 9.0, *)
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
         return GIDSignIn.sharedInstance().handle(url,
                                                  sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
                                                  annotation: options[UIApplicationOpenURLOptionsKey.annotation])
     }
-    
+
     // [START signin_handler]
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!,
               withError error: Error!) {
@@ -58,14 +58,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate {
             // [END_EXCLUDE]
         } else {
             // Perform any operations on signed in user here.
-            let _ = user.userID                  // For client-side use only!
+            _ = user.userID                  // For client-side use only!
             let idToken = user.authentication.idToken ?? "unexpected error on token" // Safe to send to the server
             let fullName = user.profile.name ?? "unexpected profile name"
             // [START_EXCLUDE]
             NotificationCenter.default.post(
                 name: Notification.Name(rawValue: "ToggleAuthUINotification"),
                 object: nil,
-                userInfo: ["token":idToken, "nickname":fullName])
+                userInfo: ["token": idToken, "nickname": fullName])
             // [END_EXCLUDE]
         }
     }
@@ -83,4 +83,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate {
     }
     // [END disconnect_handler]
 }
-
