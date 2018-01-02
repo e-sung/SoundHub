@@ -14,8 +14,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
 
     // MARK: Stored Properties
     var isKeyboardUp = false
-    var token:String?
-    var socialNickname:String?
+    var token: String?
+    var socialNickname: String?
 
     // MARK: IBOutlets
     @IBOutlet weak var errorMsgLB: UILabel!
@@ -87,7 +87,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
     }
 }
 
-extension SignUpViewController:UIGestureRecognizerDelegate {
+extension SignUpViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         let y = touch.location(in: view).y
         return y < emailSignUpStackView.frame.minY || y > googleSignInButton.frame.maxY

@@ -1,5 +1,5 @@
 disabled_rules: # rule identifiers to exclude from running
-  - colon
+  - opening_brace
   - comma
   - control_statement
   - identifier_name
@@ -8,6 +8,7 @@ disabled_rules: # rule identifiers to exclude from running
   - function_parameter_count
   - for_where
   - force_try
+  - force_cast
   - discarded_notification_center_observer
   - block_based_kvo
   - trailing_whitespace

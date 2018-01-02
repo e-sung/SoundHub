@@ -11,13 +11,13 @@ import UIKit
 class ProfileSetUpViewController: UIViewController {
 
     // MARK: Stored Properties
-    var token:String?
+    var token: String?
     var selectedInstruments = ""
-    var nickName:String!
-    var email:String!
-    var password:String!
-    var passwordConfirm:String!
-    var defaultCellSize:CGSize!
+    var nickName: String!
+    var email: String!
+    var password: String!
+    var passwordConfirm: String!
+    var defaultCellSize: CGSize!
 
     // MARK: Computed Properties
 
@@ -48,7 +48,7 @@ class ProfileSetUpViewController: UIViewController {
     }
 }
 
-extension ProfileSetUpViewController:UICollectionViewDataSource {
+extension ProfileSetUpViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return Instrument.cases.count
     }
@@ -75,7 +75,7 @@ extension ProfileSetUpViewController:UICollectionViewDataSource {
     }
 }
 
-extension ProfileSetUpViewController:UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension ProfileSetUpViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return defaultCellSize
@@ -94,7 +94,7 @@ extension ProfileSetUpViewController:UICollectionViewDelegate, UICollectionViewD
 extension ProfileSetUpViewController {
 
     /// 소셜 아이디로 회원가입
-    private func signUp(with token:String) {
+    private func signUp(with token: String) {
         showLoadingIndicator()
         NetworkController.main.signUp(with: token, nickname: nickName, instruments: selectedInstruments, completion: { (dic, errorMessage) in
             if let userInfo = dic { self.handleSuccessCaseOfSocialLogin(with: userInfo)
@@ -110,20 +110,20 @@ extension ProfileSetUpViewController {
         }
     }
 
-    private func handleSuccessCaseOfSocialLogin(with userInfo:NSDictionary) {
+    private func handleSuccessCaseOfSocialLogin(with userInfo: NSDictionary) {
         UserDefaults.standard.save(userInfo)
         self.presentedViewController?.dismiss(animated: true, completion: {
             self.performSegue(withIdentifier: "showMainChart", sender: nil)
         })
     }
-    private func handleFailureCaseOfSocialLogin(with errorMessage:String?) {
+    private func handleFailureCaseOfSocialLogin(with errorMessage: String?) {
         self.presentedViewController?.dismiss(animated: true, completion: {
             if let err = errorMessage { self.present(self.generateAlert(given: err), animated: true, completion: nil)}
             else { self.alert(msg: "이건 무슨 오류일까요?") }
         })
     }
 
-    private func generateAlert(given error:String?) -> UIAlertController {
+    private func generateAlert(given error: String?) -> UIAlertController {
         let alertMessage = self.generateAlertMessage(given: error)
         let alert = UIAlertController(title: "안내", message: alertMessage, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .cancel , handler: { (action) in
@@ -133,7 +133,7 @@ extension ProfileSetUpViewController {
         return alert
     }
 
-    private func generateAlertMessage(given errorMessage:String?) -> String {
+    private func generateAlertMessage(given errorMessage: String?) -> String {
         if let error = errorMessage { return error }
         else { return "인증 메일을 보냈습니다! \n 확인해 보세요!  \n\n 참! 스팸으로 분류되었을 수도 있어요!" }
     }

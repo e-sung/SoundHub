@@ -11,13 +11,13 @@ import AudioKitUI
 
 class RecorderCell: UITableViewCell {
 
-    weak var delegate:RecorderCellDelegate?
+    weak var delegate: RecorderCellDelegate?
     private var auManager: AKAudioUnitManager?
-    private var availableEffects:[String] = []
-    var postId:Int!
+    private var availableEffects: [String] = []
+    var postId: Int!
     var isActive = false
     var currentAU: AudioUnitGenericView?
-    var currentAUindex:Int?
+    var currentAUindex: Int?
 
     @IBOutlet var audioUnitContainerHeight: NSLayoutConstraint!
     @IBOutlet weak var audioUnitContainerFlowLayout: UICollectionView!
@@ -131,7 +131,7 @@ class RecorderCell: UITableViewCell {
         case playing
     }
 
-    private var state:State!
+    private var state: State!
 
     func deinitialize() {
         inputPlot.node?.avAudioNode.removeTap(onBus: 0)
@@ -156,7 +156,7 @@ class RecorderCell: UITableViewCell {
 
 }
 
-extension RecorderCell:UICollectionViewDataSource {
+extension RecorderCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return availableEffects.count
     }
@@ -172,7 +172,7 @@ extension RecorderCell:UICollectionViewDataSource {
 
 }
 
-extension RecorderCell:UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension RecorderCell: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 100, height: 100)
     }
@@ -211,7 +211,7 @@ extension RecorderCell:UICollectionViewDelegate, UICollectionViewDelegateFlowLay
     }
 }
 
-extension RecorderCell:AKAudioUnitManagerDelegate {
+extension RecorderCell: AKAudioUnitManagerDelegate {
     func handleAudioUnitNotification(type: AKAudioUnitManager.Notification, object: Any?) {
 
     }
@@ -233,7 +233,7 @@ extension RecorderCell:AKAudioUnitManagerDelegate {
 }
 
 protocol RecorderCellDelegate: class {
-    func uploadDidFinished(with post:Post?)
+    func uploadDidFinished(with post: Post?)
     func shouldShowAlert()
     func shouldBecomeActive()
     func shouldRequireLogin()

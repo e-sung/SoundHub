@@ -11,9 +11,9 @@ import UIKit
 class FlowContainerCell: UITableViewCell {
 
     @IBOutlet weak var flowContainer: UICollectionView!
-    weak var delegate:FlowContainerCellDelegate?
-    var parent:ProfileViewController!
-    var userInfo:User? {
+    weak var delegate: FlowContainerCellDelegate?
+    var parent: ProfileViewController!
+    var userInfo: User? {
         didSet(oldVal) { if userInfo != nil { flowContainer.reloadData() } }
     }
     override func awakeFromNib() {
@@ -23,9 +23,9 @@ class FlowContainerCell: UITableViewCell {
     }
 }
 
-extension FlowContainerCell:UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension FlowContainerCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-    var isScrollEnabled:Bool {
+    var isScrollEnabled: Bool {
         get {
             return (flowContainer.allCells[0] as! PostContainerCell).isScrollEnabled
         }set(newVal){
@@ -43,7 +43,7 @@ extension FlowContainerCell:UICollectionViewDelegate, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var identifier = ""
         var headerTitle = ""
-        var posts:[Post]? = nil
+        var posts: [Post]? = nil
         if indexPath.item == 0 {
             identifier = "postedPostContainer"
             headerTitle = "작성한 포스트"
@@ -77,7 +77,7 @@ extension FlowContainerCell:UICollectionViewDelegate, UICollectionViewDataSource
     }
 }
 
-extension FlowContainerCell:PostContainerCellDelegate {
+extension FlowContainerCell: PostContainerCellDelegate {
     func shouldShowProfile(of user: User?) {
         delegate?.shouldShowProfile(of: user)
     }
@@ -87,7 +87,7 @@ extension FlowContainerCell:PostContainerCellDelegate {
     }
 }
 
-protocol FlowContainerCellDelegate:class {
-    func shouldGoTo(post:Post)
-    func shouldShowProfile(of user:User?)
+protocol FlowContainerCellDelegate: class {
+    func shouldGoTo(post: Post)
+    func shouldShowProfile(of user: User?)
 }

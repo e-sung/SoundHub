@@ -10,26 +10,16 @@ import UIKit
 
 @IBDesignable
 extension UIView {
-    @IBInspectable public var borderColor:UIColor? {
-        get{
-            return layer.borderColor == nil ? UIColor.white : UIColor(cgColor: layer.borderColor!)
-        }
-        set(newColor){
-            layer.borderColor = newColor?.cgColor
-        }
+    @IBInspectable public var borderColor: UIColor? {
+        get { return layer.borderColor == nil ? UIColor.white : UIColor(cgColor: layer.borderColor!) }
+        set (newColor) { layer.borderColor = newColor?.cgColor }
     }
-    @IBInspectable public var borderWidth:CGFloat {
-        get{
-            return layer.borderWidth
-        }
-        set(newWidth){
-            layer.borderWidth = newWidth
-        }
+    @IBInspectable public var borderWidth: CGFloat {
+        get { return layer.borderWidth }
+        set (newWidth) { layer.borderWidth = newWidth }
     }
-    @IBInspectable public var cornerRadius:CGFloat {
-        get {
-            return layer.cornerRadius
-        }
+    @IBInspectable public var cornerRadius: CGFloat {
+        get { return layer.cornerRadius }
         set {
             layer.cornerRadius = newValue
             layer.masksToBounds = newValue > 0

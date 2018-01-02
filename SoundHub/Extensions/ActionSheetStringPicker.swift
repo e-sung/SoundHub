@@ -10,7 +10,7 @@ import Foundation
 import ActionSheetPicker_3_0
 
 extension ActionSheetStringPicker {
-    static func ask(instrument:[String], and genre:[String], of url:URL, from vc:UIViewController) {
+    static func ask(instrument: [String], and genre: [String], of url: URL, from vc: UIViewController) {
         guard let audioUploadVC = UIStoryboard(name: "UploadAudio", bundle: nil)
                                   .instantiateViewController(withIdentifier: "DocumentViewController")
                                   as? AudioUploadViewController

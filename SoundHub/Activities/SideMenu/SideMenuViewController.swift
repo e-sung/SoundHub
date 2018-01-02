@@ -12,8 +12,8 @@ import AlamofireImage
 
 class SideMenuViewController: UIViewController {
 
-    @IBOutlet weak private var nickNameButton:UIButton!
-    @IBOutlet weak private var profileImageButton:UIButton!
+    @IBOutlet weak private var nickNameButton: UIButton!
+    @IBOutlet weak private var profileImageButton: UIButton!
     @IBOutlet weak private var logoutButton: UIButton!
     @IBAction private func logoutButtonHandler(_ sender: UIButton) {
         UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)

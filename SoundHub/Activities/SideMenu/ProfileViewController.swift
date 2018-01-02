@@ -21,9 +21,9 @@ class ProfileViewController: UIViewController {
 
      UIImagePickerControllerDelegate Method 참고
     */
-    private var buttonToChange:UIButton?
-    private var changedProfileImage:UIImage?
-    private var changedHeaderImage:UIImage?
+    private var buttonToChange: UIButton?
+    private var changedProfileImage: UIImage?
+    private var changedHeaderImage: UIImage?
 
     /**
      User객체의 주요 정보가 표시되는 셀
@@ -34,8 +34,8 @@ class ProfileViewController: UIViewController {
          3. 닉네임
          4. 팔로잉/팔로워
     */
-    private var headerCell:ProfileHeaderCell?
-    private var flowCell:FlowContainerCell?
+    private var headerCell: ProfileHeaderCell?
+    private var flowCell: FlowContainerCell?
     /**
      사진첩, 혹은 카메라에 접근할 수 있는 객체
      - ToDo: 사진첩/카메라에 접근권한을 갖지 못했을 때에 대한 처리를 해야 함
@@ -45,9 +45,9 @@ class ProfileViewController: UIViewController {
     /**
      이 VC를 통해 표시되어야 할 User 객체. 유일한 internal 객체이다.
     */
-    var userInfo:User? { didSet(oldVal) { headerCell?.refresh(with: userInfo) } }
+    var userInfo: User? { didSet(oldVal) { headerCell?.refresh(with: userInfo) } }
     /// 유저가 유저정보를 수정하는동안에만 보이는 UIBarButtonItem
-    private var doneButton:UIBarButtonItem!
+    private var doneButton: UIBarButtonItem!
 
     // MARK: Objc Functions
     @objc func showsidemenu() { self.showSideMenu() }
@@ -116,7 +116,7 @@ class ProfileViewController: UIViewController {
     }
 }
 
-extension ProfileViewController:UIGestureRecognizerDelegate {
+extension ProfileViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         let y = touch.location(in: view).y
         guard let headerCell = headerCell else { return true}
@@ -125,7 +125,7 @@ extension ProfileViewController:UIGestureRecognizerDelegate {
 }
 
 // MARK: ProfileHeaderCell Delegate
-extension ProfileViewController:ProfileHeaderCellDelegate {
+extension ProfileViewController: ProfileHeaderCellDelegate {
     func shouldChangeImageOf(button: UIButton) {
         buttonToChange = button
         present(photoSourceChooingAlert, animated: true, completion: nil)
@@ -182,7 +182,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
 }
 // MARK: FlowContainerCellDelegate
-extension ProfileViewController:FlowContainerCellDelegate {
+extension ProfileViewController: FlowContainerCellDelegate {
     func shouldShowProfile(of user: User?) {
         if user?.id == userInfo?.id { return }
         let profileVC = UIStoryboard(name: "SideMenu", bundle: nil).instantiateViewController(withIdentifier: "profileViewController") as! ProfileViewController
@@ -194,7 +194,7 @@ extension ProfileViewController:FlowContainerCellDelegate {
         DetailViewController.goToDetailPage(of: post, from: self)
     }
 
-    var isScrollEnabled:Bool {
+    var isScrollEnabled: Bool {
         get { return mainTV.isScrollEnabled
         }set(newVal) { mainTV.isScrollEnabled = newVal }
     }
@@ -202,7 +202,7 @@ extension ProfileViewController:FlowContainerCellDelegate {
 
 // MARK: Computed Properties : AlertActions
 extension ProfileViewController {
-    private var defaultUIAlertActions:[UIAlertAction] {
+    private var defaultUIAlertActions: [UIAlertAction] {
         let withExistingPhoto = UIAlertAction(title: "원래 있던 사진으로", style: .default , handler: { (action) in
             self.imagePicker.sourceType = .photoLibrary
             self.present(self.imagePicker, animated: true, completion: nil)
@@ -219,7 +219,7 @@ extension ProfileViewController {
         return [withExistingPhoto, withNewPhoto, cancel]
     }
 
-    private var photoSourceChooingAlert:UIAlertController {
+    private var photoSourceChooingAlert: UIAlertController {
         let alert = UIAlertController(title: "사진 변경", message: "", preferredStyle: .actionSheet)
         let actions = defaultUIAlertActions
         for action in actions {
@@ -245,7 +245,7 @@ extension ProfileViewController {
         imagePicker.allowsEditing = false
     }
 
-    private func fillInUI(with userInfo:User?) {
+    private func fillInUI(with userInfo: User?) {
         if userInfo?.post_set == nil {
             guard let userId = userInfo?.id else { return }
             NetworkController.main.fetchUser(id: userId, completion: { (userResult) in

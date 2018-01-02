@@ -19,27 +19,24 @@ class CommentContainerCell: UITableViewCell {
             }
         }
     }
-    var aPlayer:AVPlayer?
+    var aPlayer: AVPlayer?
     var numberOfPlayersBeingDownloaded = 0
-    weak var delegate:CommentContainerCellDelegate?
+    weak var delegate: CommentContainerCellDelegate?
     var isNewTrackBeingAdded = false
-    private var allCells:[AudioCommentCell] {
-        var cells:[AudioCommentCell] = []
+    private var allCells: [AudioCommentCell] {
+        var cells: [AudioCommentCell] = []
         for i in 0..<commentTV.numberOfSections {
             for j in 0..<commentTV.numberOfRows(inSection: i) {
-                if let cell = commentTV.cellForRow(at: IndexPath(item: j, section: i)) as? AudioCommentCell{
+                if let cell = commentTV.cellForRow(at: IndexPath(item: j, section: i)) as? AudioCommentCell {
                     cells.append(cell)
                 }
             }
         }
         return cells
     }
-    var allowsMultiSelection:Bool {
-        get {
-            return commentTV.allowsMultipleSelection
-        }set (newVal) {
-            commentTV.allowsMultipleSelection = newVal
-        }
+    var allowsMultiSelection: Bool {
+        get { return commentTV.allowsMultipleSelection }
+        set (newVal) { commentTV.allowsMultipleSelection = newVal }
     }
 
     @IBOutlet weak var commentTV: UITableView!
@@ -54,7 +51,7 @@ class CommentContainerCell: UITableViewCell {
 
 extension CommentContainerCell: Playable {
     // MARK: Play and Pause Functions
-    func setInteractionability(to bool:Bool) {
+    func setInteractionability(to bool: Bool) {
         for cell in allCells { cell.isInterActive = bool }
     }
 
@@ -70,7 +67,7 @@ extension CommentContainerCell: Playable {
         for cell in allCells { cell.stop() }
     }
 
-    func seek(to proportion:Float) {
+    func seek(to proportion: Float) {
         for cell in allCells { cell.seek(to: proportion) }
     }
 
@@ -81,13 +78,13 @@ extension CommentContainerCell: Playable {
     func setMute(to value: Bool) {
         for cell in allCells { if cell.isActive { cell.setMute(to: value) } }
     }
-    var isMuted:Bool {
+    var isMuted: Bool {
         guard let aPlayer = aPlayer else { return true}
         return aPlayer.isMuted
     }
 }
 
-extension CommentContainerCell:UITableViewDataSource, UITableViewDelegate {
+extension CommentContainerCell: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return Instrument.cases.count
     }
@@ -127,8 +124,8 @@ extension CommentContainerCell:UITableViewDataSource, UITableViewDelegate {
         let comments = getComments(In: selectedCells)
         delegate?.didSelectionOccured(on: comments)
     }
-    private var selectedCells:[AudioCommentCell] {
-        var selectedCells:[AudioCommentCell] = []
+    private var selectedCells: [AudioCommentCell] {
+        var selectedCells: [AudioCommentCell] = []
         if let selectedIndexes = commentTV.indexPathsForSelectedRows {
             for idx in selectedIndexes {
                 let cell = commentTV.cellForRow(at: idx) as! AudioCommentCell
@@ -137,8 +134,8 @@ extension CommentContainerCell:UITableViewDataSource, UITableViewDelegate {
         }
         return selectedCells
     }
-    private func getComments(In cells:[AudioCommentCell]) -> [Comment] {
-        var array:[Comment] = []
+    private func getComments(In cells: [AudioCommentCell]) -> [Comment] {
+        var array: [Comment] = []
         for cell in cells {
             array.append(cell.comment)
         }
@@ -146,7 +143,7 @@ extension CommentContainerCell:UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension CommentContainerCell:AudioCommentCellDelegate {
+extension CommentContainerCell: AudioCommentCellDelegate {
     func didStartDownloading() {
         numberOfPlayersBeingDownloaded += 1
         delegate?.didStartDownloading()
@@ -164,9 +161,9 @@ extension CommentContainerCell:AudioCommentCellDelegate {
     }
 }
 
-protocol CommentContainerCellDelegate:class {
-    func didSelectionOccured(on comments:[Comment])
-    func shouldShowProfileOf(user:User?)
+protocol CommentContainerCellDelegate: class {
+    func didSelectionOccured(on comments: [Comment])
+    func shouldShowProfileOf(user: User?)
     func didStartDownloading()
     func didFinishedDownloading()
 }

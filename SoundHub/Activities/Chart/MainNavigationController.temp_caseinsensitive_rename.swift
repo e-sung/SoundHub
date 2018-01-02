@@ -10,8 +10,8 @@ import UIKit
 import ActionSheetPicker_3_0
 
 class MainNavigationController: UINavigationController {
-    var playBarController:PlayBarController!
-    var documentPicker:UIDocumentPickerViewController!
+    var playBarController: PlayBarController!
+    var documentPicker: UIDocumentPickerViewController!
     let uploadMusicButton = UIButton()
 
     override func viewDidLoad() {
@@ -32,8 +32,8 @@ class MainNavigationController: UINavigationController {
 // MARK: Initialize Upload Button
 extension MainNavigationController {
     private func setUploadButton() {
-        let upLoadButtonWidth:CGFloat = 70
-        uploadMusicButton.frame = CGRect(x: self.view.frame.width - upLoadButtonWidth, y: self.view.frame.height - upLoadButtonWidth, width: upLoadButtonWidth, height:upLoadButtonWidth)
+        let upLoadButtonWidth: CGFloat = 70
+        uploadMusicButton.frame = CGRect(x: self.view.frame.width - upLoadButtonWidth, y: self.view.frame.height - upLoadButtonWidth, width: upLoadButtonWidth, height: upLoadButtonWidth)
         uploadMusicButton.setTitle("+", for: .normal)
         uploadMusicButton.setTitleColor(.green, for: .normal)
         uploadMusicButton.titleLabel?.font = uploadMusicButton.titleLabel?.font.withSize(40)
@@ -45,7 +45,7 @@ extension MainNavigationController {
         uploadMusicButton.trailingAnchor.constraint(equalTo: playBarController.view.trailingAnchor, constant: -10).isActive = true
     }
 
-    @objc func uploadButtonHandler(sender:UIButton) {
+    @objc func uploadButtonHandler(sender: UIButton) {
         if User.isLoggedIn {
             let alert = UIAlertController(title: "어떻게 올리시겠습니까?", message: "", preferredStyle: .actionSheet)
             alert.addAction(UIAlertAction(title: "원래 있던 파일 올리기", style: .default , handler: { (action) in
@@ -65,7 +65,7 @@ extension MainNavigationController {
     }
 }
 
-extension MainNavigationController:PlayBarControllerDelegate {
+extension MainNavigationController: PlayBarControllerDelegate {
     func playBarDidTapped() {
         if self.topViewController !== playBarController?.currentPostView {
             self.show((playBarController?.currentPostView)!, sender: nil)
@@ -73,7 +73,7 @@ extension MainNavigationController:PlayBarControllerDelegate {
     }
 }
 
-extension MainNavigationController:UIDocumentPickerDelegate {
+extension MainNavigationController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         print(urls[0])
         ActionSheetStringPicker.ask(instrument: Instrument.cases, and: Genre.cases, of: urls[0], from: self)

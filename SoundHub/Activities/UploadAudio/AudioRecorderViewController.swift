@@ -58,11 +58,11 @@ class AudioRecorderViewController: UIViewController {
     }
 
     // MARK: StoredProperties
-    private var state:State!
+    private var state: State!
     private var auManager: AKAudioUnitManager?
-    private var availableEffects:[String] = []
+    private var availableEffects: [String] = []
     private var currentAU: AudioUnitGenericView?
-    private var currentAUindex:Int?
+    private var currentAUindex: Int?
 
     // MARK: LifeCycle
     override func viewDidLoad() {
@@ -88,7 +88,7 @@ class AudioRecorderViewController: UIViewController {
 }
 
 // MARK: UICollectionViewDataSource
-extension AudioRecorderViewController:UICollectionViewDataSource {
+extension AudioRecorderViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return availableEffects.count
     }
@@ -104,7 +104,7 @@ extension AudioRecorderViewController:UICollectionViewDataSource {
 }
 
 // MARK: UICollectionViewDelegate
-extension AudioRecorderViewController:UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension AudioRecorderViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 100, height: 100)
     }
@@ -144,7 +144,7 @@ extension AudioRecorderViewController:UICollectionViewDelegate, UICollectionView
 }
 
 // MARK: AKAudioUnitManagerDelegate
-extension AudioRecorderViewController:AKAudioUnitManagerDelegate {
+extension AudioRecorderViewController: AKAudioUnitManagerDelegate {
     func handleAudioUnitNotification(type: AKAudioUnitManager.Notification, object: Any?) {
     }
 

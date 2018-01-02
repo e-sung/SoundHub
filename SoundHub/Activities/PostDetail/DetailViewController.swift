@@ -16,7 +16,7 @@ class DetailViewController: UIViewController {
 
     // MARK: Internal Stored Properties
     /// 이 디테일뷰에서 표시해야 할 Post객체
-    var post:Post! {
+    var post: Post! {
         didSet(oldVal) {
             setUpMasterPlayer()
             setUpAuthorTrackPlayer()
@@ -24,22 +24,22 @@ class DetailViewController: UIViewController {
     }
     // MARK: Private Stored Properties
     /// 음악 파형이 표시되는 셀
-    private var masterWaveCell:MasterWaveFormViewCell? {
+    private var masterWaveCell: MasterWaveFormViewCell? {
         didSet(oldVal) {
             guard let masterWaveCell = masterWaveCell else { return }
             self.render(masterWaveCell)
         }
     }
 
-    private var mixedTrackToggler:ModeToggleCell?
-    private var commentTrackToggler:ModeToggleCell?
+    private var mixedTrackToggler: ModeToggleCell?
+    private var commentTrackToggler: ModeToggleCell?
 
     /// 녹음하는 셀
     private var recorderCell: RecorderCell?
-    private var heightOfRecordingCell:CGFloat = 50
+    private var heightOfRecordingCell: CGFloat = 50
 
     /// Master Track을 재생하는 플레이어
-    private var masterTrackPlayer:AVPlayer? {
+    private var masterTrackPlayer: AVPlayer? {
         didSet(oldVal) {
             PlayBarController.main.isEnabled = true
             if let lastPlayer = oldVal { removeGlobalTimeObserver(from: lastPlayer) }
@@ -49,23 +49,23 @@ class DetailViewController: UIViewController {
         }
     }
 
-    private var authorTrackPlayer:AVPlayer?
+    private var authorTrackPlayer: AVPlayer?
     /**
      mixedTrack들을 담고있는 셀. Playable 프로토콜을 상속받았다.
      따라서 **mixedTrackContainer.play()** 같은 것들이 가능하다.
     */
-    private var mixedTrackContainer:CommentContainerCell?
+    private var mixedTrackContainer: CommentContainerCell?
     /**
      commentTrack들을 담고있는 셀. Playable 프로토콜을 상속받았다.
      따라서 **commentTrackContainer.play()** 같은 것들이 가능하다.
      */
-    private var commentTrackContainer:CommentContainerCell?
-    private var allAudioPlayers:[Playable?] {
+    private var commentTrackContainer: CommentContainerCell?
+    private var allAudioPlayers: [Playable?] {
         return [ masterTrackPlayer, authorTrackPlayer, mixedTrackContainer, commentTrackContainer]
     }
 
     /// 원저작자에게만 보이는, "머지"하기 위해 multiselection을 통해 고른 셀들에 담겨있는 Comment 정보
-    private var selectedComments:[Comment]?
+    private var selectedComments: [Comment]?
     private var currentTransitionCoordinator: UIViewControllerTransitionCoordinator?
     @IBOutlet weak private var albumCoverImageView: UIImageView!
 
@@ -162,12 +162,12 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if Section(rawValue:indexPath.section) == .MainHeader { return 200 }
-        else if Section(rawValue:indexPath.section) == .MixedTrackToggler { return 60 }
-        else if Section(rawValue:indexPath.section) == .CommentTrackToggler { return 60 }
-        else if Section(rawValue:indexPath.section) == .MixedTracks {
+        if Section(rawValue: indexPath.section) == .MainHeader { return 200 }
+        else if Section(rawValue: indexPath.section) == .MixedTrackToggler { return 60 }
+        else if Section(rawValue: indexPath.section) == .CommentTrackToggler { return 60 }
+        else if Section(rawValue: indexPath.section) == .MixedTracks {
             return CGFloat(post.numOfMixedTracks * 100)
-        }else if Section(rawValue:indexPath.section) == .CommentTracks {
+        }else if Section(rawValue: indexPath.section) == .CommentTracks {
             return CGFloat(post.numOfCommentTracks * 100)
         }
         return heightOfRecordingCell
@@ -175,7 +175,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 // MARK: 모드가 변경되었을 때 처리
-extension DetailViewController:ModeToggleCellDelegate {
+extension DetailViewController: ModeToggleCellDelegate {
     func didModeToggled(to mode: Bool, by toggler: CommentContainerCell?) {
         toggler?.setMute(to: !mode)
         toggler?.setInteractionability(to: mode)
@@ -189,8 +189,8 @@ extension DetailViewController:ModeToggleCellDelegate {
 }
 
 // MARK: Playable 프로토콜 구현
-extension DetailViewController:Playable {
-    func reflect(progress:Float) {
+extension DetailViewController: Playable {
+    func reflect(progress: Float) {
         self.masterWaveCell?.reflect(progress: progress)
     }
 
@@ -206,7 +206,7 @@ extension DetailViewController:Playable {
         for player in allAudioPlayers { player?.pause() }
     }
 
-    func seek(to point:Float) {
+    func seek(to point: Float) {
         for player in allAudioPlayers { player?.seek(to: point) }
         reflect(progress: point)
     }
@@ -221,7 +221,7 @@ extension DetailViewController:Playable {
 }
 
 // MARK: CommentContainerCellDelegate
-extension DetailViewController:CommentContainerCellDelegate {
+extension DetailViewController: CommentContainerCellDelegate {
     func didStartDownloading() {
         PlayBarController.main.lastPhase = PlayBarController.main.currentPhase
         PlayBarController.main.pause()
@@ -260,7 +260,7 @@ extension DetailViewController:CommentContainerCellDelegate {
 
     @objc private func mix() {
         guard let selectedComments = selectedComments else { return }
-        var comments:[Int] = []
+        var comments: [Int] = []
         for comment in selectedComments {
             guard let commentId = comment.id else {
                 self.mixedTrackContainer?.allowsMultiSelection = false
@@ -284,7 +284,7 @@ extension DetailViewController:CommentContainerCellDelegate {
 }
 
 //MARK:RecorderCellDelegate
-extension DetailViewController:RecorderCellDelegate {
+extension DetailViewController: RecorderCellDelegate {
 
     func didStartRecording() {
         PlayBarController.main.currentPhase = .Recording
@@ -365,9 +365,9 @@ extension DetailViewController:RecorderCellDelegate {
     }
 }
 
-extension DetailViewController:UIGestureRecognizerDelegate {
+extension DetailViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        let heightOfPopBackGestureDisableZone:CGFloat = 30
+        let heightOfPopBackGestureDisableZone: CGFloat = 30
         return touch.location(in: PlayBarController.main.view).y < -heightOfPopBackGestureDisableZone
     }
 
@@ -390,7 +390,7 @@ extension DetailViewController:UIGestureRecognizerDelegate {
 
 // MARK: Helper Enums
 extension DetailViewController {
-    private enum Section:Int {
+    private enum Section: Int {
         case MainHeader = 0
         case MixedTrackToggler = 1
         case MixedTracks = 2
@@ -410,13 +410,13 @@ protocol Playable {
     func play()
     func pause()
     func stop()
-    func seek(to point:Float)
-    func setVolume(to value:Float)
-    func setMute(to value:Bool)
+    func seek(to point: Float)
+    func setVolume(to value: Float)
+    func setMute(to value: Bool)
 }
 
 extension DetailViewController {
-    private func render(_ masterWaveCell:MasterWaveFormViewCell) {
+    private func render(_ masterWaveCell: MasterWaveFormViewCell) {
         if let masterPlayer = self.masterTrackPlayer {
             masterWaveCell.masterAudioURL = (masterPlayer.currentItem?.asset as? AVURLAsset)?.url
         }else{
@@ -426,7 +426,7 @@ extension DetailViewController {
         }
     }
 
-    private func setUp(_ player: AVPlayer?, with url:URL?) {
+    private func setUp(_ player: AVPlayer?, with url: URL?) {
         PlayBarController.main.isEnabled = false
         guard let url = url else { return }
         NetworkController.main.downloadAudio(from: url) { (localURL) in
@@ -452,13 +452,13 @@ extension DetailViewController {
         }
     }
 
-    private func removeGlobalTimeObserver(from player:AVPlayer) {
+    private func removeGlobalTimeObserver(from player: AVPlayer) {
         if AVPlayerTimeObserver != nil && player === AVPlayerTimeObserver?.observer {
             player.removeTimeObserver(AVPlayerTimeObserver!.observee!)
         }
     }
 
-    private func addGlobalTimeObserver(on player:AVPlayer) {
+    private func addGlobalTimeObserver(on player: AVPlayer) {
         let cmt = CMTime(value: 1, timescale: 10)
         AVPlayerTimeObserver = PlayerTimeObserver()
         AVPlayerTimeObserver?.observer = player
@@ -480,7 +480,7 @@ extension DetailViewController {
      - parameter post : 도착한 DetailVC가 보여줘야 할 post 정보
      - parameter vc : 출발하는 ViewController
      */
-    static func goToDetailPage(of post:Post, from vc:UIViewController) {
+    static func goToDetailPage(of post: Post, from vc: UIViewController) {
         /// 보려는 포스트가, 현재 플레이바에서 재생중인 포스트라면
         if post.id == PlayBarController.main.currentPostView?.post.id {
             /// 그 포스트객체는 PlayBarController.main에 저장되어 있으니, 그걸 보여주면 됨.

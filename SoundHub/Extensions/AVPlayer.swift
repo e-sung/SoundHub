@@ -9,29 +9,29 @@
 import Foundation
 import AVFoundation
 
-var AVPlayerTimeObserver:PlayerTimeObserver?
+var AVPlayerTimeObserver: PlayerTimeObserver?
 
-struct PlayerTimeObserver{
-    var observer:AVPlayer?
-    var observee:Any?
+struct PlayerTimeObserver {
+    var observer: AVPlayer?
+    var observee: Any?
 }
 
-extension AVPlayer:Playable{
+extension AVPlayer: Playable {
     func setVolume(to value: Float) {
         self.volume = value
     }
-    
+
     func setMute(to value: Bool) {
         self.isMuted = value
     }
-    
-    func stop(){
+
+    func stop() {
         self.pause()
         self.seek(to: CMTimeMake(0, 1))
     }
-    
-    func seek(to proportion:Float){
-        let scale:Float = 1000
+
+    func seek(to proportion: Float) {
+        let scale: Float = 1000
         let duration = Float(self.currentItem!.duration.seconds)
         if duration.isNaN { return }
         let point = CMTimeMake(Int64(proportion*duration*scale), Int32(scale))
@@ -39,7 +39,7 @@ extension AVPlayer:Playable{
     }
 }
 
-extension AVPlayer{
+extension AVPlayer {
     var isPlaying: Bool {
         if (self.rate != 0 && self.error == nil) {
             return true
@@ -47,7 +47,7 @@ extension AVPlayer{
             return false
         }
     }
-    var progress:Float{
+    var progress:Float {
         guard let currentItem = self.currentItem else { return 0 }
         return Float(self.currentTime().seconds/currentItem.duration.seconds)
     }

@@ -10,19 +10,19 @@ import UIKit
 import AlamofireImage
 
 class PostContainerCell: UICollectionViewCell {
-    var posts:[Post]? {
+    var posts: [Post]? {
         didSet(oldVal) {
             if oldVal != nil {
                 postTB.reloadData()
             }
         }
     }
-    weak var delegate:PostContainerCellDelegate?
-    var firstCell:UITableViewCell!
-    var lastOffset:CGFloat = 0
-    var parent:FlowContainerCell!
-    var headerTitle:String!
-    static var headerHeight:CGFloat = 50
+    weak var delegate: PostContainerCellDelegate?
+    var firstCell: UITableViewCell!
+    var lastOffset: CGFloat = 0
+    var parent: FlowContainerCell!
+    var headerTitle: String!
+    static var headerHeight: CGFloat = 50
     var isScrolling = false
     @IBOutlet weak var postTB: UITableView!
 
@@ -95,7 +95,7 @@ extension PostContainerCell: UITableViewDelegate, UITableViewDataSource, UIScrol
         if lastOffset > scrollView.contentOffset.y {
             if postTB.visibleCells.contains(firstCell) {
                 postTB.isScrollEnabled = false
-                parent.parent.mainTV.scrollToRow(at: IndexPath(item:0,section:0), at: .top, animated: true)
+                parent.parent.mainTV.scrollToRow(at: IndexPath(item: 0,section: 0), at: .top, animated: true)
             }
         }
     }
@@ -107,26 +107,26 @@ extension PostContainerCell: UITableViewDelegate, UITableViewDataSource, UIScrol
 }
 
 extension PostContainerCell {
-    var isScrollEnabled:Bool {
+    var isScrollEnabled: Bool {
         get {
             return postTB.isScrollEnabled
         }set(newVal) {
             return postTB.isScrollEnabled = newVal
         }
     }
-    func scrollToTopWith(animation:Bool) {
-        postTB.scrollToRow(at: IndexPath(item:0,section:0), at: .top, animated: animation)
+    func scrollToTopWith(animation: Bool) {
+        postTB.scrollToRow(at: IndexPath(item: 0,section: 0), at: .top, animated: animation)
     }
 }
 
-extension PostContainerCell:PostListCellDelegate {
+extension PostContainerCell: PostListCellDelegate {
     func shouldShowProfile(of user: User?) {
         self.delegate?.shouldShowProfile(of: user)
     }
 }
 
 protocol PostContainerCellDelegate: class {
-    func shouldGoTo(post:Post)
-    func shouldShowProfile(of user:User?)
-    var isScrollEnabled:Bool { get set }
+    func shouldGoTo(post: Post)
+    func shouldShowProfile(of user: User?)
+    var isScrollEnabled: Bool { get set }
 }

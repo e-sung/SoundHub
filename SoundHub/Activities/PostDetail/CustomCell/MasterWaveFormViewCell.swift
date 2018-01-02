@@ -11,7 +11,7 @@ import NVActivityIndicatorView
 
 class MasterWaveFormViewCell: UITableViewCell, NCSoundHistogramDelegate {
 
-    func reflect(progress:Float) {
+    func reflect(progress: Float) {
         plot?.progress = progress
     }
 
@@ -24,8 +24,8 @@ class MasterWaveFormViewCell: UITableViewCell, NCSoundHistogramDelegate {
 
     @IBOutlet weak var activityLB: UILabel!
     @IBOutlet weak private var activityIndicator: NVActivityIndicatorView!
-    private var plot:NCSoundHistogram?
-    var masterAudioURL:URL? {
+    private var plot: NCSoundHistogram?
+    var masterAudioURL: URL? {
         didSet(oldVal) {
             DispatchQueue.main.async {
                 if oldVal == nil {

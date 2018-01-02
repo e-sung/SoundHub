@@ -12,7 +12,7 @@ import AVFoundation
 
 class AudioCommentCell: UITableViewCell {
 
-    var player:AVPlayer?
+    var player: AVPlayer?
 
     @IBOutlet weak var profileImageButton: UIButton!
     @IBOutlet weak private var InstrumentLB: UILabel!
@@ -36,21 +36,21 @@ class AudioCommentCell: UITableViewCell {
         }
     }
 
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey:Any]?, context: UnsafeMutableRawPointer?) {
         if player?.currentItem?.status == AVPlayerItemStatus.readyToPlay {
             self.delegate?.didFinishedDownloading()
         }
     }
 
-    func toggleSwitch(to value:Bool) {
+    func toggleSwitch(to value: Bool) {
         toggleSwitch.isOn = value
         player?.isMuted = !value
     }
-    weak var delegate:AudioCommentCellDelegate?
-    var isActive:Bool {
+    weak var delegate: AudioCommentCellDelegate?
+    var isActive: Bool {
         return toggleSwitch.isOn
     }
-    var isInterActive:Bool {
+    var isInterActive: Bool {
         get {
             return toggleSwitch.isEnabled
         }set(newVal) {
@@ -58,7 +58,7 @@ class AudioCommentCell: UITableViewCell {
         }
     }
 
-    var comment:Comment {
+    var comment: Comment {
         get {
             return _commentInfo
         }
@@ -72,7 +72,7 @@ class AudioCommentCell: UITableViewCell {
         }
     }
 
-    private var _commentInfo:Comment!
+    private var _commentInfo: Comment!
     override func awakeFromNib() {
         let bgColorView = UIView(frame: contentView.frame)
         bgColorView.backgroundColor = UIColor(red: 0, green: 1.0, blue: 0, alpha: 0.3)
@@ -80,7 +80,7 @@ class AudioCommentCell: UITableViewCell {
     }
 }
 
-extension AudioCommentCell:Playable {
+extension AudioCommentCell: Playable {
     func play() {
         player?.play()
     }
@@ -90,7 +90,7 @@ extension AudioCommentCell:Playable {
     func stop() {
         player?.stop()
     }
-    func seek(to proportion:Float) {
+    func seek(to proportion: Float) {
         player?.seek(to: proportion)
 
     }
@@ -102,8 +102,8 @@ extension AudioCommentCell:Playable {
     }
 }
 
-protocol AudioCommentCellDelegate:class {
+protocol AudioCommentCellDelegate: class {
     func didStartDownloading()
     func didFinishedDownloading()
-    func shouldShowProfileOf(user:User?)
+    func shouldShowProfileOf(user: User?)
 }

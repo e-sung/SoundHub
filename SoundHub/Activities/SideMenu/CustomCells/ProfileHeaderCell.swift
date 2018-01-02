@@ -13,8 +13,8 @@ import AlamofireImage
 class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate, UITextFieldDelegate {
 
     // MARK: Stored Properties
-    weak var delegate:ProfileHeaderCellDelegate?
-    static internal let defaultHeight:CGFloat = 330
+    weak var delegate: ProfileHeaderCellDelegate?
+    static internal let defaultHeight: CGFloat = 330
     private var _isSettingPhase = false
 
     // MARK: IBOutlets
@@ -36,7 +36,7 @@ class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate, UITex
     }
 
     // MARK: Computed Properties
-    var isSettingPhase:Bool {
+    var isSettingPhase: Bool {
         get {
             return _isSettingPhase
         }
@@ -50,16 +50,16 @@ class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate, UITex
         }
     }
 
-    var nickName:String {
+    var nickName: String {
         get { return nickNameTF.text! }
         set(newVal) { nickNameTF.text = newVal }
     }
-    var instrument:String {
+    var instrument: String {
         get { return instrumentTF.text! }
         set(newVal) { instrumentTF.text = newVal }
     }
 
-    func refresh(with userInfo:User?) {
+    func refresh(with userInfo: User?) {
         guard let userInfo = userInfo else { return }
         if let profileImageURL = userInfo.profileImageURL {
             profileImageButton.af_setImage(for: .normal, url: profileImageURL, placeholderImage: #imageLiteral(resourceName: "default-profile"), filter: nil, progress: nil, progressQueue: DispatchQueue.main, completion: nil)
@@ -83,5 +83,5 @@ class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate, UITex
 
 // MARK: Protocol Defenition
 protocol ProfileHeaderCellDelegate: class {
-    func shouldChangeImageOf(button:UIButton)
+    func shouldChangeImageOf(button: UIButton)
 }

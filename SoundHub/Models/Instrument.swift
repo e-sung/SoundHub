@@ -9,16 +9,16 @@
 import Foundation
 import UIKit
 
-enum Instrument:String {
+enum Instrument: String {
     case Vocal = "Vocal"
     case Guitar = "Guitar"
     case Bass = "Bass"
     case Drum = "Drums"
     case Keyboard = "Keyboard"
     case Other = "Other"
-    
+
     static let cases = ["Vocal","Guitar","Bass","Drums","Keyboard", "Other" ]
-    var image:UIImage? {
+    var image: UIImage? {
         switch self {
         case .Vocal: return #imageLiteral(resourceName: "vocal")
         case .Guitar: return #imageLiteral(resourceName: "guitar")

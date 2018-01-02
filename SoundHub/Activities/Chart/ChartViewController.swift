@@ -24,8 +24,8 @@ class ChartViewController: UIViewController {
     private var tapOnMoreRanking = 1
     private var tapOnMoreRecent = 1
     private let sectionTitleList = ["CategoryTab", "Popular Musicians", "Ranking Chart", "Recent Upload"]
-    var category:Categori = .general
-    var option:String = ""
+    var category: Categori = .general
+    var option: String = ""
     var shouldScrollToTop = false
 
     // MARK: LifeCycle
@@ -56,7 +56,7 @@ class ChartViewController: UIViewController {
 }
 
 // MARK: TableViewDataSource
-extension ChartViewController:UITableViewDataSource {
+extension ChartViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return sectionTitleList.count
     }
@@ -75,7 +75,7 @@ extension ChartViewController:UITableViewDataSource {
 }
 
 // MARK: TableViewDelegate
-extension ChartViewController:UITableViewDelegate {
+extension ChartViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if Section(rawValue: section) == .CategoryTab {return nil}
@@ -100,7 +100,7 @@ extension ChartViewController:UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var posts:[Post] = []
+        var posts: [Post] = []
         if Section(rawValue: indexPath.section) == .CategoryTab {
             return tableView.dequeueReusableCell(withIdentifier: "categoryTab", for: indexPath)
         }else if Section(rawValue: indexPath.section) == .PopularMusicians {
@@ -145,7 +145,7 @@ extension ChartViewController:UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let destinationPost:Post? = getDestinationPost(from: indexPath)
+        let destinationPost: Post? = getDestinationPost(from: indexPath)
         if destinationPost?.id != PlayBarController.main.currentPostView?.post.id {
             performSegue(withIdentifier: "generalChartToDetail", sender: indexPath)
         }else {
@@ -165,7 +165,7 @@ extension ChartViewController:UITableViewDelegate {
     }
 }
 
-extension ChartViewController:UINavigationControllerDelegate {
+extension ChartViewController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         let sideMenuButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "Hamburger_icon"), style: .plain, target: self, action: #selector(showsidemenu))
         viewController.navigationItem.rightBarButtonItem = sideMenuButton
@@ -188,7 +188,7 @@ extension ChartViewController {
     }
 }
 
-extension ChartViewController:PostListCellDelegate {
+extension ChartViewController: PostListCellDelegate {
     func shouldShowProfile(of user: User?) {
         guard let profileVC = UIStoryboard(name: "SideMenu", bundle: nil)
             .instantiateViewController(withIdentifier: "profileViewController") as? ProfileViewController
@@ -199,13 +199,13 @@ extension ChartViewController:PostListCellDelegate {
 }
 
 extension ChartViewController {
-    private func generateHeaderViewFor(given section:Int) -> UIView {
+    private func generateHeaderViewFor(given section: Int) -> UIView {
         let title = sectionTitleList[section]
         let height = Section(rawValue: section)!.headerHeight
         return UIView.generateHeaderView(with: title, and: Int(height))
     }
 
-    private func generateSeeMoreButtonFor(given section:Int, with parentView:UIView, and title:String) -> UIButton {
+    private func generateSeeMoreButtonFor(given section: Int, with parentView:UIView, and title:String) -> UIButton {
         let seeMoreButton = UIButton(frame: parentView.frame)
         seeMoreButton.setTitle(title, for: .normal)
         seeMoreButton.tag = section
@@ -213,8 +213,8 @@ extension ChartViewController {
         return seeMoreButton
     }
 
-    func getDestinationPost(from indexPath:IndexPath) -> Post? {
-        var destinationPost:Post? = nil
+    func getDestinationPost(from indexPath: IndexPath) -> Post? {
+        var destinationPost: Post? = nil
         if Section(rawValue: indexPath.section) == .RankingChart {
             destinationPost = DataCenter.main.homePages[category]?.pop_posts[indexPath.item]
         }else {
@@ -225,7 +225,7 @@ extension ChartViewController {
 }
 
 extension ChartViewController {
-    @objc private func seeMoreButtonTapHandler(sender:UIButton) {
+    @objc private func seeMoreButtonTapHandler(sender: UIButton) {
         if Section(rawValue: sender.tag) == .RankingChart {tapOnMoreRanking += 1}
         else if Section(rawValue: sender.tag) == .RecentUpload {tapOnMoreRecent += 1}
         mainTV.reloadData()
@@ -235,7 +235,7 @@ extension ChartViewController {
 extension ChartViewController {
     /// 앱을 끄기 직전, dataCenter에 저장된 정보들을 userDefaults에 저장하는데,
     /// 이 함수는 userDefaults에 저장된 정보를 다시 dataCenter으로 불러들임
-    private func fill(In dataCenter:DataCenter, with userDefaults:UserDefaults) {
+    private func fill(In dataCenter:DataCenter, with userDefaults: UserDefaults) {
         if let homePageData = userDefaults.object(forKey: "InitialHomepage") as? Data {
             if let homePageInfo = try? JSONDecoder().decode(HomePage.self, from: homePageData) {
                 dataCenter.homePages[.general] = homePageInfo
@@ -244,7 +244,7 @@ extension ChartViewController {
     }
 
     /// 차트를 갱신함
-    private func reloadContents(showingLoadingIndicator:Bool) {
+    private func reloadContents(showingLoadingIndicator: Bool) {
         if self.navigationController?.topViewController as? ChartViewController != nil {
             if showingLoadingIndicator == true {self.showLoadingIndicator()}
         }
@@ -254,7 +254,7 @@ extension ChartViewController {
         })
     }
 
-    private func setUpUI(with playBarController:PlayBarController) {
+    private func setUpUI(with playBarController: PlayBarController) {
         if playBarController.isHidden == false {
             guard let bottomConstraint = mainTVBottomConstraint else { return }
             bottomConstraint.isActive = false
@@ -264,13 +264,13 @@ extension ChartViewController {
 }
 
 extension ChartViewController {
-    private enum Section:Int {
+    private enum Section: Int {
         case CategoryTab = 0
         case PopularMusicians = 1
         case RankingChart = 2
         case RecentUpload = 3
 
-        var headerHeight:CGFloat {
+        var headerHeight: CGFloat {
             switch self {
             case .CategoryTab:
                 return 0.1
@@ -281,7 +281,7 @@ extension ChartViewController {
             }
         }
 
-        var rowHeight:CGFloat {
+        var rowHeight: CGFloat {
             switch self {
             case .CategoryTab:
                 return 50

@@ -17,30 +17,32 @@ class PopularMusicianContainerCell: UITableViewCell, UICollectionViewDataSource,
         super.awakeFromNib()
         popularMusicianFlowLayout.delegate = self
         popularMusicianFlowLayout.dataSource = self
-        
+
         NotificationCenter.default.addObserver(forName: NSNotification.Name("shouldReloadCells"), object: nil, queue: nil) { (noti) in
             DispatchQueue.main.async { self.popularMusicianFlowLayout.reloadData() }
         }
     }
-    
+
     // MARK: CollectionViewDelegates
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "popularMusician", for: indexPath) as! PopularMusicianCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "popularMusician", for: indexPath)
+        guard let musicianCell = cell as? PopularMusicianCell else { return cell }
         if DataCenter.main.homePages[category]!.pop_users.count > indexPath.item {
             let userInfo = DataCenter.main.homePages[category]!.pop_users[indexPath.item]
-            cell.userInfo = userInfo
+            musicianCell.userInfo = userInfo
         }
-        return cell
+        return musicianCell
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let musician = DataCenter.main.homePages[category]!.pop_users[indexPath.item]
         let storyboard = UIStoryboard(name: "SideMenu", bundle: nil)
-        let profileVC = storyboard.instantiateViewController(withIdentifier: "profileViewController") as! ProfileViewController
+        guard let profileVC = storyboard.instantiateViewController(withIdentifier: "profileViewController") as? ProfileViewController
+        else { return }
         profileVC.userInfo = musician
         delegate?.show(profileVC, sender: nil)
     }

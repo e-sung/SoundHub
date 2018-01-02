@@ -8,12 +8,12 @@
 
 import Foundation
 
-extension UITableView{
-    var allCells:[UITableViewCell]{
-        var cells:[UITableViewCell] = []
-        for i in 0..<self.numberOfSections{
-            for j in 0..<self.numberOfRows(inSection: i){
-                if let cell = self.cellForRow(at: IndexPath(item: j, section: i)){
+extension UITableView {
+    var allCells: [UITableViewCell] {
+        var cells: [UITableViewCell] = []
+        for i in 0..<self.numberOfSections {
+            for j in 0..<self.numberOfRows(inSection: i) {
+                if let cell = self.cellForRow(at: IndexPath(item: j, section: i)) {
                     cells.append(cell)
                 }
             }
@@ -22,12 +22,12 @@ extension UITableView{
     }
 }
 
-extension UICollectionView{
-    var allCells:[UICollectionViewCell]{
-        var cells:[UICollectionViewCell] = []
-        for i in 0..<self.numberOfSections{
-            for j in 0..<self.numberOfItems(inSection: i){
-                if let cell = self.cellForItem(at: IndexPath(item: j, section: i)){
+extension UICollectionView {
+    var allCells: [UICollectionViewCell] {
+        var cells: [UICollectionViewCell] = []
+        for i in 0..<self.numberOfSections {
+            for j in 0..<self.numberOfItems(inSection: i) {
+                if let cell = self.cellForItem(at: IndexPath(item: j, section: i)) {
                     cells.append(cell)
                 }
             }

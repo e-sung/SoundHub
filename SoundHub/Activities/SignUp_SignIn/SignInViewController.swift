@@ -64,7 +64,7 @@ class SignInViewController: UIViewController, UITextViewDelegate,GIDSignInUIDele
     }
 }
 
-extension SignInViewController:UIGestureRecognizerDelegate {
+extension SignInViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         let y = touch.location(in: view).y
         return y < emailLoginStackView.frame.minY || y > googleSignInButton.frame.maxY
@@ -72,7 +72,7 @@ extension SignInViewController:UIGestureRecognizerDelegate {
 }
 
 extension SignInViewController {
-    private func tryLogin(with email:String?, and password:String?) {
+    private func tryLogin(with email: String?, and password: String?) {
         guard let email = email else {alert(msg: "이메일을 입력하세요");return}
         guard let password = password else {alert(msg: "비밀번호를 입력하세요");return}
         self.showLoadingIndicator()
@@ -80,14 +80,14 @@ extension SignInViewController {
             self.handle(result: result, and: error)
         }
     }
-    private func tryLogin(with token:String) {
+    private func tryLogin(with token: String) {
         self.showLoadingIndicator()
         NetworkController.main.signIn(with: token, completion: { (result, error) in
             self.handle(result: result, and: error)
         })
     }
 
-    private func handle(result:NSDictionary?, and error:String?) {
+    private func handle(result: NSDictionary?, and error: String?) {
         if let userInfo = result {
             UserDefaults.standard.save(userInfo)
             self.presentedViewController?.dismiss(animated: true, completion: {
