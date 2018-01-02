@@ -8,17 +8,13 @@
 
 import UIKit
 
-class FlowContainerCell: UITableViewCell{
-    
+class FlowContainerCell: UITableViewCell {
+
     @IBOutlet weak var flowContainer: UICollectionView!
-    var delegate:FlowContainerCellDelegate?
-    var parent:ProfileViewController!
-    var userInfo:User?{
-        didSet(oldVal){
-            if let userInfo = userInfo{
-                flowContainer.reloadData()
-            }
-        }
+    weak var delegate: FlowContainerCellDelegate?
+    var parent: ProfileViewController!
+    var userInfo: User? {
+        didSet(oldVal) { if userInfo != nil { flowContainer.reloadData() } }
     }
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,27 +23,27 @@ class FlowContainerCell: UITableViewCell{
     }
 }
 
-extension FlowContainerCell:UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
-    
-    var isScrollEnabled:Bool{
-        get{
+extension FlowContainerCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
+    var isScrollEnabled: Bool {
+        get {
             return (flowContainer.allCells[0] as! PostContainerCell).isScrollEnabled
         }set(newVal){
-            for cell in flowContainer.allCells{
+            for cell in flowContainer.allCells {
                 let cell = cell as! PostContainerCell
                 cell.postTB.isScrollEnabled = newVal
             }
         }
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 2
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var identifier = ""
         var headerTitle = ""
-        var posts:[Post]? = nil
+        var posts: [Post]? = nil
         if indexPath.item == 0 {
             identifier = "postedPostContainer"
             headerTitle = "작성한 포스트"
@@ -55,7 +51,7 @@ extension FlowContainerCell:UICollectionViewDelegate, UICollectionViewDataSource
         }else{
             identifier = "likedPostContainer"
             headerTitle = "좋아한 포스트"
-            posts = userInfo?.liked_posts 
+            posts = userInfo?.liked_posts
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! PostContainerCell
         cell.posts = posts
@@ -64,16 +60,16 @@ extension FlowContainerCell:UICollectionViewDelegate, UICollectionViewDataSource
         cell.parent = self
         return cell
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: self.frame.width, height: self.frame.height)
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let cell = cell as? PostContainerCell
         cell?.scrollToTopWith(animation: false)
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let cell = cell as? PostContainerCell
         cell?.delegate = self
@@ -81,7 +77,7 @@ extension FlowContainerCell:UICollectionViewDelegate, UICollectionViewDataSource
     }
 }
 
-extension FlowContainerCell:PostContainerCellDelegate{
+extension FlowContainerCell: PostContainerCellDelegate {
     func shouldShowProfile(of user: User?) {
         delegate?.shouldShowProfile(of: user)
     }
@@ -91,7 +87,7 @@ extension FlowContainerCell:PostContainerCellDelegate{
     }
 }
 
-protocol FlowContainerCellDelegate {
-    func shouldGoTo(post:Post)
-    func shouldShowProfile(of user:User?)
+protocol FlowContainerCellDelegate: class {
+    func shouldGoTo(post: Post)
+    func shouldShowProfile(of user: User?)
 }

@@ -10,7 +10,6 @@ import UIKit
 
 class DetailHeaderCell: UITableViewCell {
 
-
     @IBOutlet weak var authorProfileImageButton: UIButton!
     @IBOutlet weak private var postTitleLB: UILabel!
     @IBOutlet weak private var authorNameLB: UILabel!
@@ -24,13 +23,13 @@ class DetailHeaderCell: UITableViewCell {
             self.numberOfLikesLB.text = "\(newLikeCount)"
         }
     }
-    
+
     @IBAction func authorProfileImageButtonHandler(_ sender: UIButton) {
 
     }
-    var postInfo:Post{
-        get{ return _postInfo }
-        set(newVal){
+    var postInfo: Post {
+        get { return _postInfo }
+        set (newVal) {
             _postInfo = newVal
             postTitleLB.text = newVal.title
             numberOfLikesLB.text = "\(newVal.num_liked ?? 0)"
@@ -40,11 +39,11 @@ class DetailHeaderCell: UITableViewCell {
             NetworkController.main.fetchUser(id: authorId) { (authorInfo) in
                 guard let authorInfo = authorInfo else { return }
                 self.authorNameLB.text = authorInfo.nickname ?? ""
-                if let profileImageURL = authorInfo.profileImageURL{
+                if let profileImageURL = authorInfo.profileImageURL {
                     self.authorProfileImageButton.af_setImage(for: .normal, url: profileImageURL)
                 }
             }
         }
     }
-    private var _postInfo:Post!
+    private var _postInfo: Post!
 }

@@ -14,9 +14,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
 
     // MARK: Stored Properties
     var isKeyboardUp = false
-    var token:String?
-    var socialNickname:String?
-    
+    var token: String?
+    var socialNickname: String?
+
     // MARK: IBOutlets
     @IBOutlet weak var errorMsgLB: UILabel!
     @IBOutlet weak var emailTF: UITextField!
@@ -27,14 +27,14 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
     @IBOutlet weak var emailSignUpStackView: UIStackView!
     @IBOutlet weak var googleSignInButton: UIButton!
     @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
-    
+
     // MARK: IBActions
     @IBAction func emailButtonHandler(_ sender: UIButton) {
-        if isReadyToSignUp(){
+        if isReadyToSignUp() {
             performSegue(withIdentifier: "signUpToProfileSetUp", sender: self)
         }
     }
-    
+
     @IBAction func emailConfirmHandler(_ sender: UITextField) {
         sender.resignFirstResponder()
         nickNameTF.becomeFirstResponder()
@@ -51,24 +51,24 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
         checkPasswordValidity()
     }
     @IBAction func passwordFinalConfirmHandler(_ sender: UITextField) {
-        if isReadyToSignUp(){
+        if isReadyToSignUp() {
             performSegue(withIdentifier: "signUpToProfileSetUp", sender: self)
         }
     }
-    
+
     @IBAction func onTouchHandler(_ sender: UITapGestureRecognizer) {
         if isKeyboardUp { self.view.endEditing(true) }
-        else{ self.dismiss(animated: true, completion: nil) }
+        else { self.dismiss(animated: true, completion: nil) }
     }
-    
+
     @IBAction func googleSignUpHandler(_ sender: UIButton) {
         GIDSignIn.sharedInstance().signIn()
     }
-    
+
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        for tf in textFields{ tf.delegate = self }
+        for tf in textFields { tf.delegate = self }
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardDidShow, object: nil, queue: nil) { (noti) in
             self.isKeyboardUp = true
         }
@@ -77,7 +77,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
         }
         GIDSignIn.sharedInstance().uiDelegate = self
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: "ToggleAuthUINotification"), object: nil, queue: nil) { (noti) in
-            if let dic = noti.userInfo as NSDictionary?{
+            if let dic = noti.userInfo as NSDictionary? {
                 self.token = dic["token"] as? String
                 self.socialNickname = dic["nickname"] as? String
                 self.performSegue(withIdentifier: "signUpToProfileSetUp", sender: self)
@@ -87,7 +87,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
     }
 }
 
-extension SignUpViewController:UIGestureRecognizerDelegate{
+extension SignUpViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         let y = touch.location(in: view).y
         return y < emailSignUpStackView.frame.minY || y > googleSignInButton.frame.maxY
@@ -95,10 +95,10 @@ extension SignUpViewController:UIGestureRecognizerDelegate{
 }
 
 // MARK: Segue Config
-extension SignUpViewController{
+extension SignUpViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let nextVC = segue.destination as! ProfileSetUpViewController
-        if let token = self.token{
+        if let token = self.token {
             nextVC.token = token
             nextVC.nickName = socialNickname!
         }else{
@@ -110,9 +110,9 @@ extension SignUpViewController{
     }
 }
 
-extension SignUpViewController{
-    
-    private func isReadyToSignUp()->Bool{
+extension SignUpViewController {
+
+    private func isReadyToSignUp() -> Bool {
         checkEmailValidity()
         if errorMsgLB.text?.isEmpty == false { return false }
         checkPasswordValidity()
@@ -121,8 +121,8 @@ extension SignUpViewController{
         if errorMsgLB.text?.isEmpty == false { return false }
         return true
     }
-    
-    private func checkEmailValidity(){
+
+    private func checkEmailValidity() {
         guard let email = emailTF.text else {
             errorMsgLB.text = "Fill in Email Address!"
             nickNameTF.resignFirstResponder()
@@ -140,8 +140,8 @@ extension SignUpViewController{
             nickNameTF.becomeFirstResponder()
         }
     }
-    
-    private func checkPasswordValidity(){
+
+    private func checkPasswordValidity() {
         guard let password = passwordTF.text else {
             errorMsgLB.text = "Fill in Password!"
             passwordConfirmTF.resignFirstResponder()
@@ -159,8 +159,8 @@ extension SignUpViewController{
             passwordConfirmTF.becomeFirstResponder()
         }
     }
-    
-    private func checkPasswordConfirmValidity(){
+
+    private func checkPasswordConfirmValidity() {
         guard let password = passwordConfirmTF.text else {
             errorMsgLB.text = "Fill in Password Confirm Field"
             passwordConfirmTF.becomeFirstResponder()

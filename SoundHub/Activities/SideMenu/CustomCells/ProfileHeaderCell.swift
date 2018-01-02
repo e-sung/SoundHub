@@ -10,13 +10,13 @@ import UIKit
 import Alamofire
 import AlamofireImage
 
-class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate, UITextFieldDelegate{
+class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate, UITextFieldDelegate {
 
     // MARK: Stored Properties
-    var delegate:ProfileHeaderCellDelegate?
-    static internal let defaultHeight:CGFloat = 330
+    weak var delegate: ProfileHeaderCellDelegate?
+    static internal let defaultHeight: CGFloat = 330
     private var _isSettingPhase = false
-    
+
     // MARK: IBOutlets
     @IBOutlet weak private var profileImageButton: UIButton!
     @IBOutlet weak private var headerImageButton: UIButton!
@@ -25,22 +25,22 @@ class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate, UITex
     @IBOutlet weak var numFollowingLB: UILabel!
     @IBOutlet weak var numFollowerLB: UILabel!
     @IBOutlet weak var instrumentTF: UITextField!
-    
+
     // MARK: IBActions
     @IBAction private func headerImageChangeHandler(_ sender: UIButton) {
         delegate?.shouldChangeImageOf(button: sender)
     }
-    
+
     @IBAction private func profileImageChangeHandler(_ sender: UIButton) {
         delegate?.shouldChangeImageOf(button: sender)
     }
-    
+
     // MARK: Computed Properties
-    var isSettingPhase:Bool{
-        get{
+    var isSettingPhase: Bool {
+        get {
             return _isSettingPhase
         }
-        set(newVal){
+        set(newVal) {
             _isSettingPhase = newVal
             profileImageButton.isUserInteractionEnabled = newVal
             headerImageButton.isUserInteractionEnabled = newVal
@@ -49,22 +49,22 @@ class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate, UITex
             nickNameTF.becomeFirstResponder()
         }
     }
-    
-    var nickName:String{
+
+    var nickName: String {
         get { return nickNameTF.text! }
-        set(newVal){ nickNameTF.text = newVal }
+        set(newVal) { nickNameTF.text = newVal }
     }
-    var instrument:String{
+    var instrument: String {
         get { return instrumentTF.text! }
-        set(newVal){ instrumentTF.text = newVal }
+        set(newVal) { instrumentTF.text = newVal }
     }
 
-    func refresh(with userInfo:User?){
+    func refresh(with userInfo: User?) {
         guard let userInfo = userInfo else { return }
         if let profileImageURL = userInfo.profileImageURL {
             profileImageButton.af_setImage(for: .normal, url: profileImageURL, placeholderImage: #imageLiteral(resourceName: "default-profile"), filter: nil, progress: nil, progressQueue: DispatchQueue.main, completion: nil)
         }
-        if let headerImageURL = userInfo.headerImageURL{
+        if let headerImageURL = userInfo.headerImageURL {
             headerImageButton.af_setBackgroundImage(for: .normal, url: headerImageURL)
         }
         guard let userName = userInfo.nickname else { return }
@@ -82,6 +82,6 @@ class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate, UITex
 }
 
 // MARK: Protocol Defenition
-protocol ProfileHeaderCellDelegate {
-    func shouldChangeImageOf(button:UIButton)
+protocol ProfileHeaderCellDelegate: class {
+    func shouldChangeImageOf(button: UIButton)
 }
