@@ -329,7 +329,7 @@ extension DetailViewController: RecorderCellDelegate {
 
     func shouldShowAlert() {
         let alert = UIAlertController(title: "녹음 업로드", message: "녹음을 업로드 하시겠습니까?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "확인", style: .cancel , handler: { (action) in
+        alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: { (action) in
             self.showInstrumentPicker()
         }))
         alert.addAction(UIAlertAction(title: "취소", style: .destructive, handler: { (action) in

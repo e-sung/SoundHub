@@ -11,7 +11,7 @@ import GoogleSignIn
 import Fingertips
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow? = MBFingerTipWindow(frame: UIScreen.main.bounds)
 

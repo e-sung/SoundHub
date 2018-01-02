@@ -15,7 +15,7 @@ extension UIViewController {
      */
     func alert(msg: String) {
         let alert = UIAlertController(title: "안내", message: msg, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "확인", style: .cancel , handler: { (action) in
+        alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: { (action) in
         }))
         self.present(alert, animated: true, completion: nil)
     }

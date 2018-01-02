@@ -113,10 +113,10 @@ extension NetworkController {
         Alamofire.upload(
             multipartFormData: { multipartFormData in
                 if let imageData = self.dataRepresentationOf(image: profileImage) {
-                    multipartFormData.append(imageData, withName: "profile_img",fileName: "profile_\(Date()).png", mimeType: "image/png")
+                    multipartFormData.append(imageData, withName: "profile_img", fileName: "profile_\(Date()).png", mimeType: "image/png")
                 }
                 if let imageData = self.dataRepresentationOf(image: headerImage) {
-                    multipartFormData.append(imageData, withName: "profile_bg",fileName: "header_\(Date()).png", mimeType: "image/png")
+                    multipartFormData.append(imageData, withName: "profile_bg", fileName: "header_\(Date()).png", mimeType: "image/png")
                 }
         },
             to: imagePatchURL, method: .patch,
@@ -143,7 +143,7 @@ extension NetworkController {
      - parameter localURL: 업로드 할 음악 파일이 저장되어있는 장소
      - parameter postId: 지금 댓글을 달려고 하는 포스트의 id
     */
-    func uploadAudioComment(In localURL: URL, to postId: Int,instrument: String, completion: @escaping () -> Void) {
+    func uploadAudioComment(In localURL: URL, to postId: Int, instrument: String, completion: @escaping () -> Void) {
         let url = URL(string: "\(postId)/comments/", relativeTo: postURL)!
         Alamofire.upload(
             multipartFormData: { multipartFormData in
@@ -169,7 +169,7 @@ extension NetworkController {
         Alamofire.upload(
             multipartFormData: { multipartFormData in
                 if let imageData = self.dataRepresentationOf(image: albumCover) {
-                    multipartFormData.append(imageData, withName: "post_img",fileName: "album_\(Date()).png", mimeType: "image/png")
+                    multipartFormData.append(imageData, withName: "post_img", fileName: "album_\(Date()).png", mimeType: "image/png")
                 }
                 multipartFormData.append(title.data(using: .utf8)!, withName: "title")
                 multipartFormData.append(localURL, withName: "author_track")

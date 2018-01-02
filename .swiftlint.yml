@@ -1,6 +1,5 @@
 disabled_rules: # rule identifiers to exclude from running
   - opening_brace
-  - comma
   - control_statement
   - identifier_name
   - unused_closure_parameter

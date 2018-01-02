@@ -54,7 +54,7 @@ class SideMenuViewController: UIViewController {
             logoutButton.setTitle("로그인", for: .normal)
             return
         }
-        nickNameButton.setTitle(UserDefaults.standard.string(forKey: keyForNickName) , for: .normal)
+        nickNameButton.setTitle(UserDefaults.standard.string(forKey: keyForNickName), for: .normal)
         if let socialProfileImageURL = DataCenter.main.socialProfileImageURL {
             profileImageButton.af_setBackgroundImage(for: .normal, url: socialProfileImageURL)
         }else{

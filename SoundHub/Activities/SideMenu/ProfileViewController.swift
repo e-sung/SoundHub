@@ -41,7 +41,7 @@ class ProfileViewController: UIViewController {
      - ToDo: 사진첩/카메라에 접근권한을 갖지 못했을 때에 대한 처리를 해야 함
     */
     private let imagePicker = UIImagePickerController()
-    private var tableViewHeaderTitles = ["올린 포스트들","좋아한 포스트들"]
+    private var tableViewHeaderTitles = ["올린 포스트들", "좋아한 포스트들"]
     /**
      이 VC를 통해 표시되어야 할 User 객체. 유일한 internal 객체이다.
     */
@@ -82,7 +82,7 @@ class ProfileViewController: UIViewController {
 
     @IBAction func swipeDidHappend(_ sender: UISwipeGestureRecognizer) {
         if sender.direction == .up {
-            mainTV.scrollToRow(at: IndexPath(item: 0, section: 1) , at: .top, animated: true)
+            mainTV.scrollToRow(at: IndexPath(item: 0, section: 1), at: .top, animated: true)
             flowCell?.isScrollEnabled = true
         }
         self.view.endEditing(true)
@@ -133,8 +133,8 @@ extension ProfileViewController: ProfileHeaderCellDelegate {
 }
 
 // MARK: ImagePickerDelegate
-extension ProfileViewController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             buttonToChange?.setImage(pickedImage, for: .normal)
             buttonToChange?.imageView?.contentMode = .scaleAspectFill
@@ -203,12 +203,12 @@ extension ProfileViewController: FlowContainerCellDelegate {
 // MARK: Computed Properties : AlertActions
 extension ProfileViewController {
     private var defaultUIAlertActions: [UIAlertAction] {
-        let withExistingPhoto = UIAlertAction(title: "원래 있던 사진으로", style: .default , handler: { (action) in
+        let withExistingPhoto = UIAlertAction(title: "원래 있던 사진으로", style: .default, handler: { (action) in
             self.imagePicker.sourceType = .photoLibrary
             self.present(self.imagePicker, animated: true, completion: nil)
         })
 
-        let withNewPhoto = UIAlertAction(title: "새로 사진 찍어서", style: .default , handler: { (action) in
+        let withNewPhoto = UIAlertAction(title: "새로 사진 찍어서", style: .default, handler: { (action) in
             self.imagePicker.sourceType = .camera
             self.present(self.imagePicker, animated: true, completion: nil)
         })

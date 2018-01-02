@@ -126,7 +126,7 @@ extension AudioUploadViewController {
 
     private func uploadExisting(music audioURL: URL, with bpm: Int) {
         showLoadingIndicator()
-        NetworkController.main.uploadAudio(In: audioURL, title: audioTitleTF.text ?? "무제" , genre: self.genre, instrument: self.instrument, bpm: bpm, albumCover: (self.albumArt.currentImage ?? #imageLiteral(resourceName: "no_cover") ), completion: {
+        NetworkController.main.uploadAudio(In: audioURL, title: audioTitleTF.text ?? "무제", genre: self.genre, instrument: self.instrument, bpm: bpm, albumCover: (self.albumArt.currentImage ?? #imageLiteral(resourceName: "no_cover") ), completion: {
             NotificationCenter.default.post(name: NSNotification.Name("shouldReloadContents"), object: nil)
             self.presentedViewController?.dismiss(animated: true, completion: {
                 self.dismiss(animated: true, completion: nil)
@@ -138,7 +138,7 @@ extension AudioUploadViewController {
 extension AudioUploadViewController {
     private var exportURL: URL {
         let title = audioTitleTF.text ?? "Untitled"
-        return URL(string: "\(title).m4a".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)! , relativeTo: DataCenter.documentsDirectoryURL)!
+        return URL(string: "\(title).m4a".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: DataCenter.documentsDirectoryURL)!
     }
 
     private var titleMetaData: AVMutableMetadataItem {
@@ -152,12 +152,12 @@ extension AudioUploadViewController {
     }
 
     private var defaultUIAlertActions: [UIAlertAction] {
-        let withExistingPhoto = UIAlertAction(title: "원래 있던 사진으로", style: .default , handler: { (action) in
+        let withExistingPhoto = UIAlertAction(title: "원래 있던 사진으로", style: .default, handler: { (action) in
             self.imagePicker.sourceType = .photoLibrary
             self.present(self.imagePicker, animated: true, completion: nil)
         })
 
-        let withNewPhoto = UIAlertAction(title: "새로 사진 찍어서", style: .default , handler: { (action) in
+        let withNewPhoto = UIAlertAction(title: "새로 사진 찍어서", style: .default, handler: { (action) in
             self.imagePicker.sourceType = .camera
             self.present(self.imagePicker, animated: true, completion: nil)
         })
@@ -177,8 +177,8 @@ extension AudioUploadViewController {
 }
 
 // MARK: ImagePickerDelegate
-extension AudioUploadViewController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String:Any]) {
+extension AudioUploadViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.pickedImage = pickedImage
             albumArt.setImage(pickedImage, for: .normal)

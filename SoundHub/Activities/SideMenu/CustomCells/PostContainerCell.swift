@@ -95,7 +95,7 @@ extension PostContainerCell: UITableViewDelegate, UITableViewDataSource, UIScrol
         if lastOffset > scrollView.contentOffset.y {
             if postTB.visibleCells.contains(firstCell) {
                 postTB.isScrollEnabled = false
-                parent.parent.mainTV.scrollToRow(at: IndexPath(item: 0,section: 0), at: .top, animated: true)
+                parent.parent.mainTV.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
             }
         }
     }
@@ -115,7 +115,7 @@ extension PostContainerCell {
         }
     }
     func scrollToTopWith(animation: Bool) {
-        postTB.scrollToRow(at: IndexPath(item: 0,section: 0), at: .top, animated: animation)
+        postTB.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: animation)
     }
 }
 

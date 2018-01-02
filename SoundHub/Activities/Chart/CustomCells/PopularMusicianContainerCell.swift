@@ -11,8 +11,8 @@ import UIKit
 class PopularMusicianContainerCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate {
 
     @IBOutlet weak var popularMusicianFlowLayout: UICollectionView!
-    var category:Categori = .general
-    weak var delegate:ChartViewController?
+    var category: Categori = .general
+    weak var delegate: ChartViewController?
     override func awakeFromNib() {
         super.awakeFromNib()
         popularMusicianFlowLayout.delegate = self

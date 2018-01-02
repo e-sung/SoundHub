@@ -17,7 +17,7 @@ enum Instrument: String {
     case Keyboard = "Keyboard"
     case Other = "Other"
 
-    static let cases = ["Vocal","Guitar","Bass","Drums","Keyboard", "Other" ]
+    static let cases = ["Vocal", "Guitar", "Bass", "Drums", "Keyboard", "Other" ]
     var image: UIImage? {
         switch self {
         case .Vocal: return #imageLiteral(resourceName: "vocal")

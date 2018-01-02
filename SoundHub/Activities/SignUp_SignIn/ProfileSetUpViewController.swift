@@ -126,7 +126,7 @@ extension ProfileSetUpViewController {
     private func generateAlert(given error: String?) -> UIAlertController {
         let alertMessage = self.generateAlertMessage(given: error)
         let alert = UIAlertController(title: "안내", message: alertMessage, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "확인", style: .cancel , handler: { (action) in
+        alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: { (action) in
             if error == nil { self.dismissWith(depth: 2, from: self) }
             else { self.dismiss(animated: true, completion: nil) }
         }))

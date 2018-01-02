@@ -8,7 +8,7 @@
 import UIKit
 import GoogleSignIn
 
-class SignInViewController: UIViewController, UITextViewDelegate,GIDSignInUIDelegate {
+class SignInViewController: UIViewController, UITextViewDelegate, GIDSignInUIDelegate {
 
     // MARK: Stored Properties
     var isKeyboardUp = false

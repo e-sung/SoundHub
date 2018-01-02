@@ -47,7 +47,7 @@ extension AVPlayer {
             return false
         }
     }
-    var progress:Float {
+    var progress: Float {
         guard let currentItem = self.currentItem else { return 0 }
         return Float(self.currentTime().seconds/currentItem.duration.seconds)
     }

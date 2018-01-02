@@ -36,7 +36,7 @@ class AudioCommentCell: UITableViewCell {
         }
     }
 
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey:Any]?, context: UnsafeMutableRawPointer?) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         if player?.currentItem?.status == AVPlayerItemStatus.readyToPlay {
             self.delegate?.didFinishedDownloading()
         }

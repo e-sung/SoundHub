@@ -205,7 +205,7 @@ extension ChartViewController {
         return UIView.generateHeaderView(with: title, and: Int(height))
     }
 
-    private func generateSeeMoreButtonFor(given section: Int, with parentView:UIView, and title:String) -> UIButton {
+    private func generateSeeMoreButtonFor(given section: Int, with parentView: UIView, and title: String) -> UIButton {
         let seeMoreButton = UIButton(frame: parentView.frame)
         seeMoreButton.setTitle(title, for: .normal)
         seeMoreButton.tag = section
@@ -235,7 +235,7 @@ extension ChartViewController {
 extension ChartViewController {
     /// 앱을 끄기 직전, dataCenter에 저장된 정보들을 userDefaults에 저장하는데,
     /// 이 함수는 userDefaults에 저장된 정보를 다시 dataCenter으로 불러들임
-    private func fill(In dataCenter:DataCenter, with userDefaults: UserDefaults) {
+    private func fill(In dataCenter: DataCenter, with userDefaults: UserDefaults) {
         if let homePageData = userDefaults.object(forKey: "InitialHomepage") as? Data {
             if let homePageInfo = try? JSONDecoder().decode(HomePage.self, from: homePageData) {
                 dataCenter.homePages[.general] = homePageInfo

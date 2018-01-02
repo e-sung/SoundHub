@@ -11,7 +11,7 @@ import AVFoundation
 
 class CommentContainerCell: UITableViewCell {
 
-    var allComments:[String:[Comment]]? {
+    var allComments: [String: [Comment]]? {
         didSet(oldval) {
             if oldval == nil || isNewTrackBeingAdded {
                 commentTV.reloadData()

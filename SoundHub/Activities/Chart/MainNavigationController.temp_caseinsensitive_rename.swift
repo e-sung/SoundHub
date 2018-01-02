@@ -48,10 +48,10 @@ extension MainNavigationController {
     @objc func uploadButtonHandler(sender: UIButton) {
         if User.isLoggedIn {
             let alert = UIAlertController(title: "어떻게 올리시겠습니까?", message: "", preferredStyle: .actionSheet)
-            alert.addAction(UIAlertAction(title: "원래 있던 파일 올리기", style: .default , handler: { (action) in
+            alert.addAction(UIAlertAction(title: "원래 있던 파일 올리기", style: .default, handler: { (action) in
                 self.present(self.documentPicker, animated: true, completion: nil)
             }))
-            alert.addAction(UIAlertAction(title: "새로 녹음하기", style: .default , handler: { (action) in
+            alert.addAction(UIAlertAction(title: "새로 녹음하기", style: .default, handler: { (action) in
                 let storyboard = UIStoryboard(name: "UploadAudio", bundle: nil)
                 let audioRecorderVC = storyboard.instantiateViewController(withIdentifier: "AudioRecorderViewController") as! AudioRecorderViewController
                 self.present(audioRecorderVC, animated: true, completion: nil)
