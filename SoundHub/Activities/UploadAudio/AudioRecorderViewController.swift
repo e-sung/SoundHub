@@ -83,7 +83,7 @@ class AudioRecorderViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         inputPlot.node?.avAudioNode.removeTap(onBus: 0)
         if let auManager = auManager{
-            if auManager.availableEffects.count > 0 { auManager.removeEffect(at: 0) }
+            if auManager.availableEffects.isEmpty == false { auManager.removeEffect(at: 0) }
         }
     }
 }
@@ -180,7 +180,6 @@ extension AudioRecorderViewController{
         }, origin: self.view)
     }
 
-    
     private func makeRecordingState(){
         if auManager?.input != RecordConductor.main.player {
             auManager?.connectEffects(firstNode: RecordConductor.main.player, lastNode: RecordConductor.main.mainMixer)

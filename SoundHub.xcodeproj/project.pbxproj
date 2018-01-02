@@ -11,7 +11,6 @@
 		514AE9D3C68525A59E406194 /* Pods_SoundHubUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFEF70D3C538FB607DF5384A /* Pods_SoundHubUITests.framework */; };
 		8C64A22E72B4C054AEC0195F /* Pods_SoundHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F94B1440EDA863E444AD34F /* Pods_SoundHub.framework */; };
 		F0058B151FF751C4004CC6D1 /* UploadAudio.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0058B141FF751C4004CC6D1 /* UploadAudio.storyboard */; };
-		F0058B191FF75B22004CC6D1 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0058B181FF75B22004CC6D1 /* LaunchScreenViewController.swift */; };
 		F0F1E0051FF20EB3007D1AE6 /* AudioUnitGenericView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F1E0041FF20EB2007D1AE6 /* AudioUnitGenericView.swift */; };
 		FF000D991FD11F7F00678999 /* DataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF000D981FD11F7F00678999 /* DataCenter.swift */; };
 		FF000D9D1FD1368000678999 /* AudioUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF000D9C1FD1368000678999 /* AudioUploadViewController.swift */; };
@@ -57,7 +56,7 @@
 		FFB85FCE1FCE657F000E47C8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB85FCD1FCE657F000E47C8 /* ProfileViewController.swift */; };
 		FFB85FD01FCE78B3000E47C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB85FCF1FCE78B3000E47C8 /* Post.swift */; };
 		FFB85FD21FCE79A3000E47C8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB85FD11FCE79A3000E47C8 /* User.swift */; };
-		FFC104941FEBBA6700460FD6 /* mainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC104931FEBBA6700460FD6 /* mainNavigationController.swift */; };
+		FFC104941FEBBA6700460FD6 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC104931FEBBA6700460FD6 /* MainNavigationController.swift */; };
 		FFC104971FEBBFDD00460FD6 /* MainEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC104961FEBBFDD00460FD6 /* MainEntryViewController.swift */; };
 		FFC32AE41FCF8E1500651A31 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC32AE31FCF8E1500651A31 /* Comment.swift */; };
 		FFC32AE61FCF9F0C00651A31 /* AudioCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC32AE51FCF9F0C00651A31 /* AudioCommentCell.swift */; };
@@ -104,7 +103,6 @@
 		D97CA82572278A09E19CB69B /* Pods_SoundHubTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoundHubTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFEF70D3C538FB607DF5384A /* Pods_SoundHubUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoundHubUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0058B141FF751C4004CC6D1 /* UploadAudio.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UploadAudio.storyboard; sourceTree = "<group>"; };
-		F0058B181FF75B22004CC6D1 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		F0F1E0041FF20EB2007D1AE6 /* AudioUnitGenericView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioUnitGenericView.swift; sourceTree = "<group>"; };
 		FF000D981FD11F7F00678999 /* DataCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCenter.swift; sourceTree = "<group>"; };
 		FF000D9C1FD1368000678999 /* AudioUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioUploadViewController.swift; sourceTree = "<group>"; };
@@ -154,7 +152,7 @@
 		FFB85FCD1FCE657F000E47C8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		FFB85FCF1FCE78B3000E47C8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		FFB85FD11FCE79A3000E47C8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		FFC104931FEBBA6700460FD6 /* mainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainNavigationController.swift; sourceTree = "<group>"; };
+		FFC104931FEBBA6700460FD6 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		FFC104961FEBBFDD00460FD6 /* MainEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainEntryViewController.swift; sourceTree = "<group>"; };
 		FFC32AE31FCF8E1500651A31 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		FFC32AE51FCF9F0C00651A31 /* AudioCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCommentCell.swift; sourceTree = "<group>"; };
@@ -349,7 +347,7 @@
 			isa = PBXGroup;
 			children = (
 				FF9A84E21FC962C300AC4780 /* Chart.storyboard */,
-				FFC104931FEBBA6700460FD6 /* mainNavigationController.swift */,
+				FFC104931FEBBA6700460FD6 /* MainNavigationController.swift */,
 				FF3B20B01FCA98C50019F87A /* ChartViewController.swift */,
 				FF9D18571FDBBF11008D5FD1 /* LoadingIndicatorViewController.swift */,
 				FF5C013F1FD96D0500F37CC9 /* InstrumentPickerViewController.swift */,
@@ -447,7 +445,6 @@
 				FF000D971FD0FB8900678999 /* Activities */,
 				FFCF82C51FC95D66003B7861 /* Assets.xcassets */,
 				FFCF82C71FC95D66003B7861 /* LaunchScreen.storyboard */,
-				F0058B181FF75B22004CC6D1 /* LaunchScreenViewController.swift */,
 				FFCF82CA1FC95D66003B7861 /* Info.plist */,
 				FF038E411FE17B1400AED2B5 /* SoundHub-Bridging-Header.h */,
 			);
@@ -679,7 +676,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SoundHubUITests/Pods-SoundHubUITests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SoundHubUITests/Pods-SoundHubUITests-resources.sh\"";
 			showEnvVarsInLog = 0;
 		};
 		7C29ADAE179A5CF98C1F3950 /* [CP] Embed Pods Frameworks */ = {
@@ -730,8 +727,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SoundHub/Pods-SoundHub-resources.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SoundHub/Pods-SoundHub-resources.sh\"\n\"${PODS_ROOT}/SwiftLint/swiftlint\"";
 		};
 		D2322EB168AD005ACF550774 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -836,7 +832,7 @@
 				FFCF82BF1FC95D66003B7861 /* AppDelegate.swift in Sources */,
 				FFC104971FEBBFDD00460FD6 /* MainEntryViewController.swift in Sources */,
 				FF5C013E1FD951B200F37CC9 /* GenrePickViewController.swift in Sources */,
-				FFC104941FEBBA6700460FD6 /* mainNavigationController.swift in Sources */,
+				FFC104941FEBBA6700460FD6 /* MainNavigationController.swift in Sources */,
 				FF3B20AF1FCA96E30019F87A /* PopularMusicianContainerCell.swift in Sources */,
 				FFA5A39F1FCCFD97001EA36F /* NetworkController.swift in Sources */,
 				FF9D18581FDBBF11008D5FD1 /* LoadingIndicatorViewController.swift in Sources */,
@@ -862,7 +858,6 @@
 				FFA8A8501FE74EF7008443B4 /* UIView+Geometry.m in Sources */,
 				FF3B20B51FCAADD80019F87A /* PostListCell.swift in Sources */,
 				FF3B20BC1FCACE8D0019F87A /* DetailHeaderCell.swift in Sources */,
-				F0058B191FF75B22004CC6D1 /* LaunchScreenViewController.swift in Sources */,
 				FF64BA0E1FDD36F4000A846B /* RecorderCell.swift in Sources */,
 				FFB85FCC1FCE652A000E47C8 /* ProfileHeaderCell.swift in Sources */,
 				FF02805E1FD805F600C0013A /* ModeToggleCell.swift in Sources */,

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class DataCenter{
+class DataCenter {
     static var main = DataCenter()
     static let documentsDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         
@@ -17,31 +17,27 @@ class DataCenter{
         .general:HomePage(pop_users: [], pop_posts: [], recent_posts: []),
         .genre:HomePage(pop_users: [], pop_posts: [], recent_posts: []),
         .instrument:HomePage(pop_users: [], pop_posts: [], recent_posts: [])
-        ]{
-        didSet(oldVal){
+        ] {
+        didSet(oldVal) {
             NotificationCenter.default.post(name: NSNotification.Name.init("shouldReloadCells"), object: nil)
         }
     }
 
-    var userId:Int{
-        get{
-            if _userId == nil { _userId = UserDefaults.standard.integer(forKey: keyForUserId) }
-            return _userId!
-        }
+    var userId:Int {
+        if _userId == nil { _userId = UserDefaults.standard.integer(forKey: keyForUserId) }
+        return _userId!
     }
     private var _userId:Int?
-    var userNickName:String{
-        get{
-            if _userNickName == nil{
-                _userNickName = UserDefaults.standard.string(forKey: keyForNickName)
-            }
-            return _userNickName!
+    var userNickName:String {
+        if _userNickName == nil {
+            _userNickName = UserDefaults.standard.string(forKey: keyForNickName)
         }
+        return _userNickName!
     }
     private var _userNickName:String?
     var socialProfileImageURL:URL?
     
-    func removeUserProfileImageCache(){
+    func removeUserProfileImageCache() {
         let imageDownloader = UIImageView.af_sharedImageDownloader
         let buttonDownloader = UIButton.af_sharedImageDownloader
         imageDownloader.imageCache?.removeAllImages()
@@ -49,7 +45,7 @@ class DataCenter{
         imageDownloader.sessionManager.session.configuration.urlCache?.removeAllCachedResponses()
     }
     
-    func resetHomePages(){
+    func resetHomePages() {
         self.homePages = [
             .general:HomePage(pop_users: [], pop_posts: [], recent_posts: []),
             .genre:HomePage(pop_users: [], pop_posts: [], recent_posts: []),
@@ -58,13 +54,13 @@ class DataCenter{
     }
 }
 
-struct HomePage:Codable{
+struct HomePage:Codable {
     var pop_users:[User]
     var pop_posts:[Post]
     var recent_posts:[Post]
 }
 
-enum Categori:String{
+enum Categori:String {
     case general = " "
     case genre = "genre"
     case instrument = "instrument"

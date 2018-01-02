@@ -9,7 +9,6 @@
 import UIKit
 import AlamofireImage
 
-
 class ChartViewController: UIViewController{
     let recorder = RecordConductor.main
     // MARK: IBOutlets
@@ -50,13 +49,13 @@ class ChartViewController: UIViewController{
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        if DataCenter.main.homePages[category]?.recent_posts.count == 0 { reloadContents(showingLoadingIndicator: true) }
+        if DataCenter.main.homePages[category]?.recent_posts.isEmpty == true { reloadContents(showingLoadingIndicator: true) }
         else { reloadContents(showingLoadingIndicator: false) }
         setUpUI(with: PlayBarController.main)
     }
 }
 
-//MARK: TableViewDataSource
+// MARK: TableViewDataSource
 extension ChartViewController:UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         return sectionTitleList.count
@@ -179,7 +178,7 @@ extension ChartViewController:UINavigationControllerDelegate{
 extension ChartViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let nextVC = segue.destination as? DetailViewController{
-            let indexPath = sender as! IndexPath
+            guard let indexPath = sender as? IndexPath else { return }
             if Section(rawValue: indexPath.section) == .RankingChart{
                 nextVC.post = DataCenter.main.homePages[category]!.pop_posts[indexPath.item]
             }else{
@@ -191,15 +190,16 @@ extension ChartViewController{
 
 extension ChartViewController:PostListCellDelegate{
     func shouldShowProfile(of user: User?) {
-        let profileVC = UIStoryboard(name: "SideMenu", bundle: nil)
-            .instantiateViewController(withIdentifier: "profileViewController") as! ProfileViewController
+        guard let profileVC = UIStoryboard(name: "SideMenu", bundle: nil)
+            .instantiateViewController(withIdentifier: "profileViewController") as? ProfileViewController
+            else { return }
         profileVC.userInfo = user
         navigationController?.pushViewController(profileVC, animated: true)
     }
 }
 
 extension ChartViewController{
-    private func generateHeaderViewFor(given section:Int)->UIView{
+    private func generateHeaderViewFor(given section:Int) -> UIView{
         let title = sectionTitleList[section]
         let height = Section(rawValue: section)!.headerHeight
         return UIView.generateHeaderView(with: title, and: Int(height))
@@ -213,7 +213,7 @@ extension ChartViewController{
         return seeMoreButton
     }
     
-    func getDestinationPost(from indexPath:IndexPath)->Post?{
+    func getDestinationPost(from indexPath:IndexPath) -> Post?{
         var destinationPost:Post? = nil
         if Section(rawValue: indexPath.section) == .RankingChart{
             destinationPost = DataCenter.main.homePages[category]?.pop_posts[indexPath.item]
@@ -245,7 +245,7 @@ extension ChartViewController{
     
     /// 차트를 갱신함
     private func reloadContents(showingLoadingIndicator:Bool){
-        if let _ = self.navigationController?.topViewController as? ChartViewController{
+        if self.navigationController?.topViewController as? ChartViewController != nil {
             if showingLoadingIndicator == true {self.showLoadingIndicator()}
         }
         NetworkController.main.fetchHomePage(of: self.category, with: self.option, completion: {

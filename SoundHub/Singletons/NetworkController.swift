@@ -12,7 +12,7 @@ import AlamofireImage
 import GoogleSignIn
 import UIKit
 
-class NetworkController{
+class NetworkController {
     // MARK: Stored Properties
     /// HTTP 통신을 담당하는 싱글턴 객체
     static let main = NetworkController()
@@ -29,7 +29,7 @@ class NetworkController{
     /// https://soundhub.che1.co.kr/home/
     internal let generalHomeURL:URL
  
-    init(){
+    init() {
         hostURL = URL(string: "https://soundhub.che1.co.kr/")!
         baseMediaURL = URL(string: "https://s3.ap-northeast-2.amazonaws.com/che1-soundhub/media/")!
         signUpURL = URL(string: "user/signup/", relativeTo: hostURL)!
@@ -40,11 +40,11 @@ class NetworkController{
 }
 
 // MARK: Fetching Functions
-extension NetworkController{
+extension NetworkController {
     /**
      [User 객체조회 API](https://nachwon.gitbooks.io/soundhub/content/user/user-retrieve.html) 참고
     */
-    func fetchUser(id:Int, completion:@escaping(User?)->Void){
+    func fetchUser(id:Int, completion:@escaping(User?) -> Void){
         let url = URL(string: "/user/\(id)/", relativeTo: hostURL)!
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let error = error { print(error); completion(nil); return }
@@ -58,7 +58,7 @@ extension NetworkController{
     /**
      [Post 객체조회 API](https://nachwon.gitbooks.io/soundhub/content/post/post-detail.html) 참고
      */
-    func fetchPost(id:Int, completion:@escaping(Post)->Void){
+    func fetchPost(id:Int, completion:@escaping(Post) -> Void){
         let url = URL(string: "\(id)/", relativeTo: postURL)!
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data else {print ("data is corrupted") ; return}
@@ -74,7 +74,7 @@ extension NetworkController{
      - parameter option : 세부장르/세부악기 등
      - completion : 응답이 되돌아 온 뒤 해야 할 일
     */
-    func fetchHomePage(of category:Categori, with option:String, completion:@escaping()->Void){
+    func fetchHomePage(of category:Categori, with option:String, completion:@escaping() -> Void){
         var entryURL:URL?
         if category == .general { entryURL = generalHomeURL }
         else{ entryURL = URL(string: "\(category.rawValue)", relativeTo: generalHomeURL) }
@@ -95,8 +95,8 @@ extension NetworkController{
 }
 
 // MARK: Patching Functions
-extension NetworkController{
-    func patchUser(nickname:String, instrument:String, completion:@escaping(_ hasSuccess:Bool)->Void){
+extension NetworkController {
+    func patchUser(nickname:String, instrument:String, completion:@escaping(_ hasSuccess:Bool) -> Void){
         guard let userId = UserDefaults.standard.string(forKey: keyForUserId) else { completion(false); return}
         let nickNamePatchURL = URL(string: "/user/\(userId)/", relativeTo: hostURL)!
         let headers: HTTPHeaders = ["Authorization": authToken]
@@ -137,13 +137,13 @@ extension NetworkController{
 }
 
 // MARK: 오디오 관련 요청들
-extension NetworkController{
+extension NetworkController {
     /**
      오디오 **코맨트**를 업로드하는 함수
      - parameter localURL: 업로드 할 음악 파일이 저장되어있는 장소
      - parameter postId: 지금 댓글을 달려고 하는 포스트의 id
     */
-    func uploadAudioComment(In localURL:URL, to postId:Int,instrument:String, completion:@escaping ()->Void){
+    func uploadAudioComment(In localURL:URL, to postId:Int,instrument:String, completion:@escaping () -> Void){
         let url = URL(string: "\(postId)/comments/", relativeTo: postURL)!
         Alamofire.upload(
             multipartFormData: { multipartFormData in
@@ -164,7 +164,7 @@ extension NetworkController{
      오디오 **포스트**를 업로드하는 함수
      - parameter localURL: 업로드 할 음악 파일이 저장되어있는 장소
      */
-    func uploadAudio(In localURL:URL, title:String, genre:String, instrument:String, bpm:Int, albumCover:UIImage, completion:@escaping ()->Void){
+    func uploadAudio(In localURL:URL, title:String, genre:String, instrument:String, bpm:Int, albumCover:UIImage, completion:@escaping () -> Void){
         
         Alamofire.upload(
             multipartFormData: { multipartFormData in
@@ -195,7 +195,7 @@ extension NetworkController{
      서버의 remoteURL에 있는 파일을 다운받아 localURL의 위치에 저장하는 함수
      - parameter remoteURL : 오디오가 저장되어 있는 서버측 URL
     */
-    func downloadAudio(from remoteURL:URL, completion:@escaping (_ localURL:URL)->Void){
+    func downloadAudio(from remoteURL:URL, completion:@escaping (_ localURL:URL) -> Void){
         let documentsDirectoryURL = DataCenter.documentsDirectoryURL
         let destinationUrl = documentsDirectoryURL.appendingPathComponent(parseLocalURL(from: remoteURL))
 
@@ -215,7 +215,7 @@ extension NetworkController{
      - parameter comments : 믹스하려고 하는 코맨트들의 **id** 값들
      - parameter post : 지금 믹스가 일어나는 포스트의 **id**값
     */
-    func mix(comments:[Int], on post:Int, completion:@escaping ()->Void){
+    func mix(comments:[Int], on post:Int, completion:@escaping () -> Void){
         let url = URL(string: "\(post)/mix/", relativeTo: postURL)!
         var tracksToMix = ""
         for comment in comments{ tracksToMix += "\(comment) ," }
@@ -227,10 +227,9 @@ extension NetworkController{
     }
 }
 
-
-extension NetworkController{
+extension NetworkController {
     
-    func signUp(with socialToken:String, nickname:String, instruments:String, completion: @escaping (_ result: NSDictionary?, _ errorMesge:String?)->Void){
+    func signUp(with socialToken:String, nickname:String, instruments:String, completion: @escaping (_ result: NSDictionary?, _ errorMesge:String?) -> Void){
         
         let unknownErrorMesage = "알 수 없는 오류가 발생했습니다"
         guard let clientId = GIDSignIn.sharedInstance().clientID else { completion(nil, unknownErrorMesage); return }
@@ -245,7 +244,10 @@ extension NetworkController{
                     guard let socialProfileImageURL = DataCenter.main.socialProfileImageURL else {
                         DispatchQueue.main.async { completion(nil, unknownErrorMesage)}; return
                     }
-                    let profileImageData = try! Data(contentsOf: socialProfileImageURL)
+                    guard let profileImageData = try? Data(contentsOf: socialProfileImageURL) else {
+                        DispatchQueue.main.async { completion(nil, "Error During Decoding") }
+                        return
+                    }
                     let profileImage = UIImage(data: profileImageData)!
                     self.patch(profileImage: profileImage, headerImage: nil)
                     DispatchQueue.main.async { completion(userInfo, nil) }; return
@@ -260,7 +262,7 @@ extension NetworkController{
     }
     
     func signUp(with email:String, nickname:String, instruments:String, password1:String, password2:String,
-                completion: @escaping (_ userId: Int, _ errorMesge:String?)->Void){
+                completion: @escaping (_ userId: Int, _ errorMesge:String?) -> Void){
         
         let signUpInfo = [ "email":email, "nickname":nickname, "instrument":instruments, "password1":password1, "password2":password2 ]
         Alamofire.request(signUpURL, method: .post, parameters: signUpInfo, headers: nil).responseJSON { (response) in
@@ -281,7 +283,7 @@ extension NetworkController{
         }
     }
     
-    func signIn(with socialToken:String, completion: @escaping (_ result:NSDictionary?, _ errorMessage:String?)->Void){
+    func signIn(with socialToken:String, completion: @escaping (_ result:NSDictionary?, _ errorMessage:String?) -> Void){
         
         let unknownErrorMesage = "알 수 없는 오류가 발생했습니다"
         guard let clientId = GIDSignIn.sharedInstance().clientID else { completion(nil, unknownErrorMesage); return }
@@ -305,7 +307,7 @@ extension NetworkController{
         }
     }
     
-    func signIn(with email:String, and password:String, completion:@escaping (_ response:NSDictionary?, _ error:String?)->Void){
+    func signIn(with email:String, and password:String, completion:@escaping (_ response:NSDictionary?, _ error:String?) -> Void){
         
         let unknownErrorMesage = "알 수 없는 오류가 발생했습니다"
         let signInInfo = ["email":email, "password":password]
@@ -315,8 +317,11 @@ extension NetworkController{
             }
             if let json = response.result.value {
                 if let dic = json as? NSDictionary{
-                    if let _ = dic["token"] as? String { DispatchQueue.main.async { completion(dic, nil) }; return }
-                    else{ DispatchQueue.main.async { completion(nil, "잘못된 이메일, 혹은 비밀번호입니다") }; return }
+                    if dic["token"] as? String != nil {
+                        DispatchQueue.main.async { completion(dic, nil) }; return
+                    }else{
+                        DispatchQueue.main.async { completion(nil, "잘못된 이메일, 혹은 비밀번호입니다") }; return
+                    }
                 }
             }
             DispatchQueue.main.async { completion(nil, unknownErrorMesage)}; return
@@ -325,15 +330,15 @@ extension NetworkController{
 }
 
 // MARK: Utility Functions & Computed Properties
-extension NetworkController{
+extension NetworkController {
     
-    func sendLikeRequest(on postId:Int, completion:@escaping (_ num_liked:Int)->Void){
+    func sendLikeRequest(on postId:Int, completion:@escaping (_ num_liked:Int) -> Void) {
         let url = URL(string: "\(postId)/like/", relativeTo: postURL)!
         let headers: HTTPHeaders = ["Authorization": authToken]
         Alamofire.request(url, method: .post, parameters: nil, headers: headers).responseJSON { (response) in
             if let json = response.result.value {
-                let post = json as! NSDictionary
-                let numLiked = post["num_liked"] as! Int
+                guard let post = json as? NSDictionary else { return }
+                guard let numLiked = post["num_liked"] as? Int else { return }
                 completion(numLiked)
             }
         }
@@ -341,20 +346,18 @@ extension NetworkController{
     
     /// UserDefault에 저장되어있는 토큰을 꺼내어, 백앤드가 원하는 형태로 가공해 반환함.
     /// UserDefault에 저장된 값이 없을 때는, "Invalid Token"이라는 문자열을 토큰 대신 반환함.
-    private var authToken:String{
-        get{
-            guard let tkn = UserDefaults.standard.string(forKey: keyForToken) else { return "invalid Token" }
-            return "Token \(tkn)"
-        }
+    private var authToken:String {
+        guard let tkn = UserDefaults.standard.string(forKey: keyForToken) else { return "invalid Token" }
+        return "Token \(tkn)"
     }
     
     /// UIImagePNGRpresentation Wrapper
-    private func dataRepresentationOf(image:UIImage?)->Data?{
+    private func dataRepresentationOf(image:UIImage?) -> Data? {
         if let image = image { if let data = UIImagePNGRepresentation(image){ return data } }
         return nil
     }
     
-    private func parseLocalURL(from remoteURL:URL)->String{
+    private func parseLocalURL(from remoteURL:URL) -> String {
         let user = remoteURL.absoluteString.split(separator: "/")[4]
         let postId = remoteURL.absoluteString.split(separator: "/")[5]
         return user + postId + remoteURL.lastPathComponent

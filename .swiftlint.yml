@@ -1,0 +1,30 @@
+disabled_rules: # rule identifiers to exclude from running
+  - colon
+  - comma
+  - control_statement
+  - identifier_name
+  - trailing_whitespace
+  - opening_brace
+  - unused_closure_parameter
+  - statement_position
+  - line_length
+  - function_parameter_count
+opt_in_rules: # some rules are only opt-in
+  - empty_count
+  # Find all the available rules by running:
+  # swiftlint rules
+included: # paths to include during linting. `--path` is ignored if present.
+  - ./SoundHub/
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Carthage
+  - Pods
+
+# configurable rules can be customized from this configuration file
+# binary rules can set their severity level
+force_cast: warning # implicitly
+force_try:
+  severity: warning # explicitly
+file_length:
+  warning: 500
+  error: 1200
+reporter: "xcode" # reporter type (xcode, json, csv, checkstyle, junit, html, emoji)

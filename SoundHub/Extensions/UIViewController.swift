@@ -32,16 +32,13 @@ extension UIViewController{
     }
     
     static var loadingIndicator:LoadingIndicatorViewController{
-        get{
-            let sb = UIStoryboard(name: "Chart", bundle: nil)
-            let indicatorVC = sb.instantiateViewController(withIdentifier: "LoadingIndicatorViewController") as! LoadingIndicatorViewController
-            indicatorVC.modalPresentationStyle = .overCurrentContext
-            indicatorVC.modalTransitionStyle = .crossDissolve
-            return indicatorVC
-        }
+        let sb = UIStoryboard(name: "Chart", bundle: nil)
+        let indicatorVC = sb.instantiateViewController(withIdentifier: "LoadingIndicatorViewController") as! LoadingIndicatorViewController
+        indicatorVC.modalPresentationStyle = .overCurrentContext
+        indicatorVC.modalTransitionStyle = .crossDissolve
+        return indicatorVC
     }
     
-
     /**
      최상단의 ViewController부터 depth만큼 스택에 쌓인 ViewController를 dismiss하는 함수
      - parameter depth : 스택에서 빼내고자 하는 ViewController의 개수
@@ -63,7 +60,7 @@ extension UIViewController{
      - parameter depth : 스택에서 빼내고자 하는 ViewController의 개수
      - parameter currentVC : 현시점 스택의 최상단 ViewController
      */
-    func dismissWith(depth:Int, from currentVC:UIViewController, completion:@escaping()->Void){
+    func dismissWith(depth:Int, from currentVC:UIViewController, completion:@escaping() -> Void){
         if depth == 0 { completion(); return }
         
         if let pvc = currentVC.presentingViewController {

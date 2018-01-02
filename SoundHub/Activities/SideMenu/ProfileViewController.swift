@@ -55,7 +55,7 @@ class ProfileViewController: UIViewController{
      유저가 수정한 유저정보를 UserDefault에 저장하고, 같은 정보를 서버에 보냄
     */
     @objc private func doneButtonHandler(){
-        let _ = navigationItem.rightBarButtonItems?.popLast()
+        _ = navigationItem.rightBarButtonItems?.popLast()
 
         UserDefaults.standard.set(headerCell!.nickName, forKey: keyForNickName)
         
@@ -92,7 +92,6 @@ class ProfileViewController: UIViewController{
         self.view.endEditing(true)
     }
     
-
     // MARK: IBOutlets
     /**
      최상단의 TableView
@@ -104,7 +103,6 @@ class ProfileViewController: UIViewController{
     */
     @IBOutlet weak var mainTV: UITableView!
     @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
-    
     
     // MARK: LifeCycle
     override func viewDidLoad() {
@@ -205,33 +203,29 @@ extension ProfileViewController:FlowContainerCellDelegate{
 // MARK: Computed Properties : AlertActions
 extension ProfileViewController{
     private var defaultUIAlertActions:[UIAlertAction]{
-        get{
-            let withExistingPhoto = UIAlertAction(title: "원래 있던 사진으로", style: .default , handler: { (action) in
-                self.imagePicker.sourceType = .photoLibrary
-                self.present(self.imagePicker, animated: true, completion: nil)
-            })
-            
-            let withNewPhoto = UIAlertAction(title: "새로 사진 찍어서", style: .default , handler: { (action) in
-                self.imagePicker.sourceType = .camera
-                self.present(self.imagePicker, animated: true, completion: nil)
-            })
-            
-            let cancel = UIAlertAction(title: "취소", style: .cancel) { (action) in
-                self.presentedViewController?.dismiss(animated: true, completion: nil)
-            }
-            return [withExistingPhoto, withNewPhoto, cancel]
+        let withExistingPhoto = UIAlertAction(title: "원래 있던 사진으로", style: .default , handler: { (action) in
+            self.imagePicker.sourceType = .photoLibrary
+            self.present(self.imagePicker, animated: true, completion: nil)
+        })
+        
+        let withNewPhoto = UIAlertAction(title: "새로 사진 찍어서", style: .default , handler: { (action) in
+            self.imagePicker.sourceType = .camera
+            self.present(self.imagePicker, animated: true, completion: nil)
+        })
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel) { (action) in
+            self.presentedViewController?.dismiss(animated: true, completion: nil)
         }
+        return [withExistingPhoto, withNewPhoto, cancel]
     }
     
     private var photoSourceChooingAlert:UIAlertController{
-        get{
-            let alert = UIAlertController(title: "사진 변경", message: "", preferredStyle: .actionSheet)
-            let actions = defaultUIAlertActions
-            for action in actions{
-                alert.addAction(action)
-            }
-            return alert
+        let alert = UIAlertController(title: "사진 변경", message: "", preferredStyle: .actionSheet)
+        let actions = defaultUIAlertActions
+        for action in actions{
+            alert.addAction(action)
         }
+        return alert
     }
 }
 

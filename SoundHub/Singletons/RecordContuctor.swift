@@ -70,7 +70,7 @@ extension RecordConductor{
     /// - parameter postId : 댓글이 달릴 post의 id
     /// - parameter Instrument : 어떤 악기로 녹음했는지
     /// - parameter completion : 업로드가 끝난 후 할 일
-    func confirmComment(on postId:Int, of Instrument:String, completion:@escaping (Post?)->Void){
+    func confirmComment(on postId:Int, of Instrument:String, completion:@escaping (Post?) -> Void){
         if self.player.duration == 0 { completion(nil) }
         let asset = RecordConductor.main.player.audioFile.avAsset
         self.exportComment(asset: asset, completion: { (outputURL) in
@@ -86,24 +86,25 @@ extension RecordConductor{
     /// - parameter url : export된 파일이 저장될 주소
     /// - parameter metadatas : 파일에 덮어씌울 메타데이터들
     /// - parameter completion : export 된 후 할 일
-    func exportRecordedAudio(to url:URL, with metadatas:[AVMetadataItem], completion:@escaping ()->Void){
+    func exportRecordedAudio(to url:URL, with metadatas:[AVMetadataItem], completion:@escaping () -> Void){
         if let session = AVAssetExportSession(asset: self.player.audioFile.avAsset,
                                               presetName: AVAssetExportPresetAppleM4A){
             session.metadata = metadatas
             session.outputFileType = AVFileType.m4a
             session.outputURL = url
             session.exportAsynchronously { DispatchQueue.main.async { completion() } }
-        }else { print("AVAssetExportSession wasn't generated") }
+        } else { print("AVAssetExportSession wasn't generated") }
     }
     
     /// 입력으로 주어진 asset을 .m4a파일로 export 합니다
-    private func exportComment(asset:AVAsset, completion:@escaping(_ output:URL)->Void){
-        let outputURL = URL(string: "comment.m4a".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)! , relativeTo: DataCenter.documentsDirectoryURL)!
+    private func exportComment(asset:AVAsset, completion:@escaping(_ output:URL) -> Void){
+        let outputURL = URL(string: "comment.m4a".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!,
+                            relativeTo: DataCenter.documentsDirectoryURL)!
         if let session = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetAppleM4A){
             session.outputFileType = AVFileType.m4a
             session.outputURL = outputURL
             session.exportAsynchronously { DispatchQueue.main.async(execute: { completion(outputURL) }) }
-        }else { print("AVAssetExportSession wasn't generated") }
+        } else { print("AVAssetExportSession wasn't generated") }
     }
     
     /// RecordConductor 가 가지고 있는 mic객체와 outPutPlot의 Node를 연결시킴
@@ -147,5 +148,3 @@ extension RecordConductor{
         AudioKit.output = mainMixer
     }
 }
-
-

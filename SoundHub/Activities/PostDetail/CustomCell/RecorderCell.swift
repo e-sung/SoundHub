@@ -11,7 +11,7 @@ import AudioKitUI
 
 class RecorderCell: UITableViewCell {
 
-    var delegate:RecorderCellDelegate?
+    weak var delegate:RecorderCellDelegate?
     private var auManager: AKAudioUnitManager?
     private var availableEffects:[String] = []
     var postId:Int!
@@ -75,7 +75,7 @@ class RecorderCell: UITableViewCell {
     func deActivate(){
         self.isActive = false
         if let auManager = auManager{
-            if auManager.availableEffects.count > 0 { auManager.removeEffect(at: 0) }
+            if auManager.availableEffects.isEmpty == false { auManager.removeEffect(at: 0) }
         }
         audioUnitContainerHeight.isActive = false
         audioUnitContainerFlowLayout.isHidden = true
@@ -232,7 +232,7 @@ extension RecorderCell:AKAudioUnitManagerDelegate{
  
 }
 
-protocol RecorderCellDelegate {
+protocol RecorderCellDelegate: class {
     func uploadDidFinished(with post:Post?)
     func shouldShowAlert()
     func shouldBecomeActive()

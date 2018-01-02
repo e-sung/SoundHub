@@ -17,7 +17,7 @@ class PostContainerCell: UICollectionViewCell{
             }
         }
     }
-    var delegate:PostContainerCellDelegate?
+    weak var delegate:PostContainerCellDelegate?
     var firstCell:UITableViewCell!
     var lastOffset:CGFloat = 0
     var parent:FlowContainerCell!
@@ -35,7 +35,7 @@ class PostContainerCell: UICollectionViewCell{
 extension PostContainerCell: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let posts = posts else { return 1 }
-        if posts.count == 0 { return 1 }
+        if posts.isEmpty { return 1 }
         return posts.count
     }
     
@@ -45,7 +45,7 @@ extension PostContainerCell: UITableViewDelegate, UITableViewDataSource, UIScrol
             if indexPath == IndexPath(item: 0, section: 0){ firstCell = cell }
             return cell
         }
-        if posts.count > 0 {
+        if posts.isEmpty == false {
             let cell = tableView.dequeueReusableCell(withIdentifier: "postedPostCell", for: indexPath) as! PostListCell
             cell.postInfo = posts[indexPath.item]
             if indexPath == IndexPath(item: 0, section: 0){ firstCell = cell }
@@ -72,13 +72,13 @@ extension PostContainerCell: UITableViewDelegate, UITableViewDataSource, UIScrol
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if posts?.count == 0 { return 50 }
+        if posts?.isEmpty == true { return 50 }
         return PostListCell.defaultHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let posts = posts else { return }
-        if posts.count == 0 { return }
+        if posts.isEmpty == true { return }
         delegate?.shouldGoTo(post: posts[indexPath.item])
     }
     
@@ -125,8 +125,8 @@ extension PostContainerCell:PostListCellDelegate{
     }
 }
 
-protocol PostContainerCellDelegate {
-    func shouldGoTo(post:Post) -> Void
-    func shouldShowProfile(of user:User?)->Void
+protocol PostContainerCellDelegate: class {
+    func shouldGoTo(post:Post)
+    func shouldShowProfile(of user:User?)
     var isScrollEnabled:Bool{ get set }
 }

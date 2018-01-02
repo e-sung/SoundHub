@@ -33,7 +33,7 @@ class ProfileSetUpViewController: UIViewController {
                 selectedInstruments += (Instrument.cases[i] + ",")
             }
         }
-        let _ = selectedInstruments.dropLast()
+        _ = selectedInstruments.dropLast()
         if let token = token { signUp(with: token) }
         else{ signUpWithEmail() }
     }
@@ -123,17 +123,17 @@ extension ProfileSetUpViewController{
         })
     }
     
-    private func generateAlert(given error:String?)->UIAlertController{
+    private func generateAlert(given error:String?) -> UIAlertController{
         let alertMessage = self.generateAlertMessage(given: error)
         let alert = UIAlertController(title: "안내", message: alertMessage, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .cancel , handler: { (action) in
-            if let _ = error { self.dismiss(animated: true, completion: nil) }
-            else { self.dismissWith(depth: 2, from: self) }
+            if error == nil { self.dismissWith(depth: 2, from: self) }
+            else { self.dismiss(animated: true, completion: nil) }
         }))
         return alert
     }
     
-    private func generateAlertMessage(given errorMessage:String?)->String{
+    private func generateAlertMessage(given errorMessage:String?) -> String{
         if let error = errorMessage{ return error }
         else{ return "인증 메일을 보냈습니다! \n 확인해 보세요!  \n\n 참! 스팸으로 분류되었을 수도 있어요!" }
     }

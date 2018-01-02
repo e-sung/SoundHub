@@ -8,17 +8,13 @@
 
 import UIKit
 
-class FlowContainerCell: UITableViewCell{
+class FlowContainerCell: UITableViewCell {
     
     @IBOutlet weak var flowContainer: UICollectionView!
-    var delegate:FlowContainerCellDelegate?
+    weak var delegate:FlowContainerCellDelegate?
     var parent:ProfileViewController!
-    var userInfo:User?{
-        didSet(oldVal){
-            if let userInfo = userInfo{
-                flowContainer.reloadData()
-            }
-        }
+    var userInfo:User? {
+        didSet(oldVal) { if userInfo != nil { flowContainer.reloadData() } }
     }
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,7 +23,7 @@ class FlowContainerCell: UITableViewCell{
     }
 }
 
-extension FlowContainerCell:UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+extension FlowContainerCell:UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var isScrollEnabled:Bool{
         get{
@@ -91,7 +87,7 @@ extension FlowContainerCell:PostContainerCellDelegate{
     }
 }
 
-protocol FlowContainerCellDelegate {
+protocol FlowContainerCellDelegate:class {
     func shouldGoTo(post:Post)
     func shouldShowProfile(of user:User?)
 }

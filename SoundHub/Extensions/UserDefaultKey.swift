@@ -29,7 +29,4 @@ extension UserDefaults{
         self.set(userId, forKey: keyForUserId)
         self.set(instrument, forKey: keyForInstruments)
     }
-    
-
-
 }

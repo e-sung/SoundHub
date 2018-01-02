@@ -21,7 +21,7 @@ class CommentContainerCell: UITableViewCell{
     }
     var aPlayer:AVPlayer?
     var numberOfPlayersBeingDownloaded = 0
-    var delegate:CommentContainerCellDelegate?
+    weak var delegate:CommentContainerCellDelegate?
     var isNewTrackBeingAdded = false
     private var allCells:[AudioCommentCell]{
         var cells:[AudioCommentCell] = []
@@ -81,10 +81,8 @@ extension CommentContainerCell: Playable{
         for cell in allCells { if cell.isActive { cell.setMute(to: value) } }
     }
     var isMuted:Bool{
-        get{
-            guard let aPlayer = aPlayer else { return true}
-            return aPlayer.isMuted
-        }
+        guard let aPlayer = aPlayer else { return true}
+        return aPlayer.isMuted
     }
 }
 
@@ -129,18 +127,16 @@ extension CommentContainerCell:UITableViewDataSource, UITableViewDelegate{
         delegate?.didSelectionOccured(on: comments)
     }
     private var selectedCells:[AudioCommentCell]{
-        get{
-            var selectedCells:[AudioCommentCell] = []
-            if let selectedIndexes = commentTV.indexPathsForSelectedRows {
-                for idx in selectedIndexes{
-                    let cell = commentTV.cellForRow(at: idx) as! AudioCommentCell
-                    selectedCells.append(cell)
-                }
+        var selectedCells:[AudioCommentCell] = []
+        if let selectedIndexes = commentTV.indexPathsForSelectedRows {
+            for idx in selectedIndexes{
+                let cell = commentTV.cellForRow(at: idx) as! AudioCommentCell
+                selectedCells.append(cell)
             }
-            return selectedCells
         }
+        return selectedCells
     }
-    private func getComments(In cells:[AudioCommentCell])->[Comment]{
+    private func getComments(In cells:[AudioCommentCell]) -> [Comment]{
         var array:[Comment] = []
         for cell in cells{
             array.append(cell.comment)
@@ -167,8 +163,8 @@ extension CommentContainerCell:AudioCommentCellDelegate{
     }
 }
 
-protocol CommentContainerCellDelegate{
-    func didSelectionOccured(on comments:[Comment])->Void
+protocol CommentContainerCellDelegate:class {
+    func didSelectionOccured(on comments:[Comment])
     func shouldShowProfileOf(user:User?)
     func didStartDownloading()
     func didFinishedDownloading()

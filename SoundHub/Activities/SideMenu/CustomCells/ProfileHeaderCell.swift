@@ -13,7 +13,7 @@ import AlamofireImage
 class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate, UITextFieldDelegate{
 
     // MARK: Stored Properties
-    var delegate:ProfileHeaderCellDelegate?
+    weak var delegate:ProfileHeaderCellDelegate?
     static internal let defaultHeight:CGFloat = 330
     private var _isSettingPhase = false
     
@@ -82,6 +82,6 @@ class ProfileHeaderCell: UITableViewCell, UIImagePickerControllerDelegate, UITex
 }
 
 // MARK: Protocol Defenition
-protocol ProfileHeaderCellDelegate {
+protocol ProfileHeaderCellDelegate: class {
     func shouldChangeImageOf(button:UIButton)
 }

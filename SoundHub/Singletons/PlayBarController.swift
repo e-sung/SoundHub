@@ -57,7 +57,7 @@ class PlayBarController:UIViewController{
         case Recording
         case PlayingRecord
     }
-    var delegate:PlayBarControllerDelegate?
+    weak var delegate:PlayBarControllerDelegate?
     /// 현재 플레이바가 재생하는 대상
     var currentPostView:DetailViewController?{
         willSet(newVal){ if currentPostView !== newVal { currentPhase = .Stopped } }
@@ -73,9 +73,7 @@ class PlayBarController:UIViewController{
         set(newVal){ DispatchQueue.main.async { self.playButton.isEnabled = newVal } }
     }
     /// 음악 재생률. 0~1 사이
-    var progress:Float{
-        get{ return progressBar.value }
-    }
+    var progress:Float{ return progressBar.value }
 }
 
 // MARK: Objc Functions
@@ -99,8 +97,7 @@ extension PlayBarController{
     }
 
     @objc private func showCurrentMusicContainer(){
-        guard let _ = currentPostView else { return }
-        delegate?.playBarDidTapped()
+        if currentPostView != nil { delegate?.playBarDidTapped() }
     }
 }
 
@@ -207,6 +204,6 @@ extension PlayBarController{
     }
 }
 
-protocol PlayBarControllerDelegate{
-    func playBarDidTapped()->Void
+protocol PlayBarControllerDelegate: class {
+    func playBarDidTapped()
 }

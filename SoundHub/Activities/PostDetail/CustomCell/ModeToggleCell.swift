@@ -14,8 +14,8 @@ class ModeToggleCell: UITableViewCell {
     @IBAction func switchToggleHandler(_ sender: UISwitch) {
         delegate?.didModeToggled(to: sender.isOn, by: containerToToggle)
     }
-    var delegate:ModeToggleCellDelegate?
+    weak var delegate:ModeToggleCellDelegate?
 }
-protocol ModeToggleCellDelegate{
+protocol ModeToggleCellDelegate:class {
     func didModeToggled(to mode:Bool, by toggler:CommentContainerCell?)
 }

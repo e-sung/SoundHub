@@ -46,11 +46,9 @@ class AudioCommentCell: UITableViewCell {
         toggleSwitch.isOn = value
         player?.isMuted = !value
     }
-    var delegate:AudioCommentCellDelegate?
+    weak var delegate:AudioCommentCellDelegate?
     var isActive:Bool{
-        get{
-            return toggleSwitch.isOn
-        }
+        return toggleSwitch.isOn
     }
     var isInterActive:Bool{
         get{
@@ -104,7 +102,7 @@ extension AudioCommentCell:Playable{
     }
 }
 
-protocol AudioCommentCellDelegate {
+protocol AudioCommentCellDelegate:class {
     func didStartDownloading()
     func didFinishedDownloading()
     func shouldShowProfileOf(user:User?)

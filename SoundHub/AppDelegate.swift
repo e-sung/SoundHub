@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate {
             // [END_EXCLUDE]
         } else {
             // Perform any operations on signed in user here.
-            let _ = user.userID                  // For client-side use only!
+            _ = user.userID                  // For client-side use only!
             let idToken = user.authentication.idToken ?? "unexpected error on token" // Safe to send to the server
             let fullName = user.profile.name ?? "unexpected profile name"
             // [START_EXCLUDE]
@@ -83,4 +83,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate {
     }
     // [END disconnect_handler]
 }
-

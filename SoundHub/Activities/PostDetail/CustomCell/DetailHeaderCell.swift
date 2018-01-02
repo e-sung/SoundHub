@@ -10,7 +10,6 @@ import UIKit
 
 class DetailHeaderCell: UITableViewCell {
 
-
     @IBOutlet weak var authorProfileImageButton: UIButton!
     @IBOutlet weak private var postTitleLB: UILabel!
     @IBOutlet weak private var authorNameLB: UILabel!

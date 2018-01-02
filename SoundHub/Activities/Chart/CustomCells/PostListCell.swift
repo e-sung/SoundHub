@@ -18,13 +18,12 @@ class PostListCell: UITableViewCell {
     @IBOutlet weak private var authorProfileImageBt: UIButton!
     @IBOutlet weak private var albumCoverImageView: UIImageView!
     
-
     @IBAction private func onProfileButtonClickHandler(_ sender: UIButton) {
         delegate?.shouldShowProfile(of: postInfo.author)
     }
     
     static let defaultHeight:CGFloat = 500
-    var delegate:PostListCellDelegate?
+    weak var delegate:PostListCellDelegate?
     var postInfo:Post{
         get{
             return _postInfo
@@ -63,6 +62,6 @@ class PostListCell: UITableViewCell {
     private var _postInfo:Post!
 }
 
-protocol PostListCellDelegate {
+protocol PostListCellDelegate:class {
     func shouldShowProfile(of user:User?)
 }

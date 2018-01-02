@@ -175,7 +175,6 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
     }
 }
 
-
 // MARK: 모드가 변경되었을 때 처리
 extension DetailViewController:ModeToggleCellDelegate{
     func didModeToggled(to mode: Bool, by toggler: CommentContainerCell?) {
@@ -249,7 +248,7 @@ extension DetailViewController:CommentContainerCellDelegate{
         if navigationItem.rightBarButtonItems?.count == 1{
             navigationItem.rightBarButtonItems?.append(UIBarButtonItem(title: "Merge", style: .plain, target: self, action: #selector(mix)))
         }
-        if comments.count == 0 {
+        if comments.isEmpty {
             navigationItem.rightBarButtonItem = nil
             let sideMenuButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "Hamburger_icon"), style: .plain, target: self, action: #selector(showsidemenu))
             navigationItem.rightBarButtonItem = sideMenuButton
@@ -266,7 +265,7 @@ extension DetailViewController:CommentContainerCellDelegate{
         for comment in selectedComments{
             guard let commentId = comment.id else {
                 self.mixedTrackContainer?.allowsMultiSelection = false
-                let _ = self.navigationItem.rightBarButtonItems?.popLast()
+                _ = self.navigationItem.rightBarButtonItems?.popLast()
                 return
             }
             comments.append(commentId)
@@ -279,13 +278,13 @@ extension DetailViewController:CommentContainerCellDelegate{
                 let ids = IndexSet(integersIn: Section.MixedTracks.rawValue ... Section.MixedTracks.rawValue)
                 self.mainTV.reloadSections(ids, with: .automatic)
                 self.mixedTrackContainer?.allowsMultiSelection = false
-                let _ = self.navigationItem.rightBarButtonItems?.popLast()
+                _ = self.navigationItem.rightBarButtonItems?.popLast()
             })
         })
     }
 }
 
-// MARK:RecorderCellDelegate
+//MARK:RecorderCellDelegate
 extension DetailViewController:RecorderCellDelegate{
 
     func didStartRecording() {

@@ -112,7 +112,7 @@ extension SignUpViewController{
 
 extension SignUpViewController{
     
-    private func isReadyToSignUp()->Bool{
+    private func isReadyToSignUp() -> Bool{
         checkEmailValidity()
         if errorMsgLB.text?.isEmpty == false { return false }
         checkPasswordValidity()

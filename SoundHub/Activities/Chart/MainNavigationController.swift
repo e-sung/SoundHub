@@ -9,7 +9,7 @@
 import UIKit
 import ActionSheetPicker_3_0
 
-class mainNavigationController: UINavigationController {
+class MainNavigationController: UINavigationController {
     var playBarController:PlayBarController!
     var documentPicker:UIDocumentPickerViewController!
     let uploadMusicButton = UIButton()
@@ -30,7 +30,7 @@ class mainNavigationController: UINavigationController {
 }
 
 // MARK: Initialize Upload Button
-extension mainNavigationController{
+extension MainNavigationController{
     private func setUploadButton(){
         let upLoadButtonWidth:CGFloat = 70
         uploadMusicButton.frame = CGRect(x: self.view.frame.width - upLoadButtonWidth, y: self.view.frame.height - upLoadButtonWidth, width: upLoadButtonWidth, height:upLoadButtonWidth)
@@ -53,7 +53,9 @@ extension mainNavigationController{
             }))
             alert.addAction(UIAlertAction(title: "새로 녹음하기", style: .default , handler: { (action) in
                 let storyboard = UIStoryboard(name: "UploadAudio", bundle: nil)
-                let audioRecorderVC = storyboard.instantiateViewController(withIdentifier: "AudioRecorderViewController") as! AudioRecorderViewController
+                guard let audioRecorderVC = storyboard
+                                            .instantiateViewController(withIdentifier: "AudioRecorderViewController")
+                                             as? AudioRecorderViewController else { return }
                 self.present(audioRecorderVC, animated: true, completion: nil)
             }))
             alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: { (action) in
@@ -65,8 +67,7 @@ extension mainNavigationController{
     }
 }
 
-
-extension mainNavigationController:PlayBarControllerDelegate{
+extension MainNavigationController:PlayBarControllerDelegate{
     func playBarDidTapped() {
         if self.topViewController !== playBarController?.currentPostView{
             self.show((playBarController?.currentPostView)!, sender: nil)
@@ -74,7 +75,7 @@ extension mainNavigationController:PlayBarControllerDelegate{
     }
 }
 
-extension mainNavigationController:UIDocumentPickerDelegate{
+extension MainNavigationController:UIDocumentPickerDelegate{
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         print(urls[0])
         ActionSheetStringPicker.ask(instrument: Instrument.cases, and: Genre.cases, of: urls[0], from: self)

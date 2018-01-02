@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Genre:String{
+enum Genre:String {
     case Pop = "Pop"
     case Rock = "Rock"
     case Jazz = "Jazz"
