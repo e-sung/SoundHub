@@ -148,10 +148,6 @@ extension AudioRecorderViewController: AKAudioUnitManagerDelegate {
     }
 
     func handleEffectAdded(at auIndex: Int) {
-        if RecordConductor.main.player.isStarted {
-            RecordConductor.main.player.stop()
-            RecordConductor.main.player.start()
-        }
         if let au = auManager!.effectsChain[auIndex] { showAudioUnit(au) }
     }
 
@@ -179,9 +175,7 @@ extension AudioRecorderViewController {
     }
 
     private func makeRecordingState() {
-        if auManager?.input != RecordConductor.main.player {
-            auManager?.connectEffects(firstNode: RecordConductor.main.mic, lastNode: RecordConductor.main.micMixer)
-        }
+        if let auManager = auManager { RecordConductor.main.apply(auManager) }
         recordButton.setTitle("그만 녹음하기", for: .normal)
         inputPlot.color = .red
         state = .recording
@@ -205,7 +199,6 @@ extension AudioRecorderViewController {
             }
             self.audioUnitContainerFlowLayout.reloadData()
         }
-//        auManager?.connectEffects(firstNode: RecordConductor.main.mic, lastNode: RecordConductor.main.micBooster)
     }
 
     private func showAudioUnit(_ audioUnit: AVAudioUnit) {
