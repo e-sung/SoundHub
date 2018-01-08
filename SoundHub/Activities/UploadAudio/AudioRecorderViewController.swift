@@ -32,7 +32,7 @@ class AudioRecorderViewController: UIViewController {
         case .recording :
             makeReadyToPlayState()
         case .readyToPlay :
-            RecordConductor.main.playRecorded(looping: false)
+            RecordConductor.main.playRecorded(looping: true)
             inputPlot.color = .orange
             inputPlot.node = RecordConductor.main.player
             recordButton.setTitle("그만 듣고 업로드하기", for: .normal)
