@@ -80,7 +80,10 @@ class RecorderCell: UITableViewCell {
         auGenericViewContainer.isHidden = true
         self.contentView.backgroundColor = .gray
         inputPlot.color = .black
-        DispatchQueue.global(qos: .userInitiated).async { RecordConductor.main.resetRecorder() }
+        DispatchQueue.global(qos: .userInitiated).async {
+            RecordConductor.main.resetPlayer()
+            RecordConductor.main.resetRecorder()
+        }
     }
 
     @IBAction private func recordButtonHandler(_ sender: UIButton) {

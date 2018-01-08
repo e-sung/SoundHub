@@ -102,7 +102,7 @@ extension RecordConductor {
 
     /// 입력으로 주어진 asset을 .m4a파일로 export 합니다
     private func exportComment(asset: AVAsset, completion: @escaping(_ output: URL) -> Void) {
-        let outputURL = URL(string: "comment.m4a".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!,
+        let outputURL = URL(string: "\(Date())comment.m4a".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!,
                             relativeTo: DataCenter.documentsDirectoryURL)!
         if let session = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetAppleM4A) {
             session.outputFileType = AVFileType.m4a
