@@ -57,8 +57,6 @@ class RecorderCell: UITableViewCell {
             }
             self.audioUnitContainerFlowLayout.reloadData()
         }
-        auManager?.input = RecordConductor.main.player
-        auManager?.output = RecordConductor.main.mainMixer
 
         self.isActive = true
         state = .readyToRecord
@@ -82,7 +80,10 @@ class RecorderCell: UITableViewCell {
         auGenericViewContainer.isHidden = true
         self.contentView.backgroundColor = .gray
         inputPlot.color = .black
-        DispatchQueue.global(qos: .userInitiated).async { RecordConductor.main.resetRecorder() }
+        DispatchQueue.global(qos: .userInitiated).async {
+            RecordConductor.main.resetPlayer()
+            RecordConductor.main.resetRecorder()
+        }
     }
 
     @IBAction private func recordButtonHandler(_ sender: UIButton) {
@@ -138,9 +139,7 @@ class RecorderCell: UITableViewCell {
     }
 
     private func makeRecordingState() {
-        if auManager?.input != RecordConductor.main.player {
-            auManager?.connectEffects(firstNode: RecordConductor.main.player, lastNode: RecordConductor.main.mainMixer)
-        }
+        if let auManager = auManager { RecordConductor.main.apply(auManager) }
         recordButton.setTitle("중지", for: .normal)
         inputPlot.color = .red
         state = .recording
@@ -151,6 +150,7 @@ class RecorderCell: UITableViewCell {
         recordButton.setTitle("듣기", for: .normal)
         state = .readyToPlay
         inputPlot.color = .orange
+        RecordConductor.main.stopRecording()
         RecordConductor.main.resetPlayer()
     }
 
@@ -213,17 +213,10 @@ extension RecorderCell: UICollectionViewDelegate, UICollectionViewDelegateFlowLa
 
 extension RecorderCell: AKAudioUnitManagerDelegate {
     func handleAudioUnitNotification(type: AKAudioUnitManager.Notification, object: Any?) {
-
     }
 
     func handleEffectAdded(at auIndex: Int) {
-        if RecordConductor.main.player.isStarted {
-            RecordConductor.main.player.stop()
-            RecordConductor.main.player.start()
-        }
-        if let au = auManager!.effectsChain[auIndex] {
-            showAudioUnit(au)
-        }
+        if let au = auManager!.effectsChain[auIndex] { showAudioUnit(au) }
     }
 
     func handleEffectRemoved(at auIndex: Int) {
