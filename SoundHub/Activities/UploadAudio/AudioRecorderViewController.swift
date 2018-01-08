@@ -32,7 +32,7 @@ class AudioRecorderViewController: UIViewController {
         case .recording :
             makeReadyToPlayState()
         case .readyToPlay :
-            RecordConductor.main.playRecorded(looping: true)
+            RecordConductor.main.playRecorded(looping: false)
             inputPlot.color = .orange
             inputPlot.node = RecordConductor.main.player
             recordButton.setTitle("그만 듣고 업로드하기", for: .normal)
@@ -43,7 +43,6 @@ class AudioRecorderViewController: UIViewController {
             recordButton.setTitle("녹음하기", for: .normal)
             let recordedDuration = RecordConductor.main.player != nil ? RecordConductor.main.player.audioFile.duration  : 0
             if recordedDuration > 0.0 {
-                RecordConductor.main.stopRecording()
                 setUpMetaInfoUI()
             }
         }
@@ -149,10 +148,6 @@ extension AudioRecorderViewController: AKAudioUnitManagerDelegate {
     }
 
     func handleEffectAdded(at auIndex: Int) {
-        if RecordConductor.main.player.isStarted {
-            RecordConductor.main.player.stop()
-            RecordConductor.main.player.start()
-        }
         if let au = auManager!.effectsChain[auIndex] { showAudioUnit(au) }
     }
 
@@ -180,9 +175,7 @@ extension AudioRecorderViewController {
     }
 
     private func makeRecordingState() {
-        if auManager?.input != RecordConductor.main.player {
-            auManager?.connectEffects(firstNode: RecordConductor.main.player, lastNode: RecordConductor.main.mainMixer)
-        }
+        if let auManager = auManager { RecordConductor.main.apply(auManager) }
         recordButton.setTitle("그만 녹음하기", for: .normal)
         inputPlot.color = .red
         state = .recording
@@ -193,6 +186,7 @@ extension AudioRecorderViewController {
         recordButton.setTitle("들어보기", for: .normal)
         state = .readyToPlay
         inputPlot.color = .orange
+        RecordConductor.main.stopRecording()
         RecordConductor.main.resetPlayer()
     }
 
@@ -205,8 +199,6 @@ extension AudioRecorderViewController {
             }
             self.audioUnitContainerFlowLayout.reloadData()
         }
-        auManager?.input = RecordConductor.main.player
-        auManager?.output = RecordConductor.main.mainMixer
     }
 
     private func showAudioUnit(_ audioUnit: AVAudioUnit) {

@@ -65,6 +65,10 @@ extension RecordConductor {
         self.micBooster.gain = 0
         do { try self.player.reloadFile() } catch { print("Errored reloading.") }
     }
+    
+    func apply(_ auManager:AKAudioUnitManager){
+        auManager.connectEffects(firstNode: mic, lastNode: micMixer)
+    }
 
     /// 댓글용 녹음파일을 최종적으로 제출함
     /// - parameter postId : 댓글이 달릴 post의 id
