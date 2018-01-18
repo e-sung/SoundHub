@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -13,11 +16,11 @@
             <objects>
                 <viewController storyboardIdentifier="DocumentViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0WT-tF-Ivr" customClass="AudioUploadViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hOU-mj-6Nx">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="06Y-Ug-15K">
-                                <rect key="frame" x="0.0" y="415.5" width="600" height="24"/>
+                                <rect key="frame" x="0.0" y="393" width="375" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -30,10 +33,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="08Q-g8-j9u">
-                                <rect key="frame" x="0.0" y="540" width="600" height="60"/>
+                                <rect key="frame" x="0.0" y="607" width="375" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nef-Oh-sQR">
-                                        <rect key="frame" x="0.0" y="0.0" width="298.5" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="186" height="60"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <state key="normal" title="네">
                                             <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -54,7 +57,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FRO-Wm-s3R">
-                                        <rect key="frame" x="301.5" y="0.0" width="298.5" height="60"/>
+                                        <rect key="frame" x="189" y="0.0" width="186" height="60"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <state key="normal" title="아니오">
                                             <color key="titleColor" red="1" green="0.33485970900000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -80,7 +83,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PsH-Js-41H">
-                                <rect key="frame" x="150" y="60" width="300" height="300"/>
+                                <rect key="frame" x="94" y="150" width="187.5" height="187.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="PsH-Js-41H" secondAttribute="height" multiplier="1:1" id="WA7-Kl-g5X"/>
                                 </constraints>
@@ -95,26 +98,26 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="무제" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8qA-8R-sZP">
-                                <rect key="frame" x="150" y="383.5" width="300" height="24"/>
+                                <rect key="frame" x="94" y="361" width="187.5" height="24"/>
                                 <color key="textColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f9u-iN-2wf">
-                                <rect key="frame" x="360.5" y="270.5" width="89.5" height="89.5"/>
+                                <rect key="frame" x="225.5" y="281.5" width="56" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="f9u-iN-2wf" secondAttribute="height" multiplier="1:1" id="Plo-YQ-qrw"/>
                                 </constraints>
                                 <state key="normal" image="camera_icon"/>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="120" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wKh-eC-v1F">
-                                <rect key="frame" x="300.5" y="447" width="149.5" height="22"/>
+                                <rect key="frame" x="188" y="424.5" width="93.5" height="22"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BPM : " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="06h-8x-TdS">
-                                <rect key="frame" x="145.5" y="446" width="150" height="24"/>
+                                <rect key="frame" x="89.5" y="423.5" width="93.5" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -171,12 +174,12 @@
         <scene sceneID="iIW-kI-cWw">
             <objects>
                 <viewController storyboardIdentifier="AudioRecorderViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Qst-pm-WWf" customClass="AudioRecorderViewController" customModule="SoundHub" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="aGW-Es-6an">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <view key="view" contentMode="scaleToFill" id="aGW-Es-6an" customClass="RecorderView" customModule="SoundHub" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g6M-Uo-rE0" customClass="AKNodeOutputPlot" customModule="AudioKitUI">
-                                <rect key="frame" x="0.0" y="480" width="600" height="50"/>
+                                <rect key="frame" x="0.0" y="547" width="375" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="EY9-cQ-yln"/>
@@ -205,12 +208,9 @@
                                 <state key="normal" title="녹음">
                                     <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
-                                <connections>
-                                    <action selector="recordButtonHandler:" destination="Qst-pm-WWf" eventType="touchUpInside" id="Yp6-l9-J8b"/>
-                                </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="d9M-2P-00j">
-                                <rect key="frame" x="0.0" y="60" width="600" height="100"/>
+                                <rect key="frame" x="0.0" y="60" width="375" height="100"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="kdB-ux-2bM"/>
@@ -301,12 +301,15 @@
                             <constraint firstItem="d9M-2P-00j" firstAttribute="top" secondItem="3d2-Yx-vmV" secondAttribute="bottom" constant="10" id="v8R-Oz-EPN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DHI-Kr-O9f"/>
+                        <connections>
+                            <outlet property="auGenericViewContainer" destination="Elq-hh-yoe" id="980-ik-JiH"/>
+                            <outlet property="audioUnitContainerFlowLayout" destination="d9M-2P-00j" id="3P1-GE-3e5"/>
+                            <outlet property="inputPlot" destination="g6M-Uo-rE0" id="FoK-YD-vbQ"/>
+                            <outlet property="recordButton" destination="R1G-Bs-BeI" id="IPm-bb-Stm"/>
+                        </connections>
                     </view>
                     <connections>
-                        <outlet property="auGenericViewContainer" destination="Elq-hh-yoe" id="3yk-rw-e2V"/>
-                        <outlet property="audioUnitContainerFlowLayout" destination="d9M-2P-00j" id="AaN-C0-bUc"/>
-                        <outlet property="inputPlot" destination="g6M-Uo-rE0" id="J7w-jk-hhe"/>
-                        <outlet property="recordButton" destination="R1G-Bs-BeI" id="dia-y0-7CZ"/>
+                        <outlet property="recorderView" destination="aGW-Es-6an" id="Mc4-ah-OyF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jza-gB-inq" userLabel="First Responder" sceneMemberID="firstResponder"/>

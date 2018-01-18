@@ -66,6 +66,12 @@ extension RecordConductor {
         do { try self.player.reloadFile() } catch { print("Errored reloading.") }
     }
     
+    /// 새로운 녹음을 준비
+    func refresh(){
+        self.resetPlayer()
+        self.resetPlayer()
+    }
+    
     func apply(_ auManager:AKAudioUnitManager){
         auManager.connectEffects(firstNode: mic, lastNode: micMixer)
     }
