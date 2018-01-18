@@ -208,6 +208,9 @@
                                 <state key="normal" title="녹음">
                                     <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="recordButtonHandler:" destination="Qst-pm-WWf" eventType="touchUpInside" id="fzk-fC-uIn"/>
+                                </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="d9M-2P-00j">
                                 <rect key="frame" x="0.0" y="60" width="375" height="100"/>
