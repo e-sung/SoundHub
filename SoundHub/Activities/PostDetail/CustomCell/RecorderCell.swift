@@ -139,7 +139,7 @@ class RecorderCell: UITableViewCell {
     }
 
     private func makeRecordingState() {
-        if let auManager = auManager { RecordConductor.main.apply(auManager) }
+        RecordConductor.main.applyAUManager()
         recordButton.setTitle("중지", for: .normal)
         inputPlot.color = .red
         state = .recording

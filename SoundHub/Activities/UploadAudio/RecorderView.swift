@@ -19,40 +19,37 @@ class RecorderView: UIView {
     @IBOutlet weak private var auGenericViewContainer: UIScrollView!
     
     // MARK: StoredProperties
-    private var auManager: AKAudioUnitManager?
-    private var availableEffects: [String] = []
-    private var currentAU: AudioUnitGenericView?
-    private var currentAUindex: Int?
+    var currentAU: AudioUnitGenericView?
+    var availableEffects = RecordConductor.main.availableEffects
+    var auManager = RecordConductor.main.auManager
+    var currentAUindex:Int?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
 
         RecordConductor.main.refresh()
         RecordConductor.main.connectMic(with: inputPlot)
-        activateAUManager()
         
         audioUnitContainerFlowLayout.delegate = self
         audioUnitContainerFlowLayout.dataSource = self
     }
 
-    private func activateAUManager() {
-        auManager = AKAudioUnitManager()
-        auManager?.delegate = self
-        auManager?.requestEffects { (audioComponents) in
-            for component in audioComponents {
-                if component.name != ""{ self.availableEffects.append(component.name) }
-            }
-        }
-    }
-    
     func deactivate(){
         inputPlot.node?.avAudioNode.removeTap(onBus: 0)
-        if let auManager = auManager {
-            if auManager.availableEffects.isEmpty == false { auManager.removeEffect(at: 0) }
-        }
+        RecordConductor.main.auManager.removeEffect(at: 0)
+    }
+    
+    func showAudioUnit(_ audioUnit: AVAudioUnit) {
+        
+        if currentAU != nil { currentAU?.removeFromSuperview() }
+        
+        currentAU = AudioUnitGenericView(au: audioUnit)
+        auGenericViewContainer.addSubview(currentAU!)
+        auGenericViewContainer.contentSize = currentAU!.frame.size
     }
     
     func makeRecordingState() {
-        if let auManager = auManager { RecordConductor.main.apply(auManager) }
+        RecordConductor.main.applyAUManager()
         recordButton.setTitle("그만 녹음하기", for: .normal)
         inputPlot.color = .red
         RecordConductor.main.startRecording()
@@ -101,8 +98,8 @@ extension RecorderView: UICollectionViewDelegate, UICollectionViewDelegateFlowLa
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        auManager?.removeEffect(at: 0)
-        auManager?.insertAudioUnit(name: availableEffects[indexPath.item], at: 0)
+        auManager.removeEffect(at: 0)
+        auManager.insertAudioUnit(name: availableEffects[indexPath.item], at: 0)
         currentAUindex = indexPath.item
         let cell = collectionView.cellForItem(at: indexPath) as! AUCell
         cell.backgroundColor = AUCell.selectedBackgroundColor
@@ -131,25 +128,5 @@ extension RecorderView: UICollectionViewDelegate, UICollectionViewDelegateFlowLa
                 cell.titleLB.textColor = AUCell.selectedTextColor
             }
         }
-    }
-}
-// MARK: AKAudioUnitManagerDelegate
-extension RecorderView: AKAudioUnitManagerDelegate {
-    func handleAudioUnitNotification(type: AKAudioUnitManager.Notification, object: Any?) {
-    }
-    
-    func handleEffectAdded(at auIndex: Int) {
-        if let au = auManager!.effectsChain[auIndex] { showAudioUnit(au) }
-    }
-    
-    func handleEffectRemoved(at auIndex: Int) { print("Effect removed") }
-    
-    private func showAudioUnit(_ audioUnit: AVAudioUnit) {
-        
-        if currentAU != nil { currentAU?.removeFromSuperview() }
-        
-        currentAU = AudioUnitGenericView(au: audioUnit)
-        auGenericViewContainer.addSubview(currentAU!)
-        auGenericViewContainer.contentSize = currentAU!.frame.size
     }
 }
