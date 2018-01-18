@@ -22,7 +22,17 @@ class RecorderView: UIView {
     var currentAU: AudioUnitGenericView?
     var availableEffects = RecordConductor.main.availableEffects
     var auManager = RecordConductor.main.auManager
-    var currentAUindex:Int?
+    var currentAUindex: Int?
+    
+    var isAudioUnitHidden: Bool{
+        get{ return audioUnitContainerFlowLayout.isHidden }
+        set(newVal){ audioUnitContainerFlowLayout.isHidden = newVal }
+    }
+    
+    var colorOfPlot: UIColor{
+        get{ return inputPlot.color }
+        set(newVal){ inputPlot.color = newVal }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,7 +46,9 @@ class RecorderView: UIView {
 
     func deactivate(){
         inputPlot.node?.avAudioNode.removeTap(onBus: 0)
-        RecordConductor.main.auManager.removeEffect(at: 0)
+        if RecordConductor.main.auManager.effectsCount != 0 {
+            RecordConductor.main.auManager.removeEffect(at: 0)
+        }
     }
     
     func showAudioUnit(_ audioUnit: AVAudioUnit) {
@@ -46,6 +58,13 @@ class RecorderView: UIView {
         currentAU = AudioUnitGenericView(au: audioUnit)
         auGenericViewContainer.addSubview(currentAU!)
         auGenericViewContainer.contentSize = currentAU!.frame.size
+    }
+    
+    func makeReadyToRecordState(){
+        RecordConductor.main.player.stop()
+        RecordConductor.main.connectMic(with: inputPlot)
+        inputPlot.color = .orange
+        recordButton.setTitle("녹음하기", for: .normal)
     }
     
     func makeRecordingState() {
@@ -67,11 +86,6 @@ class RecorderView: UIView {
         inputPlot.color = .orange
         inputPlot.node = RecordConductor.main.player
         recordButton.setTitle("그만 듣고 업로드하기", for: .normal)
-    }
-    
-    func makeReadyToRecordState(){
-        RecordConductor.main.player.stop()
-        recordButton.setTitle("녹음하기", for: .normal)
     }
 }
 

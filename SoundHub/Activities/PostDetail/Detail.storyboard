@@ -6,6 +6,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -49,7 +50,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="16" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mrv-l7-mvY">
-                                                            <rect key="frame" x="347" y="65" width="18" height="21"/>
+                                                            <rect key="frame" x="347" y="70.5" width="18" height="21"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="10" id="bSX-pz-UrM"/>
                                                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="30" id="jRy-gd-WCA"/>
@@ -68,7 +69,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="290-JV-UpL">
-                                                            <rect key="frame" x="341.5" y="39.5" width="28.5" height="21"/>
+                                                            <rect key="frame" x="341.5" y="45" width="28.5" height="21"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="10" id="cxh-gP-wb5"/>
                                                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="30" id="zoW-tD-Qu9"/>
@@ -437,112 +438,116 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="499.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LWf-A0-AYP">
-                                                            <rect key="frame" x="0.0" y="10" width="375" height="100"/>
-                                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="100" id="SGw-oe-tQ4"/>
-                                                            </constraints>
-                                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="La6-9a-S9E">
-                                                                <size key="itemSize" width="148" height="143"/>
-                                                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                            </collectionViewFlowLayout>
-                                                            <cells>
-                                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AUCell" id="IpA-Bg-jFe" customClass="AUCell" customModule="SoundHub" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                                                        <autoresizingMask key="autoresizingMask"/>
-                                                                        <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rGf-3u-HCI">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                                                <nil key="textColor"/>
-                                                                                <nil key="highlightedColor"/>
-                                                                            </label>
-                                                                        </subviews>
-                                                                    </view>
-                                                                    <color key="backgroundColor" name="systemOrangeColor" catalog="System" colorSpace="catalog"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HQp-hz-KTN" customClass="RecorderView" customModule="SoundHub" customModuleProvider="target">
+                                                            <rect key="frame" x="15" y="0.0" width="345" height="499.5"/>
+                                                            <subviews>
+                                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LWf-A0-AYP">
+                                                                    <rect key="frame" x="8" y="40" width="329" height="99"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="trailing" secondItem="rGf-3u-HCI" secondAttribute="trailing" id="NLA-j2-TN5"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="rGf-3u-HCI" secondAttribute="trailing" id="RYs-Is-WQN"/>
-                                                                        <constraint firstItem="rGf-3u-HCI" firstAttribute="leading" secondItem="IpA-Bg-jFe" secondAttribute="leading" id="SYx-1l-qqN"/>
-                                                                        <constraint firstItem="rGf-3u-HCI" firstAttribute="top" secondItem="IpA-Bg-jFe" secondAttribute="top" id="byi-Uf-Auz"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="rGf-3u-HCI" secondAttribute="bottom" id="fHq-nn-hIK"/>
-                                                                        <constraint firstItem="rGf-3u-HCI" firstAttribute="top" secondItem="IpA-Bg-jFe" secondAttribute="top" id="one-Vn-cr5"/>
-                                                                        <constraint firstItem="rGf-3u-HCI" firstAttribute="leading" secondItem="IpA-Bg-jFe" secondAttribute="leading" id="rIF-EN-HxP"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="rGf-3u-HCI" secondAttribute="bottom" id="wXU-Xt-DFw"/>
+                                                                        <constraint firstAttribute="height" constant="99" id="5bf-qn-ogv"/>
                                                                     </constraints>
-                                                                    <size key="customSize" width="100" height="100"/>
+                                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="La6-9a-S9E">
+                                                                        <size key="itemSize" width="148" height="143"/>
+                                                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                                    </collectionViewFlowLayout>
+                                                                    <cells>
+                                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AUCell" id="IpA-Bg-jFe" customClass="AUCell" customModule="SoundHub" customModuleProvider="target">
+                                                                            <rect key="frame" x="0.0" y="-0.5" width="100" height="100"/>
+                                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                                <subviews>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rGf-3u-HCI">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                                        <nil key="textColor"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                    </label>
+                                                                                </subviews>
+                                                                            </view>
+                                                                            <color key="backgroundColor" name="systemOrangeColor" catalog="System" colorSpace="catalog"/>
+                                                                            <size key="customSize" width="100" height="100"/>
+                                                                            <userDefinedRuntimeAttributes>
+                                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                    <real key="value" value="5"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                                    <real key="value" value="3"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                            </userDefinedRuntimeAttributes>
+                                                                            <connections>
+                                                                                <outlet property="titleLB" destination="rGf-3u-HCI" id="OC8-RM-8eb"/>
+                                                                            </connections>
+                                                                        </collectionViewCell>
+                                                                    </cells>
+                                                                </collectionView>
+                                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F2b-XT-SDC" customClass="AKNodeOutputPlot" customModule="AudioKitUI">
+                                                                    <rect key="frame" x="38" y="461" width="307" height="30"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <userDefinedRuntimeAttributes>
-                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                            <real key="value" value="5"/>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                                            <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </userDefinedRuntimeAttribute>
-                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                            <real key="value" value="3"/>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                                                            <color key="value" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
+                                                                </view>
+                                                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="MTZ-PH-oTy">
+                                                                    <rect key="frame" x="0.0" y="141" width="337" height="284"/>
+                                                                </scrollView>
+                                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgG-St-MdE">
+                                                                    <rect key="frame" x="0.0" y="461" width="30" height="30"/>
+                                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                                    <state key="normal" title="녹음">
+                                                                        <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </state>
                                                                     <connections>
-                                                                        <outlet property="titleLB" destination="rGf-3u-HCI" id="OC8-RM-8eb"/>
+                                                                        <action selector="recordButtonHandler:" destination="Lia-eD-eD2" eventType="touchUpInside" id="655-qp-laJ"/>
                                                                     </connections>
-                                                                </collectionViewCell>
-                                                            </cells>
-                                                        </collectionView>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F2b-XT-SDC" customClass="AKNodeOutputPlot" customModule="AudioKitUI">
-                                                            <rect key="frame" x="46" y="459.5" width="322" height="30"/>
+                                                                </button>
+                                                            </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="color" keyPath="color">
-                                                                    <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
-                                                        </view>
-                                                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="MTZ-PH-oTy">
-                                                            <rect key="frame" x="0.0" y="110" width="375" height="344"/>
-                                                        </scrollView>
-                                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgG-St-MdE">
-                                                            <rect key="frame" x="15" y="459" width="30" height="30"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="30" id="S3T-5u-935"/>
+                                                                <constraint firstItem="LWf-A0-AYP" firstAttribute="top" secondItem="HQp-hz-KTN" secondAttribute="top" id="4i6-es-RlN"/>
+                                                                <constraint firstItem="MTZ-PH-oTy" firstAttribute="centerX" secondItem="HQp-hz-KTN" secondAttribute="centerX" id="7bh-xx-ckO"/>
+                                                                <constraint firstItem="LWf-A0-AYP" firstAttribute="leading" secondItem="HQp-hz-KTN" secondAttribute="leading" id="SRA-eA-shD"/>
+                                                                <constraint firstItem="F2b-XT-SDC" firstAttribute="leading" secondItem="xgG-St-MdE" secondAttribute="trailing" constant="8" id="UWZ-J6-CBR"/>
+                                                                <constraint firstAttribute="trailing" secondItem="MTZ-PH-oTy" secondAttribute="trailing" id="Uwx-59-ESz"/>
+                                                                <constraint firstAttribute="trailing" secondItem="F2b-XT-SDC" secondAttribute="trailing" id="Vwm-Cx-Tws"/>
+                                                                <constraint firstItem="xgG-St-MdE" firstAttribute="top" secondItem="MTZ-PH-oTy" secondAttribute="bottom" id="be1-nE-oVc"/>
+                                                                <constraint firstAttribute="bottom" secondItem="xgG-St-MdE" secondAttribute="bottom" constant="8.5" id="cEZ-dl-4NT"/>
+                                                                <constraint firstAttribute="trailing" secondItem="LWf-A0-AYP" secondAttribute="trailing" id="eCq-Om-8UC"/>
+                                                                <constraint firstItem="MTZ-PH-oTy" firstAttribute="leading" secondItem="HQp-hz-KTN" secondAttribute="leading" id="rfJ-nc-iSA"/>
+                                                                <constraint firstItem="MTZ-PH-oTy" firstAttribute="top" secondItem="LWf-A0-AYP" secondAttribute="bottom" constant="2" id="x6u-Lb-TqT"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                                            <state key="normal" title="녹음">
-                                                                <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            </state>
                                                             <connections>
-                                                                <action selector="recordButtonHandler:" destination="Lia-eD-eD2" eventType="touchUpInside" id="655-qp-laJ"/>
+                                                                <outlet property="auGenericViewContainer" destination="MTZ-PH-oTy" id="lfw-QU-ixV"/>
+                                                                <outlet property="audioUnitContainerFlowLayout" destination="LWf-A0-AYP" id="Ar8-ZC-o5K"/>
+                                                                <outlet property="inputPlot" destination="F2b-XT-SDC" id="I8o-Pk-gpd"/>
+                                                                <outlet property="recordButton" destination="xgG-St-MdE" id="9fg-yJ-hGd"/>
                                                             </connections>
-                                                        </button>
+                                                        </view>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="F2b-XT-SDC" firstAttribute="height" secondItem="xgG-St-MdE" secondAttribute="height" id="2H1-zH-eOh"/>
-                                                        <constraint firstItem="F2b-XT-SDC" firstAttribute="centerY" secondItem="xgG-St-MdE" secondAttribute="centerY" id="2Lz-sy-sIk"/>
-                                                        <constraint firstItem="MTZ-PH-oTy" firstAttribute="top" secondItem="LWf-A0-AYP" secondAttribute="bottom" id="GQc-MR-Iea"/>
-                                                        <constraint firstAttribute="trailing" secondItem="LWf-A0-AYP" secondAttribute="trailing" id="M3C-aO-5Y8"/>
-                                                        <constraint firstAttribute="trailing" secondItem="MTZ-PH-oTy" secondAttribute="trailing" id="Z2i-Z6-WRb"/>
-                                                        <constraint firstItem="MTZ-PH-oTy" firstAttribute="leading" secondItem="2ln-Zt-P5E" secondAttribute="leading" id="bld-6o-5ma"/>
-                                                        <constraint firstItem="xgG-St-MdE" firstAttribute="leading" secondItem="2ln-Zt-P5E" secondAttribute="leading" constant="10" id="g68-xY-t6w"/>
-                                                        <constraint firstItem="LWf-A0-AYP" firstAttribute="leading" secondItem="2ln-Zt-P5E" secondAttribute="leading" id="jVO-aJ-NbN"/>
-                                                        <constraint firstItem="xgG-St-MdE" firstAttribute="top" secondItem="MTZ-PH-oTy" secondAttribute="bottom" constant="5" id="lE0-5O-wxv"/>
-                                                        <constraint firstItem="F2b-XT-SDC" firstAttribute="leading" secondItem="xgG-St-MdE" secondAttribute="trailing" constant="6" id="mlw-2m-TbT"/>
-                                                        <constraint firstAttribute="trailing" secondItem="F2b-XT-SDC" secondAttribute="trailing" constant="7" id="v7l-aI-P4P"/>
-                                                        <constraint firstItem="LWf-A0-AYP" firstAttribute="top" secondItem="2ln-Zt-P5E" secondAttribute="top" constant="10" id="y97-ae-U2c"/>
-                                                        <constraint firstAttribute="bottom" secondItem="xgG-St-MdE" secondAttribute="bottom" constant="10" id="zFN-7x-EPS"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="HQp-hz-KTN" secondAttribute="trailing" id="h7l-1z-eAm"/>
+                                                        <constraint firstAttribute="bottom" secondItem="HQp-hz-KTN" secondAttribute="bottom" id="t7h-km-pe0"/>
+                                                        <constraint firstItem="HQp-hz-KTN" firstAttribute="top" secondItem="2ln-Zt-P5E" secondAttribute="top" id="xFh-9E-ylE"/>
+                                                        <constraint firstItem="HQp-hz-KTN" firstAttribute="leading" secondItem="2ln-Zt-P5E" secondAttribute="leadingMargin" id="yta-5k-oag"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <connections>
-                                                    <outlet property="auGenericViewContainer" destination="MTZ-PH-oTy" id="9A7-7L-OLf"/>
-                                                    <outlet property="audioUnitContainerFlowLayout" destination="LWf-A0-AYP" id="V83-eP-uei"/>
-                                                    <outlet property="audioUnitContainerHeight" destination="SGw-oe-tQ4" id="UfG-o5-oa3"/>
-                                                    <outlet property="inputPlot" destination="F2b-XT-SDC" id="uoa-rF-Zea"/>
-                                                    <outlet property="recordButton" destination="xgG-St-MdE" id="hqQ-7a-VMN"/>
+                                                    <outlet property="audioUnitContainerHeight" destination="5bf-qn-ogv" id="VF2-e7-0kY"/>
+                                                    <outlet property="recorderView" destination="HQp-hz-KTN" id="3yF-TC-POK"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>

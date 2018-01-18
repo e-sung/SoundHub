@@ -94,7 +94,6 @@ class DetailViewController: UIViewController {
         if (post.author?.id ?? -1) == Int(userId) {
             commentTrackContainer?.allowsMultiSelection = true
         }
-        recorderCell?.connectInputPlotToMic()
         mainTV.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
     }
 
@@ -283,7 +282,7 @@ extension DetailViewController: CommentContainerCellDelegate {
     }
 }
 
-//MARK:RecorderCellDelegate
+//MARK: RecorderCellDelegate
 extension DetailViewController: RecorderCellDelegate {
 
     func didStartRecording() {
