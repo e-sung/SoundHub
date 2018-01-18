@@ -441,7 +441,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HQp-hz-KTN" customClass="RecorderView" customModule="SoundHub" customModuleProvider="target">
                                                             <rect key="frame" x="15" y="0.0" width="345" height="499.5"/>
                                                             <subviews>
-                                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LWf-A0-AYP">
+                                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LWf-A0-AYP">
                                                                     <rect key="frame" x="8" y="40" width="329" height="99"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
@@ -490,21 +490,21 @@
                                                                     </cells>
                                                                 </collectionView>
                                                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F2b-XT-SDC" customClass="AKNodeOutputPlot" customModule="AudioKitUI">
-                                                                    <rect key="frame" x="38" y="461" width="307" height="30"/>
+                                                                    <rect key="frame" x="38" y="461" width="299" height="30"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="color" keyPath="color">
                                                                             <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </userDefinedRuntimeAttribute>
-                                                                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                                                            <color key="value" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
-                                                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="MTZ-PH-oTy">
+                                                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="MTZ-PH-oTy">
                                                                     <rect key="frame" x="0.0" y="141" width="337" height="284"/>
                                                                 </scrollView>
-                                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgG-St-MdE">
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgG-St-MdE">
                                                                     <rect key="frame" x="0.0" y="461" width="30" height="30"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                                     <state key="normal" title="녹음">
@@ -521,13 +521,16 @@
                                                                 <constraint firstItem="MTZ-PH-oTy" firstAttribute="centerX" secondItem="HQp-hz-KTN" secondAttribute="centerX" id="7bh-xx-ckO"/>
                                                                 <constraint firstItem="LWf-A0-AYP" firstAttribute="leading" secondItem="HQp-hz-KTN" secondAttribute="leading" id="SRA-eA-shD"/>
                                                                 <constraint firstItem="F2b-XT-SDC" firstAttribute="leading" secondItem="xgG-St-MdE" secondAttribute="trailing" constant="8" id="UWZ-J6-CBR"/>
+                                                                <constraint firstItem="F2b-XT-SDC" firstAttribute="height" secondItem="xgG-St-MdE" secondAttribute="height" id="Uhj-mX-YMV"/>
                                                                 <constraint firstAttribute="trailing" secondItem="MTZ-PH-oTy" secondAttribute="trailing" id="Uwx-59-ESz"/>
-                                                                <constraint firstAttribute="trailing" secondItem="F2b-XT-SDC" secondAttribute="trailing" id="Vwm-Cx-Tws"/>
+                                                                <constraint firstItem="xgG-St-MdE" firstAttribute="leading" secondItem="HQp-hz-KTN" secondAttribute="leading" id="ZuQ-0s-jBk"/>
                                                                 <constraint firstItem="xgG-St-MdE" firstAttribute="top" secondItem="MTZ-PH-oTy" secondAttribute="bottom" id="be1-nE-oVc"/>
                                                                 <constraint firstAttribute="bottom" secondItem="xgG-St-MdE" secondAttribute="bottom" constant="8.5" id="cEZ-dl-4NT"/>
                                                                 <constraint firstAttribute="trailing" secondItem="LWf-A0-AYP" secondAttribute="trailing" id="eCq-Om-8UC"/>
                                                                 <constraint firstItem="MTZ-PH-oTy" firstAttribute="leading" secondItem="HQp-hz-KTN" secondAttribute="leading" id="rfJ-nc-iSA"/>
+                                                                <constraint firstAttribute="trailing" secondItem="F2b-XT-SDC" secondAttribute="trailing" constant="8" id="wKM-kU-Mqy"/>
                                                                 <constraint firstItem="MTZ-PH-oTy" firstAttribute="top" secondItem="LWf-A0-AYP" secondAttribute="bottom" constant="2" id="x6u-Lb-TqT"/>
+                                                                <constraint firstItem="F2b-XT-SDC" firstAttribute="centerY" secondItem="xgG-St-MdE" secondAttribute="centerY" id="xjL-TK-fYE"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="auGenericViewContainer" destination="MTZ-PH-oTy" id="lfw-QU-ixV"/>
