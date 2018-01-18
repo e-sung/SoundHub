@@ -16,7 +16,7 @@ class RecordConductor {
 
     private var micMixer: AKMixer!
     private var moogLadder: AKMoogLadder!
-    private var mic: AKMicrophone!
+    var mic: AKMicrophone!
     private var micBooster: AKBooster!
     private var recorder: AKNodeRecorder!
 
@@ -80,6 +80,7 @@ extension RecordConductor {
     }
     
     func applyAUManager(){
+        
         auManager.connectEffects(firstNode: mic, lastNode: micMixer)
     }
 
@@ -166,7 +167,6 @@ extension RecordConductor {
     }
     
     private func activateAUManager(){
-        auManager = AKAudioUnitManager()
         auManager.delegate = self
         auManager.requestEffects { (audioComponents) in
             for component in audioComponents {

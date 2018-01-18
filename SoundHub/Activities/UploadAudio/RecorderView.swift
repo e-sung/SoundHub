@@ -34,11 +34,11 @@ class RecorderView: UIView {
         set(newVal){ inputPlot.color = newVal }
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
+    func bootUP(){
         RecordConductor.main.refresh()
         RecordConductor.main.connectMic(with: inputPlot)
+        RecordConductor.main.applyAUManager()
+        
         
         audioUnitContainerFlowLayout.delegate = self
         audioUnitContainerFlowLayout.dataSource = self
@@ -68,7 +68,6 @@ class RecorderView: UIView {
     }
     
     func makeRecordingState() {
-        RecordConductor.main.applyAUManager()
         recordButton.setTitle("그만 녹음하기", for: .normal)
         inputPlot.color = .red
         RecordConductor.main.startRecording()

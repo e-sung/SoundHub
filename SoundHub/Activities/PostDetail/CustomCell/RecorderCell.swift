@@ -25,6 +25,7 @@ class RecorderCell: UITableViewCell {
         audioUnitContainerHeight.isActive = false
         recorderView.isAudioUnitHidden = true
         state = .readyToRecord
+        recorderView.bootUP()
     }
 
     func activate() {
@@ -32,6 +33,7 @@ class RecorderCell: UITableViewCell {
         state = .readyToRecord
         recorderView.makeReadyToRecordState()
         RecordConductor.main.recorderView = self.recorderView
+        recorderView.bootUP()
         audioUnitContainerHeight.isActive = true
         recorderView.isAudioUnitHidden = false
         recorderView.backgroundColor = .black

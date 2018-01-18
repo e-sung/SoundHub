@@ -56,6 +56,7 @@ class AudioRecorderViewController: UIViewController {
         super.viewWillAppear(animated)
         state = .readyToRecord
         RecordConductor.main.recorderView = self.recorderView
+        recorderView.bootUP()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
