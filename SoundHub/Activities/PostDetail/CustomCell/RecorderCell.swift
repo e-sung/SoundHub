@@ -24,16 +24,17 @@ class RecorderCell: UITableViewCell, RecorderViewDelegate {
             else{ deactivate() }
         }
     }
-    var _isActive = false
+    private var _isActive = false
 
-    @IBOutlet weak var recorderView: RecorderView!
-    @IBOutlet var audioUnitContainerHeight: NSLayoutConstraint!
+    @IBOutlet weak private var recorderView: RecorderView!
+    @IBOutlet private var audioUnitContainerHeight: NSLayoutConstraint!
     
     private func activate(){
         RecordConductor.main.recorderView = self.recorderView
         recorderView.bootUP()
         recorderView.backgroundColor = .black
     }
+    
     private func deactivate(){
         if auManager.availableEffects.isEmpty == false { auManager.removeEffect(at: 0) }
         recorderView.deactivate()

@@ -102,7 +102,7 @@ class DetailViewController: UIViewController {
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        recorderCell?.deinitialize()
+        recorderCell?.isActive = false
     }
     override func viewDidDisappear(_ animated: Bool) {
         closeRecordingCell()
