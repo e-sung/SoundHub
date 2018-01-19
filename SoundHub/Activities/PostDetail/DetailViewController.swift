@@ -94,7 +94,6 @@ class DetailViewController: UIViewController {
         if (post.author?.id ?? -1) == Int(userId) {
             commentTrackContainer?.allowsMultiSelection = true
         }
-        recorderCell?.connectInputPlotToMic()
         mainTV.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
     }
 
@@ -103,7 +102,7 @@ class DetailViewController: UIViewController {
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        recorderCell?.deinitialize()
+        recorderCell?.isActive = false
     }
     override func viewDidDisappear(_ animated: Bool) {
         closeRecordingCell()
@@ -283,7 +282,7 @@ extension DetailViewController: CommentContainerCellDelegate {
     }
 }
 
-//MARK:RecorderCellDelegate
+//MARK: RecorderCellDelegate
 extension DetailViewController: RecorderCellDelegate {
 
     func didStartRecording() {
@@ -314,7 +313,7 @@ extension DetailViewController: RecorderCellDelegate {
         CATransaction.begin()
         CATransaction.setCompletionBlock {
             self.mainTV.scrollToRow(at: IndexPath(item: 0, section: Section.RecordCell.rawValue), at: .bottom, animated: true)
-            self.recorderCell?.activate()
+            self.recorderCell?.isActive = true
         }
         mainTV.beginUpdates()
         mainTV.endUpdates()
@@ -354,7 +353,7 @@ extension DetailViewController: RecorderCellDelegate {
     }
     private func closeRecordingCell() {
         self.heightOfRecordingCell = 50
-        self.recorderCell?.deActivate()
+        self.recorderCell?.isActive = false
         CATransaction.begin()
         CATransaction.setCompletionBlock {
             self.mainTV.scrollToRow(at: IndexPath(item: 0, section: Section.RecordCell.rawValue), at: .bottom, animated: true)

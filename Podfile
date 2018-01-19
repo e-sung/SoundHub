@@ -5,9 +5,8 @@ target 'SoundHub' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-  pod 'Fingertips'
+  pod 'Fingertips' 
   pod 'SideMenu'
-  pod 'FDWaveformView'
   pod 'NVActivityIndicatorView'
   pod 'Alamofire'
   pod 'AlamofireImage'
@@ -16,6 +15,8 @@ target 'SoundHub' do
   pod 'LPSnackbar'
   pod 'ActionSheetPicker-3.0'
   pod 'SwiftLint'
+
+
   # Pods for SoundHub
 
   target 'SoundHubTests' do
@@ -27,11 +28,9 @@ target 'SoundHub' do
     inherit! :search_paths
     # Pods for testing
     pod 'SideMenu'
-    pod 'FDWaveformView'
     pod 'NVActivityIndicatorView'
     pod 'Alamofire'
     pod 'AlamofireImage'
-    pod 'AudioKit'
     pod 'ActionSheetPicker-3.0'
 
   end

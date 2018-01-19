@@ -16,9 +16,15 @@ class RecordConductor {
 
     private var micMixer: AKMixer!
     private var moogLadder: AKMoogLadder!
-    private var mic: AKMicrophone!
+    var mic: AKMicrophone!
     private var micBooster: AKBooster!
     private var recorder: AKNodeRecorder!
+
+    var auManager = AKAudioUnitManager()
+    var availableEffects: [String] = []
+    var currentAUindex: Int?
+    var recorderView:RecorderView?
+    
     /// 녹음된 소리를 재생함
     var player: AKAudioPlayer!
     /// AudioKit 엔진의 최종 Output Node
@@ -31,6 +37,7 @@ class RecordConductor {
         setUpRecorderAndPlayer()
         setUpMixer()
         startEngine()
+        activateAUManager()
     }
     private func startEngine() { AudioKit.start() }
     private func stopEngine() { AudioKit.stop() }
@@ -66,7 +73,14 @@ extension RecordConductor {
         do { try self.player.reloadFile() } catch { print("Errored reloading.") }
     }
     
-    func apply(_ auManager:AKAudioUnitManager){
+    /// 새로운 녹음을 준비
+    func refresh(){
+        self.resetPlayer()
+        self.resetPlayer()
+    }
+    
+    func applyAUManager(){
+        
         auManager.connectEffects(firstNode: mic, lastNode: micMixer)
     }
 
@@ -151,4 +165,24 @@ extension RecordConductor {
         mainMixer = AKMixer(moogLadder, micBooster)
         AudioKit.output = mainMixer
     }
+    
+    private func activateAUManager(){
+        auManager.delegate = self
+        auManager.requestEffects { (audioComponents) in
+            for component in audioComponents {
+                if component.name != ""{ self.availableEffects.append(component.name) }
+            }
+        }
+    }
+}
+
+extension RecordConductor:AKAudioUnitManagerDelegate{
+    func handleAudioUnitNotification(type: AKAudioUnitManager.Notification, object: Any?) {
+    }
+    
+    func handleEffectAdded(at auIndex: Int) {
+        if let au = auManager.effectsChain[auIndex] { recorderView?.showAudioUnit(au) }
+    }
+    
+    func handleEffectRemoved(at auIndex: Int) { print("Effect removed") }
 }

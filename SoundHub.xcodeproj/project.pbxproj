@@ -11,6 +11,7 @@
 		514AE9D3C68525A59E406194 /* Pods_SoundHubUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFEF70D3C538FB607DF5384A /* Pods_SoundHubUITests.framework */; };
 		8C64A22E72B4C054AEC0195F /* Pods_SoundHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F94B1440EDA863E444AD34F /* Pods_SoundHub.framework */; };
 		F0058B151FF751C4004CC6D1 /* UploadAudio.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0058B141FF751C4004CC6D1 /* UploadAudio.storyboard */; };
+		F03F0AC72010760400019D9C /* RecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03F0AC62010760400019D9C /* RecorderView.swift */; };
 		F0F1E0051FF20EB3007D1AE6 /* AudioUnitGenericView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F1E0041FF20EB2007D1AE6 /* AudioUnitGenericView.swift */; };
 		FF000D991FD11F7F00678999 /* DataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF000D981FD11F7F00678999 /* DataCenter.swift */; };
 		FF000D9D1FD1368000678999 /* AudioUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF000D9C1FD1368000678999 /* AudioUploadViewController.swift */; };
@@ -103,6 +104,7 @@
 		D97CA82572278A09E19CB69B /* Pods_SoundHubTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoundHubTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFEF70D3C538FB607DF5384A /* Pods_SoundHubUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoundHubUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0058B141FF751C4004CC6D1 /* UploadAudio.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UploadAudio.storyboard; sourceTree = "<group>"; };
+		F03F0AC62010760400019D9C /* RecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderView.swift; sourceTree = "<group>"; };
 		F0F1E0041FF20EB2007D1AE6 /* AudioUnitGenericView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioUnitGenericView.swift; sourceTree = "<group>"; };
 		FF000D981FD11F7F00678999 /* DataCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCenter.swift; sourceTree = "<group>"; };
 		FF000D9C1FD1368000678999 /* AudioUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioUploadViewController.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 				F0058B141FF751C4004CC6D1 /* UploadAudio.storyboard */,
 				F0058B171FF75858004CC6D1 /* CustomViews */,
 				FF1054311FD518BA00A46443 /* AudioRecorderViewController.swift */,
+				F03F0AC62010760400019D9C /* RecorderView.swift */,
 				FF000D9C1FD1368000678999 /* AudioUploadViewController.swift */,
 			);
 			path = UploadAudio;
@@ -727,7 +730,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SoundHub/Pods-SoundHub-resources.sh\"\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SoundHub/Pods-SoundHub-resources.sh\"\n";
 		};
 		D2322EB168AD005ACF550774 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -756,7 +759,6 @@
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${PODS_ROOT}/AudioKit/iOS/AudioKit.framework",
 				"${PODS_ROOT}/AudioKit/iOS/AudioKitUI.framework",
-				"${BUILT_PRODUCTS_DIR}/FDWaveformView/FDWaveformView.framework",
 				"${BUILT_PRODUCTS_DIR}/Fingertips/Fingertips.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
@@ -772,7 +774,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AudioKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AudioKitUI.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FDWaveformView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Fingertips.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
@@ -796,9 +797,6 @@
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
-				"${PODS_ROOT}/AudioKit/iOS/AudioKit.framework",
-				"${PODS_ROOT}/AudioKit/iOS/AudioKitUI.framework",
-				"${BUILT_PRODUCTS_DIR}/FDWaveformView/FDWaveformView.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
 			);
@@ -807,9 +805,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionSheetPicker_3_0.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AudioKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AudioKitUI.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FDWaveformView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
 			);
@@ -850,6 +845,7 @@
 				FF0280561FD776CF00C0013A /* UserDefaultKey.swift in Sources */,
 				FFC32AED1FCFD96500651A31 /* LoginResponse.swift in Sources */,
 				FF3B20C21FCC31930019F87A /* SignUpViewController.swift in Sources */,
+				F03F0AC72010760400019D9C /* RecorderView.swift in Sources */,
 				FF000D9D1FD1368000678999 /* AudioUploadViewController.swift in Sources */,
 				FF7D6E0C1FDD630700754A7C /* AVPlayer.swift in Sources */,
 				FF02805A1FD7996C00C0013A /* RecordContuctor.swift in Sources */,
@@ -1055,7 +1051,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "SoundHub/SoundHub-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1075,7 +1071,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SoundHub/SoundHub-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
