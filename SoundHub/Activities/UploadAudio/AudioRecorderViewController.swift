@@ -12,8 +12,8 @@ import AudioKit
 import AudioKitUI
 import ActionSheetPicker_3_0
 
-class AudioRecorderViewController: UIViewController {
-
+class AudioRecorderViewController: UIViewController, RecorderViewDelegate {
+    
     // MARK: IBoutlets
     @IBOutlet weak private var recorderView:RecorderView!
 
@@ -22,46 +22,25 @@ class AudioRecorderViewController: UIViewController {
     }
 
     @IBAction private func recordButtonHandler(_ sender: UIButton) {
-        switch state! {
-        case .readyToRecord :
-            state = .recording
-            recorderView.makeRecordingState()
-        case .recording :
-            state = .readyToPlay
-            recorderView.makeReadyToPlayState()
-        case .readyToPlay :
-            state = .playing
-            recorderView.makePlayingState()
-        case .playing :
-            state = .readyToRecord
-            recorderView.makeReadyToRecordState()
-            let recordedDuration = RecordConductor.main.player != nil ? RecordConductor.main.player.audioFile.duration  : 0
-            if recordedDuration > 0.0 { setUpMetaInfoUI() }
-        }
+        recorderView.changeState()
     }
-
-    // MARK: Private Enum
-    private enum State {
-        case readyToRecord
-        case recording
-        case readyToPlay
-        case playing
-    }
-
-    // MARK: StoredProperties
-    private var state: State!
 
     // MARK: LifeCycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        state = .readyToRecord
         RecordConductor.main.recorderView = self.recorderView
+        recorderView.delegate = self
         recorderView.bootUP()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         recorderView.deactivate()
+    }
+    
+    func shouldUploadRecorded() {
+        let recordedDuration = RecordConductor.main.player != nil ? RecordConductor.main.player.audioFile.duration : 0
+        if recordedDuration > 0.0 { setUpMetaInfoUI() }
     }
 }
 

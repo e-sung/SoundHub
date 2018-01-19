@@ -23,6 +23,39 @@ class RecorderView: UIView {
     var availableEffects = RecordConductor.main.availableEffects
     var auManager = RecordConductor.main.auManager
     var currentAUindex: Int?
+    weak var delegate:RecorderViewDelegate?
+    var state: RecordingState{
+        get{ return _state }
+        set(newVal){
+            if _state == .playing { delegate?.shouldUploadRecorded() }
+            _state = newVal
+            switch _state {
+            case .readyToRecord : makeReadyToRecordState()
+            case .recording : makeRecordingState()
+            case .readyToPlay : makeReadyToPlayState()
+            case .playing : makePlayingState()
+            }
+        }
+    }
+    
+    func changeState(){
+        switch state {
+        case .readyToRecord : state = .recording
+        case .recording : state = .readyToPlay
+        case .readyToPlay : state = .playing
+        case .playing : state = .readyToRecord
+        }
+    }
+
+    private var _state:RecordingState = .readyToRecord
+    
+    // MARK: Private Enum
+    enum RecordingState {
+        case readyToRecord
+        case recording
+        case readyToPlay
+        case playing
+    }
     
     var isAudioUnitHidden: Bool{
         get{ return audioUnitContainerFlowLayout.isHidden }
@@ -34,12 +67,19 @@ class RecorderView: UIView {
         set(newVal){ inputPlot.color = newVal }
     }
     
+    
+    /**
+     RecorderView가 Appear하기 전에 호출해야 할 함수
+     
+     이전에 녹음했던 데이터 삭제, inputPlot과 마이크 연결, AudioUnitManager 연결 등
+     - ToDo
+        viewDidLoad에서 불릴 것과 viewWillAppear에서 불릴 것을 분리해야 함.
+     */
     func bootUP(){
         RecordConductor.main.refresh()
         RecordConductor.main.connectMic(with: inputPlot)
         RecordConductor.main.applyAUManager()
-        
-        
+        self.state = .readyToRecord
         audioUnitContainerFlowLayout.delegate = self
         audioUnitContainerFlowLayout.dataSource = self
     }
@@ -60,27 +100,27 @@ class RecorderView: UIView {
         auGenericViewContainer.contentSize = currentAU!.frame.size
     }
     
-    func makeReadyToRecordState(){
+    private func makeReadyToRecordState(){
         RecordConductor.main.player.stop()
         RecordConductor.main.connectMic(with: inputPlot)
         inputPlot.color = .orange
         recordButton.setTitle("녹음", for: .normal)
     }
     
-    func makeRecordingState() {
+    private func makeRecordingState() {
         recordButton.setTitle("그만", for: .normal)
         inputPlot.color = .red
         RecordConductor.main.startRecording()
     }
     
-    func makeReadyToPlayState() {
+    private func makeReadyToPlayState() {
         recordButton.setTitle("들어보기", for: .normal)
         inputPlot.color = .orange
         RecordConductor.main.stopRecording()
         RecordConductor.main.resetPlayer()
     }
     
-    func makePlayingState(){
+    private func makePlayingState(){
         RecordConductor.main.playRecorded(looping: true)
         inputPlot.color = .orange
         inputPlot.node = RecordConductor.main.player
@@ -142,4 +182,8 @@ extension RecorderView: UICollectionViewDelegate, UICollectionViewDelegateFlowLa
             }
         }
     }
+}
+
+protocol RecorderViewDelegate:class {
+    func shouldUploadRecorded()
 }

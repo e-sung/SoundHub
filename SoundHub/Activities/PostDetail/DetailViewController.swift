@@ -313,7 +313,7 @@ extension DetailViewController: RecorderCellDelegate {
         CATransaction.begin()
         CATransaction.setCompletionBlock {
             self.mainTV.scrollToRow(at: IndexPath(item: 0, section: Section.RecordCell.rawValue), at: .bottom, animated: true)
-            self.recorderCell?.activate()
+            self.recorderCell?.isActive = true
         }
         mainTV.beginUpdates()
         mainTV.endUpdates()
@@ -353,7 +353,7 @@ extension DetailViewController: RecorderCellDelegate {
     }
     private func closeRecordingCell() {
         self.heightOfRecordingCell = 50
-        self.recorderCell?.deActivate()
+        self.recorderCell?.isActive = false
         CATransaction.begin()
         CATransaction.setCompletionBlock {
             self.mainTV.scrollToRow(at: IndexPath(item: 0, section: Section.RecordCell.rawValue), at: .bottom, animated: true)

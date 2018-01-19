@@ -9,84 +9,61 @@
 import UIKit
 import AudioKitUI
 
-class RecorderCell: UITableViewCell {
+class RecorderCell: UITableViewCell, RecorderViewDelegate {
 
     weak var delegate: RecorderCellDelegate?
     private var auManager = RecordConductor.main.auManager
     private var availableEffects: [String] = []
     var postId: Int!
-    var isActive = false
+    var isActive:Bool{
+        get{ return _isActive }
+        set(newVal){
+            _isActive = newVal
+            shouldShowAudioUnits(newVal)
+            if newVal { activate() }
+            else{ deactivate() }
+        }
+    }
+    var _isActive = false
 
     @IBOutlet weak var recorderView: RecorderView!
     @IBOutlet var audioUnitContainerHeight: NSLayoutConstraint!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        audioUnitContainerHeight.isActive = false
-        recorderView.isAudioUnitHidden = true
-        state = .readyToRecord
-        recorderView.bootUP()
-    }
-
-    func activate() {
-        self.isActive = true
-        state = .readyToRecord
-        recorderView.makeReadyToRecordState()
+    
+    private func activate(){
         RecordConductor.main.recorderView = self.recorderView
         recorderView.bootUP()
-        audioUnitContainerHeight.isActive = true
-        recorderView.isAudioUnitHidden = false
         recorderView.backgroundColor = .black
     }
-
-    func deActivate() {
-        self.isActive = false
+    private func deactivate(){
         if auManager.availableEffects.isEmpty == false { auManager.removeEffect(at: 0) }
-        audioUnitContainerHeight.isActive = false
-        recorderView.isAudioUnitHidden = true
+        recorderView.deactivate()
         recorderView.backgroundColor = .gray
         recorderView.colorOfPlot = .black
         DispatchQueue.global(qos: .userInitiated).async { RecordConductor.main.refresh() }
     }
+    
+    private func shouldShowAudioUnits(_ value:Bool){
+        audioUnitContainerHeight.isActive = value
+        recorderView.isAudioUnitHidden = !value
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        shouldShowAudioUnits(false)
+        recorderView.bootUP()
+        recorderView.delegate = self
+    }
 
     @IBAction private func recordButtonHandler(_ sender: UIButton) {
         if User.isLoggedIn == false { delegate?.shouldRequireLogin(); return }
-        if self.isActive == false {
-            self.deinitialize()
-            delegate?.shouldBecomeActive()
-            return
-        }
-        switch state! {
-        case .readyToRecord :
-            state = .recording
-            recorderView.makeRecordingState()
-        case .recording :
-            state = .readyToPlay
-            recorderView.makeReadyToPlayState()
-        case .readyToPlay :
-            state = .playing
-            recorderView.makePlayingState()
-        case .playing :
-            state = .readyToRecord
-            recorderView.makeReadyToRecordState()
-            let recordedDuration = RecordConductor.main.player != nil ? RecordConductor.main.player.audioFile.duration  : 0
-            if recordedDuration > 0.0 {
-                delegate?.shouldShowAlert()
-            }
-        }
+        if self.isActive == false { delegate?.shouldBecomeActive(); return }
+        recorderView.changeState()
     }
-
-    // MARK: Private Enum
-    private enum State {
-        case readyToRecord
-        case recording
-        case readyToPlay
-        case playing
+    
+    func shouldUploadRecorded() {
+        let recordedDuration = RecordConductor.main.player != nil ? RecordConductor.main.player.audioFile.duration : 0
+        if recordedDuration > 0.0 { delegate?.shouldShowAlert() }
     }
-
-    private var state: State!
-
-    func deinitialize() { recorderView.deactivate() }
 }
 
 protocol RecorderCellDelegate: class {
