@@ -15,6 +15,7 @@ target 'SoundHub' do
   pod 'LPSnackbar'
   pod 'ActionSheetPicker-3.0'
   pod 'SwiftLint'
+  pod 'NCSoundHistogram', :git => 'https://github.com/e-sung/NCSoundHistogram.git', :commit => '4c2e2876f6419637c09ea1271070d08774289f8e'
 
 
   # Pods for SoundHub

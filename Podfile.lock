@@ -28,6 +28,7 @@ PODS:
   - GTMSessionFetcher/Full (1.1.12):
     - GTMSessionFetcher/Core (= 1.1.12)
   - LPSnackbar (2.1.0)
+  - NCSoundHistogram (0.1.7)
   - NVActivityIndicatorView (4.1.1):
     - NVActivityIndicatorView/Presenter (= 4.1.1)
   - NVActivityIndicatorView/Presenter (4.1.1)
@@ -42,9 +43,20 @@ DEPENDENCIES:
   - Fingertips
   - GoogleSignIn
   - LPSnackbar
+  - NCSoundHistogram (from `https://github.com/e-sung/NCSoundHistogram.git`, commit `4c2e2876f6419637c09ea1271070d08774289f8e`)
   - NVActivityIndicatorView
   - SideMenu
   - SwiftLint
+
+EXTERNAL SOURCES:
+  NCSoundHistogram:
+    :commit: 4c2e2876f6419637c09ea1271070d08774289f8e
+    :git: https://github.com/e-sung/NCSoundHistogram.git
+
+CHECKOUT OPTIONS:
+  NCSoundHistogram:
+    :commit: 4c2e2876f6419637c09ea1271070d08774289f8e
+    :git: https://github.com/e-sung/NCSoundHistogram.git
 
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: eef157d75e151f255c5333d26656c7fbfe905a51
@@ -57,10 +69,11 @@ SPEC CHECKSUMS:
   GTMOAuth2: c77fe325e4acd453837e72d91e3b5f13116857b2
   GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
   LPSnackbar: 6cf30a7a567880793e3df33773ff365c8b218f04
+  NCSoundHistogram: 9453569aff64319c898417b597fb0e49b0052540
   NVActivityIndicatorView: 60109b9bf46efc2e71ab81453196ccdfdfeea870
   SideMenu: 47dbf9e4d878062d8994aed43f6e4bf6c1fea30b
   SwiftLint: 2aa21b96c8d13396a051bc1cb659d2ce1e0075b0
 
-PODFILE CHECKSUM: 74507ac38ccaf11d1f643410ae732d7496262d44
+PODFILE CHECKSUM: 32066d48511e1dc8268ba78d4acdec6157afa15d
 
 COCOAPODS: 1.3.1
