@@ -64,11 +64,11 @@ class RecorderView: UIView {
         RecordConductor.main.player.stop()
         RecordConductor.main.connectMic(with: inputPlot)
         inputPlot.color = .orange
-        recordButton.setTitle("녹음하기", for: .normal)
+        recordButton.setTitle("녹음", for: .normal)
     }
     
     func makeRecordingState() {
-        recordButton.setTitle("그만 녹음하기", for: .normal)
+        recordButton.setTitle("그만", for: .normal)
         inputPlot.color = .red
         RecordConductor.main.startRecording()
     }

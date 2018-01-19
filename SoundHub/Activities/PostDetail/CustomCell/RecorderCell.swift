@@ -86,10 +86,7 @@ class RecorderCell: UITableViewCell {
 
     private var state: State!
 
-    func deinitialize() {
-        
-        recorderView.deactivate()
-    }
+    func deinitialize() { recorderView.deactivate() }
 }
 
 protocol RecorderCellDelegate: class {
